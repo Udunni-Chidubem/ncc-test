@@ -1,0 +1,29 @@
+{
+  "name": "nigsims",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x",
+    "yarn": "1.x",
+    "nodemon": "2.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "env NODE_ENV=development nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://ead342@bitbucket.org/ead342/nigsims.git"
+  },
+  "author": "The Rabbi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "handlebars": "^4.7.6",
+    "request": "^2.88.2",
+    "dotenv": "^10.0.0",
+    "body-parser": "^1.19.0"
+  }
+}
