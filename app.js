@@ -7,11 +7,11 @@ const path = require('path')
 
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({
-    layoutsDir: './views/layouts',
-    views: './views',
-    defaultLayout: 'main_layout',
+    layoutsDir: 'views/layouts',
+    views: 'views',
+    defaultLayout: 'main',
     extname: 'hbs',
-    partialsDir: './views/_partials',
+    partialsDir: 'views/_partials',
     helpers: {
         ifEquals(arg1, arg2, options) {
             return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
