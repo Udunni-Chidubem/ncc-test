@@ -28,9 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-const siteRoute = require('./src/routes/site.route')
+const mainRoute = require('./src/routes/main.route')
 
-app.use('/', siteRoute)
+app.use('/', mainRoute)
 
 const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
