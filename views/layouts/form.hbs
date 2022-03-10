@@ -1,0 +1,20 @@
+  {{> header}}
+  <body class="body">
+      {{> main_menu}}
+        <div class="containers">
+            <div class="row pt-md-4 pt-sm-0">
+                <div class="col-md-6 col-sm-0 col-xl-6">
+                    <div class="card">
+                        <div class="card-body pt-5 mt-5">
+                            <img src="images/{{form_banner}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{{ body }}}
+                </div>
+            </div>
+        </div>
+      {{> footer}}
+   </body>
+</html>
