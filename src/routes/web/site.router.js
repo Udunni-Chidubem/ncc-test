@@ -12,4 +12,7 @@ siteRouter.get('/home', (req, res)=>{
     })
 })
 siteRouter.get('/', siteController.home)
+siteRouter.get('/presignup', siteController.presignup)
+siteRouter.get('/aboutus', siteController.aboutus)
+siteRouter.get('/farmer_signup', siteController.farmer_signup) 
 module.exports=siteRouter;
