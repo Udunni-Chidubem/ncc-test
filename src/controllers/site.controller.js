@@ -34,5 +34,26 @@ module.exports = {
             
         layout : 'dashboard'
     });
+    },
+
+    login: async (req,res) => {
+        res.render('login',{
+            form_banner:'Group.png',
+            layout : 'form'
+    });
+    },
+
+    seedcompanysignup: async (req,res) => {
+        res.render('seed_company_signup',{
+            form_banner:'seeds-02 1.png',
+            layout : 'form'
+    });
+    },
+
+    seedtradersignup: async (req,res) => {
+        res.render('seed_trader_signup',{
+            form_banner:'tradersignup.png',
+            layout : 'form'
+    });
     }
 }

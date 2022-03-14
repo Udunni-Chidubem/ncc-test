@@ -353,3 +353,12 @@ td,
 th {
   padding: 0;
 }
+
+.links {
+  color: #47ba5d;
+  text-decoration: none;
+}
+
+/* .title {
+  border-bottom: 2px solid #ffb946;
+} */
