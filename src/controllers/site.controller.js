@@ -27,5 +27,12 @@ module.exports = {
             form_banner:'Group.png',
         layout : 'form'
     });
+    },
+
+    test: async (req,res) => {
+        res.render('test',{
+            
+        layout : 'dashboard'
+    });
     }
 }

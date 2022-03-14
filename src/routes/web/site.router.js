@@ -14,4 +14,5 @@ siteRouter.get('/', siteController.home)
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/aboutus', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
+siteRouter.get('/test', siteController.test)
 module.exports=siteRouter;

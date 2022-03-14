@@ -59,6 +59,7 @@ img {
   max-width: 100%;
   vertical-align: middle;
   display: inline-block;
+  object-fit: cover;
 }
 html.w-mod-touch * {
   background-attachment: scroll !important;
@@ -260,6 +261,10 @@ ol {
   margin-top: 0px;
   margin-bottom: 10px;
   padding-left: 40px;
+}
+
+ul {
+  margin-right: 59px;
 }
 .w-list-unstyled {
   padding-left: 0;
