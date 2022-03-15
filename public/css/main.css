@@ -134,7 +134,6 @@ button {
    #PAGE WRAPPER
    ========================================================================== */
 .page-wrapper {
-  min-height: 100vh;
 }
 
 body {
@@ -282,11 +281,11 @@ h6 {
 }
 
 .btn--green {
-  background: #57b846;
+  background: #049648;
 }
 
 .btn--green:hover {
-  background: #4dae3c;
+  background: orange;
 }
 
 .btn--blue {
@@ -294,7 +293,7 @@ h6 {
 }
 
 .btn--blue:hover {
-  background: #38cd51;
+  background: orange;
 }
 .btn--radius-2 {
   text-align: center;
@@ -595,9 +594,9 @@ input[name="Accountnumber"] {
    #TITLE
    ========================================================================== */
 .title {
-  font-size: 24px;
-  color: #525252;
-  font-weight: 400;
+  font-size: 48px;
+  color: #6a707e;
+  font-weight: bold;
   /* margin-bottom: 40px; */
   margin-bottom: 5px;
   text-align: center;

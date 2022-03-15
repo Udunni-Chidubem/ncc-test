@@ -81,7 +81,30 @@
   max-width: 7rem;
   margin-right: 0%;
 }
+/* .navbar {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: auto;
+  z-index: 5555;
+  display: none;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  background-color: hsla(0, 0%, 86.7%, 0.49);
+}
 
+.navbar.scroll {
+  display: block;
+  background-color: #f5faf8;
+} */
+
+.navbar {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+  /* bottom: 24rem; */
+}
 .body {
   font-family: Lato, sans-serif;
   font-size: 14px;
@@ -1048,6 +1071,8 @@
   position: relative;
   padding-top: 0px;
   padding-bottom: 55px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .slider-2 {
@@ -1676,7 +1701,7 @@
   display: -ms-flexbox;
   display: flex;
   width: 40vw;
-  height: 60vh;
+  /* height: 60vh; */
   max-width: 397.1953125px;
   min-height: 200px;
   min-width: 180px;
@@ -1722,6 +1747,7 @@
     url("../images/Seeds.jpg");
   background-position: 0px 0px, 0px 0px;
   background-size: auto, cover;
+  min-height: 85vh;
 }
 
 .container-6 {
@@ -1733,6 +1759,8 @@
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .text-block-12 {
@@ -2408,13 +2436,14 @@
   }
 
   .form-block {
-    min-width: 240px;
+    /* min-width: 240px; */
+    min-width: 246px;
     padding-right: 14px;
     padding-left: 14px;
   }
 
   .section-2 {
-    margin-top: 18%;
+    margin-top: 0%;
   }
 
   .testimonial-section {
@@ -4362,4 +4391,15 @@ select.form-control-lg:not([size]):not([multiple]) {
 
   .div-block-14 .h3 {
   }
+}
+
+.container-form {
+  min-height: 100vh;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.primary-button:hover {
+  background: #ffb946;
+  border: 0px;
 }
