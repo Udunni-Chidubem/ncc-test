@@ -1405,6 +1405,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  padding-top: 7px;
 }
 
 .div-block-2 {
