@@ -1600,11 +1600,7 @@ textarea.w-select {
   background: #dddddd;
   z-index: 1000;
   padding-left: 5%;
-<<<<<<< HEAD
-    padding-right: 5%;
-=======
   padding-right: 5%;
->>>>>>> 88150a8328856eb1f9703bc6e5b17a12f97bdccc
 }
 .w-nav:before,
 .w-nav:after {
