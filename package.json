@@ -5,7 +5,16 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app"
+    "dev": "lite-server",
+    "start": "env NODE_ENV=development nodemon app",
+    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1/db_nigsims",
+    "migration": "npx sequelize-cli migration:create --name modify_users_add_new_fields",
+    "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
+    "seeder": "npx sequelize-cli seed:create --name my-seed-file",
+    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1/db_nigsims",
+    "seed-single": "npx sequelize-cli db:seed --seed <name of seed file>",
+    "test_local": "NODE=test yarn jest --silent=false --verbose --forceExit --runInBand",
+    "test2": "NODE=test jest --forceExit --runInBand"
   },
   "author": "Oyedele Olufemi",
   "license": "ISC",
@@ -21,9 +30,16 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.11.1",
     "jsonwebtoken": "^8.5.1",
+    "lite-server": "^2.6.1",
     "moment": "^2.29.1",
     "mongoose": "^6.2.2",
-    "request": "^2.88.2"
+    "mysql": "^2.18.1",
+    "mysql2": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2",
+    "sequelize": "^5.21.7",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "helmet": "^5.0.2"
