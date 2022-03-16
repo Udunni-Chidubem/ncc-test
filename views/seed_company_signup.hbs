@@ -3,8 +3,8 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h1 class="title p-b-15">Create an Account</h1>
-                    <div class="div-block-3"></div>
+                    <h1 class="title p-b-15">Create An Account</h1>
+                     <div class="div-block-3"></div>
                     <form method="POST" class="p-t-15">
                         <div class="row">
                             <div class=" col-lg-12 col-md-7 col-sm-12">
@@ -15,7 +15,8 @@
                                     <input class="form-control" required type="text" name="first_name" placeholder="Official address">
                                 </div>
                                 <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="first_name" placeholder="Phone no">
+                                     <input class="form-control" required type="tel"  id="phone" name="first_name" pattern="[0-9]{11} " placeholder="08033309887">
+                                
                                 </div>
                                 <div class="form-group"> 
                                     <input class="form-control" required type="text" name="first_name" placeholder="Tin">
@@ -26,20 +27,27 @@
                         </div>
                               
                          
-
-                        <div class="p-t-15">
-                            <center><button class="btn btn--radius-2 btn--green" type="submit">Submit</button></center>
+                 <div class="p-t-15">
+                            <center><button class="btn primary-button    w-button  btn--radius-2 btn--green" type="submit">Submit</button></center>
                         </div>
 
                          <div class="p-t-15">
-                            <center><a href="#" class="links" >Forgot password</a></center>
+                            <center><p style="color:#47ba5d;"> Already Have An Account? <a href="/login" class="links">SIgn In</a></p></center>
+                             
                         </div>
+                        {{!-- <div class="p-t-15">
+                            <center><button class="btn btn--radius-2 btn--green" type="submit">Submit</button></center>
+                        </div> --}}
 
-                         <div class="row">
+                         {{!-- <div class="p-t-15">
+                            <center><a href="#" class="links" >Forgot password</a></center>
+                        </div> --}}
+
+                         {{!-- <div class="row">
                             <div class="d-flex justify-content-end">
                                 <center><p style="color:#47ba5d;"> Already Have An Account? <a href="" class="links">SIgn In</a></p></center>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
