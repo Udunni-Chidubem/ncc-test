@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       Farmer.belongsTo(user)
     }
   }
+
+  
   Farmer.init({
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,

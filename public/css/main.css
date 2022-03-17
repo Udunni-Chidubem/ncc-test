@@ -207,6 +207,17 @@ h6 {
 
 .p-t-15 {
   padding-top: 15px;
+  margin-right: -8rem;
+}
+
+.p-t-17 {
+  padding-top: 15px;
+}
+
+.p-t-16 {
+  padding-top: 15px;
+  padding-right: 7rem;
+  padding-left: 15px;
 }
 
 .p-t-10 {
@@ -634,5 +645,14 @@ input[name="Accountnumber"] {
 @media (max-width: 767px) {
   .card-4 .card-body {
     padding: 50px 40px;
+  }
+  .p-t-15 {
+    padding-top: 15px;
+    margin-right: 0rem;
+  }
+  .p-t-16 {
+    padding-top: 15px;
+    padding-right: 2rem;
+    padding-left: 15px;
   }
 }
