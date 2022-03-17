@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SeedTrader.init({
-    user_id: DataTypes.INTEGER,
+      user_id: {
+      type :DataTypes.INTEGER,
+      unique : true
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false
@@ -49,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     age: DataTypes.STRING
   }, {
+    tableName : 'Seedtrader',
     sequelize,
     modelName: 'SeedTrader',
   });

@@ -30,8 +30,12 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     gender: DataTypes.STRING,
     level_of_education: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+    user_id: {
+      type :DataTypes.INTEGER,
+      unique : true
+    }
   }, {
+    tableName : 'farmer',
     sequelize,
     modelName: 'Farmer',
   });

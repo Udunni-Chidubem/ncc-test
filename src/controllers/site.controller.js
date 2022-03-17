@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models');
-const User = db.User
-const Farmer = db.Farmer
+const { sequelize } = require('../models');  
+const {User, Farmer }  = db
 module.exports = {
     home: async (req, res) => {
        // res.send('Hello Badmous');
@@ -61,23 +61,32 @@ module.exports = {
 
     savefarmer : async (rq, rs)=>{
       try{  
+
           let names=rq.body.first_name.split(' ');
             let user = new User();
-            user.username=rq.body.email
-            user.password=rq.body.password
-            user.status=0
+            user.username=rq.body.phone_number
+            user.password='Password@1'
+            user.status=false
             user.token=''
-            user.save()
+           await user.save()
             
             let farmer = new Farmer();
-            farmer.age=rq.body.age
-            // Farmer.create({
-
-            // }, { transaction })
-            transaction.commit();
-            return user;
+            farmer.age=''
+            farmer.firstname=names[0]
+            farmer.gender=rq.body.gender
+            farmer.product_farmed=rq.body.farm
+            farmer.level_of_education=rq.body.education
+            farmer.location_of_farm=rq.body.location
+            farmer.phone_no=rq.body.phone_number
+            farmer.account_name=''
+            farmer.size_of_farm=''
+            farmer.bvn=''
+            farmer.nin=''
+            farmer.user_id=user.id
+            farmer.save()
+            return {user, farmer};
     }catch(e){
-        transaction.rollback()
+        return e
     }
     },
 

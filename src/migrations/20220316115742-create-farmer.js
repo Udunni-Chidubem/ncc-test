@@ -65,7 +65,8 @@ module.exports = {
           model: 'user',
           key: 'id',
           name: 'farmer_user_id'
-        }
+        }, 
+        unique : true
       },
       createdAt: {
         allowNull: false,

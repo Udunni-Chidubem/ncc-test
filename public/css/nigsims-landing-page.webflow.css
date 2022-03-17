@@ -108,6 +108,7 @@
   width: 100%;
   top: 0;
   /* bottom: 24rem; */
+  background: white;
 }
 .body {
   font-family: Lato, sans-serif;
@@ -1269,7 +1270,7 @@
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  background-color: #47ba5d;
+  background-color: #007235;
   text-align: center;
   color: #fff;
 }
@@ -1303,6 +1304,7 @@
   object-fit: contain;
   -o-object-position: 0% 50%;
   object-position: 0% 50%;
+  margin-left: -10rem;
 }
 
 .footer-heading {
@@ -1664,6 +1666,9 @@
 
 .text-block-11 {
   font-size: 11px;
+  width: 56%;
+
+  margin-bottom: -16px;
 }
 
 .slide-4 {
@@ -2248,6 +2253,7 @@
   .footer-image {
     -o-object-fit: contain;
     object-fit: contain;
+    margin-left: -1rem;
   }
 
   .slider-text {

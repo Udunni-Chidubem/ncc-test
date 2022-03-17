@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SeedCompany.init({
-    user_id: DataTypes.INTEGER,
+     user_id: {
+      type :DataTypes.INTEGER,
+      unique : true
+    },
     name_of_company: {
       type: DataTypes.STRING,
       allowNull: false,
