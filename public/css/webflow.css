@@ -270,6 +270,7 @@ ul {
 .w-list-unstyled {
   padding-left: 0;
   list-style: none;
+  padding-right: 11rem;
 }
 .w-embed:before,
 .w-embed:after {

@@ -4,18 +4,19 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h1 class="title p-b-15">Create An Account</h1>
-                    <div class="div-block-3"></div>
+                     
                     {{!-- <div class="form-col">  --}}
                     <form method="POST" class="p-t-15" >
                         <div class="row">
-                            <div class="col-md-7 col-sm-12">
+                            <div class="col-md-5 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" type="text" name="first_name" placeholder="Enter your name">
+                                    <input class="form-control" type="text" name="firstname" placeholder="Enter your name">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                  <select class="form-control" name="" id="">
+                                  <select class="form-control"  name="gender" id="gender">
+                                       <option value="">Gender</option>
                                       <option value="m">Male</option>
                                       <option value="f">Female</option>
                                   </select>
@@ -23,29 +24,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5 col-sm-12">
+                           <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="age" placeholder="Age">
-                                    <div class="input-group-icon">
-                                    </div>
-                                </div> 
+                                    <input class="form-control" type="text" name="bvn" placeholder="Enter your BVN">
+                                </div>
                             </div>
                              
-                              <div class="col-md-7 col-sm-12">
+                              <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="tel" name="Accountnumber" placeholder="Enter Your Account Number">
+                                    <input class="form-control" type="tel" name="accountnumber" placeholder="Enter Your Account Number">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-7 col-sm-12">
+                            <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="email" placeholder="Enter Your Location">
+                                    <input class="form-control" type="text" name="location" placeholder="Enter Your Location">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" required type="tel" id="phone"  name="first_name" pattern="[0-9]{11} " placeholder="08033309887">
+                                    <input class="form-control" required type="tel" id="phone"  name="phoneno" pattern="[0-9]{11} " placeholder="Phone no">
                                 
                                 </div>
                             </div>
@@ -53,17 +52,13 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="NIN" placeholder="NIN">
+                                    <input class="form-control" type="text" name="nin" placeholder="NIN">
                                 </div>
                             </div>
-                            <div class="col-md-7 col-sm-12">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="BVN" placeholder="Enter your BVN">
-                                </div>
-                            </div>
+                           
                         </div>
                         <div class="row">
-                            {{!-- <div class="col-md-7 col-sm-12">
+                            {{!-- <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
                                     <input class="form-control" type="tel" name="Accountnumber" placeholder="Enter Your Account Number">
                                 </div>
