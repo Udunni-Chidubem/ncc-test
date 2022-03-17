@@ -274,7 +274,7 @@ ul {
 .w-list-unstyled {
   padding-left: 0;
   list-style: none;
-  padding-right: 11rem;
+  padding-right: 7rem;
 }
 .w-embed:before,
 .w-embed:after {
@@ -1697,13 +1697,14 @@ textarea.w-select {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding-right: 26px;
 }
 .w-nav-button:focus {
   outline: 0;
 }
 .w-nav-button.w--open {
-  background-color: #c8c8c8;
-  color: white;
+  /* background-color: #c8c8c8; */
+  color: black;
 }
 .w-nav[data-collapse="all"] .w-nav-menu {
   display: none;
