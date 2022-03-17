@@ -12,6 +12,19 @@ siteRouter.get('/home', (req, res)=>{
 })
 siteRouter.get('/', siteController.home)
 siteRouter.get('/presignup', siteController.presignup)
-siteRouter.get('/aboutus', siteController.aboutus)
+siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
-module.exports=siteRouter;
+siteRouter.post('/farmer_signup', (req, res)=>{
+    res.send(req);
+})
+siteRouter.get('/test', siteController.test)
+siteRouter.get('/login', siteController.login)
+siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
+siteRouter.post('/seedcompanysignup', (req, res)=>{
+    res.send(req);
+})
+siteRouter.get('/seedtradersignup', siteController.seedtradersignup)
+siteRouter.post('/seedtradersignup', (req, res)=>{
+    res.send(req);
+})
+module.exports=siteRouter; 

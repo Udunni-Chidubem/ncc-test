@@ -3,9 +3,10 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h1 class="title p-b-15" >Create An Account</h1>
+                    <h1 class="title p-b-15">Create An Account</h1>
                     <div class="div-block-3"></div>
-                    <form method="POST" class="p-t-15">
+                    {{!-- <div class="form-col">  --}}
+                    <form method="POST" class="p-t-15" >
                         <div class="row">
                             <div class="col-md-7 col-sm-12">
                                 <div class="form-group"> 
@@ -29,11 +30,10 @@
                                     </div>
                                 </div> 
                             </div>
-                            <div class="col-md-7 col-sm-12">
+                             
+                              <div class="col-md-7 col-sm-12">
                                 <div class="form-group">
-                                    <select name="" id="" class="form-control">
-                                        <option value="">select Level of Education</option>
-                                    </select>
+                                    <input class="form-control" type="tel" name="Accountnumber" placeholder="Enter Your Account Number">
                                 </div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" required type="tel" id="phone" name="phone" pattern="[0-9]{11} " placeholder="08033309887">
+                                    <input class="form-control" required type="tel" id="phone"  name="first_name" pattern="[0-9]{11} " placeholder="08033309887">
                                 
                                 </div>
                             </div>
@@ -53,28 +53,34 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="NIN" placeholder="NIN" style="width: 100%;">
+                                    <input class="form-control" type="text" name="NIN" placeholder="NIN">
                                 </div>
                             </div>
                             <div class="col-md-7 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="BVN" placeholder="Enter your BVN" style="width: 100%;">
+                                    <input class="form-control" type="text" name="BVN" placeholder="Enter your BVN">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-7 col-sm-12">
+                            {{!-- <div class="col-md-7 col-sm-12">
                                 <div class="form-group">
                                     <input class="form-control" type="tel" name="Accountnumber" placeholder="Enter Your Account Number">
                                 </div>
+                            </div> --}}
+                             
+                        </div>   
+                              
+                        {{!-- <div class="p-t-15">
+                            <center><button class="btn btn--radius-2 btn--green" type="button">Submit</button></center>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content-end">
+                                <center><p style="color:#47ba5d;"> Already Have An Account? <a href="" class="links">SIgn In</a></p></center>
                             </div>
-                            <div class="col-md-5 col-sm-12">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="Farm" placeholder="Enter your Farm Produce">
-                                </div>
-                            </div>
-                        </div> 
-                           <div class="p-t-15">
+                        </div> --}}
+
+                                         <div class="p-t-15">
                             <center><button class="btn primary-button    w-button  btn--radius-2 btn--green" type="submit">Submit</button></center>
                         </div>
 
@@ -82,16 +88,8 @@
                             <center><p style="color:#47ba5d;"> Already Have An Account? <a href="/login" class="links">SIgn In</a></p></center>
                              
                         </div>
-
-                        {{!-- <div class="p-t-15">
-                            <center><button class="btn btn--radius-2 btn--green" type="button">Submit</button></center>
-                        </div> --}}
-                        {{!-- <div class="row">
-                            <div class="d-flex justify-content-end">
-                                <center><p style="color:#47ba5d;"> Already Have An Account? <a href="" class="links">SIgn In</a></p></center>
-                            </div>
-                        </div> --}}
                     </form>
+                    {{!-- </div> --}}
                 </div>
             </div>
         </div>
