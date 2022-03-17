@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SeedCompany.init({
-     user_id: {
-      type :DataTypes.INTEGER,
-      unique : true
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     name_of_company: {
       type: DataTypes.STRING,
@@ -35,7 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    address: DataTypes.TEXT,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
     licensed_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -43,10 +46,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     certification_number: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
+    licensed_no: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   }, {
+    tableName : 'seedtrader',
     sequelize,
     modelName: 'SeedCompany',
   });

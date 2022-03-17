@@ -17,7 +17,8 @@ module.exports = {
         allowNull: false
       },
       othername: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true
       },
       product_farmed: {
         type: Sequelize.STRING,
@@ -37,7 +38,7 @@ module.exports = {
       },
       bvn: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       account_name: {
         type: Sequelize.STRING,
@@ -49,24 +50,29 @@ module.exports = {
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       gender: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
       },
       level_of_education: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'user',
           key: 'id',
           name: 'farmer_user_id'
         }, 
         unique : true
+      },
+      password: {
+        type: Sequelize.STRING(15),
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

@@ -10,6 +10,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'user',
           key: 'id'
@@ -32,6 +33,10 @@ module.exports = {
       },
       address: {
         type: Sequelize.TEXT,
+        allowNull: false
+      },
+      password: {
+        type: Sequelize.STRING(15),
         allowNull: false
       },
       licensed_no: {

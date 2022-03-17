@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SeedTrader.init({
-      user_id: {
-      type :DataTypes.INTEGER,
-      unique : true
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     firstname: {
       type: DataTypes.STRING,
@@ -28,8 +28,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    othername: DataTypes.STRING,
-    location_of_seed: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false, 
+    },
+    othername: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location_of_seed: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     phone_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -50,7 +60,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    age: DataTypes.STRING
+    age: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   }, {
     tableName : 'Seedtrader',
     sequelize,
