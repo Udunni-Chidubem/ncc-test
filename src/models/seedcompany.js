@@ -2,12 +2,9 @@
 const {
   Model
 } = require('sequelize');
-const farmer = require('./farmer');
-const seedcompany = require('./seedcompany');
-const seedtrader = require('./seedtrader');
-const user_role = require('./user_role');
+const user = require('./user');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class SeedCompany extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,34 +12,40 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(user_role)
-      User.hasOne(farmer)
-      User.hasOne(seedtrader)
-      User.hasOne(seedcompany)
+      SeedCompany.belongsTo(user)
     }
   }
-  User.init({
-    username: {
+  SeedCompany.init({
+    user_id: DataTypes.INTEGER,
+    name_of_company: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    password: {
+    phone_no:{
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    status: {
-      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0
+      unique: true
     },
-    token: {
+    tin: {
       type: DataTypes.STRING,
-      allowNull: true
-    }
+      allowNull: false,
+      unique: true
+    },
+    address: DataTypes.TEXT,
+    licensed_no: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    certification_number: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'SeedCompany',
   });
-  return User;
+  return SeedCompany;
 };

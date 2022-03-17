@@ -1,0 +1,56 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
+const user = require('./user');
+module.exports = (sequelize, DataTypes) => {
+  class SeedTrader extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      SeedTrader.belongsTo(user)
+    }
+  }
+  SeedTrader.init({
+    user_id: DataTypes.INTEGER,
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    othername: DataTypes.STRING,
+    location_of_seed: DataTypes.STRING,
+    phone_no: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    unique_no: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    bvn: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    nin: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    age: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'SeedTrader',
+  });
+  return SeedTrader;
+};
