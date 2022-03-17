@@ -15,7 +15,12 @@ siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.post('/farmer_signup', (req, res)=>{
-    res.send(req);
+    let y = siteController.savefarmer(req, res)
+    y.then(r=>{
+        res.send(r)
+    }, e=>{
+
+    })
 })
 siteRouter.get('/test', siteController.test)
 siteRouter.get('/login', siteController.login)

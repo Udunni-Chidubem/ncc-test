@@ -1,5 +1,7 @@
 require('dotenv').config()
-
+const db = require('../models');
+const User = db.User
+const Farmer = db.Farmer
 module.exports = {
     home: async (req, res) => {
        // res.send('Hello Badmous');
@@ -55,5 +57,34 @@ module.exports = {
             form_banner:'tradersignup.png',
             layout : 'form'
     });
+    },
+
+    savefarmer : async (rq, rs)=>{
+      try{  
+          let names=rq.body.first_name.split(' ');
+            let user = new User();
+            user.username=rq.body.email
+            user.password=rq.body.password
+            user.status=0
+            user.token=''
+            user.save()
+            
+            let farmer = new Farmer();
+            farmer.age=rq.body.age
+            // Farmer.create({
+
+            // }, { transaction })
+            transaction.commit();
+            return user;
+    }catch(e){
+        transaction.rollback()
     }
+    },
+
+    saveuser:  async (username, password, token, status)=>{
+        let user = new User();
+        return user;
+    }
+
+
 }
