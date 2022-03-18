@@ -2,7 +2,7 @@ require('dotenv').config()
 const db = require('../models');
 const { sequelize } = require('../models');  
 const {User, Farmer }  = db
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 module.exports = {
     home: async (req, res) => {
        // res.send('Hello Badmous');
@@ -10,7 +10,11 @@ module.exports = {
     },
 
     authenticate : async (req, res) => {
-       let user = await User.find(dusername => req.body.user)
+       let user = await User.findOne(
+                {
+                   where :  {username : req.body.user}
+                }
+           );
        if(user.id && await bcrypt.compare(req.body.password, user.password))
             return user
         else
