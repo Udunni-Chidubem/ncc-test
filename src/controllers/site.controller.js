@@ -10,17 +10,14 @@ module.exports = {
     },
 
     authenticate : async (req, res) => {
-       let user = await User.findOne(
-                {
-                   where :  {username : req.body.user}
-                }
-           );
-       if(user.id && await bcrypt.compare(req.body.password, user.password))
-            return user
-        else
-            return null
+        let user = await User.findOne({ where: { username: req.body.username } });
+        if(user != null ){
+            if(await bcrypt.compare(req.body.password, user.password) == true){
+                 return user
+            }
+        }
+        return null
     },
-
     presignup: async (req,res) => {
         res.render('pre-signup');
     },

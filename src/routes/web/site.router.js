@@ -34,13 +34,23 @@ siteRouter.get('/test', siteController.test)
 siteRouter.get('/login', siteController.login)
 siteRouter.post('/login', async (req, res)=>{
     let user = await siteController.authenticate(req, res);
-    if(user == null){
+    if(user== null || user == ''){
          res.render('login',{
             form_banner:'Group.png',
-            layout : 'form'
+            layout : 'form',
+            message : "invalid credentials"
         });
+    }else{
+         res.send(user);
     }
-    res.send('logged in successfully')
+   
+    // if(user == null){
+    //      res.render('login',{
+    //         form_banner:'Group.png',
+    //         layout : 'form'
+    //     });
+    // }
+    // res.send('logged in successfully')
         
 })
 siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
