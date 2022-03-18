@@ -2,15 +2,19 @@ require('dotenv').config()
 const db = require('../models');
 const { sequelize } = require('../models');  
 const {User, Farmer }  = db
+const bcrypt = require('bcrypt')
 module.exports = {
     home: async (req, res) => {
        // res.send('Hello Badmous');
         res.render('home');
     },
 
-    login : async (req, res) => {
-        let x={name:"Badmous", age:"33", lga:"Bida"};
-        return x
+    authenticate : async (req, res) => {
+       let user = await User.find(dusername => req.body.user)
+       if(user.id && await bcrypt.compare(req.body.password, user.password))
+            return user
+        else
+            return null
     },
 
     presignup: async (req,res) => {
@@ -42,7 +46,7 @@ module.exports = {
         res.render('login',{
             form_banner:'Group.png',
             layout : 'form'
-    });
+        });
     },
 
     seedcompanysignup: async (req,res) => {
@@ -60,19 +64,18 @@ module.exports = {
     },
 
     savefarmer : async (rq, rs)=>{
-      try{  
-
-          let names=rq.body.first_name.split(' ');
+        try{  
+            const password = await bcrypt.hash(rq.body.password, 10)
             let user = new User();
             user.username=rq.body.phone_number
-            user.password='Password@1'
+            user.password = password
             user.status=false
             user.token=''
-           await user.save()
-            
+            await user.save()
             let farmer = new Farmer();
             farmer.age=''
-            farmer.firstname=names[0]
+            farmer.firstname=rq.body.firstname
+            farmer.lastname=rq.body.lastname
             farmer.gender=rq.body.gender
             farmer.product_farmed=rq.body.farm
             farmer.level_of_education=rq.body.education
@@ -85,15 +88,17 @@ module.exports = {
             farmer.user_id=user.id
             farmer.save()
             return {user, farmer};
-    }catch(e){
-        return e
-    }
+        }catch(e){
+            return e
+        }
     },
 
     saveuser:  async (username, password, token, status)=>{
         let user = new User();
         return user;
     }
+
+
 
 
 }
