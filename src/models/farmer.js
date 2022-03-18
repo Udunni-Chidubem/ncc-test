@@ -37,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       unique : true
     }
   }, {
+    underscored: true,
     tableName : 'farmer',
     sequelize,
     modelName: 'Farmer',

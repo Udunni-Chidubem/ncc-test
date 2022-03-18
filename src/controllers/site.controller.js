@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models');
 const { sequelize } = require('../models');  
-const {User, Farmer }  = db
+const {User, Farmer, User_role, Role }  = db
 const bcrypt = require('bcrypt');
 module.exports = {
     home: async (req, res) => {
@@ -10,7 +10,17 @@ module.exports = {
     },
 
     authenticate : async (req, res) => {
-        let user = await User.findOne({ where: { username: req.body.username } });
+        let user = await User.findOne(
+            { 
+                include : [{
+                    model : User_role,
+                    include : [{model : Role}]
+                 }],  
+                where: { 
+                    username: req.body.username 
+                } 
+            }
+        );
         if(user != null ){
             if(await bcrypt.compare(req.body.password, user.password) == true){
                  return user
@@ -65,6 +75,7 @@ module.exports = {
     },
 
     savefarmer : async (rq, rs)=>{
+         
         try{  
             const password = await bcrypt.hash(rq.body.password, 10)
             let user = new User();
@@ -73,6 +84,15 @@ module.exports = {
             user.status=false
             user.token=''
             await user.save()
+             let r = await Role.findOne(
+                {
+                    where : { role_name : 'farmer' }
+                }
+            );
+            let user_role= new User_role();
+            user_role.user_id = user.id;
+            user_role.role_id = r.id
+            user_role.save();
             let farmer = new Farmer();
             farmer.age=''
             farmer.firstname=rq.body.firstname

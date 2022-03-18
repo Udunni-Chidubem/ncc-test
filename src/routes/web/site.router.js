@@ -17,15 +17,15 @@ siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.post('/farmer_signup', (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
-        //res.send(r)
-        if(r.user){
-            res.render('success',{
-                form_banner:'Group.png',
-                layout : 'form'
-             })
-        }else{
-            res.redirect('back');
-        }
+        res.send(r)
+        // if(r.user){
+        //     res.render('success',{
+        //         form_banner:'Group.png',
+        //         layout : 'form'
+        //      })
+        // }else{
+        //     res.redirect('back');
+        // }
     }, e=>{
 
     })

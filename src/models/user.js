@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     }
   }, {
+    underscored: true,
     tableName : 'user',
     sequelize,
     modelName: 'User',

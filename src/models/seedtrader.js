@@ -65,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
   }, {
+    underscored: true,
     tableName : 'Seedtrader',
     sequelize,
     modelName: 'SeedTrader',
