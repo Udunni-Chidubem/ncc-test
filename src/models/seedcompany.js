@@ -35,10 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false, 
-    },
     licensed_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -59,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     underscored: true,
-    tableName : 'seedtrader',
+    tableName : 'seedcompany',
     sequelize,
     modelName: 'SeedCompany',
   });

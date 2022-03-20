@@ -48,10 +48,10 @@ module.exports = {
         type: Sequelize.STRING(15),
         allowNull: true
       },
-      password: {
-        type: Sequelize.STRING(15),
-        allowNull: false
-      },
+      // password: {
+      //   type: Sequelize.STRING(15),
+      //   allowNull: false
+      // },
       age: {
         type: Sequelize.STRING,
         allowNull: true

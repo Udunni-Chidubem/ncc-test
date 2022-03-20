@@ -35,10 +35,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      password: {
-        type: Sequelize.STRING(15),
-        allowNull: false
-      },
+      // password: {
+      //   type: Sequelize.STRING(15),
+      //   allowNull: false
+      // },
       licensed_no: {
         type: Sequelize.STRING(30),
         unique:true

@@ -1,32 +1,18 @@
 require('dotenv').config()
-const db = require('../models');
+const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, User_role, Role }  = db
+const {User, Farmer, User_role, Role, SeedTrader, SeedCompany }  = db
 const bcrypt = require('bcrypt');
+const uniqid = require('uniqid');
 module.exports = {
     home: async (req, res) => {
-       // res.send('Hello Badmous');
         res.render('home');
     },
 
+
     authenticate : async (req, res) => {
-        let user = await User.findOne(
-            { 
-                include : [{
-                    model : User_role,
-                    include : [{model : Role}]
-                 }],  
-                where: { 
-                    username: req.body.username 
-                } 
-            }
-        );
-        if(user != null ){
-            if(await bcrypt.compare(req.body.password, user.password) == true){
-                 return user
-            }
-        }
-        return null
+        let transaction =db.rest.transaction()
+       res.send("even after transaction")
     },
     presignup: async (req,res) => {
         res.render('pre-signup');
@@ -47,6 +33,7 @@ module.exports = {
     },
 
     test: async (req,res) => {
+        console.log(req.user)
         res.render('test',{
             
         layout : 'dashboard'
@@ -75,7 +62,6 @@ module.exports = {
     },
 
     savefarmer : async (rq, rs)=>{
-         
         try{  
             const password = await bcrypt.hash(rq.body.password, 10)
             let user = new User();
@@ -117,6 +103,77 @@ module.exports = {
     saveuser:  async (username, password, token, status)=>{
         let user = new User();
         return user;
+    },
+
+    saveseedcompany: async (req, res)=>{
+         try{  
+            const password = await bcrypt.hash(req.body.password, 10)
+            let user = new User();
+            user.username=req.body.phone
+            user.password = password
+            user.status=false
+            user.token=''
+            await user.save()
+             let r = await Role.findOne(
+                {
+                    where : { role_name : 'seed_company' }
+                }
+            );
+            let user_role= new User_role();
+            user_role.user_id = user.id;
+            user_role.role_id = r.id
+            user_role.save();
+            let seed_company = new SeedCompany();
+            seed_company.name_of_company=req.body.company_name
+            seed_company.phone_no=req.body.phone
+            seed_company.tin=req.body.tin
+            seed_company.address=req.body.address
+            seed_company.certification_number=''
+            seed_company.licensed_no=''
+            seed_company.user_id=user.id
+            seed_company.save()
+            return {user, seed_company};
+        }catch(e){
+            return e
+        }
+    },
+
+    saveseettrader : async (req, res)=>{
+        try{  
+            const password = await bcrypt.hash(req.body.password, 10)
+            let user = new User();
+            user.username=req.body.phone
+            user.password = password
+            user.status=false
+            user.token=''
+            await user.save()
+             let r = await Role.findOne(
+                {
+                    where : { role_name : 'seed_trader' }
+                }
+            );
+            let user_role= new User_role();
+            user_role.user_id = user.id;
+            user_role.role_id = r.id
+            user_role.save();
+            let seed_trader = new SeedTrader();
+            seed_trader.firstname=req.body.firstname
+            seed_trader.lastname=req.body.lastname
+            seed_trader.othername=''
+            seed_trader.phone_no=req.body.phone
+            seed_trader.location_of_seed=req.body.location
+            seed_trader.address=req.body.address
+            seed_trader.unique_no=uniqid()
+            seed_trader.bvn=''
+            seed_trader.nin=''
+            seed_trader.age=''
+            seed_trader.user_id=user.id
+            seed_trader.save()
+            return {user, seed_trader};
+        }catch(e){
+            return e
+        }
+
     }
 
 
