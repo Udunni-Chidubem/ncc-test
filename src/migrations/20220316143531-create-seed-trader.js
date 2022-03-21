@@ -10,6 +10,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'user',
           key: 'id'
@@ -24,7 +25,8 @@ module.exports = {
         allowNull: false
       },
       othername: {
-        type: Sequelize.STRING(55)
+        type: Sequelize.STRING(55),
+        allowNull: true
       },
       location_of_seed: {
         type: Sequelize.STRING(65),
@@ -35,22 +37,30 @@ module.exports = {
         allowNull: false
       },
       unique_no: {
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(30),
+        allowNull: true
       },
       bvn: {
-        type: Sequelize.STRING(15)
+        type: Sequelize.STRING(15),
+        allowNull: true
       },
       nin: {
-        type: Sequelize.STRING(15)
+        type: Sequelize.STRING(15),
+        allowNull: true
       },
+      // password: {
+      //   type: Sequelize.STRING(15),
+      //   allowNull: false
+      // },
       age: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

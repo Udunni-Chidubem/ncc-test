@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-const user = require('./user');
+const User = require('./user');
 module.exports = (sequelize, DataTypes) => {
   class Farmer extends Model {
     /**
@@ -10,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
     static associate(models) {
       // define association here
-      Farmer.belongsTo(user)
+      Farmer.belongsTo(models.User)
     }
   }
+
+  
   Farmer.init({
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
@@ -29,8 +32,13 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     gender: DataTypes.STRING,
     level_of_education: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+    user_id: {
+      type :DataTypes.INTEGER,
+      unique : true
+    }
   }, {
+    underscored: true,
+    tableName : 'farmer',
     sequelize,
     modelName: 'Farmer',
   });

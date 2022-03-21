@@ -12,11 +12,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      SeedCompany.belongsTo(user)
+      SeedCompany.belongsTo(models.User)
     }
   }
   SeedCompany.init({
-    user_id: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     name_of_company: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    address: DataTypes.TEXT,
     licensed_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,10 +42,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     certification_number: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
+    licensed_no: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   }, {
+    underscored: true,
+    tableName : 'seedcompany',
     sequelize,
     modelName: 'SeedCompany',
   });

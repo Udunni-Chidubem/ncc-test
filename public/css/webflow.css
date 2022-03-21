@@ -1,3 +1,4 @@
+@import url("@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');");
 
 @font-face {
   font-family: "webflow-icons";
@@ -43,7 +44,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 html {
   height: 100%;
@@ -51,8 +52,8 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
+  background-color: #f7fcfe;
+  /* font-family: 'Roboto', sans-serif; */
   font-size: 14px;
   line-height: 20px;
   color: #333;
@@ -273,6 +274,7 @@ ul {
 .w-list-unstyled {
   padding-left: 0;
   list-style: none;
+  padding-right: 7rem;
 }
 .w-embed:before,
 .w-embed:after {
@@ -1695,13 +1697,14 @@ textarea.w-select {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding-right: 26px;
 }
 .w-nav-button:focus {
   outline: 0;
 }
 .w-nav-button.w--open {
-  background-color: #c8c8c8;
-  color: white;
+  /* background-color: #c8c8c8; */
+  color: black;
 }
 .w-nav[data-collapse="all"] .w-nav-menu {
   display: none;

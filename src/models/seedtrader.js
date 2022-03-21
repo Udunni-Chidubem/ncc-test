@@ -12,11 +12,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      SeedTrader.belongsTo(user)
+      SeedTrader.belongsTo(models.User)
     }
   }
   SeedTrader.init({
-    user_id: DataTypes.INTEGER,
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false
@@ -25,8 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    othername: DataTypes.STRING,
-    location_of_seed: DataTypes.STRING,
+    othername: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location_of_seed: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     phone_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -47,8 +56,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    age: DataTypes.STRING
+    age: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   }, {
+    underscored: true,
+    tableName : 'Seedtrader',
     sequelize,
     modelName: 'SeedTrader',
   });

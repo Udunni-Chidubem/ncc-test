@@ -10,6 +10,7 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'user',
           key: 'id'
@@ -34,6 +35,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
+      // password: {
+      //   type: Sequelize.STRING(15),
+      //   allowNull: false
+      // },
       licensed_no: {
         type: Sequelize.STRING(30),
         unique:true
@@ -42,11 +47,11 @@ module.exports = {
         type: Sequelize.STRING(30),
         unique:true
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
