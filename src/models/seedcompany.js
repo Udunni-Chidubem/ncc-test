@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // SeedCompany.belongsTo(models.user)
+       SeedCompany.belongsTo(models.User)
     }
   }
   SeedCompany.init({
