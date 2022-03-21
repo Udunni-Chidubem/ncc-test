@@ -82,9 +82,7 @@ siteRouter.post('/seedtradersignup', (req, res)=>{
 }), 
 siteRouter.get('/test2', siteController.authenticate)
 siteRouter.get('/logout', (req, res)=>{
-
     req.logOut();
-    req.isAuthenticated=false
     res.redirect('/login')
 })
 module.exports=siteRouter; 
