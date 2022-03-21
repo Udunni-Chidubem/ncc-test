@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // SeedTrader.belongsTo(models.User)
+      SeedTrader.belongsTo(models.User)
     }
   }
   SeedTrader.init({
@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     location_of_seed: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lga: {
       type: DataTypes.STRING,
       allowNull: false,
     },

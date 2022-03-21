@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // User.hasOne(models.User_role)
-      // User.hasOne(models.Farmer)
-      // User.hasOne(models.SeedTrader)
-      // User.hasOne(models.SeedCompany)
+      User.hasOne(models.User_role)
+      User.hasOne(models.Farmer)
+      User.hasOne(models.SeedTrader)
+      User.hasOne(models.SeedCompany)
     }
   }
   User.init({

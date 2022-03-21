@@ -32,6 +32,14 @@ module.exports = {
         type: Sequelize.STRING(65),
         allowNull: false
       },
+      lga: {
+        type: Sequelize.STRING(65),
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING(65),
+        allowNull: false
+      },
       phone_no: {
         type: Sequelize.STRING(20),
         allowNull: false

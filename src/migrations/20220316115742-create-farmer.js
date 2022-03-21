@@ -20,6 +20,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      lga: {
+        type: Sequelize.STRING(65),
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING(65),
+        allowNull: false
+      },
       product_farmed: {
         type: Sequelize.STRING,
         allowNull: false
