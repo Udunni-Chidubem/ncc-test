@@ -10,7 +10,6 @@ module.exports = {
     },
 
     authenticate : async (req, res) => {
-        let transaction =db.rest.transaction()
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
@@ -55,14 +54,17 @@ module.exports = {
     seedcompanysignup: async (req,res) => {
         res.render('seed_company_signup',{
             form_banner:'seeds-02 1.png',
-            layout : 'form'
+            layout : 'form',
+            errors : req.flash('errors')
     });
     },
 
     seedtradersignup: async (req,res) => {
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
-            layout : 'form'
+            layout : 'form',
+            states : states,
+            errors : req.flash('errors')
     });
     },
 
@@ -110,34 +112,35 @@ module.exports = {
     },
 
     saveseedcompany: async (req, res)=>{
+        const transaction = await db.rest.transaction();
          try{  
             const password = await bcrypt.hash(req.body.password, 10)
-            let user = new User();
-            user.username=req.body.phone
-            user.password = password
-            user.status=false
-            user.token=''
-            await user.save()
+             const user = await User.create({
+                username: req.body.phone,
+                password : password,
+                status : false,
+                token : ''
+            }, {transaction : transaction} )
              let r = await Role.findOne(
                 {
                     where : { role_name : 'seed_company' }
                 }
             );
-            let user_role= new UserRole();
-            user_role.user_id = user.id;
-            user_role.role_id = r.id
-            user_role.save();
-            let seed_company = new SeedCompany();
-            seed_company.name_of_company=req.body.company_name
-            seed_company.phone_no=req.body.phone
-            seed_company.tin=req.body.tin
-            seed_company.address=req.body.address
-            seed_company.certification_number=''
-            seed_company.licensed_no=''
-            seed_company.user_id=user.id
-            seed_company.save()
+            UserRole.create({
+                user_id : user.id,
+                role_id : r.id
+            }, {transaction : transaction})
+            const seed_company = await SeedCompany.create({
+                name_of_company:req.body.company_name,
+                phone_no:req.body.phone,
+                tin:req.body.tin,
+                address:req.body.address,
+                user_id:user.id
+            },{transaction : transaction});
+            transaction.commit();
             return {user, seed_company};
         }catch(e){
+            transaction.rollback();
             return e
         }
     },

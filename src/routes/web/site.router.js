@@ -62,6 +62,7 @@ siteRouter.post('/seedcompanysignup', (req, res)=>{
                 layout : 'form'
              })
         }else{
+             req.flash('errors', r.errors)
             res.redirect('back');
         }
     }, e=>{
@@ -78,9 +79,8 @@ siteRouter.post('/seedtradersignup', (req, res)=>{
                 layout : 'form'
              })
         }else{
-            res.send(r)
-            //req.flash('errors', r.errors)
-            //res.redirect('back');
+            req.flash('errors', r.errors)
+            res.redirect('back');
         }
      }, e=>{
          res.send(e)
