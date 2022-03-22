@@ -215,6 +215,16 @@ body {
   .card-default {
     width: 369px !important;
   }
+
+  .card_product {
+    width: 353px !important;
+  }
+
+  .column_img {
+    height: 100px !important;
+    width: 100px !important;
+    object-fit: cover;
+  }
   /* .settings {
     width: 195px;
   } */
@@ -570,16 +580,16 @@ background: yellow;
 }
 
 .ord_con_img {
-  height: 400px;
+  height: 300px;
 }
 
 .card-default {
-  width: 800px;
+  width: 600px;
 }
 
 .con_img {
-  object-fit: cover;
-  height: 400px;
+  /* object-fit: cover; */
+  height: 300px;
   width: 100%;
 }
 
@@ -587,7 +597,7 @@ background: yellow;
   border-bottom: 2px solid #cccc !important;
 }
 
-form {
+.form {
   /* width: 300px; */
   margin: 0 auto;
   /* text-align: center; */
@@ -617,17 +627,17 @@ form {
   cursor: pointer;
 }
 
-form #decrease {
+.form #decrease {
   margin-right: -4px;
   border-radius: 8px 0 0 8px;
 }
 
-form #increase {
+.form #increase {
   margin-left: -4px;
   border-radius: 0 8px 8px 0;
 }
 
-form #input-wrap {
+.form #input-wrap {
   margin: 0px;
   padding: 0px;
 }
@@ -686,6 +696,48 @@ input[type="number"] {
   font-size: 11px;
   line-height: 16.5px;
   font-weight: 500;
+}
+
+.card {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}
+
+.column_img {
+  height: 184px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card_product {
+  border-radius: 12px;
+}
+.checked {
+  color: orange;
+}
+
+.col_prod p {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.col_prod h5 {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+}
+.col_prod .h5 {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.col_prod h4 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
 }
 
 .card {
