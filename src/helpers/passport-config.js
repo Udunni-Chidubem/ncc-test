@@ -27,12 +27,13 @@ function initialize(passport){
                     } 
                 }
             );
+            console.log(user)
             if(user != null ){
                 if(await bcrypt.compare(password, user.password) == true){
                     return done(null, user);
                 }
             }
-            return done(null, false, {message : "invalid credentials"});
+            return done(null, false, {message : "You have entered Invalid credentials. Please try again!!!"});
         }catch(e){
             return done(e)
         } 

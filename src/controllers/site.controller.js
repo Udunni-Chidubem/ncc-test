@@ -6,20 +6,23 @@ const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 module.exports = {
     home: async (req, res) => {
-        res.render('home');
+        res.render('home', {
+            title: 'Welcome'
+        });
     },
-
     authenticate : async (req, res) => {
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
-        res.render('pre-signup');
+        res.render('pre-signup', {
+            title: 'Pre-Registration Page'
+        });
     },
 
     aboutus: async (req,res) => {
         res.render('about-us', {
             layout: 'common',
-            page_label : 'About Us'
+            title : 'About Us'
         });
     },
 
@@ -31,21 +34,23 @@ module.exports = {
             form_banner:'Group.png',
             layout : 'form',
             states : states,
+            title : 'Farmer\'s Registration',
             errors : req.flash('errors')
-    });
+        });
     },
 
-    test: async (req,res) => {
-        console.log(req.user)
-        res.render('test',{
-            
-        layout : 'dashboard'
-    });
+    dashboard: async (req,res) => {
+        // console.log(req.user)
+        res.render('dashboard',{
+            title: 'Dashboard',
+            layout : 'dashboard'
+        });
     },
 
     login: async (req,res) => {
         res.render('login',{
             form_banner:'Group.png',
+            title: 'Login',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -53,21 +58,19 @@ module.exports = {
 
     seedcompanysignup: async (req,res) => {
         res.render('seed_company_signup',{
-            form_banner:'seeds-02 1.png',
-            layout : 'form',
-            errors : req.flash('errors')
-    });
+                form_banner:'seeds-02 1.png',
+                layout : 'form',
+                errors : req.flash('errors')
+        });
     },
-
     seedtradersignup: async (req,res) => {
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
             states : states,
             errors : req.flash('errors')
-    });
+        });
     },
-
     savefarmer : async (rq, rs)=>{
         const transaction = await db.rest.transaction();
         try{  
@@ -105,7 +108,6 @@ module.exports = {
             return e
         }
     },
-
     saveuser:  async (username, password, token, status)=>{
         let user = new User();
         return user;

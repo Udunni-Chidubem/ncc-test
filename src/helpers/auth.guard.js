@@ -10,7 +10,7 @@ module.exports = {
     //this check if you have a session and will be called on the login route
     loggedIn: (req, res, next)=>{
         if(req.isAuthenticated()){
-           res.redirect('/test');
+           res.redirect('/dashboard');
         }else{
             return next()
         }
@@ -20,13 +20,13 @@ module.exports = {
     //this will help handle redirects
     redirect : (res, role)=>{
            if( role == 'farmer')
-                res.redirect('/test')
+                res.redirect('/dashboard')
             
             if(role == 'seed_trader')
-                res.redirect('/test')
+                res.redirect('/dashboard')
 
             if(role == 'seed_company')
-                res.redirect('/test')
+                res.redirect('/dashboard')
     },
 
     //this will be called on all farmers routes to see if the user role if farmer

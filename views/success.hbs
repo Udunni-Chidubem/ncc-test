@@ -5,16 +5,18 @@
                 <div class="card-body"-->
                     <h1 class="title" style="font-size: xx-large; color: #212B27 ; font-family: Georgia, 'Times New Roman', Times, serif;" > <b>Registration <br> Successful</b>
                     </h1>
-                    <form method="POST" action="/login">
+                    {{!-- <form method="POST" action="/login"> --}}
                         <div class="paragraph">
                             <center><p style="color:#049648 ; font-size:x-large;  "> <b>Great!</b><br></p>
 
                             <p style="color:#049648; font-size: larger;"  >Click on the login button to <br> Get Started</p></center>
                         </div>
                         <div class="p-t-15">
-                            <center><button class="btn btn--radius-2 btn--green" type="submit">Login</button></center>
+                            <center>
+                                <a href="/login" class="btn btn--radius-2 btn--green">Login</a>
+                            </center>
                         </div>
-                    </form>
+                    {{!-- </form> --}}
                 </div>
             </div>
         </div>

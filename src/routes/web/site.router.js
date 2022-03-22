@@ -29,6 +29,7 @@ siteRouter.post('/farmer_signup', (req, res)=>{
         if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
+                title: 'Successful Page',
                 layout : 'form',
                 errors : req.flash('errors')
              })
@@ -41,7 +42,7 @@ siteRouter.post('/farmer_signup', (req, res)=>{
 
     })
 })
-siteRouter.get('/test', helpers.auth, siteController.test)
+siteRouter.get('/dashboard', helpers.auth, siteController.dashboard)
 siteRouter.get('/login', helpers.loggedIn, siteController.login)
 
 siteRouter.post('/login', passport.authenticate('local', {
