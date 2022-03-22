@@ -28,17 +28,13 @@ module.exports = {
       },
       tin: {
         type: Sequelize.STRING(25),
-        allowNull: false,
+        allowNull: true,
         unique:true
       },
       address: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      // password: {
-      //   type: Sequelize.STRING(15),
-      //   allowNull: false
-      // },
       licensed_no: {
         type: Sequelize.STRING(30),
         unique:true

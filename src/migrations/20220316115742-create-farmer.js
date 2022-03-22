@@ -22,11 +22,11 @@ module.exports = {
       },
       product_farmed: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       location_of_farm: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       size_of_farm: {
         type: Sequelize.STRING,
@@ -42,7 +42,11 @@ module.exports = {
       },
       account_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
+      },
+      account_no : {
+        type : Sequelize.STRING,
+        allowNull : true
       },
       nin: {
         type: Sequelize.STRING,
@@ -58,7 +62,7 @@ module.exports = {
       },
       level_of_education: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -70,9 +74,21 @@ module.exports = {
         }, 
         unique : true
       },
-      password: {
-        type: Sequelize.STRING(15),
-        allowNull: false
+      state_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'states',
+          key: 'id'
+        }
+      },
+      lg_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'lgas',
+          key: 'id'
+        }
       },
       created_at: {
         allowNull: false,

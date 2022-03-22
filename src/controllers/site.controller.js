@@ -1,14 +1,13 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, User_role, Role, SeedTrader, SeedCompany }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 module.exports = {
     home: async (req, res) => {
         res.render('home');
     },
-
 
     authenticate : async (req, res) => {
         let transaction =db.rest.transaction()
@@ -26,9 +25,14 @@ module.exports = {
     },
 
     farmer_signup: async (req,res) => {
+        let states =await States.findAll({
+            attributes : ['id', 'name']
+        });
         res.render('farmer_signup',{
             form_banner:'Group.png',
-        layout : 'form'
+            layout : 'form',
+            states : states,
+            errors : req.flash('errors')
     });
     },
 
@@ -43,7 +47,8 @@ module.exports = {
     login: async (req,res) => {
         res.render('login',{
             form_banner:'Group.png',
-            layout : 'form'
+            layout : 'form',
+            errors : req.flash('errors')
         });
     },
 
@@ -62,40 +67,39 @@ module.exports = {
     },
 
     savefarmer : async (rq, rs)=>{
+        const transaction = await db.rest.transaction();
         try{  
             const password = await bcrypt.hash(rq.body.password, 10)
-            let user = new User();
-            user.username=rq.body.phone_number
-            user.password = password
-            user.status=false
-            user.token=''
-            await user.save()
+            const user = await User.create({
+                username: rq.body.phone_number,
+                password : password,
+                status : false,
+                token : ''
+            }, {transaction : transaction} )
              let r = await Role.findOne(
                 {
                     where : { role_name : 'farmer' }
                 }
             );
-            let user_role= new User_role();
-            user_role.user_id = user.id;
-            user_role.role_id = r.id
-            user_role.save();
-            let farmer = new Farmer();
-            farmer.age=''
-            farmer.firstname=rq.body.firstname
-            farmer.lastname=rq.body.lastname
-            farmer.gender=rq.body.gender
-            farmer.product_farmed=rq.body.farm
-            farmer.level_of_education=rq.body.education
-            farmer.location_of_farm=rq.body.location
-            farmer.phone_no=rq.body.phone_number
-            farmer.account_name=''
-            farmer.size_of_farm=''
-            farmer.bvn=''
-            farmer.nin=''
-            farmer.user_id=user.id
-            farmer.save()
+             UserRole.create({
+                user_id : user.id,
+                role_id : r.id
+            }, {transaction : transaction})
+            const farmer = await Farmer.create({
+                firstname:rq.body.firstname,
+                lastname:rq.body.lastname,
+                gender:rq.body.gender,
+                product_farmed:rq.body.farm,
+                phone_no:rq.body.phone_number,
+                account_no:rq.body.account_no,
+                user_id:user.id,
+                state_id:rq.body.state,
+                lg_id : rq.body.lga
+            }, {transaction : transaction} );
+            await transaction.commit();
             return {user, farmer};
         }catch(e){
+            await transaction.rollback();
             return e
         }
     },
@@ -119,7 +123,7 @@ module.exports = {
                     where : { role_name : 'seed_company' }
                 }
             );
-            let user_role= new User_role();
+            let user_role= new UserRole();
             user_role.user_id = user.id;
             user_role.role_id = r.id
             user_role.save();
@@ -152,7 +156,7 @@ module.exports = {
                     where : { role_name : 'seed_trader' }
                 }
             );
-            let user_role= new User_role();
+            let user_role= new UserRole();
             user_role.user_id = user.id;
             user_role.role_id = r.id
             user_role.save();
@@ -174,9 +178,26 @@ module.exports = {
             return e
         }
 
+    },
+
+    states : async (req, res)=>{
+        let states =await States.findAll({
+            attributes : ['id', 'name']
+        });
+        res.send(states)
+    }, 
+
+    lgas : async (req, res)=>{
+
+    },
+
+    lgaByStateId: async (req, res)=>{
+        let lgas = await LGAs.findAll({
+            attributes : ['id', 'name'],
+            where : {state_id : req.params.state_id}
+        });
+        res.send(lgas)
     }
-
-
 
 
 }

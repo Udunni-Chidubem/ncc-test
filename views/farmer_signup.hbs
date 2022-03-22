@@ -9,33 +9,38 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" type="text" name="firstname" placeholder="First name">
+                                    <input class="form-control" required type="text" name="firstname" placeholder="First name">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" type="text" name="lastname" placeholder="Last name">
+                                    <input class="form-control" required type="text" name="lastname" placeholder="Last name">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                              <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="farm_produce" placeholder="Enter your Farm Produce">
+                                    <input class="form-control" required type="text" name="farm_produce" placeholder="Enter your Farm Produce">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <select name="education" id="education" class="form-control">
-                                        <option value="">select Level of Education</option>
+                                    <select name="state" required id="state" class="form-control">
+                                        <option value="">Select State</option>
+                                        {{#each states}}
+                                            <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                        {{/each}}
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="location" placeholder="Enter Your Location">
+                               <div class="form-group">
+                                    <select name="lga" required id="lga" class="form-control">
+                                        <option value="">Select LGA</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
@@ -49,12 +54,12 @@
                         <div class="row"> 
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="tel" name="accountnumber" placeholder="Enter Your Account Number">
+                                    <input class="form-control" type="tel" required name="account_no" placeholder="Enter Your Account Number">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                  <select class="form-control" name="gender" id="gender">
+                                  <select class="form-control" required name="gender" id="gender">
                                       <option value="">Gender</option>
                                       <option value="male">Male</option>
                                       <option value="female">Female</option>
@@ -65,7 +70,7 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="password" name="password" placeholder="Enter Your Password">
+                                    <input class="form-control" required type="password" name="password" placeholder="Enter Your Password">
                                 </div>
                             </div>
                         </div>
@@ -94,5 +99,21 @@
     </div>
 </div>
 
+<script>
+    document.querySelector('#state').addEventListener('change', function(){
+        let url = 'http://localhost:5200/api/base/lgas/'+this.value
+        fetch(url).then(r=>r.json())
+        .then(r=>{
+            let Options =  '<option value="">Select LGA</option>'
+            r.forEach(e=>{
+                Options+='<option value="'+e.id+'">'+e.name+'</option>'
+            })
+            document.querySelector('#lga').innerHTML=Options
+        }
+        ).catch(e=>{
+            console.log(e)
+        })
+    })
+</script>
  
    

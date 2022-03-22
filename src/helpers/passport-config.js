@@ -1,12 +1,12 @@
 localStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt');
-const { User, Farmer, SeedTrader, User_role, Role} = require('../models')
+const { User, Farmer, SeedTrader, UserRole, Role} = require('../models')
 
 function initialize(passport){
     async function getUserById(id){
         return await User.findOne({
             include : [{
-                model : User_role,
+                model : UserRole,
                 include : [{model : Role}]
             }],
             where: { 
@@ -19,7 +19,7 @@ function initialize(passport){
             const user = await User.findOne(
                 { 
                     include : [{
-                        model : User_role,
+                        model : UserRole,
                         include : [{model : Role}]
                     }],  
                     where: { 

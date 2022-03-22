@@ -25,12 +25,16 @@ siteRouter.post('/farmer_signup', (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
        // res.send(r)
+      // console.log(r.errors)
         if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
-                layout : 'form'
+                layout : 'form',
+                errors : req.flash('errors')
              })
         }else{
+            //res.send(r.errors)
+            req.flash('errors', r.errors)
             res.redirect('back');
         }
     }, e=>{
@@ -43,7 +47,10 @@ siteRouter.get('/login', helpers.loggedIn, siteController.login)
 siteRouter.post('/login', passport.authenticate('local', {
     failureRedirect : "/login",
     failureFlash : true
-}), (req, res)=>{helpers.redirect(res, req.user.User_role.Role.role_name)});
+}), (req, res)=>{
+    console.log(req.user)
+    helpers.redirect(res, req.user.UserRole.Role.role_name)
+});
 
 siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
 siteRouter.post('/seedcompanysignup', (req, res)=>{
@@ -72,16 +79,17 @@ siteRouter.post('/seedtradersignup', (req, res)=>{
              })
         }else{
             res.send(r)
-            // req.flash('errors', r.errors)
-            // res.redirect('back');
+            //req.flash('errors', r.errors)
+            //res.redirect('back');
         }
      }, e=>{
-        req.flash('errors', e)
-        res.redirect('back');
+         res.send(e)
+      //  req.flash('errors', e)
+        //res.redirect('back');
      })
 }), 
 siteRouter.get('/test2', siteController.authenticate)
-siteRouter.get('/logout', (req, res)=>{
+siteRouter.delete('/logout', (req, res)=>{
     req.logOut();
     res.redirect('/login')
 })
