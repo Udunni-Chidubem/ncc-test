@@ -146,36 +146,36 @@ module.exports = {
     },
 
     saveseettrader : async (req, res)=>{
+         const transaction = await db.rest.transaction();
         try{  
             const password = await bcrypt.hash(req.body.password, 10)
-            let user = new User();
-            user.username=req.body.phone
-            user.password = password
-            user.status=false
-            user.token=''
-            await user.save()
+             const user = await User.create({
+                username: req.body.phone,
+                password : password,
+                status : false,
+                token : ''
+            }, {transaction : transaction} )
              let r = await Role.findOne(
                 {
                     where : { role_name : 'seed_trader' }
                 }
             );
-            let user_role= new UserRole();
-            user_role.user_id = user.id;
-            user_role.role_id = r.id
-            user_role.save();
-            let seed_trader = new SeedTrader();
-            seed_trader.firstname=req.body.firstname
-            seed_trader.lastname=req.body.lastname
-            seed_trader.othername=''
-            seed_trader.phone_no=req.body.phone
-            seed_trader.location_of_seed=req.body.location
-            seed_trader.address=req.body.address
-            seed_trader.unique_no=uniqid()
-            seed_trader.bvn=''
-            seed_trader.nin=''
-            seed_trader.age=''
-            seed_trader.user_id=user.id
-            seed_trader.save()
+            const user_role= await UserRole.create({
+                user_id : user.id,
+                role_id : r.id
+            }, {transaction : transaction})
+            let seed_trader =await  SeedTrader({
+                firstname:req.body.firstname,
+                lastname:req.body.lastname,
+                phone_no:req.body.phone,
+                state_id:req.body.state,
+                lg_id : req.body.lga,
+                address:req.body.address,
+                unique_no:uniqid()
+            });
+
+            user_id:user.id
+            save()
             return {user, seed_trader};
         }catch(e){
             return e

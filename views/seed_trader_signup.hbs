@@ -64,6 +64,9 @@
                              <div class="form-group">
                                     <select name="state" required id="state" class="form-control">
                                         <option value="">Select State</option>
+                                        {{#each states}}
+                                            <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                        {{/each}}
                                     </select>
                                 </div>
                              </div>   
