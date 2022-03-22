@@ -225,6 +225,23 @@ body {
     width: 100px !important;
     object-fit: cover;
   }
+
+  .card-body-default {
+    margin-left: 5rem;
+  }
+
+  .navbar-heading {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+  }
+
+  .weather {
+    padding-bottom: 0rem !important;
+  }
+
+  .card_home {
+    width: 353px !important;
+  }
   /* .settings {
     width: 195px;
   } */
@@ -688,6 +705,19 @@ input[type="number"] {
   color: white;
   border: 0px;
   border-radius: 4px;
+  width: 110px;
+  height: 42px;
+}
+.button_update {
+  background-image: linear-gradient(#5dcd6d, #008346);
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+  color: white !important;
+  border: 0px;
+  border-radius: 4px;
+  /* width: 110px;
+  height: 42px; */
 }
 
 .con_alart {
@@ -740,8 +770,80 @@ input[type="number"] {
   line-height: 27px;
 }
 
-.card {
-  margin: 0 auto; /* Added */
-  float: none; /* Added */
-  margin-bottom: 10px; /* Added */
+.navbar-heading {
+  padding-left: 17rem;
+  padding-right: 3rem;
+}
+
+.navbar-defaults {
+  background-image: linear-gradient(#5dcd6d, #008346);
+  /* color: white; */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-dark .navbar-nav .nav-link .notrifications {
+  /* border-top: 2px solid red !important;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px; */
+
+  background-color: red;
+  display: inline-block;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  text-align: left;
+  /* margin-bottom: 1rem; */
+}
+
+.summary_tran {
+}
+
+.weather {
+  /* padding-bottom: 5rem; */
+  background: #192a3e !important;
+  color: white;
+}
+
+.weather .head {
+  /* color: white; */
+}
+.weather_sub {
+  border: 1px solid #7daaee !important;
+}
+
+.weather_button_update {
+  background-image: linear-gradient(#ffb946, #f99746);
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+  color: white !important;
+  border: 0px;
+  border-radius: 14px !important;
+  width: 134px;
+  height: 42px;
+}
+
+.summary_sub {
+  color: #109cf1;
+}
+.profile_sub {
+  color: #f7685b;
+}
+
+.produce {
+  background: #eefdf1 !important;
+  box-shadow: 0px 1px 11px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.fixed-top {
+  z-index: 0 !important;
+}
+
+.list_item {
+  margin: 1rem;
 }
