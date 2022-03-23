@@ -49,8 +49,8 @@ siteRouter.post('/login', passport.authenticate('local', {
     failureRedirect : "/login",
     failureFlash : true
 }),  (req, res)=>{
-   // console.log(req.user)
-    helpers.redirect(res, req.user.UserRole.Role.role_name)
+    console.log(req.user.UserRole.Role.role_name)
+    helpers.redirect(req, res, req.user.UserRole.Role.role_name)
 });
 
 siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
@@ -72,7 +72,7 @@ siteRouter.post('/seedcompanysignup', (req, res)=>{
 })
 siteRouter.get('/seedtradersignup', siteController.seedtradersignup)
 siteRouter.post('/seedtradersignup', (req, res)=>{
-     let y = siteController.saveseettrader(req, res);
+     let y = siteController.saveseedtrader(req, res);
      y.then(r=>{
          if(r.user){
             res.render('success',{

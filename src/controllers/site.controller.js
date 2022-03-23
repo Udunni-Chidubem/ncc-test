@@ -64,6 +64,9 @@ module.exports = {
         });
     },
     seedtradersignup: async (req,res) => {
+        let states =await States.findAll({
+            attributes : ['id', 'name']
+        });
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
@@ -147,8 +150,8 @@ module.exports = {
         }
     },
 
-    saveseettrader : async (req, res)=>{
-         const transaction = await db.rest.transaction();
+    saveseedtrader : async (req, res)=>{
+        const transaction = await db.rest.transaction();
         try{  
             const password = await bcrypt.hash(req.body.password, 10)
              const user = await User.create({
@@ -162,24 +165,24 @@ module.exports = {
                     where : { role_name : 'seed_trader' }
                 }
             );
-            const user_role= await UserRole.create({
+            const user_role=await UserRole.create({
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
-            let seed_trader =await  SeedTrader({
+            let unique = uniqid();
+            let seed_trader =await  SeedTrader.create({
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
                 state_id:req.body.state,
                 lg_id : req.body.lga,
-                address:req.body.address,
-                unique_no:uniqid()
-            });
-
-            user_id:user.id
-            save()
+                unique_no:unique,
+                user_id : user.id
+            }, {transaction :transaction});
+            transaction.commit();
             return {user, seed_trader};
         }catch(e){
+            transaction.rollback();
             return e
         }
 
