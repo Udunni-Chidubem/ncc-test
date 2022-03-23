@@ -34,5 +34,5 @@ app.use('/', mainRoute)
 
 const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
-    console.log(`NIGSIMS Application is running on PORT ${PORT}`)
+    console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
