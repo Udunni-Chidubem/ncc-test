@@ -64,6 +64,11 @@ module.exports = {
         });
     },
     seedtradersignup: async (req,res) => {
+        
+        let states =await States.findAll({
+            attributes : ['id', 'name']
+        });
+
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
@@ -94,7 +99,7 @@ module.exports = {
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
                 gender:rq.body.gender,
-                product_farmed:rq.body.farm,
+                product_farmed:rq.body.farm.toString(),
                 phone_no:rq.body.phone_number,
                 account_no:rq.body.account_no,
                 user_id:user.id,

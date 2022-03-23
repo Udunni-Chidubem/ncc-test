@@ -53,8 +53,8 @@ siteRouter.post('/login', passport.authenticate('local', {
     helpers.redirect(res, req.user.UserRole.Role.role_name)
 });
 
-siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
-siteRouter.post('/seedcompanysignup', (req, res)=>{
+siteRouter.get('/seed-company-signup', siteController.seedcompanysignup)
+siteRouter.post('/seed-company-signup', (req, res)=>{
     let y = siteController.saveseedcompany(req, res);
     y.then(r=>{
          if(r.user){
@@ -70,8 +70,8 @@ siteRouter.post('/seedcompanysignup', (req, res)=>{
 
     })
 })
-siteRouter.get('/seedtradersignup', siteController.seedtradersignup)
-siteRouter.post('/seedtradersignup', (req, res)=>{
+siteRouter.get('/seed-trader-signup', siteController.seedtradersignup)
+siteRouter.post('/seed-trader-signup', (req, res)=>{
      let y = siteController.saveseettrader(req, res);
      y.then(r=>{
          if(r.user){
