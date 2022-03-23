@@ -29,17 +29,14 @@ module.exports = {
             if(role == 'seed_company')
                 res.redirect('seed-company/dashboard')
     },
-
     //this will be called on all farmers routes to see if the user role if farmer
     farmerPermission: (req, res, next)=>{
 
     },
-
     //this will be called on all seed traders route to see the role is seed_trader
     seedTraderPermission : (req, res, next)=>{
 
     },
-
     //this will be called on all seed company routes to see if the role is seed company
     seedCompanyPermission : (req, res, next)=>{
 
