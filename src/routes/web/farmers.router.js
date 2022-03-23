@@ -21,6 +21,10 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     })
 })
 
+farmersRouter.get('/update-profile', farmerController.updateProfile)
+
+
+
 
 
 module.exports=farmersRouter

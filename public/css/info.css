@@ -107,7 +107,7 @@ hr{
     border-color:rgb(255, 255, 255);
     border-bottom-color: rgb(59, 59, 59);
     border-bottom-width: thin;
-    box-sizing:border-box;
+    /* box-sizing:border-box; */
     /* width: 190px; */
   }
  
@@ -117,7 +117,7 @@ hr{
     border-color:rgb(255, 255, 255);
     border-bottom-color: rgb(59, 59, 59);
     border-bottom-width: thin;
-    box-sizing:border-box;
+    /* box-sizing:border-box; */
     padding-left: 10px;
     
 }

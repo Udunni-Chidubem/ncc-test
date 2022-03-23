@@ -1,130 +1,124 @@
 <form method="POST">
-
-  <div class="rows">
-    <div class="col_8">
-        <img class="jpegs" src="../images/image1.jpg" alt="Farmer Picture">   
-    </div>
-  </div>
-
-<div class="rows">
- <div class="col_2">
-        <div class="input">
-            <label>First Name </label><br>
-            <input type="text" name="first_name" >    
-     </div>
-    </div>
-    <div class="col_6">
-      <div class="input">
-        <label>Last Name </label><br>
-        <input type="text" name="last_name" > 
-
-      </div>
-    </div>
-  </div>
-
-  <div class="rows">
-    <div class="col_2">
-           <div class="input">
-               <label>Date of Birth </label><br>
-               <input type="date" name="date" placeholder="DD/MM/YY" >    
+    <div class="rows">
+        <div class="col_8">
+            <img class="jpegs" src="../images/image1.jpg" alt="Farmer Picture" />
         </div>
     </div>
-       <div class="col_6">
-         <div class="input1">
-           <label>Gender </label><br>
-           <select class="space">
-    <option> Gender</option> 
-    <option> Male</option>
-    <option> Female</option>
-</select>
-        </div>
-       </div>
-     </div>
 
-   
-   <div class="col_2">
-    <div class="input2">
-        <label>Level of Education</label> <br>
-        <select class="space2">
-            <option>OND</option>
-            <option>Vibes</option>
-            </select>
-    </div>
-    </div>
-<br>
-<br>
     <div class="rows">
         <div class="col_2">
-               <div class="input1">
-                   <label>BVN </label><br>
-                   <input type="text" name="bvn" >    
-                </div>
+            <div class="input">
+                <label>First Name </label><br />
+                <input type="text" name="first_name" value="{{ farmerData.firstname }}"/>
             </div>
-           <div class="col_6">
-             <div class="input1">
-               <label>NIN </label><br>
-               <input type="text" name="nin" > 
-       
-             </div>
-           </div>
         </div>
-<div class="rows">
-        <div class="col_2">
-            <div class="input1">
-              <label>State </label><br>
-              <select class="space">
-       <option> </option>
-       <option> </option>
-   </select>
-           </div>
-          </div>
-   <div class="col_6">
-       <div class="input1">
-           <label>LGA</label> <br>
-           <select class="space">
-               <option>  </option>
-               <option> </option>
-               </select>
-       </div>
-      </div>
+        <div class="col_6">
+            <div class="input">
+                <label>Last Name </label><br />
+                <input type="text" name="last_name" value="{{ farmerData.lastname }}" />
+            </div>
+        </div>
     </div>
 
-       <br>
-       <h1>Delivery Information</h1>
-       <hr>
-       <div class="rows">
-       <div class="col_2">
-        <div class="input1">
-          <label>State</label><br>
-          <select class="space">
-   <option> </option>
-   <option> </option>
-</select>
-       </div>
-      </div>
+    <div class="rows">
+        <div class="col_2">
+            <div class="input">
+                <label>Date of Birth </label><br />
+                <input type="date" name="date" placeholder="DD/MM/YY" value="{{ farmer.firstname }}"/>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>Gender </label><br />
+                <select class="space">
+                    <option> Male</option>
+                    <option> Female</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-      <div class="col_6">
-   <div class="input1">
-       <label>LGA</label> <br>
-       <select class="space">
-           <option>  </option>
-           <option> </option>
-           </select>
-   </div>
-  </div>
-</div>
+    <div class="col_2">
+        <div class="input2">
+            <label>Level of Education</label> <br />
+            <select class="space2">
+                <option>OND</option>
+                <option>Vibes</option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>BVN </label><br />
+                <input type="text" name="bvn" />
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>NIN </label><br />
+                <input type="text" name="nin" />
+            </div>
+        </div>
+    </div>
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>State </label><br />
+                <select class="space">
+                    <option> </option>
+                    <option> </option>
+                </select>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>LGA</label> <br />
+                <select class="space">
+                    <option> </option>
+                    <option> </option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-   <div class="input2">
-    <label>Address</label> <br>
-    <input type="text" name="address"> 
-</div>
+    <br />
+    <h1>Delivery Information</h1>
+    <hr />
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>State</label><br />
+                <select class="space">
+                    <option> </option>
+                    <option> </option>
+                </select>
+            </div>
+        </div>
 
-<br>
-<br>
-<div class="rows">
-  <div class="click_7">
-<button class="click" type="button" class="innerbtn">Submit </button>
-</div>
-</div>
+        <div class="col_6">
+            <div class="input1">
+                <label>LGA</label> <br />
+                <select class="space">
+                    <option> </option>
+                    <option> </option>
+                </select>
+            </div>
+        </div>
+    </div>
 
- </form>
+    <div class="input2">
+        <label>Address</label> <br />
+        <input type="text" name="address" />
+    </div>
+
+    <br />
+    <br />
+    <div class="rows">
+        <div class="click_7">
+            <button type="submit" class="btn button_update mb-1 click">Submit</button>
+        </div>
+    </div>
+</form>
