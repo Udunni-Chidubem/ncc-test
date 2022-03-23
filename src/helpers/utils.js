@@ -25,7 +25,13 @@ module.exports = {
     getTraderProfile: (user) => {
         
     },
-    getCompanyProfile: (user) => {
-        
+    getCompanyProfile: async (user) => {
+        let company =await SeedCompany.findOne({
+             where : {
+                 user_id : user.id
+             },
+             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number']
+         });
+         return company;
     }
 }

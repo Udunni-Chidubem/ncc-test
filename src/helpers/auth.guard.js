@@ -1,6 +1,6 @@
 module.exports = {
     //this will check if you are authenticated will be called on all protected routes
-    auth : (req, res, next)=>{
+    auth : (req, res, next)=> {
     if(req.isAuthenticated())
         return next()
     else
