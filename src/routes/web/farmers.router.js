@@ -5,8 +5,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
 
     //let farmer = await farmerController.dashboard(req, res);
     res.render('farmers/dashboard', {
-        layout : 'farmers-dashboard'
-       // farmer : farmer
+        layout : 'farmers-dashboard',
+        title : 'Dashboard'
     })
 })
 
