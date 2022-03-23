@@ -21,32 +21,39 @@
                         <div class="row">
                              <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" required type="text" name="farm_produce" placeholder="Enter your Farm Produce">
+                                     <select class="form-control" required name="gender" id="gender">
+                                      <option value="">Gender</option>
+                                      <option value="male">Male</option>
+                                      <option value="female">Female</option>
+                                  </select>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <select name="state" required id="state" class="form-control">
-                                        <option value="">Select State</option>
-                                        {{#each states}}
-                                            <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
-                                        {{/each}}
-                                    </select>
+                                    <input class="form-control" required type="number" id="phone" min="11" max="14" name="phone_number" placeholder="Phone no">
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                <div class="form-group">
-                                    <select name="lga" required id="lga" class="form-control">
-                                        <option value="">Select LGA</option>
+                                    <select name="state" required id="state" class="form-control">
+                                        <option value="">Select State</option>
+                                        {{#each states}}
+                                            <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                        {{/each}}
                                     </select>
+                                     
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" required type="text" id="phone" name="phone_number" placeholder="Phone no">
-                                
+                                     
+                                <select name="lga" required id="lga" class="form-control">
+                                        <option value="">Select LGA</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -54,23 +61,19 @@
                         <div class="row"> 
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="tel" required name="account_no" placeholder="Enter Your Account Number">
+                                    <input class="form-control" type="number" min="10" required name="account_no" placeholder="Enter Your Account Number">
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                  <select class="form-control" required name="gender" id="gender">
-                                      <option value="">Gender</option>
-                                      <option value="male">Male</option>
-                                      <option value="female">Female</option>
-                                  </select>
+                                   <input class="form-control" required type="text" name="farm_produce" placeholder="Enter your Farm Produce">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-5 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" required type="password" name="password" placeholder="Enter Your Password">
+                                    <input class="form-control" required type="password" minlength="6" maxlength="8" name="password" placeholder="Enter Your Password">
                                 </div>
                             </div>
                         </div>

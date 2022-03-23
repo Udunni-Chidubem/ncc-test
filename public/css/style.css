@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  background: #e5e5e5;
+  background: #e5e5e5 !important;
 }
 
 .containers {
@@ -72,8 +72,10 @@ body {
 .menu-bar {
   color: #334d6e;
   position: fixed;
-  top: 5%;
-  right: 33%;
+  /* top: 5%;
+  right: 33%; */
+  top: 2%;
+  right: -39%;
   margin-left: 1rem;
 }
 
@@ -241,6 +243,10 @@ body {
 
   .card_home {
     width: 353px !important;
+  }
+
+  .ul_list_item {
+    display: block !important;
   }
   /* .settings {
     width: 195px;
@@ -728,11 +734,11 @@ input[type="number"] {
   font-weight: 500;
 }
 
-.card {
-  margin: 0 auto; /* Added */
-  float: none; /* Added */
-  margin-bottom: 10px; /* Added */
-}
+/* .card {
+  margin: 0 auto; 
+  float: none;  
+  margin-bottom: 10px;  
+} */
 
 .column_img {
   height: 184px;
@@ -846,4 +852,64 @@ input[type="number"] {
 
 .list_item {
   margin: 1rem;
+}
+
+.ul_list_item {
+  display: flex;
+  padding-left: 0rem;
+}
+.f_1 .col-3 {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+  color: #47749c;
+}
+
+.f_1 .col-6 {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+  color: #47749c;
+}
+
+.f_2 .col-3 {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 36px;
+  /* identical to box height */
+
+  color: #47749c;
+}
+
+.f_2 .col-6 {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 36px;
+  /* identical to box height */
+
+  color: #47749c;
+}
+
+.f_0 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+
+  color: #47749c;
+}
+.mbar {
+  margin-right: -7rem !important;
+}
+
+.sidebar_arrow {
+  border: none !important;
+}
+
+.mls-auto {
+  margin-left: auto !important;
+  padding-right: 8rem;
 }
