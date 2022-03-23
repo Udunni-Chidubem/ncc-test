@@ -97,7 +97,7 @@ module.exports = {
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
                 gender:rq.body.gender,
-                product_farmed:rq.body.farm.toString(),
+                product_farmed:rq.body.farm_produce.toString(),
                 phone_no:rq.body.phone_number,
                 account_no:rq.body.account_no,
                 user_id:user.id,
