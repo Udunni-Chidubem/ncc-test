@@ -2,7 +2,6 @@ const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 
 farmersRouter.get('/dashboard', async (req, res)=>{
-
     //let farmer = await farmerController.dashboard(req, res);
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -10,6 +9,12 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     })
 })
 
+farmersRouter.get('/update-profile', async(req, res) => {
+    res.render('farmers/update-profile', {
+        layout : 'farmers-dashboard',
+        title : 'Update Profile'
+    })
+})
 
 
 

@@ -18,6 +18,9 @@ module.exports={
             }
         });
         return farmer;
+    },
+    updateProfile: async (req, res) => {
+        
     }
 
 }
