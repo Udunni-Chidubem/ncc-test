@@ -48,10 +48,7 @@ siteRouter.get('/login', helpers.loggedIn, siteController.login)
 siteRouter.post('/login', passport.authenticate('local', {
     failureRedirect : "/login",
     failureFlash : true
-}), (req, res)=>{
-    console.log(req.user)
-    helpers.redirect(res, req.user.UserRole.Role.role_name)
-});
+}), helpers.redirect(req, res, req.user.UserRole.Role.name));
 
 siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
 siteRouter.post('/seedcompanysignup', (req, res)=>{

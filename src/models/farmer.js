@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Farmer.belongsTo(models.User)
+      Farmer.belongsTo(models.States, {
+        foreignKey : 'state_id'
+      })
+      Farmer.belongsTo(models.LGAs, {
+        foreignKey : 'lg_id'
+      })
     }
   }
 
@@ -32,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     nin: DataTypes.STRING,
     age: DataTypes.INTEGER,
     gender: DataTypes.STRING,
-    state: DataTypes.STRING,
-    lga: DataTypes.STRING,
+    state_id: DataTypes.STRING,
+    lg_id: DataTypes.STRING,
     level_of_education: DataTypes.STRING,
     user_id: {
       type :DataTypes.INTEGER,

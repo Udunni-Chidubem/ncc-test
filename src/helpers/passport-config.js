@@ -27,7 +27,7 @@ function initialize(passport){
                     } 
                 }
             );
-            console.log(user)
+            // console.log(user)
             if(user != null ){
                 if(await bcrypt.compare(password, user.password) == true){
                     return done(null, user);
