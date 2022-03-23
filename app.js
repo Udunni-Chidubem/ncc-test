@@ -3,12 +3,18 @@ const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
 const handlebars = require('express-handlebars')
+const passport = require('passport')
 const path = require('path')
+const methodOveride = require('method-override')
+const session = require('express-session');
+const flash = require('express-flash')
+const passpportInitializer = require('./src/helpers/passport-config')
+passpportInitializer(passport)
 
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({
     layoutsDir: 'views/layouts',
-    views: 'views',
+    views:  'views',
     defaultLayout: 'main',
     extname: 'hbs',
     partialsDir: 'views/_partials',
@@ -27,7 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+app.use(methodOveride('_method'))
 const mainRoute = require('./src/routes/main.route')
 
 app.use('/', mainRoute)

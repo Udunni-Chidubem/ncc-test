@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SeedCompany', {
+    await queryInterface.createTable('seedcompany', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -28,15 +28,11 @@ module.exports = {
       },
       tin: {
         type: Sequelize.STRING(25),
-        allowNull: false,
+        allowNull: true,
         unique:true
       },
       address: {
         type: Sequelize.TEXT,
-        allowNull: false
-      },
-      password: {
-        type: Sequelize.STRING(15),
         allowNull: false
       },
       licensed_no: {
@@ -58,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SeedCompany');
+    await queryInterface.dropTable('seedcompany');
   }
 };

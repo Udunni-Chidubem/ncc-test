@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('SeedTrader', {
+    await queryInterface.createTable('seedtrader', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -30,7 +30,23 @@ module.exports = {
       },
       location_of_seed: {
         type: Sequelize.STRING(65),
-        allowNull: false
+        allowNull: true
+      },
+     state_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'states',
+          key: 'id'
+        }
+      },
+      lg_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'lgas',
+          key: 'id'
+        }
       },
       phone_no: {
         type: Sequelize.STRING(20),
@@ -48,10 +64,6 @@ module.exports = {
         type: Sequelize.STRING(15),
         allowNull: true
       },
-      password: {
-        type: Sequelize.STRING(15),
-        allowNull: false
-      },
       age: {
         type: Sequelize.STRING,
         allowNull: true
@@ -67,6 +79,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SeedTrader');
+    await queryInterface.dropTable('seedtrader');
   }
 };

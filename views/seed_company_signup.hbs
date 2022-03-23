@@ -9,13 +9,23 @@
                           <div class="row">
                             <div class=" col-md-5 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="company_name" placeholder="Name of company">
+                                    <input class="form-control" required type="text" name="company_name" placeholder="Enter Company Name">
                                 </div>
                                 
                             </div>
                             <div class=" col-md-5 col-sm-12">
                                 <div class="form-group"> 
-                                     <input class="form-control" required type="tel"  id="phone" name="phone" pattern="[0-9]{11} " placeholder="Phone no">
+                                     <input 
+                                        class="form-control" 
+                                        required 
+                                        type="tel" 
+                                        id="phone" 
+                                        name="phone" 
+                                        placeholder="Phone e.g 0*******" 
+                                        pattern="^0[0-9]{10}$"
+                                        title="Phone Number should start with 0 and contain 11digits"
+                                        minlength="11"
+                                        maxlength="11">
                                 
                                 </div>
                                 
@@ -32,7 +42,7 @@
                             </div>
                             <div class=" col-md-5 col-sm-12">
                                  <div class="form-group">
-                                    <input class="form-control" type="text" name="password" placeholder="Enter Your Password">
+                                    <input class="form-control" type="password" name="password" placeholder="Enter Your Password">
                                 </div>
                                 
                             </div>
@@ -40,9 +50,9 @@
                             </div>
 
                              <div class="row">
-                            <div class=" col-md-5 col-sm-12">
+                            <div class=" col-md-10 col-sm-12">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" name="address" placeholder="Official address">
+                                    <textarea class="form-control" name="address" id="address" cols="30" rows="3" placeholder="Enter your address"></textarea>
                                 </div>
                                 
                             </div>

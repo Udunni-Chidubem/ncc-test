@@ -28,15 +28,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false, 
-    },
     othername: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     location_of_seed: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    state_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lg_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -47,17 +51,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     unique_no: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     bvn: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     nin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     age: {
@@ -66,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     underscored: true,
-    tableName : 'Seedtrader',
+    tableName : 'seedtrader',
     sequelize,
     modelName: 'SeedTrader',
   });
