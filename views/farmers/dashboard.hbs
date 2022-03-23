@@ -5,7 +5,7 @@
           <div class="card-body">
              <div class="row">
                <div class="col-12">
-                 <h4>Welcome, Adamu Garba!</h4>
+                 <h4>Welcome, {{ firstname }} {{ lastname }}!</h4>
                </div>
                <div class="row">
                  <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
@@ -25,8 +25,8 @@
       <div class="card-body">
          <div class="row mb-1" >
            <div class="col-12">
-             <span><img src="images/ep_map-location.png" alt=""> </span>
-             <span>Kuri, Gombe State</span>
+             <span> <img src="images/ep_map-location.png" alt=""> </span>
+             <span>{{ lga }}, {{ state }}</span>
            </div>
          </div>
 

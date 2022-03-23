@@ -19,6 +19,7 @@ module.exports = {
 
     //this will help handle redirects
     redirect : (req, res, role)=>{
+           req.flash('user', req.user)
            if( role == 'farmer')
                 res.redirect('farmer/dashboard')
             
