@@ -6,20 +6,23 @@ const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 module.exports = {
     home: async (req, res) => {
-        res.render('home');
+        res.render('home', {
+            title: 'Welcome'
+        });
     },
-
     authenticate : async (req, res) => {
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
-        res.render('pre-signup');
+        res.render('pre-signup', {
+            title: 'Pre-Registration Page'
+        });
     },
 
     aboutus: async (req,res) => {
         res.render('about-us', {
             layout: 'common',
-            page_label : 'About Us'
+            title : 'About Us'
         });
     },
 
@@ -31,21 +34,23 @@ module.exports = {
             form_banner:'Group.png',
             layout : 'form',
             states : states,
+            title : 'Farmer\'s Registration',
             errors : req.flash('errors')
-    });
+        });
     },
 
-    test: async (req,res) => {
-        console.log(req.user)
-        res.render('test',{
-            
-        layout : 'dashboard'
-    });
+    dashboard: async (req,res) => {
+        // console.log(req.user)
+        res.render('dashboard',{
+            title: 'Dashboard',
+            layout : 'dashboard'
+        });
     },
 
     login: async (req,res) => {
         res.render('login',{
             form_banner:'Group.png',
+            title: 'Login',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -53,21 +58,22 @@ module.exports = {
 
     seedcompanysignup: async (req,res) => {
         res.render('seed_company_signup',{
-            form_banner:'seeds-02 1.png',
-            layout : 'form',
-            errors : req.flash('errors')
-    });
+                form_banner:'seeds-02 1.png',
+                layout : 'form',
+                errors : req.flash('errors')
+        });
     },
-
     seedtradersignup: async (req,res) => {
+        let states =await States.findAll({
+            attributes : ['id', 'name']
+        });
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
             states : states,
             errors : req.flash('errors')
-    });
+        });
     },
-
     savefarmer : async (rq, rs)=>{
         const transaction = await db.rest.transaction();
         try{  
@@ -91,7 +97,7 @@ module.exports = {
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
                 gender:rq.body.gender,
-                product_farmed:rq.body.farm,
+                product_farmed:rq.body.farm_produce.toString(),
                 phone_no:rq.body.phone_number,
                 account_no:rq.body.account_no,
                 user_id:user.id,
@@ -105,7 +111,6 @@ module.exports = {
             return e
         }
     },
-
     saveuser:  async (username, password, token, status)=>{
         let user = new User();
         return user;
@@ -145,8 +150,8 @@ module.exports = {
         }
     },
 
-    saveseettrader : async (req, res)=>{
-         const transaction = await db.rest.transaction();
+    saveseedtrader : async (req, res)=>{
+        const transaction = await db.rest.transaction();
         try{  
             const password = await bcrypt.hash(req.body.password, 10)
              const user = await User.create({
@@ -160,24 +165,24 @@ module.exports = {
                     where : { role_name : 'seed_trader' }
                 }
             );
-            const user_role= await UserRole.create({
+            const user_role=await UserRole.create({
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
-            let seed_trader =await  SeedTrader({
+            let unique = uniqid();
+            let seed_trader =await  SeedTrader.create({
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
                 state_id:req.body.state,
                 lg_id : req.body.lga,
-                address:req.body.address,
-                unique_no:uniqid()
-            });
-
-            user_id:user.id
-            save()
+                unique_no:unique,
+                user_id : user.id
+            }, {transaction :transaction});
+            transaction.commit();
             return {user, seed_trader};
         }catch(e){
+            transaction.rollback();
             return e
         }
 

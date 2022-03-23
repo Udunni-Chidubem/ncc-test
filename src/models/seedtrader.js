@@ -30,17 +30,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     othername: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     location_of_seed: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    state: {
+    state_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lga: {
+    lg_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -51,17 +51,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     unique_no: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     bvn: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     nin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     age: {

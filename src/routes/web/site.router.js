@@ -29,6 +29,7 @@ siteRouter.post('/farmer_signup', (req, res)=>{
         if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
+                title: 'Successful Page',
                 layout : 'form',
                 errors : req.flash('errors')
              })
@@ -41,19 +42,19 @@ siteRouter.post('/farmer_signup', (req, res)=>{
 
     })
 })
-siteRouter.get('/test', helpers.auth, siteController.test)
+siteRouter.get('/dashboard', helpers.auth, siteController.dashboard)
 siteRouter.get('/login', helpers.loggedIn, siteController.login)
 
 siteRouter.post('/login', passport.authenticate('local', {
     failureRedirect : "/login",
     failureFlash : true
-}), (req, res)=>{
-    console.log(req.user)
-    helpers.redirect(res, req.user.UserRole.Role.role_name)
+}),  (req, res)=>{
+    console.log(req.user.UserRole.Role.role_name)
+    helpers.redirect(req, res, req.user.UserRole.Role.role_name)
 });
 
-siteRouter.get('/seedcompanysignup', siteController.seedcompanysignup)
-siteRouter.post('/seedcompanysignup', (req, res)=>{
+siteRouter.get('/seed-company-signup', siteController.seedcompanysignup)
+siteRouter.post('/seed-company-signup', (req, res)=>{
     let y = siteController.saveseedcompany(req, res);
     y.then(r=>{
          if(r.user){
@@ -69,8 +70,8 @@ siteRouter.post('/seedcompanysignup', (req, res)=>{
 
     })
 })
-siteRouter.get('/seedtradersignup', siteController.seedtradersignup)
-siteRouter.post('/seedtradersignup', (req, res)=>{
+siteRouter.get('/seed-trader-signup', siteController.seedtradersignup)
+siteRouter.post('/seed-trader-signup', (req, res)=>{
      let y = siteController.saveseettrader(req, res);
      y.then(r=>{
          if(r.user){

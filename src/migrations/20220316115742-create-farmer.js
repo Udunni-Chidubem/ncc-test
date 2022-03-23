@@ -21,7 +21,7 @@ module.exports = {
         allowNull: true
       },
       product_farmed: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true
       },
       location_of_farm: {
