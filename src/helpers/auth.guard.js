@@ -9,6 +9,7 @@ module.exports = {
 
     //this check if you have a session and will be called on the login route
     loggedIn: (req, res, next)=>{
+        console.log(req.user)
         if(req.isAuthenticated()){
            res.redirect('/dashboard');
         }else{

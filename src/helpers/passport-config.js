@@ -45,5 +45,4 @@ function initialize(passport){
         return done(null, getUserById(id))
     })
 }
-
 module.exports=initialize
