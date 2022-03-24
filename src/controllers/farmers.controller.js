@@ -25,11 +25,16 @@ module.exports={
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)
 
+        let states = await States.findAll({
+            attributes : ['id', 'name']
+        });
+        console.log(states);
         res.render('farmers/update-profile', {
             layout : 'farmers-dashboard',
             title: 'Update Profile',
             fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
-            farmerData: farmer.dataValues
+            farmerData: farmer.dataValues,
+            states : states
         })
     }
 
