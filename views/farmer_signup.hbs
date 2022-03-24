@@ -24,8 +24,6 @@
                                 <div class="form-group"> 
                                     <select class="form-control" required name="gender" id="gender">
                                         <option value="">Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -71,8 +69,6 @@
                              <div class="col-md-10 col-sm-10">
                                 <div class="form-group">
                                     <select class="js-example-basic-multiple form-control" required name="farm_produce" multiple="multiple" id="farmProduce">
-                                        <option value="Rice">Rice</option>
-                                        <option value="Sorghum">Sorghum</option>
                                     </select>
                                     {{!-- <input class="form-control" required type="text" name="farm_produce" placeholder="Enter your Farm Produce"> --}}
                                 </div>
@@ -134,6 +130,34 @@
             allowClear: true
         });
     })
+
+    let url =  window.location.origin+'/api/base/get-gender'
+
+    fetch(url,{})
+    .then(response => response.json())
+    .then(response => {
+        if(response.statusCode === 200){
+            let objArray, len, i, farm_produce
+            objArray = response.data.gender
+            len = objArray.length
+
+            var ele = document.getElementById('gender');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
+            }
+
+            farm_produce = response.data.farm_produce
+            len = farm_produce.length
+
+            var ele = document.getElementById('farmProduce');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            }
+        }
+    })
+    .catch()
 
 
 </script>

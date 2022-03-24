@@ -1,6 +1,6 @@
 module.exports = {
     //this will check if you are authenticated will be called on all protected routes
-    auth : (req, res, next)=>{
+    auth : (req, res, next)=> {
     if(req.isAuthenticated())
         return next()
     else
@@ -9,7 +9,6 @@ module.exports = {
 
     //this check if you have a session and will be called on the login route
     loggedIn: (req, res, next)=>{
-        console.log(req.user)
         if(req.isAuthenticated()){
            res.redirect('/dashboard');
         }else{
@@ -20,7 +19,7 @@ module.exports = {
 
     //this will help handle redirects
     redirect : (req, res, role)=>{
-           // console.log(req.user)
+           req.flash('user', req.user)
            if( role == 'farmer')
                 res.redirect('farmer/dashboard')
             

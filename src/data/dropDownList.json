@@ -1,0 +1,26 @@
+{
+    "gender": [
+        {
+            "id": "M",
+            "name": "Male"
+        },
+        {
+            "id": "F",
+            "name": "Female"
+        }
+    ],
+    "farmProduce": [
+        {
+            "id": "O",
+            "name": "Oranges"
+        },
+        {
+            "id": "S",
+            "name": "Sweet Potatoes"
+        },
+        {
+            "id": "R",
+            "name": "Rice"
+        }
+    ]
+}

@@ -13,7 +13,7 @@
           <ul class="navbar-nav ms-auto mls-auto mb-2 mb-lg-0">
              
             <li class="nav-item">
-              <a class="nav-link" href="#">Adamu Garba</a>
+              <a class="nav-link" href="#">Your TIN is {{ company.tin }}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
@@ -36,12 +36,9 @@
   <aside class="sidebar close seed_com_side">
       
     <div>
-        {{!-- <div class="sidebar-menu-bar" >
-          <i class='bx bx-menu side-bx-menu' ></i>
-        </div> --}}
-        <div class="mobile-logo-details">
-        <img src="../images/nigsims_logo_white.png" alt="nigsims-logo">
-      </div>
+        <div class="mobile-logo-details"> 
+          {{> sidebar_image}}
+          </div>
        
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
@@ -117,7 +114,7 @@
           </a>
     
         </li> --}}
-        <li>
+           <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">
               <i class='bx bx-log-out'></i>

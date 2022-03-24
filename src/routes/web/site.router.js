@@ -72,12 +72,13 @@ siteRouter.post('/seed-company-signup', (req, res)=>{
 })
 siteRouter.get('/seed-trader-signup', siteController.seedtradersignup)
 siteRouter.post('/seed-trader-signup', (req, res)=>{
-     let y = siteController.saveseettrader(req, res);
+     let y = siteController.saveseedtrader(req, res);
      y.then(r=>{
          if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
-                layout : 'form'
+                layout : 'form',
+                title: 'Notification'
              })
         }else{
             req.flash('errors', r.errors)

@@ -1,17 +1,17 @@
- {{!-- <div class="container ">
+ <div class="container ">
     <div class="row">
       <div class="col-12">
         <div class="card shadow card_home pl-0 mb-2 ">
           <div class="card-body">
              <div class="row">
                <div class="col-12">
-                 <h4>Welcome, Adamu Garba!</h4>
+                 <h4>Welcome, {{ fullname }}!</h4>
                </div>
                <div class="row">
                  <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
                  <div class="col-6">
-                  <div class="  float-end">
-                    <button type="button  " class="btn button_update mb-1">Update Profile</button>
+                  <div class="float-end">
+                    <a href="/farmer/update-profile" class="btn button_update mb-1">Update Profile</a>
                   </div>
                  </div>
                </div>
@@ -25,8 +25,8 @@
       <div class="card-body">
          <div class="row mb-1" >
            <div class="col-12">
-             <span> <img src="image/ep_map-location.png" alt=""> </span>
-             <span class="f_0">Kuri, Gombe State</span>
+             <span> <img src="../../images/ep_map-location.png" alt=""> </span>
+             <span>{{ lga }}, {{ state }}</span>
            </div>
          </div>
 
@@ -167,232 +167,127 @@
           </div>
         </div>
 
-        <div class="card shadow card_home summary_tran">
-          <div class="card-body">
-             <div class="row">
-               <div class="col-12">
-                 <h4>TRANSACTION Summary</h4>
-               </div>
-             </div>
-
-             <div class="row">
-              <div class="col-12 summary_sub">
-                <p>You have not made any transaction this month</p>
+        <div class="row">
+              <div class="col-12">
+                <div class="card shadow card_home pl-0 mt-3 mb-2 ">
+                  <div class="card-body">
+                    <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2">
+                      <div class="col-12  ">
+                        <div class="p-3 border sal_bac text-center pt-5 border-0 border-end">
+                          <h5 class="c_d_s2 c_d_s2_sale">Total Sales &nbsp;   &nbsp; <span class="c_d_s2_sales ">2</span></h5>
+                         
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="p-3 border text-center border-0 border-end">
+                          <h5 class="c_d_s2">Saved Items</h5>
+                          <h1 class="c_d_s2_full ">0</h1>
+                         
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="p-3 border text-center border-0 border-end">
+                          <h5 class="c_d_s2">Processing Orders</h5>
+                          <h1 class=" c_d_s2_unfull">1</h1>
+                         
+                        </div>
+                      </div>
+  
+                      <div class="col-12">
+                        <div class="p-3 border text-center border-0 border-end">
+                          <h5 class="c_d_s2">Completed</h5>
+                          <h1 class=" c_d_s2_unfull">1</h1>
+                         
+                        </div>
+                      </div>
+                      </div>
+          
+                    </div>
+                  </div>
               </div>
-            </div>
-            </div>
-          </div>
+   
+
+              <div class="container-fluid  ">
+                
+  
+              <div class="card card_home mb-2 summary_tran">
+                <div class="card-body">
+                   <div class="row">
+                     <div class="col-12">
+                       <h4>Transaction Summary</h4>
+                     </div>
+                   </div>
+      
+                   <div class="row">
+                    <div class="col-12 summary_sub">
+                      <p>You have not made any transaction this month</p>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <table class="table con t_info  table-borderless">
+                  <thead class="t_info_head ">
+                    <tr class="">
+                      <th scope="col">S/N</th>
+                      <th scope="col">ITEM</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody class="t_info_body">
+                    <tr class="t_info_row1">
+                      <th scope="row"  >1</th>
+                      <td>White Maize</td>
+                      <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  Processing</span> 
+                      <br>
+                      <span class="mt-1"> Paid on 15/APR/2020</span> 
+                      </td>
+                      <td><a href="#"> See Details</a></td>
+                    </tr>
+                    <tr class="t_info_row2">
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>
+                        <span  >  <span class="canceled px-1"><i class="bi bi-dot  "></i> Canceled</span> 
+                      <br>
+                      <span>Paid on 15/APR/2020</span> 
+                      </td>
+                      <td><a href="#"> See Details</a></td>
+                    </tr>
+
+                    <tr class="t_info_row1">
+                      <th scope="row"  >3</th>
+                      <td>White Maize</td>
+                      <td>
+                        <span  >  <span class="paid px-1"><i class="bi bi-dot"></i> Paid</span> 
+                      <br>
+                      <span>Paid on 15/APR/2020</span> 
+                      </td>
+                      <td><a href="#"> See Details</a></td>
+                    </tr>
+                    <tr class="t_info_row2">
+                      <th scope="row">4</th>
+                      <td>White Maize</td>
+                      <td>
+                        <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+                      <br>
+                      <span>Paid on 15/APR/2020</span> 
+                      </td>
+                      <td><a href="#"> See Details</a></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              
+  
 
     </div>
 
-       --}}
-
-
-        <div class="container ">
-         <form action=""> 
-        <div class="row">
-            <div class="col-12">
-                <div class="card card_home rounded mx-auto shadow pl-0 mb-2 ">
-                    <div class="card-body bg-light">
-                     
-                      <div class="row row-cols-5 row-cols-lg-1 g-2 g-lg-2">
-                        
-                        <div class="col-12">
-                         
-                           
-                          <div class="p-3     ">
-                            <h5 class="card-header card-c p-0 mb-3 bg-light profile_header">Personal Information</h5>
-                          <img src="../images/farmer-with-vege-p-2000.jpeg" class=" mb-2 mx-auto d-block img_round" alt="...">
-                             <div class="row">
-                                <div class="col-sm-6">
-                                  <label for="firstname" class="input_form">First name</label>
-                                    <div class="input-group    input-group-sm mb-3">
-                                      
-                                      <input type="text" class="form-control border-0 border-bottom  input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                  <label for="lastname"  class="input_form">Last name</label>
-                                  <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="text" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  </div>
-                              </div>
-                             </div>
-
-                             <div class="row">
-                              <div class="col-sm-6">
-                                <label for="dob" class="input_form">Date of Birth</label>
-                                  <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="text" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-6">
-                                <label for="gender" class="input_form">Gender</label>
-                                <div class="input-group mb-3">
-                              
-                                  <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
-                                  </select>
-                                </div>
-                            </div>
-                           </div>
-
-                             <div class="row">
-                              <div class="col-sm-12">
-                                <label for="education" class="input_form">Level of Education</label>
-                                  <div class="input-group input-group-sm mb-3">
-                                    
-                                    <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                      <option value="1"> </option>
-                                      <option value="2">Female</option>
-                                       
-                                    </select>
-                                  </div>
-                              </div>
-                              </div>
-
-                             <div class="row">
-                              <div class="col-sm-6" class="input_form">
-                                <label for="bvn" class="input_form">BVN</label>
-                                  <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="text" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-6">
-                                <label for="nin" class="input_form">NIN</label>
-                                <div class="input-group input-group-sm mb-3">
-                                  
-                                  <input type="text" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                </div>
-                            </div>
-                           </div>
-
-                           <div class="row">
-                            <div class="col-sm-6" >
-                                <div class="input-group input-group-sm mb-3">
-                                  
-                                  <label for="state" class="input_form">State</label>
-                                <div class="input-group mb-3">
-                              
-                                  <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
-                                  </select>
-                                </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                              <div class="input-group input-group-sm mb-3">
-                                
-                                <label for="lga" class="input_form">LGA</label>
-                                <div class="input-group mb-3">
-                              
-                                  <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
-                                  </select>
-                                </div>
-
-                              </div>
-                          </div>
-                         </div>
-                         <h5 class="card-header card-c p-0 bg-light profile_header">Delivery Information</h5>
-                          
-                         <div class="row">
-                          <div class="col-sm-6">
-                              <div class="input-group input-group-sm mb-3">
-                                
-                                <label for="state" class="input_form">State</label>
-                                <div class="input-group mb-3">
-                              
-                                  <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
-                                  </select>
-                                </div>
-
-                              </div>
-                          </div>
-
-                          <div class="col-sm-6">
-                            <div class="input-group input-group-sm mb-3">
-                              
-                              <label for="lga" class="input_form">LGA</label>
-                                <div class="input-group mb-3">
-                              
-                                  <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
-                                  </select>
-                                </div>
-                            </div>
-                        </div>
-                       </div>
-                       
-                       <div class="row">
-                        <div class="col-sm-12 ">
-                            <div class="input-group input-group-sm mb-3">
-                              
-                              <label for="address" class="input_form">Address</label>
-                              <div class="input-group mb-3">
-                            
-                                <select class="form-select border-0 border-bottom" id="inputGroupSelect01">
-                                   
-                                  <option value="1"> </option>
-                                  <option value="2">Female</option>
-                                   
-                                </select>
-                              </div>
-
-                            </div>
-
-                            <div class="col-12">
-                              <div class="columns mx-auto"  style="width: 160px;">
-                                <button type="button float-end" class="btn  mb-1">Update</button>
-                              </div>
-                            </div>
-                        </div>
-
-                        
-                     </div>
-
-                     
-                          </div>
-                          
-                        </div>
-                        <!-- <div class="col-12 order-first  ">
-                          <div class="p-3  ">
-                            <div class="row">
-                              <div class="col-12"><img src="image/farmer-with-vege-p-2000.jpeg" class="  mx-auto d-block img_round" alt="..."></div>
-                               
-                            </div>
-                          </div>
-                        </div> -->
-                      </div>
-                    </div>
-                </div>
-                </form>
-          </div>
-
-
       
+
+
+     
+
+         

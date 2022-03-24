@@ -1,5 +1,7 @@
 const db = require('../models');
 const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
+const utils = require('../helpers/utils');
+
 module.exports={
     dashboard : async (req, res)=>{
         let farmer =await Farmer.findOne({
@@ -18,6 +20,27 @@ module.exports={
             }
         });
         return farmer;
+    },
+    updateProfile: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        let states = await States.findAll({
+            attributes : ['id', 'name']
+        });
+
+        res.render('farmers/update-profile', {
+            layout : 'farmers-dashboard',
+            title: 'Update Profile',
+            fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
+            farmerData: farmer.dataValues,
+            states : states,
+            isVerified
+        })
+    },
+    editProfileData: async (req, res) => {
+        
     }
 
 }

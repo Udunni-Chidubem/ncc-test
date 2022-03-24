@@ -1,0 +1,216 @@
+<form method="POST">
+    <div class="rows">
+        <div class="col_8">
+            {{!-- <img class="jpegs" src="../images/image1.jpg" alt="Farmer Picture" /> --}}
+        </div>
+    </div>
+
+    <div class="rows">
+        <div class="col_2">
+            <div class="input">
+                <label>First Name </label><br />
+                <input type="text" name="first_name" value="{{ farmerData.firstname }}"/>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input">
+                <label>Last Name </label><br />
+                <input type="text" name="last_name" value="{{ farmerData.lastname }}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="rows">
+        <div class="col_2">
+            <div class="input">
+                <label>Date of Birth </label><br />
+                <input type="date" name="date" placeholder="DD/MM/YY" value="" id="dob" data-dob="{{ farmerData.date_of_birth }}"/>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>Gender </label><br />
+                <select class="space" id="gender" data-gender="{{ farmerData.gender }}">
+                    <option value="Male"> Male</option>
+                    <option value="Female"> Female</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col_2">
+        <div class="input2">
+            <label>Level of Education</label> <br />
+            <select class="space2">
+                <option>OND</option>
+                <option>ND</option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="col_2">
+        <div class="produce">
+            <label>Farm Produce</label> <br />
+            <select class="space2">
+                <option>OND</option>
+                <option>ND</option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>BVN </label><br />
+                <input type="text" name="bvn" value="{{ farmerData.bvn }}"/>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>NIN </label><br />
+                <input type="text" name="nin" value="{{ farmerData.nin }}"/>
+            </div>
+        </div>
+    </div>
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>State </label><br />
+                <select class="space" data-state="{{ farmerData.state_id }}" id="state">
+                    <option value="">Select State</option>
+                    {{#each states}}
+                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class="col_6">
+            <div class="input1">
+                <label>LGA</label> <br />
+                <select class="space" id="lgas" data-lga="{{ farmerData.state_id }}">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <h1>Delivery Information</h1>
+    <hr />
+    <div class="rows">
+        <div class="col_2">
+            <div class="input1">
+                <label>State</label><br />
+                <select class="space" name="state_of_delivery" id="stateDelivery">
+                    {{#each states}}
+                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col_6">
+            <div class="input1">
+                <label>LGA</label> <br />
+                <select class="space" name="lga_of_delivery" id="lgaDelivery">
+                    <option> </option>
+                    <option> </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="input2">
+        <label>Address</label> <br />
+        <input type="text" name="address" />
+    </div>
+
+    <br />
+    <br />
+    <div class="rows">
+        <div class="click_7">
+            <button type="submit" class="btn button_update mb-1 click">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+
+        let lga = $('.lgas').data('lg_id')
+
+        const getDefaultLgas = (state_id) => {
+            let url =  window.location.origin+'/api/base/lgas/'+ state_id
+            fetch(url).then(r=>r.json())
+            .then(r => { 
+                //let Options =  '<option value="">Select LGA</option>'
+                let selected,Options
+                r.forEach(e=>{
+                    selected = (e.id == lga ? 'selected' : null)
+                    Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgas').innerHTML= Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        }
+
+        let gender = $('#gender').data('gender')
+        if(gender != null){
+            $('#gender').val(gender)
+        }
+
+
+        let state = $('#state').data('state')
+        if(state != null){
+            $('#state').val(state)
+
+            getDefaultLgas(state)
+        }
+
+        let dob = $('#dob').data(`dob`)
+        var today = moment(dob).format('YYYY-MM-DD')
+
+        $('#dob').val(today);
+
+
+
+        document.querySelector('#state').addEventListener('change', function(){
+            let url =  window.location.origin+'/api/base/lgas/'+this.value
+            fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgas').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+
+        document.querySelector('#stateDelivery').addEventListener('change', function(){
+            let url =  window.location.origin+'/api/base/lgas/'+this.value
+            fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgaDelivery').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+    })
+</script>
