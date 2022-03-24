@@ -37,7 +37,11 @@ module.exports = {
     isVerified: async (user) => {
         let farmerData = await Farmer.findOne({ where : {user_id : user.id}, raw: true })
         
-        if(farmerData.bvn != null && farmerData.nin != null && farmerData.level_of_education != null && farmerData.date_of_birth != null){
+        if(
+            farmerData.level_of_education != null 
+            && farmerData.state_id != null
+            && farmerData.lg_id != null
+        ){
             return false
         }
 

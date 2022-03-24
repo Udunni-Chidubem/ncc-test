@@ -207,7 +207,7 @@ module.exports = {
         });
         res.send(lgas)
     },
-    getGenders:  (req, res) => {
+    getDropList:  (req, res) => {
         const data = require('../data/dropDownList.json')
 
         fs.stat(directoryPath +'dropDownList.json', (err, stats) => {
@@ -217,10 +217,12 @@ module.exports = {
         
             const genders = []
             const farmProduce = []
-            // let gender = Object.entries(data.gender) //convert javascript object to an array
+            const levelEdu = []
+
             let gender = data.gender
             let farm_Produce = data.farmProduce
-            
+            let level = data.levelEducation
+
             gender.forEach((value, index, self) => {
                 genders.push(value)
             })
@@ -229,7 +231,15 @@ module.exports = {
                 farmProduce.push(value)
             })
 
-            return res.json({statusCode: 200, error: false,  data: {gender: genders, farm_produce: farmProduce} })
+            level.forEach((value, index, self) => {
+                levelEdu.push(value)
+            })
+
+            res.json({statusCode: 200, error: false,  data: {
+                gender: genders, 
+                farm_produce: farmProduce,
+                eduLevel: levelEdu
+            } })
 
         })
     }

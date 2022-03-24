@@ -10,8 +10,8 @@
 }
 
 /* ==========================================================================
-   #GRID
-   ========================================================================== */
+     #GRID
+     ========================================================================== */
 .row {
   display: -webkit-box;
   display: -webkit-flex;
@@ -44,12 +44,12 @@
 }
 
 /* ==========================================================================
-   #BOX-SIZING
-   ========================================================================== */
+     #BOX-SIZING
+     ========================================================================== */
 /**
- * More sensible default box-sizing:
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
- */
+   * More sensible default box-sizing:
+   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+   */
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -70,11 +70,11 @@ html {
 }
 
 /* ==========================================================================
-   #RESET
-   ========================================================================== */
+     #RESET
+     ========================================================================== */
 /**
- * A very simple reset that sits on top of Normalize.css.
- */
+   * A very simple reset that sits on top of Normalize.css.
+   */
 body,
 h1,
 h2,
@@ -98,25 +98,25 @@ legend {
 }
 
 /**
- * Remove trailing margins from nested lists.
- */
+   * Remove trailing margins from nested lists.
+   */
 li > ol,
 li > ul {
   margin-bottom: 0;
 }
 
 /**
- * Remove default table spacing.
- */
+   * Remove default table spacing.
+   */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 /**
- * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
- *    on fieldsets.
- */
+   * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
+   *    on fieldsets.
+   */
 fieldset {
   min-width: 0;
   /* [1] */
@@ -131,9 +131,10 @@ button {
 }
 
 /* ==========================================================================
-   #PAGE WRAPPER
-   ========================================================================== */
+     #PAGE WRAPPER
+     ========================================================================== */
 .page-wrapper {
+  min-height: 100vh;
 }
 
 body {
@@ -176,8 +177,8 @@ h6 {
 }
 
 /* ==========================================================================
-   #BACKGROUND
-   ========================================================================== */
+     #BACKGROUND
+     ========================================================================== */
 .bg-blue {
   background: #ffffff;
 }
@@ -187,8 +188,8 @@ h6 {
 }
 
 /* ==========================================================================
-   #SPACING
-   ========================================================================== */
+     #SPACING
+     ========================================================================== */
 .p-t-100 {
   padding-top: 100px;
 }
@@ -207,17 +208,6 @@ h6 {
 
 .p-t-15 {
   padding-top: 15px;
-  margin-right: -8rem;
-}
-
-.p-t-17 {
-  padding-top: 15px;
-}
-
-.p-t-16 {
-  padding-top: 15px;
-  padding-right: 7rem;
-  padding-left: 15px;
 }
 
 .p-t-10 {
@@ -237,8 +227,8 @@ h6 {
 }
 
 /* ==========================================================================
-   #WRAPPER
-   ========================================================================== */
+     #WRAPPER
+     ========================================================================== */
 .wrapper {
   margin: 0 auto;
 }
@@ -256,78 +246,78 @@ h6 {
 }
 
 /* ==========================================================================
-   #BUTTON
-   ========================================================================== */
-.btn {
+     #BUTTON
+     ========================================================================== */
+.btns {
   text-align: center;
   display: inline-block;
-  line-height: 50px;
+  line-height: 42px;
   padding: 0 50px;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 13px;
   color: #fff;
   font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
 }
 
 .btn--radius {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+  border-radius: 3px !important;
 }
 
 .btn--radius-2 {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 4px !important;
 }
 
 .btn--pill {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  border-radius: 20px !important;
 }
 
 .btn--green {
-  background: #049648;
+  background: #57b846 !important;
 }
 
 .btn--green:hover {
-  background: orange;
+  background: #4dae3c !important;
 }
 
 .btn--blue {
-  background: #4272d7;
+  background: #109cf1 !important;
 }
 
 .btn--blue:hover {
-  background: orange;
+  background: #38cd51 !important;
 }
 .btn--radius-2 {
-  text-align: center;
+  text-align: center !important;
 }
 
 /* ==========================================================================
-   #FORM
-   ========================================================================== */
-input {
+     #FORM
+     ========================================================================== */
+.inputs {
   outline: none;
   margin: 0;
   border: none;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
-  box-shadow: none;
-  width: 100%;
-  font-size: 14px;
+  box-shadow: none !important;
+  width: 100% !important;
+  font-size: 14px !important;
   font-family: inherit;
 }
 
 .input--style-4 {
-  line-height: 50px;
-  background: #fafafa;
+  line-height: 40px;
+  background: #f5f8fa;
   -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
   box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
@@ -353,35 +343,44 @@ input[name="NIN"] {
   align-content: right;
 }
 
+input[name="Search"] {
+  width: 595px;
+}
+
 input[name="Accountnumber"] {
   width: 260px;
 }
 
 .input--style-4::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
-  color: #666;
+  color: #90a0b7;
+  line-height: 18px;
 }
 
 .input--style-4:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: #666;
+  color: #90a0b7;
+  line-height: 18px;
   opacity: 1;
 }
 
 .input--style-4::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: #666;
+  color: #90a0b7;
+  line-height: 18px;
   opacity: 1;
 }
 
 .input--style-4:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #666;
+  color: #90a0b7;
+  line-height: 18px;
 }
 
 .input--style-4:-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #666;
+  color: #90a0b7;
+  line-height: 18px;
 }
 
 .label {
@@ -490,8 +489,8 @@ input[name="Accountnumber"] {
   text-align: justify;
 }
 /* ==========================================================================
-   #SELECT2
-   ========================================================================== */
+     #SELECT2
+     ========================================================================== */
 .select--no-search .select2-search {
   display: none !important;
 }
@@ -602,156 +601,57 @@ input[name="Accountnumber"] {
 }
 
 /* ==========================================================================
-   #TITLE
-   ========================================================================== */
+     #TITLE
+     ========================================================================== */
 .title {
-  font-size: 30px;
-  color: #6a707e;
-  font-weight: bold;
-  /* margin-bottom: 40px; */
-  margin-bottom: 5px;
+  font-size: 24px;
+  color: #525252;
+  font-weight: 400;
+  margin-bottom: 40px;
   text-align: center;
-  border-bottom: 5px solid orange;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-bottom: 11px;
 }
 
 /* ==========================================================================
-   #CARD
-   ========================================================================== */
+     #CARD
+     ========================================================================== */
 .card {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  /* background: #fff; */
+  background: #fff;
 }
 
 .card-4 {
-  background: #fff;
+  background: #FFFF(255, 255, 255, 0.582) !important;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  border-radius: 10px;
+  border-radius: 10px !important;
   -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.055);
+  height: 154px;
 }
 
 .card-4 .card-body {
-  padding: 57px 65px;
-  padding-bottom: 65px;
+  padding: 47px 25px;
+  padding-bottom: 270px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 600px) {
   .card-4 .card-body {
-    padding: 50px 40px;
+    padding: 20px 20px;
   }
-  .p-t-15 {
-    padding-top: 15px;
-    margin-right: 0rem;
+  .card-4 {
+    width: 330px !important;
   }
-  .p-t-16 {
-    padding-top: 15px;
-    padding-right: 2rem;
-    padding-left: 15px;
+  .paragraph {
+    padding-left: 30px;
+    text-align: right !important;
+    text-align: center !important;
+    width: 330px;
+    margin: auto;
   }
 }
 
-.alert {
-  position: relative;
-  padding: 1rem 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-}
-
-.alert-heading {
-  color: inherit;
-}
-
-.alert-link {
-  font-weight: 700;
-}
-
-.alert-dismissible {
-  padding-right: 3rem;
-}
-.alert-dismissible .btn-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  padding: 1.25rem 1rem;
-}
-
-.alert-primary {
-  color: #084298;
-  background-color: #cfe2ff;
-  border-color: #b6d4fe;
-}
-.alert-primary .alert-link {
-  color: #06357a;
-}
-
-.alert-secondary {
-  color: #41464b;
-  background-color: #e2e3e5;
-  border-color: #d3d6d8;
-}
-.alert-secondary .alert-link {
-  color: #34383c;
-}
-
-.alert-success {
-  color: #0f5132;
-  background-color: #d1e7dd;
-  border-color: #badbcc;
-}
-.alert-success .alert-link {
-  color: #0c4128;
-}
-
-.alert-info {
-  color: #055160;
-  background-color: #cff4fc;
-  border-color: #b6effb;
-}
-.alert-info .alert-link {
-  color: #04414d;
-}
-
-.alert-warning {
-  color: #664d03;
-  background-color: #fff3cd;
-  border-color: #ffecb5;
-}
-.alert-warning .alert-link {
-  color: #523e02;
-}
-
-.alert-danger {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
-}
-.alert-danger .alert-link {
-  color: #6a1a21;
-}
-
-.alert-light {
-  color: #636464;
-  background-color: #fefefe;
-  border-color: #fdfdfe;
-}
-.alert-light .alert-link {
-  color: #4f5050;
-}
-
-.alert-dark {
-  color: #141619;
-  background-color: #d3d3d4;
-  border-color: #bcbebf;
-}
-.alert-dark .alert-link {
-  color: #101214;
+.search_container {
 }

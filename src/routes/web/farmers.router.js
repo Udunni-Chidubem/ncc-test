@@ -1,7 +1,8 @@
 const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
-
+const { profileUpdateValidation, validate } = require('../../helpers/formValidator')
+ 
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
@@ -17,30 +18,23 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         phone_no,
         account_name,
         account_no,
-        lga : LGA.name, 
-        state : State.name,
+        lga : LGA ? LGA.name : null, 
+        state : State ? State.name : null,
         isVerified
     })
 })
 
 farmersRouter.get('/update-profile', farmerController.updateProfile)
-farmersRouter.post('update-profile', async(req, res) => {
-    let resp = farmerController.editProfileData(req, res)
+farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {
 
-    resp.then(r=>{
-        if(r.farmer){
-           //Redirect user with notification
-       }else{
-           req.flash('errors', r.errors)
-           res.redirect('back');
-       }
-    }, e=>{
-        res.send(e)
-    })
+    let response = await farmerController.editProfileData(req, res)
+    if(response.farmer || response.deliveryInformation){
+         res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 }).status(200).send();
+   }else{
+         res.json({ message: response.errors, error: true, statusCode: 400 }).status(400).send()
+   }
+
 })
-
-
-
 
 
 module.exports=farmersRouter
