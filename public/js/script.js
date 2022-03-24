@@ -11,6 +11,11 @@ let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
 let sidebarBtn2 = document.querySelector(".side-bi-arrow-left-circle-fill");
 let sidebarBtn3 = document.querySelector(".bi-arrow-left-circle-fill");
 
+<<<<<<< HEAD
+=======
+
+console.log(sidebarBtn);
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 sidebarBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("show");
   // sidebarBtn.classList.toggle("bi bi-arrow-right-circle-fill");

@@ -54,6 +54,68 @@
                             </div>
                            </div>
 
+
+                            <div class="col_2">
+                                <div class="input2">
+                                    <label>Level of Education</label> <br />
+                                    <select class="space2">
+                                        <option>OND</option>
+                                        <option>ND</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="col_2">
+                                <div class="produce">
+                                    <label>Farm Produce</label> <br />
+                                    <select class="space2">
+                                        <option>OND</option>
+                                        <option>ND</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+
+                          <div class="rows">
+                              <div class="col_2">
+                                  <div class="input1">
+                                      <label>BVN </label><br />
+                                      <input type="text" name="bvn" value="{{ farmerData.bvn }}"/>
+                                  </div>
+                              </div>
+                              <div class="col_6">
+                                  <div class="input1">
+                                      <label>NIN </label><br />
+                                      <input type="text" name="nin" value="{{ farmerData.nin }}"/>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <div class="rows">
+                              <div class="col_2">
+                                  <div class="input1">
+                                      <label>State </label><br />
+                                      <select class="space" data-state="{{ farmerData.state_id }}" id="state">
+                                          <option value="">Select State</option>
+                                          {{#each states}}
+                                              <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                          {{/each}}
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col_6">
+                                  <div class="input1">
+                                      <label>LGA</label> <br />
+                                      <select class="space" id="lgas" data-lga="{{ farmerData.state_id }}">
+                                          <option value=""></option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+
                              <div class="row">
                               <div class="col-sm-12">
                                 <label for="education" class="input_form">Level of Education <span class="profile_sub">*</span></label>

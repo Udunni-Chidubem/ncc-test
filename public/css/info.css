@@ -2,6 +2,7 @@
    #BODY & HEADINGS & HR
    ====================*/
 <<<<<<< HEAD
+<<<<<<< HEAD
    h1{
     color:#47749c;
     font-style:Sofia Pro ;
@@ -14,6 +15,8 @@ body{
 }
  
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 h1 {
   color: #47749c;
   font-style: Sofia Pro;
@@ -24,11 +27,15 @@ h1 {
 body {
   background-color: rgb(204, 204, 204);
 }
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 
 /* ===================
    #DATE
    ====================*/
+<<<<<<< HEAD
 <<<<<<< HEAD
    [type="date"] {
     background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
@@ -74,6 +81,8 @@ body {
 
  @media screen and (max-width: 200px) {
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 [type="date"] {
   background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
     97% 50% no-repeat;
@@ -120,7 +129,10 @@ body {
 }
 
 /* @media screen and (max-width: 100px) {
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
   .area{
     flex: 90%;
     height: 10%;
@@ -128,10 +140,14 @@ body {
     padding-left: 20px;
     padding-right: 20px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     max-height: 800px;
 =======
     max-width: 300px;
 >>>>>>> screens
+=======
+    max-width: 300px;
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
   }   
   .col_8{
     width: 20%;
@@ -139,6 +155,7 @@ body {
     border-right: #eeeeee;
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 }
 
@@ -154,6 +171,8 @@ hr{
 
 
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 } */
 
 hr {
@@ -164,11 +183,15 @@ hr {
   text-align: right;
 }
 
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 /* ===================
    #FORM-INPUT
    ====================*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
  input {
     border-style: solid;
@@ -203,6 +226,8 @@ hr {
 }
 
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 input {
   border-style: solid;
   border-color: rgb(255, 255, 255);
@@ -233,12 +258,16 @@ input {
   box-sizing: border-box;
   padding-left: 10px;
 }
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 
 /* ===================
    #ARRANGEMENT
    ====================*/
 
+<<<<<<< HEAD
 <<<<<<< HEAD
    .rows{
      display:flex;
@@ -264,6 +293,8 @@ input {
 
   /* .input{
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 .rows {
   display: flex;
   /* padding: 10px 10px; */
@@ -280,7 +311,10 @@ input {
 }
 
 /* .input{
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
     -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
@@ -288,6 +322,7 @@ input {
     
   } */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
    /* ===================
    #DROPBOXES
@@ -316,6 +351,8 @@ input {
 
 
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 /* ===================
    #DROPBOXES
    ====================*/
@@ -338,11 +375,15 @@ input {
   text-emphasis-color: rgb(121, 151, 190);
   padding-left: 10px;
 }
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 
 /* ===================
    #.click
    ====================*/
+<<<<<<< HEAD
 <<<<<<< HEAD
    .click{
 
@@ -395,6 +436,8 @@ input {
 ====================*/
 .jpegs{
 =======
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
 .click {
   display: inline-block;
   background-color: #12d400;
@@ -443,22 +486,33 @@ input {
   #IMAGE
 ====================*/
 .jpegs {
+<<<<<<< HEAD
 >>>>>>> screens
+=======
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
   border-radius: 40%;
   max-height: 240px;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .col_8{
 =======
 .col_8 {
 >>>>>>> screens
+=======
+.col_8 {
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b
   position: relative;
   padding-left: 860px;
   width: 100%;
   height: 40px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 =======
 }
 >>>>>>> screens
+=======
+}
+>>>>>>> f432b0ca50557b7c5d35512997a6e12ed4b9d17b

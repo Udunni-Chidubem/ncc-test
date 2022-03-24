@@ -36,7 +36,9 @@
   <aside class="sidebar close seed_com_side">
       
     <div>
-    {{> sidebar_image}}
+        <div class="mobile-logo-details"> 
+          {{> sidebar_image}}
+          </div>
        
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
@@ -112,7 +114,7 @@
           </a>
     
         </li> --}}
-        <li>
+           <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">
               <i class='bx bx-log-out'></i>

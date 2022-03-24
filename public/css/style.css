@@ -265,6 +265,10 @@ body {
   .border-end {
     border-top: 1px solid #dee2e6 !important;
   }
+
+  .con {
+    width: 357px !important;
+  }
   /* .settings {
     width: 195px;
   } */
@@ -620,7 +624,7 @@ background: yellow;
 }
 
 .ord_con_img {
-  height: 300px;
+  height: 100%;
 }
 
 .card-default {
@@ -628,8 +632,8 @@ background: yellow;
 }
 
 .con_img {
-  /* object-fit: cover; */
-  height: 300px;
+  object-fit: cover;
+  height: 100%;
   width: 100%;
 }
 
@@ -896,7 +900,7 @@ input[type="number"] {
 
 .f_2 .col-3 {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 36px;
   /* identical to box height */
 
@@ -905,8 +909,8 @@ input[type="number"] {
 
 .f_2 .col-6 {
   font-weight: 700;
-  font-size: 12px;
-  line-height: 36px;
+  font-size: 15px;
+  /* line-height: 36px; */
   /* identical to box height */
 
   color: #47749c;
@@ -997,7 +1001,7 @@ input[type="number"] {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 16px;
   /* identical to box height */
 
@@ -1105,4 +1109,79 @@ input[type="number"] {
   text-transform: capitalize;
 
   color: #109cf1;
+}
+
+.sal_bac {
+  background: #f99746;
+  border-radius: 4px;
+}
+
+.t_info {
+  color: white !important;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.t_info_head {
+  background: #049648;
+}
+
+.t_info_row1 {
+  background: #eefdf1 !important;
+}
+
+.t_info_row2 {
+  background: white !important;
+}
+
+.t_info_body {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  color: #47749c;
+}
+
+.c_d_s2_sale {
+  color: #fff;
+}
+
+.process {
+  background: #aec3ff;
+  border-radius: 10px;
+}
+
+.canceled {
+  background: #ffe0e0;
+  border-radius: 10px;
+}
+
+.paid {
+  background: #ffe19a;
+  border-radius: 10px;
+}
+
+.delivered {
+  background: #cdffcd;
+  border-radius: 10px;
+}
+
+.dot {
+  font-size: 12px;
+  color: #031e6a;
 }
