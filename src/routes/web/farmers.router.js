@@ -28,22 +28,11 @@ farmersRouter.get('/update-profile', farmerController.updateProfile)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {
 
     let response = await farmerController.editProfileData(req, res)
-    console.log(response)
     if(response.farmer || response.deliveryInformation){
          res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 }).status(200).send();
    }else{
          res.json({ message: response.errors, error: true, statusCode: 400 }).status(400).send()
    }
-   //return res
-//     response.then(r => {
-//         if(r.farmer || r.deliveryInformation){
-//             return res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 })
-//        }else{
-//             return res.json({ message: r.errors, error: true, statusCode: 400 })
-//        }
-//    }, e=> {
-//         return res.json({ message: e.errors, error: true, statusCode: 400 })
-//    })
 
 })
 
