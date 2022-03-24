@@ -101,6 +101,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('fFarmer');
+    await queryInterface.dropTable('farmer');
   }
 };

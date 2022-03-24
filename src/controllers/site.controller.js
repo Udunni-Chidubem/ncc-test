@@ -96,13 +96,8 @@ module.exports = {
             const farmer = await Farmer.create({
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
-                gender: null,
-                product_farmed: null,
                 phone_no:rq.body.phone_number,
-                account_no: null,
-                user_id:user.id,
-                state_id: null,
-                lg_id : null
+                user_id:user.id
             }, {transaction : transaction} );
             await transaction.commit();
             return {user, farmer};
