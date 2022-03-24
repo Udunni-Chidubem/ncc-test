@@ -1,131 +1,207 @@
-<form method="POST">
-    <div class="rows">
-        <div class="col_8">
-            {{!-- <img class="jpegs" src="../images/image1.jpg" alt="Farmer Picture" /> --}}
-        </div>
-    </div>
+  <div class="container ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card_home rounded mx-auto shadow pl-0 mb-2 ">
+                    <div class="card-body bg-light">
+                     
+                      <div class="row row-cols-5 row-cols-lg-1 g-2 g-lg-2">
+                        
+                        <div class="col-12">
+                         
+                          <div class="p-3">
+                            <h5 class="card-header card-c p-0 mb-3 bg-light profile_header">Personal Information</h5>
+                          <img src="../images/farmer-with-vege-p-2000.jpeg" class=" mb-2 mx-auto d-block img_round" alt="...">
+                             <div class="row">
+                                <div class="col-sm-6">
+                                  <label for="firstname" class="input_form">First name</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                      <input type="text" name="firstname" value="{{ farmerData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </div>
 
-    <div class="rows">
-        <div class="col_2">
-            <div class="input">
-                <label>First Name </label><br />
-                <input type="text" name="first_name" value="{{ farmerData.firstname }}"/>
-            </div>
-        </div>
-        <div class="col_6">
-            <div class="input">
-                <label>Last Name </label><br />
-                <input type="text" name="last_name" value="{{ farmerData.lastname }}" />
-            </div>
-        </div>
-    </div>
+                                <div class="col-sm-6">
+                                  <label for="lastname" class="input_form">Last name</label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <input type="text" name="lastname" value="{{ farmerData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  </div>
+                              </div>
+                             </div>
 
-    <div class="rows">
-        <div class="col_2">
-            <div class="input">
-                <label>Date of Birth </label><br />
-                <input type="date" name="date" placeholder="DD/MM/YY" value="" id="dob" data-dob="{{ farmerData.date_of_birth }}"/>
-            </div>
-        </div>
-        <div class="col_6">
-            <div class="input1">
-                <label>Gender </label><br />
-                <select class="space" id="gender" data-gender="{{ farmerData.gender }}">
-                    <option value="Male"> Male</option>
-                    <option value="Female"> Female</option>
-                </select>
-            </div>
-        </div>
-    </div>
+                             <div class="row">
+                              <div class="col-sm-6">
+                                <label for="dob" class="input_form">Date of Birth</label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <input 
+                                        type="date" 
+                                        class="form-control border-0 border-bottom" 
+                                        aria-label="Sizing example input" 
+                                        aria-describedby="inputGroup-sizing-sm"
+                                        name="date_of_birth"
+                                        placeholder="DD/MM/YY"
+                                        id="dob" 
+                                        data-dob="{{ farmerData.date_of_birth }}"
+                                    />
+                                  </div>
+                              </div>
 
-    <div class="col_2">
-        <div class="input2">
-            <label>Level of Education</label> <br />
-            <select class="space2">
-                <option>OND</option>
-                <option>ND</option>
-            </select>
-        </div>
-    </div>
-    <br />
-    <br />
-    <div class="rows">
-        <div class="col_2">
-            <div class="input1">
-                <label>BVN </label><br />
-                <input type="text" name="bvn" value="{{ farmerData.bvn }}"/>
-            </div>
-        </div>
-        <div class="col_6">
-            <div class="input1">
-                <label>NIN </label><br />
-                <input type="text" name="nin" value="{{ farmerData.nin }}"/>
-            </div>
-        </div>
-    </div>
-    <div class="rows">
-        <div class="col_2">
-            <div class="input1">
-                <label>State </label><br />
-                <select class="space" data-state="{{ farmerData.state_id }}" id="state">
-                    <option value="">Select State</option>
-                    {{#each states}}
-                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-        </div>
-        <div class="col_6">
-            <div class="input1">
-                <label>LGA</label> <br />
-                <select class="space" id="lgas" data-lga="{{ farmerData.state_id }}">
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
-    </div>
+                              <div class="col-sm-6">
+                                <label for="gender" class="input_form">Gender</label>
+                                <div class="input-group mb-3">
+                                  <select name="gender" class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
+                                      <option value="Male"> Male</option>
+                                      <option value="Female"> Female</option>
+                                  </select>
+                                </div>
+                            </div>
+                           </div>
 
-    <br />
-    <h1>Delivery Information</h1>
-    <hr />
-    <div class="rows">
-        <div class="col_2">
-            <div class="input1">
-                <label>State</label><br />
-                <select class="space" name="state_of_delivery" id="stateDelivery">
-                    {{#each states}}
-                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-        </div>
+                             <div class="row">
+                              <div class="col-sm-12">
+                                <label for="education" class="input_form">Level of Education</label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <select name="level_of_education" class="form-select border-0 border-bottom" id="levelE" data-level="{{ farmerData.level_of_education }}">
+                                    </select>
+                                  </div>
+                              </div>
+                              </div>
 
-        <div class="col_6">
-            <div class="input1">
-                <label>LGA</label> <br />
-                <select class="space" name="lga_of_delivery" id="lgaDelivery">
-                    <option> </option>
-                    <option> </option>
-                </select>
-            </div>
-        </div>
-    </div>
+                           <div class="row">
+                            <div class="col-sm-6" >
+                                <div class="input-group input-group-sm mb-3">
+                                  
+                                  <label for="state" class="input_form">State</label>
+                                <div class="input-group mb-3">
+                              
+                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id">                                    <option value="">Select State</option>
+                                    {{#each states}}
+                                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                    {{/each}}
+                                  </select>
+                                </div>
 
-    <div class="input2">
-        <label>Address</label> <br />
-        <input type="text" name="address" />
-    </div>
+                                </div>
+                            </div>
 
-    <br />
-    <br />
-    <div class="rows">
-        <div class="click_7">
-            <button type="submit" class="btn button_update mb-1 click">Submit</button>
-        </div>
-    </div>
-</form>
+                            <div class="col-sm-6">
+                              <div class="input-group input-group-sm mb-3">
+                                
+                                <label for="lga" class="input_form">LGA</label>
+                                <div class="input-group mb-3">
+                              
+                                  <select class="form-select border-0 border-bottom" id="lgas" data-lga="{{ farmerData.state_id }}" name="lg_id">
+                                     <option value=""></option>
+                                  </select>
+                                </div>
+
+                              </div>
+                          </div>
+                         </div>
+
+                         <div class="row">
+                              
+
+                              <div class="col-sm-6">
+                                <label for="nin" class="input_form">NIN</label>
+                                <div class="input-group input-group-sm mb-3">
+                                  <input 
+                                    type="text" 
+                                    class="form-control border-0 border-bottom" 
+                                    aria-label="Sizing example input" 
+                                    aria-describedby="inputGroup-sizing-sm"
+                                    name="nin" value="{{ farmerData.nin }}">
+                                </div>
+                            </div>
+
+                            {{!-- <div class="col-sm-6" class="input_form">
+                                <label for="bvn" class="input_form">BVN</label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <input 
+                                        type="text" 
+                                        class="form-control border-0 border-bottom" 
+                                        aria-label="Sizing example input" 
+                                        aria-describedby="inputGroup-sizing-sm"
+                                        name="bvn" value="{{ farmerData.bvn }}"
+                                            />
+                                  </div>
+                              </div> --}}
+                           </div>
+                           
+                         <h5 class="card-header card-c p-0 bg-light profile_header">Delivery Information</h5>
+                          
+                         <div class="row">
+                          <div class="col-sm-6">
+                              <div class="input-group input-group-sm mb-3">
+                                
+                                <label for="state" class="input_form">State</label>
+                                <div class="input-group mb-3">
+                              
+                                  <select class="form-select border-0 border-bottom" name="state_of_delivery" id="stateDelivery">
+                                     {{#each states}}
+                                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                    {{/each}}
+                                  </select>
+                                </div>
+
+                              </div>
+                          </div>
+
+                          <div class="col-sm-6">
+                            <div class="input-group input-group-sm mb-3">
+                              
+                              <label for="lga" class="input_form">LGA</label>
+                                <div class="input-group mb-3">
+                              
+                                  <select class="form-select border-0 border-bottom" name="lga_of_delivery" id="lgaDelivery">               
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+                            </div>
+                        </div>
+                       </div>
+                       
+                       <div class="row">
+                        <div class="col-sm-12 ">
+                            <div class="input-group input-group-sm mb-3">
+                              
+                              <label for="address" class="input_form">Address</label>
+                              <div class="input-group mb-3">
+
+                                <textarea class="form-select border-0 border-bottom" name="address" id="" cols="30" rows="5">
+
+                                </textarea>
+                              </div>
+
+                            </div>
+
+                            <div class="col-12">
+                              <div class="columns mx-auto"  style="width: 160px;">
+                                <button type="button float-end" class="btn  mb-1">Update</button>
+                              </div>
+                            </div>
+                        </div>
+
+                        
+                     </div>
+
+                     
+                          </div>
+                          
+                        </div>
+                        <!-- <div class="col-12 order-first  ">
+                          <div class="p-3  ">
+                            <div class="row">
+                              <div class="col-12"><img src="image/farmer-with-vege-p-2000.jpeg" class="  mx-auto d-block img_round" alt="..."></div>
+                               
+                            </div>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                </div>
+          </div>
 
 
+      
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -199,5 +275,45 @@
                 console.log(e)
             })
         })
+
+
+    let url =  window.location.origin+'/api/base/get-droplist'
+
+    fetch(url,{})
+    .then(response => response.json())
+    .then(response => {
+      console.log(response)
+        if(response.statusCode === 200){
+          
+            let objArray, len, i, farm_produce, level
+            objArray = response.data.gender
+            len = objArray.length
+
+            var ele = document.getElementById('gender');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
+            }
+
+            farm_produce = response.data.farm_produce
+            len = farm_produce.length
+
+            var ele = document.getElementById('farmProduce');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            }
+
+            level = response.data.levelE
+           
+            len = level.length
+
+            var ele = document.getElementById('levelE');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
+            }
+        }
+    }).catch()
     })
 </script>

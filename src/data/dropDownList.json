@@ -11,16 +11,34 @@
     ],
     "farmProduce": [
         {
-            "id": "O",
-            "name": "Oranges"
-        },
-        {
-            "id": "S",
-            "name": "Sweet Potatoes"
+            "id": "R",
+            "name": "Rice"
         },
         {
             "id": "R",
-            "name": "Rice"
+            "name": "Maize"
+        },
+        {
+            "id": "C",
+            "name": "Cowpea"
+        },
+        {
+            "id": "G",
+            "name": "Groundnut"
+        }
+    ],
+    "levelEducation": [
+        {
+            "id": "HND",
+            "name": "HND"
+        },
+        {
+            "id": "Diploma",
+            "name": "Diploma"
+        },
+        {
+            "id": "SSCE",
+            "name": "SSCE"
         }
     ]
 }
