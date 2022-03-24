@@ -10,7 +10,7 @@ module.exports = {
      */
      await queryInterface.changeColumn('farmer', 'date_of_birth', {
       type: Sequelize.DATE,
-      allowNull: false
+      allowNull: true
     });
   },
 

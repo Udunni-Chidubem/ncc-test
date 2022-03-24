@@ -1,0 +1,163 @@
+ <div class="container-fluid pt-3" id="contain">
+    <div class="page-wrapper bg-gra-02 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h1 class="title p-b-15" >Create An Account</h1>
+ 
+                    <form method="POST" class="p-t-15">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                    <input class="form-control" required type="text" name="firstname" placeholder="First name">
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                    <input class="form-control" required type="text" name="lastname" placeholder="Last name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                    <select class="form-control" required name="gender" id="gender">
+                                        <option value="">Gender</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                    <input 
+                                        class="form-control" 
+                                        required 
+                                        type="text" 
+                                        id="phone" 
+                                        name="phone_number" 
+                                        placeholder="Phone e.g 0*******" 
+                                        pattern="^0[0-9]{10}$"
+                                        title="Phone Number should start with 0 and contain 11digits"
+                                        minlength="11"
+                                        maxlength="11">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                     <select name="state" required id="state" class="form-control">
+                                        <option value="">Select State</option>
+                                        {{#each states}}
+                                            <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-12">
+                                <div class="form-group"> 
+                                    <select name="lga" required id="lga" class="form-control">
+                                        <option value="">Select LGA</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+{{!-- 
+                        <div class="row">
+                             <div class="col-md-10 col-sm-10">
+                                <div class="form-group">
+                                    <select class="js-example-basic-multiple form-control" required name="farm_produce" multiple="multiple" id="farmProduce">
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div> --}}
+
+                        <div class="row">
+                             <div class="col-md-5 col-sm-12">
+                                <div class="form-group">
+                                    <input class="form-control" required type="password" minlength="6" maxlength="8" name="password" placeholder="Enter Your Password">
+                                </div>
+                            </div>
+                            {{!-- <div class="col-md-5 col-sm-12">
+                                <div class="form-group">
+                                    <input 
+                                        class="form-control" 
+                                        type="tel" 
+                                        required 
+                                        name="account_no" 
+                                        placeholder="Enter Your Account Number"
+                                        pattern="[0-9]{10}$"
+                                        title="Account Number should contain 10digits"
+                                        minlength="10"
+                                        maxlength="10">
+                                </div>
+                            </div> --}}
+                           
+                        </div>
+                          
+                           <div class="p-t-16">
+                            <center><button class="btn primary-button w-button  btn--radius-2 btn--green" type="submit">Submit</button></center>
+                        </div>
+
+                         <div class="p-t-16">
+                            <center><p style="color:#47ba5d;"> Already Have An Account? <a href="/login" class="links">Sign In</a></p></center>
+                             
+                        </div>
+
+                        {{!-- <div class="p-t-15">
+                            <center><button class="btn btn--radius-2 btn--green" type="button">Submit</button></center>
+                        </div> --}}
+                        {{!-- <div class="row">
+                            <div class="d-flex justify-content-end">
+                                <center><p style="color:#47ba5d;"> Already Have An Account? <a href="" class="links">SIgn In</a></p></center>
+                            </div>
+                        </div> --}}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            placeholder: "Select Farm Produce",
+            allowClear: true
+        });
+    })
+
+    let url =  window.location.origin+'/api/base/get-droplist'
+
+    fetch(url,{})
+    .then(response => response.json())
+    .then(response => {
+        if(response.statusCode === 200){
+            let objArray, len, i, farm_produce
+            objArray = response.data.gender
+            len = objArray.length
+
+            var ele = document.getElementById('gender');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
+            }
+
+            farm_produce = response.data.farm_produce
+            len = farm_produce.length
+
+            var ele = document.getElementById('farmProduce');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            }
+        }
+    })
+    .catch()
+
+
+</script>

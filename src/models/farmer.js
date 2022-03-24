@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  
   Farmer.init({
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,

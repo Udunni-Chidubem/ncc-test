@@ -35,8 +35,6 @@ module.exports={
             attributes: ['state_id', 'lg_id', 'address'], raw: true
         })
 
-        console.log(deliveryInfo);
-
         res.render('farmers/update-profile', {
             layout : 'farmers-dashboard',
             title: 'Update Profile',
@@ -61,7 +59,8 @@ module.exports={
                 state_id: req.body.state_id,
                 lg_id: req.body.lg_id,
                 nin: req.body.nin,
-                bvn: req.body.bvn
+                bvn: req.body.bvn,
+                farm_produce: req.body.farm_produce.toString()
             }
 
             const farmer = await Farmer.update( data , {
