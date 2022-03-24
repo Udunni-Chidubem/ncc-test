@@ -22,6 +22,20 @@ farmersRouter.get('/dashboard', async (req, res)=>{
 })
 
 farmersRouter.get('/update-profile', farmerController.updateProfile)
+farmersRouter.post('update-profile', async(req, res) => {
+    let resp = farmerController.editProfileData(req, res)
+
+    resp.then(r=>{
+        if(r.farmer){
+           //Redirect user with notification
+       }else{
+           req.flash('errors', r.errors)
+           res.redirect('back');
+       }
+    }, e=>{
+        res.send(e)
+    })
+})
 
 
 

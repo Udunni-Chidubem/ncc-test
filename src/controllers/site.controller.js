@@ -160,15 +160,18 @@ module.exports = {
                 status : false,
                 token : ''
             }, {transaction : transaction} )
-             let r = await Role.findOne(
+
+            let r = await Role.findOne(
                 {
                     where : { role_name : 'seed_trader' }
                 }
             );
+
             const user_role=await UserRole.create({
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
+
             let unique = uniqid();
             let seed_trader =await  SeedTrader.create({
                 firstname:req.body.firstname,
@@ -179,6 +182,7 @@ module.exports = {
                 unique_no:unique,
                 user_id : user.id
             }, {transaction :transaction});
+            
             transaction.commit();
             return {user, seed_trader};
         }catch(e){

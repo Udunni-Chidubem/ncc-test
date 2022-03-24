@@ -28,7 +28,7 @@ module.exports={
         let states = await States.findAll({
             attributes : ['id', 'name']
         });
-        console.log(states);
+
         res.render('farmers/update-profile', {
             layout : 'farmers-dashboard',
             title: 'Update Profile',
@@ -36,6 +36,9 @@ module.exports={
             farmerData: farmer.dataValues,
             states : states
         })
+    },
+    editProfileData: async (req, res) => {
+        
     }
 
 }

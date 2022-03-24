@@ -92,9 +92,10 @@
         <div class="col_2">
             <div class="input1">
                 <label>State</label><br />
-                <select class="space">
-                    <option> </option>
-                    <option> </option>
+                <select class="space" name="state_of_delivery" id="stateDelivery">
+                    {{#each states}}
+                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                    {{/each}}
                 </select>
             </div>
         </div>
@@ -102,7 +103,7 @@
         <div class="col_6">
             <div class="input1">
                 <label>LGA</label> <br />
-                <select class="space">
+                <select class="space" name="lga_of_delivery" id="lgaDelivery">
                     <option> </option>
                     <option> </option>
                 </select>
@@ -178,6 +179,21 @@
                     Options+='<option value="'+e.id+'">'+e.name+'</option>'
                 })
                 document.querySelector('#lgas').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+
+        document.querySelector('#stateDelivery').addEventListener('change', function(){
+            let url =  window.location.origin+'/api/base/lgas/'+this.value
+            fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgaDelivery').innerHTML=Options
             }
             ).catch(e=>{
                 console.log(e)
