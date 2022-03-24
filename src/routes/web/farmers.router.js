@@ -4,7 +4,8 @@ const utils = require('../../helpers/utils')
 
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
-    let farmer = await utils.getFarmerProfile(user);
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user.dataValues)
     let {firstname, lastname, account_no, account_name, phone_no, LGA, State }=farmer
     
     res.render('farmers/dashboard', {
@@ -17,7 +18,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         account_name,
         account_no,
         lga : LGA.name, 
-        state : State.name
+        state : State.name,
+        isVerified
     })
 })
 

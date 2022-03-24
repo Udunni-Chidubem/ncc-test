@@ -46,45 +46,55 @@
         <li>
           <a href="#">
             <i class='bx bx-user'></i>
-            <span class="link_name">Profile</span>
+            <span class="link_name">Profile
+
+              {{#if isVerified }}
+                <span class="profile_sub">(Unverified)</span> 
+              {{/if}}
+              
+            </span>
           </a>
   
         </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cart-add'></i>
-            <span class="link_name">Order</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-purchase-tag'></i>
-            <span class="link_name">Transaction</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-library'></i>
-            <span class="link_name">Knowledge Base</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-leaf'></i>
-            <span class="link_name">Farm Input</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-help-circle' ></i>
-            <span class="link_name">Help</span>
-          </a>
-    
-        </li>
+
+        {{#unless isVerified }}
+          <li>
+            <a href="#">
+              <i class='bx bx-cart-add'></i>
+              <span class="link_name">Order</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-purchase-tag'></i>
+              <span class="link_name">Transaction</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-library'></i>
+              <span class="link_name">Knowledge Base</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-leaf'></i>
+              <span class="link_name">Farm Input</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="#">
+              <i class='bx bx-help-circle' ></i>
+              <span class="link_name">Help</span>
+            </a>
+
+          </li>
+        {{/unless}}
+        
         <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">

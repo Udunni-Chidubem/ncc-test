@@ -24,6 +24,7 @@ module.exports={
     updateProfile: async (req, res) => {
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
 
         let states = await States.findAll({
             attributes : ['id', 'name']
@@ -34,7 +35,8 @@ module.exports={
             title: 'Update Profile',
             fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
             farmerData: farmer.dataValues,
-            states : states
+            states : states,
+            isVerified
         })
     },
     editProfileData: async (req, res) => {
