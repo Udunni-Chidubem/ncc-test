@@ -1,3 +1,4 @@
+ {{#if isVerified }}
  <div class="container ">
     <div class="row">
       <div class="col-12">
@@ -20,7 +21,9 @@
           </div>
       </div>
     </div>
+    {{/if}}
 
+    {{#unless isVerified}}
     <div class="card card_home shadow-lg  produce mb-2 ">
       <div class="card-body">
          <div class="row mb-1" >
@@ -165,24 +168,27 @@
             </div>
           </div>
           </div>
-        </div>
+      </div>
 
-        <div class="card shadow card_home summary_tran">
-          <div class="card-body">
-             <div class="row">
-               <div class="col-12">
-                 <h4>TRANSACTION Summary</h4>
-               </div>
-             </div>
-
-             <div class="row">
-              <div class="col-12 summary_sub">
-                <p>You have not made any transaction this month</p>
+ 
+      <div class="card shadow card_home summary_tran">
+        <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <h4>TRANSACTION Summary</h4>
               </div>
             </div>
+
+            <div class="row">
+            <div class="col-12 summary_sub">
+              <p>You have not made any transaction this month</p>
             </div>
           </div>
+          </div>
+        </div>
 
     </div>
 
+
+{{/unless}}
       

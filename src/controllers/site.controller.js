@@ -221,7 +221,7 @@ module.exports = {
 
             let gender = data.gender
             let farm_Produce = data.farmProduce
-            let level_education = data.levelEducation
+            let level = data.levelEducation
 
             gender.forEach((value, index, self) => {
                 genders.push(value)
@@ -231,15 +231,15 @@ module.exports = {
                 farmProduce.push(value)
             })
 
-            level_education.forEach((value, index, self) => {
+            level.forEach((value, index, self) => {
                 levelEdu.push(value)
             })
 
-            return res.json({statusCode: 200, error: false,  data: {
+            res.json({statusCode: 200, error: false,  data: {
                 gender: genders, 
                 farm_produce: farmProduce,
-                levelE: levelEdu
-                } })
+                eduLevel: levelEdu
+            } })
 
         })
     }

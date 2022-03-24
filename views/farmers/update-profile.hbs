@@ -1,3 +1,4 @@
+  <form method="POST" id="updateProfile">
   <div class="container ">
         <div class="row">
             <div class="col-12">
@@ -13,25 +14,25 @@
                           <img src="../images/farmer-with-vege-p-2000.jpeg" class=" mb-2 mx-auto d-block img_round" alt="...">
                              <div class="row">
                                 <div class="col-sm-6">
-                                  <label for="firstname" class="input_form">First name</label>
+                                  <label for="firstname" class="input_form">First name <span class="profile_sub">*</span> </label>
                                     <div class="input-group input-group-sm mb-3">
-                                      <input type="text" name="firstname" value="{{ farmerData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                      <input type="text" readonly required id="firstname" name="firstname" value="{{ farmerData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                  <label for="lastname" class="input_form">Last name</label>
+                                  <label for="lastname" class="input_form">Last name <span class="profile_sub">*</span> </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <input type="text" name="lastname" value="{{ farmerData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input type="text" readonly required id="lastname" name="lastname" value="{{ farmerData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                   </div>
                               </div>
                              </div>
 
                              <div class="row">
                               <div class="col-sm-6">
-                                <label for="dob" class="input_form">Date of Birth</label>
+                                <label for="dob" class="input_form">Date of Birth </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <input 
+                                    <input
                                         type="date" 
                                         class="form-control border-0 border-bottom" 
                                         aria-label="Sizing example input" 
@@ -45,11 +46,9 @@
                               </div>
 
                               <div class="col-sm-6">
-                                <label for="gender" class="input_form">Gender</label>
+                                <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
-                                  <select name="gender" class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
-                                      <option value="Male"> Male</option>
-                                      <option value="Female"> Female</option>
+                                  <select name="gender" required class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
                                   </select>
                                 </div>
                             </div>
@@ -57,9 +56,10 @@
 
                              <div class="row">
                               <div class="col-sm-12">
-                                <label for="education" class="input_form">Level of Education</label>
+                                <label for="education" class="input_form">Level of Education <span class="profile_sub">*</span></label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <select name="level_of_education" class="form-select border-0 border-bottom" id="levelE" data-level="{{ farmerData.level_of_education }}">
+                                    <select name="level_of_education" required class="form-select border-0 border-bottom" id="levelE" data-level="{{ farmerData.level_of_education }}">
+                                      <option value="">Select One</option>
                                     </select>
                                   </div>
                               </div>
@@ -69,10 +69,11 @@
                             <div class="col-sm-6" >
                                 <div class="input-group input-group-sm mb-3">
                                   
-                                  <label for="state" class="input_form">State</label>
+                                  <label for="state" required class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id">                                    <option value="">Select State</option>
+                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id" >                                    
+                                    <option value="">Select State</option>
                                     {{#each states}}
                                         <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
                                     {{/each}}
@@ -85,10 +86,10 @@
                             <div class="col-sm-6">
                               <div class="input-group input-group-sm mb-3">
                                 
-                                <label for="lga" class="input_form">LGA</label>
+                                <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" id="lgas" data-lga="{{ farmerData.state_id }}" name="lg_id">
+                                  <select required class="form-select border-0 border-bottom" id="lgas" data-lga="{{ farmerData.state_id }}" name="lg_id">
                                      <option value=""></option>
                                   </select>
                                 </div>
@@ -104,7 +105,11 @@
                                 <label for="nin" class="input_form">NIN</label>
                                 <div class="input-group input-group-sm mb-3">
                                   <input 
-                                    type="text" 
+                                    type="text"
+                                    id="nin"
+                                    title="It should contain 11digits only"
+                                    minlength="11"
+                                    maxlength="11"
                                     class="form-control border-0 border-bottom" 
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
@@ -112,30 +117,43 @@
                                 </div>
                             </div>
 
-                            {{!-- <div class="col-sm-6" class="input_form">
+                            <div class="col-sm-6" class="input_form">
                                 <label for="bvn" class="input_form">BVN</label>
                                   <div class="input-group input-group-sm mb-3">
                                     <input 
-                                        type="text" 
+                                        type="text"
+                                        id="bvn"
+                                        pattern="[0-9]{11}$"
+                                        title="It should contain 11digits only"
+                                        minlength="11"
+                                        maxlength="11"
                                         class="form-control border-0 border-bottom" 
                                         aria-label="Sizing example input" 
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="bvn" value="{{ farmerData.bvn }}"
                                             />
                                   </div>
-                              </div> --}}
+                              </div>
                            </div>
-                           
+
+                           <br/>
+
                          <h5 class="card-header card-c p-0 bg-light profile_header">Delivery Information</h5>
                           
                          <div class="row">
                           <div class="col-sm-6">
                               <div class="input-group input-group-sm mb-3">
                                 
-                                <label for="state" class="input_form">State</label>
+                                <label for="state" class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" name="state_of_delivery" id="stateDelivery">
+                                  <select 
+                                    class="form-select border-0 border-bottom" 
+                                    name="state_of_delivery" 
+                                    id="stateDelivery" 
+                                    required 
+                                    data-stateDelivery="{{ deliveryInfo.state_id }}" />
+                                      <option value="">Select One</option>
                                      {{#each states}}
                                         <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
                                     {{/each}}
@@ -148,10 +166,15 @@
                           <div class="col-sm-6">
                             <div class="input-group input-group-sm mb-3">
                               
-                              <label for="lga" class="input_form">LGA</label>
+                              <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" name="lga_of_delivery" id="lgaDelivery">               
+                                  <select 
+                                      class="form-select border-0 border-bottom" 
+                                      name="lga_of_delivery" 
+                                      id="lgaDelivery" 
+                                      required
+                                       data-lgaDelivery="{{ deliveryInfo.lg_id }}" />               
                                     <option value=""></option>
                                   </select>
                                 </div>
@@ -163,19 +186,22 @@
                         <div class="col-sm-12 ">
                             <div class="input-group input-group-sm mb-3">
                               
-                              <label for="address" class="input_form">Address</label>
+                              <label for="address" class="input_form">Address <span class="profile_sub">*</span></label>
                               <div class="input-group mb-3">
 
-                                <textarea class="form-select border-0 border-bottom" name="address" id="" cols="30" rows="5">
-
+                                <textarea 
+                                  class="form-control border-0 border-bottom" 
+                                  name="address" 
+                                  id="address" cols="30" rows="5" required>
+                                   {{ deliveryInfo.address }} 
                                 </textarea>
                               </div>
 
                             </div>
 
                             <div class="col-12">
-                              <div class="columns mx-auto"  style="width: 160px;">
-                                <button type="button float-end" class="btn  mb-1">Update</button>
+                              <div class="columns mx-auto" style="width: 160px;">
+                                <button type="submit" class="btn float-end mb-1 submitBtn">Update</button>
                               </div>
                             </div>
                         </div>
@@ -199,12 +225,45 @@
                     </div>
                 </div>
           </div>
-
+</form>
 
       
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+
+<script type="text/javascript">
+
+    const success_toastr = (msg) => {
+      Toastify({
+          text: msg,
+          duration: 4000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to bottom, #00b09b, #28a745)", //#00b09b #96c93d
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
+      // success_toastr('You have successfully update your profile')
+
+    const error_toastr = (msg) => {
+        Toastify({
+          text: msg,
+          duration: 5000,
+          newWindow: true,
+          close: false,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
     $(document).ready(function(){
 
         let lga = $('.lgas').data('lg_id')
@@ -233,17 +292,34 @@
 
 
         let state = $('#state').data('state')
-        if(state != null){
+        let stateDelivery = $('#stateDelivery').data('statedelivery')
+        if(state != null || lga != null || stateDelivery != null){
             $('#state').val(state)
+            $('#stateDelivery').val(stateDelivery)
 
             getDefaultLgas(state)
+
+            setTimeout(function(){
+                let url =  window.location.origin+'/api/base/lgas/'+ stateDelivery
+                fetch(url).then(r=>r.json())
+                .then(r => { 
+                    let selected,Options
+                    r.forEach(e=>{
+                        selected = (e.id == lga ? 'selected' : null)
+                        Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                    })
+                    document.querySelector('#lgaDelivery').innerHTML= Options
+                }
+                ).catch(e=>{
+                    console.log(e)
+                })
+            }, 1000)
         }
 
         let dob = $('#dob').data(`dob`)
         var today = moment(dob).format('YYYY-MM-DD')
 
-        $('#dob').val(today);
-
+        $('#dob').val(today)
 
 
         document.querySelector('#state').addEventListener('change', function(){
@@ -257,7 +333,7 @@
                 document.querySelector('#lgas').innerHTML=Options
             }
             ).catch(e=>{
-                console.log(e)
+                //console.log(e)
             })
         })
 
@@ -282,7 +358,6 @@
     fetch(url,{})
     .then(response => response.json())
     .then(response => {
-      console.log(response)
         if(response.statusCode === 200){
           
             let objArray, len, i, farm_produce, level
@@ -295,25 +370,81 @@
                 ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
             }
 
-            farm_produce = response.data.farm_produce
-            len = farm_produce.length
 
-            var ele = document.getElementById('farmProduce');
+            level = response.data.eduLevel
 
-            for(i=0; i < len; i++){
-                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
-            }
-
-            level = response.data.levelE
-           
             len = level.length
-
             var ele = document.getElementById('levelE');
 
+            let Options =  '<option value="">Select One</option>'
             for(i=0; i < len; i++){
                 ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
             }
+
+                setTimeout(function(){
+
+                  let level = $('#levelE').data('level')
+                   if(level != null){
+                        $('#levelE').val(level)
+                    }
+                }, 1000)
         }
     }).catch()
+    })
+
+
+    $("#updateProfile").on('submit', function(e){
+      e.preventDefault()
+      
+      let _data = {
+        firstname: $('#firstname').val(),
+        lastname: $('#lastname').val(),
+        date_of_birth: $('#dob').val(),
+        gender: $('#gender').val(),
+        level_of_education: $('#levelE').val(),
+        state_id: $('#state').val(),
+        lg_id: $('#lgas').val(),
+        bvn: $('#bvn').val(),
+        nin: $('#nin').val(),
+        state_of_delivery: $('#stateDelivery').val(),
+        lga_of_delivery: $('#lga_of_delivery').val(),
+        address: $('#address').val()
+      }
+
+      let updateURL =  window.location.origin+'/farmer/update-profile'
+      
+      $.ajax({
+          type: 'POST',
+          url: updateURL,
+          data: $(this).serialize(),
+          beforeSend: () => {
+            $('.submitBtn').html('Please Wait...')
+          },
+          success: (response) => {
+            if(response.statusCode === 402){
+                let msg = ''
+                let errors = response.data
+                errors.forEach((value, index) => {
+                  msg += (index + 1 ) + '.' + value.msg + ' \n'
+                })
+                error_toastr(msg)
+              }else if(response.statusCode == 500 || response.statusCode == 400){
+                error_toastr(response.data)
+              }else{
+                success_toastr(response.message)
+
+                setTimeout(function(){
+                  window.location='dashboard'
+                }, 2000)
+              }
+          },
+          complete: () => {
+              $('.submitBtn').html('Update')
+          },
+          error: (err) => {
+
+          }
+      })
+
     })
 </script>
