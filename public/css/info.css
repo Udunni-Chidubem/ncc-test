@@ -55,6 +55,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* max-height: 400px;
     max-width:400px ; */
+
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 /* @media screen and (max-width: 100px) {
