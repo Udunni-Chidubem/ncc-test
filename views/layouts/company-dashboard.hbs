@@ -43,7 +43,7 @@
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
-          <a href="#">
+          <a href="dashboard">
             <i class='bx bx-grid-alt' ></i>
             <span class="link_name">Dashboard</span>
           </a>
@@ -51,7 +51,7 @@
         </li>
        
         <li>
-          <a href="#">
+          <a href="update-profile">
             <i class='bx bx-user'></i>
             <span class="link_name">Profile</span>
             <span class="p_red">(Unverified)</span>
@@ -142,6 +142,21 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
  <script src="../js/script.js"></script>
  <script src="../js/payment_page_preview.js"></script>
-
+   <script>
+    document.querySelector('.states').addEventListener('change', function(){
+        let url =  window.location.origin+'/api/base/lgas/'+this.value
+        fetch(url).then(r=>r.json())
+        .then(r=>{
+            let Options =  '<option value="">Select LGA</option>'
+            r.forEach(e=>{
+                Options+='<option value="'+e.id+'">'+e.name+'</option>'
+            })
+            document.querySelector('.lgas').innerHTML=Options
+        }
+        ).catch(e=>{
+            console.log(e)
+        })
+    })
+</script>
    </body>
 </html>

@@ -18,7 +18,8 @@ module.exports = {
             ],
             where : {
                 user_id : user.id
-            }
+            },
+            raw :true
         });
         return farmer;
     },
@@ -30,7 +31,8 @@ module.exports = {
              where : {
                  user_id : user.id
              },
-             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number']
+             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'],
+             raw :true
          });
          return company;
     },

@@ -186,10 +186,19 @@ module.exports = {
     },
     states : async (req, res)=>{
         let states =await States.findAll({
-            attributes : ['id', 'name']
+            attributes : ['id', 'name'],
+            raw : true
         });
         res.send(states)
     }, 
+
+    getStates : async ()=>{
+        let states =await States.findAll({
+            attributes : ['id', 'name'],
+            raw : true
+        });
+        return states
+    },
 
     lgas : async (req, res)=>{
 
@@ -197,7 +206,8 @@ module.exports = {
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
             attributes : ['id', 'name'],
-            where : {state_id : req.params.state_id}
+            where : {state_id : req.params.state_id},
+            raw : true
         });
         res.send(lgas)
     },
