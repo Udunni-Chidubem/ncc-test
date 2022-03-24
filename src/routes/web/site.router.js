@@ -77,7 +77,8 @@ siteRouter.post('/seed-trader-signup', (req, res)=>{
          if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
-                layout : 'form'
+                layout : 'form',
+                title: 'Notification'
              })
         }else{
             req.flash('errors', r.errors)

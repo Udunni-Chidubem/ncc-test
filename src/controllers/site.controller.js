@@ -4,6 +4,11 @@ const { sequelize } = require('../models');
 const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
+const directoryPath = './src/data/'
+const path = require('path')
+const fs = require('fs')
+
+
 module.exports = {
     home: async (req, res) => {
         res.render('home', {
@@ -25,7 +30,6 @@ module.exports = {
             title : 'About Us'
         });
     },
-
     farmer_signup: async (req,res) => {
         let states =await States.findAll({
             attributes : ['id', 'name']
@@ -38,7 +42,6 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-
     dashboard: async (req,res) => {
         // console.log(req.user)
         res.render('dashboard',{
@@ -46,7 +49,6 @@ module.exports = {
             layout : 'dashboard'
         });
     },
-
     login: async (req,res) => {
         res.render('login',{
             form_banner:'Group.png',
@@ -55,7 +57,6 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-
     seedcompanysignup: async (req,res) => {
         res.render('seed_company_signup',{
                 form_banner:'seeds-02 1.png',
@@ -115,7 +116,6 @@ module.exports = {
         let user = new User();
         return user;
     },
-
     saveseedcompany: async (req, res)=>{
         const transaction = await db.rest.transaction();
          try{  
@@ -149,7 +149,6 @@ module.exports = {
             return e
         }
     },
-
     saveseedtrader : async (req, res)=>{
         const transaction = await db.rest.transaction();
         try{  
@@ -191,7 +190,6 @@ module.exports = {
         }
 
     },
-
     states : async (req, res)=>{
         let states =await States.findAll({
             attributes : ['id', 'name']
@@ -202,13 +200,38 @@ module.exports = {
     lgas : async (req, res)=>{
 
     },
-
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
             attributes : ['id', 'name'],
             where : {state_id : req.params.state_id}
         });
         res.send(lgas)
+    },
+    getGenders:  (req, res) => {
+        const data = require('../data/dropDownList.json')
+
+        fs.stat(directoryPath +'dropDownList.json', (err, stats) => {
+            if (err) {
+                return res.json({statusCode: 404, error: true, data: err})
+            }
+        
+            const genders = []
+            const farmProduce = []
+            // let gender = Object.entries(data.gender) //convert javascript object to an array
+            let gender = data.gender
+            let farm_Produce = data.farmProduce
+            
+            gender.forEach((value, index, self) => {
+                genders.push(value)
+            })
+
+            farm_Produce.forEach((value, index, self) => {
+                farmProduce.push(value)
+            })
+
+            return res.json({statusCode: 200, error: false,  data: {gender: genders, farm_produce: farmProduce} })
+
+        })
     }
 
 
