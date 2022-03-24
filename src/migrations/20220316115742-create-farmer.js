@@ -58,7 +58,7 @@ module.exports = {
       },
       gender: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       level_of_education: {
         type: Sequelize.STRING,

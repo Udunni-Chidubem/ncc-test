@@ -49,83 +49,12 @@
                                 <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                                   <select name="gender" required class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
+                                    <option value="">Select One</option>
                                   </select>
                                 </div>
                             </div>
                            </div>
 
-
-                            <div class="col_2">
-                                <div class="input2">
-                                    <label>Level of Education</label> <br />
-                                    <select class="space2">
-                                        <option>OND</option>
-                                        <option>ND</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <br />
-
-                            <div class="col_2">
-                                <div class="produce">
-                                    <label>Farm Produce</label> <br />
-                                    <select class="space2">
-                                        <option>OND</option>
-                                        <option>ND</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br />
-                            <br />
-
-                          <div class="rows">
-                              <div class="col_2">
-                                  <div class="input1">
-                                      <label>BVN </label><br />
-                                      <input type="text" name="bvn" value="{{ farmerData.bvn }}"/>
-                                  </div>
-                              </div>
-                              <div class="col_6">
-                                  <div class="input1">
-                                      <label>NIN </label><br />
-                                      <input type="text" name="nin" value="{{ farmerData.nin }}"/>
-                                  </div>
-                              </div>
-                          </div>
-                          
-                          <div class="rows">
-                              <div class="col_2">
-                                  <div class="input1">
-                                      <label>State </label><br />
-                                      <select class="space" data-state="{{ farmerData.state_id }}" id="state">
-                                          <option value="">Select State</option>
-                                          {{#each states}}
-                                              <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
-                                          {{/each}}
-                                      </select>
-                                  </div>
-                              </div>
-                              <div class="col_6">
-                                  <div class="input1">
-                                      <label>LGA</label> <br />
-                                      <select class="space" id="lgas" data-lga="{{ farmerData.state_id }}">
-                                          <option value=""></option>
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
-
-                             <div class="row">
-                              <div class="col-sm-12">
-                                <label for="education" class="input_form">Level of Education <span class="profile_sub">*</span></label>
-                                  <div class="input-group input-group-sm mb-3">
-                                    <select name="level_of_education" required class="form-select border-0 border-bottom" id="levelE" data-level="{{ farmerData.level_of_education }}">
-                                      <option value="">Select One</option>
-                                    </select>
-                                  </div>
-                              </div>
-                              </div>
 
                            <div class="row">
                             <div class="col-sm-6" >
@@ -161,8 +90,6 @@
                          </div>
 
                          <div class="row">
-                              
-
                               <div class="col-sm-6">
                                 <label for="nin" class="input_form">NIN</label>
                                 <div class="input-group input-group-sm mb-3">
@@ -198,14 +125,35 @@
                               </div>
                            </div>
 
+
+                           <div class="row">
+
+                              <div class="col-sm-6" class="input_form">
+                               <label for="education" class="input_form">Level of Education <span class="profile_sub">*</span></label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <select name="level_of_education" required class="form-select border-0 border-bottom" id="levelE" data-level="{{ farmerData.level_of_education }}">
+                                      <option value="">Select One</option>
+                                    </select>
+                                  </div>
+                            </div>
+
+                              <div class="col-sm-6">
+                                <label for="nin" class="input_form">Farm Produce</label>
+                                <div class="input-group input-group-sm mb-3">
+                                      <select class="js-example-basic-multiple form-control border-0 border-bottom" required name="farm_produce" multiple="multiple" id="farmProduce">
+                                      </select>
+                                </div>
+                            </div>
+
+                           </div>
+
                            <br/>
 
                          <h5 class="card-header card-c p-0 bg-light profile_header">Delivery Information</h5>
                           
                          <div class="row">
                           <div class="col-sm-6">
-                              <div class="input-group input-group-sm mb-3">
-                                
+                              <div class="input-group input-group-sm mb-3">                              
                                 <label for="state" class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
@@ -275,14 +223,6 @@
                           </div>
                           
                         </div>
-                        <!-- <div class="col-12 order-first  ">
-                          <div class="p-3  ">
-                            <div class="row">
-                              <div class="col-12"><img src="image/farmer-with-vege-p-2000.jpeg" class="  mx-auto d-block img_round" alt="..."></div>
-                               
-                            </div>
-                          </div>
-                        </div> -->
                       </div>
                     </div>
                 </div>
@@ -293,6 +233,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
 
@@ -313,18 +254,23 @@
       // success_toastr('You have successfully update your profile')
 
     const error_toastr = (msg) => {
-        Toastify({
-          text: msg,
-          duration: 5000,
-          newWindow: true,
-          close: false,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          onClick: function () { }, // Callback after click
-        }).showToast();
-      }
+      Toastify({
+        text: msg,
+        duration: 5000,
+        newWindow: true,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        onClick: function () { }, // Callback after click
+      }).showToast();
+    }
+
+    $('.js-example-basic-multiple').select2({
+        placeholder: "Select Farm Produce",
+        allowClear: true
+    });
 
     $(document).ready(function(){
 
@@ -443,13 +389,23 @@
                 ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
             }
 
-                setTimeout(function(){
+            setTimeout(function(){
 
-                  let level = $('#levelE').data('level')
-                   if(level != null){
-                        $('#levelE').val(level)
-                    }
-                }, 1000)
+              let level = $('#levelE').data('level')
+                if(level != null){
+                    $('#levelE').val(level)
+                }
+            }, 1000)
+
+
+            farm_produce = response.data.farm_produce
+            len = farm_produce.length
+
+            var ele = document.getElementById('farmProduce');
+
+            for(i=0; i < len; i++){
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            }
         }
     }).catch()
     })
@@ -469,8 +425,9 @@
         bvn: $('#bvn').val(),
         nin: $('#nin').val(),
         state_of_delivery: $('#stateDelivery').val(),
-        lga_of_delivery: $('#lga_of_delivery').val(),
-        address: $('#address').val()
+        lga_of_delivery: $('#lgaDelivery').val(),
+        address: $('#address').val(),
+        farm_produce: $('#farmProduce').val()
       }
 
       let updateURL =  window.location.origin+'/farmer/update-profile'

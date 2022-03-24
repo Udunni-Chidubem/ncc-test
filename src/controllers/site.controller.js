@@ -43,7 +43,6 @@ module.exports = {
         });
     },
     dashboard: async (req,res) => {
-        // console.log(req.user)
         res.render('dashboard',{
             title: 'Dashboard',
             layout : 'dashboard'
@@ -59,9 +58,9 @@ module.exports = {
     },
     seedcompanysignup: async (req,res) => {
         res.render('seed_company_signup',{
-                form_banner:'seeds-02 1.png',
-                layout : 'form',
-                errors : req.flash('errors')
+            form_banner:'seeds-02 1.png',
+            layout : 'form',
+            errors : req.flash('errors')
         });
     },
     seedtradersignup: async (req,res) => {
@@ -97,13 +96,13 @@ module.exports = {
             const farmer = await Farmer.create({
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
-                gender:rq.body.gender,
-                product_farmed:rq.body.farm_produce.toString(),
+                gender: null,
+                product_farmed: null,
                 phone_no:rq.body.phone_number,
-                account_no:rq.body.account_no,
+                account_no: null,
                 user_id:user.id,
-                state_id:rq.body.state,
-                lg_id : rq.body.lga
+                state_id: null,
+                lg_id : null
             }, {transaction : transaction} );
             await transaction.commit();
             return {user, farmer};
