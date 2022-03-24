@@ -624,7 +624,7 @@ background: yellow;
 }
 
 .ord_con_img {
-  height: 300px;
+  height: 100%;
 }
 
 .card-default {
@@ -632,8 +632,8 @@ background: yellow;
 }
 
 .con_img {
-  /* object-fit: cover; */
-  height: 300px;
+  object-fit: cover;
+  height: 100%;
   width: 100%;
 }
 
