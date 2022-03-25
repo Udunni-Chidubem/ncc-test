@@ -95,6 +95,20 @@ module.exports={
             transaction.rollback();
             return e
         }
+    },
+    marketPlace: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/market_place', {
+            layout : 'farmers-dashboard',
+            title: 'Market Place',
+            fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
     }
 
 }
