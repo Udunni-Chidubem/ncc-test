@@ -51,13 +51,18 @@
         </li>
        
         <li>
-          <a href="update-profile">
+            <a href="{{#if isVerified }} # {{else}} update-profile {{/if}}">
             <i class='bx bx-user'></i>
             <span class="link_name">Profile</span>
-            <span class="p_red">(Unverified)</span>
+              {{#if isVerified }}
+                <span class="p_red">(Unverified)</span>
+              {{/if}}
+            
           </a>
   
         </li>
+
+        {{#unless isVerified}}
 
         <li>
           <a href="#">
@@ -79,42 +84,18 @@
             <span class="link_name">Help</span>
           </a>
         </li>
-        {{!-- <li>
+
+         <li id="settings">
           <a href="#">
-            <i class='bx bx-cart-add'></i>
-            <span class="link_name">Order</span>
+            <i class='bx bx-cog' ></i>
+            <span class="link_name" >Settings</span>
           </a>
-  
+   
         </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-purchase-tag'></i>
-            <span class="link_name">Transaction</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-library'></i>
-            <span class="link_name">Knowledge Base</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-leaf'></i>
-            <span class="link_name">Farm Input</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-help-circle' ></i>
-            <span class="link_name">Help</span>
-          </a>
-    
-        </li> --}}
-           <li>
+
+        {{/unless}}
+
+          <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">
               <i class='bx bx-log-out'></i>
@@ -122,13 +103,7 @@
             </button>
           </form>
         </li>
-        <li id="settings">
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="link_name" >Settings</span>
-          </a>
-   
-        </li>
+       
   
       </ul>
     </div>

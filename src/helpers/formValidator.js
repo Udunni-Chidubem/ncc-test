@@ -26,6 +26,30 @@ const profileUpdateValidation = () => {
    ] 
 }
 
+const companyValidation = () => {
+    return [
+        body('name_of_company')
+            .not().isEmpty().withMessage('Company Name field is required'),
+        body('phone_no')
+            .not().isEmpty().withMessage('Phone Number field is required'),
+        body('tin')
+            .not().isEmpty().withMessage('TIN field is required'),
+        body('address')
+            .not().isEmpty().withMessage('Address field is required'),
+        body('licensed_no')
+            .not().isEmpty().withMessage('Licensed Number field required'),
+        body('certification_number')
+            .not().isEmpty().withMessage('Certification Number field is required'),
+        body('email')
+            .not().isEmpty().withMessage('Email field is required'),
+        body('state_id')
+            .not().isEmpty().withMessage('State field is required'),
+        body('lg_id')
+            .not().isEmpty().withMessage('LGA field is required'),
+        
+    ];
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
@@ -45,5 +69,6 @@ const validate = (req, res, next) => {
 
 module.exports = {
     profileUpdateValidation,
+    companyValidation,
     validate
 }

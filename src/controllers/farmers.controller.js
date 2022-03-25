@@ -27,7 +27,8 @@ module.exports={
         const isVerified = await utils.isVerified(user.dataValues)
 
         let states = await States.findAll({
-            attributes : ['id', 'name']
+            attributes : ['id', 'name'],
+            raw: true
         });
 
         let deliveryInfo = await DeliveryInformation.findOne({ 
@@ -38,8 +39,8 @@ module.exports={
         res.render('farmers/update-profile', {
             layout : 'farmers-dashboard',
             title: 'Update Profile',
-            fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
-            farmerData: farmer.dataValues,
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
             states : states,
             isVerified,
             deliveryInfo

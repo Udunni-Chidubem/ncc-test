@@ -48,6 +48,14 @@ module.exports = {
         }
 
         return true
+    },
+    isCompanyVerified: async (user) => {
+        let company = await SeedCompany.findOne({ where: {user_id: user.id}, 
+            attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'], raw: true})
 
+        if(company.licensed_no != null && company.certification_number != null){
+            return false
+        }
+        return true
     }
 }
