@@ -21,6 +21,7 @@ module.exports = {
             },
             raw :true
         });
+
         return farmer;
     },
     getTraderProfile: (user) => {
@@ -31,7 +32,7 @@ module.exports = {
              where : {
                  user_id : user.id
              },
-             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'],
+             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number', 'email', 'state_id', 'lg_id'],
              raw :true
          });
          return company;
@@ -51,7 +52,7 @@ module.exports = {
     },
     isCompanyVerified: async (user) => {
         let company = await SeedCompany.findOne({ where: {user_id: user.id}, 
-            attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'], raw: true})
+            attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number', 'email', 'state_id', 'lg_id'], raw: true})
 
         if(company.licensed_no != null && company.certification_number != null){
             return false

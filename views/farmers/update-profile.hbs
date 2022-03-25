@@ -48,8 +48,7 @@
                               <div class="col-sm-6">
                                 <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
-                                  <select name="gender" required class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
-                                    <option value="">Select One</option>
+                                  <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
                                   </select>
                                 </div>
                             </div>
@@ -63,7 +62,7 @@
                                   <label for="state" required class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id" >                                    
+                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id">                                    
                                     <option value="">Select State</option>
                                     {{#each states}}
                                         <option value="{{this.id}}">{{this.name}}</option>
@@ -293,6 +292,7 @@
             })
         }
 
+
         let gender = $('#gender').data('gender')
         if(gender != null){
             $('#gender').val(gender)
@@ -330,35 +330,35 @@
         $('#dob').val(today)
 
 
-        document.querySelector('#state').addEventListener('change', function(){
-            let url =  window.location.origin+'/api/base/lgas/'+this.value
-            fetch(url).then(r=>r.json())
-            .then(r=>{
-                let Options =  '<option value="">Select LGA</option>'
-                r.forEach(e=>{
-                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                })
-                document.querySelector('#lgas').innerHTML=Options
-            }
-            ).catch(e=>{
-                //console.log(e)
-            })
-        })
+      document.querySelector('#state').addEventListener('change', function(){
+          let url =  window.location.origin+'/api/base/lgas/'+this.value
+          fetch(url).then(r=>r.json())
+          .then(r=>{
+              let Options =  '<option value="">Select LGA</option>'
+              r.forEach(e=>{
+                  Options+='<option value="'+e.id+'">'+e.name+'</option>'
+              })
+              document.querySelector('#lgas').innerHTML=Options
+          }
+          ).catch(e=>{
+              //console.log(e)
+          })
+      })
 
-        document.querySelector('#stateDelivery').addEventListener('change', function(){
-            let url =  window.location.origin+'/api/base/lgas/'+this.value
-            fetch(url).then(r=>r.json())
-            .then(r=>{
-                let Options =  '<option value="">Select LGA</option>'
-                r.forEach(e=>{
-                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                })
-                document.querySelector('#lgaDelivery').innerHTML=Options
-            }
-            ).catch(e=>{
-                console.log(e)
+    document.querySelector('#stateDelivery').addEventListener('change', function(){
+        let url =  window.location.origin+'/api/base/lgas/'+this.value
+        fetch(url).then(r=>r.json())
+        .then(r=>{
+            let Options =  '<option value="">Select LGA</option>'
+            r.forEach(e=>{
+                Options+='<option value="'+e.id+'">'+e.name+'</option>'
             })
+            document.querySelector('#lgaDelivery').innerHTML=Options
+        }
+        ).catch(e=>{
+            console.log(e)
         })
+    })
 
 
     let url =  window.location.origin+'/api/base/get-droplist'
@@ -372,6 +372,8 @@
             objArray = response.data.gender
             len = objArray.length
 
+            let Options =  '<option value="">Select One</option>'
+
             var ele = document.getElementById('gender');
 
             for(i=0; i < len; i++){
@@ -384,7 +386,7 @@
             len = level.length
             var ele = document.getElementById('levelE');
 
-            let Options =  '<option value="">Select One</option>'
+            
             for(i=0; i < len; i++){
                 ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
             }

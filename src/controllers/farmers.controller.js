@@ -105,7 +105,7 @@ module.exports={
         res.render('farmers/market_place', {
             layout : 'farmers-dashboard',
             title: 'Market Place',
-            fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
+            fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer.dataValues,
             isVerified
         })
