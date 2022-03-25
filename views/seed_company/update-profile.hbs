@@ -16,54 +16,101 @@
                           <img src="../images/farmer-with-vege-p-2000.jpeg" class=" mb-2 mx-auto d-block img_round" alt="...">
                              <div class="row">
                                 <div class="col-sm-6">
-                                  <label for="company" class="input_form">Company Name</label>
-                                    <div class="input-group    input-group-sm mb-3">
+                                  <label for="company" class="input_form">Company Name <span class="profile_sub">*</span></label>
+                                    <div class="input-group input-group-sm mb-3">
                                       
-                                      <input type="text" class="form-control border-0 border-bottom  input_borderless " required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                      <input 
+                                        type="text" 
+                                        class="form-control border-0 border-bottom  input_borderless" 
+                                        required
+                                        readonly
+                                        name="name_of_company"
+                                        id="company_name"
+                                        aria-label="Sizing example input" 
+                                        aria-describedby="inputGroup-sizing-sm"
+                                        value="{{ company.name_of_company}}">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                  <label for="email"  class="input_form">Email</label>
+                                  <label for="email"  class="input_form">Email Address <span class="profile_sub">*</span></label>
                                   <div class="input-group input-group-sm mb-3">
                                     
-                                    <input type="text" class="form-control border-0 border-bottom" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input 
+                                      type="email" 
+                                      class="form-control border-0 border-bottom" 
+                                      required
+                                      name="email"
+                                      id="email"
+                                      aria-label="Sizing example input" 
+                                      aria-describedby="inputGroup-sizing-sm">
                                   </div>
                               </div>
                              </div>
 
                              <div class="row">
                               <div class="col-sm-6">
-                                <label for="phone" class="input_form">Phone Number</label>
+                                <label for="phone" class="input_form">Phone Number <span class="profile_sub">*</span></label>
                                   <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="number" class="form-control border-0 border-bottom" min="11" max="14" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input 
+                                        class="form-control" 
+                                        required 
+                                        type="text" 
+                                        id="phone" 
+                                        name="phone_no" 
+                                        placeholder="Phone e.g 0*******" 
+                                        pattern="^0[0-9]{10}$"
+                                        value="{{company.phone_no}}"
+                                        readonly
+                                        title="Phone Number should start with 0 and contain 11digits"
+                                        minlength="11"
+                                        maxlength="11">
                                   </div>
                               </div>
 
                               <div class="col-sm-6">
-                                <label for="tin" class="input_form">TIN</label>
+                                <label for="tin" class="input_form">TIN <span class="profile_sub">*</span></label>
                                   <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="number" class="form-control border-0 border-bottom" max="13" min="10" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input 
+                                      type="number" 
+                                      class="form-control border-0 border-bottom" 
+                                      max="13" 
+                                      min="10"
+                                      id="tin"
+                                      value="{{company.tin}}"
+                                      aria-label="Sizing example input" 
+                                      aria-describedby="inputGroup-sizing-sm">
                                   </div>
                               </div>
                            </div>
 
                              <div class="row">
                               <div class="col-sm-6" class="input_form">
-                                <label for="licenced" class="input_form">Licensed Number </label>
+                                <label for="licenced" class="input_form">Licensed Number <span class="profile_sub">*</span> </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    
-                                    <input type="number" class="form-control border-0 border-bottom" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input 
+                                      type="text" 
+                                      class="form-control border-0 border-bottom" 
+                                      required
+                                      id="licensed_no"
+                                      value="{{company.licensed_no}}"
+                                      aria-label="Sizing example input"
+                                      aria-describedby="inputGroup-sizing-sm">
                                   </div>
                               </div>
 
                               <div class="col-sm-6">
-                                <label for="certification" class="input_form">Certification Number</label>
+                                <label for="certification" class="input_form">Certification Number <span class="profile_sub">*</span></label>
                                 <div class="input-group input-group-sm mb-3">
                                   
-                                  <input type="number" class="form-control border-0 border-bottom" required aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  <input 
+                                    type="text" 
+                                    class="form-control border-0 border-bottom" 
+                                    required
+                                    name="certification_number"
+                                    value="{{company.certification_number}}"
+                                    aria-label="Sizing example input" 
+                                    aria-describedby="inputGroup-sizing-sm">
                                 </div>
                             </div>
                            </div>
@@ -72,10 +119,10 @@
                             <div class="col-sm-6" >
                                 <div class="input-group input-group-sm mb-3">
                                   
-                                  <label for="state" class="input_form">State</label>
+                                  <label for="state" class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom states" required id="inputGroupSelect01">                
+                                  <select name="state_id" class="form-select border-0 border-bottom states" required id="state" data-state="{{company.state_id}}">                
                                     <option value="">Select State </option>
                                     {{#each states}}
                                         <option value="{{this.id}}">{{this.name}}</option>
@@ -90,14 +137,11 @@
                             <div class="col-sm-6">
                               <div class="input-group input-group-sm mb-3">
                                 
-                                <label for="lga" class="input_form">LGA</label>
+                                <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom lgas" required id="inputGroupSelect01">
-                                     
-                                    <option value="1"> </option>
-                                    <option value="2">Female</option>
-                                     
+                                  <select class="form-select border-0 border-bottom lgas" required id="lgas" name="lg_id" data-lga="{{company.lg_id}}">
+ 
                                   </select>
                                 </div>
 
@@ -106,11 +150,19 @@
                          </div>
                        
                        <div class="row">
-                        <div class="col-sm-6">
-                          <label for="address" class="input_form">Address</label>
+                        <div class="col-sm-12">
+                          <label for="address" class="input_form">Address <span class="profile_sub">*</span></label>
                           <div class="input-group input-group-sm mb-3">
                             
-                            <input type="text" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                             <textarea 
+                                class="form-control border-0 border-bottom" 
+                                name="address" 
+                                id="address" 
+                                cols="30" 
+                                rows="5" 
+                                required>
+                                  {{ company.address }} 
+                              </textarea>
                           </div>
                       </div>
                        </div>  
@@ -124,8 +176,96 @@
                        </div>
                         
                      </div>
-
                      
-                          </div>
+                  </div>
                           
-</form>                          
+</form>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+
+    const success_toastr = (msg) => {
+      Toastify({
+          text: msg,
+          duration: 4000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to bottom, #00b09b, #28a745)", //#00b09b #96c93d
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
+      // success_toastr('You have successfully update your profile')
+
+    const error_toastr = (msg) => {
+      Toastify({
+        text: msg,
+        duration: 5000,
+        newWindow: true,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        onClick: function () { }, // Callback after click
+      }).showToast();
+    }
+
+    $(document).ready(function(){
+
+        let lga = $('#lgas').data('lga')
+
+        const getDefaultLgas = (state_id) => {
+            let url =  window.location.origin+'/api/base/lgas/'+ state_id
+            fetch(url).then(r=>r.json())
+            .then(r => { 
+                //let Options =  '<option value="">Select LGA</option>'
+                let selected,Options
+                r.forEach(e=>{
+                    selected = (e.id == lga ? 'selected' : null)
+                    Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgas').innerHTML= Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        }
+
+
+        let state = $('#state').data('state')
+        if(state != null || lga != null ){
+            $('#state').val(state)
+
+            getDefaultLgas(state)
+
+            setTimeout(function(){
+                let url =  window.location.origin+'/api/base/lgas/'+ state
+                fetch(url).then(r=>r.json())
+                .then(r => { 
+                    let selected,Options
+                    r.forEach(e=>{
+                        selected = (e.id == lga ? 'selected' : null)
+                        Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                    })
+                    document.querySelector('#lgas').innerHTML= Options
+                }
+                ).catch(e=>{
+                    console.log(e)
+                })
+            }, 1000)
+        }
+
+
+   
+
+    })
+</script>

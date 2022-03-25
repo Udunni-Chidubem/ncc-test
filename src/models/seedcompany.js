@@ -35,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
+    email: {
+      type: DataTypes.STRING(65),
+      allowNull: true,
+      unique: true
+    },
     licensed_no: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -53,10 +58,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    state_id: DataTypes.INTEGER,
+    lg_id: DataTypes.INTEGER,
   }, {
     underscored: true,
     tableName : 'seedcompany',
     sequelize,
+    timestamps: false,
     modelName: 'SeedCompany',
   });
   return SeedCompany;
