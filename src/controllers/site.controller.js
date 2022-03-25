@@ -64,13 +64,13 @@ module.exports = {
         });
     },
     seedtradersignup: async (req,res) => {
-        let states =await States.findAll({
-            attributes : ['id', 'name']
-        });
+        // let states =await States.findAll({
+        //     attributes : ['id', 'name']
+        // });
         res.render('seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
-            states : states,
+            // states : states,
             errors : req.flash('errors')
         });
     },
