@@ -26,7 +26,7 @@ module.exports = {
             }, {transaction: transaction})
 
             transaction.commit();
-            return company;
+            return {company};
         }catch(e){
             transaction.rollback();
             return e

@@ -1,4 +1,4 @@
-<form action="" method="post"> 
+<form action="#" id="update"> 
  <div class="container ">
         <div class="row">
           <form action="" method="post"></form>
@@ -21,7 +21,7 @@
                                       
                                       <input 
                                         type="text" 
-                                        class="form-control border-0 border-bottom  input_borderless" 
+                                        class="form-control border-0 border-bottom input_borderless" 
                                         required
                                         readonly
                                         name="name_of_company"
@@ -72,11 +72,12 @@
                                 <label for="tin" class="input_form">TIN <span class="profile_sub">*</span></label>
                                   <div class="input-group input-group-sm mb-3">
                                     <input 
-                                      type="number" 
+                                      type="text" 
                                       class="form-control border-0 border-bottom" 
                                       max="13" 
                                       min="10"
                                       id="tin"
+                                      name="tin"
                                       value="{{company.tin}}"
                                       aria-label="Sizing example input" 
                                       aria-describedby="inputGroup-sizing-sm">
@@ -93,6 +94,7 @@
                                       class="form-control border-0 border-bottom" 
                                       required
                                       id="licensed_no"
+                                      name="licensed_no"
                                       value="{{company.licensed_no}}"
                                       aria-label="Sizing example input"
                                       aria-describedby="inputGroup-sizing-sm">
@@ -108,6 +110,7 @@
                                     class="form-control border-0 border-bottom" 
                                     required
                                     name="certification_number"
+                                    id="certification_number"
                                     value="{{company.certification_number}}"
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm">
@@ -170,7 +173,7 @@
                        <div class="row">
                         <div class="col-12">
                           <div class="columns mx-auto"  style="width: 160px;">
-                            <button type="button float-end" class="btn  mb-1">Update</button>
+                              <button type="submit" class="btn float-end mb-1 submitBtn">Update</button>
                           </div>
                         </div>
                        </div>
@@ -265,7 +268,59 @@
         }
 
 
-   
+    $("#update").on('submit', function(e){
+      e.preventDefault()
+      
+      let _data = {
+        name_of_company: $('#company_name').val(),
+        phone_no: $('#phone').val(),
+        tin: $('#tin').val(),
+        address: $('#address').val(),
+        licensed_no: $('#licensed_no').val(),
+        certification_number: $('#certification_number').val(),
+        state_id: $('#state').val(),
+        lg_id: $('#lgas').val(),
+        email: $('#email').val(),
+        address: $('#address').val()
+      }
+
+      let updateURL =  window.location.origin+'/seed-company/update-profile'
+      
+      
+       $.ajax({
+          type: 'POST',
+          url: updateURL,
+          data: $(this).serialize(),
+          beforeSend: () => {
+            $('.submitBtn').html('Please Wait...')
+          },
+          success: (response) => {
+            if(response.statusCode === 402){
+                let msg = ''
+                let errors = response.data
+                errors.forEach((value, index) => {
+                  msg += (index + 1 ) + '.' + value.msg + ' \n'
+                })
+                error_toastr(msg)
+              }else if(response.statusCode == 500 || response.statusCode == 400){
+                error_toastr(response.data)
+              }else{
+                success_toastr(response.message)
+
+                setTimeout(function(){
+                  window.location='dashboard'
+                }, 2000)
+              }
+          },
+          complete: () => {
+              $('.submitBtn').html('Update')
+          },
+          error: (err) => {
+
+          }
+      })
+      
+    })
 
     })
 </script>

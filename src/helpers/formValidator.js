@@ -1,5 +1,6 @@
 const { body, validationResult } = require('express-validator')
 const db = require('../models')
+const { SeedCompany } = db
 
 
 const profileUpdateValidation = () => {
@@ -42,6 +43,13 @@ const companyValidation = () => {
             .not().isEmpty().withMessage('Certification Number field is required'),
         body('email')
             .not().isEmpty().withMessage('Email field is required'),
+            // .custom((value, { req }) => {
+            //     return SeedCompany.findOne({ where: { email: req.body.email } }).then(user => {
+            //         if (user) {
+            //             return Promise.reject('E-mail address already in use. Please try another one');
+            //         }
+            //     });
+            // }),
         body('state_id')
             .not().isEmpty().withMessage('State field is required'),
         body('lg_id')

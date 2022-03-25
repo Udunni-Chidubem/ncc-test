@@ -29,9 +29,9 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 
     let response = await farmerController.editProfileData(req, res)
     if(response.farmer || response.deliveryInformation){
-            res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 }).status(200).send();
+        res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 }).status(200)
     }else{
-            res.json({ message: response.errors, error: true, statusCode: 400 }).status(400).send()
+        res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
     }
 
 })
