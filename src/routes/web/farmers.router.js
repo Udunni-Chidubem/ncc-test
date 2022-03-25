@@ -36,5 +36,7 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 
 })
 
+farmersRouter.get('/market_place', farmerController.marketPlace)
+
 
 module.exports=farmersRouter
