@@ -61,7 +61,7 @@ module.exports={
                 lg_id: req.body.lg_id,
                 nin: req.body.nin,
                 bvn: req.body.bvn,
-                farm_produce: req.body.farm_produce.toString()
+                product_farmed: req.body.farm_produce.toString()
             }
 
             const farmer = await Farmer.update( data , {

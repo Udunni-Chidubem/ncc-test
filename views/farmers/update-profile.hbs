@@ -39,7 +39,8 @@
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="date_of_birth"
                                         placeholder="DD/MM/YY"
-                                        id="dob" 
+                                        id="dob"
+                                        max="2019-12-31"
                                         data-dob="{{ farmerData.date_of_birth }}"
                                     />
                                   </div>
@@ -139,7 +140,7 @@
                               <div class="col-sm-6">
                                 <label for="nin" class="input_form">Farm Produce</label>
                                 <div class="input-group input-group-sm mb-3">
-                                      <select class="js-example-basic-multiple form-control border-0 border-bottom" required name="farm_produce" multiple="multiple" id="farmProduce">
+                                      <select class="js-example-basic-multiple form-control border-0 border-bottom" required name="farm_produce" multiple="multiple" id="farmProduce" value="{{ farmerData.product_farmed }}">
                                       </select>
                                 </div>
                             </div>
@@ -200,7 +201,8 @@
 
                                 <textarea 
                                   class="form-control border-0 border-bottom" 
-                                  name="address" 
+                                  name="address"
+                                  style="align-content:left; overflow:auto"
                                   id="address" cols="30" rows="5" required>
                                    {{ deliveryInfo.address }} 
                                 </textarea>
@@ -267,7 +269,7 @@
     }
 
     $('.js-example-basic-multiple').select2({
-        placeholder: "Select Farm Produce",
+        placeholder: "Select multiple items",
         allowClear: true
     });
 

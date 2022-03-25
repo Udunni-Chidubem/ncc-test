@@ -4,6 +4,7 @@ const helpers = require('../../helpers/auth.guard')
 const passpportInitializer = require('../../helpers/passport-config')
 passpportInitializer(passport)
 const db = require('../../models/index')
+const { signupValidation, signUpvalidate }  = require('../../helpers/formValidator')
 
 const siteRouter = require('express').Router();
 
@@ -21,7 +22,7 @@ siteRouter.get('/', siteController.home)
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
-siteRouter.post('/farmer_signup', (req, res)=>{
+siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
        // res.send(r)

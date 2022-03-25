@@ -36,7 +36,7 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     let r =await companyController.updateProfile(req, res)
 
     if(r.company) {
-        return res.json({ message: 'Your profile has been updated successfully.', statusCode: 200 }).status(200).send();
+        return res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200).send();
     } 
     return res.json({ message: r.errors, error: true, statusCode: 400 }).status(400).send()
 })

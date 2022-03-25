@@ -31,13 +31,13 @@ module.exports = {
         });
     },
     farmer_signup: async (req,res) => {
-        let states =await States.findAll({
-            attributes : ['id', 'name']
-        });
+        // let states =await States.findAll({
+        //     attributes : ['id', 'name']
+        // });
         res.render('farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
-            states : states,
+            // states : states,
             title : 'Farmer\'s Registration',
             errors : req.flash('errors')
         });
