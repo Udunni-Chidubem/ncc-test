@@ -1,18 +1,30 @@
  <div class="container-fluid pt=5">
         <div class="card card-4"> 
             <div class="card-body">
-                <form method="post">
-                    <center><input class="input--style-4 inputs mb-2" type="text"placeholder="Search for seed" name="Search" >  <button class="btns btn--radius-2 btn--blue" co type="button">Search</button>
-                    </center>
-                    
-                    <!--select name="education" id="education" class="input--style-4">
-                    <option value=""></option>
-                    </select-->
-                </form>
+                <form method="post" class="ml-5 mr-4">
+                    <div class="input-group ">
+                        <input class="input--style-4 inputs" type="search" placeholder="Search for seed" name="Search" >  
+                        <button class="btns btn--radius-2 btn--blue ml-2" type="button">Search</button>
+                    </div>
 
+                    <div class="search-tip">
+                        <p ><i class="fa fa-lightbulb"></i> tip: You need 3kg of maize seed for your farm</p>
+                    </div>
+                </form>
+                <div class="search-filter ml-5 mr-4 mt-2">
+                      <div class="input-field">
+                        <label><b >Results: &nbsp; </b> Sort By</label>
+                        <select>
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Highest Price</option>
+                          <option value="2">Lowest Price</option>
+                        </select>
+                      </div>
+                </div>
             </div>
                 
-        </div>  <br><br><br><br><br><br><br>
+        </div>  
+        <br><br><br><br><br><br><br>
         <center><i class="fa fa-search" style="font-size:133px;color:#C2CFE0;" ></i></center>
         <br>
 
