@@ -4,20 +4,18 @@ const helpers = require('../../helpers/auth.guard')
 const passpportInitializer = require('../../helpers/passport-config')
 passpportInitializer(passport)
 const db = require('../../models/index')
-const { signupValidation, signUpvalidate }  = require('../../helpers/formValidator')
+const { 
+    signupValidation, 
+    signUpvalidate, 
+    registerSeedCompanyValidation, 
+    registerSeedCompanyValidate,
+    seedTraderValidation,
+    seedTraderValidate
+ }  = require('../../helpers/formValidator')
 
 const siteRouter = require('express').Router();
 
-siteRouter.get('/home', async (req, res)=>{
-   // let y = siteController.login(req, res);
-    //y.then(r=>{
-      //  const t = await db.transaction();
-       // res.send(t)
-       // res.render('farmers/index'); 
-    // }, e={
-
-    // })
-})
+siteRouter.get('/home', async (req, res) => {})
 siteRouter.get('/', siteController.home)
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/about-us', siteController.aboutus)
@@ -50,17 +48,17 @@ siteRouter.post('/login', passport.authenticate('local', {
     failureRedirect : "/login",
     failureFlash : true
 }),  (req, res)=>{
-    console.log(req.user.UserRole.Role.role_name)
     helpers.redirect(req, res, req.user.UserRole.Role.role_name)
 });
 
 siteRouter.get('/seed-company-signup', siteController.seedcompanysignup)
-siteRouter.post('/seed-company-signup', (req, res)=>{
+siteRouter.post('/seed-company-signup', registerSeedCompanyValidation(), registerSeedCompanyValidate, (req, res)=>{
     let y = siteController.saveseedcompany(req, res);
     y.then(r=>{
          if(r.user){
             res.render('success',{
                 form_banner:'Group.png',
+                title: 'Notification',
                 layout : 'form'
              })
         }else{
@@ -72,7 +70,7 @@ siteRouter.post('/seed-company-signup', (req, res)=>{
     })
 })
 siteRouter.get('/seed-trader-signup', siteController.seedtradersignup)
-siteRouter.post('/seed-trader-signup', (req, res)=>{
+siteRouter.post('/seed-trader-signup', seedTraderValidation(), seedTraderValidate, (req, res)=>{
      let y = siteController.saveseedtrader(req, res);
      y.then(r=>{
          if(r.user){

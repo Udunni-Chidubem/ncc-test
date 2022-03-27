@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     tin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     email: {
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     licensed_no: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     certification_number: {
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,

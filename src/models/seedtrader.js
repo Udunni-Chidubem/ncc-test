@@ -38,11 +38,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     state_id: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     lg_id: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     phone_no: {
       type: DataTypes.STRING,

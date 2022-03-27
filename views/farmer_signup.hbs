@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-md-10 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" type="text" name="firstname" placeholder="Firstname">
+                                    <input class="form-control" type="text" name="firstname" placeholder="Firstname" value="{{ formData.firstname}}">
                                 </div>
                             </div>
                         </div>
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-10 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="lastname" placeholder="Lastname">
+                                    <input class="form-control" required type="text" name="lastname" placeholder="Lastname" value="{{ formData.lastname}}">
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,8 @@
                                         required 
                                         type="text" 
                                         id="phone" 
-                                        name="phone_number" 
+                                        name="phone_number"
+                                        value="{{ formData.phone_number}}"
                                         placeholder="Phone Number e.g 0*******" 
                                         pattern="^0[0-9]{10}$"
                                         title="Phone Number should start with 0 and contain 11digits"

@@ -1,6 +1,6 @@
 const { body, validationResult } = require('express-validator')
 const db = require('../models')
-const { SeedCompany, User } = db
+const { SeedCompany, User, SeedTrader } = db
 
 
 const profileUpdateValidation = () => {
@@ -103,6 +103,107 @@ const signUpvalidate = (req, res, next) => {
     });
 }
 
+const registerSeedCompanyValidation = () => {
+    return [
+        body('company_name')
+            .not().isEmpty().withMessage('Company\'s Name field is required'),
+        body('phone')
+            .not().isEmpty().withMessage('Phone Number field is required')
+            .custom((value, { req }) => {
+                return User.findOne({ where: { username: req.body.phone } }).then(user => {
+                    if (user) {
+                        return Promise.reject('Phone Number is already in use. Please try another one!');
+                    }
+                });
+            }),
+        body('password')
+            .not().isEmpty().withMessage('Password field is required'),
+        body('confirm_password')
+            .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Password confirmation does not match Password');
+            }
+            return true
+        })
+    ];
+}
+
+const registerSeedCompanyValidate = (req, res, next) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+        return next()
+    }
+    const extractedErrors = []
+    errors.array().map(err => extractedErrors.push({ msg: err.msg }))
+
+
+    //Send Values Back to form
+    let formData = {
+        company_name: req.body.company_name,
+        phone: req.body.phone
+    }
+
+    res.render('seed_company_signup',{
+        form_banner:'seeds-02 1.png',
+        layout : 'form',
+        title: 'Seed\'s Company Registration',
+        formData,
+        extractedErrors,
+    });
+}
+
+const seedTraderValidation = () => {
+    return [
+        body('firstname')
+            .not().isEmpty().withMessage('Firstname field is required'),
+        body('lastname')
+            .not().isEmpty().withMessage('Lastname field is required'),
+        body('phone')
+            .not().isEmpty().withMessage('Phone Number field is required')
+            .custom((value, { req }) => {
+                return User.findOne({ where: { username: req.body.phone } }).then(user => {
+                    if (user) {
+                        return Promise.reject('Phone Number is already in use. Please try another one!');
+                    }
+                });
+            }),
+        body('password')
+            .not().isEmpty().withMessage('Password field is required'),
+        body('confirm_password')
+            .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Password confirmation does not match Password');
+            }
+            return true
+        })
+    ];
+}
+
+const seedTraderValidate = (req, res, next) => {
+    const errors = validationResult(req)
+    if (errors.isEmpty()) {
+        return next()
+    }
+    const extractedErrors = []
+    errors.array().map(err => extractedErrors.push({ msg: err.msg }))
+
+
+    //Send Values Back to form
+    let formData = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phone: req.body.phone
+    }
+
+    res.render('seed_trader_signup',{
+        form_banner:'tradersignup.png',
+        layout : 'form',
+        title: 'Seed\'s Trader Registration',
+        formData,
+        extractedErrors,
+    });
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
@@ -123,5 +224,9 @@ module.exports = {
     companyValidation,
     validate,
     signupValidation,
-    signUpvalidate
+    signUpvalidate,
+    registerSeedCompanyValidation,
+    registerSeedCompanyValidate,
+    seedTraderValidation,
+    seedTraderValidate
 }
