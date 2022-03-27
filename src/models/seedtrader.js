@@ -37,11 +37,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     state_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     lg_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     phone_no: {
