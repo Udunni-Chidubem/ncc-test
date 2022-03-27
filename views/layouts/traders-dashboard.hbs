@@ -1,6 +1,7 @@
    {{> dashboard_header}}
   <body class="body">
-
+  
+{{#if isVerified}}
  <header>
     <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_com_nav navbar-dark  ">
       <div class="container-fluid">
@@ -31,6 +32,7 @@
       </div>
     </nav>
    </header>
+  {{/if}}
   
 
   <aside class="sidebar close seed_com_side">
@@ -49,13 +51,18 @@
         </li>
        
         <li>
-          <a href="#">
+          <a href="{{#if isVerified }} # {{else}} # {{/if}}">
             <i class='bx bx-user'></i>
             <span class="link_name">Profile</span>
-            <span class="p_red">(Unverified)</span>
+              {{#if isVerified }}
+                <span class="p_red">(Unverified)</span>
+              {{/if}}
+            
           </a>
   
         </li>
+
+        {{#unless isVerified}}
 
         <li>
           <a href="#">
@@ -77,41 +84,15 @@
             <span class="link_name">Help</span>
           </a>
         </li>
-        {{!-- <li>
+
+        <li id="settings">
           <a href="#">
-            <i class='bx bx-cart-add'></i>
-            <span class="link_name">Order</span>
+            <i class='bx bx-cog' ></i>
+            <span class="link_name" >Settings</span>
           </a>
   
         </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-purchase-tag'></i>
-            <span class="link_name">Transaction</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-library'></i>
-            <span class="link_name">Knowledge Base</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-leaf'></i>
-            <span class="link_name">Farm Input</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-help-circle' ></i>
-            <span class="link_name">Help</span>
-          </a>
-    
-        </li> --}}
+        {{/unless}}
         <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">
@@ -120,13 +101,7 @@
             </button>
           </form>
         </li>
-        <li id="settings">
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="link_name" >Settings</span>
-          </a>
-   
-        </li>
+        
   
       </ul>
     </div>

@@ -9,7 +9,7 @@ companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
 
-    let isVerified = await utils.isCompanyVerified(user)
+    let isVerified = await utils.isVerified(user)
     res.render('seed_company/dashboard', {
         layout : 'company-dashboard',
         title : 'Dashboard',
@@ -20,7 +20,7 @@ companyRouter.get('/dashboard', async (req, res)=>{
 companyRouter.get('/update-profile', async (req, res)=>{
     let states = await siteController.getStates();
     let user = await req.user
-    let isVerified = await utils.isCompanyVerified(user)
+    let isVerified = await utils.isVerified(user, 'company')
     let company = await utils.getCompanyProfile(user)
 
     res.render('seed_company/update-profile', {

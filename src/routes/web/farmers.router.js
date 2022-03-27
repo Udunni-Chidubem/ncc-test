@@ -6,7 +6,7 @@ const { profileUpdateValidation, validate } = require('../../helpers/formValidat
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
-    const isVerified = await utils.isVerified(user.dataValues)
+    const isVerified = await utils.isVerified(user, 'farmer')
     let {firstname, lastname, account_no, account_name, phone_no, LGA, State }=farmer
     
     res.render('farmers/dashboard', {
