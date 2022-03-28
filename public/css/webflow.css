@@ -274,7 +274,8 @@ ul {
 .w-list-unstyled {
   padding-left: 0;
   list-style: none;
-  padding-right: 7rem;
+  padding-right: 1rem;
+  width: 100%;
 }
 .w-embed:before,
 .w-embed:after {
@@ -1955,4 +1956,25 @@ textarea.w-select {
   .text {
     margin-left: 15px;
   }
+}
+
+.footer_head {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+
+  color: #ffffff;
+}
+
+.foot_li {
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 21px;
+  /* identical to box height */
+
+  color: #ffffff;
+}
+
+.foot_li_space {
+  padding-right: 1rem;
 }

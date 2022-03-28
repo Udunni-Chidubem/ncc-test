@@ -741,7 +741,7 @@ input[type="number"] {
   line-height: 19.5px;
   font-weight: 600;
   color: white !important;
-  border: 0px;
+  border: none !important;
   border-radius: 4px;
   /* width: 110px;
   height: 42px; */
@@ -873,7 +873,7 @@ input[type="number"] {
 }
 
 .list_item {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 .ul_list_item {
@@ -892,7 +892,7 @@ input[type="number"] {
 .f_1 .col-6 {
   font-weight: 500;
   font-size: 12px;
-  line-height: 18px;
+  /* line-height: 18px; */
   /* identical to box height */
 
   color: #47749c;
@@ -901,12 +901,14 @@ input[type="number"] {
 .f_2 .col-3 {
   font-weight: 700;
   font-size: 15px;
-  line-height: 36px;
+  /* line-height: 36px; */
   /* identical to box height */
 
   color: #47749c;
 }
 
+.f_2 {
+}
 .f_2 .col-6 {
   font-weight: 700;
   font-size: 15px;

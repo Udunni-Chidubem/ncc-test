@@ -1289,7 +1289,7 @@ body {
 
 .footer-logo-link {
   max-height: 60px;
-  min-width: 60px;
+  min-width: 100%;
   -webkit-box-flex: 0;
   -webkit-flex: 0 auto;
   -ms-flex: 0 auto;
@@ -1664,10 +1664,16 @@ body {
 }
 
 .text-block-11 {
-  font-size: 11px;
+  /* font-size: 11px;
   width: 56%;
 
+  margin-bottom: -16px; */
+  font-size: 11px;
+  width: 61%;
   margin-bottom: -16px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .slide-4 {
@@ -4404,9 +4410,9 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 
 .container-form {
-  min-height: 100vh;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  min-height: 50vh;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .primary-button:hover {
