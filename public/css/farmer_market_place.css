@@ -1998,7 +1998,7 @@ select::-ms-expand {
 }
 
 .btn-place-order {
-  width: 130px !important;
+  width: 134px !important;
   height: 50px;
   color: #fff !important;
   background: linear-gradient(180deg, #5DCD6D 0%, #008346 100%);;
@@ -2022,7 +2022,7 @@ select::-ms-expand {
 }
 
 .btn-save-product {
-  width: 130px !important;
+  width: 134px !important;
   height: 50px;
   color: #fff !important;
   background-color:  #008346 !important;
