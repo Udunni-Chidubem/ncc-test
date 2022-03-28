@@ -2,10 +2,10 @@
 
 
 <div class="container py-5">
-    <div class="card">
+    <div class="card card_home">
         <div class="card-body">
-            <form method="POST" action="">
-                <div class="form-row">
+            <form method="POST" action="" id="form-inp">
+                <div class="form-row"  >
                     <div class="form-group col-md-6">
                         <label for="productName">Product Name <span class="required-feilds">*</span></label>
                         <input type="text" class="form-control" id="productName" placeholder="Product Name" required>
@@ -17,11 +17,139 @@
                     </div>
                 </div>
 
+                 <div class="form-row"  >
+                    <div class="form-group col-md-12">
+                        <label for="productName">Product Description <span class="required-feilds">*</span></label>
+                         <textarea class="form-control" placeholder="Tell us more about your product" id="floatingTextarea2" style="height: 100px"></textarea>
+                    </div>
+
+                    
+                </div>
+ 
+
                 <div class="form-group ">
                     <label for="Product Description">Available Stock <span class="required-feilds">*</span></label>
                     
                 </div> 
+               <div class="inp_cont" id="inp_cont">
+                    <div class="">
+                      <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 col_rma">
+                    <div class="col col_sma ">
+                        <div class="   ">
+                             <label for="firstname" class="input_form input_form_head">Package Size <i>(kg)</i>  </label>
+                        </div>
+                  
+                    </div>
+                    <div class="col col_sma">
+                        <div class=" ">
+                             <label for="firstname" class="input_form input_form_head">Quantity </label>
+                        </div>
+             
+                    </div>
+                       <div class="col col_sma">
+                         <div class=" ">
+                             <label for="firstname" class="input_form input_form_head">Min Order </label>
+                         </div>
+                  
+                    </div>
+                    <div class="col col_sma">
+                        <div class=" ">
+                             <label for="firstname" class="input_form input_form_head">Price </label>
+                        </div>
+                  
+                    </div>
+                    <div class="col col_sma">
+                          
+                   
+                    </div>
+
+                    </div>
+                     <div class="row   row-cols-2 row-cols-lg-6 g-2 g-lg-2 mb-2 col_rma"  >
+                    <div class="col col_sma">  
+                    <div class="py-3 ">
+                         <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></div>
+                    </div>
+                    <div class="col col_sma">
+                        
+                    <div class="py-3 "> 
+                        <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></div>
+                    </div>
+                       <div class="col col_sma">
+                        
+                    <div class="py-3 ">
+                         <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></div>
+                    </div>
+                    <div class="col col_sma">
+                         
+                    <div class="py-3 ">
+                         <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></div>
+                    </div>
+                    <div class="col col_sma">
+                          
+                    <div class="p-3  ">
+                        <span class="add " id="_add"><i class=" fa fa-solid fa-plus"></i></span>
+                    </div>
+                    </div>
+
+                    </div>
+
+
+
+                      <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 mb-2 col_rma" id="input_number">
+                    <div class="col col_sma">
+                    <div class="py-3 ">
+                        <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    </div>
+                    <div class="col col_sma">
+                    <div class="py-3 ">
+                        <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    </div>
+                       <div class="col col_sma">
+                    <div class="py-3 ">
+                        <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    </div>
+                    <div class="col col_sma">
+                    <div class="py-3 ">
+                        <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    </div>
+                    <div class="col col_sma">
+                    <div class="p-3 ">
+                      <span><i class="fa fa-solid fa-trash-can _trash p_red"></i></span>
+                    </div>
+                    </div>
+
+                    </div>
+
+
+                     
                 
+               </div>
+
+                   
+                </div>
+
+                 <div class="row  ">
+                    <div class="col-5 hr1">
+                    <div class="  border-0 border-top"></div>
+                    </div>
+                    {{!-- <div class="col-3">
+                    <div class="p-3 border bg-light">row</div>
+                    </div>
+                    </div> --}}
+
+                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                    <div class="col">
+                    <div class="p-3 ">
+                         <div class="columns mx-auto"  style="width: 160px;">
+                                <button type="button float-end" class="btn  mb-1">Done</button>
+                              </div>
+                    </div>
+                    </div>
+                    </div>
             </form>
         </div>
     </div>
@@ -38,11 +166,26 @@
                     <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
                 </div>
             </div>
+        </div>
 
-            <!-- Uploaded image area-->
+        <div class="col-lg-6">
+             <!-- Uploaded image area-->
             <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
             <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
 
         </div>
     </div>
 </div>
+
+
+<script>
+document.querySelector('#_add').addEventListener('click', function(){
+       $("#input_number")
+        .clone()
+        .appendTo($("#inp_cont"))
+});
+     
+ 
+     
+</script>
+
