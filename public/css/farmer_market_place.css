@@ -1946,49 +1946,49 @@ select::-ms-expand {
 }
 
 
-.seeds{
+.products{
   margin-top: 20px;
 }
 
-.seeds-card{
+.products-card{
   border-radius: 12px !important;
 }
 
-.seeds-content{
+.products-content{
   display: grid;
   grid-template-columns: repeat(4, auto);
 }
 
-.seed-img{
+.product-img{
   width: 310px;
   padding: 4px;
 
 }
 
-.seed-img img{
+.product-img img{
   width: 100%;
 }
 
-.seed-details{
+.product-details{
   font-family: 'Poppins';
   font-style: normal;
   color: #000000;
   letter-spacing: 0.01em;
 }
 
-.seed-details h4{
+.product-details h4{
   font-weight: 600;
   font-size: 23px;
   line-height: 27px;
 }
 
-.seed-details P{
+.product-details P{
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 15px;
 }
 
-.seed-actions{
+.product-actions{
   display: grid;
     grid-template-columns: max-content;
     grid-template-rows: max-content;
@@ -2021,56 +2021,56 @@ select::-ms-expand {
   border-color: #868889;
 }
 
-.btn-save-seed {
+.btn-save-product {
   width: 130px !important;
   height: 50px;
   color: #fff !important;
   background-color:  #008346 !important;
   border-radius: 8px !important;
 }
-.btn-save-seed:hover {
+.btn-save-product:hover {
   color: #fff;
   background: #008341;
   border-color: #008346;
 }
-.btn-save-seed.focus,
-.btn-save-seed:focus {
+.btn-save-product.focus,
+.btn-save-product:focus {
   box-shadow: 0 0 0 0.2rem rgb(0, 159.38, 38.848, 0.5
   );
 }
-.btn-save-seed.disabled,
-.btn-save-seed:disabled {
+.btn-save-product.disabled,
+.btn-save-product:disabled {
   color: #fff;
   background: #868889;
   border-color: #868889;
 }
 
-.seed-price{
+.product-price{
   display: grid;
   justify-content: center;
   grid-template-rows: auto;
 }
 
-.seed-price h4{
+.product-price h4{
   font-family: 'Poppins';
   font-style: normal;
-  color: #000000;
+  color: #47BA5D;
   letter-spacing: 0.01em;
   font-weight: 600;
   font-size: 26px;
-  line-height: 27px;
+  line-height: 15px;
   justify-self: center;
   margin-bottom: 0px;
 }
 
-.seed-price p{
+.product-price p{
   font-family: 'Poppins';
   font-style: normal;
   color: #818E9B;
   letter-spacing: 0.01em;
   font-weight: 400;
-  font-size: 15px;
-  line-height: 27px;
+  font-size: 12px;
+  line-height: 15px;
   justify-self: center;
   margin-bottom: 0px;
 }
@@ -2081,8 +2081,9 @@ select::-ms-expand {
   border-bottom: 1px solid #818E9B !important;  
   border-radius: 2px;
   border: none;
-  width: 80px !important;
+  width: 50px !important;
   text-align: center;
+  font-size: 13px !important;
 }
 
 .btn-count {
@@ -2091,19 +2092,21 @@ select::-ms-expand {
   box-sizing: border-box;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 10px !important;
+  width: 20px;
+  padding: inherit !important;
 }
 .btn-count:hover {
   color: #fff;
   background: #008341;
   border-color: #008346;
 }
-.btn-save-seed.focus,
-.btn-save-seed:focus {
+.btn-save-product.focus,
+.btn-save-product:focus {
   box-shadow: 0 0 0 0.2rem rgb(0, 159.38, 38.848, 0.5
   );
 }
-.btn-save-seed.disabled,
-.btn-save-seed:disabled {
+.btn-save-product.disabled,
+.btn-save-product:disabled {
   color: #fff;
   background: #868889;
   border-color: #868889;
@@ -2188,3 +2191,41 @@ h1 {
 }
 
 
+.product-line{
+  background-color: #EBEFF2;
+  width: 200px;
+  height: 3px;
+}
+
+.product-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 0.8fr) auto;
+}
+
+.view-product-price{
+  align-content: flex-end;
+}
+
+.view-product-price h4{
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #47BA5D;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 18px;
+  justify-self: center;
+  margin-bottom: 0px;
+}
+
+.view-product-price p{
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #818E9B;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  justify-self: center;
+  margin-bottom: 0px;
+}
