@@ -8,25 +8,19 @@ module.exports = {
         const transaction = await db.rest.transaction();
         const user = await req.user
 
+        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email} = req.body
+
         try{
-            const data = {
-                name_of_company: req.body.name_of_company,
-                phone_no: req.body.phone_no,
-                tin: req.body.tin,
-                address: req.body.address,
-                licensed_no: req.body.licensed_no,
-                state_id: req.body.state_id,
-                lg_id: req.body.lg_id,
-                certification_number: req.body.certification_number,
-                email: req.body.email
-            }
+            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email }
+
+            await User.update({status: true}, {where: {id: user.id} })
 
             const company = await SeedCompany.update( data , {
                 where: { user_id: user.id }
             }, {transaction: transaction})
 
             transaction.commit();
-            return company;
+            return {company};
         }catch(e){
             transaction.rollback();
             return e

@@ -51,17 +51,21 @@ module.exports={
         const user = await req.user
         let deliveryInformation
         try{
+
+            await User.update({status: true}, {where: {id: user.id} })
+
+            const { firstname, lastname, date_of_birth, gender, level_of_education, state_id, lg_id, nin, bvn, farm_produce, state_of_delivery, lga_of_delivery, address } = req.body
             const data = {
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                date_of_birth: req.body.date_of_birth,
-                gender: req.body.gender,
-                level_of_education: req.body.level_of_education,
-                state_id: req.body.state_id,
-                lg_id: req.body.lg_id,
-                nin: req.body.nin,
-                bvn: req.body.bvn,
-                farm_produce: req.body.farm_produce.toString()
+                firstname, 
+                lastname, 
+                date_of_birth, 
+                gender, 
+                level_of_education, 
+                state_id, 
+                lg_id, 
+                nin, 
+                bvn,
+                product_farmed: farm_produce.toString()
             }
 
             const farmer = await Farmer.update( data , {
@@ -75,16 +79,16 @@ module.exports={
             if(!existingDelivery){
                 const deliveryInformation = await DeliveryInformation.create({
                     user_id : user.id,
-                    state_id: req.body.state_of_delivery,
-                    lg_id: req.body.lga_of_delivery,
-                    address: req.body.address
+                    state_id:state_of_delivery,
+                    lg_id: lga_of_delivery,
+                    address
                 }, { transaction: transaction})
             }else{
                 //Update existing information
                 const deliveryInformation = await Farmer.update( {
-                    state_id: req.body.state_of_delivery,
-                    lg_id: req.body.lga_of_delivery,
-                    address: req.body.address
+                    state_id: state_of_delivery,
+                    lg_id: lga_of_delivery,
+                    address: address
                 } , {
                     where: { user_id: user.id }
                 }, {transaction: transaction})
@@ -95,6 +99,49 @@ module.exports={
             transaction.rollback();
             return e
         }
+    },
+    marketPlace: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+
+
+        res.render('farmers/market_place', {
+            layout : 'farmers-dashboard',
+            title: 'Market Place',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified
+        })
+    },
+
+    product: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
+    },
+    viewProduct: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/view-product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
     }
 
 }

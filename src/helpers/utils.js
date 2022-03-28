@@ -21,41 +21,31 @@ module.exports = {
             },
             raw :true
         });
+
         return farmer;
     },
     getTraderProfile: (user) => {
         
     },
     getCompanyProfile: async (user) => {
-        let company =await SeedCompany.findOne({
+        const company =await SeedCompany.findOne({
              where : {
                  user_id : user.id
              },
-             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'],
+             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number', 'email', 'state_id', 'lg_id'],
              raw :true
          });
          return company;
     },
     isVerified: async (user) => {
-        let farmerData = await Farmer.findOne({ where : {user_id : user.id}, raw: true })
-        
-        if(
-            farmerData.level_of_education != null 
-            && farmerData.state_id != null
-            && farmerData.lg_id != null
-        ){
-            return false
+        let status = true
+
+        const verify = await User.findOne({ where: { id: user.id, status: true}, attributes : ['id', 'username', 'status'], raw: true })
+
+        if(verify != null){
+            status = false 
         }
 
-        return true
+        return status    
     },
-    isCompanyVerified: async (user) => {
-        let company = await SeedCompany.findOne({ where: {user_id: user.id}, 
-            attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number'], raw: true})
-
-        if(company.licensed_no != null && company.certification_number != null){
-            return false
-        }
-        return true
-    }
 }
