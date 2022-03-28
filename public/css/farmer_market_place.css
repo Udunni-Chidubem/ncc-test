@@ -2003,6 +2003,7 @@ select::-ms-expand {
   color: #fff !important;
   background: linear-gradient(180deg, #5DCD6D 0%, #008346 100%);;
   border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
 }
 .btn-place-order:hover {
   color: #fff;
@@ -2027,6 +2028,7 @@ select::-ms-expand {
   color: #fff !important;
   background-color:  #008346 !important;
   border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
 }
 .btn-save-product:hover {
   color: #fff;
@@ -2228,4 +2230,17 @@ h1 {
   line-height: 15px;
   justify-self: center;
   margin-bottom: 0px;
+}
+
+
+.sidebar li .submenu{ 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  padding-left: 1rem; 
+  padding-right: 1rem;
+}
+
+.has-submenu .nav-link{
+  padding: 0px !important;
 }
