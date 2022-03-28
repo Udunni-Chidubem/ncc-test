@@ -271,7 +271,7 @@
       }).showToast();
     }
 
-    $('.js-example-basic-multiple').select2({
+   $('.js-example-basic-multiple').select2({
         placeholder: "Select multiple items",
         allowClear: true
     });
@@ -409,9 +409,10 @@
             len = farm_produce.length
 
             var ele = document.getElementById('farmProduce');
-
-            for(i=0; i < len; i++){
-                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            //$(ele).atrr('val')
+            let val =ele.getAttribute('value')
+            for(i=0; i < len; i++){ 
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '"' + (val.includes(farm_produce[i].name) ? 'selected="'+true+'"' : null)+'>' + farm_produce[i].name + '</option>';
             }
         }
     }).catch()
