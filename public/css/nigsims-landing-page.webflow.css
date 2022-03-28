@@ -4405,8 +4405,8 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 .container-form {
   min-height: 100vh;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 5rem;
+  padding-bottom: 2rem;
 }
 
 .primary-button:hover {
