@@ -21,6 +21,13 @@ companyRouter.get('/update-profile', async (req, res)=>{
         title : 'Profile Update',
         states : states
     })
+});
+companyRouter.get('/create-product', async (req, res)=>{
+
+    res.render('seed_company/create-product', {
+        layout : 'company-dashboard',
+        title : 'Create Product',
+    })
 })
 
 module.exports=companyRouter
