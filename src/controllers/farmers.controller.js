@@ -108,6 +108,35 @@ module.exports={
             farmerData: farmer.dataValues,
             isVerified
         })
+    },
+
+    product: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
+    },
+    viewProduct: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/view-product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
     }
 
 }
