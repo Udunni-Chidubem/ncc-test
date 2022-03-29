@@ -315,6 +315,7 @@ body {
   .float_end {
     float: left !important;
   }
+
   /* .settings {
     width: 195px;
   } */
@@ -1171,11 +1172,7 @@ input[type="number"] {
   font-weight: 600;
   font-size: 12px;
   line-height: 18px;
-  /* identical to box height */
-
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-
   color: #ffffff;
 }
 
@@ -1197,11 +1194,7 @@ input[type="number"] {
   font-weight: 600;
   font-size: 12px;
   line-height: 18px;
-  /* identical to box height */
-
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-
   color: #47749c;
 }
 
@@ -1305,4 +1298,14 @@ input[type="number"] {
 
 .float_end {
   float: right;
+}
+
+.d_t .dropdown-item {
+  font-weight: 600;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+  color: #a5a5a5;
 }
