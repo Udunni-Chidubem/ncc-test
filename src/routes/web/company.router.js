@@ -35,10 +35,15 @@ companyRouter.get('/update-profile', async (req, res)=>{
 });
 companyRouter.get('/create-product', async (req, res)=>{
 
-    res.render('seed_company/create-product', {
+    res.render('seed_company/create-products', {
         layout : 'company-dashboard',
         title : 'Create Product',
     })
+});
+companyRouter.post('/create-product', async (req, res)=>{
+let r = await companyController.createProduct(req, res);
+  console.log(req.files)
+  res.send(req.body)
 });
 companyRouter.get('/product-list', async (req, res)=>{
 

@@ -1,6 +1,6 @@
 require('dotenv').config()
 const db = require('../models')
-const {User,UserRole, Role, SeedCompany, LGAs, States }  = db
+const {User,UserRole, Role, SeedCompany, LGAs, States, Product }  = db
 const utils = require('../helpers/utils');
 
 module.exports = {
@@ -26,4 +26,38 @@ module.exports = {
             return e
         }
     },
+
+    createProduct : async (req, res)=>{
+        const transaction =await db.rest.transaction();
+        let item = null;
+        item={
+            min : req.body.min_order, 
+            pkg: req.body.pkg_size, 
+            price:req.body.price, 
+            quantity : req.body.quantity
+        }
+       // item.push({pkg: req.body.pkg_size})
+        //item.push({price:req.body.price})
+        //item.push({quantity : req.body.quantity})
+        item = await JSON.stringify(item, null, 2)
+     //   return
+        const user = await req.user
+        try{
+            let p = Product.create({
+                product_name : req.body.productName,
+                description : req.body.productDescription,
+                variant : req.body.productVariant,
+                item : '',
+                user_id : user.id,
+                file_name : ''
+            }, {transaction : transaction})
+            transaction.commit()
+            return p
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return e
+        }
+        
+    }
 }
