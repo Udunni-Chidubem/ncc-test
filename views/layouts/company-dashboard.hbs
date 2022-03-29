@@ -40,7 +40,7 @@
           {{> sidebar_image}}
           </div>
        
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav_accordion">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
           <a href="dashboard">
@@ -68,8 +68,39 @@
           <a href="#">
             <i class='bx bx-user'></i>
             <span class="link_name">Order Management</span>
+            <span class="arrow">
+                    <i class="arrow-icon"></i>
+                </span>
           </a>
+          <ul class="dropdown-menu">
+                <li>
+                    <a href="create-product.html">Create Products</a>
+                </li>
+                <li>
+                    <a href="product-list.html">Products List</a>
+                </li>
+                <li>
+                    <a href="edit-product.html">Edit Product</a>
+                </li>
+            </ul>
+        </li> --}}
+
+        <li class="nav-item has-submenu">
+          <a class="nav-link" href="#"> 
+              <i class='bx bx-user'></i>
+            <span class="link_name">Order Management</span>
+              
+            <span class="arrow">
+                    <i class='fa fa-angle-down'></i>
+                </span>
+          </a>
+          <ul class="submenu collapse">
+            <li><a class="nav-link" href="./create-product">Create Product </a></li>
+            <li><a class="nav-link" href="#">Product List </a></li>
+            <li><a class="nav-link" href="#">Orders </a> </li>
+          </ul>
         </li>
+         
 
          <li>
           <a href="#">
@@ -117,6 +148,10 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
  <script src="../js/script.js"></script>
  <script src="../js/payment_page_preview.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
    <script>
     document.querySelector('.states').addEventListener('change', function(){
         let url =  window.location.origin+'/api/base/lgas/'+this.value
@@ -132,6 +167,8 @@
             console.log(e)
         })
     })
+
+    
 </script>
    </body>
 </html>

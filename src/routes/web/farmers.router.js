@@ -39,6 +39,7 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 farmersRouter.get('/market_place', farmerController.marketPlace)
 farmersRouter.get('/product', farmerController.product)
 farmersRouter.get('/view-product', farmerController.viewProduct)
+farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
 
 
 module.exports=farmersRouter

@@ -273,6 +273,28 @@ body {
   .con {
     width: 357px !important;
   }
+
+  .col_sma {
+    width: 20% !important;
+  }
+
+  .row-cols-lg-6.col_rma > * {
+    flex: 0 0 auto;
+    width: 19.667% !important;
+  }
+
+  .input_form.input_form_head {
+    font-size: 10px !important;
+    line-height: 18px;
+    /* identical to box height */
+
+    letter-spacing: 0.01em;
+  }
+
+  .col-5.hr1 {
+    flex: 0 0 auto;
+    width: 79.667%;
+  }
   /* .settings {
     width: 195px;
   } */
@@ -745,7 +767,7 @@ input[type="number"] {
   line-height: 19.5px;
   font-weight: 600;
   color: white !important;
-  border: 0px;
+  border: none !important;
   border-radius: 4px;
   /* width: 110px;
   height: 42px; */
@@ -877,7 +899,7 @@ input[type="number"] {
 }
 
 .list_item {
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 .ul_list_item {
@@ -896,7 +918,7 @@ input[type="number"] {
 .f_1 .col-6 {
   font-weight: 500;
   font-size: 12px;
-  line-height: 18px;
+  /* line-height: 18px; */
   /* identical to box height */
 
   color: #47749c;
@@ -905,12 +927,14 @@ input[type="number"] {
 .f_2 .col-3 {
   font-weight: 700;
   font-size: 15px;
-  line-height: 36px;
+  /* line-height: 36px; */
   /* identical to box height */
 
   color: #47749c;
 }
 
+.f_2 {
+}
 .f_2 .col-6 {
   font-weight: 700;
   font-size: 15px;
@@ -1188,4 +1212,21 @@ input[type="number"] {
 .dot {
   font-size: 12px;
   color: #031e6a;
+}
+
+.row-cols-lg-6.col_rma > * {
+  flex: 0 0 auto;
+  width: 9.667%;
+}
+
+.add {
+  border: 2px solid #5dcd6d;
+  border-radius: 8px;
+  font-size: 9px;
+  line-height: 14px;
+}
+
+._trash {
+  font-size: 10px;
+  line-height: 14px !important;
 }
