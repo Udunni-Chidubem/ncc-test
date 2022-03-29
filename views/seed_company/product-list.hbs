@@ -1,126 +1,117 @@
  <!-- Content Wrapper START -->
 <div class="main-content">
-    <div class="page-header">
-        <div class="header-sub-title">
-            <nav class="breadcrumb breadcrumb-dash">
-                <a href="#" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
-                <a class="breadcrumb-item" href="#">Inventory</a>
-                <span class="breadcrumb-item active">Product List</span>
-            </nav>
+   <div class="container"> 
+        <div class="row  ">
+          <div class="col-12   ">
+          <a href="./create-product" class="btn create_p mb-2  float_end ">
+            Create New Product <span><i class=" fa fa-solid fa-plus"></i></span>
+        </a>
+        </div>
         </div>
     </div>
+    <div class=" container table-responsives table_t_info">   
+        <table class="table con t_info  table-borderless">
+          <thead class="t_info_head ">
+            <tr class="">
+                <th scope="col">S/N</th>
+                <th scope="col">PRODUCT NAME/VARIANT</th>
+                <th scope="col">WEIGHT (KG)</th>
+                <th scope="col">PRICE(&#8358;)</Nav></th>
+                <th scope="col">STATUS</th>
+                <th scope="col">ACTION</th>
+            </tr>
+          </thead>
+          <tbody class="t_info_body">
+            <tr class="t_info_row1">
+                <th scope="row"  >1</th>
+                <td>White Maize</td>
+                <td>40</td>
+                <td>2000</td>
+                <td> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> 
+                </td>
+                <td><a href="#"> 
+                  <div class="dropdown d_t">
+                    <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Actions
+                    </a>
 
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Update</a></li>
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Order</a></li>
+                      <li><a class="dropdown-item  " href="#">Add Stock</a></li>
+                    </ul>
+                  </div>
+                </a></td>
+            </tr>
+            <tr class="t_info_row2">
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>40</td>
+                <td>2000</td>
+                  <td>
+                  <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
+                </td>
+                <td><a href="#"> 
+                  <div class="dropdown d_t">
+                    <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Actions
+                    </a>
 
- 
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Update</a></li>
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Order</a></li>
+                      <li><a class="dropdown-item  " href="#">Add Stock</a></li>
+                    </ul>
+                  </div>
+                </a></td>
+            </tr>
+            <tr class="t_info_row1">
+                <th scope="row"  >3</th>
+                <td>White Maize</td>
+                <td>40</td>
+                <td>2000</td>
+                <td>
+                  <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
+                </td>
+                <td><a href="#"> 
+                  <div class="dropdown d_t">
+                    <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Actions
+                    </a>
 
- <div class=" container table-responsives table_t_info">   
-  
-        <button type="button" class="btn create_p mb-2  ">
-          Create New Product <span><i class=" fa fa-solid fa-plus"></i></span>
-        </button>
- 
-          <table class="table con t_info  table-borderless">
-                <thead class="t_info_head ">
-                  <tr class="">
-                      <th scope="col">S/N</th>
-                      <th scope="col">PRODUCT NAME/VARIANT</th>
-                      <th scope="col">WEIGHT (KG)</th>
-                      <th scope="col">PRICE(&#8358;)</Nav></th>
-                      <th scope="col">STATUS</th>
-                      <th scope="col">ACTION</th>
-                  </tr>
-                </thead>
-                <tbody class="t_info_body">
-                  <tr class="t_info_row1">
-                      <th scope="row"  >1</th>
-                      <td>White Maize</td>
-                      <td>40</td>
-                      <td>2000</td>
-                       <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> 
-                      </td>
-                      <td><a href="#"> 
-                        <div class="dropdown">
-                          <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                          </a>
+                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Update</a></li>
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Order</a></li>
+                      <li><a class="dropdown-item  " href="#">Add Stock</a></li>
+                    </ul>
+                  </div>
+                </a></td>
+            </tr>
+            <tr class="t_info_row2">
+                <th scope="row">4</th>
+                <td>White Maize</td>
+                <td>40</td>
+                <td>2000</td>
+                  <td>
+                  <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
+                </td>
+                <td><a href="#"> 
+                  <form action="" method="post"> 
+                  <div class="dropdown d_t">
+                    <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Actions
+                    </a>
 
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Action</a></li>
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Another action</a></li>
-                            <li><a class="dropdown-item  " href="#">Something else here</a></li>
-                          </ul>
-                        </div>
-                      </a></td>
-                  </tr>
-                  <tr class="t_info_row2">
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>40</td>
-                      <td>2000</td>
-                        <td>
-                        <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-                      </td>
-                      <td><a href="#"> 
-                        <div class="dropdown">
-                          <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                          </a>
-
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Action</a></li>
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Another action</a></li>
-                            <li><a class="dropdown-item  " href="#">Something else here</a></li>
-                          </ul>
-                        </div>
-                      </a></td>
-                  </tr>
-                  <tr class="t_info_row1">
-                      <th scope="row"  >3</th>
-                      <td>White Maize</td>
-                      <td>40</td>
-                      <td>2000</td>
-                       <td>
-                        <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-                      </td>
-                      <td><a href="#"> 
-                        <div class="dropdown">
-                          <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                          </a>
-
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Action</a></li>
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Another action</a></li>
-                            <li><a class="dropdown-item  " href="#">Something else here</a></li>
-                          </ul>
-                        </div>
-                      </a></td>
-                  </tr>
-                  <tr class="t_info_row2">
-                      <th scope="row">4</th>
-                      <td>White Maize</td>
-                      <td>40</td>
-                      <td>2000</td>
-                        <td>
-                        <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-                      </td>
-                      <td><a href="#"> 
-                        <form action="" method="post"> 
-                        <div class="dropdown">
-                          <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                          </a>
-
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Action</a></li>
-                            <li><a class="dropdown-item border-0 border-bottom" href="#">Another action</a></li>
-                            <li><a class="dropdown-item  " href="#">Something else here</a></li>
-                          </ul>
-                        </div>
-                        </form>
-                      </a></td>
-                  </tr>
-                </tbody>
-            </table>
-      </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Update</a></li>
+                      <li><a class="dropdown-item border-0 border-bottom" href="#">Order</a></li>
+                      <li><a class="dropdown-item  " href="#">Add Stock</a></li>
+                    </ul>
+                  </div>
+                  </form>
+                </a></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 </div>      
