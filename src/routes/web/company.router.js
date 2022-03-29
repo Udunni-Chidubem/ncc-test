@@ -30,6 +30,13 @@ companyRouter.get('/update-profile', async (req, res)=>{
         company: company,
         isVerified
     })
+});
+companyRouter.get('/create-product', async (req, res)=>{
+
+    res.render('seed_company/create-product', {
+        layout : 'company-dashboard',
+        title : 'Create Product',
+    })
 })
 
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
