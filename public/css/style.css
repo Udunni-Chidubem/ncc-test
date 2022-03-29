@@ -9,7 +9,7 @@ body {
   background: #e5e5e5 !important;
 }
 
-.listStyle{
+.listStyle {
   margin-top: -11px;
 }
 
@@ -1229,4 +1229,8 @@ input[type="number"] {
 ._trash {
   font-size: 10px;
   line-height: 14px !important;
+}
+
+.hidden {
+  display: none !important;
 }

@@ -148,24 +148,42 @@
     ></script>
 
    <script>
-    document.querySelector('.states').addEventListener('change', function(){
-        let url =  window.location.origin+'/api/base/lgas/'+this.value
-        fetch(url).then(r=>r.json())
-        .then(r=>{
-            let Options =  '<option value="">Select LGA</option>'
-            r.forEach(e=>{
-                Options+='<option value="'+e.id+'">'+e.name+'</option>'
-            })
-            document.querySelector('.lgas').innerHTML=Options
-        }
-        ).catch(e=>{
-            console.log(e)
+     $(document).ready(function(){
+        $('#_add').on('click', function(){
+          let len = $('.input_number').length
+          if(len == 1 && $('.input_number').hasClass('hidden')){
+            $('.input_number').removeClass('hidden')
+          }else if(len<4){
+            $(".input_number")
+            .first()
+            .clone(true).removeClass('hidden')
+            .appendTo($("#inp_cont"))
+          }
+            
+        });
+        $("#_trash").on('click', function(){
+           let len = $('.input_number').length
+          if(len == 1 && !($('.input_number').hasClass('hidden'))){
+            $(this).closest('.row').addClass('hidden')
+          }else if(len>1){
+            $(this).closest(".row").remove()
+          }
         })
-    });
-
-
-
-    
+        $('.states').on('click', function(){
+            let url =  window.location.origin+'/api/base/lgas/'+this.value
+            fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('.lgas').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+     })
 </script>
-   </body>
+</body>
 </html>
