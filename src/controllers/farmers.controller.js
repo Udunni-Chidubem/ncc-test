@@ -38,7 +38,7 @@ module.exports={
         res.render('farmers/update-profile', {
             layout : 'farmers-dashboard',
             title: 'Update Profile',
-            fullname: farmer.dataValues.firstname + ' ' + farmer.dataValues.lastname,
+            fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer.dataValues,
             states : states,
             isVerified,
