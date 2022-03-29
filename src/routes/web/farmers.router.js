@@ -7,19 +7,14 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
-    let {firstname, lastname, account_no, account_name, phone_no, LGA, State }=farmer
-    
+    let {firstname, lastname, LGA, State }=farmer
+
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
         title: 'Dashboard',
-        fullname: firstname + ' ' + lastname,
-        firstname,
-        lastname,
-        phone_no,
-        account_name,
-        account_no,
-        lga : LGA ? LGA.name : null, 
-        state : State ? State.name : null,
+        fullname: firstname + ' ' + lastname, 
+        lga : farmer['LGA.name'] ? farmer['LGA.name'] : null,
+        state : farmer['State.name'] ? farmer['State.name'] : null,
         isVerified
     })
 })

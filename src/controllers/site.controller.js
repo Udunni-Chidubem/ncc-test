@@ -11,7 +11,7 @@ const fs = require('fs')
 
 module.exports = {
     home: async (req, res) => {
-        res.render('home', {
+        res.render('site/home', {
             title: 'Welcome'
         });
     },
@@ -19,13 +19,13 @@ module.exports = {
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
-        res.render('pre-signup', {
+        res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
     },
 
     aboutus: async (req,res) => {
-        res.render('about-us', {
+        res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
@@ -34,7 +34,7 @@ module.exports = {
         // let states =await States.findAll({
         //     attributes : ['id', 'name']
         // });
-        res.render('farmer_signup',{
+        res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
             // states : states,
@@ -49,7 +49,7 @@ module.exports = {
         });
     },
     login: async (req,res) => {
-        res.render('login',{
+        res.render('site/login',{
             form_banner:'Group.png',
             title: 'Login',
             layout : 'form',
@@ -57,14 +57,14 @@ module.exports = {
         });
     },
     seedcompanysignup: async (req,res) => {
-        res.render('seed_company_signup',{
+        res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
             layout : 'form',
             errors : req.flash('errors')
         });
     },
     seedtradersignup: async (req,res) => {
-        res.render('seed_trader_signup',{
+        res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
             errors : req.flash('errors')

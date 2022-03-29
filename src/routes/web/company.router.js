@@ -10,10 +10,12 @@ companyRouter.get('/dashboard', async (req, res)=>{
     let company = await utils.getCompanyProfile(user)
 
     let isVerified = await utils.isVerified(user)
+
     res.render('seed_company/dashboard', {
         layout : 'company-dashboard',
         title : 'Dashboard',
         company: company,
+        page_title: '',
         isVerified
     })
 });
