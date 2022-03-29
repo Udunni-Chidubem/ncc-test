@@ -35,14 +35,14 @@ companyRouter.get('/update-profile', async (req, res)=>{
 });
 companyRouter.get('/create-product', async (req, res)=>{
 
-    res.render('seed_company/inventory/create-product', {
+    res.render('seed_company/create-product', {
         layout : 'company-dashboard',
         title : 'Create Product',
     })
 });
 companyRouter.get('/product-list', async (req, res)=>{
 
-    res.render('seed_company/inventory/product-list', {
+    res.render('seed_company/product-list', {
         layout : 'company-dashboard',
         title : 'Products',
     })
