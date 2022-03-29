@@ -2318,17 +2318,37 @@ h1 {
 
 
 .form-row label{
+  font-family: 'Poppins';
+  font-weight: 700;
   font-size: 13px;
-color: #53535f;
-line-height: 1.5;
-margin-bottom: 5px;
+  color: #818E9B;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+
+.form-row input {
+  font-weight: 400;
+font-size: 12px;
+  background: #F5F8FA;
+  border: 1px solid #BFE7C6;
+  color: #90A0B7;
 }
 
 .prod-label{
+  font-family: 'Poppins';
+  font-weight: 700;
   font-size: 13px;
-color: #53535f;
-line-height: 1.5;
-margin-bottom: 5px;
+  color: #818E9B;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+
+.prod-label textarea{
+  font-weight: 400;
+font-size: 12px;
+  background: #F5F8FA;
+  border: 1px solid #BFE7C6;
+  color: #90A0B7;
 }
 
 .move-btn-right{
