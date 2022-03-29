@@ -303,6 +303,14 @@ body {
   .table_t_info {
     width: 375px !important;
   }
+  .create_p {
+    width: 161px;
+  }
+
+  .page-header {
+    width: 375px;
+    display: flex;
+  }
   /* .settings {
     width: 195px;
   } */
