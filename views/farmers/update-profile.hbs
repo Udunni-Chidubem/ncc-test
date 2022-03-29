@@ -48,7 +48,8 @@
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="date_of_birth"
                                         placeholder="DD/MM/YY"
-                                        id="dob" 
+                                        id="dob"
+                                        max="2019-12-31"
                                         data-dob="{{ farmerData.date_of_birth }}"
                                     />
                                   </div>
@@ -57,8 +58,7 @@
                               <div class="col-sm-6">
                                 <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
-                                  <select name="gender" required class="form-select border-0 border-bottom" id="gender" data-gender="{{ farmerData.gender }}">
-                                    <option value="">Select One</option>
+                                  <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
                                   </select>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                   <label for="state" required class="input_form">State <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id" >                                    
+                                  <select class="form-select border-0 border-bottom" data-state="{{ farmerData.state_id }}" id="state" name="state_id">                                    
                                     <option value="">Select State</option>
                                     {{#each states}}
                                         <option value="{{this.id}}">{{this.name}}</option>
@@ -149,7 +149,7 @@
                               <div class="col-sm-6">
                                 <label for="nin" class="input_form">Farm Produce</label>
                                 <div class="input-group input-group-sm mb-3">
-                                      <select class="js-example-basic-multiple form-control border-0 border-bottom" required name="farm_produce" multiple="multiple" id="farmProduce">
+                                      <select class="js-example-basic-multiple form-control border-0 border-bottom" required name="farm_produce" multiple="multiple" id="farmProduce" value="{{ farmerData.product_farmed }}">
                                       </select>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                                     data-stateDelivery="{{ deliveryInfo.state_id }}" />
                                       <option value="">Select One</option>
                                      {{#each states}}
-                                        <option value="{{this.dataValues.id}}">{{this.dataValues.name}}</option>
+                                        <option value="{{this.id}}">{{this.name}}</option>
                                     {{/each}}
                                   </select>
                                 </div>
@@ -210,7 +210,8 @@
 
                                 <textarea 
                                   class="form-control border-0 border-bottom" 
-                                  name="address" 
+                                  name="address"
+                                  style="align-content:left; overflow:auto"
                                   id="address" cols="30" rows="5" required>
                                    {{ deliveryInfo.address }} 
                                 </textarea>
@@ -276,8 +277,8 @@
       }).showToast();
     }
 
-    $('.js-example-basic-multiple').select2({
-        placeholder: "Select Farm Produce",
+   $('.js-example-basic-multiple').select2({
+        placeholder: "Select multiple items",
         allowClear: true
     });
 
@@ -301,6 +302,7 @@
                 console.log(e)
             })
         }
+
 
         let gender = $('#gender').data('gender')
         if(gender != null){
@@ -339,35 +341,35 @@
         $('#dob').val(today)
 
 
-        document.querySelector('#state').addEventListener('change', function(){
-            let url =  window.location.origin+'/api/base/lgas/'+this.value
-            fetch(url).then(r=>r.json())
-            .then(r=>{
-                let Options =  '<option value="">Select LGA</option>'
-                r.forEach(e=>{
-                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                })
-                document.querySelector('#lgas').innerHTML=Options
-            }
-            ).catch(e=>{
-                //console.log(e)
-            })
-        })
+      document.querySelector('#state').addEventListener('change', function(){
+          let url =  window.location.origin+'/api/base/lgas/'+this.value
+          fetch(url).then(r=>r.json())
+          .then(r=>{
+              let Options =  '<option value="">Select LGA</option>'
+              r.forEach(e=>{
+                  Options+='<option value="'+e.id+'">'+e.name+'</option>'
+              })
+              document.querySelector('#lgas').innerHTML=Options
+          }
+          ).catch(e=>{
+              //console.log(e)
+          })
+      })
 
-        document.querySelector('#stateDelivery').addEventListener('change', function(){
-            let url =  window.location.origin+'/api/base/lgas/'+this.value
-            fetch(url).then(r=>r.json())
-            .then(r=>{
-                let Options =  '<option value="">Select LGA</option>'
-                r.forEach(e=>{
-                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                })
-                document.querySelector('#lgaDelivery').innerHTML=Options
-            }
-            ).catch(e=>{
-                console.log(e)
+    document.querySelector('#stateDelivery').addEventListener('change', function(){
+        let url =  window.location.origin+'/api/base/lgas/'+this.value
+        fetch(url).then(r=>r.json())
+        .then(r=>{
+            let Options =  '<option value="">Select LGA</option>'
+            r.forEach(e=>{
+                Options+='<option value="'+e.id+'">'+e.name+'</option>'
             })
+            document.querySelector('#lgaDelivery').innerHTML=Options
+        }
+        ).catch(e=>{
+            console.log(e)
         })
+    })
 
 
     let url =  window.location.origin+'/api/base/get-droplist'
@@ -381,6 +383,8 @@
             objArray = response.data.gender
             len = objArray.length
 
+            let Options =  '<option value="">Select One</option>'
+
             var ele = document.getElementById('gender');
 
             for(i=0; i < len; i++){
@@ -393,7 +397,7 @@
             len = level.length
             var ele = document.getElementById('levelE');
 
-            let Options =  '<option value="">Select One</option>'
+            
             for(i=0; i < len; i++){
                 ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
             }
@@ -411,9 +415,10 @@
             len = farm_produce.length
 
             var ele = document.getElementById('farmProduce');
-
-            for(i=0; i < len; i++){
-                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '">' + farm_produce[i].name + '</option>';
+            //$(ele).atrr('val')
+            let val =ele.getAttribute('value')
+            for(i=0; i < len; i++){ 
+                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '"' + (val.includes(farm_produce[i].name) ? 'selected="'+true+'"' : null)+'>' + farm_produce[i].name + '</option>';
             }
         }
     }).catch()

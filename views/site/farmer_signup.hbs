@@ -5,11 +5,11 @@
                 <div class="card-body">
                     <h1 class="title p-b-15" >Create An Account</h1>
  
-                    <form method="POST" class="p-t-15">
+                    <form method="POST" class="p-t-15" id="register">
                         <div class="row">
                             <div class="col-md-10 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="firstname" placeholder="Firstname">
+                                    <input class="form-control" type="text" name="firstname" placeholder="Firstname" value="{{ formData.firstname}}">
                                 </div>
                             </div>
                         </div>
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-10 col-sm-12">
                                 <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="lastname" placeholder="Lastname">
+                                    <input class="form-control" required type="text" name="lastname" placeholder="Lastname" value="{{ formData.lastname}}">
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,8 @@
                                         required 
                                         type="text" 
                                         id="phone" 
-                                        name="phone_number" 
+                                        name="phone_number"
+                                        value="{{ formData.phone_number}}"
                                         placeholder="Phone Number e.g 0*******" 
                                         pattern="^0[0-9]{10}$"
                                         title="Phone Number should start with 0 and contain 11digits"
@@ -48,12 +49,12 @@
                                     <input class="form-control" required type="password" name="password" placeholder="Enter Your Password">
                                 </div>
                             </div>
-                            {{!-- <div class=" col-md-10 col-sm-12">
+                            <div class=" col-md-10 col-sm-12">
                                  <div class="form-group">
                                     <input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password">
                                 </div>
                                 
-                            </div> --}}
+                            </div>
                         </div>
                           
                         <div class="p-t-16">
@@ -71,3 +72,10 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<script>
+</script>

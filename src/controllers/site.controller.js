@@ -11,7 +11,7 @@ const fs = require('fs')
 
 module.exports = {
     home: async (req, res) => {
-        res.render('home', {
+        res.render('site/home', {
             title: 'Welcome'
         });
     },
@@ -19,25 +19,25 @@ module.exports = {
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
-        res.render('pre-signup', {
+        res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
     },
 
     aboutus: async (req,res) => {
-        res.render('about-us', {
+        res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
     farmer_signup: async (req,res) => {
-        let states =await States.findAll({
-            attributes : ['id', 'name']
-        });
-        res.render('farmer_signup',{
+        // let states =await States.findAll({
+        //     attributes : ['id', 'name']
+        // });
+        res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
-            states : states,
+            // states : states,
             title : 'Farmer\'s Registration',
             errors : req.flash('errors')
         });
@@ -49,7 +49,7 @@ module.exports = {
         });
     },
     login: async (req,res) => {
-        res.render('login',{
+        res.render('site/login',{
             form_banner:'Group.png',
             title: 'Login',
             layout : 'form',
@@ -57,20 +57,16 @@ module.exports = {
         });
     },
     seedcompanysignup: async (req,res) => {
-        res.render('seed_company_signup',{
+        res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
             layout : 'form',
             errors : req.flash('errors')
         });
     },
     seedtradersignup: async (req,res) => {
-        // let states =await States.findAll({
-        //     attributes : ['id', 'name']
-        // });
-        res.render('seed_trader_signup',{
+        res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
             layout : 'form',
-            // states : states,
             errors : req.flash('errors')
         });
     },
@@ -132,8 +128,6 @@ module.exports = {
             const seed_company = await SeedCompany.create({
                 name_of_company:req.body.company_name,
                 phone_no:req.body.phone,
-                tin:req.body.tin,
-                address:req.body.address,
                 user_id:user.id
             },{transaction : transaction});
             transaction.commit();
@@ -170,9 +164,7 @@ module.exports = {
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
-                state_id:req.body.state,
-                lg_id : req.body.lga,
-                unique_no:unique,
+                unique_no: unique,
                 user_id : user.id
             }, {transaction :transaction});
             

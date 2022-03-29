@@ -29,7 +29,21 @@
                             </div>
                         </div>
                     {{/if}}
+
+                    {{#if extractedErrors}}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul style="padding: 5px;">
+                                {{#each extractedErrors}}
+                                    <li>{{msg}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+
+
                     {{{ body }}}
+
+
                 </div>
             </div>
         </div>

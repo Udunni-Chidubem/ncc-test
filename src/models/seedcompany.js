@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       SeedCompany.belongsTo(models.User)
+      SeedCompany.hasMany(models.Product)
     }
   }
   SeedCompany.init({
@@ -32,12 +33,17 @@ module.exports = (sequelize, DataTypes) => {
     },
     tin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      unique: true
+    },
+    email: {
+      type: DataTypes.STRING(65),
+      allowNull: true,
       unique: true
     },
     licensed_no: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     certification_number: {
@@ -51,12 +57,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     address: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
+    state_id: DataTypes.INTEGER,
+    lg_id: DataTypes.INTEGER,
   }, {
     underscored: true,
     tableName : 'seedcompany',
     sequelize,
+    timestamps: false,
     modelName: 'SeedCompany',
   });
   return SeedCompany;
