@@ -40,7 +40,11 @@ module.exports={
             layout : 'farmers-dashboard',
             title: 'Update Profile',
             fullname: farmer.firstname + ' ' + farmer.lastname,
+<<<<<<< HEAD
             farmerData: farmer,
+=======
+            farmerData: farmer.dataValues,
+>>>>>>> 8606150740d9b72a9e3ee15fdb8ad08b725a0564
             states : states,
             isVerified,
             deliveryInfo

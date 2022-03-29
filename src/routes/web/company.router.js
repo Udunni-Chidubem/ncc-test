@@ -37,6 +37,13 @@ companyRouter.get('/create-product', async (req, res)=>{
         layout : 'company-dashboard',
         title : 'Create Product',
     })
+});
+companyRouter.get('/product-list', async (req, res)=>{
+
+    res.render('seed_company/product-list', {
+        layout : 'company-dashboard',
+        title : 'Products',
+    })
 })
 
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {

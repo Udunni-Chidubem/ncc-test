@@ -1,6 +1,12 @@
-
-
-
+<div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a href="#" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
+                <a class="breadcrumb-item" href="#">Inventory</a>
+                <span class="breadcrumb-item active">Create Product</span>
+            </nav>
+        </div>
+    </div>
 <div class="container py-5">
     <div class="card card_home">
         <div class="card-body">
@@ -27,10 +33,12 @@
                 </div> --}}
  
 
-                <div class="form-group ">
-                    <label for="Product Description">Available Stock <span class="required-feilds">*</span></label>
-                    
+                
+                <div class="form-group prod-label">
+                    <label for="productDescription"> Product Description <span class="required-feilds">*</span></label>
+                     <textarea name="productDescription" id="productDescription" class="form-control" placeholder="Product Description" rows="5"></textarea>
                 </div> 
+
                <div class="inp_cont" id="inp_cont">
                     <div class="">
                       <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 col_rma">
@@ -132,28 +140,6 @@
                    
                 </div>
 
-                 <div class="row">
-                    <div class="col-5 hr1">
-                    <div class="  border-0 border-top"></div>
-                    </div>
-                    {{!-- <div class="col-3">
-                    <div class="p-3 border bg-light">row</div>
-                    </div>
-                    </div> --}}
-
-                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                    <div class="col">
-                    <div class="p-3 ">
-                         {{!-- <div class="columns mx-auto"  style="width: 160px;">
-                                <button type="button float-end" class="btn  mb-1 shadow-lg">Done</button>
-                              </div> --}}
-                    </div>
-                    </div>
-                    </div>
-                <div class="form-group prod-label">
-                    <label for="productDescription"> Product Description <span class="required-feilds">*</span></label>
-                     <textarea name="productDescription" id="productDescription" class="form-control" placeholder="Product Description" rows="5"></textarea>
-                </div> 
 
                 <hr>
 
@@ -175,8 +161,9 @@
                 
                 
 
-                
-                <button type="submit" class="btn btn-theme move-btn-right">Submit</button>
+                <div class="float-end">
+                   <button type="submit" class="btn btn-theme float-right">Submit</button>                    
+                </div>
 
             </form>
         </div>
