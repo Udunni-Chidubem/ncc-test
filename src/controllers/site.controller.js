@@ -22,14 +22,23 @@ module.exports = {
         res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
-    },
+    }, 
 
+    success_page_test: async (req,res) => {
+        res.render('site/success-bk',{
+            form_banner:'Group.png',
+            title: 'Successful Page',
+            layout : 'success-header',
+            errors : req.flash('errors')
+         })
+    },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
+
     farmer_signup: async (req,res) => {
         // let states =await States.findAll({
         //     attributes : ['id', 'name']
