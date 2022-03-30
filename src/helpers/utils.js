@@ -28,7 +28,7 @@ module.exports = {
         
     },
     getCompanyProfile: async (user) => {
-        const company =await SeedCompany.findOne({
+        const company = await SeedCompany.findOne({
              where : {
                  user_id : user.id
              },
@@ -45,7 +45,6 @@ module.exports = {
         if(verify != null){
             status = false 
         }
-
         return status    
     },
 }

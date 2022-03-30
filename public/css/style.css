@@ -1309,3 +1309,15 @@ input[type="number"] {
   text-transform: capitalize;
   color: #a5a5a5;
 }
+
+
+/* .table_img {
+  width: 100px;
+  height: 65px;
+} */
+
+.table_img img {
+  width: 100px;
+  height: 65px;
+  object-fit: cover;
+}

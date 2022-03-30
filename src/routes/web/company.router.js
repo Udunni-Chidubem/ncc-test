@@ -1,7 +1,7 @@
 const companyRouter=require('express').Router()
 const siteController = require('../../controllers/site.controller');
 const utils = require('../../helpers/utils')
-const { companyValidation, validate } = require('../../helpers/formValidator');
+const { companyValidation, validate, productValidation } = require('../../helpers/formValidator');
 const companyController = require('../../controllers/company.controller');
 
 
@@ -40,32 +40,41 @@ companyRouter.get('/create-product', async (req, res)=>{
         title : 'Create Product',
     })
 });
-companyRouter.post('/create-product', async (req, res)=>{
+companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
 
-    console.log(req.body)
-    return
-let r = await companyController.createProduct(req, res);
-  if(r.id){
-    res.json({statusCode:200, message: "Product Created Successfully", body :r}).status(200).send()
-  }else{
-     res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
-  }
+    let r = await companyController.createProduct(req, res);
+    if(r.id){
+        res.json({statusCode:200, message: "Your Product has been successfully added", body :r}).status(200)
+    }else{
+        res.json({statusCode:500, error :r, message : "something went wrong"}).status(500);
+    }
 });
+
+
 companyRouter.get('/product-list', async (req, res)=>{
+
+    let product = await companyController.listProducts(req, res)
+
+    if(product){
+        console.log(product);
+    }
 
     res.render('seed_company/product-list', {
         layout : 'company-dashboard',
+        product,
         title : 'Products',
     })
 })
 
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
-    let r =await companyController.updateProfile(req, res)
+    let r = await companyController.updateProfile(req, res)
 
     if(r.company) {
-        return res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200).send();
-    } 
-    return res.json({ message: r.errors, error: true, statusCode: 400 }).status(400).send()
+        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
+    }else{
+        res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
+    }
+    
 })
 
 module.exports=companyRouter

@@ -22,10 +22,15 @@ module.exports = (sequelize, DataTypes) => {
     variant: DataTypes.STRING,
     description: DataTypes.TEXT,
     item: DataTypes.STRING,
-    file_name: DataTypes.STRING
+    file_name: DataTypes.STRING,
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     underscored : true,
     sequelize,
+    timestamps: false,
     tableName: 'product',
     modelName: 'Product',
   });

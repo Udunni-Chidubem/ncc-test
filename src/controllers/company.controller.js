@@ -2,6 +2,7 @@ require('dotenv').config()
 const db = require('../models')
 const {User,UserRole, Role, SeedCompany, LGAs, States, Product }  = db
 const utils = require('../helpers/utils');
+const { getPagingData, getPagination } = require('../helpers/pagination');
 
 module.exports = {
     updateProfile: async (req, res) => {
@@ -20,27 +21,23 @@ module.exports = {
             }, {transaction: transaction})
 
             transaction.commit();
-            return {company};
+            return {company}
         }catch(e){
             transaction.rollback();
             return e
         }
     },
-
     createProduct : async (req, res)=>{
         const transaction =await db.rest.transaction();
-        let item = null;
-        item={
+        let item = {
             min : req.body.min_order, 
             pkg: req.body.pkg_size, 
             price:req.body.price, 
             quantity : req.body.quantity
         }
-       // item.push({pkg: req.body.pkg_size})
-        //item.push({price:req.body.price})
-        //item.push({quantity : req.body.quantity})
+
         item = await JSON.stringify(item, null, 2)
-     //   return
+
         const user = await req.user
         try{
             let p = await Product.create({
@@ -49,16 +46,35 @@ module.exports = {
                 variant : req.body.productVariant,
                 item : item,
                 user_id : user.id,
-                file_name : ''
+                file_name : 'rice.jpg'
             }, {transaction : transaction})
             transaction.commit()
             return p
         }catch(e){
-            console.log(e)
             transaction.rollback()
-            console.log(e)
             return e
         }
         
+    },
+    listProducts: async (req, res) => {
+        const user = await req.user
+        let response = null
+
+        const {page, size} = req.query
+        const {limit, offset} = getPagination(page, size)
+
+        const product = await Product.findAndCountAll({ 
+            where: { user_id: user.id},
+            order: [
+                ['id', 'DESC'],
+            ],
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+            raw: true, limit, offset 
+        })
+
+        if(product){
+            response = getPagingData(product, page, limit)
+        }
+        return response
     }
 }
