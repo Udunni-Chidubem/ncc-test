@@ -2,7 +2,7 @@
 <div class="container py-5">
     <div class="card card_home">
         <div class="card-body">
-            <form method="POST" action="" id="form-inp">
+            <form method="POST" action="" id="form-product">
                 <div class="form-row"  >
                     <div class="form-group col-md-6">
                         <label for="productName">Product Name <span class="required-feilds">*</span></label>
@@ -17,21 +17,21 @@
                     <label for="productDescription"> Product Description <span class="required-feilds">*</span></label>
                      <textarea name="productDescription" name="productDescription" id="productDescription" class="form-control" placeholder="Product Description" rows="5"></textarea>
                 </div>
-                 <div class=" row py-4">
-                <div class="col-lg-6 mx-auto">
-                    <!-- Upload image input-->
-                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                        <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
-                        <div class="input-group-append">
-                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                {{!-- <div class=" row py-4">
+                    <div class="col-lg-6 mx-auto">
+                        <!-- Upload image input-->
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                            <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                            <div class="input-group-append">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    <div class="image-area col-lg-6">
-                    <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
-                </div>
-            </div> 
+                        <div class="image-area col-lg-6">
+                        <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                    </div>
+                </div>  --}}
                 <div class="inp_cont" id="inp_cont">
                     <div class="">
                         <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 col_rma m-0">
@@ -116,6 +116,22 @@
                 </div>                     
             </div>
             <hr>
+            <div class=" row py-4">
+                <div class="col-lg-6 mx-auto">
+                    <!-- Upload image input-->
+                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                        <input id="upload" name="upload" onchange="filesChange(event.target.files); readURL(this)" type="file" class="form-control border-0">
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                        <div class="input-group-append">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        </div>
+                    </div>
+                </div>
+                    <div class="image-area col-lg-6">
+                    <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                </div>
+            </div>
+            <div class="float-end">
             <div class="float-end m-5">
                 <button type="submit" class="btn btn-theme float-right">Submit</button>                    
             </div>

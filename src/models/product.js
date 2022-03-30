@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.belongsTo(models.SeedCompany, {
+      Product.belongsTo(models.User, {
         foreignKey : 'user_id'
       })
     }
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     item: DataTypes.STRING,
     file_name: DataTypes.STRING
   }, {
+    underscored : true,
     sequelize,
     tableName: 'product',
     modelName: 'Product',
