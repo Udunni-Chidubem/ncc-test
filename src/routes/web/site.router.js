@@ -4,6 +4,7 @@ const helpers = require('../../helpers/auth.guard')
 const passpportInitializer = require('../../helpers/passport-config')
 passpportInitializer(passport)
 const db = require('../../models/index')
+
 const { 
     signupValidation, 
     signUpvalidate, 
@@ -11,7 +12,7 @@ const {
     registerSeedCompanyValidate,
     seedTraderValidation,
     seedTraderValidate
- }  = require('../../helpers/formValidator')
+}  = require('../../helpers/formValidator')
 
 const siteRouter = require('express').Router();
 
@@ -24,8 +25,7 @@ siteRouter.get('/test', siteController.success_page_test)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
-       // res.send(r)
-      // console.log(r.errors)
+        
         if(r.user){
             res.render('site/success-bk',{
                 form_banner:'Group.png',
