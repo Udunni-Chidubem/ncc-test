@@ -43,17 +43,18 @@ module.exports = {
      //   return
         const user = await req.user
         try{
-            let p = Product.create({
+            let p = await Product.create({
                 product_name : req.body.productName,
                 description : req.body.productDescription,
                 variant : req.body.productVariant,
-                item : '',
+                item : item,
                 user_id : user.id,
                 file_name : ''
             }, {transaction : transaction})
             transaction.commit()
             return p
         }catch(e){
+            console.log(e)
             transaction.rollback()
             console.log(e)
             return e

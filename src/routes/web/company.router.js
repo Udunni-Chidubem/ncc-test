@@ -42,8 +42,11 @@ companyRouter.get('/create-product', async (req, res)=>{
 });
 companyRouter.post('/create-product', async (req, res)=>{
 let r = await companyController.createProduct(req, res);
-  console.log(req.files)
-  res.send(req.body)
+  if(r.id){
+    res.json({statusCode:200, message: "product created successfully", body :r}).status(200).send()
+  }else{
+     res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
+  }
 });
 companyRouter.get('/product-list', async (req, res)=>{
 

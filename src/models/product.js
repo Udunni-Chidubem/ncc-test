@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     item: DataTypes.STRING,
     file_name: DataTypes.STRING
   }, {
+    underscored : true,
     sequelize,
     tableName: 'product',
     modelName: 'Product',
