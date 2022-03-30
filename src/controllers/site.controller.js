@@ -4,9 +4,14 @@ const { sequelize } = require('../models');
 const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
+const directoryPath = './src/data/'
+const path = require('path')
+const fs = require('fs')
+
+
 module.exports = {
     home: async (req, res) => {
-        res.render('home', {
+        res.render('site/home', {
             title: 'Welcome'
         });
     },
@@ -14,63 +19,56 @@ module.exports = {
        res.send("even after transaction")
     },
     presignup: async (req,res) => {
-        res.render('pre-signup', {
+        res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
     },
 
     aboutus: async (req,res) => {
-        res.render('about-us', {
+        res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
-
     farmer_signup: async (req,res) => {
-        let states =await States.findAll({
-            attributes : ['id', 'name']
-        });
-        res.render('farmer_signup',{
+
+        res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
-            states : states,
+            // states : states,
             title : 'Farmer\'s Registration',
             errors : req.flash('errors')
         });
     },
-
     dashboard: async (req,res) => {
-        // console.log(req.user)
         res.render('dashboard',{
             title: 'Dashboard',
             layout : 'dashboard'
         });
     },
-
     login: async (req,res) => {
-        res.render('login',{
+        res.render('site/login',{
             form_banner:'Group.png',
             title: 'Login',
             layout : 'form',
             errors : req.flash('errors')
         });
     },
-
     seedcompanysignup: async (req,res) => {
-        res.render('seed_company_signup',{
-                form_banner:'seeds-02 1.png',
-                layout : 'form',
-                errors : req.flash('errors')
+        res.render('site/seed_company_signup',{
+            form_banner:'seeds-02 1.png',
+            title : 'Seed Company\'s Registration',
+            sub: ' Investment in agriculture yields profit',
+            layout : 'form',
+            errors : req.flash('errors')
         });
     },
     seedtradersignup: async (req,res) => {
-        let states =await States.findAll({
-            attributes : ['id', 'name']
-        });
-        res.render('seed_trader_signup',{
+        res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
+            title : 'Seed Trader\'s Registration',
+            sub: 'Become an entrepreneur in seed trading',
             layout : 'form',
-            states : states,
             errors : req.flash('errors')
         });
     },
@@ -96,13 +94,8 @@ module.exports = {
             const farmer = await Farmer.create({
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
-                gender:rq.body.gender,
-                product_farmed:rq.body.farm_produce.toString(),
                 phone_no:rq.body.phone_number,
-                account_no:rq.body.account_no,
-                user_id:user.id,
-                state_id:rq.body.state,
-                lg_id : rq.body.lga
+                user_id:user.id
             }, {transaction : transaction} );
             await transaction.commit();
             return {user, farmer};
@@ -115,7 +108,6 @@ module.exports = {
         let user = new User();
         return user;
     },
-
     saveseedcompany: async (req, res)=>{
         const transaction = await db.rest.transaction();
          try{  
@@ -138,18 +130,16 @@ module.exports = {
             const seed_company = await SeedCompany.create({
                 name_of_company:req.body.company_name,
                 phone_no:req.body.phone,
-                tin:req.body.tin,
-                address:req.body.address,
                 user_id:user.id
             },{transaction : transaction});
             transaction.commit();
+
             return {user, seed_company};
         }catch(e){
-            transaction.rollback();
+            transaction.rollback();          
             return e
         }
     },
-
     saveseedtrader : async (req, res)=>{
         const transaction = await db.rest.transaction();
         try{  
@@ -160,25 +150,27 @@ module.exports = {
                 status : false,
                 token : ''
             }, {transaction : transaction} )
-             let r = await Role.findOne(
+
+            let r = await Role.findOne(
                 {
                     where : { role_name : 'seed_trader' }
                 }
             );
+
             const user_role=await UserRole.create({
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
+
             let unique = uniqid();
             let seed_trader =await  SeedTrader.create({
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
-                state_id:req.body.state,
-                lg_id : req.body.lga,
-                unique_no:unique,
+                unique_no: unique,
                 user_id : user.id
             }, {transaction :transaction});
+            
             transaction.commit();
             return {user, seed_trader};
         }catch(e){
@@ -187,24 +179,68 @@ module.exports = {
         }
 
     },
-
     states : async (req, res)=>{
         let states =await States.findAll({
-            attributes : ['id', 'name']
+            attributes : ['id', 'name'],
+            raw : true
         });
         res.send(states)
     }, 
 
+    getStates : async ()=>{
+        let states =await States.findAll({
+            attributes : ['id', 'name'],
+            raw : true
+        });
+        return states
+    },
+
     lgas : async (req, res)=>{
 
     },
-
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
             attributes : ['id', 'name'],
-            where : {state_id : req.params.state_id}
+            where : {state_id : req.params.state_id},
+            raw : true
         });
         res.send(lgas)
+    },
+    getDropList:  (req, res) => {
+        const data = require('../data/dropDownList.json')
+
+        fs.stat(directoryPath +'dropDownList.json', (err, stats) => {
+            if (err) {
+                return res.json({statusCode: 404, error: true, data: err})
+            }
+        
+            const genders = []
+            const farmProduce = []
+            const levelEdu = []
+
+            let gender = data.gender
+            let farm_Produce = data.farmProduce
+            let level = data.levelEducation
+
+            gender.forEach((value, index, self) => {
+                genders.push(value)
+            })
+
+            farm_Produce.forEach((value, index, self) => {
+                farmProduce.push(value)
+            })
+
+            level.forEach((value, index, self) => {
+                levelEdu.push(value)
+            })
+
+            res.json({statusCode: 200, error: false,  data: {
+                gender: genders, 
+                farm_produce: farmProduce,
+                eduLevel: levelEdu
+            } })
+
+        })
     }
 
 

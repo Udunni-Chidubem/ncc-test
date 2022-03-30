@@ -1,11 +1,15 @@
 const tradersRouter=require('express').Router()
+const utils = require('../../helpers/utils')
 
 tradersRouter.get('/dashboard', async (req, res)=>{
-
-    //let farmer = await farmerController.dashboard(req, res);
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'trader')
+    
     res.render('seed_trader/dashboard', {
-        layout : 'traders-dashboard'
-       // farmer : farmer
+        layout : 'traders-dashboard',
+        title : 'Dashboard',
+        isVerified
     })
 })
+
 module.exports=tradersRouter

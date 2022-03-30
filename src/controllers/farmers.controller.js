@@ -1,5 +1,7 @@
 const db = require('../models');
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation }  = db
+const utils = require('../helpers/utils');
+
 module.exports={
     dashboard : async (req, res)=>{
         let farmer =await Farmer.findOne({
@@ -18,6 +20,142 @@ module.exports={
             }
         });
         return farmer;
+    },
+    updateProfile: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        let states = await States.findAll({
+            attributes : ['id', 'name'],
+            raw: true
+        });
+
+        let deliveryInfo = await DeliveryInformation.findOne({ 
+            where: {user_id : user.id}, 
+            attributes: ['state_id', 'lg_id', 'address'], raw: true
+        })
+
+        res.render('farmers/update-profile', {
+            layout : 'farmers-dashboard',
+            title: 'Update Profile',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            states : states,
+            isVerified,
+            deliveryInfo
+        })
+    },
+    editProfileData: async (req, res) => {
+        const transaction = await db.rest.transaction();
+        const user = await req.user
+        let deliveryInformation
+        try{
+
+            await User.update({status: true}, {where: {id: user.id} })
+
+            const { firstname, lastname, date_of_birth, gender, level_of_education, state_id, lg_id, nin, bvn, farm_produce, state_of_delivery, lga_of_delivery, address } = req.body
+            const data = {
+                firstname, 
+                lastname, 
+                date_of_birth, 
+                gender, 
+                level_of_education, 
+                state_id, 
+                lg_id, 
+                nin, 
+                bvn,
+                product_farmed: farm_produce.toString()
+            }
+
+            const farmer = await Farmer.update( data , {
+                where: { user_id: user.id }
+            }, {transaction: transaction})
+
+            
+            const existingDelivery = await DeliveryInformation.findOne({ where: { user_id: user.id}, 
+                attributes: ['user_id', 'state_id', 'lg_id', 'address'], raw: true })
+
+            if(!existingDelivery){
+                const deliveryInformation = await DeliveryInformation.create({
+                    user_id : user.id,
+                    state_id:state_of_delivery,
+                    lg_id: lga_of_delivery,
+                    address
+                }, { transaction: transaction})
+            }else{
+                //Update existing information
+                const deliveryInformation = await Farmer.update( {
+                    state_id: state_of_delivery,
+                    lg_id: lga_of_delivery,
+                    address: address
+                } , {
+                    where: { user_id: user.id }
+                }, {transaction: transaction})
+            }
+            transaction.commit();
+            return {farmer, deliveryInformation};
+        }catch(e){
+            transaction.rollback();
+            return e
+        }
+    },
+    marketPlace: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+
+
+        res.render('farmers/market_place', {
+            layout : 'farmers-dashboard',
+            title: 'Market Place',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified
+        })
+    },
+
+    product: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
+    },
+    viewProduct: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/view-product', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
+    },
+    paymentPage: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        res.render('farmers/payment_page_preview', {
+            layout : 'farmers-dashboard',
+            title: 'Product',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer.dataValues,
+            isVerified
+        })
     }
 
 }

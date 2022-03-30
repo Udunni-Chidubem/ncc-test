@@ -1,32 +1,17 @@
-  {{> dashboard_header}}
+   {{> dashboard_header}}
   <body class="body">
-      
-      
-  {{!-- <header>
-    <nav class="containers">
-      <div class=" logo-details">
-        <img src="./images/Group 39.png" alt="nigsims-logo">
-      </div>
-      <div class="nav-section">
-        <div class="menu-bar" >
-          <i class='bx bx-menu' ></i>
-        </div>
-        <div class="d-flex justify-content-end" style="">
-          
-        </div>
-      </div>
-    </nav>
-  </header> --}}
-
+  
+{{#if isVerified}}
  <header>
-    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top  navbar-dark  ">
+    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_com_nav navbar-dark  ">
       <div class="container-fluid">
-        <a class="navbar-brand navbar-heading " href="#">{{ title }}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
+        <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <span class="navbar-toggler sidebar_arrow"> <i class="bi bi-arrow-left-circle-fill"></i></span>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav ms-auto mls-auto mb-2 mb-lg-0">
              
             <li class="nav-item">
               <a class="nav-link" href="#">Adamu Garba</a>
@@ -36,6 +21,9 @@
                 <!-- <span class="notrifications"></span> -->
               </a>
             </li>
+            <li class="nav-item">
+               
+            </li>
              
              
           </ul>
@@ -44,17 +32,13 @@
       </div>
     </nav>
    </header>
+  {{/if}}
   
 
-  <aside class="sidebar close ">
+  <aside class="sidebar close seed_com_side">
       
     <div>
-        <div class="sidebar-menu-bar" >
-          <i class='bx bx-menu side-bx-menu' ></i>
-        </div>
-        <div class="mobile-logo-details">
-        <img src="./images/Group 39.png" alt="nigsims-logo">
-      </div>
+     {{> sidebar_image}}
        
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
@@ -65,49 +49,50 @@
           </a>
   
         </li>
-      
+       
+        <li>
+          <a href="{{#if isVerified }} # {{else}} # {{/if}}">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Profile</span>
+              {{#if isVerified }}
+                <span class="p_red">(Unverified)</span>
+              {{/if}}
+            
+          </a>
+  
+        </li>
+
+        {{#unless isVerified}}
+
         <li>
           <a href="#">
             <i class='bx bx-user'></i>
-            <span class="link_name">Profile</span>
+            <span class="link_name">Order Management</span>
           </a>
-  
         </li>
-        <li>
+
+         <li>
           <a href="#">
-            <i class='bx bx-cart-add'></i>
-            <span class="link_name">Order</span>
+            <i class='bx bx-user'></i>
+            <span class="link_name">knowledge Base</span>
           </a>
-  
         </li>
-        <li>
+
+         <li>
           <a href="#">
-            <i class='bx bx-purchase-tag'></i>
-            <span class="link_name">Transaction</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-library'></i>
-            <span class="link_name">Knowledge Base</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-leaf'></i>
-            <span class="link_name">Farm Input</span>
-          </a>
-  
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-help-circle' ></i>
+            <i class='bx bx-user'></i>
             <span class="link_name">Help</span>
           </a>
-    
         </li>
+
+        <li id="settings">
+          <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="link_name" >Settings</span>
+          </a>
+  
+        </li>
+        {{/unless}}
         <li>
           <form method="post" action="/logout?_method=DELETE">
             <button type="submit">
@@ -116,13 +101,7 @@
             </button>
           </form>
         </li>
-        <li id="settings">
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="link_name" >Settings</span>
-          </a>
-   
-        </li>
+        
   
       </ul>
     </div>
@@ -130,12 +109,23 @@
 
   
   <div class="home">
+
+      <div class="page-header">
+          <div class="header-sub-title">
+              <nav class="breadcrumb breadcrumb-dash">
+                  <a href="/seed-traded/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
+                  <a class="breadcrumb-item " href="#">{{ title }}</a>
+                  <span class="breadcrumb-item active" >{{ sub_title }}</span>
+              </nav>
+          </div>
+      </div>
+      
       {{{body}}}
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
- <script src="js/script.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ <script src="../js/script.js"></script>
+ <script src="../js/payment_page_preview.js"></script>
 
    </body>
 </html>

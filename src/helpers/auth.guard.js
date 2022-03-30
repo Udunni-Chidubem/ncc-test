@@ -1,6 +1,6 @@
 module.exports = {
     //this will check if you are authenticated will be called on all protected routes
-    auth : (req, res, next)=>{
+    auth : (req, res, next)=> {
     if(req.isAuthenticated())
         return next()
     else
@@ -19,15 +19,15 @@ module.exports = {
 
     //this will help handle redirects
     redirect : (req, res, role)=>{
-           // console.log(req.user)
+           req.flash('user', req.user)
            if( role == 'farmer')
-                res.redirect('farmer/dashboard')
+                return res.redirect('farmer/dashboard')
             
             if(role == 'seed_trader')
-                res.redirect('seed-trader/dashboard')
+                return res.redirect('seed-trader/dashboard')
 
             if(role == 'seed_company')
-                res.redirect('seed-company/dashboard')
+                return res.redirect('seed-company/dashboard')
     },
     //this will be called on all farmers routes to see if the user role if farmer
     farmerPermission: (req, res, next)=>{

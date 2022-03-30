@@ -1,0 +1,145 @@
+  {{> dashboard_header}}
+  <body class="body">
+    <header>
+    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top  navbar-dark  ">
+      <div class="container-fluid">
+        <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
+        <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          
+        </button>
+
+       
+            <span class="navbar-toggler sidebar_arrow"> <i class="bi bi-arrow-left-circle-fill"></i></span>
+          
+      
+
+        
+         {{!-- <div class="menu-bar" >
+          
+          
+        </div> --}}
+        
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mls-auto mb-2 mb-lg-0">
+             
+            <li class="nav-item">
+              <a class="nav-link" href="#">Adamu Garba</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
+                <!-- <span class="notrifications"></span> -->
+              </a>
+            </li>
+            <li class="nav-item">
+               
+            </li>
+             
+             
+          </ul>
+        
+        </div>
+      </div>
+    </nav>
+   </header>
+   
+  
+
+  <aside class="sidebar close">
+      
+    <div>
+        <div class="sidebar-menu-bar" >
+          <i class='bx bx-menu side-bx-menu' ></i>
+        </div>
+        <div class="mobile-logo-details">
+        <img src="../images/Group 39.png" alt="nigsims-logo">
+      </div>
+       
+      <ul class="nav-links">
+        {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
+        <li>
+          <a href="#">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="link_name">Dashboard</span>
+          </a>
+  
+        </li>
+      
+        <li>
+          <a href="#">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Profile</span>
+            <span class="p_red">(Unverified)</span>
+          </a>
+  
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-cart-add'></i>
+            <span class="link_name">Order</span>
+          </a>
+  
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-purchase-tag'></i>
+            <span class="link_name">Transaction</span>
+          </a>
+  
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-library'></i>
+            <span class="link_name">Knowledge Base</span>
+          </a>
+  
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-leaf'></i>
+            <span class="link_name">Farm Input</span>
+          </a>
+  
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-help-circle' ></i>
+            <span class="link_name">Help</span>
+          </a>
+    
+        </li>
+        <li>
+          <form method="post" action="/logout?_method=DELETE">
+            <button type="submit">
+              <i class='bx bx-log-out'></i>
+              <span class="link_name">Log Out</span>
+            </button>
+          </form>
+        </li>
+        <li id="settings">
+          <a href="#">
+            <i class='bx bx-cog' ></i>
+            <span class="link_name" >Settings</span>
+          </a>
+   
+        </li>
+  
+      </ul>
+    </div>
+  </aside>
+
+  
+  <div class="home">
+      {{>market_place}}
+      {{{body}}}
+  </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+ <script src="../../js/script.js"></script>
+ <script src="../../js/payment_page_preview.js"></script>
+ 
+
+   </body>
+</html>

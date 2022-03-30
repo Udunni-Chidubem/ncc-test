@@ -11,7 +11,9 @@ function initialize(passport){
             }],
             where: { 
                 id: id 
-            } 
+            },
+            attributes: ['id', 'username', 'status', 'token', 'created_at', 'updated_at']
+
         })
     }
     async function authenticateUser(username, password, done){
@@ -24,7 +26,7 @@ function initialize(passport){
                     }],  
                     where: { 
                         username: username 
-                    } 
+                    },
                 }
             );
             // console.log(user)
@@ -45,5 +47,4 @@ function initialize(passport){
         return done(null, getUserById(id))
     })
 }
-
 module.exports=initialize

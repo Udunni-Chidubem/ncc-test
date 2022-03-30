@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  
   Farmer.init({
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
@@ -36,10 +35,10 @@ module.exports = (sequelize, DataTypes) => {
     account_name: DataTypes.STRING,
     account_no : DataTypes.STRING,
     nin: DataTypes.STRING,
-    age: DataTypes.INTEGER,
+    date_of_birth: DataTypes.DATE,
     gender: DataTypes.STRING,
-    state_id: DataTypes.STRING,
-    lg_id: DataTypes.STRING,
+    state_id: DataTypes.INTEGER,
+    lg_id: DataTypes.INTEGER,
     level_of_education: DataTypes.STRING,
     user_id: {
       type :DataTypes.INTEGER,

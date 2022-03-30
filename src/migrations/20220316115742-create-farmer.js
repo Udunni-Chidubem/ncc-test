@@ -58,7 +58,7 @@ module.exports = {
       },
       gender: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       level_of_education: {
         type: Sequelize.STRING,
@@ -101,6 +101,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('fFarmer');
+    await queryInterface.dropTable('farmer');
   }
 };

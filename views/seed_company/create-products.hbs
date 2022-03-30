@@ -1,0 +1,140 @@
+
+<div class="container py-5">
+    <div class="card card_home">
+        <div class="card-body">
+            <form method="POST" action="" id="form-product">
+                <div class="form-row"  >
+                    <div class="form-group col-md-6">
+                        <label for="productName">Product Name <span class="required-feilds">*</span></label>
+                        <input type="text" class="form-control" name="productName" id="productName" placeholder="Product Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="productVarient">Product Variant <span class="required-feilds">*</span></label>
+                        <input type="text" class="form-control" name="productVariant" id="productVariant" placeholder="Product Variant" required>
+                    </div>
+                </div>
+                <div class="form-group prod-label">
+                    <label for="productDescription"> Product Description <span class="required-feilds">*</span></label>
+                     <textarea name="productDescription" name="productDescription" id="productDescription" class="form-control" placeholder="Product Description" rows="5"></textarea>
+                </div>
+                {{!-- <div class=" row py-4">
+                    <div class="col-lg-6 mx-auto">
+                        <!-- Upload image input-->
+                        <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                            <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                            <div class="input-group-append">
+                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="image-area col-lg-6">
+                        <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                    </div>
+                </div>  --}}
+                <div class="inp_cont" id="inp_cont">
+                    <div class="">
+                        <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 col_rma m-0">
+                            <div class="col col_sma ">
+                                <div class="   ">
+                                    <label for="firstname" class="input_form input_form_head">Package Size <i>(kg)</i>  </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label for="firstname" class="input_form input_form_head">Quantity </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label for="firstname" class="input_form input_form_head">Min Order </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label for="firstname" class="input_form input_form_head">Price </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                            </div>
+                        </div>
+                        <div class="row   row-cols-2 row-cols-lg-6 g-2 g-lg-2 mb-2 col_rma"  >
+                            <div class="col col_sma">  
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="pkg_size">
+                                </div>
+                            </div>
+                            <div class="col col_sma">   
+                                <div class="py-3 "> 
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="quantity">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="min_order">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="price">
+                                </div>
+                            </div>
+                            <div class="col col_sma">    
+                                <div class="p-3  ">
+                                    <span class="add " id="_add"><i class=" fa fa-solid fa-plus"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-2 mb-2 col_rma hidden input_number" id="input_number">
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="pkg_size">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="quantity">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  name="min_order">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="py-3 ">
+                                    <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"  name="price">
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class="p-3 ">
+                                    <span id="_trash"><i class="fa fa-solid fa-trash-can _trash p_red"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>                     
+            </div>
+            <hr>
+            <div class=" row py-4">
+                <div class="col-lg-6 mx-auto">
+                    <!-- Upload image input-->
+                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                        <input id="upload" name="upload" onchange="filesChange(event.target.files); readURL(this)" type="file" class="form-control border-0">
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                        <div class="input-group-append">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        </div>
+                    </div>
+                </div>
+                    <div class="image-area col-lg-6">
+                    <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                </div>
+            </div>
+            <div class="float-end">
+            <div class="float-end m-5">
+                <button type="submit" class="btn btn-theme float-right">Submit</button>                    
+            </div>
+        </form>
+    </div>
+</div>
