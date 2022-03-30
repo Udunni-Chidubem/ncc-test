@@ -35,10 +35,18 @@ companyRouter.get('/update-profile', async (req, res)=>{
 });
 companyRouter.get('/create-product', async (req, res)=>{
 
-    res.render('seed_company/create-product', {
+    res.render('seed_company/create-products', {
         layout : 'company-dashboard',
         title : 'Create Product',
     })
+});
+companyRouter.post('/create-product', async (req, res)=>{
+let r = await companyController.createProduct(req, res);
+  if(r.id){
+    res.json({statusCode:200, message: "product created successfully", body :r}).status(200).send()
+  }else{
+     res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
+  }
 });
 companyRouter.get('/product-list', async (req, res)=>{
 

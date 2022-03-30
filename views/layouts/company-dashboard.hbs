@@ -146,8 +146,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script> --}}
 
    <script>
+     var files = null;
      $(document).ready(function(){
         $('#_add').on('click', function(){
           let len = $('.input_number').length
@@ -186,7 +188,39 @@
                 console.log(e)
             })
         })
+        $('#form-product').on('submit', function(){
+          event.preventDefault();
+          let form = new FormData()
+          let data = $('#form-product').serializeArray()
+          form.append('image', files);
+          data.forEach(e=>{
+            if(e.value != null && e.value != ""){
+              form.append(e.name, e.value)
+            }
+          })
+          let url = window.location.origin+"/seed-company/create-product";
+          fetch(url, {
+            headers : {
+              'Accept' : 'application/json'
+            },
+            method : 'post',
+            mode : "cors",
+            body : form
+          }).then(r=>r.json())
+          .then(r=>console.log(r))
+          .catch(e=>{
+            console.log(e)
+          });
+          
+            //axios.post(url, form).then(r=>{
+            // console.log(r)
+           //});
+        })
      })
+
+    function filesChange(file){
+        files = file;
+    }
 </script>
 </body>
 </html>

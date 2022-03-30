@@ -5,6 +5,7 @@ const server = require('http').createServer(app)
 const handlebars = require('express-handlebars')
 const passport = require('passport')
 const path = require('path')
+const fileUpload = require('express-fileupload');
 const methodOveride = require('method-override')
 const session = require('express-session');
 const flash = require('express-flash')
@@ -42,6 +43,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use(methodOveride('_method'))
+app.use(fileUpload({
+    createParentPath: true
+}));
 const mainRoute = require('./src/routes/main.route')
 
 app.use('/', mainRoute)
