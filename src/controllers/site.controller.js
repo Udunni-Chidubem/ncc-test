@@ -134,14 +134,9 @@ module.exports = {
             },{transaction : transaction});
             transaction.commit();
 
-            console.log(12222)
-            console.log(user);
-            console.log(seed_company);
             return {user, seed_company};
         }catch(e){
-            console.log(e)
-            transaction.rollback();
-            
+            transaction.rollback();          
             return e
         }
     },

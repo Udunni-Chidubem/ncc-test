@@ -61,6 +61,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    }
   }, {
     underscored: true,
     tableName : 'seedcompany',
