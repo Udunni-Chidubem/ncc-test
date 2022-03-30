@@ -54,14 +54,16 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
 companyRouter.get('/product-list', async (req, res)=>{
 
     let product = await companyController.listProducts(req, res)
-
+    let paginate
     if(product){
-        console.log(product);
+        paginate = { page: req.query.page || 1, pageCount: product.totalPages }
+        // console.log(paginate);
     }
 
     res.render('seed_company/product-list', {
         layout : 'company-dashboard',
         product,
+        pagination: paginate,
         title : 'Products',
     })
 })
