@@ -1259,8 +1259,8 @@ input[type="number"] {
 }
 
 .create_p {
-  background: linear-gradient(180deg, #049648 0%, #6bd975 46.35%, #49a956 100%);
-  box-shadow: 0px 2px 8px rgba(71, 118, 96, 0.4);
+  background-color: #049648 !important;
+  box-shadow: 1px 4px 7px rgba(71, 118, 96, 0.4) !important;
   color: #fff !important;
   font-weight: 600 !important;
   font-size: 12px !important;
@@ -1268,14 +1268,8 @@ input[type="number"] {
 }
 
 .action_btn {
-  /* background-color: #109cf1 !important; */
-  background: linear-gradient(
-    180deg,
-    #049648 0%,
-    #6bd975 46.35%,
-    #49a956 100%
-  ) !important;
-  box-shadow: 0px 2px 8px rgba(71, 118, 96, 0.4) !important;
+  background-color: #049648 !important;
+  box-shadow: 1px 4px 7px rgba(71, 118, 96, 0.4) !important;
   color: white !important;
   position: static;
   height: 38px !important;
