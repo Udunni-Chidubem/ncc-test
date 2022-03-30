@@ -59,6 +59,7 @@ module.exports = {
     seedcompanysignup: async (req,res) => {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
+            sub: ' Investment in agriculture yields profit',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -66,6 +67,7 @@ module.exports = {
     seedtradersignup: async (req,res) => {
         res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
+            sub: 'Become an entrepreneur in seed trading',
             layout : 'form',
             errors : req.flash('errors')
         });
