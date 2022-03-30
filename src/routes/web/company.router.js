@@ -10,10 +10,12 @@ companyRouter.get('/dashboard', async (req, res)=>{
     let company = await utils.getCompanyProfile(user)
 
     let isVerified = await utils.isVerified(user)
+
     res.render('seed_company/dashboard', {
         layout : 'company-dashboard',
         title : 'Dashboard',
         company: company,
+        page_title: '',
         isVerified
     })
 });
@@ -36,6 +38,13 @@ companyRouter.get('/create-product', async (req, res)=>{
     res.render('seed_company/create-product', {
         layout : 'company-dashboard',
         title : 'Create Product',
+    })
+});
+companyRouter.get('/product-list', async (req, res)=>{
+
+    res.render('seed_company/product-list', {
+        layout : 'company-dashboard',
+        title : 'Products',
     })
 })
 

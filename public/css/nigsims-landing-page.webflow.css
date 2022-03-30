@@ -4410,15 +4410,9 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 
 .container-form {
-<<<<<<< HEAD
-  min-height: 100vh;
-  padding-top: 5rem;
-  padding-bottom: 2rem;
-=======
   min-height: 50vh;
   padding-top: 5rem;
   padding-bottom: 5rem;
->>>>>>> 3eeeda4f16d0b4e8dd7a4227cc867a7cf9104d28
 }
 
 .primary-button:hover {

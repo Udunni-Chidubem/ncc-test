@@ -94,7 +94,7 @@ const signUpvalidate = (req, res, next) => {
         phone_number: req.body.phone_number
     }
 
-    res.render('farmer_signup',{
+    res.render('site/farmer_signup',{
         form_banner:'Group.png',
         layout : 'form',
         formData,
@@ -143,7 +143,7 @@ const registerSeedCompanyValidate = (req, res, next) => {
         phone: req.body.phone
     }
 
-    res.render('seed_company_signup',{
+    res.render('site/seed_company_signup',{
         form_banner:'seeds-02 1.png',
         layout : 'form',
         title: 'Seed\'s Company Registration',
@@ -195,7 +195,7 @@ const seedTraderValidate = (req, res, next) => {
         phone: req.body.phone
     }
 
-    res.render('seed_trader_signup',{
+    res.render('site/seed_trader_signup',{
         form_banner:'tradersignup.png',
         layout : 'form',
         title: 'Seed\'s Trader Registration',

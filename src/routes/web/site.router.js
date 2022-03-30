@@ -26,7 +26,7 @@ siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)
        // res.send(r)
       // console.log(r.errors)
         if(r.user){
-            res.render('success',{
+            res.render('site/success',{
                 form_banner:'Group.png',
                 title: 'Successful Page',
                 layout : 'form',
@@ -56,7 +56,7 @@ siteRouter.post('/seed-company-signup', registerSeedCompanyValidation(), registe
     let y = siteController.saveseedcompany(req, res);
     y.then(r=>{
          if(r.user){
-            res.render('success',{
+            res.render('site/success',{
                 form_banner:'Group.png',
                 title: 'Notification',
                 layout : 'form'
@@ -74,7 +74,7 @@ siteRouter.post('/seed-trader-signup', seedTraderValidation(), seedTraderValidat
      let y = siteController.saveseedtrader(req, res);
      y.then(r=>{
          if(r.user){
-            res.render('success',{
+            res.render('site/success',{
                 form_banner:'Group.png',
                 layout : 'form',
                 title: 'Notification'
