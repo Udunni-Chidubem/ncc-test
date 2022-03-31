@@ -126,7 +126,6 @@ module.exports={
 
         return { farmer, isVerified, response }
     },
-
     product: async (req, res) => {
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)
@@ -160,12 +159,11 @@ module.exports={
         const farmer = await utils.getFarmerProfile(user.dataValues)
         const isVerified = await utils.isVerified(user.dataValues)
 
-
-        res.render('farmers/payment_page_preview', {
+        res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
-            title: 'Product',
+            title: 'Order Preview',
             fullname: farmer.firstname + ' ' + farmer.lastname,
-            farmerData: farmer.dataValues,
+            farmerData: farmer,
             isVerified
         })
     }
