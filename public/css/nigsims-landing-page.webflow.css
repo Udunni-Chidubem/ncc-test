@@ -4481,6 +4481,10 @@ select.form-control-lg:not([size]):not([multiple]) {
 padding-top: 5px;
 padding-bottom: 5px;
 }
+.w-input {
+  background-color: #cfe1d2;
+  border-radius: 4px;
+}
 @media only screen and (max-width: 600px){
   .contact-form-grid {
     display: block;
