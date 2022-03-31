@@ -31,7 +31,7 @@
                         <p>Variant: White Maize</p>
                         <p>Seller: Seed Comapny Name</p>
                         <p>Location: Gombe</p>
-                        <fieldset class="rating ratings"> <input type="radio" id="star5" name="rating" value="5" />
+                        {{!-- <fieldset class="rating ratings"> <input type="radio" id="star5" name="rating" value="5" />
                             <label class="full" for="star5" title="Awesome - 5 stars"></label> 
                             <input type="radio" id="star4half" name="rating" value="4.5" />
                                 <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
@@ -52,19 +52,30 @@
                             <input type="radio" id="starhalf" name="rating" value="0.5" />
                                 <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> 
                             <input type="radio" class="reset-option" name="rating" value="reset" /> 
-                        </fieldset>
+                        </fieldset> --}}
                       </div>
                     </div>
                     <div class="col c_inf2">
                       <div class="px-3 px_3">
-                        <p>Price per KG</p>
+                        <p>Price</p>
                         <h1>N 3,999</h1>
-                        <p>Select Qty (kg)</p>
+                        {{!-- <p>Select Qty (kg)</p>
                         <div class="form form2">
-                        <div class="value-button v_bt" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                        <input type="number" id="number" value="0" />
-                        <div class="value-button v_bt" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                      </div>
+                          <div class="value-button v_bt" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                          <input type="number" id="number" value="0" />
+                          <div class="value-button v_bt" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                      </div> --}}
+                        {{!-- <p class="p_sm">Select Size</p>
+                        <div class="dropdown">
+                          <button class="btn   dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            1kg
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">1kg</a></li>
+                            <li><a class="dropdown-item" href="#">2kg</a></li>
+                            <li><a class="dropdown-item" href="#">3kg</a></li>
+                          </ul>
+                        </div> --}}
                       </div>
                     </div>
                     <div class="col-12 r_mt">
@@ -115,7 +126,7 @@
                         <p>Variant: White Maize</p>
                         <p>Seller: Seed Comapny Name</p>
                         <p>Location: Gombe</p>
-                          <fieldset class="rating ratings"> <input type="radio" id="star5" name="rating" value="5" />
+                          {{!-- <fieldset class="rating ratings"> <input type="radio" id="star5" name="rating" value="5" />
                             <label class="full" for="star5" title="Awesome - 5 stars"></label> 
                             <input type="radio" id="star4half" name="rating" value="4.5" />
                                 <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
@@ -136,19 +147,19 @@
                             <input type="radio" id="starhalf" name="rating" value="0.5" />
                                 <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> 
                             <input type="radio" class="reset-option" name="rating" value="reset" /> 
-                        </fieldset>
+                        </fieldset> --}}
                       </div>
                     </div>
                     <div class="col c_inf2">
                       <div class="px-3 px_3">
-                        <p>Price per KG</p>
+                        <p>Price</p>
                         <h1>N 3,999</h1>
-                        <p>Select Qty (kg)</p>
+                        {{!-- <p>Select Qty (kg)</p>
                         <div class="form form2">
                         <div class="value-button v_bt" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
                         <input type="number" id="number" value="0" />
                         <div class="value-button v_bt" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                      </div>
+                      </div> --}}
                       </div>
                     </div>
                     <div class="col-12 r_mt">
@@ -181,9 +192,10 @@
           <div class="card card_pay ">
             <div class="card-body  ">
               <h5 class="card-title">
-                <h1 class="text-center"> Order Summary </h1>
+                <h1 class="text-center "> Order Summary </h1>
+                <hr>
               </h5>
-              <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-2">
+              {{!-- <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-2">
                   <div class="col card_pay_inf">
                     <div class="p-3  ">
                       <h1>White Maize</h1>
@@ -205,8 +217,75 @@
                   <div class="col">
                     <div class="p-3  text-center">
                       <button type="submit" class="btn btn_gr2 shadow ">Pay Now</button>
+                      <div class="con_terms">
+                        <a href="#" class="terms link-secondary">terms and Conditions</a>
+                      </div>
                     </div>
-                  </div>
+                  </div> --}}
+
+                   <div class="items_ border-0 border-bottom">
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                      <div class="col">
+                        <div class=" ">
+                          White Maize
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="  float-end">3kg</div>
+                      </div>
+                    </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="col">
+                          <div class=" ">Brown Rice</div>
+                        </div>
+                        <div class="col">
+                          <div class="float-end ">2kg</div>
+                        </div>
+                      </div> 
+                    </div> 
+
+                   <div class="cost_ border-0 border-bottom">
+                       <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                      <div class="col">
+                        <div class="  ">Subtotal</div>
+                      </div>
+                      <div class="col">
+                        <div class=" float-end">4,999</div>
+                      </div>
+                    </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="col">
+                          <div class=" ">Shipping</div>
+                        </div>
+                        <div class="col">
+                          <div class="float-end ">5,999</div>
+                        </div>
+                      </div>  
+                    </div>
+
+                    <div class="total_">
+                       <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                          <div class="col">
+                            <div class=" t_text">Total</div>
+                          </div>
+                          <div class="col">
+                            <div class="float-end  t_price">5,999</div>
+                          </div>
+                        </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="p-3  text-center">
+                          <button type="submit" class="btn btn_gr2 shadow ">Pay Now</button>
+                          <div class="con_terms">
+                            <a href="#" class="terms link-secondary">terms and Conditions</a>
+                          </div>
+                        </div>
+                      </div>  
+                   </div>
+
+                    
               </div>
             </div>
           </div>
