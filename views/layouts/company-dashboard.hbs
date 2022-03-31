@@ -146,7 +146,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
 
    <script>
      var files = null;
@@ -190,36 +190,32 @@
         })
         $('#form-product').on('submit', function(){
           event.preventDefault();
-          let form = new FormData()
+          const form = new FormData()
+          form.append("Content-Type", "multipart/form-data");
           let data = $('#form-product').serializeArray()
-          form.append('image', files);
+          form.append('upload', files);
           data.forEach(e=>{
             if(e.value != null && e.value != ""){
               form.append(e.name, e.value)
             }
           })
-          let url = window.location.origin+"/seed-company/create-product";
+           let url = window.location.origin+"/seed-company/create-product";  
           fetch(url, {
-            headers : {
-              'Accept' : 'application/json'
-            },
-            method : 'post',
-            mode : "cors",
+            method:'POST',
             body : form
-          }).then(r=>r.json())
-          .then(r=>console.log(r))
-          .catch(e=>{
-            console.log(e)
-          });
-          
-            //axios.post(url, form).then(r=>{
-            // console.log(r)
-           //});
+          }).then(r=>r.json()).then(r=>{
+            console.log(r)
+          })
+                 
+         // axios.post(url, form).then(r=>{
+           //  console.log(r)
+         //  });
         })
      })
 
     function filesChange(file){
-        files = file;
+        console.log(file[0])
+        files = file[0];
     }
 </script>
 </body>

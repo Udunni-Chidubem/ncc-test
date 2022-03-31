@@ -4,7 +4,6 @@ const utils = require('../../helpers/utils')
 const { companyValidation, validate } = require('../../helpers/formValidator');
 const companyController = require('../../controllers/company.controller');
 
-
 companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
@@ -41,12 +40,21 @@ companyRouter.get('/create-product', async (req, res)=>{
     })
 });
 companyRouter.post('/create-product', async (req, res)=>{
-let r = await companyController.createProduct(req, res);
-  if(r.id){
-    res.json({statusCode:200, message: "product created successfully", body :r}).status(200).send()
-  }else{
-     res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
-  }
+    let filename='';
+    if(req.files){
+        console.log(req.files)
+        
+        let upload=req.files.upload
+        filename=Date.now()+upload.name
+        upload.mv('./public/uploads/'+filename)
+    }
+    let r = await companyController.createProduct(req, res, filename);
+    if(r.id){
+        res.json({statusCode:200, message: "product created successfully", body :r}).status(200).send()
+    }else{
+        res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
+    }
+  
 });
 companyRouter.get('/product-list', async (req, res)=>{
 

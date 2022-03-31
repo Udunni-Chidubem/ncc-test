@@ -3,6 +3,8 @@ const db = require('../models')
 const {User,UserRole, Role, SeedCompany, LGAs, States, Product }  = db
 const utils = require('../helpers/utils');
 
+
+
 module.exports = {
     updateProfile: async (req, res) => {
         const transaction = await db.rest.transaction();
@@ -27,7 +29,8 @@ module.exports = {
         }
     },
 
-    createProduct : async (req, res)=>{
+    createProduct : async (req, res, filename)=>{
+        
         const transaction =await db.rest.transaction();
         let item = null;
         item={
@@ -49,14 +52,13 @@ module.exports = {
                 variant : req.body.productVariant,
                 item : item,
                 user_id : user.id,
-                file_name : ''
+                file_name : filename
             }, {transaction : transaction})
             transaction.commit()
             return p
         }catch(e){
             console.log(e)
             transaction.rollback()
-            console.log(e)
             return e
         }
         
