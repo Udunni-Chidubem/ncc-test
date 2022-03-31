@@ -1304,7 +1304,6 @@ input[type="number"] {
   color: #a5a5a5;
 }
 
-
 /* .table_img {
   width: 100px;
   height: 65px;
@@ -1362,6 +1361,7 @@ input[type="number"] {
 .p_in h1 {
   font-weight: 500;
   font-size: 18px;
+  margin-left: 0px !important;
 }
 
 .p_in p {
@@ -1549,6 +1549,9 @@ input[type="number"] {
   .col-12.r_mt {
     margin-top: 0rem !important;
   }
+  .ratings {
+    margin-right: 47px !important;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -1630,4 +1633,20 @@ input[type="number"] {
     font-size: 18px;
     margin: 0px;
   }
+  .ratings {
+    margin-right: 47px !important;
+  }
+}
+
+.v_bt {
+  width: 21px !important;
+}
+
+.form2 {
+  width: 300px !important;
+}
+
+.rating.ratings > label::before {
+  margin-right: 0px !important;
+  font-size: 12px !important;
 }
