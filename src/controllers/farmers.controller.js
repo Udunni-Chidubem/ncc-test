@@ -16,7 +16,7 @@ module.exports={
                 }
             ],
             where : {
-                user_id : res.user.id
+                user_id : res.user.id, status: 1, 
             }
         });
         return farmer;
