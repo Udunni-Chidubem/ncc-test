@@ -24,13 +24,15 @@
 
           {{#if product}}
           
-          <tbody class="t_info_body">
+          <tbody class="t_info_body products-list-table">
 
             {{#each product.result }}
 
               <tr class="t_info_row1">
                   <th scope="row">{{increment @index}}</th>
                   <td> 
+                  {{!-- <th scope="row">1</th> --}}
+                  <td style="width: 150px;"> 
                       <div  class="table_img"> 
                           <a href="/seed-company/view/{{this.id}}"><img src="../product_images/{{this.file_name}}" alt="Product Image"></a>
                       </div>
