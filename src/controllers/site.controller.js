@@ -203,9 +203,13 @@ module.exports = {
         });
         return states
     },
-
     lgas : async (req, res)=>{
-
+        let lgas = await LGAs.findAll({
+            attributes : ['id', 'name'],
+            where : {state_id : req.params.state_id, id: req.params.lga_id},
+            raw : true
+        });
+        res.send(lgas)
     },
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({

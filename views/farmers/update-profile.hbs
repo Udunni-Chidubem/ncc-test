@@ -278,11 +278,12 @@
         let lga = $('.lgas').data('lg_id')
 
         const getDefaultLgas = (state_id) => {
-            let url =  window.location.origin+'/api/base/lgas/'+ state_id
+            let url =  window.location.origin+'/api/base/default-lga/'+ state_id + '/' + lga
             fetch(url).then(r=>r.json())
             .then(r => { 
                 //let Options =  '<option value="">Select LGA</option>'
                 let selected,Options
+                console.log(r)
                 r.forEach(e=>{
                     selected = (e.id == lga ? 'selected' : null)
                     Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
@@ -303,14 +304,16 @@
 
         let state = $('#state').data('state')
         let stateDelivery = $('#stateDelivery').data('statedelivery')
-        if(state != null || lga != null || stateDelivery != null){
+        let lgaDelivery = $('#lgaDelivery').data('lgadelivery')
+        if(lgaDelivery != null || stateDelivery != null){
+        //if(state != null || lgaDelivery != null || stateDelivery != null){
             $('#state').val(state)
             $('#stateDelivery').val(stateDelivery)
 
             getDefaultLgas(state)
 
             setTimeout(function(){
-                let url =  window.location.origin+'/api/base/lgas/'+ stateDelivery
+                let url =  window.location.origin+'/api/base/lgas/'+ stateDelivery + '/' + 
                 fetch(url).then(r=>r.json())
                 .then(r => { 
                     let selected,Options
