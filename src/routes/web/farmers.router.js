@@ -46,5 +46,18 @@ farmersRouter.get('/product', farmerController.product)
 farmersRouter.get('/view-product', farmerController.viewProduct)
 farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
 
+// Cart Route
+farmersRouter.get('/cart', async (req, res) => {
+    let resp = await farmerController.cart(req, res)
+
+    res.render('farmers/cart', {
+        layout : 'farmers-dashboard',
+        title: 'Cart',
+        fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
+        farmerData: resp.farmer,
+        isVerified: resp.isVerified
+    })
+})
+
 
 module.exports=farmersRouter

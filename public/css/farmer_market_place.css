@@ -2166,7 +2166,8 @@ h1 {
 
 .rating {
     border: none;
-    margin-right: 49px
+    margin-right: 49px;
+    float: left;
 }
 
 .myratings {
