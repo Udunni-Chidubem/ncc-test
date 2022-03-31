@@ -64,7 +64,7 @@ companyRouter.get('/product-list', async (req, res)=>{
         paginate = { page: req.query.page || 1, pageCount: product.totalPages }
         // console.log(paginate);
     }
-
+    console.log(paginate)
     res.render('seed_company/product-list', {
         layout : 'company-dashboard',
         product,
