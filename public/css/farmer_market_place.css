@@ -1999,7 +1999,7 @@ select::-ms-expand {
 }
 
 .btn-place-order {
-  width: 134px !important;
+  width: 153px !important;
   height: 50px;
   color: #fff !important;
   background: linear-gradient(180deg, #5DCD6D 0%, #008346 100%);;
@@ -2024,12 +2024,13 @@ select::-ms-expand {
 }
 
 .btn-save-product {
-  width: 134px !important;
+  width: 153px !important;
   height: 50px;
   color: #fff !important;
   background-color:  #008346 !important;
   border-radius: 8px !important;
   box-shadow: 3px 3px 5px #1213128c !important;
+  padding: 10px !important;
 }
 .btn-save-product:hover {
   color: #fff;
