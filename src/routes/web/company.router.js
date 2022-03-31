@@ -45,7 +45,7 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
         console.log(req.files)
         let upload=req.files.upload
         filename=Date.now()+upload.name
-        upload.mv('./public/uploads/'+filename)
+        upload.mv('./public/product_images/'+filename)
     }
     let r = await companyController.createProduct(req, res, filename);
     if(r.id){
