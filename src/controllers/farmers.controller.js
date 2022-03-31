@@ -141,6 +141,7 @@ module.exports={
             isVerified
         })
     },
+    
     viewProduct: async (req, res) => {
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)

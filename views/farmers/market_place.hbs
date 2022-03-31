@@ -11,7 +11,6 @@
                         <p ><i class="fa fa-lightbulb"></i> tip: You need 3kg of maize seed for your farm</p>
                     </div>
                 </form>
-                <br/>
                 <div class="search-filter ml-5 mr-4 mt-2">
                       <div class="input-field">
                         <label><b >Results: &nbsp; </b> Sort By</label>
@@ -70,7 +69,17 @@
                     <div class="product-price"> 
                         <p>Price per KG</p>
                         <h4> &#8358; 3,000</h4>
-                        <p>Select Qty (kg)</p>
+                        <p>Select Size (kg)</p>
+                        <div class="input-field product-size">
+                            <select>
+                              <option value="" disabled selected>Choose Size</option>
+                              <option value="1">1Kg</option>
+                              <option value="2">5kg</option>
+                              <option value="2">10kg</option>
+                            </select>
+                          </div>
+
+                        <p>Select Qty</p>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">
@@ -86,7 +95,7 @@
                         </div>
                     </div>
                     <div class="product-actions">
-                        <button class="btn btn-place-order" onclick="window.location.href='./view-product'">View Order</button>
+                        <button class="btn btn-place-order" onclick="window.location.href='./view-product'"><i class='fa fa-eye'></i>  View Product</button>
                         <button class="btn btn-save-product"> <i class='bx bx-cart-add'></i>Add to Cart</button>
                     </div>
                 </div>
@@ -148,7 +157,7 @@
                         </div>
                     </div>
                     <div class="product-actions">
-                         <button class="btn btn-place-order" onclick="window.location.href='./view-product'">View Order</button>
+                         <button class="btn btn-place-order" onclick="window.location.href='./view-product'"><i class='fa fa-eye'></i> View Product</button>
                         <button class="btn btn-save-product"> <i class='bx bx-cart-add'></i>Add to Cart</button>
                     </div>
                 </div>
