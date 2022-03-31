@@ -28,10 +28,13 @@ app.engine('hbs', handlebars({
         concat(){
             arguments = [...arguments].slice(0, -1);
             return arguments.join('');
-        }
+        },
     }
 }))
 
+Handlebars.registerHelper("increment", function (inindex) {
+    return inindex + 1
+});
 Handlebars.registerHelper('paginate', paginate);
 
 app.use(express.static(path.join(__dirname, 'public')))
