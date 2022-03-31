@@ -45,6 +45,7 @@ farmersRouter.get('/market_place', async (req, res) => {
 farmersRouter.get('/product', farmerController.product)
 farmersRouter.get('/view-product', farmerController.viewProduct)
 farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
+farmersRouter.get('/cart', farmerController.cart)
 
 
 module.exports=farmersRouter
