@@ -141,14 +141,7 @@ module.exports={
             isVerified
         })
     },
-
-    cart: async (req, res) => {
-        res.render('farmers/cart', {
-            layout : 'farmers-dashboard',
-            title: 'cart',
-        })
-    },
-
+    
     viewProduct: async (req, res) => {
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)
