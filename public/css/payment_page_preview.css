@@ -15,7 +15,7 @@ body {
 
 .container1 {
   background: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
   height: auto !important;
   width: 75%;
   /* width: 84%; */
@@ -31,7 +31,7 @@ body {
 }
 .horizontalLine {
   border-bottom: 1px solid #f5f6f8;
-  width: 90%;
+  width: 100%;
   margin: 20px auto;
 }
 .orderContainer {
@@ -50,12 +50,17 @@ body {
 }
 .orderInfo {
   color: #79818c;
+  width: 167px;
+  font-size: 12px;
+  padding-top: 2px;
 }
 .orderInfo p {
   padding: 2px 0;
+  margin-bottom: 0px;
 }
 .orderName {
   font-weight: 700;
+  font-size: 14px;
 }
 /* .qtyWrapper {
   display: flex;
@@ -79,12 +84,13 @@ body {
 
 .container2 {
   background: #fff;
-  border-radius: 4px;
-  height: 350px !important;
+  border-radius: 8px;
+  height: auto;
   width: 75%;
   border: 3px solid #fff;
   margin: 2rem auto;
   color: #47749c;
+  padding: 12px 3px;
 }
 .shippingGrid {
   width: 95%;
@@ -110,15 +116,18 @@ p {
 }
 .container3 {
   background: #fff;
-  border-radius: 4px;
-  height: 330px;
+  border-radius: 8px;
+  height: auto;
   width: 75%;
   border: 3px solid #fff;
   margin: 2rem auto;
   color: #47749c;
+  padding: 12px 3px;
 }
 .container3 p {
   margin: 9px;
+  color: #bbb;
+  font-size: 12px;
 }
 .form-container {
   /* display: grid;
@@ -130,7 +139,7 @@ p {
 }
 .container4 {
   background: #fff;
-  border-radius: 4px;
+  border-radius: 8px;
   height: auto;
   border: 3px solid #fff;
   width: 75%;
@@ -158,6 +167,8 @@ p {
 }
 .amountCalc {
   color: #000;
+  font-weight: 400;
+  font-size: 13px;
 }
 .amountCalc p {
   color: #000;
@@ -172,11 +183,15 @@ p {
 }
 .orderQty {
   color: #000;
+  font-weight: 400;
+  font-size: 10px;
 }
 .summaryAmount,
 .orderSummary p {
   font-weight: bold;
   /* padding: 1rem; */
+  font-weight: 600;
+  font-size: 14px;
 }
 .summaryAmount h1 {
   font-weight: 800;
@@ -236,44 +251,45 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (min-width: 1300px) {
   .container1 {
     background: #fff;
-    border-radius: 4px;
-    height: 250px;
+    border-radius: 8px;
+    height: auto;
     border: 3px solid #fff;
-    width: 621px;
+    width: 722px;
     margin: 2rem;
+    padding: 16px 0px;
   }
   .container2 {
     /* background: #fff;
     border-radius: 4px; */
-    height: 250px;
+    height: auto;
     /* border: 3px solid #fff; */
-    width: 621px;
+    width: 722px;
     margin: 2rem;
     /* color: #47749c; */
   }
   .container3 {
     background: #fff;
-    border-radius: 4px;
-    height: 250px;
+    border-radius: 8px;
+    height: auto;
     border: 3px solid #fff;
-    width: 621px;
+    width: 722px;
     margin: 2rem;
     color: #47749c;
   }
   .container4 {
     background: #fff;
-    border-radius: 4px;
-    height: 420px;
+    border-radius: 8px;
+    height: auto;
     border: 3px solid #fff;
     width: 25%;
     margin: 2rem;
     position: absolute;
-    top: 0;
-    right: 130px;
+    top: 18px;
+    right: 0px;
     color: #47749c;
   }
   .parent-container {
-    width: 75%;
+    width: 100%;
     margin: auto;
   }
   .orderContainer {
@@ -287,14 +303,14 @@ input[type="number"]::-webkit-outer-spin-button {
   .orderGrid {
     display: grid;
     grid-template-columns: 171px 112px;
-    width: 28%;
+    width: 44%;
   }
   .shippingGrid {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 95%;
+    width: 100%;
     margin: auto;
   }
   .shippingAddress {
@@ -307,6 +323,7 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    width: 66px;
   }
   .summaryBtn {
     background: linear-gradient(180deg, #5dcd6d 0%, #008346 100%);
@@ -320,5 +337,51 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #fff;
     font-size: 13px;
     font-weight: 600;
+  }
+}
+
+.parent-container .h1 {
+  float: left;
+  margin: 0px 34px !important;
+  padding-top: 0px;
+}
+.shippingAddress h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.shippingAddress p {
+  font-size: 12px;
+}
+
+.addAddress p {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.container3 .pre_pay {
+  margin: 0px 25px !important;
+}
+
+.order h4 {
+  font-weight: 700;
+  font-size: 14px;
+}
+.order p {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.summaryAmount h3 {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .container2 {
+    height: auto !important;
+  }
+  .container3 {
+    height: auto !important;
   }
 }

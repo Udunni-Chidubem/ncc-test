@@ -12,19 +12,16 @@ let sidebarBtn2 = document.querySelector(".side-bi-arrow-left-circle-fill");
 let sidebarBtn3 = document.querySelector(".bi-arrow-left-circle-fill");
 
 
-console.log(sidebarBtn);
 sidebarBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("show");
   // sidebarBtn.classList.toggle("bi bi-arrow-right-circle-fill");
   sidebar.classList.add("sss");
   if(sidebarBtn3.classList.contains("bi-arrow-left-circle-fill")){
     sidebarBtn3.classList.remove("bi-arrow-left-circle-fill");
-  sidebarBtn3.classList.add("bi-arrow-right-circle-fill");
-  }
-
-  else{
+    sidebarBtn3.classList.add("bi-arrow-right-circle-fill");
+  } else{
     sidebarBtn3.classList.add("bi-arrow-left-circle-fill");
-  sidebarBtn3.classList.remove("bi-arrow-right-circle-fill");
+    sidebarBtn3.classList.remove("bi-arrow-right-circle-fill");
   }
   
  
@@ -83,7 +80,7 @@ function readURL(input) {
 var input = document.getElementById( 'upload' );
 var infoArea = document.getElementById( 'upload-label' );
 
-input.addEventListener( 'change', showFileName );
+input.addEventListener('change', showFileName() );
 function showFileName( event ) {
   var input = event.srcElement;
   var fileName = input.files[0].name;

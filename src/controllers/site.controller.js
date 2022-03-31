@@ -22,18 +22,25 @@ module.exports = {
         res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
-    },
+    }, 
 
+    success_page_test: async (req,res) => {
+        res.render('site/success-bk',{
+            form_banner:'Group.png',
+            title: 'Successful Page',
+            layout : 'success-header',
+            errors : req.flash('errors')
+         })
+    },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
+
     farmer_signup: async (req,res) => {
-        // let states =await States.findAll({
-        //     attributes : ['id', 'name']
-        // });
+
         res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
@@ -59,6 +66,7 @@ module.exports = {
     seedcompanysignup: async (req,res) => {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
+            title : 'Seed Company\'s Registration',
             sub: ' Investment in agriculture yields profit',
             layout : 'form',
             errors : req.flash('errors')
@@ -67,6 +75,7 @@ module.exports = {
     seedtradersignup: async (req,res) => {
         res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
+            title : 'Seed Trader\'s Registration',
             sub: 'Become an entrepreneur in seed trading',
             layout : 'form',
             errors : req.flash('errors')
@@ -133,9 +142,10 @@ module.exports = {
                 user_id:user.id
             },{transaction : transaction});
             transaction.commit();
+
             return {user, seed_company};
         }catch(e){
-            transaction.rollback();
+            transaction.rollback();          
             return e
         }
     },

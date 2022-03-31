@@ -1,6 +1,7 @@
 const db = require('../models');
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation, Product }  = db
 const utils = require('../helpers/utils');
+const { getPagination, getPagingData } = require('../helpers/pagination');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -105,14 +106,25 @@ module.exports={
         const farmer = await utils.getFarmerProfile(user)
         const isVerified = await utils.isVerified(user)
 
+        let response = null
 
-        res.render('farmers/market_place', {
-            layout : 'farmers-dashboard',
-            title: 'Market Place',
-            fullname: farmer.firstname + ' ' + farmer.lastname,
-            farmerData: farmer,
-            isVerified
+        const {page, size} = req.query
+        const {limit, offset} = getPagination(page, size)
+
+        const product = await Product.findAndCountAll({ 
+            where: { status: 1},
+            order: [
+                ['id', 'DESC'],
+            ],
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true, limit, offset 
         })
+
+        if(product){
+            response = getPagingData(product, page, limit)
+        }
+
+        return { farmer, isVerified, response }
     },
 
     product: async (req, res) => {
