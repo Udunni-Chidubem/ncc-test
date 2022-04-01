@@ -1,12 +1,4 @@
-<div class="page-header">
-        <div class="header-sub-title">
-            <nav class="breadcrumb breadcrumb-dash">
-                <a href="./dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
-                <a class="breadcrumb-item" href="./market_place">Market Place</a>
-                <span class="breadcrumb-item active">View Product</span>
-            </nav>
-        </div>
-    </div>
+{{#if product }}
 <div class="container">
 	<div class="card">
         <div class="card-body m-3">
@@ -15,17 +7,17 @@
              </div>
              <div class="product-grid">
              	<div class="product-img">
-             		<img src="../images/farmer-with-vege-p-2000.jpeg" />
+             		 <img src="../../product_images/{{product.file_name}}" alt="Product Image">
              	</div>
              	<div class="product-details">
-             		<h4 class="product-name">White Maize FM/123</h4>                   
-	                <p class="product-variant">Maize FM/123</p>                   
-	                <p class="product-seller">Adamu Garba Ltd</p> 
+             		<h4 class="product-name">{{product.product_name}}</h4>                   
+	                <p class="product-variant">{{product.variant}}</p>                   
+	                <p class="product-seller">{{seedCompany}}</p> 
 
 	                <hr class="product-line">
 
 	                <h5>Description</h5>
-	                <p>Lorem ipsum dolor sit amet consectur leviec sectoram jut sertaome</p>
+	                <p>{{product.description}}</p>
 					
 					<button class="btn btn-save-product mr-2"><i class="fa fa-cart-add"></i>Add to Cart</button>
 	                <button class="btn btn-place-order" onclick="window.location.href='./payment_page_preview'">Place Order</button>
@@ -33,6 +25,14 @@
              	<div class="view-product-price">
              	  <h4>&#8358; 3,999 </h4>
                   <p class="text-dark">per KG </p>
+                  <div class="input-field product-size">
+                            <select>
+                              <option value="" disabled selected>Choose Size</option>
+                              {{#each items}}
+                                <option value="{{this}}">{{this}}Kg</option>
+                              {{/each}}
+                            </select>
+                          </div>
                   <p >Select quantiy</p>
                   <div class="input-group">
                             <span class="input-group-btn">
@@ -52,3 +52,6 @@
         </div>
 	</div>
 </div>
+{{else}}
+
+{{/if}}

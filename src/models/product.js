@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       Product.belongsTo(models.User, {
         foreignKey : 'user_id'
       })
+
+      Product.hasOne(models.SeedCompany, {
+        foreignKey: 'user_id'
+      })
     }
   }
   Product.init({
@@ -22,10 +26,15 @@ module.exports = (sequelize, DataTypes) => {
     variant: DataTypes.STRING,
     description: DataTypes.TEXT,
     item: DataTypes.STRING,
-    file_name: DataTypes.STRING
+    file_name: DataTypes.STRING,
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1
+    }
   }, {
     underscored : true,
     sequelize,
+    timestamps: false,
     tableName: 'product',
     modelName: 'Product',
   });

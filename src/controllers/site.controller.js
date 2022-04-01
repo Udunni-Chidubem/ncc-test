@@ -22,18 +22,25 @@ module.exports = {
         res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
-    },
+    }, 
 
+    success_page_test: async (req,res) => {
+        res.render('site/success-bk',{
+            form_banner:'Group.png',
+            title: 'Successful Page',
+            layout : 'success-header',
+            errors : req.flash('errors')
+         })
+    },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
+
     farmer_signup: async (req,res) => {
-        // let states =await States.findAll({
-        //     attributes : ['id', 'name']
-        // });
+
         res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
@@ -59,7 +66,8 @@ module.exports = {
     seedcompanysignup: async (req,res) => {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
-            sub: ' Investment in agriculture yields profit',
+            title : 'Seed Company\'s Registration',
+            sub: 'Investment in agriculture yields profit',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -67,6 +75,7 @@ module.exports = {
     seedtradersignup: async (req,res) => {
         res.render('site/seed_trader_signup',{
             form_banner:'tradersignup.png',
+            title : 'Seed Trader\'s Registration',
             sub: 'Become an entrepreneur in seed trading',
             layout : 'form',
             errors : req.flash('errors')
@@ -134,14 +143,9 @@ module.exports = {
             },{transaction : transaction});
             transaction.commit();
 
-            console.log(12222)
-            console.log(user);
-            console.log(seed_company);
             return {user, seed_company};
         }catch(e){
-            console.log(e)
-            transaction.rollback();
-            
+            transaction.rollback();          
             return e
         }
     },
@@ -199,17 +203,27 @@ module.exports = {
         });
         return states
     },
-
     lgas : async (req, res)=>{
-
+        let lgas = await LGAs.findAll({
+            attributes : ['id', 'name'],
+            where : {state_id : req.params.state_id, id: req.params.lga_id},
+            raw : true
+        });
+        res.json(lgas)
     },
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
+            include : [
+                {
+                    model : States,
+                    attributes : ['id', 'name']
+                },
+            ],
             attributes : ['id', 'name'],
             where : {state_id : req.params.state_id},
             raw : true
         });
-        res.send(lgas)
+        res.json(lgas)
     },
     getDropList:  (req, res) => {
         const data = require('../data/dropDownList.json')
@@ -246,6 +260,12 @@ module.exports = {
             } })
 
         })
+    },
+    errorPage: async (req,res) => {
+        res.render('site/404', {
+            layout: 'main',
+            title : '404 Page'
+        });
     }
 
 

@@ -13,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       SeedCompany.belongsTo(models.User)
-      SeedCompany.hasMany(models.Product)
+      SeedCompany.hasMany(models.Product, {
+        foreignKey: 'user_id'
+      })
+      SeedCompany.belongsTo(models.States, {
+        foreignKey: 'state_id'
+      })
     }
   }
   SeedCompany.init({
@@ -61,6 +66,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    }
   }, {
     underscored: true,
     tableName : 'seedcompany',

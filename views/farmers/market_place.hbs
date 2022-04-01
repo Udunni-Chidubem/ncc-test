@@ -1,40 +1,36 @@
-<div class="page-header">
-        <div class="header-sub-title">
-            <nav class="breadcrumb breadcrumb-dash">
-                <a href="#" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
-                <span class="breadcrumb-item active" href="#">Market Place</span>
-            </nav>
-        </div>
-    </div>
-
- <div class="container-fluid pt=5">
+<div class="container-fluid pt=5">
         <div class="card card-4"> 
             <div class="card-body">
-                <form method="post" class="ml-5 mr-4">
-                    <div class="input-group ">
-                        <input class="input--style-4 inputs" type="search" placeholder="Search for product" name="Search" >  
-                        <button class="btns btn--radius-2 btn--blue ml-2" type="button">Search</button>
+                <form method="get" class="ml-5 mr-4">
+                    <div class="input-group">
+                        <input class="input--style-4 inputs" type="search" placeholder="Search for product" name="Search" required>  
+                        <button class="btns btn--radius-2 btn--blue ml-2" type="submit">Search</button>
                     </div>
 
                     <div class="search-tip">
                         <p ><i class="fa fa-lightbulb"></i> tip: You need 3kg of maize seed for your farm</p>
                     </div>
-                </form>
+                
+                {{#if products}}
                 <div class="search-filter ml-5 mr-4 mt-2">
                       <div class="input-field">
                         <label><b >Results: &nbsp; </b> Sort By</label>
-                        <select>
+                        <select name="sorting">
                           <option value="" disabled selected>Choose your option</option>
-                          <option value="1">Highest Price</option>
-                          <option value="2">Lowest Price</option>
+                          <option value="highest-price">Highest Price</option>
+                          <option value="lowest-prices">Lowest Price</option>
                         </select>
                       </div>
                 </div>
+                {{/if}}
+
+                </form>
             </div>
                 
         </div> 
 
 
+<<<<<<< HEAD
         <section class="products">
             <div class="card products-card">
                 <div class="card-body products-content">
@@ -130,15 +126,78 @@
                 </div>
             </div>
 
+=======
+        {{#if products }}
+>>>>>>> 4cc5ef1d7c6a2e8bb56253f1033688680e23dcf9
         
-        </section> 
-        <br><br><br><br><br><br><br>
-        <center><i class="fa fa-search" style="font-size:133px;color:#C2CFE0;" ></i></center>
-        <br>
 
-        <div class="paragraph" style="color: #34AFF9; text-align: center; size: 18px;height: 27px; font-size:medium;">
-             What are you looking for ?
-        </div>
+             <section class="products">
+
+                 {{#each products.result }}
+                <div class="card products-card">
+                    <div class="card-body products-content">
+                        <div class="product-img"> 
+                            <img src="../../product_images/{{this.file_name}}" alt="Product Image">               
+                        </div>
+                        <div class="product-details">
+                            <h4 class="product-name">{{this.product_name}}</h4>                   
+                            <p class="product-variant">Variant: {{this.variant}}</p>                   
+                            <p class="product-seller">Seller: {{'User.SeedCompany.name_of_company'}}</p>                   
+                            <p class="product-location">Location: {{'User.SeedCompany.State.name'}} State</p> 
+                        </div>
+                        <div class="product-price"> 
+                            <p>Price per KG</p>
+                            <h4> 
+                                {{!-- &#8358; 3,000 --}}
+                            </h4>
+                            <p>Select Size (kg)</p>
+                            <div class="input-field product-size">
+                                <select>
+                                    <option value="" disabled selected>Choose Size</option>
+                                    {{#each this.item.min}}
+                                        <option value="1">{{this}} Kg</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <p>Select Qty</p>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">
+                                    <span class="fa fa-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="1" max="100">
+                                <span class="input-group-btn">
+                                    <button type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
+                                        <span class="fa fa-plus"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-place-order" onclick="window.location.href='/farmer/view-product/{{this.id}}'"><i class='fa fa-eye'></i>  View Product</button>
+                            <button class="btn btn-save-product"> <i class='bx bx-cart-add'></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                {{/each}}
+        
+            </section>
+
+        {{else}}
+             <br><br><br>
+            <center><i class="fa fa-search" style="font-size:133px;color:#C2CFE0;" ></i></center>
+            <br>
+
+            <div class="paragraph" style="color: #34AFF9; text-align: center; size: 18px;height: 27px; font-size:medium;">
+                What are you looking for ?
+            </div>
+        {{/if}}
+        
+       
       
     </div>
                         

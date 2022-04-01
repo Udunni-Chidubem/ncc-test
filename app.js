@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
 const handlebars = require('express-handlebars')
+const Handlebars = require('handlebars');
+const paginate = require('handlebars-paginate')
 const passport = require('passport')
 const path = require('path')
 const fileUpload = require('express-fileupload');
@@ -26,9 +28,31 @@ app.engine('hbs', handlebars({
         concat(){
             arguments = [...arguments].slice(0, -1);
             return arguments.join('');
+        },
+        for(from, to, incr, block){
+            var accum = '';
+            for(var i = from; i <= to; i += incr)
+                accum += block.fn(i);
+            return accum;
+        },
+        equals(a, b, options){
+            return (a === b ) ? options.fn(this) : options.fn(reverse)
+        },
+        add(a, b, sum){
+            b += a;
+            return b;
+        },
+        sub(a, b, sub){
+            b-= a
+            return b
+        },
+        increment(inindex){
+            return inindex + 1
         }
     }
 }))
+
+Handlebars.registerHelper('paginate', paginate);
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -47,10 +71,11 @@ app.use(fileUpload({
     createParentPath: true
 }));
 const mainRoute = require('./src/routes/main.route')
+const { reverse } = require('dns')
 
 app.use('/', mainRoute)
 
 const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
-    console.log(`NIGSIMS Application is running on PORT ${PORT}`)
+    console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
