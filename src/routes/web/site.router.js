@@ -95,5 +95,6 @@ siteRouter.get('/test2', siteController.authenticate)
 siteRouter.delete('/logout', (req, res)=>{
     req.logOut();
     res.redirect('/login')
-})
+}),
+siteRouter.get('/404', siteController.errorPage)
 module.exports=siteRouter; 

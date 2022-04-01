@@ -1541,6 +1541,7 @@ h6 {
   transition: all 0.4s ease;
 }
 
+
 input[name="BVN"] {
   width: 260px;
 }
@@ -1846,11 +1847,11 @@ input[name="Accountnumber"] {
 }
 
 @media (max-width: 600px) {
-  .card-4 .card-body {
+  /* .card-4 .card-body {
     padding: 20px 20px;
-  }
+  } */
   .card-4 {
-    width: 330px !important;
+    width: 520px !important;
   }
   .paragraph {
     padding-left: 30px;
@@ -1858,6 +1859,12 @@ input[name="Accountnumber"] {
     text-align: center !important;
     width: 330px;
     margin: auto;
+  }
+  .card-body{
+    /* width: 400px !important; */
+  }
+  .input--style-4 inputs{
+    margin-left: ;
   }
 }
 
@@ -1996,6 +2003,8 @@ select::-ms-expand {
     grid-gap: 10px;
     align-content: center;
     justify-content: center;
+    /* margin-top: 120px;
+    margin-bottom: 0px; */
 }
 
 .btn-place-order {
@@ -2078,6 +2087,8 @@ select::-ms-expand {
   display: grid;
   justify-content: center;
   grid-template-rows: auto;
+  grid-gap: 15px;
+  /* margin-right: -20px; */
 }
 
 .product-price h4{
@@ -2166,7 +2177,8 @@ h1 {
 
 .rating {
     border: none;
-    margin-right: 49px
+    margin-right: 49px;
+    float: left;
 }
 
 .myratings {
@@ -2418,3 +2430,9 @@ font-size: 12px;
   padding: 0px;
   height: fit-content;
 }
+
+/* @media screen and (min-width: 1200px){
+  .profile-card{
+      width: 100%;
+  } */
+  

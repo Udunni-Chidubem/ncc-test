@@ -260,6 +260,12 @@ module.exports = {
             } })
 
         })
+    },
+    errorPage: async (req,res) => {
+        res.render('site/404', {
+            layout: 'main',
+            title : '404 Page'
+        });
     }
 
 

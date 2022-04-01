@@ -1320,7 +1320,7 @@ input[type="number"] {
 }
 
 .card_products {
-  width: 100%;
+  width: 700px;
   border-radius: 8px !important;
   height: auto;
 }
@@ -1661,21 +1661,6 @@ input[type="number"] {
 
   .btn_gr2 {
     margin-left: 1.2rem;
-  }
-}
-
-@media only screen and (min-device-width: 1364px) {
-  .p_img img {
-    width: 100%;
-    margin-left: 33px;
-  }
-
-  .c_inf {
-    padding-top: 0rem;
-  }
-
-  .ck input[type="checkbox"] {
-    margin-top: 3rem;
   }
 }
 

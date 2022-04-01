@@ -42,9 +42,10 @@ body {
   }
   [type="date"]::-webkit-inner-spin-.click {
     display: none;
+    color: black;
   }
   [type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
+    opacity: 70%;
   }
 
 
