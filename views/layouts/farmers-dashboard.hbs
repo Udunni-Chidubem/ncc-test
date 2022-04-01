@@ -134,7 +134,8 @@
  <script>
    $(document).ready(function(){
      $('.size').on('change', function(){
-       let product_id = $(this).attr('id')
+       let qty = document.getElementById('quantity').value;
+       let product_id = $(this).attr('id');
        let value = $(this).val();
        let url = window.location.origin+'/farmer/product/price?product_id='+product_id
        fetch(url).then(r=>r.json()).then(r=>{
@@ -143,7 +144,7 @@
          for (let i=0; i < item.min.length; i++){
            if(item.pkg[i]==value){
              console.log(item.price[i])
-             $('.price_kg').html(item.price[i])
+             $('.price_kg').html("&#8358; " + (item.price[i] * qty))
            }
          }
        })
