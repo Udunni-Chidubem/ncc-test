@@ -48,6 +48,11 @@ app.engine('hbs', handlebars({
         },
         increment(inindex){
             return inindex + 1
+        },
+        json(data, resp){
+            
+            data = JSON.parse(data)
+            return resp.fn(data);
         }
     }
 }))

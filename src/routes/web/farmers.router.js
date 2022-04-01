@@ -34,7 +34,6 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 farmersRouter.get('/market_place', async (req, res) => {
     let resp = await farmerController.marketPlace(req, res)
     const products = resp.response
-
     res.render('farmers/market_place', {
         layout : 'farmers-dashboard',
         title: 'Market Place',
@@ -69,6 +68,9 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
     })
 })
 farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
-
+farmersRouter.get("/product/price", async (req, res)=>{
+    let product = await farmerController.singleProduct(req.query.product_id)
+    res.send(product)
+})
 
 module.exports=farmersRouter
