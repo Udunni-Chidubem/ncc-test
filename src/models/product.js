@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     file_name: DataTypes.STRING,
     status: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 1
     }
   }, {
     underscored : true,

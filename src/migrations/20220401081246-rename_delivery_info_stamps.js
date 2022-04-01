@@ -9,8 +9,8 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
      return [
-      queryInterface.renameColumn('delivery_Information', 'createdAt', 'created_at'),
-      queryInterface.renameColumn('delivery_Information', 'updatedAt', 'updated_at')
+      queryInterface.renameColumn('delivery_information', 'createdAt', 'created_at'),
+      queryInterface.renameColumn('delivery_information', 'updatedAt', 'updated_at')
     ];
   },
 
