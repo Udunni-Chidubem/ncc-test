@@ -13,7 +13,7 @@
         <table class="table con t_info  table-borderless">
           <thead class="t_info_head ">
             <tr class="">
-                {{!-- <th scope="col">S/N</th> --}}
+                <th scope="col">S/N</th>
                 <th>Image URL</th>
                 <th scope="col">PRODUCT NAME</th>
                 <th scope="col">PRODUCT VARIANT</th>
@@ -29,7 +29,7 @@
             {{#each product.result }}
 
               <tr class="t_info_row1">
-                  {{!-- <th scope="row">1</th> --}}
+                  <th scope="row">{{increment @index}}</th>
                   <td style="width: 150px;"> 
                       <div  class="table_img"> 
                           <a href="/seed-company/view/{{this.id}}"><img src="../product_images/{{this.file_name}}" alt="Product Image"></a>

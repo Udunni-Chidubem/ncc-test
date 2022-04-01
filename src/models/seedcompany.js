@@ -13,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       SeedCompany.belongsTo(models.User)
-      SeedCompany.hasMany(models.Product)
+      SeedCompany.hasMany(models.Product, {
+        foreignKey: 'user_id'
+      })
+      SeedCompany.belongsTo(models.States, {
+        foreignKey: 'state_id'
+      })
     }
   }
   SeedCompany.init({

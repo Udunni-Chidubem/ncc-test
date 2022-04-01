@@ -29,7 +29,6 @@ module.exports = {
             return e
         }
     },
-
     createProduct : async (req, res, filename)=>{
         
         const transaction =await db.rest.transaction();
