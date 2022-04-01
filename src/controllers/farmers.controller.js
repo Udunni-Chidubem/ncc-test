@@ -59,7 +59,7 @@ module.exports={
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth, 
+                date_of_birth: date_of_birth ? date_of_birth : null, 
                 gender, 
                 level_of_education, 
                 state_id, 
@@ -99,6 +99,7 @@ module.exports={
             transaction.commit();
             return {farmer, deliveryInformation};
         }catch(e){
+            console.log(e);
             transaction.rollback();
             return e
         }
