@@ -2419,3 +2419,9 @@ font-size: 12px;
   padding: 0px;
   height: fit-content;
 }
+
+@media screen and (min-width: 1200px){
+  .profile-card{
+      width: 100%;
+  }
+}
