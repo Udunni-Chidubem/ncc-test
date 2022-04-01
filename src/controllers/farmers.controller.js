@@ -59,7 +59,7 @@ module.exports={
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth: date_of_birth ? date_of_birth : null, 
+                date_of_birth: date_of_birth ? date_of_birth : '0000-00-00 00:00:00', 
                 gender, 
                 level_of_education, 
                 state_id, 
