@@ -36,6 +36,23 @@ Handlebars.registerHelper("increment", function (inindex) {
     return inindex + 1
 });
 Handlebars.registerHelper('paginate', paginate);
+Handlebars.registerHelper('for', function(from, to, incr, block) {
+    var accum = '';
+    for(var i = from; i <= to; i += incr)
+        accum += block.fn(i);
+    return accum;
+});
+Handlebars.registerHelper('equals', function(a, b, options){
+   return (a === b ) ? options.fn(this) : options.fn(reverse)
+})
+Handlebars.registerHelper('add', function(a, b, sum){
+     b += a;
+    return b;
+});
+Handlebars.registerHelper('sub', function(a,b, sub){
+    b-= a
+    return b
+});
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -54,6 +71,7 @@ app.use(fileUpload({
     createParentPath: true
 }));
 const mainRoute = require('./src/routes/main.route')
+const { reverse } = require('dns')
 
 app.use('/', mainRoute)
 
