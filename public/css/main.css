@@ -766,7 +766,7 @@ input[name="Accountnumber"] {
                 width:100%;
                 margin:100px auto;
                 padding: 100px;
-                color: #000000 !important
+                color: #278f44 !important
             }
             ._404{
                 font-size: 220px;
@@ -804,14 +804,14 @@ input[name="Accountnumber"] {
                 z-index: 5;
                 font-size: 25px;
                 margin:0 auto;
-                color:#33cc99;
+                color:#278f44;
                 text-decoration: none;
                 margin-right: 10px;
                 border-radius: 10px;
                 box-shadow: 3px 3px 3px #9daea9;
             }
             .btn-home:hover{
-                background-color: #33cc99;
+                background-color: #278f44;
                 color: #ffffff;
                 border: 1px solid #86b4a6;
             }
@@ -824,7 +824,7 @@ input[name="Accountnumber"] {
             .error-hr{
                 padding: 0;
                 border: none;
-                border-top: 5px solid #3c9;
+                border-top: 5px solid #278f44;
                 color: #fff;
                 text-align: center;
                 margin: 0px auto;
@@ -840,7 +840,7 @@ input[name="Accountnumber"] {
                 top: -13px;
                 font-size: 2em;
                 padding: 0 0.2em;
-                background: #33cc99;
+                background: #278f44;
                 border-radius: 50%;
             }
             
