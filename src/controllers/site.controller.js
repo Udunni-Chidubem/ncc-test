@@ -209,7 +209,7 @@ module.exports = {
             where : {state_id : req.params.state_id, id: req.params.lga_id},
             raw : true
         });
-        res.send(lgas)
+        res.json(lgas)
     },
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
@@ -223,7 +223,7 @@ module.exports = {
             where : {state_id : req.params.state_id},
             raw : true
         });
-        res.send(lgas)
+        res.json(lgas)
     },
     getDropList:  (req, res) => {
         const data = require('../data/dropDownList.json')
