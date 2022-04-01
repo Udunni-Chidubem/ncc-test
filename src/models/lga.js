@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      LGAs.belongsTo(models.States)
+      LGAs.belongsTo(models.States, {
+        foreignKey : 'state_id'
+      })
     }
   }
   LGAs.init({

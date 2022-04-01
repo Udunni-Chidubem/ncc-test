@@ -80,7 +80,7 @@
                                 <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                               
-                                  <select required class="form-select border-0 border-bottom" id="lgas" data-lga="{{ farmerData.state_id }}" name="lg_id">
+                                  <select required class="form-select border-0 border-bottom" id="lgas" data-lga="{{ farmerData.lg_id }}" name="lg_id">
                                      <option value=""></option>
                                   </select>
                                 </div>
@@ -275,24 +275,34 @@
 
     $(document).ready(function(){
 
-        let lga = $('.lgas').data('lg_id')
+      let lga = $('#lgas').data('lga')
+
+      let state = $('#state').data('state')
 
         const getDefaultLgas = (state_id) => {
-            let url =  window.location.origin+'/api/base/default-lga/'+ state_id + '/' + lga
+            let url =  window.location.origin+'/api/base/lgas/'+ state_id
             fetch(url).then(r=>r.json())
-            .then(r => { 
-                //let Options =  '<option value="">Select LGA</option>'
+            .then(r => {
                 let selected,Options
-                console.log(r)
                 r.forEach(e=>{
-                    selected = (e.id == lga ? 'selected' : null)
-                    Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
                 })
                 document.querySelector('#lgas').innerHTML= Options
+
+                $('#lgas').val(lga)
             }
             ).catch(e=>{
                 console.log(e)
             })
+        }
+
+
+        //Get All LGAs based on selected value of the state
+        
+        if(state != null){
+          $('#state').val(state)
+
+          getDefaultLgas(state)
         }
 
 
@@ -302,26 +312,37 @@
         }
 
 
-        let state = $('#state').data('state')
-        let stateDelivery = $('#stateDelivery').data('statedelivery')
+        document.querySelector('#stateDelivery').addEventListener('change', function(){
+          let url =  window.location.origin+'/api/base/lgas/'+this.value
+          fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgaDelivery').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+        
+        let stateD = $('#stateDelivery').data('statedelivery')
         let lgaDelivery = $('#lgaDelivery').data('lgadelivery')
-        if(lgaDelivery != null || stateDelivery != null){
-        //if(state != null || lgaDelivery != null || stateDelivery != null){
-            $('#state').val(state)
-            $('#stateDelivery').val(stateDelivery)
+        if(stateD != null){
+          $('#stateDelivery').val(stateD)
 
-            getDefaultLgas(state)
-
-            setTimeout(function(){
-                let url =  window.location.origin+'/api/base/lgas/'+ stateDelivery + '/' + 
+          setTimeout(function(){
+                let url =  window.location.origin+'/api/base/lgas/'+ stateD
                 fetch(url).then(r=>r.json())
                 .then(r => { 
                     let selected,Options
                     r.forEach(e=>{
-                        selected = (e.id == lga ? 'selected' : null)
-                        Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                        Options+='<option value="'+e.id+'">'+e.name+'</option>'
                     })
                     document.querySelector('#lgaDelivery').innerHTML= Options
+
+                    $('#lgaDelivery').val(lgaDelivery)
                 }
                 ).catch(e=>{
                     console.log(e)
@@ -329,153 +350,120 @@
             }, 1000)
         }
 
-        let dob = $('#dob').data(`dob`)
-        var today = moment(dob).format('YYYY-MM-DD')
+        let url =  window.location.origin+'/api/base/get-droplist'
 
-        $('#dob').val(today)
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let objArray, len, i, farm_produce, level
+                objArray = response.data.gender
+                len = objArray.length
 
+                let Options =  '<option value="">Select One</option>'
 
-      document.querySelector('#state').addEventListener('change', function(){
-          let url =  window.location.origin+'/api/base/lgas/'+this.value
-          fetch(url).then(r=>r.json())
-          .then(r=>{
-              let Options =  '<option value="">Select LGA</option>'
-              r.forEach(e=>{
-                  Options+='<option value="'+e.id+'">'+e.name+'</option>'
-              })
-              document.querySelector('#lgas').innerHTML=Options
-          }
-          ).catch(e=>{
-              //console.log(e)
-          })
-      })
+                var ele = document.getElementById('gender');
 
-    document.querySelector('#stateDelivery').addEventListener('change', function(){
-        let url =  window.location.origin+'/api/base/lgas/'+this.value
-        fetch(url).then(r=>r.json())
-        .then(r=>{
-            let Options =  '<option value="">Select LGA</option>'
-            r.forEach(e=>{
-                Options+='<option value="'+e.id+'">'+e.name+'</option>'
-            })
-            document.querySelector('#lgaDelivery').innerHTML=Options
-        }
-        ).catch(e=>{
-            console.log(e)
-        })
-    })
-
-
-    let url =  window.location.origin+'/api/base/get-droplist'
-
-    fetch(url,{})
-    .then(response => response.json())
-    .then(response => {
-        if(response.statusCode === 200){
-          
-            let objArray, len, i, farm_produce, level
-            objArray = response.data.gender
-            len = objArray.length
-
-            let Options =  '<option value="">Select One</option>'
-
-            var ele = document.getElementById('gender');
-
-            for(i=0; i < len; i++){
-                ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
-            }
-
-
-            level = response.data.eduLevel
-
-            len = level.length
-            var ele = document.getElementById('levelE');
-
-            
-            for(i=0; i < len; i++){
-                ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
-            }
-
-            setTimeout(function(){
-
-              let level = $('#levelE').data('level')
-                if(level != null){
-                    $('#levelE').val(level)
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
                 }
-            }, 1000)
 
 
-            farm_produce = response.data.farm_produce
-            len = farm_produce.length
+                level = response.data.eduLevel
 
-            var ele = document.getElementById('farmProduce');
-            //$(ele).atrr('val')
-            let val =ele.getAttribute('value')
-            for(i=0; i < len; i++){ 
-                ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '"' + (val.includes(farm_produce[i].name) ? 'selected="'+true+'"' : null)+'>' + farm_produce[i].name + '</option>';
-            }
-        }
-    }).catch()
-    })
+                len = level.length
+                var ele = document.getElementById('levelE');
 
-
-    $("#updateProfile").on('submit', function(e){
-      e.preventDefault()
-      
-      let _data = {
-        firstname: $('#firstname').val(),
-        lastname: $('#lastname').val(),
-        date_of_birth: $('#dob').val(),
-        gender: $('#gender').val(),
-        level_of_education: $('#levelE').val(),
-        state_id: $('#state').val(),
-        lg_id: $('#lgas').val(),
-        bvn: $('#bvn').val(),
-        nin: $('#nin').val(),
-        state_of_delivery: $('#stateDelivery').val(),
-        lga_of_delivery: $('#lgaDelivery').val(),
-        address: $('#address').val(),
-        farm_produce: $('#farmProduce').val()
-      }
-
-      let updateURL =  window.location.origin+'/farmer/update-profile'
-      
-      $.ajax({
-          type: 'POST',
-          url: updateURL,
-          data: $(this).serialize(),
-          beforeSend: () => {
-            $('.submitBtn').html('Please Wait...')
-          },
-          success: (response) => {
-            if(response.statusCode === 402){
-                let msg = ''
-                let errors = response.data
-                errors.forEach((value, index) => {
-                  msg += (index + 1 ) + '.' + value.msg + ' \n'
-                })
-                error_toastr(msg)
-              }else if(response.statusCode == 500 || response.statusCode == 400){
-                error_toastr(response.data)
-              }else{
-
-                let m = state != null ? 'Your profile has been update successfully.' : response.message
-                success_toastr(m)
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
+                }
 
                 setTimeout(function(){
-                  if(!state){
-                    window.location='dashboard'
-                  }
-                }, 2000)
-              }
-          },
-          complete: () => {
-              $('.submitBtn').html('Update')
-          },
-          error: (err) => {
 
+                  let level = $('#levelE').data('level')
+                    if(level != null){
+                        $('#levelE').val(level)
+                    }
+                }, 1000)
+
+
+                farm_produce = response.data.farm_produce
+                len = farm_produce.length
+
+                var ele = document.getElementById('farmProduce');
+                //$(ele).atrr('val')
+                let val =ele.getAttribute('value')
+                for(i=0; i < len; i++){ 
+                    ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '"' + (val.includes(farm_produce[i].name) ? 'selected="'+true+'"' : null)+'>' + farm_produce[i].name + '</option>';
+                }
+            }
+        }).catch(e => {
+          console.log(e)
+        })
+        
+
+
+        $("#updateProfile").on('submit', function(e){
+          e.preventDefault()
+          
+          let _data = {
+            firstname: $('#firstname').val(),
+            lastname: $('#lastname').val(),
+            date_of_birth: $('#dob').val(),
+            gender: $('#gender').val(),
+            level_of_education: $('#levelE').val(),
+            state_id: $('#state').val(),
+            lg_id: $('#lgas').val(),
+            bvn: $('#bvn').val(),
+            nin: $('#nin').val(),
+            state_of_delivery: $('#stateDelivery').val(),
+            lga_of_delivery: $('#lgaDelivery').val(),
+            address: $('#address').text(),
+            farm_produce: $('#farmProduce').val()
           }
-      })
 
+          let updateURL =  window.location.origin+'/farmer/update-profile'
+          
+          $.ajax({
+              type: 'POST',
+              url: updateURL,
+              data: $(this).serialize(),
+              beforeSend: () => {
+                $('.submitBtn').html('Please Wait...')
+              },
+              success: (response) => {
+                if(response.statusCode == 402){
+                    let msg = ''
+                    let errors = response.data
+                    errors.forEach((value, index) => {
+                      msg += (index + 1 ) + '.' + value.msg + ' \n'
+                    })
+                    error_toastr(msg)
+                  }else if(response.statusCode == 500 || response.statusCode == 400){
+                    error_toastr(response.data)
+                  }else{
+
+                    let m = state != null ? 'Your profile has been update successfully.' : response.message
+                    success_toastr(m)
+
+                    setTimeout(function(){
+                      if(!state){
+                        window.location='dashboard'
+                      }
+                    }, 2000)
+                  }
+              },
+              complete: () => {
+                  $('.submitBtn').html('Update')
+              },
+              error: (err) => {
+
+              }
+          })
+
+        })
     })
+    
 </script>

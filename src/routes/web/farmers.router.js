@@ -33,17 +33,41 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 
 farmersRouter.get('/market_place', async (req, res) => {
     let resp = await farmerController.marketPlace(req, res)
+    const products = resp.response
 
     res.render('farmers/market_place', {
         layout : 'farmers-dashboard',
         title: 'Market Place',
         fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
         farmerData: resp.farmer,
+        products,
         isVerified: resp.isVerified
     })
 })
+
 farmersRouter.get('/product', farmerController.product)
-farmersRouter.get('/view-product', farmerController.viewProduct)
+farmersRouter.get('/view-product/:id', async (req, res) => {
+
+    const resp = await farmerController.viewProduct(req, res)
+    const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']
+    const items = JSON.stringify(JSON.parse(resp.singleProduct.item))
+    const data = Object.entries(items)
+    
+    // data.forEach((value, index, self) => {
+    //     console.log(value);
+    // })
+
+    res.render('farmers/view-product', {
+        layout : 'farmers-dashboard',
+        title: 'Product',
+        fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
+        farmerData: resp.farmer,
+        product: resp.singleProduct,
+        seedCompany,
+        items: items.min,
+        isVerified: resp.isVerified
+    })
+})
 farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
 
 
