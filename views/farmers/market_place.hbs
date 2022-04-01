@@ -49,16 +49,18 @@
                         </div>
                         <div class="product-price"> 
                             <p>Price per KG</p>
-                            <h4> 
+                            <h4 class="price_kg"> 
                                 {{!-- &#8358; 3,000 --}}
                             </h4>
                             <p>Select Size (kg)</p>
                             <div class="input-field product-size">
-                                <select>
-                                    <option value="" disabled selected>Choose Size</option>
-                                    {{#each this.item.min}}
-                                        <option value="1">{{this}} Kg</option>
-                                    {{/each}}
+                                <select id="{{this.id}}" class="size" >
+                                    <option value="">Choose Size</option>
+                                    {{#json this.item}}
+                                        {{#each this.min}}
+                                              <option value="{{this}}">{{this}} kg</option>
+                                        {{/each}}
+                                    {{/json}}
                                 </select>
                             </div>
 

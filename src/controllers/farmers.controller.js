@@ -229,6 +229,15 @@ module.exports={
             isVerified
         })
     },
+
+    singleProduct:async (product_id)=>{
+         const singleProduct = await Product.findOne({
+            where: {id: product_id, status: 1},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true
+        })
+        return singleProduct;
+    },
     cart: async (req, res) => {
         const user = await req.user
         const farmer = await utils.getFarmerProfile(user.dataValues)
