@@ -57,7 +57,7 @@
                                 <select id="{{this.id}}" class="size" >
                                     <option value="">Choose Size</option>
                                     {{#json this.item}}
-                                        {{#each this.min}}
+                                        {{#each this.pkg}}
                                               <option value="{{this}}">{{this}} kg</option>
                                         {{/each}}
                                     {{/json}}

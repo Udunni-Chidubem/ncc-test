@@ -141,7 +141,7 @@
          let item = JSON.parse(r.item)
          let price = null;
          for (let i=0; i < item.min.length; i++){
-           if(item.min[i]==value){
+           if(item.pkg[i]==value){
              console.log(item.price[i])
              $('.price_kg').html(item.price[i])
            }
