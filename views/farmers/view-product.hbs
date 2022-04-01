@@ -23,33 +23,37 @@
 	                <button class="btn btn-place-order" onclick="window.location.href='./payment_page_preview'">Place Order</button>
              	</div>
              	<div class="view-product-price">
-             	   <p>Unit Price per KG</p>
+                 
+             	    <p>Unit Price per KG</p>
+                   <br/>
                   <h4 class="price_kg"></h4>
-                  <p class="text-dark">per KG </p>
                   <div class="input-field product-size">
-                            <select id="{{this.id}}" class="size">
-                              <option value="">Choose Size</option>
-                              {{#json product.item}}
-                                  {{#each this.pkg}}
-                                        <option value="{{this}}">{{this}} kg</option>
-                                  {{/each}}
-                              {{/json}}
-                            </select>
-                          </div>
-                  <p>Select quantiy</p>
-                  <div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">
-                                  <span class="fa fa-minus"></span>
-                                </button>
-                            </span>
-                            <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="1" max="100">
-                            <span class="input-group-btn">
-                                <button type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
-                                    <span class="fa fa-plus"></span>
-                                </button>
-                            </span>
+                          <select id="{{product.id}}" class="size">
+                            <option value="">Choose Size</option>
+                            {{#json product.item}}
+                                {{#each this.pkg}}
+                                      <option value="{{this}}">{{this}} kg</option>
+                                {{/each}}
+                            {{/json}}
+                          </select>
                         </div>
+
+                  <p>Select quantiy</p>
+
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                          <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">
+                            <span class="fa fa-minus"></span>
+                          </button>
+                      </span>
+                      <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="1" max="100">
+                      <span class="input-group-btn">
+                          <button type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
+                              <span class="fa fa-plus"></span>
+                          </button>
+                      </span>
+                  </div>
+
              	</div>
              </div>
         </div>
