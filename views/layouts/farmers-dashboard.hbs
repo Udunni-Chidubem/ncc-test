@@ -15,15 +15,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">{{ fullname }}</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
-                <!-- <span class="notrifications"></span> -->
-              </a>
+               <a class="nav-link  " href="./cart"><i class="bx bx-cart"></i></a>
             </li>
+            
             <li class="nav-item">
-              
+             <a class="nav-link  " href="#"><i class="bi bi-bell"></i></a>
             </li>
-             
              
           </ul>
         
@@ -58,7 +57,7 @@
   
         </li>
 
-        {{#unless isVerified }}
+        {{!-- {{#unless isVerified }} --}}
           <li>
             <a href="/farmer/market_place">
               <i class='bx bx-cart-add'></i>
@@ -95,7 +94,7 @@
           </a>
    
         </li>
-        {{/unless}}
+        {{!-- {{/unless}} --}}
         
         <li>
           <form method="post" action="/logout?_method=DELETE">

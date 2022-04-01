@@ -2166,7 +2166,8 @@ h1 {
 
 .rating {
     border: none;
-    margin-right: 49px
+    margin-right: 49px;
+    float: left;
 }
 
 .myratings {
@@ -2417,4 +2418,10 @@ font-size: 12px;
   font-weight: normal;
   padding: 0px;
   height: fit-content;
+}
+
+@media screen and (min-width: 1200px){
+  .profile-card{
+      width: 100%;
+  }
 }

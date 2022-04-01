@@ -237,6 +237,14 @@ module.exports={
             raw: true
         })
         return singleProduct;
+    },
+    cart: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user.dataValues)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+
+        return { farmer, isVerified }
     }
 
 }
