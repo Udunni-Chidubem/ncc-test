@@ -27,7 +27,7 @@ siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)
     y.then(r=>{
         
         if(r.user){
-            res.render('site/success-bk',{
+            res.render('site/success',{
                 form_banner:'Group.png',
                 title: 'Successful Page',
                 layout : 'success-header',
@@ -60,7 +60,8 @@ siteRouter.post('/seed-company-signup', registerSeedCompanyValidation(), registe
             res.render('site/success',{
                 form_banner:'Group.png',
                 title: 'Notification',
-                layout : 'form'
+                layout : 'success-header'
+                // layout : 'form'
              })
         }else{
              req.flash('errors', r.errors)
@@ -77,8 +78,8 @@ siteRouter.post('/seed-trader-signup', seedTraderValidation(), seedTraderValidat
          if(r.user){
             res.render('site/success',{
                 form_banner:'Group.png',
-                layout : 'form',
-                title: 'Notification'
+                title: 'Notification',
+                layout : 'success-header'
              })
         }else{
             req.flash('errors', r.errors)

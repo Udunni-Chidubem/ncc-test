@@ -28,6 +28,26 @@ app.engine('hbs', handlebars({
         concat(){
             arguments = [...arguments].slice(0, -1);
             return arguments.join('');
+        },
+        for(from, to, incr, block){
+            var accum = '';
+            for(var i = from; i <= to; i += incr)
+                accum += block.fn(i);
+            return accum;
+        },
+        equals(a, b, options){
+            return (a === b ) ? options.fn(this) : options.fn(reverse)
+        },
+        add(a, b, sum){
+            b += a;
+            return b;
+        },
+        sub(a, b, sub){
+            b-= a
+            return b
+        },
+        increment(inindex){
+            return inindex + 1
         }
     }
 }))
@@ -51,6 +71,7 @@ app.use(fileUpload({
     createParentPath: true
 }));
 const mainRoute = require('./src/routes/main.route')
+const { reverse } = require('dns')
 
 app.use('/', mainRoute)
 
