@@ -48,17 +48,17 @@
                             <p class="product-location">Location: {{'User.SeedCompany.State.name'}} State</p> 
                         </div>
                         <div class="product-price"> 
-                            <p>Price per KG</p>
-                            <h4> 
-                                {{!-- &#8358; 3,000 --}}
-                            </h4>
+                            <p>Unit Price per KG</p>
+                            <h4 class="price_kg"></h4>
                             <p>Select Size (kg)</p>
                             <div class="input-field product-size">
-                                <select>
-                                    <option value="" disabled selected>Choose Size</option>
-                                    {{#each this.item.min}}
-                                        <option value="1">{{this}} Kg</option>
-                                    {{/each}}
+                                <select id="{{this.id}}" class="size">
+                                    <option value="">Choose Size</option>
+                                    {{#json this.item}}
+                                        {{#each this.pkg}}
+                                              <option value="{{this}}">{{this}} kg</option>
+                                        {{/each}}
+                                    {{/json}}
                                 </select>
                             </div>
 
@@ -69,7 +69,7 @@
                                     <span class="fa fa-minus"></span>
                                     </button>
                                 </span>
-                                <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="1" max="100">
+                                <input type="text" id="quantity" name="quantity" class="input-number" value="2" min="1" max="100">
                                 <span class="input-group-btn">
                                     <button type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
                                         <span class="fa fa-plus"></span>
