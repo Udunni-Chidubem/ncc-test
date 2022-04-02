@@ -66,13 +66,15 @@
                                  <input 
                                     type="text" 
                                     class="form-control border-0 border-bottom" 
-                                    max="13" 
-                                    min="10"
+                                    maxlength="14" 
+                                    minlength="13"
                                     id="tin"
                                     name="tin"
                                     value="{{company.tin}}"
                                     aria-label="Sizing example input" 
-                                    aria-describedby="inputGroup-sizing-sm">
+                                    aria-describedby="inputGroup-sizing-sm"
+                                    pattern="[0-9]+"
+                                    >
                               </div>
                            </div>
                         </div>

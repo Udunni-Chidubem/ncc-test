@@ -70,7 +70,7 @@ companyRouter.get('/product-list', async (req, res)=>{
         pagination: paginate,
         title : 'Products',
     })
-})
+});
 
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
     let r = await companyController.updateProfile(req, res)
@@ -81,6 +81,17 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
         res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
     }
     
+});
+
+companyRouter.get('/update-product', async (req, res)=>{
+
+    let product = await companyController.updateProduct(req, res)
+
+    res.render('seed_company/update-product', {
+        layout : 'company-dashboard',
+        product,
+        title : 'Update Product',
+    })
 })
 
 module.exports=companyRouter

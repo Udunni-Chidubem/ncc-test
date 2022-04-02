@@ -79,5 +79,14 @@ module.exports = {
             response = getPagingData(product, page, limit)
         }
         return response
+    },
+    updateProduct : async (req, res, filename)=>{
+         const user = await req.user
+         const product = await Product.findOne({ 
+            where: { user_id: user.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true 
+        })
+        
     }
 }
