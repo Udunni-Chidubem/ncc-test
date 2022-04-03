@@ -23,7 +23,7 @@
 				</div>
 				<hr class="sc-product-line">
 				<div>
-					<table class="table table-bordered table-responsive">
+					{{!-- <table class="table table-bordered table-responsive">
 						<thead>
 							<tr>
 								<th>Package Size (kg)</th>
@@ -44,7 +44,76 @@
 								</tr>
 							{{/json}}
 						</tbody>
-					</table>
+					</table> --}}
+
+					<div class="inp_cont" id="inp_cont">
+                    <div class="">
+                        <div class="row">
+                            <div class="col col_sma ">
+                                <div class="   ">
+                                    <label class="input_form input_form_head">Package Size <i>(kg)</i>  </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label class="input_form input_form_head">Quantity </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label class="input_form input_form_head">Min Stock </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <label class="input_form input_form_head">Unit Price (NGN) </label>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                            </div>
+                        </div>
+                        <div class="row  "  >
+                            <div class="col col_sma"> 
+                            {{#json product.item}}
+                                    {{#each this.pkg}} 
+                                <div class="py-1 ">
+                                       <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">   
+                                    {{#each this.quantity}}
+                                <div class="py-1 "> 
+                                    <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                    {{#each this.min}}
+                                <div class="py-1 ">
+                                    <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                    {{#each this.price}}
+                                <div class="py-1 ">
+                                    <h5> &#8358; {{this}} </h5>
+                                </div>
+                                {{/each}}
+                                    {{/json}}
+                            </div>
+                            <div class="col col_sma">    
+                                <div class="p-3  ">
+                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1"><i class="bi bi-dot"></i>
+					                  {{#if this.status}} Published {{else}} Pending {{/if}}
+					                </span> 
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div> 
+                				<hr class="sc-product-line">
 
 					
 				</div>
@@ -53,6 +122,10 @@
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 		</div>
+			<div class="float-end">
+            <div class="float-end m-2 mb-3">
+                <button type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href='/seed-company/update-product/{{product.id}}'">Edit</button>                    
+            </div>
 	</div>
 </div>
 {{else}}

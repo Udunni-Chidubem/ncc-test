@@ -2438,7 +2438,7 @@ font-size: 12px;
   
 .sc-product{
   width: 946px;
-  height: 525px;
+  height: auto;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin: 40px;

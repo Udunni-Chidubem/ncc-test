@@ -53,28 +53,22 @@
                                     
                                 </div>
                                 {{/each}}
-                                {{/json}}
                             </div>
                             <div class="col col_sma">   
-                                {{#json product.item}}
                                     {{#each this.quantity}}
                                 <div class="py-3 "> 
                                     <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="quantity" value="{{this}}" >
                                 </div>
                                 {{/each}}
-                                    {{/json}}
                             </div>
                             <div class="col col_sma">
-                                {{#json product.item}}
                                     {{#each this.min}}
                                 <div class="py-3 ">
                                     <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="min_order"  value="{{this}}">
                                 </div>
                                 {{/each}}
-                                    {{/json}}
                             </div>
                             <div class="col col_sma">
-                                {{#json product.item}}
                                     {{#each this.price}}
                                 <div class="py-3 ">
                                     <input type="number" class="form-control   input_borderless " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="price"  value="{{this}}">
