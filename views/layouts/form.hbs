@@ -8,7 +8,7 @@
                         <div class="card-body pt-5 mt-5">
                             <img src="images/{{form_banner}}" alt="">
                         </div>
-                        <h4 style="text-align: center;">{{sub}}</h4>
+                        {{!-- <h4 style="text-align: center;">{{sub}}</h4> --}}
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
@@ -51,19 +51,5 @@
       {{!-- {{> footer}} --}}
    </body>
    <script>
-    document.querySelector('#state').addEventListener('change', function(){
-        let url =  window.location.origin+'/api/base/lgas/'+this.value
-        fetch(url).then(r=>r.json())
-        .then(r=>{
-            let Options =  '<option value="">Select LGA</option>'
-            r.forEach(e=>{
-                Options+='<option value="'+e.id+'">'+e.name+'</option>'
-            })
-            document.querySelector('#lga').innerHTML=Options
-        }
-        ).catch(e=>{
-            console.log(e)
-        })
-    })
 </script>
 </html>

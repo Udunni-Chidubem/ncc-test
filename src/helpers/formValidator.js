@@ -204,6 +204,17 @@ const seedTraderValidate = (req, res, next) => {
     });
 }
 
+const productValidation = () => {
+    return [
+        body('productName')
+            .not().isEmpty().withMessage('Product Name field is required'),
+        body('productDescription')
+            .not().isEmpty().withMessage('Product Description field is required'),
+        body('productVariant')
+            .not().isEmpty().withMessage('Product Variant field is required'),
+    ];
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
@@ -228,5 +239,6 @@ module.exports = {
     registerSeedCompanyValidation,
     registerSeedCompanyValidate,
     seedTraderValidation,
-    seedTraderValidate
+    seedTraderValidate,
+    productValidation
 }

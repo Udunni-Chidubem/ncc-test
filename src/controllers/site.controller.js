@@ -22,14 +22,23 @@ module.exports = {
         res.render('site/pre-signup', {
             title: 'Pre-Registration Page'
         });
-    },
+    }, 
 
+    success_page_test: async (req,res) => {
+        res.render('site/success-bk',{
+            form_banner:'Group.png',
+            title: 'Successful Page',
+            layout : 'success-header',
+            errors : req.flash('errors')
+         })
+    },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
             layout: 'common',
             title : 'About Us'
         });
     },
+
     farmer_signup: async (req,res) => {
 
         res.render('site/farmer_signup',{
@@ -58,7 +67,7 @@ module.exports = {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
             title : 'Seed Company\'s Registration',
-            sub: ' Investment in agriculture yields profit',
+            sub: 'Investment in agriculture yields profit',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -194,17 +203,27 @@ module.exports = {
         });
         return states
     },
-
     lgas : async (req, res)=>{
-
+        let lgas = await LGAs.findAll({
+            attributes : ['id', 'name'],
+            where : {state_id : req.params.state_id, id: req.params.lga_id},
+            raw : true
+        });
+        res.json(lgas)
     },
     lgaByStateId: async (req, res)=>{
         let lgas = await LGAs.findAll({
+            include : [
+                {
+                    model : States,
+                    attributes : ['id', 'name']
+                },
+            ],
             attributes : ['id', 'name'],
             where : {state_id : req.params.state_id},
             raw : true
         });
-        res.send(lgas)
+        res.json(lgas)
     },
     getDropList:  (req, res) => {
         const data = require('../data/dropDownList.json')
@@ -241,6 +260,12 @@ module.exports = {
             } })
 
         })
+    },
+    errorPage: async (req,res) => {
+        res.render('site/404', {
+            layout: 'main',
+            title : '404 Page'
+        });
     }
 
 
