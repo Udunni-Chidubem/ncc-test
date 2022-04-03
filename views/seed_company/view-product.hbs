@@ -1,0 +1,60 @@
+{{#if product }}
+<div class="container">
+	<div class="card sc-product">
+        <div class="card-body m-3 sc-view-product">
+			<div class="">
+				<div class="sc-name_varaint">
+					<div>
+						<h4>Product Name</h4>
+						<h5>{{product.product_name}}</h5>
+					</div>
+					<div>
+						<h4>Variant</h4>
+						<h5>{{product.variant}}</h5>
+					</div>
+				</div>
+                <hr class="sc-product-line">
+				<div class="sc-view-prod-desc">
+					<h4>Product Description</h4>
+					<p>{{product.description}}
+
+						<br>
+					</p>
+				</div>
+				<hr class="sc-product-line">
+				<div>
+					<table class="table table-bordered table-responsive">
+						<thead>
+							<tr>
+								<th>Package Size (kg)</th>
+								<th>Quantity</th>
+								<th>Min Stock</th>
+								<th>Price</th>
+								<th> </th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{{#json product.item}}
+								<tr>
+									{{#each this.pkg}}<td>{{this}}</td>{{/each}}
+									{{#each this.min}}<td class="row">{{this}}</td>{{/each}}
+									{{#each this.quantity}}<td>{{this}}</td>{{/each}}
+									{{#each this.price}}<td>{{this}}</td>{{/each}}
+								</tr>
+							{{/json}}
+						</tbody>
+					</table>
+
+					
+				</div>
+			</div>
+			<div class="sc-product-img">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
+			</div>
+		</div>
+	</div>
+</div>
+{{else}}
+
+{{/if}}

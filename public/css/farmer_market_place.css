@@ -2436,3 +2436,81 @@ font-size: 12px;
       width: 100%;
   } */
   
+.sc-product{
+  width: 946px;
+  height: 525px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 40px;
+}
+  
+.sc-view-product{
+  display: grid;
+  grid-template-columns: 525px auto;
+}
+
+.sc-view-product h4{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+
+/* identical to box height */
+letter-spacing: 0.01em;
+
+/* text_help_gray */
+color: #818E9B;
+
+}
+
+.sc-view-product h5{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #757575;
+}
+
+.sc-view-product p{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+
+  /* identical to box height */
+  letter-spacing: 0.01em;
+
+  color: #000000;
+}
+
+.sc-name_varaint{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.sc-product-line{
+  background-color: #626161;;
+  width: 400px;
+  height: 1px;
+}
+
+.sc-product-img{
+  width: 325px;
+  height: 230px;
+}
+
+.sc-product-img img{
+  width: 100%;
+  height: inherit;
+}
+
+
+.sc-view-prod-desc{
+  height: 123px;
+  padding-top: 10px;
+}
