@@ -2514,3 +2514,57 @@ color: #818E9B;
   height: 123px;
   padding-top: 10px;
 }
+
+
+@media screen and (min-width: 320px) and (max-width: 475px){
+    .sc-product{
+      width: auto;
+      padding: 0px;
+      margin: 5px;
+    }
+  
+    .sc-view-product{
+      grid-template-columns: auto;
+    }
+
+    .sc-view-product h4{
+      font-size: 12px;
+    }
+
+    .sc-view-product h5{
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    .sc-product-line{
+      width: 300px;
+    }
+
+    .sc-product-img{
+      width: 100%px;
+      height: 216px;
+      margin-bottom: 10px;
+    }
+
+    .sc-product-img-hidden{
+      display: none;
+    }
+
+    .sc-product-img img{
+      width: 100%;
+      height: inherit;
+    }
+
+    .sc-product-row{
+      --bs-gutter-x: -0.5rem !important;
+    }
+
+    .sc-availbility-check{
+      font-size: 10px;
+      width: max-content;
+    }
+
+    .sc-view-prod-desc{
+      height: auto;
+    }
+}
