@@ -1251,11 +1251,13 @@ input[type="number"] {
 .pending {
   background: #ffe19a;
   border-radius: 10px;
+  color: #fb8200;
 }
 
 .approved {
   background: #cdffcd;
   border-radius: 10px;
+  color: #007f00;
 }
 
 .create_p {
@@ -1719,4 +1721,9 @@ input[type="number"] {
   text-align: right;
   letter-spacing: 0.01em;
   color: #049648;
+}
+
+.form-check-input.ck_box {
+  width: 2em;
+  height: 2em;
 }
