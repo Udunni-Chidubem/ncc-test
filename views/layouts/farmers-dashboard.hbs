@@ -143,7 +143,7 @@
          let price = null;
          for (let i=0; i < item.min.length; i++){
            if(item.pkg[i]==value){
-             $('.price_kg').html("&#8358; " + (item.price[i] * qty))
+             $('.price_'+product_id).html("&#8358; " + (item.price[i] * qty))
            }
          }
        })
