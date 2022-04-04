@@ -263,7 +263,7 @@ module.exports = {
     },
     errorPage: async (req,res) => {
         res.render('site/404', {
-            layout: 'main',
+            layout: '404',
             title : '404 Page'
         });
     }
