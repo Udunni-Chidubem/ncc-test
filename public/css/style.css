@@ -1576,6 +1576,19 @@ input[type="number"] {
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .t_info {
+    width: 735px !important;
+  }
+  .card_home {
+    width: 735px !important;
+  }
+  .col__4 {
+    flex: 0 0 auto;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
   .card_products {
     width: 462px;
   }
@@ -1663,6 +1676,19 @@ input[type="number"] {
 
   .btn_gr2 {
     margin-left: 1.2rem;
+  }
+  .ul_list_item {
+    display: block !important;
+  }
+  .t_info {
+    width: 484px !important;
+  }
+  .card_home {
+    width: 484px !important;
+  }
+  .col__4 {
+    flex: 0 0 auto;
+    width: 100% !important;
   }
 }
 
