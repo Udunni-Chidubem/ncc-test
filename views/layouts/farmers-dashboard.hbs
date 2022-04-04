@@ -17,11 +17,15 @@
             </li>
             
             <li class="nav-item">
-               <a class="nav-link  " href="/farmer/cart"><i class="bx bx-cart"></i></a>
+               <a class="nav-link" href="/farmer/cart"><i class="bx bx-cart"></i>
+                <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+               </a>
             </li>
             
             <li class="nav-item">
-             <a class="nav-link  " href="#"><i class="bi bi-bell"></i></a>
+              <a class="nav-link" href="#"><i class="bi bi-bell"></i>
+                {{!-- <span class='badge badge-warning' id='lblCartCount'> 5 </span> --}}
+              </a>
             </li>
              
           </ul>
@@ -33,7 +37,7 @@
   <aside class="sidebar close ">
       
     <div>
-        {{> sidebar_image}}
+        {{> farmer_sidebar_images}}
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
@@ -57,7 +61,7 @@
   
         </li>
 
-        {{!-- {{#unless isVerified }} --}}
+        {{#unless isVerified }}
           <li>
             <a href="/farmer/market_place">
               <i class='bx bx-cart-add'></i>
@@ -94,7 +98,7 @@
           </a>
    
         </li>
-        {{!-- {{/unless}} --}}
+        {{/unless}}
         
         <li>
           <form method="post" action="/logout?_method=DELETE">
@@ -137,6 +141,8 @@
  <script>
    $(document).ready(function(){
 
+     let baseUrl = window.location.origin
+
      const success_toastr = (msg) => {
       Toastify({
           text: msg,
@@ -171,7 +177,7 @@
        let qty = document.getElementById('quantity').value;
        let product_id = $(this).attr('id');
        let value = $(this).val();
-       let url = window.location.origin+'/farmer/product/price?product_id='+product_id
+       let url = baseUrl +'/farmer/product/price?product_id='+product_id
        fetch(url).then(r=>r.json()).then(r=>{
          let item = JSON.parse(r.item)
          let price = null;
@@ -191,14 +197,45 @@
       let q = content.find('#quantity').val()
       let pid = $(this).data('prodid')
 
-      const body =  {
-        'price': p.split('₦')[1].trim(), 
+      let price = p ? p.split('₦')[1].trim() : null
+
+      const data =  {
+        'price': price, 
         'size' : s, 
         'quantity' : q,
         'pid': pid
       }
 
-      console.log(body)
+      if(data.price != null || data.size != null || data.quantity != null){
+        $(this).html('<i class="fa fa-spinner"></i> Please wait...')
+
+        let url = baseUrl + '/farmer/add-to-cart'
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then(r => r.json())
+        .then(response => {
+          $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+          if(response.statusCode == 402){
+            let msg = ''
+            let errors = response.data
+            errors.forEach((value, index) => {
+              msg += (index + 1 ) + '. ' + value.msg + ' \n'
+            })
+            error_toastr(msg)
+          }else if(response.statusCode == 500 || response.statusCode == 400){
+            error_toastr(response.message)
+          }else{
+            success_toastr(response.message)
+          }
+        })
+        .catch(error => console.log(error))
+      }else{
+        error_toastr('Ensure you have selected a price, size and quantity before you can proceed')
+      }
 
       
     })

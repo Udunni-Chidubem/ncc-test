@@ -1322,7 +1322,7 @@ input[type="number"] {
 }
 
 .card_products {
-  width: 700px;
+  width: fit-content;
   border-radius: 8px !important;
   height: auto;
 }
@@ -1351,9 +1351,9 @@ input[type="number"] {
 }
 
 .p_img img {
-  width: 200px;
+  width: 100%;
   padding-bottom: 0px !important;
-  margin-left: 40px;
+  margin-left: 31px;
 }
 
 .card_title {
@@ -1373,7 +1373,7 @@ input[type="number"] {
 }
 
 .c_inf {
-  padding-top: 2rem;
+  padding-top: 0rem;
 }
 
 .c_inf2 h1 {
@@ -1404,7 +1404,7 @@ input[type="number"] {
 }
 
 .btn_gr {
-  width: 110px;
+  width: 84px;
   height: 42px;
   background: linear-gradient(180deg, #5dcd6d 0%, #008346 100%);
   border-radius: 8px;
@@ -1663,6 +1663,123 @@ input[type="number"] {
 
   .btn_gr2 {
     margin-left: 1.2rem;
+  }
+  .ul_list_item {
+    display: block !important;
+  }
+  .t_info {
+    width: 735px !important;
+  }
+  .card_home {
+    width: 735px !important;
+  }
+  .col__4 {
+    flex: 0 0 auto;
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
+  .card_products {
+    width: 462px;
+  }
+
+  .card_pay {
+    width: 322px;
+  }
+
+  .check_box input {
+    display: none;
+  }
+
+  .check_box2 input {
+    display: none;
+  }
+
+  .card_title {
+    display: none;
+  }
+
+  .c_inf {
+    padding-top: 0rem !important;
+  }
+
+  .ck {
+    display: none;
+  }
+
+  .ck input[type="checkbox"] {
+    display: none;
+  }
+
+  .py_3 {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+  .p_img img {
+    width: 100%;
+    padding-bottom: 0px !important;
+    margin-left: 0px !important;
+    height: 179px;
+    object-fit: cover;
+  }
+
+  .ck2 {
+    display: block;
+  }
+
+  .p-3.p_b3 {
+    padding: 0rem 0rem !important;
+  }
+  .p-3.p_b1 {
+    padding: 0rem 0rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .px-3.px_3 {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+  }
+
+  .trash__ {
+    margin-bottom: 0px !important;
+  }
+
+  .col-12.r_mt {
+    margin-top: 0rem !important;
+  }
+
+  .col-4.c0l_4 {
+    width: 90.667% !important;
+  }
+
+  .p_in h1 {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px;
+  }
+  .col-12.r_mt {
+    margin-top: 0rem !important;
+  }
+  .ratings {
+    margin-right: 4px !important;
+  }
+
+  .btn_gr2 {
+    margin-left: 1.2rem;
+  }
+  .ul_list_item {
+    display: block !important;
+  }
+  .t_info {
+    width: 484px !important;
+  }
+  .card_home {
+    width: 484px !important;
+  }
+  .col__4 {
+    flex: 0 0 auto;
+    width: 100% !important;
   }
 }
 

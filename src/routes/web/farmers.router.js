@@ -1,7 +1,7 @@
 const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
-const { profileUpdateValidation, validate } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, validate } = require('../../helpers/formValidator')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -52,10 +52,6 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
     const items = JSON.stringify(JSON.parse(resp.singleProduct.item))
     const data = Object.entries(items)
     
-    // data.forEach((value, index, self) => {
-    //     console.log(value);
-    // })
-
     res.render('farmers/view-product', {
         layout : 'farmers-dashboard',
         title: 'Product',
@@ -84,6 +80,17 @@ farmersRouter.get('/cart', async (req, res) => {
         farmerData: resp.farmer,
         isVerified: resp.isVerified
     })
+})
+
+farmersRouter.post('/add-to-cart', cartValidation(), validate, async (req, res) => {
+    let response = farmerController.addToCart(req, res)
+    
+    if(response.cartItems != null){
+        res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
+    }else{
+        console.log(response.errors)
+        res.json({ message: 'Unable to add item to cart. Please try again', error: true, statusCode: 400 }).status(400)
+    }
 })
 
 

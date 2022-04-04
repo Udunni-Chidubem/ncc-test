@@ -23,7 +23,6 @@ module.exports = {
             title: 'Pre-Registration Page'
         });
     }, 
-
     success_page_test: async (req,res) => {
         res.render('site/success-bk',{
             form_banner:'Group.png',
@@ -195,7 +194,6 @@ module.exports = {
         });
         res.send(states)
     }, 
-
     getStates : async ()=>{
         let states =await States.findAll({
             attributes : ['id', 'name'],
@@ -260,13 +258,5 @@ module.exports = {
             } })
 
         })
-    },
-    errorPage: async (req,res) => {
-        res.render('site/404', {
-            layout: 'main',
-            title : '404 Page'
-        });
-    }
-
-
+    } 
 }

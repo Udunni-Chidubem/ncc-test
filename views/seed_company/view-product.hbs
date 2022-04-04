@@ -1,7 +1,9 @@
 {{#if product }}
-<div class="container">
 	<div class="card sc-product">
-        <div class="card-body m-3 sc-view-product">
+        <div class="card-body m-0 sc-view-product">
+        	<div class="sc-product-img sc-product-img-min-hidden">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
+			</div>
 			<div class="">
 				<div class="sc-name_varaint">
 					<div>
@@ -48,7 +50,7 @@
 
 					<div class="inp_cont" id="inp_cont">
                     <div class="">
-                        <div class="row">
+                        <div class="row sc-product-row">
                             <div class="col col_sma ">
                                 <div class="   ">
                                     <h4 >Package Size <i>(kg)</i>  </h4>
@@ -56,23 +58,24 @@
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Quantity </h4>
+                                    <h4 >Quantity </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Min Stock </h4>
+                                    <h4 >Min Stock </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Unit Price (NGN) </h4>
+                                    <h4 >Unit Price </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
+                            	<h4 > Availability </h4>
                             </div>
                         </div>
-                        <div class="row  "  >
+                        <div class="row  sc-product-row"  >
                             <div class="col col_sma"> 
                             {{#json product.item}}
                                     {{#each this.pkg}} 
@@ -104,8 +107,8 @@
                                     {{/json}}
                             </div>
                             <div class="col col_sma">    
-                                <div class="p-3  ">
-                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1"><i class="bi bi-dot"></i>
+                                <div class="p-0  sc-availbility-check">
+                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
 					                  {{#if this.status}} Published {{else}} Pending {{/if}}
 					                </span> 
                                 </div>
@@ -118,7 +121,7 @@
 					
 				</div>
 			</div>
-			<div class="sc-product-img">
+			<div class="sc-product-img sc-product-img-hidden">
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 		</div>
@@ -127,7 +130,6 @@
                 <button type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href='/seed-company/update-product/{{product.id}}'"><i class="fa fa-pencil"></i> Edit</button>                    
             </div>
 	</div>
-</div>
 {{else}}
 
 {{/if}}

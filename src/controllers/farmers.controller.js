@@ -1,5 +1,5 @@
 const db = require('../models');
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation, Product }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation, Product, Cart }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
 const { Op } = require("sequelize");
@@ -242,8 +242,22 @@ module.exports={
         const farmer = await utils.getFarmerProfile(user.dataValues)
         const isVerified = await utils.isVerified(user.dataValues)
 
-
         return { farmer, isVerified }
+    },
+    addToCart: async (req, res) => {
+        const user = await req.user
+        console.log(user.id)
+        const {pid, price, size, quantity} = req.body
+        const cartItems = await Cart.create({
+            user_id: user.id,
+            product_id: pid,
+            unit_price: price,
+            size: size,
+            qty: quantity,
+            total_amount: parseInt(price * quantity)
+        })
+
+        return {cartItems}
     }
 
 }
