@@ -1322,7 +1322,7 @@ input[type="number"] {
 }
 
 .card_products {
-  width: 700px;
+  width: fit-content;
   border-radius: 8px !important;
   height: auto;
 }
@@ -1351,9 +1351,9 @@ input[type="number"] {
 }
 
 .p_img img {
-  width: 200px;
+  width: 100%;
   padding-bottom: 0px !important;
-  margin-left: 40px;
+  margin-left: 31px;
 }
 
 .card_title {
@@ -1373,7 +1373,7 @@ input[type="number"] {
 }
 
 .c_inf {
-  padding-top: 2rem;
+  padding-top: 0rem;
 }
 
 .c_inf2 h1 {
