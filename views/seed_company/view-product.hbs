@@ -1,7 +1,7 @@
 {{#if product }}
 	<div class="card sc-product">
         <div class="card-body m-0 sc-view-product">
-        	<div class="sc-product-img">
+        	<div class="sc-product-img sc-product-img-min-hidden">
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 			<div class="">
@@ -58,20 +58,21 @@
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Quantity </h4>
+                                    <h4 >Quantity </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Min Stock </h4>
+                                    <h4 >Min Stock </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 class="input_form input_form_head">Unit Price (NGN) </h4>
+                                    <h4 >Unit Price </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
+                            	<h4 > Availability </h4>
                             </div>
                         </div>
                         <div class="row  sc-product-row"  >
@@ -107,7 +108,7 @@
                             </div>
                             <div class="col col_sma">    
                                 <div class="p-0  sc-availbility-check">
-                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1"><i class="bi bi-dot"></i>
+                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
 					                  {{#if this.status}} Published {{else}} Pending {{/if}}
 					                </span> 
                                 </div>
