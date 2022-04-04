@@ -39,6 +39,13 @@ companyRouter.get('/create-product', async (req, res)=>{
         title : 'Create Product',
     })
 });
+companyRouter.get('/order-list', async (req, res)=>{
+
+    res.render('seed_company/order-list', {
+        layout : 'company-dashboard',
+        title : 'Order List',
+    })
+});
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
     let filename='';
     if(req.files){
