@@ -14,12 +14,13 @@ $(document).ready(function(){
           // Stop acting like a button
           e.preventDefault();
           // Get the field name
-          var quantity = parseInt($('#quantity').val())
+          let input = $(this).closest('.input-group').find("#quantity")
+          var quantity = parseInt(input.val())
           // var quantity = parseInt($(this).find('#quantity').val());
           
           // If is not undefined
               
-              $('#quantity').val(quantity + 1);
+              input.val(quantity + 1);
   
             
               // Increment
@@ -31,14 +32,14 @@ $(document).ready(function(){
           e.preventDefault();
           // Get the field name
           // var quantity = parseInt($(this).find('#quantity').val());
-
-          var quantity = parseInt($('#quantity').val());
+          let input = $(this).closest('.input-group').find("#quantity")
+          var quantity = parseInt(input.val());
           
           // If is not undefined
         
               // Increment
               if(quantity>0){
-              $('#quantity').val(quantity - 1);
+                input.val(quantity - 1);
               }
       });
   
