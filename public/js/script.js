@@ -14,7 +14,8 @@ $(document).ready(function(){
           // Stop acting like a button
           e.preventDefault();
           // Get the field name
-          var quantity = parseInt($('#quantity').val());
+          var quantity = parseInt($('#quantity').val())
+          // var quantity = parseInt($(this).find('#quantity').val());
           
           // If is not undefined
               
@@ -29,6 +30,8 @@ $(document).ready(function(){
           // Stop acting like a button
           e.preventDefault();
           // Get the field name
+          // var quantity = parseInt($(this).find('#quantity').val());
+
           var quantity = parseInt($('#quantity').val());
           
           // If is not undefined
