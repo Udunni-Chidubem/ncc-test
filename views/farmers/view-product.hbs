@@ -24,12 +24,11 @@
              	</div>
              	<div class="view-product-price">
                  
-             	   <p>Unit Price per KG</p>
-                    <h4 class="price_{{this.id}}"></h4>
-                    <p>Select Size (kg)</p>
-
-                    <div class="input-field product-size">
-                        <select id="{{product.id}}" class="size">
+             	    <p>Unit Price per KG</p>
+                   <br/>
+                  <h4 class="price_{{product.id}}"></h4>
+                  <div class="input-field product-size">
+                          <select id="{{product.id}}" class="size">
                             <option value="">Choose Size</option>
                             {{#json product.item}}
                                 {{#each this.pkg}}
