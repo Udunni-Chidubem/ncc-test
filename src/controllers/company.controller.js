@@ -87,6 +87,28 @@ module.exports = {
             attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
             raw: true 
         })
+
+         if(product){
+            response = product
+        }
+
+        return response
         
+    },
+    viewProduct: async (req, res) => {
+        const user = await req.user
+        let response = null
+
+        const singleProduct = await Product.findOne({
+            where: { user_id: user.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true
+        })
+
+         if(singleProduct){
+            response = singleProduct
+        }
+
+        return response
     }
 }

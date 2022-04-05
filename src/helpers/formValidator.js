@@ -215,6 +215,19 @@ const productValidation = () => {
     ];
 }
 
+const cartValidation = () => {
+    return [
+        body('pid')
+            .not().isEmpty().withMessage('Product Item is requried'),
+        body('price')
+            .not().isEmpty().withMessage('You have not selected a price for the product'),
+        body('quantity')
+            .not().isEmpty().withMessage('Quantity field is required'),
+        body('size')
+            .not().isEmpty().withMessage('Size field is required')
+    ];
+}
+
 const validate = (req, res, next) => {
     const errors = validationResult(req)
     if (errors.isEmpty()) {
@@ -240,5 +253,6 @@ module.exports = {
     registerSeedCompanyValidate,
     seedTraderValidation,
     seedTraderValidate,
+    cartValidation,
     productValidation
 }

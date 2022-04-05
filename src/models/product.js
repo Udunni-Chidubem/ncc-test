@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'user_id'
       })
 
-      Product.hasOne(models.SeedCompany, {
-        foreignKey: 'user_id'
-      })
+      // Product.belongsTo(models.SeedCompany, {
+      //   foreignKey: 'user_id'
+      // })
     }
   }
   Product.init({

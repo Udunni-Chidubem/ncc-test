@@ -43,7 +43,7 @@
       <ul class="nav-links" id="nav_accordion">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
-          <a href="dashboard">
+          <a href="/seed-company/dashboard">
             <i class='bx bx-grid-alt' ></i>
             <span class="link_name">Dashboard</span>
           </a>
@@ -51,7 +51,7 @@
         </li>
        
         <li>
-            <a href="{{#if isVerified }} # {{else}} update-profile {{/if}}">
+            <a href="{{#if isVerified }} # {{else}} /seed-company/update-profile {{/if}}">
             <i class='bx bx-user'></i>
             <span class="link_name">Profile</span>
               {{#if isVerified }}
@@ -75,7 +75,7 @@
           <ul class="submenu collapse">
             <li><a class="nav-link" href="./create-product">Add Product </a></li>
             <li><a class="nav-link" href="./product-list">Product List </a></li>
-            <li><a class="nav-link" href="#">Orders </a> </li>
+            <li><a class="nav-link" href="./order-list">Orders </a> </li>
           </ul>
         </li>
          
