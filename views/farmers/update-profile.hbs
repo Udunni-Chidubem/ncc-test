@@ -34,12 +34,14 @@
                                   <div class="input-group input-group-sm mb-3">
                                     <input
                                         style="color:rgb(58, 56, 56);"
-                                        type="date" 
+                                        width="312"
+                                        type="numeric" 
                                         class="form-control border-0 border-bottom" 
                                         aria-label="Sizing example input" 
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="date_of_birth"
-                                        {{!-- placeholder="DD/MM/YY" --}}
+                                        placeholder="dd/mm/yyyy"
+                                        data-date-format="dd/mm/yyyy"
                                         id="dob"
                                         max="2019-12-31"
                                         data-dob="{{ farmerData.date_of_birth }}"
@@ -47,6 +49,18 @@
                                     />
 
                                   </div>
+                                  <script>
+                                        $('#dob').datepicker({
+                                            uiLibrary: 'materialdesign',
+                                            format:  'mm/dd/yyyy',
+                                            maxDate: '12/12/2010',
+                                            value: '01/01/2010',
+                                            keyboardNavigation: true,
+                                            // modal: true, 
+                                            // header: true, 
+                                            // footer: true
+                                        })
+                                    </script>
                               </div>
 
                               <div class="col-sm-6">

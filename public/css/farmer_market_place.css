@@ -2431,10 +2431,165 @@ font-size: 12px;
   height: fit-content;
 }
 
-/* @media screen and (min-width: 1200px){
-  .profile-card{
+.min-search-btn{
+  display: none !important;
+}
+
+.product-info{
+      display: grid;
+      grid-template-columns: 50% 300px;
+    }
+
+
+/*Farmer- Market Place responsiveness Begins*/
+@media only screen and (min-width: 320px) and (max-width:  425px){
+
+    .card-4{
+      width: 355px !important;
+      height: 150px;
+    }
+
+    .card-4 .card-body{
+      padding: 14px;
+      padding-bottom: 0px;
+    }
+
+    .card-4 .card-body .search-form{
+      margin-left: 1rem !important;
+      margin-right: 1.5rem !important;
+    }
+
+    .products-card{
+      width: fit-content;
+    }
+
+    .products-content {
+      grid-template-columns: 320px;
+    } 
+
+    .product-price {
+      grid-gap: 5px;
+    }
+
+    .product-actions{
+      grid-template-columns: auto auto;
+    }
+
+    .product-info{
+      grid-template-columns: auto auto;
+    }
+
+    .product-details p {
+      font-size: 15px;
+      line-height: 12px;
+    }
+
+    input[name="Search"] {
+      width: 243px;
+    }
+
+    .pri-search-btn{
+      display: none;
+    }
+
+    .search-tip {
+      width: 284px;
+    }
+
+    .search-filter {
+      width: 320px;
+      font-size: small; 
+      margin-left: 0px !important;
+    }
+
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .card-4{
+      width: 100% !important;
+      height: 150px;
+    }
+
+    .card-4 .card-body{
+      padding: 14px;
+      padding-bottom: 0px;
+    }
+
+    .card-4 .card-body .search-form{
+      margin-left: 1rem !important;
+      margin-right: 1.5rem !important;
+    }
+
+    .products-card{
+      width: fit-content;
+    }
+
+    .products-content {
+      grid-template-columns: 100%;
+    } 
+
+    .product-price {
+      grid-gap: 5px;
+    }
+
+    .product-actions{
+      grid-template-columns: auto auto;
+    }
+
+    .product-info{
+      grid-template-columns: auto auto;
+    }
+    
+    .product-img{
       width: 100%;
-  } */
+      padding: 0px;
+      padding-bottom: 14px;
+    }
+
+    .product-details p {
+      font-size: 15px;
+      line-height: 12px;
+    }
+
+    .products-card{
+      width: 100%;
+    }
+
+    input[name="Search"] {
+      width: 92%;
+    }
+
+    .pri-search-btn{
+      display: none;
+    }
+
+    .min-search-btn{
+      display: block !important;
+    }
+
+    .min-search-btn button{
+      border-radius: 0px 9px 9px 0px;
+      border-color: #109cf1 !important;
+    }
+
+    .search-tip {
+      width: 284px;
+    }
+
+    .search-filter {
+      width: 320px;
+      font-size: small; 
+      margin-left: 0px !important;
+    }
+}
+
+@media only screen and (min-width: 1280px){
+    input[name="Search"] {
+      width: 621px;
+    }
+}
   
 .sc-product{
   width: 946px;
@@ -2603,4 +2758,19 @@ color: #818E9B;
     padding: 0 5px;
     vertical-align: top;
     margin-left: -7px; 
+}
+
+.datepicker td, .datepicker th {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.85rem;
+}
+
+.datepicker {
+    margin-bottom: 3rem;
+}
+
+
+.datepicker-dropdown {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
