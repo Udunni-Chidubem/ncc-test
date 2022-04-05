@@ -52,7 +52,15 @@ app.engine('hbs', handlebars({
         json(data, resp){           
             data = JSON.parse(data)
             return resp.fn(data);
+        },
+        itemSum(items, sum){
+            let s=0
+            items.forEach(i=>{
+                s=Number(s)+Number(i.total_amount)
+            })
+            return sum.fn(s)
         }
+
     }
 }))
 
