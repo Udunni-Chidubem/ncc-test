@@ -73,8 +73,6 @@ farmersRouter.get("/product/price", async (req, res)=>{
 farmersRouter.get('/cart', async (req, res) => {
     let resp = await farmerController.cart(req, res)
 
-
-    console.log(resp.getCartItems);
     res.render('farmers/cart', {
         layout : 'farmers-dashboard',
         title: 'Cart',
