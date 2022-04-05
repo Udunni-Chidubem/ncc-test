@@ -79,6 +79,15 @@ const { reverse } = require('dns')
 
 app.use('/', mainRoute)
 
+app.use(async function (req, res) {
+    //const user = await req.user
+    //console.log(user);
+    res.status(400).render('site/404', {
+        //layout: "main",
+        error_msg: 'We are unable to process your request. Please try again',
+    })
+})
+
 const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
