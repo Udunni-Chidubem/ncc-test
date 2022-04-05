@@ -17,7 +17,7 @@
             </li>
             
             <li class="nav-item">
-               <a class="nav-link  " href="/farmer/cart"><i class="bx bx-cart"></i></a>
+               <a class="nav-link  " href="./cart"><i class="bx bx-cart"></i></a>
             </li>
             
             <li class="nav-item">
@@ -57,7 +57,7 @@
   
         </li>
 
-        {{#unless isVerified }}
+        {{!-- {{#unless isVerified }} --}}
           <li>
             <a href="/farmer/market_place">
               <i class='bx bx-cart-add'></i>
@@ -94,7 +94,7 @@
           </a>
    
         </li>
-        {{/unless}}
+        {{!-- {{/unless}} --}}
         
         <li>
           <form method="post" action="/logout?_method=DELETE">
