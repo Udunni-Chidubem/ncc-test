@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id'
       })
 
-      Cart.hasOne(models.Product, {
+      Cart.belongsTo(models.Product, {
         foreignKey: 'id'
       })
     }
   }
   Cart.init({
-    farmer_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
     product_id: DataTypes.INTEGER,
     unit_price: DataTypes.STRING,
     size: DataTypes.INTEGER,

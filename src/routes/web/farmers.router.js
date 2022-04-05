@@ -73,24 +73,34 @@ farmersRouter.get("/product/price", async (req, res)=>{
 farmersRouter.get('/cart', async (req, res) => {
     let resp = await farmerController.cart(req, res)
 
+
+    console.log(resp.getCartItems);
     res.render('farmers/cart', {
         layout : 'farmers-dashboard',
         title: 'Cart',
         fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
         farmerData: resp.farmer,
-        isVerified: resp.isVerified
+        isVerified: resp.isVerified,
+        cartItems: resp.getCartItems
     })
 })
 
 farmersRouter.post('/add-to-cart', cartValidation(), validate, async (req, res) => {
-    let response = farmerController.addToCart(req, res)
-    
-    if(response.cartItems != null){
-        res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
+    let response = await farmerController.addToCart(req, res)
+
+    //First check if item has not been added
+    if(response.isItemAlreadyAdded){
+        return res.json({ message: 'This item has been already been added to your cart.', statusCode: 200 }).status(200)
+    }else if(response.cartItems){
+        return res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
     }else{
-        console.log(response.errors)
-        res.json({ message: 'Unable to add item to cart. Please try again', error: true, statusCode: 400 }).status(400)
+        return res.json({ message: 'Unable to add item to cart. Please try again', error: true, statusCode: 400 }).status(400)
     }
+})
+
+farmersRouter.get('/get-cart-count', async (req, res) => {
+    let result = await farmerController.getFarmerCartCount(req, res)
+    res.json({ message: result , statusCode: 200 }).status(200)
 })
 
 

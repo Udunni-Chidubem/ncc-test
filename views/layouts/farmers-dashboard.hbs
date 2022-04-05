@@ -18,13 +18,13 @@
             
             <li class="nav-item">
                <a class="nav-link" href="/farmer/cart"><i class="bx bx-cart"></i>
-                <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+                <span class='badge badge-warning' id='lblCartCount'>  </span>
                </a>
             </li>
             
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="bi bi-bell"></i>
-                {{!-- <span class='badge badge-warning' id='lblCartCount'> 5 </span> --}}
+                <span class='badge badge-warning' id='lblNotificationCount'>  </span>
               </a>
             </li>
              
@@ -146,7 +146,7 @@
      const success_toastr = (msg) => {
       Toastify({
           text: msg,
-          duration: 4000,
+          duration: 3000,
           newWindow: true,
           close: true,
           gravity: "bottom", // `top` or `bottom`
@@ -161,7 +161,7 @@
       const error_toastr = (msg) => {
         Toastify({
           text: msg,
-          duration: 5000,
+          duration: 4000,
           newWindow: true,
           close: false,
           gravity: "top", // `top` or `bottom`
@@ -178,13 +178,14 @@
        let product_id = $(this).attr('id');
        let value = $(this).val();
        let url = baseUrl +'/farmer/product/price?product_id='+product_id
+
        fetch(url).then(r=>r.json()).then(r=>{
          let item = JSON.parse(r.item)
+         
          let price = null;
          for (let i=0; i < item.min.length; i++){
            if(item.pkg[i]==value){
-             $('.price_'+ product_id).html("&#8358; " + (item.price[i]  ))
-            // $('.price_'+product_id).html("&#8358; " + (item.price[i] * qty))
+             $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
            }
          }
        })
@@ -198,6 +199,10 @@
       let pid = $(this).data('prodid')
 
       let price = p ? p.split('₦')[1].trim() : null
+
+      if(q == 0){
+        error_toastr('You have not selected a quantity.')
+      }
 
       const data =  {
         'price': price, 
@@ -240,6 +245,25 @@
       
     })
 
+    const getCartCount = () => {
+      fetch(baseUrl + '/farmer/get-cart-count', {
+        method: 'GET'
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        $('#lblCartCount').text(json.message)
+      }).catch(error => {
+         console.log(error)
+      })
+    }
+
+
+    //Check the Cart to update with new information if any and show count on the notification
+    //if(window.location.pathname.split('/')[2] == 'market_place'){
+    setInterval(getCartCount, 2000)
+    //}
+
+    
    })
  </script>
    </body>

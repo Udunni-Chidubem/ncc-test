@@ -239,25 +239,110 @@ module.exports={
     },
     cart: async (req, res) => {
         const user = await req.user
-        const farmer = await utils.getFarmerProfile(user.dataValues)
-        const isVerified = await utils.isVerified(user.dataValues)
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
 
-        return { farmer, isVerified }
+        const getCartItems = await Cart.findAll({ 
+            include : [
+                {
+                    model: Product,
+                    include : [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                            include : [
+                                {
+                                    model : SeedCompany,
+                                    attributes: ['id', 'name_of_company', 'state_id'],
+                                    include : [{model : States, attributes: ['id', 'name']}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            where: {
+            [Op.and]: [
+                {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0
+                  }
+                }
+              ]
+        }, 
+        order: [
+            ['id', 'DESC'],
+        ],
+        raw: true
+        })
+
+        return { farmer, isVerified, getCartItems }
+    },
+    getFarmerCartCount: async (req, res) => {
+        const user = await req.user
+        const cartCount = await Cart.count({ where: {
+            [Op.and]: [
+                {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0
+                  }
+                }
+              ]
+        }, raw: true})
+
+        return cartCount
     },
     addToCart: async (req, res) => {
         const user = await req.user
-        console.log(user.id)
         const {pid, price, size, quantity} = req.body
-        const cartItems = await Cart.create({
-            user_id: user.id,
-            product_id: pid,
-            unit_price: price,
-            size: size,
-            qty: quantity,
-            total_amount: parseInt(price * quantity)
-        })
 
-        return {cartItems}
+        let cartItems
+        /**
+         * First check if item has already been added to cart
+         * and has not been paid
+         */
+        const isItemAlreadyAdded = await Cart.findOne({ where: {
+            [Op.and]: [
+                {
+                    product_id: {
+                      [Op.eq]: pid
+                    }
+                },
+                {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0
+                  }
+                }
+              ]
+        }, raw: true})
+
+        if(!isItemAlreadyAdded){
+            cartItems = await Cart.create({
+                user_id : user.id,
+                product_id: pid,
+                unit_price: price,
+                size: size,
+                qty: quantity,
+                total_amount: parseInt(price * quantity)
+            })
+        }
+
+        return {cartItems, isItemAlreadyAdded}
     }
 
 }
