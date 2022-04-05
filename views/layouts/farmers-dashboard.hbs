@@ -171,8 +171,10 @@
           onClick: function () { }, // Callback after click
         }).showToast();
       }
-
-    
+  let itemTotalsum=$('.item-sum').html()
+  let shippingCost=$('.shipping-cost').html()
+  shippingCost=shippingCost.replace(',', '');
+  $(".t_price").html(Number(shippingCost)+Number(itemTotalsum))
      $('.size').on('change', function(){
        let qty = document.getElementById('quantity').value;
        let product_id = $(this).attr('id');

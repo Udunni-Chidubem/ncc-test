@@ -142,9 +142,11 @@
                       <div class="col">
                         <div class="">Subtotal</div>
                       </div>
+                      {{#itemSum cartItems}}
                       <div class="col">
-                        <div class=" float-end">4,999</div>
+                        <div class=" float-end item-sum">{{this}}</div>
                       </div>
+                      {{/itemSum}}
                     </div>  
 
                      <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
@@ -152,7 +154,7 @@
                           <div class=" ">Shipping</div>
                         </div>
                         <div class="col">
-                          <div class="float-end ">5,999</div>
+                          <div class="float-end shipping-cost">5,999</div>
                         </div>
                       </div>  
                     </div>
@@ -163,7 +165,7 @@
                             <div class=" t_text">Total</div>
                           </div>
                           <div class="col">
-                            <div class="float-end t_price">5,999</div>
+                            <div class="float-end t_price"></div>
                           </div>
                         </div>  
 
