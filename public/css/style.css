@@ -1500,9 +1500,13 @@ input[type="number"] {
   display: none;
 }
 
-@media (min-width: 300px) and (max-width: 440px){
+@media (min-width: 300px) and (max-width: 580px){
   .card_products {
     width: 322px;
+  }
+
+  .card-wallet{
+   
   }
   .card-details{
     display: grid !important;
@@ -1605,6 +1609,101 @@ input[type="number"] {
   }
   .canvas_stuff{
    height: 250px !important;
+  }
+
+  .card_pay {
+    width: 322px;
+  }
+
+  .check_box input {
+    display: none;
+  }
+
+  .check_box2 input {
+    display: none;
+  }
+
+  .card_title {
+    display: none;
+  }
+
+  .c_inf {
+    padding-top: 0rem !important;
+  }
+
+  .ck {
+    display: none;
+  }
+
+  .ck input[type="checkbox"] {
+    display: none;
+  }
+
+  .py_3 {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+  .p_img img {
+    width: 100%;
+    padding-bottom: 0px !important;
+    margin-left: 0px !important;
+    height: 179px;
+    object-fit: cover;
+  }
+
+  .ck2 {
+    display: block;
+  }
+
+  .p-3.p_b3 {
+    padding: 0rem 0rem !important;
+  }
+  .p-3.p_b1 {
+    padding: 0rem 0rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .px-3.px_3 {
+    padding-left: 2rem !important;
+  }
+
+  .trash__ {
+    margin-bottom: 0px !important;
+  }
+
+  .col-12.r_mt {
+    margin-top: 0rem !important;
+  }
+  .ratings {
+    margin-right: 47px !important;
+  }
+  .btn_gr2 {
+    margin-left: 1.2rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width:990px) {
+  .card_products {
+    width: 322px;
+  }
+
+  .card_home {
+    width: 800px !important;
+  }
+ 
+  .card-stuff {
+    width: 800px !important;
+  }
+
+  .card-details{
+    display: grid !important;
+    grid-template-columns: repeat(3, 196px);
+    grid-template-rows: repeat(1,1fr);
+    grid-gap: 0px;  
+  }
+
+  .canvas_stuff{
+   height: 300px !important;
   }
 
   .card_pay {
@@ -1878,7 +1977,7 @@ input[type="number"] {
     width: 484px !important;
   }
   .card_home {
-    width: 484px !important;
+    width: 628px !important;
   }
   .col__4 {
     flex: 0 0 auto;
