@@ -60,8 +60,6 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
         res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
     }
 });
-
-
 companyRouter.get('/product-list', async (req, res)=>{
 
     let product = await companyController.listProducts(req, res)
@@ -78,7 +76,6 @@ companyRouter.get('/product-list', async (req, res)=>{
         title : 'Products',
     })
 });
-
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
     let r = await companyController.updateProfile(req, res)
 
@@ -89,7 +86,6 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     }
     
 });
-
 companyRouter.get('/update-product/:id', async (req, res)=>{
 
     let product = await companyController.updateProduct(req, res)
@@ -100,30 +96,11 @@ companyRouter.get('/update-product/:id', async (req, res)=>{
         title : 'Update Product',
     })
 });
-
 companyRouter.get('/view-product/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
-    console.log(product.item)
-    const data = JSON.stringify(JSON.parse(product.item))
-    console.log(Object.keys(product.item))
-    // const keys = Object.keys(product.item)
-    //     console.log(keys)
-    // const newItems = []
 
-    // keys.forEach((el, index) => {
-    //   if (index < keys.length) {
-    //     newItems.push({
-    //       min: product.item.min[index],
-    //       pkg: product.item.pkg[index],
-    //       price: product.item.price[index],
-    //       quantity: product.item.quantity[index]
-    //     })
-    //   }
-    // })
-    
-    // product.item = newItems;
-    
+    const data = JSON.stringify(JSON.parse(product.item))
     
     res.render('seed_company/view-product', {
         layout : 'company-dashboard',

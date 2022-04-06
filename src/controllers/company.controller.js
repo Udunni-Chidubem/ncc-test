@@ -83,7 +83,7 @@ module.exports = {
     updateProduct : async (req, res, filename)=>{
          const user = await req.user
          const product = await Product.findOne({ 
-            where: { user_id: user.id},
+            where: { user_id: user.id, id: req.params.id},
             attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
             raw: true 
         })
@@ -100,7 +100,7 @@ module.exports = {
         let response = null
 
         const singleProduct = await Product.findOne({
-            where: { user_id: user.id},
+            where: { user_id: user.id, id: req.params.id},
             attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
             raw: true
         })

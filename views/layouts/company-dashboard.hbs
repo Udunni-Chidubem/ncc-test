@@ -13,7 +13,7 @@
           <ul class="navbar-nav ms-auto mls-auto mb-2 mb-lg-0">
              
             <li class="nav-item">
-              <a class="nav-link" href="#">Your TIN is {{ company.tin }}</a>
+              <a class="nav-link" href="#">You are logged in as:  {{ company.name_of_company }}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
@@ -265,7 +265,6 @@
      })
 
     function filesChange(file){
-        console.log(file[0])
         files = file[0];
     }
 </script>
