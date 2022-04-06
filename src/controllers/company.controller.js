@@ -32,11 +32,23 @@ module.exports = {
     createProduct : async (req, res, filename)=>{
         
         const transaction =await db.rest.transaction();
+        let min=[], qty=[], size=[], price=[];
+        if(!Array.isArray(req.body.min_order)){
+            min.push(req.body.min_order)
+            size.push(req.body.pkg_size)
+            qty.push(req.body.quantity)
+            price.push(req.body.price)
+        }else{
+            min=req.body.min_order
+            size=req.body.pkg_size
+            qty=req.body.quantity
+            price=req.body.price
+        }
         let item = {
-            min : req.body.min_order, 
-            pkg: req.body.pkg_size, 
-            price:req.body.price, 
-            quantity : req.body.quantity
+            min : min, 
+            pkg: size, 
+            price:price, 
+            quantity : qty
         }
 
         item = await JSON.stringify(item, null, 2)
