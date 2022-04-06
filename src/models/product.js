@@ -30,6 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 1
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
     }
   }, {
     underscored : true,
