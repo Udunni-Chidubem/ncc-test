@@ -55,7 +55,23 @@ module.exports={
         let deliveryInformation
         try{
 
-            const { firstname, lastname, date_of_birth, gender, level_of_education, state_id, lg_id, nin, bvn, farm_produce, state_of_delivery, lga_of_delivery, address } = req.body
+            const { 
+                firstname, 
+                lastname, 
+                date_of_birth, 
+                gender, 
+                level_of_education, 
+                state_id, 
+                lg_id,
+                 nin, 
+                 bvn, 
+                 farm_produce, 
+                 state_of_delivery, 
+                 lga_of_delivery, 
+                 address, 
+                 source_type,  
+                 address_of_farm,
+                 farm_size } = req.body
             const data = {
                 firstname, 
                 lastname, 
@@ -66,6 +82,9 @@ module.exports={
                 lg_id, 
                 nin, 
                 bvn,
+                source_type,
+                address_of_farm,
+                farm_size,
                 product_farmed: farm_produce.toString()
             }
 

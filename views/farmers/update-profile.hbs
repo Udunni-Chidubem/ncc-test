@@ -124,21 +124,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6" class="input_form">
-                                <label for="bvn" class="input_form">BVN</label>
+                              <div class="col-sm-6" class="input_form">
+                                <label for="bvn" class="input_form">Are you Banked?</label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <input 
-                                        type="password"
-                                        id="bvn"
-                                        pattern="[0-9]{11}$"
-                                        title="It should contain 11digits only"
-                                        minlength="11"
-                                        maxlength="11"
-                                        class="form-control border-0 border-bottom" 
-                                        aria-label="Sizing example input" 
-                                        aria-describedby="inputGroup-sizing-sm"
-                                        name="bvn" value="{{ farmerData.bvn }}"
-                                            />
+
+                                    <select class="form-select border-0 border-bottom" data-val="{{ farmerData.bvn }}" id="bvn" name="bvn" required>                                    
+                                      <option value="">Select One</option>
+                                      <option value="Yes">Yes</option>
+                                      <option value="No">No</option>
+
+                                    </select>
                                   </div>
                               </div>
                            </div>
@@ -173,17 +168,61 @@
                                <label for="education" class="input_form">Phone Number</label>
                                   <div class="input-group input-group-sm mb-3">
                                       <input type="text" readonly required id="phone_no" name="phone_no" value="{{ farmerData.phone_no }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-
                                   </div>
                             </div>
 
-                              <div class="col-sm-6"> </div>
+                              <div class="col-sm-6"> 
+                                  <label for="source_type" class="input_form">Put a Name Here</label>
+                                  <div class="input-group input-group-sm mb-3">
+
+                                    <select class="form-select border-0 border-bottom" data-val="{{ farmerData.source_type }}" id="source_type" name="source_type" required>                                    
+                                      <option value="">Select One</option>
+                                      <option value="IDPs ">IDPs </option>
+                                      <option value="Host">Host</option>
+                                      <option value="Returnees">Returnees</option>
+                                    </select>
+                                  </div>
+                              </div>
+
+                           </div>
+
+                           <br/>
+
+                         <h5 class="card-header card-c p-0 bg-light profile_header">Farm Information</h5>
+                         <hr/>
+
+                           <div class="row">
+
+                             <div class="col-sm-6"> 
+                                <label for="address_of_farm" class="input_form">Address of Farm Land </label>
+                                  <div class="input-group mb-3">
+
+                                    <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" id="address_of_farm" cols="30" rows="2"> {{ farmerData.address_of_farm }}</textarea>
+                                  </div>
+                              </div>
+
+                              <div class="col-sm-6" class="input_form">
+                               <label for="education" class="input_form">Size of Farm (<b>in Hectares</b>)</label>
+                                  <div class="input-group input-group-sm mb-3">
+                                      <input 
+                                        type="text" 
+                                        required 
+                                        id="farmSize" 
+                                        name="farm_size" 
+                                        value="{{ farmerData.farm_size }}" 
+                                        class="form-control border-0 border-bottom input_borderless" 
+                                        aria-label="Sizing example input" 
+                                        aria-describedby="inputGroup-sizing-sm"
+                                      />
+                                  </div>
+                            </div>
 
                            </div>
 
                            <br/>
 
                          <h5 class="card-header card-c p-0 bg-light profile_header">Delivery Information</h5>
+                         <hr/>
                           
                          <div class="row">
                           <div class="col-sm-6">
@@ -233,13 +272,7 @@
                               <label for="address" class="input_form">Address <span class="profile_sub">*</span></label>
                               <div class="input-group mb-3">
 
-                                <textarea 
-                                  class="form-control border-0 border-bottom" 
-                                  name="address"
-                                  style="align-content:left; overflow:auto"
-                                  id="address" cols="30" rows="5" required>
-                                   {{ deliveryInfo.address }} 
-                                </textarea>
+                                <textarea class="form-control border-0 border-bottom" name="address" style="align-content:left; overflow:auto" id="address" cols="30" rows="5" required>{{ deliveryInfo.address }} </textarea>
                               </div>
 
                             </div>
@@ -310,6 +343,17 @@
     $(document).ready(function(){
 
       let lga = $('#lgas').data('lga')
+      let banked = $('#bvn').data('val')
+      let type = $('#source_type').data('val')
+
+      if(banked != null){
+        $('#bvn').val(banked)
+      }
+
+      if(type != null){
+        $('#source_type').val(type)
+      }
+
 
       let state = $('#state').data('state')
 
