@@ -61,7 +61,7 @@
   
         </li>
 
-        {{!-- {{#unless isVerified }} --}}
+        {{#unless isVerified }}
           <li>
             <a href="/farmer/market_place">
               <i class='bx bx-cart-add'></i>
@@ -98,7 +98,7 @@
           </a>
    
         </li>
-        {{!-- {{/unless}} --}}
+        {{/unless}}
         
         <li>
           <form method="post" action="/logout?_method=DELETE">
@@ -171,10 +171,15 @@
           onClick: function () { }, // Callback after click
         }).showToast();
       }
+  
   let itemTotalsum=$('.item-sum').html()
   let shippingCost=$('.shipping-cost').html()
-  shippingCost=shippingCost.replace(',', '');
-  $(".t_price").html(Number(shippingCost)+Number(itemTotalsum))
+
+  if(shippingCost != null){
+    shippingCost=shippingCost.replace(',', '');
+    $(".t_price").html(Number(shippingCost)+Number(itemTotalsum))
+  }
+
      $('.size').on('change', function(){
        let qty = document.getElementById('quantity').value;
        let product_id = $(this).attr('id');
@@ -260,15 +265,21 @@
     }
 
 
-    //Check the Cart to update with new information if any and show count on the notification
     //if(window.location.pathname.split('/')[2] == 'market_place'){
-    setInterval(getCartCount, 2000)
+    setInterval(getCartCount, 1000)
     //}
 
-    
-
+    //Single Add to Cart
+    $('.addCart').on('click', function(){
+      let content=$(this).closest('.products-details')
+      let z = content.find('.price_5').html()
+      alert(z)
+    })
     
    })
+
+   
  </script>
+
    </body>
 </html>
