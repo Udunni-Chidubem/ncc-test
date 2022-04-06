@@ -270,6 +270,11 @@
     //}
 
     //Single Add to Cart
+    $('.addCart').on('click', function(){
+      let content=$(this).closest('.products-details')
+      let z = content.find('.price_5').html()
+      alert(z)
+    })
     
    })
 
