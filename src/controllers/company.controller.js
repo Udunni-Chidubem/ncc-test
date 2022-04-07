@@ -1,0 +1,126 @@
+require('dotenv').config()
+const db = require('../models')
+const {User,UserRole, Role, SeedCompany, LGAs, States, Product }  = db
+const utils = require('../helpers/utils');
+const { getPagingData, getPagination } = require('../helpers/pagination');
+
+
+
+module.exports = {
+    updateProfile: async (req, res) => {
+        const transaction = await db.rest.transaction();
+        const user = await req.user
+
+        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email} = req.body
+
+        try{
+            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email }
+
+            await User.update({status: true}, {where: {id: user.id} })
+
+            const company = await SeedCompany.update( data , {
+                where: { user_id: user.id }
+            }, {transaction: transaction})
+
+            transaction.commit();
+            return {company}
+        }catch(e){
+            transaction.rollback();
+            return e
+        }
+    },
+    createProduct : async (req, res, filename)=>{
+        
+        const transaction =await db.rest.transaction();
+        let min=[], qty=[], size=[], price=[];
+        if(!Array.isArray(req.body.min_order)){
+            min.push(req.body.min_order)
+            size.push(req.body.pkg_size)
+            qty.push(req.body.quantity)
+            price.push(req.body.price)
+        }else{
+            min=req.body.min_order
+            size=req.body.pkg_size
+            qty=req.body.quantity
+            price=req.body.price
+        }
+        let item = {
+            min : min, 
+            pkg: size, 
+            price:price, 
+            quantity : qty
+        }
+
+        item = await JSON.stringify(item, null, 2)
+
+        const user = await req.user
+        try{
+            let p = await Product.create({
+                product_name : req.body.productName,
+                description : req.body.productDescription,
+                variant : req.body.productVariant,
+                item : item,
+                user_id : user.id,
+                file_name : filename
+            }, {transaction : transaction})
+            transaction.commit()
+            return p
+        }catch(e){
+            transaction.rollback()
+            return e
+        }
+        
+    },
+    listProducts: async (req, res) => {
+        const user = await req.user
+        let response = null
+
+        const {page, size} = req.query
+        const {limit, offset} = getPagination(page, size)
+
+        const product = await Product.findAndCountAll({ 
+            where: { user_id: user.id},
+            order: [
+                ['id', 'DESC'],
+            ],
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+            raw: true, limit, offset 
+        })
+
+        if(product){
+            response = getPagingData(product, page, limit)
+        }
+        return response
+    },
+    updateProduct : async (req, res, filename)=>{
+         const user = await req.user
+         const product = await Product.findOne({ 
+            where: { user_id: user.id, id: req.params.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true 
+        })
+
+         if(product){
+            response = product
+        }
+
+        return response
+        
+    },
+    viewProduct: async (req, res) => {
+        const user = await req.user
+        let response = null
+
+        const singleProduct = await Product.findOne({
+            where: { user_id: user.id, id: req.params.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true
+        })
+
+         if(singleProduct){
+            response = singleProduct
+        }
+
+        return response
+    }
+}

@@ -1,0 +1,55 @@
+  {{> header}}
+  <body class="body">
+      {{> main_menu}}
+        <div class="containers container-form">
+            <div class="row pt-md-4 pt-sm-0">
+                <div class="col-md-6 col-sm-0 col-xl-6">
+                    <div class="card">
+                        <div class="card-body pt-5 mt-5">
+                            <img src="images/{{form_banner}}" alt="">
+                        </div>
+                        {{!-- <h4 style="text-align: center;">{{sub}}</h4> --}}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    {{#if messages.error}}
+                     <div class="row d-flex justify-content-center">
+                        <div class="col-12 alert alert-danger">
+                            {{messages.error}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#if errors.length}}
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 alert alert-danger">
+                                <ul>
+                                    {{#each errors}}
+                                       <li>{{this.message}}</li> 
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    {{/if}}
+
+                    {{#if extractedErrors}}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul style="padding: 5px;">
+                                {{#each extractedErrors}}
+                                    <li>{{msg}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+
+
+                    {{{ body }}}
+
+
+                </div>
+            </div>
+        </div>
+      {{!-- {{> footer}} --}}
+   </body>
+   <script>
+</script>
+</html>

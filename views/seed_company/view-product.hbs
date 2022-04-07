@@ -1,0 +1,135 @@
+{{#if product }}
+	<div class="card sc-product">
+        <div class="card-body m-0 sc-view-product">
+        	<div class="sc-product-img sc-product-img-min-hidden">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
+			</div>
+			<div class="">
+				<div class="sc-name_varaint">
+					<div>
+						<h4>Product Name</h4>
+						<h5>{{product.product_name}}</h5>
+					</div>
+					<div>
+						<h4>Variant</h4>
+						<h5>{{product.variant}}</h5>
+					</div>
+				</div>
+                <hr class="sc-product-line">
+				<div class="sc-view-prod-desc">
+					<h4>Product Description</h4>
+					<p>{{product.description}}
+
+						<br>
+					</p>
+				</div>
+				<hr class="sc-product-line">
+				<div>
+					{{!-- <table class="table table-bordered table-responsive">
+						<thead>
+							<tr>
+								<th>Package Size (kg)</th>
+								<th>Quantity</th>
+								<th>Min Stock</th>
+								<th>Price</th>
+								<th> </th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{{#json product.item}}
+								<tr>
+									{{#each this.pkg}}<td>{{this}}</td>{{/each}}
+									{{#each this.min}}<td class="row">{{this}}</td>{{/each}}
+									{{#each this.quantity}}<td>{{this}}</td>{{/each}}
+									{{#each this.price}}<td>{{this}}</td>{{/each}}
+								</tr>
+							{{/json}}
+						</tbody>
+					</table> --}}
+
+					<div class="inp_cont" id="inp_cont">
+                    <div class="">
+                        <div class="row sc-product-row">
+                            <div class="col col_sma ">
+                                <div class="   ">
+                                    <h4 >Package Size <i>(kg)</i>  </h4>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <h4 >Quantity </h4>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <h4 >Min Stock </h4>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                                <div class=" ">
+                                    <h4 >Unit Price </h4>
+                                </div>
+                            </div>
+                            <div class="col col_sma">
+                            	<h4 > Availability </h4>
+                            </div>
+                        </div>
+                        <div class="row  sc-product-row"  >
+                            <div class="col col_sma"> 
+                            {{#json product.item}}
+                                    {{#each this.pkg}} 
+                                <div class="py-1 ">
+                                       <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">   
+                                    {{#each this.quantity}}
+                                <div class="py-1 "> 
+                                    <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                    {{#each this.min}}
+                                <div class="py-1 ">
+                                    <h5>{{this}} </h5>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                    {{#each this.price}}
+                                <div class="py-1 ">
+                                    <h5> &#8358; {{this}} </h5>
+                                </div>
+                                {{/each}}
+                                    {{/json}}
+                            </div>
+                            <div class="col col_sma">    
+                                <div class="p-0  sc-availbility-check">
+                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
+					                  {{#if this.status}} Published {{else}} Pending {{/if}}
+					                </span> 
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div> 
+                				<hr class="sc-product-line">
+
+					
+				</div>
+			</div>
+			<div class="sc-product-img sc-product-img-hidden">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
+			</div>
+		</div>
+			<div class="float-end">
+            <div class="float-end m-2 mb-3">
+                <button type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href='/seed-company/update-product/{{product.id}}'"><i class="fa fa-pencil"></i> Edit</button>                    
+            </div>
+	</div>
+{{else}}
+
+{{/if}}

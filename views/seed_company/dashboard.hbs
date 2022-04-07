@@ -1,0 +1,179 @@
+
+  {{#if isVerified }}
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+             <div class="row">
+               <div class="col-12">
+                 <h4>Welcome, {{ company.name_of_company }}</h4>
+               </div>
+               <div class="row">
+                 <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
+                 <div class="col-6">
+                  <div class="  float-end">
+                    <a href="/seed-company/update-profile" class="btn button_update mb-1 shadow-lg">Update Profile</a>
+                  </div>
+                 </div>
+               </div>
+             </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    {{/if}}
+
+{{#unless isVerified}}
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+              <div class="col-12">
+                <div class="p-3 border text-center border-0 border-end ">
+                  <h5 class="c_d_s2">Total Sales</h5>
+                  <h1 class="c_d_s2_sales ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="p-3 border text-center  border-0 border-end  ">
+                  <h5 class="c_d_s2">Fulfilled Orders</h5>
+                  <h1 class="c_d_s2_full ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="p-3 border text-center border-0 border-end  ">
+                  <h5 class="c_d_s2">Unfufilled Orders</h5>
+                  <h1 class=" c_d_s2_unfull">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+             <div class="row">
+               <div class="col-12">
+                <canvas id="myChart" width="400" height="135" style="background:#fff;"></canvas>
+               </div>
+               
+             </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-4 col__4">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+             <div class="row">
+               <div class="col-12">
+                 <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
+               </div>
+               <div class="row">
+                 <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub"><p>203,000</p></div>
+                 <div class="col-12">
+                  <div class=" mb-2 float-end">
+                    <button type="button  " class="btn button_update shadow-lg mb-1">Withdraw</button>
+                  </div>
+                 </div>
+               </div>
+             </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+              <div class="col-12">
+                <div class="p-3 border text-center border-0 border-end">
+                  <h5 class="c_d_s2">Total Products</h5>
+                  <h1 class="c_d_s2_sales ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="p-3 border text-center border-0 border-end">
+                  <h5 class="c_d_s2">Active</h5>
+                  <h1 class="c_d_s2_full ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="p-3 border text-center border-0 border-end">
+                  <h5 class="c_d_s2">Sold Out</h5>
+                  <h1 class=" c_d_s2_unfull">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+      
+    </div>
+
+  {{/unless}}
+
+
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'July'],
+          datasets: [{
+               
+              label: 'Monthly',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  '#47BA5D',
+                  '#47BA5D',
+                  '#47BA5D',
+                  '#47BA5D',
+                  '#47BA5D',
+                  '#47BA5D'
+              ],
+              borderColor: [
+                  'white',
+                  'white',
+                  'white',
+                  'white',
+                  'white',
+                  'white',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
+  

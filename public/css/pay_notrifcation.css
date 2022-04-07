@@ -1,0 +1,62 @@
+body {
+  background-color: rgb(194, 189, 189);
+}
+h1 {
+  color: #049648;
+}
+
+.notification {
+  background: white;
+  border-radius: 4px;
+  width: 330px;
+  height: 325px;
+  margin-top: 228px;
+}
+
+.div1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div2 {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding-right: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0.01em;
+}
+
+p {
+  font-size: 10px;
+  padding-top: 5px;
+  font-style: italic;
+}
+
+#dial {
+  letter-spacing: 0.02em;
+}
+
+#dialClose {
+  padding-right: 77px;
+}
+
+a {
+  color: #34aff9;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#pro {
+  padding-top: 100px;
+}
