@@ -61,7 +61,7 @@
   
         </li>
 
-        {{!-- {{#unless isVerified }} --}}
+        {{#unless isVerified }}
           <li>
             <a href="/farmer/market_place">
               <i class='bx bx-cart-add'></i>
@@ -98,7 +98,7 @@
           </a>
    
         </li>
-        {{!-- {{/unless}} --}}
+        {{/unless}}
         
         <li>
           <form method="post" action="/logout?_method=DELETE">
@@ -264,14 +264,53 @@
       })
     }
 
+    setInterval(getCartCount, 1000) //fetch the db to update the cart items without refreshing the page
 
-    //Check the Cart to update with new information if any and show count on the notification
-    //if(window.location.pathname.split('/')[2] == 'market_place'){
-    setInterval(getCartCount, 1000)
-    //}
-  
+    //Single Add to Cart
+    $('.addCart').on('click', function(){
+      let price=$('#price').html()
+      let kg  = $('.size').val()
+      let qty  = $('#quantity').val()
+      let pid  = $(this).data('prodid')
 
 
+      if(qty == 0){
+        error_toastr('You have not selected a quantity.')
+      }
+      
+      const data =  {
+        'price': price, 
+        'size' : kg, 
+        'quantity' : qty
+      }
+
+
+
+        let url = baseUrl + '/farmer/single-cart-item/' + pid
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then(r => r.json())
+        .then(response => {
+          $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+          if(response.statusCode == 402){
+            let msg = ''
+            let errors = response.data
+            errors.forEach((value, index) => {
+              msg += (index + 1 ) + '. ' + value.msg + ' \n'
+            })
+            error_toastr(msg)
+          }else if(response.statusCode == 500 || response.statusCode == 400){
+            error_toastr(response.message)
+          }else{
+            success_toastr(response.message)
+          }
+        })
+        .catch(error => console.log(error))
+    })
     
    })
 

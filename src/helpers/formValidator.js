@@ -215,10 +215,24 @@ const productValidation = () => {
     ];
 }
 
+//Cart with multiple items
 const cartValidation = () => {
     return [
         body('pid')
             .not().isEmpty().withMessage('Product Item is requried'),
+        body('price')
+            .not().isEmpty().withMessage('You have not selected a price for the product'),
+        body('quantity')
+            .not().isEmpty().withMessage('Quantity field is required'),
+        body('size')
+            .not().isEmpty().withMessage('Size field is required')
+    ];
+}
+
+
+//Single Cart for scenario where farmer is just interested in 
+const cartSingleValidation = () => {
+    return [
         body('price')
             .not().isEmpty().withMessage('You have not selected a price for the product'),
         body('quantity')
@@ -254,5 +268,6 @@ module.exports = {
     seedTraderValidation,
     seedTraderValidate,
     cartValidation,
+    cartSingleValidation,
     productValidation
 }
