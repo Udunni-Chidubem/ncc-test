@@ -1844,3 +1844,37 @@ input[type="number"] {
   width: 2em;
   height: 2em;
 }
+
+
+@media (max-width: 600px) {
+  #idea {
+    width: 100%;
+  }
+
+  .tvanish{
+    display: none;
+  }
+  /* span{
+    display: none;
+    
+  } */
+}
+
+
+
+
+/* .demercation{
+  height: 50px;
+  width: 100%;
+  background: #049648;
+  border-radius: 4px;
+} */
+/* @media (min-width: 600px) {
+ .demercation{
+   display: none;
+ }
+} */
+
+
+
+
