@@ -265,6 +265,7 @@ module.exports={
             include : [
                 {
                     model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
                     include : [
                         {
                             model: User,
@@ -362,6 +363,62 @@ module.exports={
         }
 
         return {cartItems, isItemAlreadyAdded}
+    },
+    singleCartItem: async (req, res) => {
+        const user = await req.user
+        const {price, size, quantity} = req.body
+
+        let cartItems, productCheck
+        /**
+         * 1. Check if the product exist
+         * 2. check if item has already been added to cart
+         * and has not been paid
+         */
+        const product = await Product.findOne({ where: { id: req.params.id, status: 1}, attributes: ['id'], raw: true})
+
+        const isItemAlreadyAdded = await Cart.findOne({ where: {
+            [Op.and]: [
+                {
+                    product_id: {
+                      [Op.eq]: req.params.id
+                    }
+                },
+                {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                    size: {
+                      [Op.eq]: size
+                    }
+                },
+                {
+                    qty: {
+                      [Op.eq]: quantity
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0 //o means items has not been paid for, 1 means item has been purchased
+                  }
+                }
+              ]
+        }, raw: true})
+
+        if(!isItemAlreadyAdded){
+            let newPrice = price.split('₦')[1]
+            cartItems = await Cart.create({
+                user_id : user.id,
+                product_id: req.params.id,
+                unit_price: newPrice,
+                size: size,
+                qty: quantity,
+                total_amount: parseInt(newPrice * quantity)
+            })
+        }
+
+        return {cartItems, isItemAlreadyAdded, product}
     }
 
 }
