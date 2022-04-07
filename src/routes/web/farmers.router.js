@@ -1,7 +1,7 @@
 const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
-const { profileUpdateValidation, cartValidation, validate } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate } = require('../../helpers/formValidator')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -88,6 +88,20 @@ farmersRouter.post('/add-to-cart', cartValidation(), validate, async (req, res) 
 
     //First check if item has not been added
     if(response.isItemAlreadyAdded){
+        return res.json({ message: 'This item has been already been added to your cart.', statusCode: 200 }).status(200)
+    }else if(response.cartItems){
+        return res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
+    }else{
+        return res.json({ message: 'Unable to add item to cart. Please try again', error: true, statusCode: 400 }).status(400)
+    }
+})
+
+farmersRouter.post('/single-cart-item/:id', cartSingleValidation(), validate, async (req, res) => {
+    let response = await farmerController.singleCartItem(req, res)
+
+    if(response.product  == null){
+        return res.json({ message: 'Sorry we are unable to process the item.', statusCode: 400 }).status(400)
+    }else if(response.isItemAlreadyAdded){
         return res.json({ message: 'This item has been already been added to your cart.', statusCode: 200 }).status(200)
     }else if(response.cartItems){
         return res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
