@@ -1821,6 +1821,12 @@ input[type="number"] {
   .co_12 .s_2 {
     /* margin-top: 2.3rem; */
   }
+  .admin_container.mb-3 {
+    width: 735px;
+  }
+  .c_d_s2_sales {
+    font-size: 23px;
+  }
 }
 
 @media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
@@ -1964,6 +1970,12 @@ input[type="number"] {
   }
   .co_12 .s_2 {
     /* margin-top: 2.3rem; */
+  }
+  .admin_container.mb-3 {
+    width: 484px !important;
+  }
+  .c_d_s2_sales {
+    font-size: 23px;
   }
 }
 
