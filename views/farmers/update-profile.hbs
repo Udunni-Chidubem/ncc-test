@@ -201,25 +201,50 @@
                                 <label for="address_of_farm" class="input_form">Address of Farm Land </label>
                                   <div class="input-group mb-3">
 
-                                    <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" id="address_of_farm" cols="30" rows="2"> {{ farmerData.address_of_farm }}</textarea>
+                                    <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" id="address_of_farm" cols="30" rows="3"> {{ farmerData.address_of_farm }}</textarea>
                                   </div>
                               </div>
 
-                              <div class="col-sm-6" class="input_form">
-                               <label for="education" class="input_form">Size of Farm (<b>in Hectares</b>)</label>
-                                  <div class="input-group input-group-sm mb-3">
-                                      <input 
-                                        type="text" 
-                                        required 
-                                        id="farmSize" 
-                                        name="farm_size" 
-                                        value="{{ farmerData.farm_size }}" 
-                                        class="form-control border-0 border-bottom input_borderless" 
-                                        aria-label="Sizing example input" 
-                                        aria-describedby="inputGroup-sizing-sm"
-                                      />
+                                <div class="col-sm-6" class="input_form">
+                                 <div>
+                                  <label for="village" class="input_form">Village</label>
+                                  <div class="input-group mb-1">
+
+                                    <input type="text" class="form-control border-0 border-bottom" name="village" id="village" >
+                                  </div>
+                                    </div>
+                                    <div > 
+                                      <label for="ward" class="input_form">Ward/Community </label>
+                                        <div class="input-group">
+
+                                          <input type="text" class="form-control border-0 border-bottom" name="ward" id="ward" >
+                                        </div>
+                                    </div>
                                   </div>
                             </div>
+
+
+                            <div class="row">
+
+
+                              <div class="col-sm-6" class="input_form">
+                              <label for="education" class="input_form">Size of Farm (<b>in Hectares</b>)</label>
+                                    <div class="input-group input-group-sm mb-3">
+                                        <input 
+                                          type="text" 
+                                          required 
+                                          id="farmSize" 
+                                          name="farm_size" 
+                                          value="{{ farmerData.farm_size }}" 
+                                          class="form-control border-0 border-bottom input_borderless" 
+                                          aria-label="Sizing example input" 
+                                          aria-describedby="inputGroup-sizing-sm"
+                                        />
+                                    </div>
+                               
+                            </div>
+
+
 
                            </div>
 
