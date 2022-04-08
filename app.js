@@ -14,6 +14,12 @@ const flash = require('express-flash')
 const passpportInitializer = require('./src/helpers/passport-config')
 passpportInitializer(passport)
 
+const {seedAdminData} = require('./src/helpers/bootstrapUser')
+
+
+// seedAdminData()
+
+
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({
     layoutsDir: 'views/layouts',

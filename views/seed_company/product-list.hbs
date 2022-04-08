@@ -14,11 +14,12 @@
           <thead class="t_info_head ">
             <tr class="">
                 <th scope="col">S/N</th>
+                <th scope="col">Product Name</th>
                 <th>Product Image</th>
-                <th scope="col">PRODUCT NAME</th>
-                <th scope="col">PRODUCT VARIANT</th>
-                <th scope="col">STATUS</th>
-                <th scope="col">ACTION</th>
+                <th scope="col">Product Variant</th>
+                <th scope="col">Local Name</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
             </tr>
           </thead>
 
@@ -30,13 +31,15 @@
 
               <tr class="t_info_row1">
                   <th scope="row">{{increment @index}}</th>
+                  <td>  {{ this.product_name }}</td>
                   <td style="width: 150px;"> 
                       <div  class="table_img"> 
                           <a href="/seed-company/view-product/{{this.id}}"><img src="../product_images/{{this.file_name}}" alt="Product Image"></a>
                       </div>
                   </td>
-                  <td>  {{ this.product_name }}</td>
+                  
                   <td>{{ this.variant }}</td>
+                  <td></td>
                   <td> 
                     <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1"><i class="bi bi-dot"></i>
                       {{#if this.status}} Published {{else}} Pending {{/if}}
