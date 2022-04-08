@@ -332,9 +332,9 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .c_d_s2.c__h {
     width: 100px;
     margin: 0px -1rem;
@@ -912,10 +912,8 @@ input[type="number"] {
 }
 
 /* .weather .head {
-  /* color: white; 
-  }*/
-
- 
+  color: white;
+} */
 .weather_sub {
   border: 1px solid #7daaee !important;
 }
@@ -1051,33 +1049,14 @@ input[type="number"] {
   /* background: white !important; */
   border: none !important;
 }
-.profilePic-container {
-  object-fit: cover;
-  /* border-radius: 50%; */
-}
+
 .img_round {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
 }
-.profilePic-btn {
-  text-align: center;
-  background-image: linear-gradient(#5dcd6d, #008346);
-  font-size: 13px;
-  line-height: 19.5px;
-  font-weight: 600;
-  color: white;
-  border: 0px;
-  border-radius: 4px;
-  /* width: 110px; */
-  /* height: 42px; */
-  padding: 8px 14px;
- margin: 1rem 0;
-}
-.fileDisplay{
-  display: none;
-}
+
 .order-first {
   order: 0 !important;
 }
@@ -1659,9 +1638,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .col__4 {
     flex: 0 0 auto;
     width: 100% !important;
@@ -1839,9 +1818,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
 }
 
 @media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
@@ -1983,9 +1962,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
 }
 
 .v_bt {
