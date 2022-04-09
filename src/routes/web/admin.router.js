@@ -16,6 +16,18 @@ adminRouter.get('/dashboard', async (req, res)=>{
     })
 });
 
+adminRouter.get('/create-user', async (req, res)=>{
+    let user = await req.user
+
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('admin/create-user', {
+        layout : 'admin-dashboard',
+        title : 'Dashboard',
+        isVerified
+    })
+});
+
 
 
 module.exports = adminRouter
