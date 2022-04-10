@@ -63,6 +63,10 @@
 	.navbar-collapse .nav-list{
 		margin-left: 20px !important;
 	}
+
+	.nav-list li {
+	  padding-right: 10px;
+	}
 }
 
 @media (max-width: 991px){
@@ -73,6 +77,8 @@
 		right: 0px;
 		background: rgb(200, 200, 200) none repeat scroll 0% 0%;
 	}
+
+
 }
 
 
