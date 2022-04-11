@@ -1527,6 +1527,7 @@ input[type="number"] {
 .ck2 {
   display: none;
 }
+
 @media (max-width: 600px) {
   .card_products {
     width: 322px;
