@@ -15,7 +15,7 @@ const seedAdminData = async () => {
 			}
 		);
 		console.log(user)
-		if(!user.id){
+		if(user==null){
 			user = await User.create({
 				username: "admin",
 				password : password,
