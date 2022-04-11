@@ -532,3 +532,160 @@
    color: #000 !important;
    text-decoration: none;
 }
+
+
+.admin-product{
+   width: 991px;
+}
+
+.admin-view-product{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 40px !important;
+}
+
+.admin-view-product h4{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+
+/* identical to box height */
+letter-spacing: 0.01em;
+
+/* text_help_gray */
+color: #818E9B;
+
+}
+
+.admin-view-product h5{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #757575;
+}
+
+.admin-view-product p{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+
+  /* identical to box height */
+  letter-spacing: 0.01em;
+
+  color: #000000;
+}
+
+.admin-name_varaint{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.admin-product-line{
+  background-color: #626161;;
+  width: 95%;
+  height: 1px;
+}
+
+.admin-product-img{
+   width: 80%;
+   /*height: 230px;*/
+   justify-self: center;
+   align-self: center;
+}
+
+.admin-product-img img{
+   width: 392px;
+   height: 253px;
+}
+
+
+.admin-view-prod-desc{
+  height: auto;
+  padding-top: 10px;
+}
+
+.admin-product-row{
+      --bs-gutter-x: -1.5rem !important;
+    }
+
+
+@media screen and (min-width: 320px) and (max-width: 475px){
+    .admin-product{
+      width: fit-content;
+      padding: 0px;
+      margin: 5px;
+    }
+  
+    .admin-view-product{
+      grid-template-columns: auto;
+    }
+
+    .admin-view-product h4{
+      font-size: 12px;
+    }
+
+    .admin-view-product h5{
+      font-size: 12px;
+      line-height: 15px;
+    }
+
+    .admin-product-line{
+      width: 300px;
+    }
+
+    .admin-product-img{
+      width: 100%;
+      height: 216px;
+      margin-bottom: 10px;
+    }
+
+    .admin-product-img-hidden{
+      display: none;
+    }
+
+    .admin-product-img img{
+      width: 100%;
+      height: inherit;
+    }
+
+    .admin-product-row{
+      --bs-gutter-x: -0.5rem !important;
+    }
+
+    .admin-availbility-check{
+      font-size: 10px;
+      width: max-content;
+    }
+
+    .admin-view-prod-desc{
+      height: auto;
+    }
+}
+
+
+@media (min-width: 576px) {
+  .admin-product-img-min-hidden{
+    display: none;
+  }
+}
+
+
+@media only screen and (min-width: 600px) and (max-width: 991px) {
+  .admin-product-img img{
+      width: 306px;
+      height: 189px;
+      margin-top: -200px;
+  }
+}
+
+.text-samll{
+  font-size: 12px !important;
+}
