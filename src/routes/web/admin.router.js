@@ -46,6 +46,19 @@ adminRouter.get('/all-users', async (req, res)=>{
     })
 });
 
+adminRouter.get('/view-product', async (req, res)=>{
+    let user = await req.user
+
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('admin/view-product', {
+        layout : 'admin-dashboard',
+        title : 'View Product',
+        username : user.username,
+        isVerified
+    })
+});
+
 
 
 module.exports = adminRouter
