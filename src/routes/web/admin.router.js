@@ -53,7 +53,8 @@ adminRouter.get('/view-product', async (req, res)=>{
     
     res.render('admin/view-product', {
         layout : 'admin-dashboard',
-        title : 'View Product',
+        title : 'Product Management',
+        sub_title : 'View Product',
         username : user.username,
         isVerified
     })
