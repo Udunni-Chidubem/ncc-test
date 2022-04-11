@@ -246,7 +246,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 353px !important;
   }
 
   .ul_list_item {
@@ -1532,19 +1532,6 @@ input[type="number"] {
   .card_products {
     width: 322px;
   }
-  .card-details {
-    display: grid !important;
-    grid-template-columns: repeat(3, 196px);
-    grid-template-rows: repeat(1, 1fr);
-    grid-gap: 0px;
-  }
-
-  .graph {
-    height: 250px !important;
-  }
-  .canvas_stuff {
-    height: 250px !important;
-  }
 
   .card_pay {
     width: 322px;
@@ -1693,7 +1680,7 @@ input[type="number"] {
   }
 }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1025px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .card_products {
     width: 462px;
   }
