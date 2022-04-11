@@ -1873,7 +1873,7 @@ input[name="Accountnumber"] {
 
 
 .search-tip{
-  width: 309px;
+  width: 370px;
   height: 32px;
   background: #885AF8;
 border-radius: 4px;
@@ -2493,7 +2493,7 @@ font-size: 12px;
     }
 
     .search-tip {
-      width: 284px;
+      width: 375px;
     }
 
     .search-filter {
@@ -2518,7 +2518,7 @@ font-size: 12px;
     }
 
     .card-4 .card-body .search-form{
-      margin-left: 1rem !important;
+      margin-left: 0rem !important;
       margin-right: 1.5rem !important;
     }
 
@@ -2558,7 +2558,7 @@ font-size: 12px;
     }
 
     input[name="Search"] {
-      width: 92%;
+      width: 87%;
     }
 
     .pri-search-btn{
@@ -2575,7 +2575,7 @@ font-size: 12px;
     }
 
     .search-tip {
-      width: 284px;
+      width: 370px;
     }
 
     .search-filter {

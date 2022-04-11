@@ -1,0 +1,79 @@
+{{!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+<span class="fa fa-th-large" aria-hidden="true"></span>
+</button>
+
+<!-- navbar-header-->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav">
+            <li class="active">
+               <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="fa fa-th-large" aria-hidden="true"></span>
+               </button>
+            </li>
+         </ul>
+      </div> --}}
+<div id="wrapper">
+      
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+      	
+         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>CREATE USER</a>
+            </li>
+            <li>
+               <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-bars fa-stack-1x "></i></span>ALL USERS</a>
+            </li>
+         </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+<div id="page-content-wrapper">
+
+{{>breadcrumbs}}
+
+<div class="card create-user-card">
+	<div class="card-header">
+		Create User
+	</div>
+	<div class="card-body create-user-form">
+		<form action="" method="post" class="">
+           <div class="form-row row">
+           	 <div class="col-6 form-group">
+           	 	<label for="first_name">First Name</label>
+           	 	<input type="text" name="first_name" class="form-control" value="" placeholder="">
+           	 </div>
+           	 <div class="col-6 form-group">
+           	 	<label for="last_name">Last Name</label>
+           	 	<input type="text" name="last_name" class="form-control" value="" placeholder="">
+           	 </div>	
+           </div>
+
+           <div class="form-group">
+           		<label for="email">Email</label>
+           		<input type="email" name="email" class="form-control" value="" placeholder="">
+           </div>
+           
+           <div class="form-group">
+           		<label for="phone">Phone</label>
+           		<input type="tel" name="phone" class="form-control" value="" placeholder="">
+           </div>
+
+           <div class="form-group">
+           		<select class="form-select" name="roles">
+           			<option value="">Assign Role</option>
+           			<option value="NASC">NASC</option>
+           			<option value="Admin">Admin</option>
+           			<option value="Seed Trader">Seed Trader</option>
+           		</select>
+           </div>
+           <hr>
+           <div	class=" " style="float: right">
+           	 <button type="submit" class="btn btn-theme">Submit</button>
+           </div>	
+		</form>
+	</div>
+	
+</div>
+</div>
+
+</div>
