@@ -228,7 +228,7 @@
 
   {{!--  --}}
 
-  var xValues = ["Italy", "France"];
+  var xactorValues = ["Active Account", "Inactive Account"];
 var yfarmerValues = [55, 19];
 var barColors = [
   "#FFB946",
@@ -278,7 +278,7 @@ var yseedtraderValues = [55, 19];
 new Chart("seedtrader", {
   type: "doughnut",
   data: {
- 
+ labels: xproductValues,
     datasets: [{
       backgroundColor: barColors,
       data: yseedtraderValues
