@@ -16,24 +16,19 @@ adminRouter.get('/dashboard', async (req, res)=>{
     })
 });
 
-<<<<<<< HEAD
-adminRouter.get('/product-mgt', async (req, res)=>{
-=======
 adminRouter.get('/create-user', async (req, res)=>{
->>>>>>> 7ea4e04d08543867eab22daf4c9e334eea67ac51
     let user = await req.user
 
     let isVerified = await utils.isVerified(user)
-    
-<<<<<<< HEAD
+     HEAD
     res.render('admin/product-mgt', {
         layout : 'admin-dashboard',
         title : 'Product Management',
-=======
+
     res.render('admin/create-user', {
         layout : 'admin-dashboard',
         title : 'Dashboard',
->>>>>>> 7ea4e04d08543867eab22daf4c9e334eea67ac51
+
         isVerified
     })
 });
