@@ -8,12 +8,14 @@ const seedAdminData = async () => {
 	let transaction = await db.rest.transaction();
 	const password = await bcrypt.hash("P@ssw0rd@1", 10)
 	try{
-		let user = User.findOne(
+		let user =await User.findOne(
 			{
-				where : {username : 'admin'}
+				where : {username : 'admin'},
+				raw : true
 			}
 		);
-		if(!user){
+		console.log(user)
+		if(!user.id){
 			user = await User.create({
 				username: "admin",
 				password : password,
