@@ -12,6 +12,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
         title : 'Dashboard',
+        username : user.username,
         isVerified
     })
 });
@@ -19,11 +20,28 @@ adminRouter.get('/dashboard', async (req, res)=>{
 adminRouter.get('/create-user', async (req, res)=>{
     let user = await req.user
 
+    console.log(user.username)
     let isVerified = await utils.isVerified(user)
     
     res.render('admin/create-user', {
         layout : 'admin-dashboard',
-        title : 'Dashboard',
+        title : 'User Management',
+        sub_title : 'Create User',
+        username : user.username,
+        isVerified
+    })
+});
+
+
+adminRouter.get('/all-users', async (req, res)=>{
+    let user = await req.user
+
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('admin/all-users', {
+        layout : 'admin-dashboard',
+        title : 'All Users',
+        username : user.username,
         isVerified
     })
 });
