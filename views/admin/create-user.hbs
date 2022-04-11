@@ -46,9 +46,9 @@
               <div class="form-group">
               		<select class="form-select" name="roles">
               			<option value="">Assign Role</option>
-              			<option value="NASC">NASC</option>
-              			<option value="Admin">Admin</option>
-              			<option value="Seed Trader">Seed Trader</option>
+              			{{#each roles}}
+							<option value="{{this.id}}">{{this.role_name}}</option>
+						{{/each}}
               		</select>
               </div>
               <hr>

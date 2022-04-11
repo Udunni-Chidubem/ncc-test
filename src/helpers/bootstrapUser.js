@@ -39,8 +39,16 @@ const seedAdminData = async () => {
 					console.log(rolee + 121)
 				}
 			}
-			transaction.commit();
 		}
+		let n = await Role.findOne({
+			where : {role_name : 'nasc'}
+		})
+		if(!n){
+			Role.create({
+				role_name : 'nasc'
+			}, {transaction : transaction});
+		}
+		transaction.commit();
 	}catch(e){
 		transaction.rollback();
 		console.log(e)
