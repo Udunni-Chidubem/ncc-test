@@ -133,6 +133,10 @@ function showFileName( event ) {
   infoArea.textContent = 'File name: ' + fileName;
 }
 
+
+/* PRODUCT INCREASE DECREASE BUTTON */
+
+
 // let activeBtn = document.querySelector("activeB")
 //   activeBtn.addEventListener("click", ()=> {
     
