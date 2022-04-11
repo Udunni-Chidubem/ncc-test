@@ -1,8 +1,8 @@
-  <div class="about">
-        <div class="btn-container container">
-            <button class="tab-btn active" data-id="all">ALL</button>
-            <button class="tab-btn" data-id="approved">APPROVED</button>
-            <button class="tab-btn" data-id="rejected">REJECTED</button>
+  <div class="product-mgt-container">
+        <div class="d-flex flex-row container mt-5">
+            <div class="tab-btn active" data-id="all">ALL</div>
+            <div class="tab-btn" data-id="approved">APPROVED</div>
+            <div class="tab-btn" data-id="rejected">REJECTED</div>
         </div>
         <div>
     
@@ -198,11 +198,31 @@
             </div>
             </div>
             <!-- end of single item -->
-
+    <div class="paginate-wrapper">
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+    </div>
     </div>
 
     <script>
-        const about = document.querySelector(".about");
+        const about = document.querySelector(".product-mgt-container");
 const btns = document.querySelectorAll(".tab-btn");
 const tables = document.querySelectorAll(".content");
 about.addEventListener("click", function (e) {

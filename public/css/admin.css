@@ -224,12 +224,7 @@
 
 
 /* Product Management Styles Begins Here */
-.btn-container.container{
-  background: #fff;
-  width: 27%;
-  margin: 0 12px ;
-  padding-left:0;
-}
+
 .t_info_head{
   background:#049648;
   color: #fff;
@@ -247,8 +242,10 @@ th td {
   border-bottom: transparent;
   border-left: transparent;
   border-right: 1px solid #ccc;
-  background: transparent;
-  padding:0 13px;
+  background: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  width: 120px;
 }
 .download-btn{
   background: #049648;
@@ -289,11 +286,13 @@ display: none;
 }
 .tab-btn.active {
 background:#049648;
-padding: 8px 19px;
+padding: 4px 8px;
 }
 .content.active {
 display: block;
 }
+
+
 
 /* Product Management Styles Ends Here */
 
