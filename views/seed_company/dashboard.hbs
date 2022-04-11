@@ -2,7 +2,7 @@
   {{#if isVerified }}
     <div class="row">
       <div class="col-12">
-        <div class="card shadow card_home pl-0 mb-2 ">
+        <div class="card shadow card_home card-width pl-0 mb-2 ">
           <div class="card-body">
              <div class="row">
                <div class="col-12">
@@ -30,24 +30,24 @@
       <div class="col-12">
         <div class="card shadow card_home pl-0 mb-2 ">
           <div class="card-body">
-            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+            <div class="row row-cols-2  card-details row-cols-lg-3 g-2 g-lg-2">
               <div class="col-12">
                 <div class="p-3 border text-center border-0 border-end ">
-                  <h5 class="c_d_s2">Total Sales</h5>
-                  <h1 class="c_d_s2_sales ">0</h1>
+                  <h5 class="c_d_s2 c__h">Total Sales</h5>
+                  <h1 class="c_d_s2_sales s_1 ">0</h1>
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 co_12">
                 <div class="p-3 border text-center  border-0 border-end  ">
-                  <h5 class="c_d_s2">Fulfilled Orders</h5>
+                  <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
                   <h1 class="c_d_s2_full ">0</h1>
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 co_12">
                 <div class="p-3 border text-center border-0 border-end  ">
-                  <h5 class="c_d_s2">Unfufilled Orders</h5>
+                  <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
                   <h1 class=" c_d_s2_unfull">0</h1>
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
@@ -63,9 +63,9 @@
       <div class="col-8">
         <div class="card shadow card_home pl-0 mb-2 ">
           <div class="card-body">
-             <div class="row">
+             <div class="row graph">
                <div class="col-12">
-                <canvas id="myChart" width="400" height="135" style="background:#fff;"></canvas>
+                <canvas id="myChart" class="canvas_stuff" width="400" height="135" style="background:#fff;"></canvas>
                </div>
                
              </div>
@@ -94,11 +94,11 @@
       </div>
     </div>
 
-    <div class="row">
+    {{!-- <div class="row">
       <div class="col-12">
         <div class="card shadow card_home pl-0 mb-2 ">
           <div class="card-body">
-            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+            <div class="row row-cols-2 card-details row-cols-lg-3 g-2 g-lg-2">
               <div class="col-12">
                 <div class="p-3 border text-center border-0 border-end">
                   <h5 class="c_d_s2">Total Products</h5>
@@ -106,28 +106,60 @@
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
-              <div class="col-12">
+              <div class="col-12 co_12">
                 <div class="p-3 border text-center border-0 border-end">
                   <h5 class="c_d_s2">Active</h5>
+                  <h1 class="c_d_s2_full s_2 ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12 co_12">
+                <div class="p-3 border text-center border-0 border-end">
+                  <h5 class="c_d_s2">Sold Out</h5>
+                  <h1 class=" c_d_s2_unfull s_2">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              </div> --}}
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow card_home pl-0 mb-2 ">
+          <div class="card-body">
+            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+              <div class="col-12 co_12">
+                <div class="p-3 border text-center border-0 border-end ">
+                  <h5 class="c_d_s2 c__h">Total Products</h5>
+                  <h1 class="c_d_s2_sales s_1 ">0</h1>
+                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                </div>
+              </div>
+              <div class="col-12 co_12">
+                <div class="p-3 border text-center  border-0 border-end  ">
+                  <h5 class="c_d_s2 c__h">Active</h5>
                   <h1 class="c_d_s2_full ">0</h1>
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
-              <div class="col-12">
-                <div class="p-3 border text-center border-0 border-end">
-                  <h5 class="c_d_s2">Sold Out</h5>
+              <div class="col-12 co_12">
+                <div class="p-3 border text-center border-0 border-end  ">
+                  <h5 class="c_d_s2 c__h">Sold out</h5>
                   <h1 class=" c_d_s2_unfull">0</h1>
                   <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
-              </div>
-
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+            {{!-- </div>
           </div>
       </div>
 
       
-    </div>
+    </div> --}}
 
   {{/unless}}
 
