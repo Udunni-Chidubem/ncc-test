@@ -1527,6 +1527,25 @@ input[type="number"] {
 .ck2 {
   display: none;
 }
+.fileDisplay{
+  display: none;
+}
+.profilePic-btn{
+  background-image: linear-gradient(#5dcd6d, #008346);
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+  color: white;
+  border: 0px;
+  border-radius: 4px;
+  width: 110px;
+  height: 42px;
+  padding: 8px 16px;
+  
+}
+.userProfileImg  label{
+  margin-bottom: 8px;
+}
 @media (max-width: 600px) {
   .card_products {
     width: 322px;

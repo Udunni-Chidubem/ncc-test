@@ -16,6 +16,18 @@ adminRouter.get('/dashboard', async (req, res)=>{
     })
 });
 
+adminRouter.get('/product-mgt', async (req, res)=>{
+    let user = await req.user
+
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('admin/product-mgt', {
+        layout : 'admin-dashboard',
+        title : 'Product Management',
+        isVerified
+    })
+});
+
 
 
 module.exports = adminRouter
