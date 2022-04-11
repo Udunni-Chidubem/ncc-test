@@ -49,6 +49,25 @@
 	font-size: 12px;
 	border: 0px;
 	background: transparent;
+   width: 100%;
+   color: #000 !important;
+}
+
+.nav-btn:hover{
+   background: #cacaca;
+}
+
+.nav-link{
+   color: #000 !important;
+}
+
+.nav-tabs .nav-link{
+   background: #fff !important;
+}
+
+.nav-tabs .nav-link.active{
+   color: #fff !important;
+   background: #049648 !important;
 }
 
 @media (max-width: 767px){
@@ -451,4 +470,65 @@
   color: #fff;
   background: #868889;
   border-color: #868889;
+}
+
+
+/*Users Mgt*/
+.users_card{
+   background-color: transparent !important;
+   border: none !important;
+}
+
+.table-theme,
+.table-theme > td,
+.table-theme > th {
+  background-color: #049648;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+}
+
+.table-hover .table-theme:hover {
+  background-color: #EEFDF1;
+}
+.table-hover .table-theme:hover > td,
+.table-hover .table-theme:hover > th {
+  background-color: #EEFDF1;
+}
+
+.table-theme tr th{
+   color: #fff !important;
+}
+
+.table-theme-secondary,
+.table-theme-secondary > td,
+.table-theme-secondary > th {
+  background-color: #EEFDF1;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+}
+
+.table-hover .table-theme-secondary:hover {
+  background-color: #EEFDF1;
+}
+.table-hover .table-theme-secondary:hover > td,
+.table-hover .table-theme-secondary:hover > th {
+  background-color: #EEFDF1;
+}
+
+.table-striped-theme tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 200, 0.09);
+}
+
+
+.table-theme-secondary a{
+   color: #000 !important;
+   text-decoration: none;
 }
