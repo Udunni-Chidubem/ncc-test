@@ -107,23 +107,20 @@
             </div>
 	</div>
 
-<div class="modal fade" id="reject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
+<div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="rejectLabel">Rejection Reason</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       	<form action="product_rejection_submit" method="get" accept-charset="utf-8">
-      		<textarea name="rejectionReason" cols="4" placeholder="Reason for rejection" class="form-control"></textarea>
-      	
+      		<textarea name="rejectionReason" rows="4" placeholder="Reason for rejection" class="form-control"></textarea>
+      		<br>
+        	<button type="button" class="btn btn-theme float-end">Submit</button>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-theme">Submit</button>
-      </div>
-  </form>
+
     </div>
   </div>
 </div>
