@@ -172,14 +172,14 @@
                             </div>
 
                               <div class="col-sm-6"> 
-                                  <label for="source_type" class="input_form">Put a Name Here</label>
+                                  <label for="source_type" class="input_form">What is your present leaving status?</label>
                                   <div class="input-group input-group-sm mb-3">
 
                                     <select class="form-select border-0 border-bottom" data-val="{{ farmerData.source_type }}" id="source_type" name="source_type" required>                                    
                                       <option value="">Select One</option>
-                                      <option value="IDPs ">IDPs </option>
-                                      <option value="Host">Host</option>
-                                      <option value="Returnees">Returnees</option>
+                                      <option value="IDP">Internally Displaced Person </option>
+                                      <option value="Host">Indigene of the State</option>
+                                      <option value="Returnee">Returnee</option>
                                     </select>
                                   </div>
                               </div>
@@ -194,7 +194,7 @@
                            <div class="row">
 
                              <div class="col-sm-6"> 
-                                <label for="address_of_farm" class="input_form">Address of Farm Land </label>
+                                <label for="address_of_farm" class="input_form">Where is your farm location?</label>
                                   <div class="input-group mb-3">
 
                                     <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" id="address_of_farm" cols="30" rows="3"> {{ farmerData.address_of_farm }}</textarea>

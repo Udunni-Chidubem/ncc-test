@@ -49,19 +49,20 @@
 				  		<th>Name</th>
 				  		<th>Location</th>
 				  		<th></th>
-			  		</tr>		  		
+			  		</tr>	
+					  {{#each farmers}}	  		
 			  		<tr class="table-theme-secondary">
-			  			<td colspan="" rowspan="" headers="">01/12/2012</td>
-			  			<td colspan="" rowspan="" headers="">Gambo Musa</td>
-			  			<td colspan="" rowspan="" headers="">Gombe</td>
+			  			<td colspan="" rowspan="" headers="">{{this.created_at}}</td>
+			  			<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
+			  			<td colspan="" rowspan="" headers="">{{this.State.name}}</td>
 			  			<td colspan="" rowspan="" headers=""> 
 			  				<a class="" href="#">
                                 <i class="fa fa-eye"></i> View
                             </a>
                         </td>
 			  		</tr>
-
-			  		<tr class="table-theme-secondary">
+					{{/each}}
+			  		{{!-- <tr class="table-theme-secondary">
 			  			<td colspan="" rowspan="" headers="">01/12/2012</td>
 			  			<td colspan="" rowspan="" headers="">Gambo Musa</td>
 			  			<td colspan="" rowspan="" headers="">Gombe</td>
@@ -81,7 +82,7 @@
                                 <i class="fa fa-eye"></i> View
                             </a>
 			  			</td>
-			  		</tr>
+			  		</tr> --}}
 			  	</table>
 			  </div>
 			  <div class="tab-pane fade" id="seed-company" role="tabpanel" aria-labelledby="seed-company-tab">
