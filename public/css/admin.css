@@ -261,13 +261,16 @@
   color: #fff;
   
 }
+
 td{
   color: #47749C;
   /* font-size: 25px; */
 }
+
 th td {
   padding: 20px;
 }
+
 .tab-btn{
   border-top: transparent;
   border-bottom: transparent;
@@ -277,7 +280,9 @@ th td {
   padding: 4px 8px;
   cursor: pointer;
   width: 120px;
+  border-radius: 7px 7px 0px 0px;
 }
+
 .download-btn{
   background: #049648;
   color: #fff;
@@ -285,12 +290,14 @@ th td {
   vertical-align: middle;
   text-align: center;
 }
+
 .published{
   background: #cdffcd;
   color: #007f00;
   border-radius: 10px;
   padding: 4px 8px;
 }
+
 .unpublished{
   background: #ffe19a;
   color: #fb8200;
@@ -298,14 +305,17 @@ th td {
   padding: 4px 8px;
   
 }
+
 .row-height {
   height: 3rem;
   vertical-align: middle;
 }
+
 .row-one{
   background:#FFF;
   padding:8px 0;
 }
+
 .row-two{
   background:#F0FFF3;
   padding:8px 0;
@@ -313,14 +323,17 @@ th td {
 
 /* hide content */
 .content {
-display: none;
+   display: none;
 }
+
 .tab-btn.active {
-background:#049648;
-padding: 4px 8px;
+   background:#049648;
+   padding: 4px 8px;
+   border-radius: 7px 7px 0px 0px;
 }
+
 .content.active {
-display: block;
+   display: block;
 }
 
 
@@ -774,3 +787,76 @@ color: #818E9B;
 .text-samll{
   font-size: 12px !important;
 }
+
+
+/*Single User Profile*/
+.admin-view-user{
+   display: grid;
+   grid-template-columns: 30% 70%;
+}
+
+.profile-image-section{
+   display: grid;
+   border-right: 1px solid gray;
+   padding: 20px;
+   justify-content: center;
+}
+
+.profile-image-section img{
+   margin-bottom: 100px;
+}
+
+.profile-info-section{
+   padding: 10px;
+   padding-left: 50px;
+}
+
+.bio-data{
+   display: grid;
+   grid-template-columns: repeat(2, 50%);
+   grid-template-rows: repeat(3, 50%);
+   font-family: 'Poppins';
+   font-style: normal;
+}
+
+.bio-data h5{
+   font-weight: 500;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.bio-data p{
+   font-weight: 400;
+   font-size: 13px;
+   line-height: 20px;
+   letter-spacing: 0.01em;
+   color: #323C47;
+}
+
+.other-data{
+   display: grid;
+   grid-template-columns: repeat(2, 50%);
+   /*grid-template-rows: repeat(2, 50%);*/
+   font-family: 'Poppins';
+   font-style: normal;
+}
+
+.other-data h5{
+   font-weight: 500;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.other-data p{
+   font-weight: 400;
+   font-size: 13px;
+   line-height: 20px;
+   letter-spacing: 0.01em;
+   color: #323C47;
+}
+
+/*Single User Profile Ends*/

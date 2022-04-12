@@ -1,0 +1,110 @@
+{{>breadcrumbs}}
+
+<div class="container-fluid">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">PERSONAL INFORMATION</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">SHIPPING INFORMATION</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="activity-log-tab" data-bs-toggle="tab" data-bs-target="#activity-log" type="button" role="tab" aria-controls="activity-log" aria-selected="false">ACTIVITY LOG</button>
+			  </li>
+			</ul>
+	<div class="card">
+		
+		<div class="card-body">
+			{{#if farmer}}
+			<div class="admin-view-user">
+				<div class="profile-image-section">
+					<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
+					<button type="button" class="btn btn-danger"> Deactivate User</button>
+				</div>
+				<div class="tab-content" id="myTabContent">
+			  		<div class="tab-pane fade show active profile-info-section" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+						<div class="bio-data">
+							<div>
+								<h5>First name</h5>
+								<p>{{farmer.firstname}}</p>
+							</div>
+							
+							<div>
+								<h5>Last name</h5>
+								<p>{{farmer.lastname}}</p>
+							</div>
+
+							<div>
+								<h5>Date of Birth</h5>
+								<p>{{dateFormat farmer.date_of_birth "DD/MM/YYYY"}}</p>
+							</div>
+							
+							<div>
+								<h5>Gender</h5>
+								<p>{{farmer.gender}}</p>
+							</div>
+
+							<div>
+								<h5>Level of Education</h5>
+								<p>{{farmer.level_of_education}}</p>
+							</div>
+
+							<div>
+								<h5>Phone Number</h5>
+								<p>{{farmer.phone_no}}</p>
+							</div>
+						</div>
+						<div class="other-data">
+							<div>
+								<h5>BVN</h5>
+								<p>{{farmer.bvn}}</p>
+							</div>
+							
+							<div>
+								<h5>NIN</h5>
+								<p>{{farmer.nin}}</p>
+							</div>
+							
+							<div>
+								<h5>State</h5>
+								<p>{{farmer.State.name}}</p>
+							</div>
+							
+							<div>
+								<h5>LGA</h5>
+								<p>{{farmer.LGA.name}}</p>
+							</div>
+						</div>
+					</div>
+
+			  		<div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+			  			EMPTY
+
+			  		</div>
+
+			  		<div class="tab-pane fade" id="activity-log" role="tabpanel" aria-labelledby="activity-log-tab">
+			  			<table class="table table-responsive table-bordered">
+			  				<thead>
+			  					<tr>
+			  						<th>Name</th>
+			  						<th>Phone</th>
+			  						<th>Book</th>
+			  						<th>Address</th>
+			  					</tr>
+			  				</thead>
+			  				<tbody>
+			  					<tr>
+			  						<td>data</td>
+			  						<td>data</td>
+			  						<td>data</td>
+			  						<td>data</td>
+			  					</tr>
+			  				</tbody>
+			  			</table>
+			  		</div>
+				</div>
+			</div>
+			{{/if}}
+		</div>
+	</div>
+</div>

@@ -22,7 +22,7 @@ module.exports={
     }, 
     getFarmers: async (req, res) =>{
         let farmers = await Farmer.findAll({
-            attributes : ['firstname', 'lastname', 'created_at'],
+            attributes : ['id', 'firstname', 'lastname', 'created_at'],
             include : [ 
                 {
                     model : States,
@@ -32,9 +32,15 @@ module.exports={
                     model : LGAs,
                     attributes : ['name']
                 }
+            ],
+            order : [
+            	['created_at', 'DESC']
             ]
          })
          farmers=JSON.stringify(farmers)
+
+         console.log(farmers)
+
         return JSON.parse(farmers)
     },
     getCompanies : async (req, res)=>{
@@ -48,6 +54,9 @@ module.exports={
                     model : LGAs,
                     attributes : ['name']
                 }
+            ],
+            order : [
+            	['created_at', 'DESC']
             ]
         })
 
@@ -65,10 +74,41 @@ module.exports={
                     model : LGAs,
                     attributes : ['name']
                 }
+            ],
+            order : [
+            	['created_at', 'DESC']
             ]
         })
         traders = JSON.stringify(traders)
         return JSON.parse(traders)
+    },
+
+    viewFarmer: async (req, res) => {
+        const user = await req.user
+        let response = null
+
+        const singleFarmer = await Farmer.findOne({
+            where: {id: req.params.id},
+            attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'state_id', 'created_at'],
+            include : [ 
+                {
+                    model : States,
+                    attributes : ['name']
+                },
+                {
+                    model : LGAs,
+                    attributes : ['name']
+                }
+            ],
+            raw: true
+        })
+
+         if(singleFarmer){
+            response = JSON.parse(JSON.stringify(singleFarmer))
+            console.log(response)
+        }
+
+        return response
     }
 
 
