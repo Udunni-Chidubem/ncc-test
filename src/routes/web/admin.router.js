@@ -35,6 +35,8 @@ adminRouter.get('/create-user', async (req, res)=>{
 adminRouter.get('/all-users', async (req, res)=>{
     let user = await req.user
      let farmers=await adminController.getFarmers(req, res)
+     let traders = await adminController.getTraders(req, res)
+     let companies= await adminController.getCompanies(req, res)
     let isVerified = await utils.isVerified(user)
     
     res.render('admin/all-users', {
@@ -42,7 +44,9 @@ adminRouter.get('/all-users', async (req, res)=>{
         title : 'All Users',
         username : user.username,
         isVerified,
-        farmers
+        farmers,
+        companies,
+        traders
     })
 });
 
