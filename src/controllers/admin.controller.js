@@ -72,7 +72,9 @@ module.exports={
     },
 
     getProducts:async (req, res)=>{
-        let products=await 
+        let products=await Product.findAll({
+            
+        })
     }
 
 
