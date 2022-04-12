@@ -14,7 +14,7 @@ const seedAdminData = async () => {
 				raw : true
 			}
 		);
-		console.log(user)
+	//	console.log(user)
 		if(user==null){
 			user = await User.create({
 				username: "admin",
@@ -43,8 +43,9 @@ const seedAdminData = async () => {
 		let n = await Role.findOne({
 			where : {role_name : 'nasc'}
 		})
+		console.log(n)
 		if(!n){
-			Role.create({
+			await Role.create({
 				role_name : 'nasc'
 			}, {transaction : transaction});
 		}
