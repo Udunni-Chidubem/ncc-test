@@ -47,16 +47,16 @@ Webflow.require('ix2').init(
 const slider = [
     {
       id: 1,
-      name: "Laylah Mohammed",
+      name: "Falilat Abdulganiu",
       bg:"s1",
       img:
         "images/Artboard-1.jpg",
       text:
-        "The seeds i used to buy before now gets rotten and does not germinate because i cannot store them well. When I started using NIGSIMS I could buy quality seeds whenever i need it, and i don’t have to worry about storage.",
+        "The seeds I used to buy before now gets rotten and does not germinate because I cannot store them well. When I started using NIGSIMS I could buy quality seeds whenever I need it, and I don’t have to worry about storage.",
     },
     {
       id: 2,
-      name: "anna johnson",
+      name: "Mutiat Jumoh",
        bg:"s2",
       img:
         "images/medium-shot-man-carrying-tool.jpg",
@@ -65,7 +65,7 @@ const slider = [
     },
     {
       id: 3,
-      name: "peter jones",
+      name: "Ismaila Naziru",
       bg:"s3",
       img:
         "images/farmers-on-farmland-p-800.jpeg",
