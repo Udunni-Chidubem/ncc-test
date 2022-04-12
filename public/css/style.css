@@ -352,8 +352,9 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
-  .co_12 .s_2 {
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .c_d_s2.c__h {
     width: 100px;
     margin: 0px -1rem;
@@ -1372,8 +1373,8 @@ input[type="number"] {
   /* margin-bottom: 1rem; */
 }
 
-.summary_tran {
-}
+/* .summary_tran {
+} */
 
 .weather {
   /* padding-bottom: 5rem; */
@@ -1381,9 +1382,9 @@ input[type="number"] {
   color: white;
 }
 
-.weather .head {
-  /* color: white; */
-}
+/* .weather .head {
+  color: white;
+} */
 .weather_sub {
   border: 1px solid #7daaee !important;
 }
@@ -1452,8 +1453,8 @@ input[type="number"] {
   color: #47749c;
 }
 
-.f_2 {
-}
+/* .f_2 {
+} */
 .f_2 .col-6 {
   font-weight: 700;
   font-size: 15px;
@@ -1511,9 +1512,9 @@ input[type="number"] {
   width: 353px !important;
 }
 
-.input_borderless {
-  /* background: red !important; */
-}
+/* .input_borderless {
+  background: red !important;
+} */
 
 .profile_header {
   /* background: white !important; */
@@ -2125,6 +2126,25 @@ input[type="number"] {
   }
   
 }
+.fileDisplay{
+  display: none;
+}
+.profilePic-btn{
+  background-image: linear-gradient(#5dcd6d, #008346);
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: 600;
+  color: white;
+  border: 0px;
+  border-radius: 4px;
+  width: 110px;
+  height: 42px;
+  padding: 8px 16px;
+  
+}
+.userProfileImg  label{
+  margin-bottom: 8px;
+}
 @media (max-width: 600px) {
   .card_products {
     width: 322px;
@@ -2258,9 +2278,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .col__4 {
     flex: 0 0 auto;
     width: 100% !important;
@@ -2582,6 +2602,8 @@ input[type="number"] {
   .card_dis{
     margin-bottom: -40px !important;
     margin-bottom: 00px !important;
+  }
+
   .admin_container.mb-3 {
     width: 686px;
   }
@@ -2599,6 +2621,9 @@ input[type="number"] {
     font-size: 8.822px !important;
     color: #000000;
   }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
 }
 
 @media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
@@ -2757,7 +2782,8 @@ input[type="number"] {
   .card_dis{
     margin-bottom: -40px !important;
     margin-bottom: 00px !important;
-  .admin_container.mb-3 {
+  }
+    .admin_container.mb-3 {
     width: 686px !important;
   }
   .c_d_s2_sales {
@@ -2773,7 +2799,10 @@ input[type="number"] {
     font-size: 8.822px !important;
     color: #000000;
   }
-}
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
+  }
 
 .v_bt {
   width: 21px !important;

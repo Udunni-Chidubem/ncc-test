@@ -6,11 +6,14 @@
          <div class="card card_home card_profile rounded mx-auto shadow pl-0 mb-2 ">
             <div class="card-body bg-light">
                <div class="row row-cols-5 row-cols-lg-1 g-2 g-lg-2">
-                  <div class="col-12">
+                  <div class="col-12 text-center">
                      <div class="p-3">
                         <h5 class="card-header card-c p-0 mb-3 bg-light profile_header">Personal Information</h5>
-                        <img src="../images/farmer-with-vege-p-2000.jpeg" class=" mb-2 mx-auto d-block img_round" alt="...">
-                        <div class="row">
+                          <img src="../images/profile-avatar.png" id="output" class=" mb-2 mx-auto d-block img_round" alt="user profile image">
+                          <label for="file">
+                          <span class="profilePic-btn">Change Image</span>
+                          </label>
+                          <input id="file" class="fileDisplay" type="file" onchange="loadFile(event)"/>                        <div class="row">
                            <div class="col-sm-6">
                               <label for="company" class="input_form">Company Name <span class="profile_sub">*</span></label>
                               <div class="input-group input-group-sm mb-3">
@@ -266,4 +269,10 @@
     })
 
     })
+
+      const loadFile = function (event) {
+  event.preventDefault()
+let image = document.getElementById("output");
+image.src = URL.createObjectURL(event.target.files[0]);
+};
 </script>
