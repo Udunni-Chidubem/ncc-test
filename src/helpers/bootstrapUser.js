@@ -43,7 +43,8 @@ const seedAdminData = async () => {
 		let n = await Role.findOne({
 			where : {role_name : 'nasc'}
 		})
-		console.log(n)
+		
+		console.log(JSON.stringify(n))
 		if(!n){
 			await Role.create({
 				role_name : 'nasc'

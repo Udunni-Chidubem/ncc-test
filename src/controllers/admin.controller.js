@@ -33,10 +33,9 @@ module.exports={
                     attributes : ['name']
                 }
             ],
-            raw : true
          })
-         console.log(farmers)
-        return farmers
+         farmers=JSON.stringify(farmers)
+        return JSON.parse(farmers)
     }
 
 
