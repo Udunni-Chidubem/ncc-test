@@ -274,7 +274,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 353px !important;
   }
 
   .ul_list_item {
@@ -1403,7 +1403,7 @@ input[type="number"] {
   border: 0px;
   border-radius: 14px !important;
   width: 134px;
-  height: 42px;
+  height: auto;
 }
 
 .summary_sub {
@@ -2154,19 +2154,6 @@ input[type="number"] {
   .card_products {
     width: 322px;
   }
-  .card-details{
-    display: grid !important;
-    grid-template-columns: repeat(3, 196px);
-    grid-template-rows: repeat(1,1fr);
-    grid-gap: 0px;  
-  }
-
-  .graph{
-    height: 250px !important;
-  }
-  .canvas_stuff{
-   height: 250px !important;
-  }
 
   .card_pay {
     width: 322px;
@@ -2245,13 +2232,10 @@ input[type="number"] {
     margin-top: 10px;
   }
   .c_d_s2 {
-    font-size: 9px !important;
+    font-size: 10px !important;
   }
-  .orders{
-    margin-top: -2px;
-  }
-  .completed{
-    margin-top: 10px;
+  .p-3.border.sal_bac.text-center.pt-5.border-0.border-end {
+    padding-top: 0rem !important;
   }
 
   .c_d_s2_link h5 {
@@ -2276,11 +2260,11 @@ input[type="number"] {
   .c_d_s2_full {
     margin-bottom: 0rem;
     line-height: 3rem;
+    font-size: 15px;
   }
   .c_d_s2_unfull {
     line-height: 3rem;
-  }
-  .c_d_s2_unfull {
+    font-size: 15px;
     margin-bottom: 0rem;
   }
   /* .co_12 .s_2 {
@@ -2338,115 +2322,7 @@ input[type="number"] {
   }
 }
 
-@media (min-width: 600px) and (max-width:990px) {
-  .card_products {
-    width: 322px;
-  }
-
-  .card_home {
-    width: 800px !important;
-  }
- 
-  .card-stuff {
-    width: 800px !important;
-  }
-
-  .card-details{
-    display: grid !important;
-    grid-template-columns: repeat(3, 196px);
-    grid-template-rows: repeat(1,1fr);
-    grid-gap: 0px;  
-  }
-
-  .canvas_stuff{
-   height: 300px !important;
-  }
-
-  .card_pay {
-    width: 322px;
-  }
-
-  .check_box input {
-    display: none;
-  }
-
-  .check_box2 input {
-    display: none;
-  }
-
-  .card_title {
-    display: none;
-  }
-
-  .c_inf {
-    padding-top: 0rem !important;
-  }
-
-  .ck {
-    display: none;
-  }
-
-  .ck input[type="checkbox"] {
-    display: none;
-  }
-
-  .py_3 {
-    padding-top: 0rem !important;
-    padding-bottom: 0rem !important;
-  }
-  .p_img img {
-    width: 100%;
-    padding-bottom: 0px !important;
-    margin-left: 0px !important;
-    height: 179px;
-    object-fit: cover;
-  }
-
-  .ck2 {
-    display: block;
-  }
-
-  .p-3.p_b3 {
-    padding: 0rem 0rem !important;
-  }
-  .p-3.p_b1 {
-    padding: 0rem 0rem !important;
-    padding-top: 1rem !important;
-  }
-
-  .px-3.px_3 {
-    padding-left: 2rem !important;
-  }
-
-  .trash__ {
-    margin-bottom: 0px !important;
-  }
-
-  .col-12.r_mt {
-    margin-top: 0rem !important;
-  }
-  .ratings {
-    margin-right: 47px !important;
-  }
-  .btn_gr2 {
-    margin-left: 1.2rem;
-  }
-  .pt-5 {
-    padding-top: 0px!important;
-}
-  .card_comp{
-    display: grid;
-    grid-gap: 63px;
-    grid-template-columns: repeat(4, 400px);
-    margin-right: 0px !important;
-  }
-  .card_dis{
-    margin-bottom: -40px !important;
-    margin-bottom: 00px !important;
-  }
-}
-
-@media only screen and (min-device-width: 769px) and (max-device-width: 1025px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .card_products {
     width: 462px;
   }
