@@ -1,3 +1,4 @@
+ {{>breadcrumbs}}
   <div class="product-mgt-container">
         <div class="d-flex flex-row container mt-5">
             <div class="tab-btn active" data-id="all">ALL</div>
@@ -18,22 +19,29 @@
                             <th scope="col">PRICE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">
-                                <button class="btn download-btn ">Download Report</button>
+                                <button class="btn  download-btn ">Download Report</button>
                             </th>
                         </tr>
                       </thead>
                       <tbody>
+                        {{#each products}}
                           <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
+                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
+                              {{#equals this.status 1}}
                                 <span class="published">Published</span>
+                              {{/equals}}
+                              {{#equals this.status 0}}
+                                <span class="unpublished">Unpublished</span>
+                              {{/equals}}
                             </td>
                             <td scope="col"><a href="/admin/view-product">Details</a></td>
                           </tr>
-                          <tr class="row-two row-height">
+                        {{/each}}
+                          {{!-- <tr class="row-two row-height">
                             <td scope="col">01/04/2022</td>
                             <td scope="col"><strong>RICE/WHITE</strong></td>
                             <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
@@ -82,7 +90,7 @@
                                 <span class="unpublished">Unpublished</span>
                             </td>
                             <td scope="col">Details</td>
-                          </tr>
+                          </tr> --}}
                       </tbody>
                     </table>
                 </div>
@@ -106,7 +114,24 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {{#each approvedProducts}}
                           <tr class="row-one row-height">
+                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+                            <td scope="col"> <strong>1OOO</strong></td>
+                            <td scope="col">
+                              {{#equals this.status 1}}
+                                <span class="published">Published</span>
+                              {{/equals}}
+                              {{#equals this.status 0}}
+                                <span class="unpublished">Unpublished</span>
+                              {{/equals}}
+                            </td>
+                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                          </tr>
+                        {{/each}}
+                          {{!-- <tr class="row-one row-height">
                             <td scope="col">01/04/2022</td>
                             <td scope="col"><strong>RICE/WHITE</strong></td>
                             <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
@@ -145,7 +170,7 @@
                                 <span class="published">Published</span>
                             </td>
                             <td scope="col">Details</td>
-                          </tr>
+                          </tr> --}}
                     
                       </tbody>
                     </table>
@@ -171,7 +196,24 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {{#each rejectedProducts}}
                           <tr class="row-one row-height">
+                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+                            <td scope="col"> <strong>1OOO</strong></td>
+                            <td scope="col">
+                              {{#equals this.status 1}}
+                                <span class="published">Published</span>
+                              {{/equals}}
+                              {{#equals this.status 0}}
+                                <span class="unpublished">Unpublished</span>
+                              {{/equals}}
+                            </td>
+                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                          </tr>
+                        {{/each}}
+                          {{!-- <tr class="row-one row-height">
                             <td scope="col">01/04/2022</td>
                             <td scope="col"><strong>RICE/WHITE</strong></td>
                             <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
@@ -190,7 +232,7 @@
                                 <span class="unpublished">Unpublished</span>
                             </td>
                             <td scope="col">Details</td>
-                          </tr>
+                          </tr> --}}
                         
                       </tbody>
                     </table>
