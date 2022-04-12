@@ -11,69 +11,51 @@
             </li>
          </ul>
       </div> --}}
-<div id="wrapper">
-      
-      <!-- Sidebar -->
-      <div id="sidebar-wrapper">
-      	
-         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li>
-               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>CREATE USER</a>
-            </li>
-            <li>
-               <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-bars fa-stack-1x "></i></span>ALL USERS</a>
-            </li>
-         </ul>
-      </div>
-      <!-- /#sidebar-wrapper -->
-
-<div id="page-content-wrapper">
+{{>user_mgt_sidebar}}
 
 {{>breadcrumbs}}
 
-<div class="card create-user-card">
-	<div class="card-header">
-		Create User
-	</div>
-	<div class="card-body create-user-form">
-		<form action="" method="post" class="">
-           <div class="form-row row">
-           	 <div class="col-6 form-group">
-           	 	<label for="first_name">First Name</label>
-           	 	<input type="text" name="first_name" class="form-control" value="" placeholder="">
-           	 </div>
-           	 <div class="col-6 form-group">
-           	 	<label for="last_name">Last Name</label>
-           	 	<input type="text" name="last_name" class="form-control" value="" placeholder="">
-           	 </div>	
-           </div>
+<div id="page-content-wrapper">
+   <div class="card create-user-card">
+   	<div class="card-header">
+   		Create User
+   	</div>
+   	<div class="card-body create-user-form">
+   		<form action="" method="post" class="">
+              <div class="form-row row">
+              	 <div class="col-6 form-group">
+              	 	<label for="first_name">First Name</label>
+              	 	<input type="text" name="first_name" class="form-control" value="" placeholder="">
+              	 </div>
+              	 <div class="col-6 form-group">
+              	 	<label for="last_name">Last Name</label>
+              	 	<input type="text" name="last_name" class="form-control" value="" placeholder="">
+              	 </div>	
+              </div>
 
-           <div class="form-group">
-           		<label for="email">Email</label>
-           		<input type="email" name="email" class="form-control" value="" placeholder="">
-           </div>
-           
-           <div class="form-group">
-           		<label for="phone">Phone</label>
-           		<input type="tel" name="phone" class="form-control" value="" placeholder="">
-           </div>
+              <div class="form-group">
+              		<label for="email">Email</label>
+              		<input type="email" name="email" class="form-control" value="" placeholder="">
+              </div>
+              
+              <div class="form-group">
+              		<label for="phone">Phone</label>
+              		<input type="tel" name="phone" class="form-control" value="" placeholder="">
+              </div>
 
-           <div class="form-group">
-           		<select class="form-select" name="roles">
-           			<option value="">Assign Role</option>
-           			<option value="NASC">NASC</option>
-           			<option value="Admin">Admin</option>
-           			<option value="Seed Trader">Seed Trader</option>
-           		</select>
-           </div>
-           <hr>
-           <div	class=" " style="float: right">
-           	 <button type="submit" class="btn btn-theme">Submit</button>
-           </div>	
-		</form>
-	</div>
-	
-</div>
-</div>
-
+              <div class="form-group">
+              		<select class="form-select" name="roles">
+              			<option value="">Assign Role</option>
+              			{{#each roles}}
+							<option value="{{this.id}}">{{this.role_name}}</option>
+						{{/each}}
+              		</select>
+              </div>
+              <hr>
+              <div	class=" " style="float: right">
+              	 <button type="submit" class="btn btn-theme">Submit</button>
+              </div>	
+   		</form>
+   	</div>  
+   </div>
 </div>

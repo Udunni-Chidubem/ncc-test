@@ -63,7 +63,7 @@
               <div class=" ">Date</div>
             </div>
             <div class="col ">
-              <div class=" ">Company Name</div>
+              <div class=" float-end">Company Name</div>
             </div>
           </div>
 
@@ -72,7 +72,7 @@
               <div class=" ">01/ 04/ 2022</div>
             </div>
             <div class="col ">
-              <div class=" ">Seed company name</div>
+              <div class="float-end ">Seed company name</div>
             </div>
           </div>
 
@@ -81,7 +81,7 @@
               <div class=" ">01/ 04/ 2022</div>
             </div>
             <div class="col ">
-              <div class=" ">Seed company name</div>
+              <div class=" float-end">Seed company name</div>
             </div>
           </div>
 
@@ -90,7 +90,7 @@
               <div class=" ">01/ 04/ 2022</div>
             </div>
             <div class="col ">
-              <div class=" ">Seed company name</div>
+              <div class="float-end ">Seed company name</div>
             </div>
           </div>
 
@@ -132,19 +132,19 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 ">
                       <div class=" ">
-                        <canvas id="farmer" style="width:100%;max-width:600px"></canvas>
+                        <canvas id="farmer" style="width:100%;max-width:600px;"></canvas>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class=" ">
-                        <canvas id="seedcompany" style="width:100%;max-width:600px"></canvas>
+                        <canvas id="seedcompany" style="width:100%;max-width:600px;"></canvas>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class=" ">
-                        <canvas id="seedtrader" style="width:100%;max-width:600px"></canvas>
+                        <canvas id="seedtrader" style="width:100%;max-width:600px;"></canvas>
                       </div>
                     </div>
                 </div>    
@@ -228,7 +228,7 @@
 
   {{!--  --}}
 
-  var xValues = ["Italy", "France"];
+  var xactorValues = ["Active Account", "Inactive Account"];
 var yfarmerValues = [55, 19];
 var barColors = [
   "#FFB946",
@@ -278,7 +278,7 @@ var yseedtraderValues = [55, 19];
 new Chart("seedtrader", {
   type: "doughnut",
   data: {
- 
+ labels: xproductValues,
     datasets: [{
       backgroundColor: barColors,
       data: yseedtraderValues

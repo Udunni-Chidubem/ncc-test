@@ -14,7 +14,7 @@
           <ul class="navbar-nav nav-list mb-2 mb-lg-0">
              
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class='bx bx-grid-alt' ></i> Dashboard</a>
+              <a class="nav-link" href="/admin/dashboard"><i class='bx bx-grid-alt' ></i> Dashboard</a>
             </li>
 
             <li class="nav-item">
@@ -25,51 +25,21 @@
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
               <ul class="dropdown-content arrow-top">
                   <li>
-                    <a href="#">Product Management</a>
+                    <a href="/admin/product-mgt">Product Management</a>
                   </li>
                   <li>
-                    <a href="#">Inventory Management</a>
+                    <a href="#">Order Management</a>
                   </li>
                 </ul>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/admin/create-user"><i class='bx bx-group'></i> User Management</a>
+              <a class="nav-link" href="/admin/all-users"><i class='bx bx-group'></i> User Management</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class='bx bx-cog'></i>General Settings</a>
+              <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
             </li>
-            {{!-- <li class="nav-item">
-              <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
-                <!-- <span class="notrifications"></span> -->
-              </a>
-            </li> --}}
-           {{!--  <li class="nav-item dropdown">
-                <a class="dropbtn"> 
-                 <i class="bi bi-bell"></i>  Administrator Name 
-                </a>
-                <ul class="dropdown-content arrow-top">
-                  <li>
-                    <a href="#">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Link 3</a>
-                  </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-              <form method="post" action="/logout?_method=DELETE">
-                <button class="nav-link nav-btn" type="submit">
-                  <i class='bx bx-log-out'></i>
-                  <span class="link_name">Log Out</span>
-                </button>
-              </form>
-            </li> --}}
-             
              
           </ul>
         
@@ -77,33 +47,30 @@
       </div>
     </nav>
     <div class="container-fluid secondary-nav" >
-    <ul class="navbar-nav nav-list">
-      <li class="nav-item dropdown">
-                <a class="dropbtn"> 
-                 <i class="bi bi-bell"></i>  Administrator Name 
-                </a>
-                <ul class="dropdown-content arrow-top">
-                  <li>
-                    <a href="#">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Link 3</a>
-                  </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-              <form method="post" action="/logout?_method=DELETE">
-                <button class="nav-link nav-btn" type="submit">
-                  <i class="bx bx-log-out"></i>
-                  <span class="link_name">Log Out</span>
-                </button>
-              </form>
-            </li>
-    </ul>
-  </div>
+      <ul class="navbar-nav nav-list">
+        <li class="nav-item dropdown">
+            <a class="dropbtn text-uppercase"> 
+             <i class="bi bi-bell"></i> {{ username }}
+            </a>
+            <ul class="dropdown-content username arrow-top">
+              <li>
+                <a href="#">Link 1</a>
+              </li>
+              <li>
+                <a href="#">Link 2</a>
+              </li>
+              <li class="nav-item">
+                 <form method="post" action="/logout?_method=DELETE">
+                    <button class="nav-link nav-btn" type="submit">
+                      <i class="bx bx-log-out"></i>
+                      <span class="link_name">Log Out</span>
+                    </button>
+                  </form>
+              </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
    </header>
 
 <div class="container">
