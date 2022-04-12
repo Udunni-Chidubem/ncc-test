@@ -99,8 +99,7 @@ module.exports={
                     model : LGAs,
                     attributes : ['name']
                 }
-            ],
-            raw: true
+            ]
         })
 
          if(singleFarmer){
