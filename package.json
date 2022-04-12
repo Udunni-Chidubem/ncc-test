@@ -48,6 +48,7 @@
     "request": "^2.88.2",
     "sequelize": "^5.21.7",
     "sequelize-cli": "^6.2.0",
+    "translate": "^1.4.1",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {

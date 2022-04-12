@@ -13,6 +13,13 @@ body {
   margin-top: -11px;
 }
 
+.goog{
+  display:null;
+  color: white;
+  margin-top: -12px;
+  margin-right: -15px;
+  /* font-size: 1px; */
+}
 .containers {
   /* background: #ffffff; */
   background-image: linear-gradient(#5dcd6d, #008346);
@@ -1559,6 +1566,7 @@ input[type="number"] {
 .seed_com_side {
   background: #24502a;
 }
+
 
 .seed_com_side .nav-links li a {
   font-family: "Poppins";
