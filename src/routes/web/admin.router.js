@@ -40,9 +40,6 @@ adminRouter.get('/all-users', async (req, res)=>{
     let traders = await adminController.getTraders(req, res)
     let companies= await adminController.getCompanies(req, res)
     let isVerified = await utils.isVerified(user)
-
-
-    
     res.render('admin/all-users', {
         layout : 'admin-dashboard',
         title : 'User Management',
@@ -72,12 +69,21 @@ adminRouter.get('/view-product', async (req, res)=>{
 adminRouter.get('/product-mgt', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user)
-
+    let products = await adminController.getProducts(req, res);
+    let approvedProducts=await products.filter(e => {
+        return e.status == 1
+    });
+    let rejectedProducts = await products.filter(e=>{
+        return e.status == 0
+    })
     res.render('admin/product-mgt', {
         layout : 'admin-dashboard',
         title : 'Product Management',
         username : user.username,
-        isVerified
+        isVerified,
+        products,
+        approvedProducts,
+        rejectedProducts
     })
 });
 

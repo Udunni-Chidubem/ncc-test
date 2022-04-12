@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models')
 const utils = require('../helpers/utils');
-const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, SeedTrader }  = db
+const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, SeedTrader, Product }  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 
@@ -83,6 +83,22 @@ module.exports={
         return JSON.parse(traders)
     },
 
+    getProducts:async (req, res)=>{
+        let products=await Product.findAll({
+             include : [ 
+                {
+                    model : User,
+                    include : [
+                        {
+                            model : SeedCompany
+                        }
+                    ]
+                }
+            ]
+        });
+        products = JSON.stringify(products);
+        return JSON.parse(products);
+    },
     viewFarmer: async (req, res) => {
         const user = await req.user
         let response = null
@@ -106,7 +122,6 @@ module.exports={
             response = JSON.parse(JSON.stringify(singleFarmer))
             console.log(response)
         }
-
         return response
     }
 
