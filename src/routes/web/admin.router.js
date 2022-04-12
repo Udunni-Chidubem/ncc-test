@@ -6,7 +6,6 @@ const adminController = require('../../controllers/admin.controller');
 
 adminRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
-
     let isVerified = await utils.isVerified(user)
     
     res.render('admin/dashboard', {
@@ -19,7 +18,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
 
 adminRouter.get('/create-user', async (req, res)=>{
     let user = await req.user
-
+    let roles =await adminController.getNascAdminRoles(req, res)
     console.log(user.username)
     let isVerified = await utils.isVerified(user)
     
@@ -28,21 +27,23 @@ adminRouter.get('/create-user', async (req, res)=>{
         title : 'User Management',
         sub_title : 'Create User',
         username : user.username,
-        isVerified
+        isVerified,
+        roles : roles
     })
 });
 
 
 adminRouter.get('/all-users', async (req, res)=>{
     let user = await req.user
-
+     let farmers=await adminController.getFarmers(req, res)
     let isVerified = await utils.isVerified(user)
     
     res.render('admin/all-users', {
         layout : 'admin-dashboard',
         title : 'All Users',
         username : user.username,
-        isVerified
+        isVerified,
+        farmers
     })
 });
 
