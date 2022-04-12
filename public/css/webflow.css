@@ -616,14 +616,15 @@ textarea.w-select {
   display: none;
   
 }
+.goog-te-gadget{
+  margin-left: 25px;
+}
 .goog{
   display: none;
   color: white;
-  margin-top: -12px;
-  margin-bottom: 0px;
-  /* margin-right: -55px;
-  margin-left: 0px;
-  font-size: -5px; */
+  margin-top: -10px;
+  margin-left: 20px;
+  /* font-size: -5px; */
 }
 @media screen and (max-width: 991px) {
   .w-container {
