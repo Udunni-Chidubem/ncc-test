@@ -927,7 +927,7 @@ input[type="number"] {
   border: 0px;
   border-radius: 14px !important;
   width: 134px;
-  height: 42px;
+  height: auto;
 }
 
 .summary_sub {
@@ -1607,7 +1607,10 @@ input[type="number"] {
     width: 33.33333333% !important;
   }
   .c_d_s2 {
-    font-size: 11px !important;
+    font-size: 10px !important;
+  }
+  .p-3.border.sal_bac.text-center.pt-5.border-0.border-end {
+    padding-top: 0rem !important;
   }
 
   .c_d_s2_link h5 {
@@ -1632,13 +1635,14 @@ input[type="number"] {
   .c_d_s2_full {
     margin-bottom: 0rem;
     line-height: 3rem;
+    font-size: 15px;
   }
   .c_d_s2_unfull {
     line-height: 3rem;
-  }
-  .c_d_s2_unfull {
+    font-size: 15px;
     margin-bottom: 0rem;
   }
+
   .co_12 .s_2 {
     /* margin-top: 2.3rem; */
   }
