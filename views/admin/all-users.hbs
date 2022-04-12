@@ -4,25 +4,6 @@
 
 <div id="page-content-wrapper">
 	<div class="card users_card">
-		{{!-- <div class="card-header">
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link active" id="farmers-tab" data-bs-toggle="tab" data-bs-target="#farmers" type="button" role="tab" aria-controls="farmers" aria-selected="true">FARMERS</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="seed-company-tab" data-bs-toggle="tab" data-bs-target="#seed-company" type="button" role="tab" aria-controls="seed-company" aria-selected="false">SEED COMPANY</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="seed-traders-tab" data-bs-toggle="tab" data-bs-target="#seed-traders" type="button" role="tab" aria-controls="seed-traders" aria-selected="false">SEED TRADER</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="nasc-tab" data-bs-toggle="tab" data-bs-target="#nasc" type="button" role="tab" aria-controls="nasc" aria-selected="false">NASC ADMIN</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="others-tab" data-bs-toggle="tab" data-bs-target="#others" type="button" role="tab" aria-controls="others" aria-selected="false">OTHER ADMIN</button>
-			  </li>
-			</ul>
-		</div> --}}
 		<div class="card-body">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 			  <li class="nav-item" role="presentation">
@@ -50,17 +31,17 @@
 				  		<th>Location</th>
 				  		<th></th>
 			  		</tr>	
-					{{#each farmers}}	  		
-						<tr class="table-theme-secondary">
-							<td colspan="" rowspan="" headers="">{{this.created_at}}</td>
-							<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
-							<td colspan="" rowspan="" headers="">{{this.State.name}}{{this.LGA.name}}</td>
-							<td colspan="" rowspan="" headers=""> 
-								<a class="" href="#">
-									<i class="fa fa-eye"></i> View
-								</a>
-							</td>
-						</tr>
+					  {{#each farmers}}	  		
+			  		<tr class="table-theme-secondary">
+			  			<td colspan="" rowspan="" headers="">{{this.created_at}}</td>
+			  			<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
+			  			<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} , {{this.State.name}}</td>
+			  			<td colspan="" rowspan="" headers=""> 
+			  				<a class="" href="#">
+                                <i class="fa fa-eye"></i> View
+                            </a>
+                        </td>
+			  		</tr>
 					{{/each}}
 			  	</table>
 			  </div>
