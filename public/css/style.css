@@ -141,7 +141,10 @@ body {
 @media (max-width: 768px) {
   .sidebar {
     width: 50%;
-    z-index: 1;
+    z-index: 0;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
   .close {
     display: none;
@@ -342,6 +345,9 @@ body {
   .col__4 {
     flex: 0 0 auto;
     width: 100% !important;
+  }
+  .sidebar_arrow {
+    order: -1;
   }
 
   /* .settings {
@@ -1001,7 +1007,7 @@ input[type="number"] {
   color: #47749c;
 }
 .mbar {
-  margin-right: -7rem !important;
+  /* margin-right: -7rem !important; */
 }
 
 .sidebar_arrow {
@@ -1532,6 +1538,9 @@ input[type="number"] {
   .card_products {
     width: 322px;
   }
+  .fixed-top {
+    z-index: 1 !important;
+  }
 
   .card_pay {
     width: 322px;
@@ -1682,11 +1691,17 @@ input[type="number"] {
   .lic_req0 button {
     text-align: end !important;
   }
+  .sidebar_arrow {
+    order: -1;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .card_products {
     width: 462px;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
 
   .card_pay {
@@ -1848,11 +1863,17 @@ input[type="number"] {
     flex: 0 0 auto;
     width: 50% !important;
   }
+  .sidebar_arrow {
+    order: -1;
+  }
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1080px) {
   .card_products {
     width: 462px;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
 
   .card_pay {
@@ -2013,6 +2034,9 @@ input[type="number"] {
   ._col {
     flex: 0 0 auto;
     width: 50% !important;
+  }
+  .sidebar_arrow {
+    order: -1;
   }
 }
 
