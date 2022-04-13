@@ -141,6 +141,9 @@ body {
   font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 14px;
+  position: initial !important;
+  min-height: initial !important;
+  top: auto !important;
 }
 
 
