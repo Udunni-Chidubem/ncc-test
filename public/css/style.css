@@ -1850,7 +1850,7 @@ input[type="number"] {
   }
 }
 
-@media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1080px) {
   .card_products {
     width: 462px;
   }
@@ -1943,10 +1943,12 @@ input[type="number"] {
     display: block !important;
   }
   .t_info {
-    width: 484px !important;
+    /* width: 484px !important; */
+    /* width: 100% !important; */
   }
   .card_home {
-    width: 484px !important;
+    /* width: 484px !important; */
+    /* width: 100% !important; */
   }
   .col__4 {
     flex: 0 0 auto;
