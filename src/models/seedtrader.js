@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       SeedTrader.belongsTo(models.User)
+      SeedTrader.belongsTo(models.States, {
+        foreignKey: 'state_id'
+      })
+      SeedTrader.belongsTo(models.LGAs, {
+        foreignKey : 'lg_id'
+      })
     }
   }
   SeedTrader.init({

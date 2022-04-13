@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       SeedCompany.belongsTo(models.States, {
         foreignKey: 'state_id'
       })
+      SeedCompany.belongsTo(models.LGAs, {
+        foreignKey : 'lg_id'
+      })
     }
   }
   SeedCompany.init({

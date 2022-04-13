@@ -66,12 +66,11 @@ app.engine('hbs', handlebars({
             })
             return sum.fn(s)
         }
-
     }
 }))
 
 Handlebars.registerHelper('paginate', paginate);
-
+Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: false}))
