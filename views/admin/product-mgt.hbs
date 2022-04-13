@@ -203,9 +203,9 @@
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
-                              {{#equals this.status 1}}
+                              {{#if this.status 1}}
                                 <span class="published">Published</span>
-                              {{/equals}}
+                              {}}
                               {{#equals this.status 0}}
                                 <span class="unpublished">Unpublished</span>
                               {{/equals}}

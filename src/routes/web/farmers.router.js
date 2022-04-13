@@ -1,6 +1,7 @@
 const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
+const paystack = require('../../helpers/paystack')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate } = require('../../helpers/formValidator')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
@@ -113,6 +114,17 @@ farmersRouter.post('/single-cart-item/:id', cartSingleValidation(), validate, as
 farmersRouter.get('/get-cart-count', async (req, res) => {
     let result = await farmerController.getFarmerCartCount(req, res)
     res.json({ message: result , statusCode: 200 }).status(200)
+})
+
+farmersRouter.get("/cart/checkout", async (req, res)=>{
+    let initial= await paystack.initialize()
+    if(initial.status==true){
+        res.redirect(initial.data.authorization_url);
+    }
+})
+
+farmersRouter.get('/checkout/callback', async (req, res)=>{
+
 })
 
 
