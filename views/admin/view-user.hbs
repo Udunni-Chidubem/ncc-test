@@ -15,75 +15,92 @@
 	<div class="card">
 		
 		<div class="card-body">
-			{{#if farmer}}
+			{{#if response}}
 			<div class="admin-view-user">
 				<div class="profile-image-section">
 					<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
-					<button type="button" class="btn btn-danger"> Deactivate User</button>
+					<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
 				</div>
 				<div class="tab-content" id="myTabContent">
 			  		<div class="tab-pane fade show active profile-info-section" id="personal" role="tabpanel" aria-labelledby="personal-tab">
 						<div class="bio-data">
 							<div>
 								<h5>First name</h5>
-								<p>{{farmer.firstname}}</p>
+								<p>{{response.firstname}}</p>
 							</div>
 							
 							<div>
 								<h5>Last name</h5>
-								<p>{{farmer.lastname}}</p>
+								<p>{{response.lastname}}</p>
 							</div>
 
 							<div>
 								<h5>Date of Birth</h5>
-								<p>{{dateFormat farmer.date_of_birth "DD/MM/YYYY"}}</p>
+								<p>{{dateFormat response.date_of_birth "DD/MM/YYYY"}}</p>
 							</div>
 							
 							<div>
 								<h5>Gender</h5>
-								<p>{{farmer.gender}}</p>
+								<p>{{response.gender}}</p>
 							</div>
 
 							<div>
 								<h5>Level of Education</h5>
-								<p>{{farmer.level_of_education}}</p>
+								<p>{{response.level_of_education}}</p>
 							</div>
 
 							<div>
 								<h5>Phone Number</h5>
-								<p>{{farmer.phone_no}}</p>
+								<p>{{response.phone_no}}</p>
 							</div>
 						</div>
 						<div class="other-data">
 							<div>
 								<h5>BVN</h5>
-								<p>{{farmer.bvn}}</p>
+								<p>{{response.bvn}}</p>
 							</div>
 							
 							<div>
 								<h5>NIN</h5>
-								<p>{{farmer.nin}}</p>
+								<p>{{response.nin}}</p>
 							</div>
 							
 							<div>
 								<h5>State</h5>
-								<p>{{farmer.State.name}}</p>
+								<p>{{response.State.name}}</p>
 							</div>
 							
 							<div>
 								<h5>LGA</h5>
-								<p>{{farmer.LGA.name}}</p>
+								<p>{{response.LGA.name}}</p>
 							</div>
 						</div>
 					</div>
 
-			  		<div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
-			  			EMPTY
+			  		<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
+			  			<div class="shipping">
+			  				<h3>MAIN SHIPPING ADDRESS</h3>
+			  				<div class="shipping-details">
+			  					<div>
+									<h5>State</h5>
+									<p>{{ delInfo.State.name }}</p>
+								</div>
+								
+								<div>
+									<h5>LGA</h5>
+									<p>{{delInfo.LGA.name}}</p>
+								</div>
 
+			  					<div>
+			  						<h5>Address</h5>
+									<p>{{ delInfo.address}}</p>	
+			  					</div>
+			  				</div>
+			  			</div>
 			  		</div>
 
-			  		<div class="tab-pane fade" id="activity-log" role="tabpanel" aria-labelledby="activity-log-tab">
-			  			<table class="table table-responsive table-bordered">
+			  		<div class="tab-pane activity-log-section fade" id="activity-log" role="tabpanel" aria-labelledby="activity-log-tab">
+			  			<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
 			  				<thead>
 			  					<tr>
 			  						<th>Name</th>

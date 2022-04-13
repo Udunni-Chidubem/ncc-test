@@ -50,7 +50,11 @@ $(document).ready(function(){
       
   });
   
-  
+$(document).ready(function() {
+  $('#activity-log-table').DataTable({
+    "order": [[2, "desc"]]
+  });
+});
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
