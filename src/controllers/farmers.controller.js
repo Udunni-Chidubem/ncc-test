@@ -510,11 +510,11 @@ module.exports={
                     where : {
                         id : items.id
                     }
-                } {transaction : transaction})
+                }, {transaction : transaction})
             }
             transaction.commit()
          }catch(e){
-             console.log(e)
+            console.log(e)
             transaction.rollback()
          }
         
