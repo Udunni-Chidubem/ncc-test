@@ -164,16 +164,16 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             data.amount = paystackPayload.data.amount
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
-            let {farmer} = await farmerController.cart(req, res)
+            let {farmer, isVerified} = await farmerController.cart(req, res)
             farmerController.updateCart(farmer.user_id)
-
+            res.render('farmers/payment-success', {
+                layout : 'farmers-dashboard',
+                title: 'Success Page',
+                isVerified,
+                paystackPayload
+            })
         }
-         res.render('farmers/payment-success', {
-            layout : 'farmers-dashboard',
-            title: 'Success Page',
-            isVerified,
-            paystackPayload
-        })
+       
        // res.render(paystackPayload)
        // return
     }
