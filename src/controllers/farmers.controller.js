@@ -509,16 +509,16 @@ module.exports={
     updateCart:async (items)=>{
          let transaction =await db.rest.transaction()
          try{
-            for(let i=0; i<items.length; i++){
+           // for(let i=0; i<items.length; i++){
                 await  Cart.update({
                     status : 1,
                     updated_at: now()
                 },{
                     where : {
-                        id : items.id
+                        user_id : items
                     }
                 }, {transaction : transaction})
-            }
+          //  }
             transaction.commit()
          }catch(e){
             console.log(e)
@@ -531,7 +531,6 @@ module.exports={
             where : { user_id : user_id},
             include :[{model : States}, {model : LGAs}],
             attributes : ['address']
-            
         })                              
     }
     

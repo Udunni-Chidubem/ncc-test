@@ -164,8 +164,8 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             data.amount = paystackPayload.data.amount
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
-            let items = await farmerController.cart(req, res)
-            farmerController.updateCart(items)
+            let {farmer} = await farmerController.cart(req, res)
+            farmerController.updateCart(farmer.user_id)
 
         }
         res.send(paystackPayload.message)
