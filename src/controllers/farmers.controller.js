@@ -258,7 +258,9 @@ module.exports={
        // const {getCartItems}=await this.cart(req.res)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
-            title: 'Order Preview',
+            title: 'Market Place',
+            sub_title : 'Checkout',
+            prev_link: '/farmer/cart',
             fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer,
             isVerified
