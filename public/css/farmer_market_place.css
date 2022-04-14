@@ -2790,3 +2790,57 @@ color: #818E9B;
 .datepicker-dropdown {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
+
+.payment-notifaction-page{
+  display: grid;
+justify-content: center;
+}
+
+
+.payment-card{
+  width: 350px;
+  height: auto;
+  border-radius: 9px !important;
+  box-shadow: 13px 14px 16px 0px #aaa;
+  padding: 10px;
+}
+
+.payment-line{
+  border: 1px dashed gray;
+}
+
+.message-type{
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.message-type h4{
+ color: #008346;
+}
+
+
+.message-type i {
+  color: #1c8655;
+  font-size: 70px;
+  margin-left: 0px;
+  margin-top: 12px;
+}
+
+.amount{
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #757575;
+  text-align: center;
+}
+
+.return-btn{
+  display: flex !important;
+  width: fit-content !important;
+  align-self: center;
+}

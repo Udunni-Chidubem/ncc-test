@@ -173,4 +173,17 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
 
 })
 
+farmersRouter.get('/payment-success', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+
+    res.render('farmers/payment-success', {
+        layout : 'farmers-dashboard',
+        title: 'Success Page',
+        isVerified
+    })
+})
+
+
 module.exports=farmersRouter
