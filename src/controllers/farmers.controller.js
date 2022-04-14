@@ -499,7 +499,24 @@ module.exports={
         }
         
     },
-    updateCart:async (item)=>{
+    updateCart:async (items)=>{
+         let transaction =await db.rest.transaction()
+         try{
+            for(let i=0; i<items.length; i++){
+                await  Cart.update({
+                    status : 1,
+                    updated_at: now()
+                },{
+                    where : {
+                        id : items.id
+                    }
+                } {transaction : transaction})
+            }
+            transaction.commit()
+         }catch(e){
+             console.log(e)
+            transaction.rollback()
+         }
         
     }
 }
