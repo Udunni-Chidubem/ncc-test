@@ -258,5 +258,11 @@ module.exports = {
             } })
 
         })
-    } 
+    },
+   services: async (req,res) => {
+        res.render('site/services', {
+            layout: 'common',
+            title : 'Services'
+        });
+    },
 }
