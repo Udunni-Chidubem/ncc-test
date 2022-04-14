@@ -1,7 +1,8 @@
 const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
-const { profileUpdateValidation, cartValidation, validate } = require('../../helpers/formValidator')
+const paystack = require('../../helpers/paystack')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate } = require('../../helpers/formValidator')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -63,7 +64,20 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
         isVerified: resp.isVerified
     })
 })
-farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
+farmersRouter.get('/checkout/preview', async (req, res)=>{
+    let {getCartItems, farmer, isVerified}=await farmerController.cart(req, res);
+    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
+    console.log(deliveryInfo)
+        res.render('farmers/order_preview', {
+            layout : 'farmers-dashboard',
+            title: 'Order Preview',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmer: farmer,
+            isVerified,
+            getCartItems,
+            deliveryInfo
+        })
+})
 farmersRouter.get("/product/price", async (req, res)=>{
     let product = await farmerController.singleProduct(req.query.product_id)
     res.send(product)
@@ -72,7 +86,7 @@ farmersRouter.get("/product/price", async (req, res)=>{
 // Cart Route
 farmersRouter.get('/cart', async (req, res) => {
     let resp = await farmerController.cart(req, res)
-
+    console.log(resp.getCartItems)
     res.render('farmers/cart', {
         layout : 'farmers-dashboard',
         title: 'Cart',
@@ -96,9 +110,85 @@ farmersRouter.post('/add-to-cart', cartValidation(), validate, async (req, res) 
     }
 })
 
+farmersRouter.post('/single-cart-item/:id', cartSingleValidation(), validate, async (req, res) => {
+    let response = await farmerController.singleCartItem(req, res)
+
+    if(response.product  == null){
+        return res.json({ message: 'Sorry we are unable to process the item.', statusCode: 400 }).status(400)
+    }else if(response.isItemAlreadyAdded){
+        return res.json({ message: 'This item has been already been added to your cart.', statusCode: 200 }).status(200)
+    }else if(response.cartItems){
+        return res.json({ message: 'Item has been added to cart successfully', statusCode: 200 }).status(200)
+    }else{
+        return res.json({ message: 'Unable to add item to cart. Please try again', error: true, statusCode: 400 }).status(400)
+    }
+})
+
 farmersRouter.get('/get-cart-count', async (req, res) => {
     let result = await farmerController.getFarmerCartCount(req, res)
     res.json({ message: result , statusCode: 200 }).status(200)
+})
+
+farmersRouter.post("/cart/checkout", async (req, res)=>{
+   try{
+        let paymentType = req.body.inlineRadioOptions
+        if(paymentType=='card'){  
+            let initial= await paystack.initialize('tipson664@gmail.com', 200000, req)
+           // console.log(initial)
+            if(initial.status==true){
+                let ref = initial.data.reference
+                let {getCartItems, farmer}=await farmerController.cart(req, res)
+                await farmerController.initializeTransaction(req, res, ref, getCartItems, farmer)
+                res.redirect(initial.data.authorization_url);
+            }
+        }
+   }catch(e){
+        console.log(e)
+        res.send(e)
+   }
+
+  
+})
+
+farmersRouter.get('/checkout/callback', async (req, res)=>{
+    let ref=req.query.reference
+    let check=await farmerController.checkTransaction(ref)
+    if(check){
+        let data={}
+        data.status='pending'
+        farmerController.updateTransactionLog(data, ref)
+        let paystackPayload = await paystack.callback(req, res)
+        if(paystackPayload.status==true){
+            data.status='verified'
+            data.currency=paystackPayload.data.currency,
+            data.amount = paystackPayload.data.amount
+            data.description = paystackPayload.data.log.history[1].message
+            farmerController.updateTransactionLog(data, ref)
+            let {farmer, isVerified} = await farmerController.cart(req, res)
+            farmerController.updateCart(farmer.user_id)
+            res.render('farmers/payment-success', {
+                layout : 'farmers-dashboard',
+                title: 'Success Page',
+                isVerified,
+                paystackPayload
+            })
+            return
+        }
+    }
+    res.send("this is not a valid transaction reference, pls contact admin if this is a error")
+
+})
+
+farmersRouter.get('/payment-success', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+
+    res.render('farmers/payment-success', {
+        layout : 'farmers-dashboard',
+        title: 'Success Page',
+        isVerified
+    })
 })
 
 

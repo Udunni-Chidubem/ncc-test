@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="search-tip">
-                        <p ><i class="fa fa-lightbulb"></i> tip: You need 3kg of maize seed for your farm</p>
+                        <p ><i class="fa fa-lightbulb"></i> Recomendation: You need 3kg of maize seed for your farm</p>
                     </div>
                 
                 {{#if products}}
@@ -54,10 +54,10 @@
                             <div class="product-price"> 
                                 <p>Unit Price per KG</p>
                                 <h4 class="price_{{this.id}}"></h4>
-                                <p>Select Size (kg)</p>
+                                <p>Choose Qty (kg)</p>
                                 <div class="input-field product-size">
                                     <select id="{{this.id}}" class="size">
-                                        <option value="">Choose Size</option>
+                                        <option value="">Choose Qty</option>
                                         {{#json this.item}}
                                             {{#each this.pkg}}
                                                   <option value="{{this}}">{{this}} kg</option>
@@ -66,7 +66,7 @@
                                     </select>
                                 </div>
 
-                                <p>Select Qty</p>
+                                <p style="margin-bottom: 10px;">Select Amount</p>
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                         <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">

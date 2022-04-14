@@ -141,7 +141,23 @@ body {
   font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 14px;
+  position: initial !important;
+  min-height: initial !important;
+  top: auto !important;
 }
+
+
+.goog-logo-link {
+    display:none !important;
+} 
+    
+.goog-te-gadget {
+    color: transparent !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+display: none !important;
+} 
 
 h1,
 h2,
@@ -1873,7 +1889,7 @@ input[name="Accountnumber"] {
 
 
 .search-tip{
-  width: 309px;
+  width: 370px;
   height: 32px;
   background: #885AF8;
 border-radius: 4px;
@@ -2419,7 +2435,7 @@ font-size: 12px;
 }
 
 .product-size{
-  height: 21px;
+  height: 35px;
 }
 
 
@@ -2493,7 +2509,7 @@ font-size: 12px;
     }
 
     .search-tip {
-      width: 284px;
+      width: 375px;
     }
 
     .search-filter {
@@ -2518,7 +2534,7 @@ font-size: 12px;
     }
 
     .card-4 .card-body .search-form{
-      margin-left: 1rem !important;
+      margin-left: 0rem !important;
       margin-right: 1.5rem !important;
     }
 
@@ -2558,7 +2574,7 @@ font-size: 12px;
     }
 
     input[name="Search"] {
-      width: 92%;
+      width: 87%;
     }
 
     .pri-search-btn{
@@ -2575,7 +2591,7 @@ font-size: 12px;
     }
 
     .search-tip {
-      width: 284px;
+      width: 370px;
     }
 
     .search-filter {
@@ -2773,4 +2789,58 @@ color: #818E9B;
 
 .datepicker-dropdown {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-notifaction-page{
+  display: grid;
+justify-content: center;
+}
+
+
+.payment-card{
+  width: 350px;
+  height: auto;
+  border-radius: 9px !important;
+  box-shadow: 13px 14px 16px 0px #aaa;
+  padding: 10px;
+}
+
+.payment-line{
+  border: 1px dashed gray;
+}
+
+.message-type{
+  display: block;
+  justify-content: center;
+  text-align: center;
+}
+
+.message-type h4{
+ color: #008346;
+}
+
+
+.message-type i {
+  color: #1c8655;
+  font-size: 70px;
+  margin-left: 0px;
+  margin-top: 12px;
+}
+
+.amount{
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #757575;
+  text-align: center;
+}
+
+.return-btn{
+  display: flex !important;
+  width: fit-content !important;
+  align-self: center;
 }

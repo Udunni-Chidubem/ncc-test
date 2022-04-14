@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    unserscored : true,
+    underscored : true,
     sequelize,
     tableName: 'states',
     modelName: 'States',

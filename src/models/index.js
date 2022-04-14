@@ -20,7 +20,6 @@ let db = {};
             dbPath.password,
             dbPath
         )
-
     }
 
     //Add the Database Models

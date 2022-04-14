@@ -50,7 +50,11 @@ $(document).ready(function(){
       
   });
   
-  
+$(document).ready(function() {
+  $('#activity-log-table').DataTable({
+    "order": [[2, "desc"]]
+  });
+});
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
@@ -133,6 +137,10 @@ function showFileName( event ) {
   infoArea.textContent = 'File name: ' + fileName;
 }
 
+
+/* PRODUCT INCREASE DECREASE BUTTON */
+
+
 // let activeBtn = document.querySelector("activeB")
 //   activeBtn.addEventListener("click", ()=> {
     
@@ -153,3 +161,10 @@ function decreaseValue() {
   document.getElementById('number').value = value;
 }
 
+/*  ==========================================
+    TRANSLATE
+* ========================================== */
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+}

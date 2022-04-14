@@ -1,9 +1,25 @@
 const db = require('../models');
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation, Product, Cart }  = db
+const {
+        User, 
+        Farmer, 
+        UserRole, 
+        Role, 
+        SeedTrader, 
+        SeedCompany, 
+        LGAs, 
+        States, 
+        DeliveryInformation, 
+        Product, 
+        Cart, 
+        TransactionLog, 
+        TransactionCarts, 
+        Wallet 
+    }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
 const { Op } = require("sequelize");
-const { QueryTypes } = require('sequelize')
+const { QueryTypes } = require('sequelize');
+const { now } = require('moment');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -236,13 +252,15 @@ module.exports={
         return {farmer, isVerified, singleProduct}
     },
     paymentPage: async (req, res) => {
-        const user = await req.user
-        const farmer = await utils.getFarmerProfile(user)
-        const isVerified = await utils.isVerified(user)
-
+       // const user = await req.user
+       // const farmer = await utils.getFarmerProfile(user)
+       // const isVerified = await utils.isVerified(user)
+       // const {getCartItems}=await this.cart(req.res)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
-            title: 'Order Preview',
+            title: 'Market Place',
+            sub_title : 'Checkout',
+            prev_link: '/farmer/cart',
             fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer,
             isVerified
@@ -261,10 +279,11 @@ module.exports={
         const farmer = await utils.getFarmerProfile(user)
         const isVerified = await utils.isVerified(user)
 
-        const getCartItems = await Cart.findAll({ 
+        let getCartItems = await Cart.findAll({ 
             include : [
                 {
                     model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
                     include : [
                         {
                             model: User,
@@ -276,6 +295,17 @@ module.exports={
                                     include : [{model : States, attributes: ['id', 'name']}]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    model : User,
+                    attributes : ['id'],
+                    include : [
+                        {
+                                    model : DeliveryInformation,
+                                    attributes : ['address'],
+                                    include :[{model : States}, {model : LGAs}]
                         }
                     ]
                 }
@@ -297,9 +327,8 @@ module.exports={
         order: [
             ['id', 'DESC'],
         ],
-        raw: true
         })
-
+        getCartItems = JSON.parse(JSON.stringify(getCartItems))
         return { farmer, isVerified, getCartItems }
     },
     getFarmerCartCount: async (req, res) => {
@@ -362,6 +391,149 @@ module.exports={
         }
 
         return {cartItems, isItemAlreadyAdded}
-    }
+    },
+    singleCartItem: async (req, res) => {
+        const user = await req.user
+        const {price, size, quantity} = req.body
 
+        let cartItems, productCheck
+        /**
+         * 1. Check if the product exist
+         * 2. check if item has already been added to cart
+         * and has not been paid
+         */
+        const product = await Product.findOne({ where: { id: req.params.id, status: 1}, attributes: ['id'], raw: true})
+
+        const isItemAlreadyAdded = await Cart.findOne({ where: {
+            [Op.and]: [
+                {
+                    product_id: {
+                      [Op.eq]: req.params.id
+                    }
+                },
+                {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                    size: {
+                      [Op.eq]: size
+                    }
+                },
+                {
+                    qty: {
+                      [Op.eq]: quantity
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0 //o means items has not been paid for, 1 means item has been purchased
+                  }
+                }
+              ]
+        }, raw: true})
+
+        if(!isItemAlreadyAdded){
+            let newPrice = price.split('₦')[1]
+            cartItems = await Cart.create({
+                user_id : user.id,
+                product_id: req.params.id,
+                unit_price: newPrice,
+                size: size,
+                qty: quantity,
+                total_amount: parseInt(newPrice * quantity)
+            })
+        }
+
+        return {cartItems, isItemAlreadyAdded, product}
+    },
+    initializeTransaction : async (req, res, ref, getCartItems, farmer)=>{
+        //const {getCartItems, farmer}=await cart(req, res)
+        
+        let transaction =await db.rest.transaction()
+        try{
+            let log=await TransactionLog.create({
+                farmer_id : farmer.id,
+                transaction_ref : ref,
+                status : 'initiated',
+                created_at : await now()
+            }, {transaction : transaction})
+            for(let i=0; i<getCartItems.length; i++){
+              await  TransactionCarts.create({
+                    transaction_log_id : log.id,
+                    cart_id : getCartItems[i].id,
+                    created_at :await now(),
+                }, {transaction : transaction})
+            }
+            transaction.commit();
+            return log
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+            return e
+        }
+    },
+    checkTransaction: async (ref)=>{
+        let t=await TransactionLog.findOne({
+            where : {
+                transaction_ref : ref
+            }
+        })
+        if(t){
+            return true
+        }
+        return false
+    },
+    updateTransactionLog:async (data, ref)=>{
+        let transaction=await db.rest.transaction()
+        try{
+            await TransactionLog.update(
+            data,
+            {
+                where : {
+                    transaction_ref : ref
+                }
+            },
+            {
+                transaction : transaction
+            }
+        )
+        transaction.commit()
+        return true
+        }catch(e){
+            transaction.rollback()
+            console.log('update transaction error', e)
+            return false
+        }
+        
+    },
+    updateCart:async (items)=>{
+         let transaction =await db.rest.transaction()
+         try{
+           // for(let i=0; i<items.length; i++){
+                await  Cart.update({
+                    status : 1,
+                    updated_at: now()
+                },{
+                    where : {
+                        user_id : items
+                    }
+                }, {transaction : transaction})
+          //  }
+            transaction.commit()
+         }catch(e){
+            console.log(e)
+            transaction.rollback()
+         }
+        
+    },
+    deliveryInfo : async (user_id)=>{
+        let d=await DeliveryInformation.findOne({
+            where : { user_id : user_id},
+            include :[{model : States}, {model : LGAs}],
+            attributes : ['address']
+        })                              
+    }
+    
 }

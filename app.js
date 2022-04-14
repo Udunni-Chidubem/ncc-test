@@ -14,6 +14,8 @@ const flash = require('express-flash')
 const passpportInitializer = require('./src/helpers/passport-config')
 passpportInitializer(passport)
 
+const {seedAdminData} = require('./src/helpers/bootstrapUser')
+
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({
     layoutsDir: 'views/layouts',
@@ -60,12 +62,11 @@ app.engine('hbs', handlebars({
             })
             return sum.fn(s)
         }
-
     }
 }))
 
 Handlebars.registerHelper('paginate', paginate);
-
+Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -84,7 +85,6 @@ app.use(fileUpload({
 }));
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
-
 app.use('/', mainRoute)
 
 app.use(async function (req, res) {
@@ -100,3 +100,4 @@ const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
+ seedAdminData()

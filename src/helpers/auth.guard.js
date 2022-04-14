@@ -28,6 +28,9 @@ module.exports = {
 
             if(role == 'seed_company')
                 return res.redirect('seed-company/dashboard')
+            
+            if(role == 'admin')
+                return res.redirect('admin/dashboard')
     },
     //this will be called on all farmers routes to see if the user role if farmer
     farmerPermission: (req, res, next)=>{
@@ -40,5 +43,8 @@ module.exports = {
     //this will be called on all seed company routes to see if the role is seed company
     seedCompanyPermission : (req, res, next)=>{
 
+    },
+    //this will be called on all seed company routes to see if the role is seed company
+    adminPermission : (req, res, next)=>{
     }
 }

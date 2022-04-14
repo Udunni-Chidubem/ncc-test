@@ -3,7 +3,7 @@
 	<div class="card">
         <div class="card-body m-3">
         	 <div class="search-tip">
-                <p ><i class="fa fa-lightbulb"></i> tip: You need 3kg of maize seed for your farm</p>
+                <p ><i class="fa fa-lightbulb"></i> Recommendation: You need 3kg of maize seed for your farm</p>
              </div>
              <div class="product-grid">
              	<div class="product-img">
@@ -21,13 +21,12 @@
 					
 					{{!-- <button class="btn btn-save-product mr-2"><i class="fa fa-cart-add"></i>Add to Cart</button> --}}
                      <button class="btn btn-save-product mr-2 addCart" data-prodid="{{product.id}}"> <i class='bx bx-cart-add'></i>Add to Cart</button>
-	                <button class="btn btn-place-order" onclick="window.location.href='./payment_page_preview'">Place Order</button>
+	                <button class="btn btn-place-order">Place Order</button>
+	                {{!-- <button class="btn btn-place-order" onclick="window.location.href='./payment_page_preview'">Place Order</button> --}}
              	</div>
-             	<div class="view-product-price">
-                 
-             	    <p>Unit Price per KG</p>
-                   <br/>
-                  <h4 class="price_{{product.id}}"></h4>
+             	<div class="view-product-price">                
+             	    <p>Unit Price</p>
+                  <h4 class="price_{{product.id}}" id="price"></h4>
                   <div class="input-field product-size">
                           <select id="{{product.id}}" class="size">
                             <option value="">Choose Size</option>
@@ -39,7 +38,7 @@
                         </select>
                     </div>
 
-                  <p>Select quantity</p>
+                  <p style="margin-bottom: 10px;">Select quantity</p>
 
                   <div class="input-group">
                       <span class="input-group-btn">

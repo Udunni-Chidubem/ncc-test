@@ -1,0 +1,62 @@
+const db = require('../models');
+const {User, UserRole, Role }  = db
+const bcrypt = require('bcrypt');
+const { raw } = require('body-parser');
+
+
+const seedAdminData = async () => {
+	let transaction = await db.rest.transaction();
+	const password = await bcrypt.hash("P@ssw0rd@1", 10)
+	try{
+		let user =await User.findOne(
+			{
+				where : {username : 'admin'},
+				raw : true
+			}
+		);
+	//	console.log(user)
+		if(user==null){
+			user = await User.create({
+				username: "admin",
+				password : password,
+				status : 1
+			}, {transaction : transaction})
+
+			if(user){
+				let r = await Role.findOne(
+					{
+						where : { role_name : 'admin' },
+						raw: true
+					}
+				);
+
+				console.log(r)
+				if(!r){
+					r = await Role.create({role_name : 'admin'}, {transaction : transaction})
+				}
+				if(r) {
+					const rolee = UserRole.create({user_id : user.id, role_id : r.id})
+					console.log(rolee + 121)
+				}
+			}
+		}
+		let n = await Role.findOne({
+			where : {role_name : 'nasc'}
+		})
+		
+		console.log(JSON.stringify(n))
+		if(!n){
+			await Role.create({
+				role_name : 'nasc'
+			}, {transaction : transaction});
+		}
+		transaction.commit();
+	}catch(e){
+		transaction.rollback();
+		console.log(e)
+	}
+
+
+}
+
+module.exports = {seedAdminData}

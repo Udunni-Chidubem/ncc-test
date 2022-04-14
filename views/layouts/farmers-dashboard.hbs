@@ -3,7 +3,7 @@
 
  <header>
     <nav class="navbar navbar-defaults navbar-expand-lg fixed-top  navbar-dark  ">
-      <div class="container-fluid">
+      <div class="container-fluid ">
         <a class="navbar-brand navbar-heading" href="#">{{ title }}</a>
         <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,6 +27,10 @@
                 <span class='badge badge-warning' id='lblNotificationCount'>  </span>
               </a>
             </li>
+              <li class="nav-item">
+                 <div class="nav-link goog" id="google_translate_element"></div>
+            </li>
+             
              
           </ul>
         
@@ -129,6 +133,13 @@
     
       {{{body}}}
   </div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+  }
+</script>
+ <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 
@@ -264,16 +275,52 @@
       })
     }
 
-
-    //if(window.location.pathname.split('/')[2] == 'market_place'){
-    setInterval(getCartCount, 1000)
-    //}
+    setInterval(getCartCount, 1000) //fetch the db to update the cart items without refreshing the page
 
     //Single Add to Cart
     $('.addCart').on('click', function(){
-      let content=$(this).closest('.products-details')
-      let z = content.find('.price_5').html()
-      alert(z)
+      let price=$('#price').html()
+      let kg  = $('.size').val()
+      let qty  = $('#quantity').val()
+      let pid  = $(this).data('prodid')
+
+
+      if(qty == 0){
+        error_toastr('You have not selected a quantity.')
+      }
+      
+      const data =  {
+        'price': price, 
+        'size' : kg, 
+        'quantity' : qty
+      }
+
+
+
+        let url = baseUrl + '/farmer/single-cart-item/' + pid
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then(r => r.json())
+        .then(response => {
+          $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+          if(response.statusCode == 402){
+            let msg = ''
+            let errors = response.data
+            errors.forEach((value, index) => {
+              msg += (index + 1 ) + '. ' + value.msg + ' \n'
+            })
+            error_toastr(msg)
+          }else if(response.statusCode == 500 || response.statusCode == 400){
+            error_toastr(response.message)
+          }else{
+            success_toastr(response.message)
+          }
+        })
+        .catch(error => console.log(error))
     })
     
    })

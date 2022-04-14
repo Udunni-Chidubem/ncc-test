@@ -7,11 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server",
     "start": "env NODE_ENV=development nodemon app",
-    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1/db_nigsims",
-    "migration": "npx sequelize-cli migration:create --name modify_users_add_new_fields",
+    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3306/db_nigsims",
+    "migration": "npx sequelize-cli migration:create --name create_wallets_table",
     "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
     "seeder": "npx sequelize-cli seed:create --name my-seed-file",
-    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1/db_nigsims",
+    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1:3306/db_nigsims",
     "seed-single": "npx sequelize-cli db:seed --seed <name of seed file>",
     "test_local": "NODE=test yarn jest --silent=false --verbose --forceExit --runInBand",
     "test2": "NODE=test jest --forceExit --runInBand"
@@ -34,6 +34,7 @@
     "express-validator": "^6.11.1",
     "g": "^2.0.1",
     "handlebars": "^4.7.7",
+    "handlebars-dateformat": "^1.1.2",
     "jsonwebtoken": "^8.5.1",
     "lite-server": "^2.6.1",
     "method-override": "^3.0.0",
@@ -48,6 +49,7 @@
     "request": "^2.88.2",
     "sequelize": "^5.21.7",
     "sequelize-cli": "^6.2.0",
+    "translate": "^1.4.1",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
