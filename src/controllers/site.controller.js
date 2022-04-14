@@ -23,6 +23,12 @@ module.exports = {
             title: 'Pre-Registration Page'
         });
     }, 
+    extension_worker: async (req,res) => {
+        res.render('site/extension-worker', {
+            title: 'Find and extension worker',
+            layout: 'header'
+        });
+    },
     success_page_test: async (req,res) => {
         res.render('site/success-bk',{
             form_banner:'Group.png',

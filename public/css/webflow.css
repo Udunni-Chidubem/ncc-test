@@ -621,6 +621,8 @@ textarea.w-select {
 .goog-te-combo{
   font-size: 2pt;
   color: #000;
+  border: white;
+  /* border-bottom-color: #000; */
 }
 .goog-logo-link {
   display:none !important;
@@ -636,11 +638,16 @@ display: none !important;
 } 
 
 .goog{
+  /* margin-left: 25px; */
+  border: white;
+  /* border-bottom-color: #000; */
   display: none;
   color: black;
-  margin-top: -20px;
-  margin-bottom: 0px;
+  /* margin-top: -20px; */
+  margin-bottom: -25px;
   margin-left: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   /* margin-top: auto; */
 }
 
