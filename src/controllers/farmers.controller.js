@@ -291,12 +291,18 @@ module.exports={
                                     model : SeedCompany,
                                     attributes: ['id', 'name_of_company', 'state_id'],
                                     include : [{model : States, attributes: ['id', 'name']}]
-                                },
-                                {
-                                    model : DeliveryInformation,
-                                    include :[{model : States}, {model : LGAs}]
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    model : User,
+                    attributes : ['id'],
+                    include : [
+                        {
+                                    model : DeliveryInformation,
+                                    include :[{model : States}, {model : LGAs}]
                         }
                     ]
                 }
@@ -518,5 +524,12 @@ module.exports={
             transaction.rollback()
          }
         
+    },
+    deliveryInfo : async (user_id)=>{
+        let d=await DeliveryInformation.findOne({
+            where : { user_id : user_id},
+            include :[{model : States}, {model : LGAs}]
+        })                              
     }
+    
 }

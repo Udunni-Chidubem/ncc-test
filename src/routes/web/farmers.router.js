@@ -66,14 +66,16 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
 })
 farmersRouter.get('/checkout/preview', async (req, res)=>{
     let {getCartItems, farmer, isVerified}=await farmerController.cart(req, res);
-    console.log(getCartItems)
+    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
+    console.log(deliveryInfo)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
             title: 'Order Preview',
             fullname: farmer.firstname + ' ' + farmer.lastname,
-            farmerData: farmer,
+            farmer: farmer,
             isVerified,
-            getCartItems
+            getCartItems,
+            deliveryInfo
         })
 })
 farmersRouter.get("/product/price", async (req, res)=>{
