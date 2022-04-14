@@ -150,9 +150,9 @@ body {
     width: 50%;
     z-index: 1;
   }
-  .{
+  /* .{
     width: 390px !important;
-  }
+  } */
  
   /* .card_comp{
     display: grid;
@@ -372,10 +372,10 @@ body {
     grid-template-columns: repeat(4, 100px);
     margin-right: 0px !important;
   } */
-  .card_dis{
-    /* margin-bottom: -40px !important;
-    margin-bottom: 00px !important; */
-  }
+  /* .card_dis{
+    margin-bottom: -40px !important;
+    margin-bottom: 00px !important;
+  } */
 }
 
 
@@ -593,8 +593,8 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
-  .co_12 .s_2 {
-  }
+  /* .co_12 .s_2 {
+  } */
   .c_d_s2.c__h {
     width: 100px;
     margin: 0px -1rem;
@@ -808,8 +808,8 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
-  .co_12 .s_2 {
-  }
+  /* .co_12 .s_2 {
+  } */
   .c_d_s2.c__h {
     width: 100px;
     margin: 0px -1rem;
@@ -2035,9 +2035,9 @@ input[type="number"] {
     width: 400px !important;
   } */
 
-  .card-wallet{
+  /* .card-wallet{
    
-  }
+  } */
   .card-details{
     display: grid !important;
     grid-template-columns: repeat(3, 196px);
@@ -2333,7 +2333,7 @@ input[type="number"] {
     margin-bottom: 00px !important;
   }
 
-}
+
 
 @media (min-width: 600px) and (max-width:990px) {
   .card_products {
@@ -2586,9 +2586,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .pt-5 {
     padding-top: 0px!important;
 }
@@ -2767,9 +2767,9 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
-  .co_12 .s_2 {
-    /* margin-top: 2.3rem; */
-  }
+  /* .co_12 .s_2 {
+    margin-top: 2.3rem;
+  } */
   .pt-5 {
     padding-top: 0px!important;
 }
