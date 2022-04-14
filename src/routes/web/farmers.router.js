@@ -134,7 +134,7 @@ farmersRouter.post("/cart/checkout", async (req, res)=>{
         let paymentType = req.body.inlineRadioOptions
         if(paymentType=='card'){  
             let initial= await paystack.initialize('tipson664@gmail.com', 200000, req)
-            console.log(initial)
+           // console.log(initial)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, farmer}=await farmerController.cart(req, res)
@@ -156,7 +156,7 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
     if(check){
         let data={}
         data.status='pending'
-        let u = await farmerController.updateTransactionLog(data, ref)
+        farmerController.updateTransactionLog(data, ref)
         let paystackPayload = await paystack.callback(req, res)
         if(paystackPayload.status==true){
             data.status='verified'
@@ -172,10 +172,8 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
                 isVerified,
                 paystackPayload
             })
+            return
         }
-       
-       // res.render(paystackPayload)
-       // return
     }
     res.send("this is not a valid transaction reference, pls contact admin if this is a error")
 

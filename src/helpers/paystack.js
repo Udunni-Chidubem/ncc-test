@@ -25,7 +25,7 @@ module.exports={
                     }
                 }
             )
-            console.log(resp.data.data.authorization_url)
+           // console.log(resp.data.data.authorization_url)
            return resp.data
         }catch(e){
             console.log(e)
