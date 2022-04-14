@@ -8,7 +8,7 @@
     "dev": "lite-server",
     "start": "env NODE_ENV=development nodemon -r esm app",
     "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3306/db_nigsims",
-    "migration": "npx sequelize-cli migration:create --name create_transaction_log_table",
+    "migration": "npx sequelize-cli migration:create --name create_wallets_table",
     "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
     "seeder": "npx sequelize-cli seed:create --name my-seed-file",
     "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1:3306/db_nigsims",

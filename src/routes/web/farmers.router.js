@@ -64,7 +64,18 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
         isVerified: resp.isVerified
     })
 })
-farmersRouter.get('/payment_page_preview', farmerController.paymentPage)
+farmersRouter.get('/checkout/preview', async (req, res)=>{
+    let {getCartItems, farmer, isVerified}=await farmerController.cart(req, res);
+    console.log(getCartItems)
+        res.render('farmers/order_preview', {
+            layout : 'farmers-dashboard',
+            title: 'Order Preview',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified,
+            getCartItems
+        })
+})
 farmersRouter.get("/product/price", async (req, res)=>{
     let product = await farmerController.singleProduct(req.query.product_id)
     res.send(product)
@@ -73,7 +84,7 @@ farmersRouter.get("/product/price", async (req, res)=>{
 // Cart Route
 farmersRouter.get('/cart', async (req, res) => {
     let resp = await farmerController.cart(req, res)
-
+    console.log(resp.getCartItems)
     res.render('farmers/cart', {
         layout : 'farmers-dashboard',
         title: 'Cart',
@@ -116,16 +127,50 @@ farmersRouter.get('/get-cart-count', async (req, res) => {
     res.json({ message: result , statusCode: 200 }).status(200)
 })
 
-farmersRouter.get("/cart/checkout", async (req, res)=>{
-    let initial= await paystack.initialize()
-    if(initial.status==true){
-        res.redirect(initial.data.authorization_url);
-    }
+farmersRouter.post("/cart/checkout", async (req, res)=>{
+   try{
+        let paymentType = req.body.inlineRadioOptions
+        if(paymentType=='card'){  
+            let initial= await paystack.initialize('tipson664@gmail.com', 200000, req)
+            console.log(initial)
+            if(initial.status==true){
+                let ref = initial.data.reference
+                let {getCartItems, farmer}=await farmerController.cart(req, res)
+                await farmerController.initializeTransaction(req, res, ref, getCartItems, farmer)
+                res.redirect(initial.data.authorization_url);
+            }
+        }
+   }catch(e){
+        console.log(e)
+        res.send(e)
+   }
+
+  
 })
 
 farmersRouter.get('/checkout/callback', async (req, res)=>{
+    let ref=req.query.reference
+    let check=await farmerController.checkTransaction(ref)
+    if(check){
+        let data={}
+        data.status='pending'
+        let u = await farmerController.updateTransactionLog(data, ref)
+        let paystackPayload = await paystack.callback(req, res)
+        if(paystackPayload.status==true){
+            data.status='verified'
+            data.currency=paystackPayload.data.currency,
+            data.amount = paystackPayload.data.amount
+            data.description = paystackPayload.data.log.history[1].message
+            farmerController.updateTransactionLog(data, ref)
+            let items = await farmerController.cart(req, res)
+            farmerController.updateCart(items)
+
+        }
+        res.send(paystackPayload.message)
+        return
+    }
+    res.send("this is not a valid transaction reference, pls contact admin if this is a error")
 
 })
-
 
 module.exports=farmersRouter

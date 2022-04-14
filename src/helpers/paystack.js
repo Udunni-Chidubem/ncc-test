@@ -3,20 +3,20 @@ const uniqueString = require('unique-string')
 const uniqid = require('uniqid');
 module.exports={
     callback:async (req, res)=>{
-       let resp=await axios.get('https://api.paystack.co/transaction/verify/'+req.query.reference, {
+       let resp=await axios.get(process.env.paystack_verify+req.query.reference, {
             headers: {
-                Authorization : 'Bearer '+process.env.paystack_test_secret_key
+                Authorization : 'Bearer '+process.env.paystack_secret_key
             }
         })
-        res.send(resp.data)
+        return resp.data
     },
-    initialize : async (email, amount)=>{
+    initialize : async (email, amount, req)=>{
         try{
             let ref=uniqid()
              let resp=await axios.post(process.env.paystack_initialize, {
                     email : email,
                     amount : amount,
-                    callback_url : window.location.origin+'/checkout/callback',
+                    callback_url : req.get('origin')+'/farmer/checkout/callback',
                     key : process.env.paystack_secret_key,
                     reference : ref
                 },
@@ -29,7 +29,7 @@ module.exports={
             console.log(resp.data.data.authorization_url)
            return resp.data
         }catch(e){
-
+            console.log(e)
         }
     }
 }

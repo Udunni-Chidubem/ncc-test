@@ -1,9 +1,25 @@
 const db = require('../models');
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, DeliveryInformation, Product, Cart }  = db
+const {
+        User, 
+        Farmer, 
+        UserRole, 
+        Role, 
+        SeedTrader, 
+        SeedCompany, 
+        LGAs, 
+        States, 
+        DeliveryInformation, 
+        Product, 
+        Cart, 
+        TransactionLog, 
+        TransactionCarts, 
+        Wallet 
+    }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
 const { Op } = require("sequelize");
-const { QueryTypes } = require('sequelize')
+const { QueryTypes } = require('sequelize');
+const { now } = require('moment');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -236,10 +252,10 @@ module.exports={
         return {farmer, isVerified, singleProduct}
     },
     paymentPage: async (req, res) => {
-        const user = await req.user
-        const farmer = await utils.getFarmerProfile(user)
-        const isVerified = await utils.isVerified(user)
-
+       // const user = await req.user
+       // const farmer = await utils.getFarmerProfile(user)
+       // const isVerified = await utils.isVerified(user)
+       // const {getCartItems}=await this.cart(req.res)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
             title: 'Order Preview',
@@ -261,7 +277,7 @@ module.exports={
         const farmer = await utils.getFarmerProfile(user)
         const isVerified = await utils.isVerified(user)
 
-        const getCartItems = await Cart.findAll({ 
+        let getCartItems = await Cart.findAll({ 
             include : [
                 {
                     model: Product,
@@ -275,6 +291,10 @@ module.exports={
                                     model : SeedCompany,
                                     attributes: ['id', 'name_of_company', 'state_id'],
                                     include : [{model : States, attributes: ['id', 'name']}]
+                                },
+                                {
+                                    model : DeliveryInformation,
+                                    include :[{model : States}, {model : LGAs}]
                                 }
                             ]
                         }
@@ -298,9 +318,8 @@ module.exports={
         order: [
             ['id', 'DESC'],
         ],
-        raw: true
         })
-
+        getCartItems = JSON.parse(JSON.stringify(getCartItems))
         return { farmer, isVerified, getCartItems }
     },
     getFarmerCartCount: async (req, res) => {
@@ -419,6 +438,68 @@ module.exports={
         }
 
         return {cartItems, isItemAlreadyAdded, product}
+    },
+    initializeTransaction : async (req, res, ref, getCartItems, farmer)=>{
+        //const {getCartItems, farmer}=await cart(req, res)
+        
+        let transaction =await db.rest.transaction()
+        try{
+            let log=await TransactionLog.create({
+                farmer_id : farmer.id,
+                transaction_ref : ref,
+                status : 'initiated',
+                created_at : await now()
+            }, {transaction : transaction})
+            for(let i=0; i<getCartItems.length; i++){
+              await  TransactionCarts.create({
+                    transaction_log_id : log.id,
+                    cart_id : getCartItems[i].id,
+                    created_at :await now(),
+                }, {transaction : transaction})
+            }
+            transaction.commit();
+            return log
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+            return e
+        }
+    },
+    checkTransaction: async (ref)=>{
+        let t=await TransactionLog.findOne({
+            where : {
+                transaction_ref : ref
+            }
+        })
+        if(t){
+            return true
+        }
+        return false
+    },
+    updateTransactionLog:async (data, ref)=>{
+        let transaction=await db.rest.transaction()
+        try{
+            await TransactionLog.update(
+            data,
+            {
+                where : {
+                    transaction_ref : ref
+                }
+            },
+            {
+                transaction : transaction
+            }
+        )
+        transaction.commit()
+        return true
+        }catch(e){
+            transaction.rollback()
+            console.log('update transaction error', e)
+            return false
+        }
+        
+    },
+    updateCart:async (item)=>{
+        
     }
-
 }

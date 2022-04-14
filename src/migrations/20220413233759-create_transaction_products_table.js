@@ -1,53 +1,33 @@
 'use strict';
 
+const transactionlog = require("../models/transactionlog");
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('transaction_log', {
+     await queryInterface.createTable('transaction_carts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmer_id: {
+      transaction_log_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'farmer',
+          model: 'transaction_log',
           key: 'id',
-          name: 'farmer_id_key'
+          name: 'transaction_log_id_key'
         }, 
       },
-      transaction_ref : {
-        type : Sequelize.STRING,
+      cart_id : {
+        type : Sequelize.INTEGER,
         allowNull : false,
-        unique : true
-      },
-      currency :{
-        type:Sequelize.STRING,
-        allowNull : true
-      },
-      amount : {
-        type : Sequelize.DOUBLE,
-        allowNull : true,
-      },
-      description : {
-        allowNull : true,
-        type:Sequelize.TEXT
-      },
-      company_id : {
-        type:Sequelize.INTEGER,
-        allowNull : true,
         references : {
-          model : 'seedcompany',
+          model : 'cart',
           key : 'id',
-          name : 'seedcompany_id_key'
+          name : 'cart_id_key'
         }
-      },
-      status : {
-        type : Sequelize.STRING,
-        values: ['initiated', 'pending', 'verified'],
-        allowNull : true,
       },
       created_at: {
         allowNull: false,

@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.SeedTrader)
       User.hasOne(models.SeedCompany)
       User.hasMany(models.Product)
+      User.hasOne(models.DeliveryInformation)
     }
   }
   User.init({
