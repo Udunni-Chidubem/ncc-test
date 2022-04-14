@@ -302,6 +302,7 @@ module.exports={
                     include : [
                         {
                                     model : DeliveryInformation,
+                                    attributes : ['address'],
                                     include :[{model : States}, {model : LGAs}]
                         }
                     ]
@@ -528,7 +529,9 @@ module.exports={
     deliveryInfo : async (user_id)=>{
         let d=await DeliveryInformation.findOne({
             where : { user_id : user_id},
-            include :[{model : States}, {model : LGAs}]
+            include :[{model : States}, {model : LGAs}],
+            attributes : ['address']
+            
         })                              
     }
     
