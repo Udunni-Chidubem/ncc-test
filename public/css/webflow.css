@@ -62,6 +62,9 @@ body {
   line-height: 20px;
   color: #333;
   overflow-x: hidden;
+  position: initial !important;
+  min-height: initial !important;
+  top: auto !important;
 }
 
 img {
@@ -613,19 +616,34 @@ textarea.w-select {
 
 .goog-te-banner-frame {
   visibility: visible;
-  display: none;
-  
+  display: none; 
 }
-.goog-te-gadget{
+.goog-te-combo{
+  font-size: 2pt;
+  color: #000;
+}
+.goog-logo-link {
+  display:none !important;
+} 
+  
+.goog-te-gadget {
+  color: transparent !important;
   margin-left: 25px;
 }
+
+.goog-te-banner-frame.skiptranslate {
+display: none !important;
+} 
+
 .goog{
   display: none;
-  color: white;
-  margin-top: -10px;
+  color: black;
+  margin-top: -20px;
+  margin-bottom: 0px;
   margin-left: 20px;
-  /* font-size: -5px; */
+  /* margin-top: auto; */
 }
+
 @media screen and (max-width: 991px) {
   .w-container {
     max-width: 728px;

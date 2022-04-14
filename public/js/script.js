@@ -161,3 +161,10 @@ function decreaseValue() {
   document.getElementById('number').value = value;
 }
 
+/*  ==========================================
+    TRANSLATE
+* ========================================== */
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+}

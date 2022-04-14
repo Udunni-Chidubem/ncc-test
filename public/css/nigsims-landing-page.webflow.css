@@ -112,6 +112,9 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
+  position: initial !important;
+  min-height: initial !important;
+  top: auto !important;
 }
 
 .slide {
