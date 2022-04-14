@@ -16,10 +16,6 @@ passpportInitializer(passport)
 
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
-
-
-
-
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({
     layoutsDir: 'views/layouts',
@@ -89,7 +85,6 @@ app.use(fileUpload({
 }));
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
-
 app.use('/', mainRoute)
 
 app.use(async function (req, res) {

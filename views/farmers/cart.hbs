@@ -23,7 +23,7 @@
                                 <div class="form-check ck">
                                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 </div>
-                                  <img src="../../product_images/{{'Product.file_name'}}" alt="Product Image" class="rounded">
+                                  <img src="../../product_images/{{Product.file_name}}" alt="Product Image" class="rounded">
                               </div>
                             </div>
                           </div>
@@ -32,32 +32,10 @@
                               <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 mb-2">
                                 <div class="col p_in">
                                   <div class="  ">
-                                    <h1>{{'Product.product_name'}} </h1>
-                                    <p>Variant: {{'Product.variant'}}</p>
-                                    <p>Seller: {{'Product.User.SeedCompany.name_of_company'}}</p>
-                                    <p>Location: {{'Product.User.SeedCompany.State.name'}}</p>
-                                    {{!-- <fieldset class="rating ratings"> <input type="radio" id="star5" name="rating" value="5" />
-                                        <label class="full" for="star5" title="Awesome - 5 stars"></label> 
-                                        <input type="radio" id="star4half" name="rating" value="4.5" />
-                                            <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
-                                        <input type="radio" id="star4" name="rating" value="4" />
-                                            <label class="full" for="star4" title="Pretty good - 4 stars"></label> 
-                                        <input type="radio" id="star3half" name="rating" value="3.5" />
-                                            <label class="half" for="star3half" title="Meh - 3.5 stars"></label> 
-                                        <input type="radio" id="star3" name="rating" value="3" />
-                                            <label class="full" for="star3" title="Meh - 3 stars"></label> 
-                                        <input type="radio" id="star2half" name="rating" value="2.5" />
-                                            <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> 
-                                        <input type="radio" id="star2" name="rating" value="2" />
-                                            <label class="full" for="star2" title="Kinda bad - 2 stars"></label> 
-                                        <input type="radio" id="star1half" name="rating" value="1.5" />
-                                            <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                                        <input type="radio" id="star1" name="rating" value="1" />
-                                            <label class="full" for="star1" title="Sucks big time - 1 star"></label> 
-                                        <input type="radio" id="starhalf" name="rating" value="0.5" />
-                                            <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> 
-                                        <input type="radio" class="reset-option" name="rating" value="reset" /> 
-                                    </fieldset> --}}
+                                    <h1>{{Product.product_name}} </h1>
+                                    <p>Variant: {{Product.variant}}</p>
+                                    <p>Seller: {{Product.User.SeedCompany.name_of_company}}</p>
+                                    <p>Location: {{Product.User.SeedCompany.State.name}}</p>
                                   </div>
                                 </div>
                                 <div class="col c_inf2">
@@ -153,7 +131,7 @@
                           <div class=" ">Shipping</div>
                         </div>
                         <div class="col">
-                          <div class="float-end shipping-cost">5,999</div>
+                          <div class="float-end shipping-cost">0</div>
                         </div>
                       </div>  
                     </div>
@@ -170,7 +148,7 @@
 
                      <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
                         <div class="p-3  text-center">
-                          <button type="button" class="btn btn_gr2 shadow " onclick="window.location.href='/farmer/payment_page_preview'"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          <button type="button" class="btn btn_gr2 shadow " onclick="window.location.href='/farmer/checkout/preview'"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
  Check Out</button>
                           <div class="con_terms">
                             <a href="#" class="terms link-secondary">terms and Conditions</a>

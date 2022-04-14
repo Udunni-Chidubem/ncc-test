@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('admin', {
+    await queryInterface.createTable('wallet', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,8 +14,13 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'user',
-          key: 'id'
-        }
+          key: 'id',
+          name: 'wallet_user_id_key'
+        }, 
+      },
+      amount : {
+        type : Sequelize.DOUBLE,
+        allowNull : true,
       },
       created_at: {
         allowNull: false,

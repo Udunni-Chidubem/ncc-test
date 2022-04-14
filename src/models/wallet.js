@@ -2,9 +2,8 @@
 const {
   Model
 } = require('sequelize');
-const state = require('./lga');
 module.exports = (sequelize, DataTypes) => {
-  class States extends Model {
+  class Wallet extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,20 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      States.hasMany(models.LGAs)
-      States.hasMany(models.Farmer)
+        Wallet.belongsTo(models.User, {
+            foreignKey : 'user_id'
+        })
     }
   }
-  States.init({  
-    name:{ 
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+  Wallet.init({
+    user_id : DataTypes.INTEGER,
+    amount : DataTypes.DOUBLE,
+    created_at : DataTypes.DATE,
+    updated_at : DataTypes.DATE,
   }, {
     underscored : true,
     sequelize,
-    tableName: 'states',
-    modelName: 'States',
+    modelName: 'Wallet',
+    tableName : 'wallet'
   });
-  return States;
+  return Wallet;
 };
