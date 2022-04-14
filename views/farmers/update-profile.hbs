@@ -7,14 +7,17 @@
                      
                       <div class="row row-cols-5 row-cols-lg-1 g-2 g-lg-2">
                         
-                        <div class="col-12 text-center">
+                        <div class="col-12">
                          
                           <div class="p-3 ">
                             <h5 class="card-header card-c p-0 mb-3 bg-light profile_header">Personal Information</h5>
                           <img src="../images/profile-avatar.png" id="output" class=" mb-2 mx-auto d-block img_round" alt="user profile image">
-                          <label  for="file">
-                          <span class=" profilePic-btn">Change Image</span>
+                          <div class="text-center" >
+                             <label class="profilePic-btn-container" for="file">
+                          <span class=" profilePic-btn ">Change Image</span>
                           </label>
+                          </div>
+                         
                           <input id="file" class="fileDisplay" type="file" onchange="loadFile(event)"/>
                              <div class="row">
                                 <div class="col-sm-6">
