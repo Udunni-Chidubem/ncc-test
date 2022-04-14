@@ -167,7 +167,10 @@ display: none !important;
  @media (max-width: 768px) {    /*(min-width: 500px) and*/
   .sidebar {
     width: 50%;
-    z-index: 1;
+    z-index: 0;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
   /* .{
     width: 390px !important;
@@ -631,6 +634,9 @@ display: none !important;
   }
   .close {
     display: none;
+  }
+  .sidebar_arrow {
+    order: -1;
   }
 
   .pt-5 {
@@ -1416,7 +1422,7 @@ input[type="number"] {
   color: white !important;
   border: 0px;
   border-radius: 14px !important;
-  width: 134px;
+  width: auto;
   height: auto;
 }
 
@@ -1491,7 +1497,7 @@ input[type="number"] {
   color: #47749c;
 }
 .mbar {
-  margin-right: -7rem !important;
+  /* margin-right: -7rem !important; */
 }
 
 .sidebar_arrow {
@@ -2179,6 +2185,9 @@ input[type="number"] {
   .card_products {
     width: 322px;
   }
+  .fixed-top {
+    z-index: 1 !important;
+  }
 
   .card_pay {
     width: 322px;
@@ -2345,11 +2354,17 @@ input[type="number"] {
     margin-bottom: -40px !important;
     margin-bottom: 00px !important;
   }
+  .sidebar_arrow {
+    order: -1;
+  }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .card_products {
     width: 462px;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
 
   .card_pay {
@@ -2528,11 +2543,22 @@ input[type="number"] {
   /* .co_12 .s_2 {
     margin-top: 2.3rem;
   } */
+
+  ._col {
+    flex: 0 0 auto;
+    width: 50% !important;
+  }
+  .sidebar_arrow {
+    order: -1;
+  }
 }
 
-@media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1080px) {
   .card_products {
     width: 462px;
+  }
+  .fixed-top {
+    z-index: 1 !important;
   }
 
   .card_pay {
@@ -2623,7 +2649,8 @@ input[type="number"] {
     display: block !important;
   }
   .t_info {
-    width: 484px !important;
+    /* width: 484px !important; */
+    /* width: 100% !important; */
   }
   .card_home {
     width: 628px !important;
@@ -2706,7 +2733,14 @@ input[type="number"] {
   /* .co_12 .s_2 {
     margin-top: 2.3rem;
   } */
+  ._col {
+    flex: 0 0 auto;
+    width: 50% !important;
   }
+  .sidebar_arrow {
+    order: -1;
+  }
+}
 
 .v_bt {
   width: 21px !important;
@@ -2875,4 +2909,8 @@ input[type="number"] {
 
 .admin_container {
   padding-top: 20px;
+}
+
+._col {
+  text-align: center;
 }

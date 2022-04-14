@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false}
   }, {
-    unserscored :true,
+    underscored :true,
     sequelize,
     tableName: 'lgas',
     modelName: 'LGAs',

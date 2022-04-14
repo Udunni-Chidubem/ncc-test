@@ -4,18 +4,16 @@
         <div class="horizontalLine"></div>
         <div class="orderContainer">
           <div class="orderGrid">
-            <div>
-              <p>Maize</p>
-            </div>
-            <div>
-               <p>3kg</p> 
-            </div>
-            <div>
-              <p>Maize</p>
-            </div>
-            <div>
-               <p>3kg</p> 
-            </div>
+            {{#if getCartItems}}
+              {{#each getCartItems}}
+                <div>
+                  <p>{{Product.product_name}}</p>
+                </div>
+                <div>
+                  <p>{{size}}kg</p> 
+                </div>
+              {{/each}}
+            {{/if}}
           </div>
 
           <hr>
@@ -24,23 +22,26 @@
               <h6>Sub-Total</h6>  
             </div>
             <div>
-              <p>&#8358; 3000</p>
+              <p>&#8358; 0</p>
             </div>
             <div>
               <h6>Shipping</h6>  
             </div>
             <div>
-              <p>&#8358; 300</p>
+              <p>&#8358; 0</p>
             </div>
           </div>
         <hr>
-          <div class="costGrid ">       
+          <div class="costGrid ">  
+            {{#itemSum getCartItems}}     
             <div class="total">
               <p>Total</p>  
             </div>
+
             <div class="totalCost">
-              <p>&#8358; 3300</p>
+              <p>&#8358;{{this}} </p>
             </div>
+            {{/itemSum}}
           </div>
         </div>
       </div>
@@ -51,9 +52,9 @@
 
         <div class="shippingGrid">
           <div class="shippingAddress">
-            <h4>Adamu Garba, +234 801 234 5678</h4>
-            <p>Address: No 1 Dutse Alhaji street, Mai Gishiri Kuri, Gombe</p>
-            <p>Pick up point: <span>Giri Round about</span></p>
+            <h4>{{farmer.firsname}} {{farmer.lastname}}, {{farmer.phone_no}}</h4>
+            <p>Address:{{farmer.Address}}  {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</p>
+            <p>Pick up point: <span>{{deliveryInfo.Address}}, {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</span></p>
           </div>
         </div>
       </div>
@@ -64,7 +65,7 @@
 
         <div class="pre_pay">
           <p><em>Select your preferred mode of payment</em></p>
-          <form class="form-container">
+          <form class="form-container" action="/farmer/cart/checkout" method="post">
 
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="card" value="card">
@@ -90,7 +91,7 @@
  --}}
             <hr>
             
-            <button type="button" class="btn btn-theme " style="float: right;">Pay</button>
+            <button type="submit" class="btn btn-theme " style="float: right;">Pay</button>
           </form>
         </div>
       </div>
