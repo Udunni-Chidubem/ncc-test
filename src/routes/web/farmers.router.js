@@ -168,8 +168,14 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             farmerController.updateCart(farmer.user_id)
 
         }
-        res.send(paystackPayload.message)
-        return
+         res.render('farmers/payment-success', {
+            layout : 'farmers-dashboard',
+            title: 'Success Page',
+            isVerified,
+            paystackPayload
+        })
+       // res.render(paystackPayload)
+       // return
     }
     res.send("this is not a valid transaction reference, pls contact admin if this is a error")
 

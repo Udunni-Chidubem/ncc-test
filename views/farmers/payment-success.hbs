@@ -7,7 +7,7 @@
           </div>
            
            <h4>Transaction Successful</h4>
-           <p>Transaction Id: 2102901903</p>
+           <p>Transaction Id: {{paystackPayload.data.id}}</p>
          </div>
          <hr class="payment-line">
          <div class="amount">
@@ -15,7 +15,7 @@
               <h6>Amount Paid:</h6>
             </div>
             <div>
-              <h6>&#8358; 30000</h6>
+              <h6>&#8358; {{paystackPayload.data.amount}}</h6>
             </div>
          </div>
        </div>
