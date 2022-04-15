@@ -87,6 +87,6 @@ adminRouter.get('/product-mgt', async (req, res)=>{
     })
 });
 
-adminRouter.get('/view-user/:id', adminController.viewFarmer);
+adminRouter.get('/view-user/:user_id', adminController.viewFarmer);
 
 module.exports = adminRouter

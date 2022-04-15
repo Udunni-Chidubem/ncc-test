@@ -198,7 +198,7 @@ farmersRouter.get('/transactions', async (req, res)=>{
 
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
-        title: 'Success Page',
+        title: 'Transaction History',
         isVerified
     })
 })
