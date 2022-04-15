@@ -19,6 +19,7 @@ const siteRouter = require('express').Router();
 siteRouter.get('/home', async (req, res) => {})
 siteRouter.get('/', siteController.home)
 siteRouter.get('/presignup', siteController.presignup)
+siteRouter.get('/extension_worker', siteController.extension_worker)
 siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
@@ -96,5 +97,7 @@ siteRouter.delete('/logout', (req, res)=>{
     req.logOut();
     res.redirect('/login')
 }),
+siteRouter.get('/services', siteController.services)
+
 
 module.exports=siteRouter; 

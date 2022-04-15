@@ -134,7 +134,7 @@ farmersRouter.post("/cart/checkout", async (req, res)=>{
         let paymentType = req.body.inlineRadioOptions
         if(paymentType=='card'){  
             let initial= await paystack.initialize('tipson664@gmail.com', 200000, req)
-            console.log(initial)
+           // console.log(initial)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, farmer}=await farmerController.cart(req, res)
@@ -156,7 +156,7 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
     if(check){
         let data={}
         data.status='pending'
-        let u = await farmerController.updateTransactionLog(data, ref)
+        farmerController.updateTransactionLog(data, ref)
         let paystackPayload = await paystack.callback(req, res)
         if(paystackPayload.status==true){
             data.status='verified'
@@ -164,15 +164,44 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             data.amount = paystackPayload.data.amount
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
-            let items = await farmerController.cart(req, res)
-            farmerController.updateCart(items)
-
+            let {farmer, isVerified} = await farmerController.cart(req, res)
+            farmerController.updateCart(farmer.user_id)
+            res.render('farmers/payment-success', {
+                layout : 'farmers-dashboard',
+                title: 'Success Page',
+                isVerified,
+                paystackPayload
+            })
+            return
         }
-        res.send(paystackPayload.message)
-        return
     }
     res.send("this is not a valid transaction reference, pls contact admin if this is a error")
 
 })
+
+farmersRouter.get('/payment-success', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+
+    res.render('farmers/payment-success', {
+        layout : 'farmers-dashboard',
+        title: 'Success Page',
+        isVerified
+    })
+})
+
+farmersRouter.get('/transactions', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+
+    res.render('farmers/transaction-history', {
+        layout : 'farmers-dashboard',
+        title: 'Transaction History',
+        isVerified
+    })
+})
+
 
 module.exports=farmersRouter

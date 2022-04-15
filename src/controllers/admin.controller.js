@@ -22,7 +22,7 @@ module.exports={
     }, 
     getFarmers: async (req, res) =>{
         let farmers = await Farmer.findAll({
-            attributes : ['id', 'firstname', 'lastname', 'created_at'],
+            // attributes : ['id', 'firstname', 'lastname', 'created_at'],
             include : [ 
                 {
                     model : States,
@@ -105,10 +105,14 @@ module.exports={
         // let traders = await adminController.getTraders(req, res)
         // let companies= await adminController.getCompanies(req, res)
         let isVerified = await utils.isVerified(user)
-        let response = null
+        let farmer = null
+        let deliveryInfo = null
+        let delInfo = null
+        let company = null
+        let trader = null
 
         const singleFarmer = await Farmer.findOne({
-            where: {id: req.params.id},
+            where: {user_id: req.params.user_id},
             attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'address_of_farm', 'user_id', 'created_at'],
             include : [ 
                 {
@@ -122,7 +126,11 @@ module.exports={
             ]
         });
 
-        let deliveryInfo = await DeliveryInformation.findOne({ 
+        
+         if(singleFarmer){
+            farmer = JSON.parse(JSON.stringify(singleFarmer))
+            // console.log(farmer)
+            let deliveryInfo = await DeliveryInformation.findOne({ 
             where: {user_id : JSON.parse(JSON.stringify(singleFarmer)).user_id}, 
             attributes: ['state_id', 'lg_id', 'address'],
             include : [
@@ -135,28 +143,66 @@ module.exports={
                     attributes : ['name']
                 }
             ]
-        })
+        });
 
         const delInfo = JSON.parse(JSON.stringify(deliveryInfo))
+        console.log(singleFarmer.toJSON())
+        };
 
-         if(singleFarmer){
-            response = JSON.parse(JSON.stringify(singleFarmer))
-            // console.log(response)
-        }
+        const singleCompany = await SeedCompany.findOne({
+            where: {user_id: req.params.user_id},
+            attributes: ['id', 'name_of_company', 'email', 'phone_no', 'address', 'licensed_no', 'certification_number', 'tin'],
+            include : [
+                {
+                    model : States,
+                    attributes : ['name']
+                },
+                {
+                    model : LGAs,
+                    attributes : ['name']
+                }
+            ]
+        });
+
+        if (singleCompany) {
+            company = JSON.parse(JSON.stringify(singleCompany))
+            console.log(singleCompany.toJSON())
+        };
+        
+        const singleTrader = await SeedTrader.findOne({
+                    where: {user_id: req.params.user_id},
+                    include : [
+                        {
+                            model : States,
+                            attributes : ['name']
+                        },
+                        {
+                            model : LGAs,
+                            attributes : ['name']
+                        }
+                    ]
+                });
+
+                if (singleTrader) {
+                    trader = JSON.parse(JSON.stringify(singleTrader))
+                    console.log(singleTrader.toJSON())
+                };
+
+        
         
     
     
         res.render('admin/view-user', {
             layout : 'admin-dashboard',
-            title : 'View User',
+            title : 'All Users',
             sub_title : 'View User',
             prev_link : '/admin/all-users',
             username : user.username,
             isVerified,
-            response,
-            delInfo
-            // companies,
-            // traders
+            farmer,
+            delInfo,
+            company,
+            trader
         })
     }
 

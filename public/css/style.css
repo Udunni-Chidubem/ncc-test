@@ -2165,6 +2165,9 @@ input[type="number"] {
 .fileDisplay{
   display: none;
 }
+.profilePic-btn-container{
+  margin: 1rem;
+}
 .profilePic-btn{
   background-image: linear-gradient(#5dcd6d, #008346);
   font-size: 13px;

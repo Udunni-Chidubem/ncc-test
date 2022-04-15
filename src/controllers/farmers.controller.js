@@ -258,7 +258,9 @@ module.exports={
        // const {getCartItems}=await this.cart(req.res)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
-            title: 'Order Preview',
+            title: 'Market Place',
+            sub_title : 'Checkout',
+            prev_link: '/farmer/cart',
             fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer,
             isVerified
@@ -509,16 +511,16 @@ module.exports={
     updateCart:async (items)=>{
          let transaction =await db.rest.transaction()
          try{
-            for(let i=0; i<items.length; i++){
+           // for(let i=0; i<items.length; i++){
                 await  Cart.update({
                     status : 1,
                     updated_at: now()
                 },{
                     where : {
-                        id : items.id
+                        user_id : items
                     }
                 }, {transaction : transaction})
-            }
+          //  }
             transaction.commit()
          }catch(e){
             console.log(e)
@@ -531,7 +533,6 @@ module.exports={
             where : { user_id : user_id},
             include :[{model : States}, {model : LGAs}],
             attributes : ['address']
-            
         })                              
     }
     
