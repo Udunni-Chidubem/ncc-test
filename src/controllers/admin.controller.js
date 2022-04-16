@@ -203,6 +203,22 @@ module.exports={
         });
         productsById = JSON.stringify(productsById);
         return JSON.parse(productsById);
+    },
+    getFarmerCount : async (req, res)=>{
+        let farmerCount =await Farmer.count({
+            // where: {id: req.params.id}
+        });
+
+        farmerCount = farmerCount;
+        return farmerCount;
+    },
+    getCompanyCount : async (req, res)=>{
+        let companyCount =await SeedCompany.count({
+            // where: {id: req.params.id}
+        });
+
+        companyCount = companyCount;
+        return companyCount;
     }
 
 }

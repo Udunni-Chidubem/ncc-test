@@ -3169,3 +3169,16 @@ justify-content: center;
   align-items: center;
   justify-content: center;
 }
+
+.dashboard_balance p{
+  font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+letter-spacing: 0.15px;
+
+color: #47749C;
+}

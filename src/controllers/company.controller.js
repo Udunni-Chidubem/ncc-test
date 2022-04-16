@@ -140,5 +140,29 @@ module.exports = {
             console.log(e)
         }
        
+    },
+    getWallet : async (req, res)=>{
+    const user = await req.user
+       let balance 
+       const singleBalance = await Wallet.findOne({
+            where: {user_id: user.id},
+            attributes : ['amount'],
+            raw: true
+        });
+        
+        balance = singleBalance
+        console.log(balance)
+        return balance;
+    },
+    getProductCount : async (req, res)=>{
+        const user = await req.user
+        let productCount
+         const countProducts = await Product.count({
+            where: {user_id: user.id}
+        });
+
+        productCount = countProducts
+        console.log(productCount)
+        return productCount;
     }
 }

@@ -7,6 +7,8 @@ const companyController = require('../../controllers/company.controller');
 companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
+    let balance = await companyController.getWallet(req, res)
+    let productCount = await companyController.getProductCount(req, res)
 
     let isVerified = await utils.isVerified(user)
 
@@ -15,7 +17,9 @@ companyRouter.get('/dashboard', async (req, res)=>{
         title : 'Dashboard',
         company: company,
         page_title: '',
-        isVerified
+        isVerified,
+        balance,
+        productCount
     })
 });
 companyRouter.get('/update-profile', async (req, res)=>{

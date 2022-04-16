@@ -8,12 +8,16 @@ const adminController = require('../../controllers/admin.controller');
 adminRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user)
+    let farmerCount = await adminController.getFarmerCount(req, res)
+    let companyCount = await adminController.getCompanyCount(req, res)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
         title : 'Dashboard',
         username : user.username,
-        isVerified
+        isVerified,
+        farmerCount,
+        companyCount
     })
 });
 

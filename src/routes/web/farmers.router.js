@@ -160,7 +160,8 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
         if(paystackPayload.status==true){
             data.status='verified'
             data.currency=paystackPayload.data.currency,
-            data.amount = paystackPayload.data.amount
+            data.amount = paystackPayload.data.amount / 100
+            console.log(data.amount)
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
             let {farmer, isVerified, getCartItems} = await farmerController.cart(req, res)
