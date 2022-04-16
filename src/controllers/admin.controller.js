@@ -196,6 +196,13 @@ module.exports={
         /*Find Seed Trader - Ends */
 
         return trader
+    },
+    getProductsByUserID:async (req, res)=>{
+        let productsById =await Product.findAll({
+            where: {user_id: req.params.user_id}
+        });
+        productsById = JSON.stringify(productsById);
+        return JSON.parse(productsById);
     }
 
 }

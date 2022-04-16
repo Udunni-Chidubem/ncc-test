@@ -93,6 +93,7 @@ adminRouter.get('/view-user/:user_id', async (req, res)=>{
     let farmer = await adminController.getOneFarmer(req, res);
     let company = await adminController.getOneCompany(req, res);
     let trader = await adminController.getOneTrader(req, res);
+    let products = await adminController.getProductsByUserID(req, res);
 
     res.render('admin/view-user', {
         layout : 'admin-dashboard',
@@ -103,7 +104,8 @@ adminRouter.get('/view-user/:user_id', async (req, res)=>{
         isVerified,
         farmer,
         company,
-        trader
+        trader,
+        products
     })
 });
 
