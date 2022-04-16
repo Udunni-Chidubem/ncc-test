@@ -1,6 +1,6 @@
 require('dotenv').config()
 const db = require('../models')
-const {User,UserRole, Role, SeedCompany, LGAs, States, Product }  = db
+const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet}  = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -122,5 +122,23 @@ module.exports = {
         }
 
         return response
+    },
+    creditWallet : async (carts)=>{
+        let transaction = await db.rest.transaction()
+        try{
+           // let transaction = db.rest.transaction()
+            carts.forEach(async cart=>{
+            await Wallet.increment({
+                    amount : cart.total_amount
+                }, {
+                    where : {user_id : cart.Product.user_id}
+                }, {transaction : transaction})
+            })
+            transaction.commit()
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+        }
+       
     }
 }

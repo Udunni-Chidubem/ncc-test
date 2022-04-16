@@ -533,7 +533,34 @@ module.exports={
             where : { user_id : user_id},
             include :[{model : States}, {model : LGAs}],
             attributes : ['address']
-        })                              
+        })
+        return JSON.parse(JSON.stringify(d))                              
+    },
+    getTransactions : async (farmer_id)=>{
+        let transactions= await TransactionLog.findAll({
+            include  : [
+                {
+                    model : TransactionCarts,
+                    include : [
+                        {
+                            model : Cart,
+                            attributes : [],
+                            include : [
+                               { 
+                                   model : Product,
+                                   attributes : ['product_name']
+                               }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            attributes : ['status', 'created_at'],
+            where : {
+                farmer_id : farmer_id
+            }
+        });
+        return JSON.parse(JSON.stringify(transactions))
     }
     
 }
