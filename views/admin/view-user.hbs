@@ -1,6 +1,6 @@
 {{>breadcrumbs}}
 
-<div class="container-fluid">
+<div class="container pt-4">
 	{{#if farmer}}
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 			  <li class="nav-item" role="presentation">
@@ -113,17 +113,17 @@
 				  				<div class="shipping-details">
 				  					<div>
 										<h5>State</h5>
-										<p>{{ delInfo.State.name }}</p>
+										<p>{{farmer.User.DeliveryInformation.State.name }}</p>
 									</div>
 									
 									<div>
 										<h5>LGA</h5>
-										<p>{{delInfo.LGA.name}}</p>
+										<p>{{farmer.User.DeliveryInformation.LGA.name}}</p>
 									</div>
 
 				  					<div>
 				  						<h5>Address</h5>
-										<p>{{ delInfo.address}}</p>	
+										<p>{{ farmer.User.DeliveryInformation.address}}</p>	
 				  					</div>
 				  				</div>
 				  			</div>

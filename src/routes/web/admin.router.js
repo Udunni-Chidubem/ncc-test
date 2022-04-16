@@ -87,6 +87,24 @@ adminRouter.get('/product-mgt', async (req, res)=>{
     })
 });
 
-adminRouter.get('/view-user/:user_id', adminController.viewFarmer);
+adminRouter.get('/view-user/:user_id', async (req, res)=>{
+    const user = await req.user
+    let isVerified = await utils.isVerified(user)
+    let farmer = await adminController.getOneFarmer(req, res);
+    let company = await adminController.getOneCompany(req, res);
+    let trader = await adminController.getOneTrader(req, res);
+
+    res.render('admin/view-user', {
+        layout : 'admin-dashboard',
+        title : 'All Users',
+        sub_title : 'View User',
+        prev_link : '/admin/all-users',
+        username : user.username,
+        isVerified,
+        farmer,
+        company,
+        trader
+    })
+});
 
 module.exports = adminRouter
