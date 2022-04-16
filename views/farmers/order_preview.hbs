@@ -66,21 +66,23 @@
         <div class="pre_pay">
           <p><em>Select your preferred mode of payment</em></p>
           <form class="form-container" action="/farmer/cart/checkout" method="post">
-
+             {{#itemSum getCartItems}}     
+              <input type="hidden" name="total_sum" id="total_sum" value="{{this}}">
+            {{/itemSum}}
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="card" value="card">
+              <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="card" value="card" >
               <label class="form-check-label" for="card">Card</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ussd" value="ussd">
+              <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="ussd" value="ussd">
               <label class="form-check-label" for="ussd">USSD</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="pos" value="pos">
+              <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="pos" value="pos">
               <label class="form-check-label" for="pos">POS</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="payOnDelivery" value="payOnDelivery">
+              <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="payOnDelivery" value="payOnDelivery">
               <label class="form-check-label" for="payOnDelivery">Pay On Delivery</label>
             </div>
 {{!-- 

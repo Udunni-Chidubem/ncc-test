@@ -12,16 +12,18 @@
           </tr>
         </thead>
         <tbody class="t_info_body">
+          {{#each transactions}}
           <tr class="t_info_row1">
-            <th scope="row"  >1</th>
-            <td>White Maize</td>
-            <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  Processing</span> 
+            <th scope="row"  >{{@index}}</th>
+            <td>{{this.TransactionCarts.Cart.Product.product_name}}</td>
+            <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
             <br>
-            <span class="mt-1"> Paid on 15/APR/2020</span> 
+            <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span> 
             </td>
             <td><a href="#"> See Details</a></td>
           </tr>
-          <tr class="t_info_row2">
+          {{/each}}
+          {{!-- <tr class="t_info_row2">
             <th scope="row">2</th>
             <td>Jacob</td>
             <td>
@@ -118,7 +120,7 @@
             <span>Paid on 15/Jan/2022</span> 
             </td>
             <td><a href="#"> See Details</a></td>
-          </tr>
+          </tr> --}}
           
         </tbody>
       </table>
