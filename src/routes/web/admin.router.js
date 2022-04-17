@@ -4,6 +4,7 @@ const siteController = require('../../controllers/site.controller');
 const utils = require('../../helpers/utils')
 const { adminValidation, validate, productValidation } = require('../../helpers/formValidator');
 const adminController = require('../../controllers/admin.controller');
+const { now } = require('moment');
 
 adminRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
@@ -21,7 +22,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     })
 });
 
-adminRouter.get('/create-user', async (req, res)=>{
+adminRouter.get('/user/create', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
@@ -38,7 +39,7 @@ adminRouter.get('/create-user', async (req, res)=>{
 });
 
 
-adminRouter.get('/all-users', async (req, res)=>{
+adminRouter.get('/users', async (req, res)=>{
     let user = await req.user
     let farmers=await adminController.getFarmers(req, res)
     let traders = await adminController.getTraders(req, res)
@@ -56,7 +57,7 @@ adminRouter.get('/all-users', async (req, res)=>{
     })
 });
 
-adminRouter.get('/view-product/:id', async (req, res)=>{
+adminRouter.get('/products/:id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let product = await adminController.viewProduct(req, res);
@@ -66,14 +67,14 @@ adminRouter.get('/view-product/:id', async (req, res)=>{
         layout : 'admin-dashboard',
         title : 'Product Management',
         sub_title : 'View Product',
-        prev_link: '/admin/product-mgt',
+        prev_link: '/admin/product',
         username : user.username,
         isVerified,
         product
     })
 });
 
-adminRouter.get('/product-mgt', async (req, res)=>{
+adminRouter.get('/products', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user)
     let products = await adminController.getProducts(req, res);
@@ -94,7 +95,7 @@ adminRouter.get('/product-mgt', async (req, res)=>{
     })
 });
 
-adminRouter.get('/view-user/:user_id', async (req, res)=>{
+adminRouter.get('/users/:id', async (req, res)=>{
     const user = await req.user
     let isVerified = await utils.isVerified(user)
     let farmer = await adminController.getOneFarmer(req, res);
@@ -117,5 +118,18 @@ adminRouter.get('/view-user/:user_id', async (req, res)=>{
         balance
     })
 });
+adminRouter.get('/products/approval/:id/:status', async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+    let id = req.params.id
+    adminController.productUpdate(data, id)
+    res.redirect("/admin/products")
+})
+adminRouter.get("/users/activate/:id/:status", async (req, res)=>{
+     let data={status : req.params.status, updated_at : now()}
+    let id = req.params.id
+    adminController.userUpdate(data, id)
+    res.redirect("/admin/users")
+})
+
 
 module.exports = adminRouter

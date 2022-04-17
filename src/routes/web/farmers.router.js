@@ -47,7 +47,7 @@ farmersRouter.get('/market_place', async (req, res) => {
 })
 
 farmersRouter.get('/product', farmerController.product)
-farmersRouter.get('/view-product/:id', async (req, res) => {
+farmersRouter.get('/products/:id', async (req, res) => {
 
     const resp = await farmerController.viewProduct(req, res)
     const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']

@@ -34,7 +34,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
          })
          farmers=JSON.stringify(farmers)
@@ -56,7 +56,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
         })
 
@@ -76,7 +76,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
         })
         traders = JSON.stringify(traders)
@@ -94,7 +94,10 @@ module.exports={
                         }
                     ]
                 }
-            ]
+            ],
+            order: [
+                ['updated_at', 'DESC'],
+            ],
         });
         products = JSON.stringify(products);
         return JSON.parse(products);
@@ -247,12 +250,27 @@ module.exports={
                 }
             ],
             where: {id: req.params.id},
-            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at'],
             raw: true
         })
 
 
         return singleProduct;
+    },
+    productUpdate:async (data, id)=>{
+        Product.update(
+            data,
+            {
+                where : {id : id}
+            }
+        )
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
+        })
     }
 
 }
