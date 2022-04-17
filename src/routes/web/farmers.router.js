@@ -161,6 +161,7 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             data.status='verified'
             data.currency=paystackPayload.data.currency,
             data.amount = paystackPayload.data.amount / 100
+            data.transaction_id=paystackPayload.data.id
            // console.log(data.amount)
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)

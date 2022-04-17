@@ -56,36 +56,36 @@
                             </div>
                         </div>
                         <div class="row  admin-product-row"  >
-                            <div class="col col_sma"> 
                             {{#json product.item}}
+                                <div class="col col_sma"> 
                                     {{#each this.pkg}} 
-                                <div class="py-1 ">
-                                       <h5>{{this}} </h5>
+                                        <div class="py-1 ">
+                                            <h5>{{this}} </h5>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                                {{/each}}
-                            </div>
-                            <div class="col col_sma">   
+                                <div class="col col_sma">   
                                     {{#each this.quantity}}
-                                <div class="py-1 "> 
-                                    <h5>{{this}} </h5>
+                                        <div class="py-1 "> 
+                                            <h5>{{this}} </h5>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                                {{/each}}
-                            </div>
-                            <div class="col col_sma">
+                                <div class="col col_sma">
                                     {{#each this.min}}
-                                <div class="py-1 ">
-                                    <h5>{{this}} </h5>
+                                        <div class="py-1 ">
+                                            <h5>{{this}} </h5>
+                                        </div>
+                                    {{/each}}
                                 </div>
-                                {{/each}}
-                            </div>
-                            <div class="col col_sma">
+                                <div class="col col_sma">
                                     {{#each this.price}}
-                                <div class="py-1 ">
-                                    <h5> &#8358; {{this}} </h5>
+                                    <div class="py-1 ">
+                                        <h5> &#8358; {{this}} </h5>
+                                    </div>
+                                    {{/each}}
                                 </div>
-                                {{/each}}
-                                    {{/json}}
-                            </div>
+                            {{/json}}
                             <div class="col col_sma">    
                                 <div class="p-0  sc-availbility-check">
                                     <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
@@ -105,15 +105,18 @@
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 		</div>
-			<div class="float-end">
-            <div class="float-end m-2 mb-3">
-                <button type="button" class="btn btn-theme float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject"><i class="fa fa-close"></i> Reject</button>                    
-            </div>
-
-            <div class="float-end m-2 mb-3">
-                <button type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href='#'"><i class="fa fa-check"></i> Approve</button>                    
-            </div>
-	</div>
+		<div class="float-end">
+            {{#if product.status}}
+                <div class="float-end m-2 mb-3">
+                    <button type="button" class="btn btn-theme float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject"><i class="fa fa-close"></i> Reject</button>                    
+                </div>
+            {{else}}
+                <div class="float-end m-2 mb-3">
+                    <button type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href='#'"><i class="fa fa-check"></i> Approve</button>                    
+                </div>
+            {{/if}}
+            
+	    </div>
 
 <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
   <div class="modal-dialog">
