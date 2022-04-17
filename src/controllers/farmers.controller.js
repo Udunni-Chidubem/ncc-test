@@ -555,7 +555,7 @@ module.exports={
                     ]
                 }
             ],
-            attributes : ['status', 'created_at'],
+            attributes : ['transaction_ref', 'status', 'created_at'],
             where : {
                 farmer_id : farmer_id
             }

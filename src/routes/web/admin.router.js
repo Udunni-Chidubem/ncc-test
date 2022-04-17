@@ -56,9 +56,11 @@ adminRouter.get('/all-users', async (req, res)=>{
     })
 });
 
-adminRouter.get('/view-product', async (req, res)=>{
+adminRouter.get('/view-product/:id', async (req, res)=>{
     let user = await req.user
-    let isVerified = await utils.isVerified(user)
+    let isVerified = await utils.isVerified(user);
+    let product = await adminController.viewProduct(req, res);
+
     
     res.render('admin/view-product', {
         layout : 'admin-dashboard',
@@ -66,7 +68,8 @@ adminRouter.get('/view-product', async (req, res)=>{
         sub_title : 'View Product',
         prev_link: '/admin/product-mgt',
         username : user.username,
-        isVerified
+        isVerified,
+        product
     })
 });
 
@@ -98,6 +101,7 @@ adminRouter.get('/view-user/:user_id', async (req, res)=>{
     let company = await adminController.getOneCompany(req, res);
     let trader = await adminController.getOneTrader(req, res);
     let products = await adminController.getProductsByUserID(req, res);
+    let balance = await adminController.getWallet(req, res);
 
     res.render('admin/view-user', {
         layout : 'admin-dashboard',
@@ -109,7 +113,8 @@ adminRouter.get('/view-user/:user_id', async (req, res)=>{
         farmer,
         company,
         trader,
-        products
+        products,
+        balance
     })
 });
 

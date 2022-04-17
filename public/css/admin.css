@@ -974,5 +974,39 @@ color: #818E9B;
    padding-top: 30px;
 }
 
+.account-details-grid{
+   display: grid;
+   grid-template-columns: repeat(2, 30%);
+}
+
+.account-details-grid h6{
+   font-weight: 500;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.account-details-grid p{
+   font-weight: 400;
+   font-size: 13px;
+   line-height: 20px;
+   letter-spacing: 0.01em;
+   color: #323C47;
+}
+
+.transaction-div{
+   padding: 10px;
+   scroll-behavior: smooth;
+   overflow-y: scroll;
+   background: #F5F6F8;
+   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.25);
+   scrollbar-width: thin;
+   height: 400px;
+}
+
+.transaction-div select{
+   width: fit-content;
+}
 
 /*Single User Profile Ends*/

@@ -1,27 +1,26 @@
 {{>breadcrumbs}}
 
+{{#if product}}
 	<div class="card admin-product container ">
         <div class="card-body m-0 admin-view-product">
         	<div class="admin-product-img admin-product-img-min-hidden">
-				<img src="../../product_images/maize.jpg" alt="Product Image">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 			<div class="">
 				<div class="admin-name_varaint">
 					<div>
 						<h4>Product Name</h4>
-						<h5>Maize</h5>
+						<h5>{{product.product_name}}</h5>
 					</div>
 					<div>
 						<h4>Variant</h4>
-						<h5>Yellow</h5>
+						<h5>{{product.variant}}</h5>
 					</div>
 				</div>
                 <hr class="admin-product-line">
 				<div class="admin-view-prod-desc">
 					<h4>Product Description</h4>
-					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida odio orci, auctor gravida ex rhoncus in. Praesent rutrum dignissim nibh, ac porttitor turpis lacinia vitae. Fusce nec scelerisque ante, eu aliquet dolor. Phasellus congue condimentum vulputate. Suspendisse quis justo a risus ornare ultricies tempus id neque. Ut ut volutpat est, sed molestie odio. Donec posuere neque sit amet enim dignissim, ut interdum leo lacinia. Curabitur pellentesque sagittis sollicitudin. Nam pellentesque ipsum eu urna dignissim pellentesque.
-						<br>
-					</p>
+					<p>{{product.description}}</p>
 				</div>
 				<hr class="admin-product-line">
 
@@ -58,32 +57,41 @@
                         </div>
                         <div class="row  admin-product-row"  >
                             <div class="col col_sma"> 
-
+                            {{#json product.item}}
+                                    {{#each this.pkg}} 
                                 <div class="py-1 ">
-                                       <h5>1</h5>
+                                       <h5>{{this}} </h5>
                                 </div>
-                           
+                                {{/each}}
                             </div>
                             <div class="col col_sma">   
-                               
+                                    {{#each this.quantity}}
                                 <div class="py-1 "> 
-                                    <h5>20</h5>
+                                    <h5>{{this}} </h5>
                                 </div>
-                               
+                                {{/each}}
                             </div>
                             <div class="col col_sma">
-                                  
+                                    {{#each this.min}}
                                 <div class="py-1 ">
-                                    <h5>5</h5>
+                                    <h5>{{this}} </h5>
                                 </div>
-                             
+                                {{/each}}
                             </div>
                             <div class="col col_sma">
-                                  
+                                    {{#each this.price}}
                                 <div class="py-1 ">
-                                    <h5> &#8358; 4000 </h5>
+                                    <h5> &#8358; {{this}} </h5>
                                 </div>
-                      
+                                {{/each}}
+                                    {{/json}}
+                            </div>
+                            <div class="col col_sma">    
+                                <div class="p-0  sc-availbility-check">
+                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
+                                      {{#if this.status}} Published {{else}} Pending {{/if}}
+                                    </span> 
+                                </div>
                             </div>
                         </div>
                      </div>
@@ -94,7 +102,7 @@
 				</div>
 			</div>
 			<div class="admin-product-img admin-product-img-hidden">
-				<img src="../../product_images/maize.jpg" alt="Product Image">
+				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 		</div>
 			<div class="float-end">
@@ -124,3 +132,4 @@
     </div>
   </div>
 </div>
+{{/if}}

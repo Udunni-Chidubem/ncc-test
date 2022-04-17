@@ -73,6 +73,26 @@ $(document).ready(function() {
   });
 });
 
+
+$(document).ready(function() {
+  $('#transactionTable').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function(){
+    $(".view-btn").click(function(){
+        $(this).text($(this).text() == 'Show Ledger' ? 'Hide Ledger' : 'Show Ledger');
+        if ($(this).text() === 'Show Ledger') {
+          $("#Myid").hide(300);
+        }
+        else
+          $("#Myid").show(300);
+    });
+});
+
+
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
 let sidebarBtn2 = document.querySelector(".side-bi-arrow-left-circle-fill");
@@ -185,3 +205,4 @@ function decreaseValue() {
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 }
+

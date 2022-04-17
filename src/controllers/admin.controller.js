@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models')
 const utils = require('../helpers/utils');
-const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, DeliveryInformation, SeedTrader, Product }  = db
+const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 
@@ -219,6 +219,40 @@ module.exports={
 
         companyCount = companyCount;
         return companyCount;
+    },
+    getWallet : async (req, res)=>{
+       let balance = await Wallet.findOne({
+            where: {user_id: req.params.user_id},
+            attributes : ['amount'],
+            raw: true
+        });
+        
+        balance = balance
+        console.log(balance)
+        return balance;
+    },
+    viewProduct: async (req, res) => {
+        const singleProduct = await Product.findOne({
+            include : [
+                {
+                    model: User,
+                    attributes: ['username'],
+                    include : [
+                        {
+                            model : SeedCompany,
+                            attributes: ['id', 'name_of_company', 'state_id'],
+                            include : [{model : States, attributes: ['id', 'name']}]
+                        }
+                    ]
+                }
+            ],
+            where: {id: req.params.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
+            raw: true
+        })
+
+
+        return singleProduct;
     }
 
 }

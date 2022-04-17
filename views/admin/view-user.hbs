@@ -293,7 +293,9 @@
 					  			<div class="balance-grid">
 					  				<div>
 					  					<h5>Total Wallet Balance</h5>
-					  					<h3>&#8358; 20,000</h3>	
+					  					{{#balance}}
+					  						<h3>&#8358; {{number this.amount}}</h3>	
+					  					{{/balance}}
 					  				</div>
 
 					  				<div class="cleared-balance">
@@ -307,19 +309,123 @@
 					  				</div>
 					  			</div>
 					  			{{!-- Balance Grid - Ends --}}
-					  			<button onclick="toggleText()">button</button>
-								<p id="Myid" style="display">Text</p>
-								<script>
-								function toggleText(){
-								  var x = document.getElementById("Myid");
-								  if (x.style.display === "none") {
-								    x.style.display = "block";
-								  } else {
-								    x.style.display = "none";
-								  }
-								}
-								</script>
+					  			<a href="#" class="view-btn">Show Ledger</a>
+								<div id="Myid" style="display:none">
+									<div class="transaction-div">
+										<select name="transaction-types" class="custom-select form-control mb-2" >
+											<option value="">Sales History</option>
+											<option value="">Withdrawals</option>
+										</select>
+										<table class="container-fluid table con t_info  table-borderless" id="transactionTable">
+							            <thead class="t_info_head ">
+							              <tr class="">
+							                  <th scope="col">ORDER ID</th>
+							                  <th scope="col">UNIT PRICE (&#8358;)</th>
+							                  <th scope="col">QTY</th>
+							                  <th scope="col">EARNING(&#8358;)</Nav></th>
+							                  <th scope="col">STATUS</th>
+							              </tr>
+							            </thead>
+							            <tbody class="t_info_body">
+							              <tr class="t_info_row1">
+							                  <th scope="row"  ><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
+							                 
+							               </tr>
+							              <tr class="t_info_row2">
+							                  <th scope="row"><a href="#">12345678</a></th>
+							                  <td>3000</td>
+							                  <td>40KG</td>
+							                  <td>6000</td>
+							                    <td>
+							                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
+							                  </td>
+							                 
+							              </tr>
+							              <tr class="t_info_row1">
+							                  <th scope="row"  ><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                  <td>
+							                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
+							                  </td>
+							                  
+							              </tr>
+							              <tr class="t_info_row2">
+							                  <th scope="row"><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                    <td>
+							                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
+							                  </td>
+							                  
+							              </tr>
+							              <tr class="t_info_row1">
+							                  <th scope="row"  ><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
+							                 
+							               </tr>
+							              <tr class="t_info_row2">
+							                  <th scope="row"><a href="#">12345678</a></th>
+							                  <td>3000</td>
+							                  <td>40KG</td>
+							                  <td>6000</td>
+							                    <td>
+							                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
+							                  </td>
+							                 
+							              </tr>
+							              <tr class="t_info_row1">
+							                  <th scope="row"  ><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                  <td>
+							                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
+							                  </td>
+							                  
+							              </tr>
+							              <tr class="t_info_row2">
+							                  <th scope="row"><a href="#">12345678</a></th>
+							                  <td>2000</td>
+							                  <td>40KG</td>
+							                  <td>4000</td>
+							                    <td>
+							                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
+							                  </td>
+							                  
+							              </tr>
+							            </tbody>
+							        </table>
+									</div>
+								</div>
+								
+								<hr>
 
+								<div class="account-details-grid">
+									<div>
+										<h6>Bank Name</h6>
+										<p>Access Bank</p>
+									</div>
+									
+									<div>
+										<h6>Account Name</h6>
+										<p>Chinedu Olufemi Umar</p>
+									</div>
+									
+									<div>
+										<h6>Account Number</h6>
+										<p>0099887766</p>
+									</div>
+								</div>
 					  		</div>
 					  		{{!-- Account Details - Ends --}}
 						</div>

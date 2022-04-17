@@ -11,6 +11,7 @@ const fileUpload = require('express-fileupload');
 const methodOveride = require('method-override')
 const session = require('express-session');
 const flash = require('express-flash')
+const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
 passpportInitializer(passport)
 
@@ -67,6 +68,7 @@ app.engine('hbs', handlebars({
 
 Handlebars.registerHelper('paginate', paginate);
 Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
+ NumeralHelper.registerHelpers(Handlebars);
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -91,7 +93,7 @@ app.use(async function (req, res) {
     //const user = await req.user
     //console.log(user);
     res.status(400).render('site/404', {
-        //layout: "main",
+        layout: "404",
         error_msg: 'We are unable to process your request. Please try again',
     })
 })
