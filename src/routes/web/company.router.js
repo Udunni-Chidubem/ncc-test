@@ -90,7 +90,7 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     }
     
 });
-companyRouter.get('/update-product/:id', async (req, res)=>{
+companyRouter.get('/products/update/:id', async (req, res)=>{
 
     let product = await companyController.updateProduct(req, res)
 
@@ -100,7 +100,7 @@ companyRouter.get('/update-product/:id', async (req, res)=>{
         title : 'Update Product',
     })
 });
-companyRouter.get('/view-product/:id', async (req, res)=>{
+companyRouter.get('/products/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 

@@ -213,6 +213,11 @@
               if(item.min[i] != item.quantity[i])
                 btnPlus.removeAttr("disabled")
               
+              if(item.quantity[i] < 1){
+                error_toastr("this particular size is out of stock for this company pls choose another size")
+                $(this).closest(".products-card").find(".add-to-cart").attr("disabled", true)
+              }
+              
               //btnMinus.attr("disabled", true)
               $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
             }
