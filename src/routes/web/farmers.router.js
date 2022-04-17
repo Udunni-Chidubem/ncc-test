@@ -161,11 +161,14 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
             data.status='verified'
             data.currency=paystackPayload.data.currency,
             data.amount = paystackPayload.data.amount / 100
-            console.log(data.amount)
+           // console.log(data.amount)
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
             let {farmer, isVerified, getCartItems} = await farmerController.cart(req, res)
             farmerController.updateCart(farmer.user_id)
+            getCartItems.forEach(item=>{
+                farmerController.productItemsUpdate(item.product_id, item.size, item.qty)
+            })
             companyController.creditWallet(getCartItems)
             res.render('farmers/payment-success', {
                 layout : 'farmers-dashboard',
@@ -197,7 +200,7 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let transactions=await farmerController.getTransactions(farmer.id)
-    console.log('transactions', transactions)
+   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',

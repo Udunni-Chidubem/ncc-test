@@ -87,8 +87,8 @@ app.use(fileUpload({
 }));
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
+const farmersController = require('./src/controllers/farmers.controller')
 app.use('/', mainRoute)
-
 app.use(async function (req, res) {
     //const user = await req.user
     //console.log(user);
