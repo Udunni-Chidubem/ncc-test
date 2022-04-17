@@ -209,11 +209,11 @@
            if(item.pkg[i]==value){
               qty.attr("min", 1)
               qty.attr("max", item.quantity[i])
-              qty.val(item.min[i])
+              qty.val(1)
               if(item.min[i] != item.quantity[i])
                 btnPlus.removeAttr("disabled")
               
-              btnMinus.attr("disabled", true)
+              //btnMinus.attr("disabled", true)
               $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
             }
          }
