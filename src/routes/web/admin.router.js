@@ -67,7 +67,7 @@ adminRouter.get('/products/:id', async (req, res)=>{
         layout : 'admin-dashboard',
         title : 'Product Management',
         sub_title : 'View Product',
-        prev_link: '/admin/product',
+        prev_link: '/admin/products',
         username : user.username,
         isVerified,
         product
@@ -95,7 +95,7 @@ adminRouter.get('/products', async (req, res)=>{
     })
 });
 
-adminRouter.get('/users/:id', async (req, res)=>{
+adminRouter.get('/users/:user_id', async (req, res)=>{
     const user = await req.user
     let isVerified = await utils.isVerified(user)
     let farmer = await adminController.getOneFarmer(req, res);
@@ -108,7 +108,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
         layout : 'admin-dashboard',
         title : 'All Users',
         sub_title : 'View User',
-        prev_link : '/admin/all-users',
+        prev_link : '/admin/users',
         username : user.username,
         isVerified,
         farmer,
