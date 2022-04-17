@@ -297,17 +297,6 @@ module.exports={
                             ]
                         }
                     ]
-                },
-                {
-                    model : User,
-                    attributes : ['id'],
-                    include : [
-                        {
-                                    model : DeliveryInformation,
-                                    attributes : ['address'],
-                                    include :[{model : States}, {model : LGAs}]
-                        }
-                    ]
                 }
             ],
             where: {
@@ -561,6 +550,18 @@ module.exports={
             }
         });
         return JSON.parse(JSON.stringify(transactions))
+    },
+    productItemsUpdate:async (product_id, size, quantity)=>{
+        let p = await Product.findOne({
+            where : {id : product_id}
+        })
+        p.item=JSON.parse(p.item)
+        for(let i=0; i<p.item.pkg.length; i++){
+            if(p.item.pkg[i]==size){
+                p.item.quantity[i]=p.item.quantity[i]-quantity
+            }
+        }
+        p.item=JSON.stringify(p.item, null, 2)
+        p.save()
     }
-    
 }

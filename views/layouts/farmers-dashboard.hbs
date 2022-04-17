@@ -207,16 +207,15 @@
          let btnPlus=$(this).closest('.product-price').find('.quantity-right-plus')
          for (let i=0; i < item.min.length; i++){
            if(item.pkg[i]==value){
-             qty.attr("min", item.min[i])
-             qty.attr("max", item.quantity[i])
-
-            qty.val(item.min[i])
-            if(item.min[i] != item.quantity[i])
-              btnPlus.removeAttr("disabled")
+              qty.attr("min", 1)
+              qty.attr("max", item.quantity[i])
+              qty.val(item.min[i])
+              if(item.min[i] != item.quantity[i])
+                btnPlus.removeAttr("disabled")
               
               btnMinus.attr("disabled", true)
-             $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
-           }
+              $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
+            }
          }
        })
      })
