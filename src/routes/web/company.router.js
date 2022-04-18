@@ -66,7 +66,7 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
 });
 companyRouter.post('/products/:id', async (req, res)=>{
      companyController.updateProduct(req, res)
-     res.redirect("/admin/products")
+     res.redirect("/seed-company/products")
 
 })
 companyRouter.get('/products', async (req, res)=>{
@@ -105,12 +105,11 @@ companyRouter.get('/products/:id', async (req, res)=>{
         title : 'Update Product',
     })
 });
-companyRouter.get('/products/:id', async (req, res)=>{
+companyRouter.get('/product/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 
     const data = JSON.stringify(JSON.parse(product.item))
-    console.log(data)
     
     res.render('seed_company/view-product', {
         layout : 'company-dashboard',

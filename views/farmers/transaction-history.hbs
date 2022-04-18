@@ -6,7 +6,7 @@
         <thead class="t_info_head ">
           <tr class="">
             <th scope="col">S/N</th>
-            <th scope="col">ITEM</th>
+            <th scope="col">Transaction ID</th>
             <th scope="col">Transaction Ref.</th>
             <th scope="col">STATUS</th>
             <th scope="col">STATUS</th>
@@ -16,7 +16,6 @@
           {{#each transactions}}
           <tr class="t_info_row1">
             <th scope="row"  >{{@index}}</th>
-            <td>{{this.TransactionCarts.Cart.Product.product_name}}</td>
             <td>{{this.transaction_id}}</td>
             <td>{{this.transaction_ref}}</td>
             <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
