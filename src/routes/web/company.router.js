@@ -105,11 +105,14 @@ companyRouter.get('/products/:id', async (req, res)=>{
     let product = await companyController.viewProduct(req, res)
 
     const data = JSON.stringify(JSON.parse(product.item))
+    console.log(data)
     
     res.render('seed_company/view-product', {
         layout : 'company-dashboard',
+        data,
         product,
-        title : 'View Product',
+        title : 'Products',
+        sub_title : 'View Product'
     })
 });
 companyRouter.get('/view-order', async (req, res)=>{
@@ -119,7 +122,7 @@ companyRouter.get('/view-order', async (req, res)=>{
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Order Management',
-        sub_title : 'View Order',
+        sub_title : 'View Order'
     })
 });
 

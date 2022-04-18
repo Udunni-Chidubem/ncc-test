@@ -83,36 +83,45 @@
                                        <h5>{{this}} </h5>
                                 </div>
                                 {{/each}}
-                            </div>
-                            <div class="col col_sma">   
-                                    {{#each this.quantity}}
-                                <div class="py-1 "> 
-                                    <h5>{{this}} </h5>
-                                </div>
-                                {{/each}}
-                            </div>
-                            <div class="col col_sma">
-                                    {{#each this.min}}
-                                <div class="py-1 ">
-                                    <h5>{{this}} </h5>
-                                </div>
-                                {{/each}}
-                            </div>
-                            <div class="col col_sma">
-                                    {{#each this.price}}
-                                <div class="py-1 ">
-                                    <h5> &#8358; {{this}} </h5>
-                                </div>
-                                {{/each}}
-                                    {{/json}}
-                            </div>
-                            <div class="col col_sma">    
-                                <div class="p-0  sc-availbility-check">
-                                    <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
-					                  {{#if this.status}} Published {{else}} Pending {{/if}}
-					                </span> 
-                                </div>
-                            </div>
+	                            </div>
+	                            <div class="col col_sma">   
+	                                    {{#each this.quantity}}
+	                                <div class="py-1 "> 
+	                                    <h5>{{this}} </h5>
+	                                </div>
+	                                {{/each}}
+	                            </div>
+	                            <div class="col col_sma">
+	                                    {{#each this.min}}
+	                                <div class="py-1 ">
+	                                    <h5>{{this}} </h5>
+	                                </div>
+	                                {{/each}}
+	                            </div>
+	                            <div class="col col_sma">
+	                                    {{#each this.price}}
+	                                <div class="py-1 ">
+	                                    <h5> &#8358; {{this}} </h5>
+	                                </div>
+	                                {{/each}}
+	                                    
+	                            </div>
+	                           
+	                            <div class="col col_sma"> 
+	                            	{{#each this.quantity}}    
+	                                <div class="py-2  sc-availbility-check">
+	                                    <span class="{{#if (gt this 0)}} in_stock {{else}} empty {{/if}} px-1 text-small">
+						                  {{#if (gt this 0)}} 
+						                  	IN STOCK 
+						                  {{else}} 
+						                  	OUT OF STOCK 
+						                  {{/if}}
+						                </span> 
+	                                </div>
+	                                {{/each}}
+	                            </div>
+                            
+                            {{/json}}
                         </div>
                      </div>
                 </div> 
