@@ -44,7 +44,7 @@ companyRouter.get('/create-product', async (req, res)=>{
     })
 });
 companyRouter.get('/orders', async (req, res)=>{
-
+    
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
         title : 'Order List',

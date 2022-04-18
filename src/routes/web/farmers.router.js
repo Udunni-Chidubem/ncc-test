@@ -209,6 +209,10 @@ farmersRouter.get('/transactions', async (req, res)=>{
         transactions
     })
 })
+farmersRouter.get("/cart/delete/:id", async (req, res)=>{
+    farmerController.deleteItem(req, res)
+    res.redirect("/farmer/cart")
+})
 
 
 module.exports=farmersRouter
