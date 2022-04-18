@@ -1991,6 +1991,8 @@ select::-ms-expand {
 
 .product-img img{
   width: 100%;
+  padding-bottom: 0px !important;
+  height: 200px;
 }
 
 .product-details{
@@ -3183,4 +3185,114 @@ justify-content: center;
 
 .profile_sub{
   font-size: 50px !important;
+}
+
+.table-theme,
+.table-theme > td,
+.table-theme > th {
+  background-color: #049648;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+}
+
+.table-hover .table-theme:hover {
+  background-color: #EEFDF1;
+}
+.table-hover .table-theme:hover > td,
+.table-hover .table-theme:hover > th {
+  background-color: #EEFDF1;
+}
+
+.table-theme tr th{
+   color: #fff !important;
+}
+
+.table-theme-secondary,
+.table-theme-secondary > td,
+.table-theme-secondary > th {
+  background-color: #EEFDF1;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+}
+
+.table-hover .table-theme-secondary:hover {
+  background-color: #EEFDF1;
+}
+.table-hover .table-theme-secondary:hover > td,
+.table-hover .table-theme-secondary:hover > th {
+  background-color: #EEFDF1;
+}
+
+.table-striped-theme tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 200, 0.09);
+}
+
+
+.table-theme-secondary a{
+   color: #000 !important;
+   text-decoration: none;
+}
+
+.buyer_info{
+  display: grid;
+  grid-template-columns: repeat(2, 30%);
+  font-family: 'Poppins';
+  font-style: normal;
+}
+
+.buyer_info h4{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #47749C
+}
+
+.buyer_info p{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #6F6F6F;
+}
+
+.buyer_info span{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: #6F6F6F;
+}
+
+.order_id{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 34px;
+  color: #47749C;
+  margin-bottom: 20px;
+}
+
+.order_header{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  color: #47749C;
+  margin-bottom: 15px;
+}
+
+.order_btn{
+  font-size: 10px !important;
 }

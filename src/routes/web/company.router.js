@@ -117,5 +117,17 @@ companyRouter.get('/products/:id', async (req, res)=>{
         title : 'View Product',
     })
 });
+companyRouter.get('/view-order', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    
+    res.render('seed_company/view-order', {
+        layout : 'company-dashboard',
+        title : 'Order Management',
+        sub_title : 'View Order',
+    })
+});
+
+
 
 module.exports=companyRouter
