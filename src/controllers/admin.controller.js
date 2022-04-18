@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models')
 const utils = require('../helpers/utils');
-const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, DeliveryInformation, SeedTrader, Product }  = db
+const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 
@@ -34,7 +34,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
          })
          farmers=JSON.stringify(farmers)
@@ -56,7 +56,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
         })
 
@@ -76,7 +76,7 @@ module.exports={
                 }
             ],
             order : [
-            	['created_at', 'DESC']
+            	['updated_at', 'DESC']
             ]
         })
         traders = JSON.stringify(traders)
@@ -94,23 +94,19 @@ module.exports={
                         }
                     ]
                 }
-            ]
+            ],
+            order: [
+                ['updated_at', 'DESC'],
+            ],
         });
         products = JSON.stringify(products);
         return JSON.parse(products);
     },
 
-    viewFarmer: async (req, res) => {
-        const user = await req.user
-        // let traders = await adminController.getTraders(req, res)
-        // let companies= await adminController.getCompanies(req, res)
-        let isVerified = await utils.isVerified(user)
-        let farmer = null
-        let deliveryInfo = null
-        let delInfo = null
-        let company = null
-        let trader = null
 
+    getOneFarmer: async (req, res)=>{
+        let farmer
+        /* Find Farmer Begins*/
         const singleFarmer = await Farmer.findOne({
             where: {user_id: req.params.user_id},
             attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'address_of_farm', 'user_id', 'created_at'],
@@ -122,33 +118,40 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
+                },
+                {
+                    model: User,
+                    attributes: ['id'],
+                    include : [
+                        {
+                            model: DeliveryInformation,
+                            include : [
+                                {
+                                    model : States,
+                                    attributes : ['name']
+                                },
+                                {
+                                    model : LGAs,
+                                    attributes : ['name']
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         });
 
         
-         if(singleFarmer){
-            farmer = JSON.parse(JSON.stringify(singleFarmer))
-            // console.log(farmer)
-            let deliveryInfo = await DeliveryInformation.findOne({ 
-            where: {user_id : JSON.parse(JSON.stringify(singleFarmer)).user_id}, 
-            attributes: ['state_id', 'lg_id', 'address'],
-            include : [
-                {
-                    model : States,
-                    attributes : ['name']
-                },
-                {
-                    model : LGAs,
-                    attributes : ['name']
-                }
-            ]
-        });
-
-        const delInfo = JSON.parse(JSON.stringify(deliveryInfo))
-        console.log(singleFarmer.toJSON())
+        if(singleFarmer){
+            farmer = JSON.parse(JSON.stringify(singleFarmer))    
         };
+        /* Find Farmer - Ends */
+        return farmer
+    },
 
+    getOneCompany : async (req, res) => {
+        let company
+        /* FInd Seed Company - Begins*/
         const singleCompany = await SeedCompany.findOne({
             where: {user_id: req.params.user_id},
             attributes: ['id', 'name_of_company', 'email', 'phone_no', 'address', 'licensed_no', 'certification_number', 'tin'],
@@ -168,43 +171,106 @@ module.exports={
             company = JSON.parse(JSON.stringify(singleCompany))
             console.log(singleCompany.toJSON())
         };
-        
+        /* Find Seed Company - Ends */
+        return company
+    },
+
+    getOneTrader : async (req, res) => {
+        let trader
+        /* Find Seed Trader - Begin */
         const singleTrader = await SeedTrader.findOne({
-                    where: {user_id: req.params.user_id},
+            where: {user_id: req.params.user_id},
+            include : [
+                {
+                    model : States,
+                    attributes : ['name']
+                },
+                {
+                    model : LGAs,
+                    attributes : ['name']
+                }
+            ]
+        });
+
+        if (singleTrader) {
+            trader = JSON.parse(JSON.stringify(singleTrader))
+            console.log(singleTrader.toJSON())
+        };
+        /*Find Seed Trader - Ends */
+
+        return trader
+    },
+    getProductsByUserID:async (req, res)=>{
+        let productsById =await Product.findAll({
+            where: {user_id: req.params.user_id}
+        });
+        productsById = JSON.stringify(productsById);
+        return JSON.parse(productsById);
+    },
+    getFarmerCount : async (req, res)=>{
+        let farmerCount =await Farmer.count({
+            // where: {id: req.params.id}
+        });
+
+        farmerCount = farmerCount;
+        return farmerCount;
+    },
+    getCompanyCount : async (req, res)=>{
+        let companyCount =await SeedCompany.count({
+            // where: {id: req.params.id}
+        });
+
+        companyCount = companyCount;
+        return companyCount;
+    },
+    getWallet : async (req, res)=>{
+       let balance = await Wallet.findOne({
+            where: {user_id: req.params.user_id},
+            attributes : ['amount'],
+            raw: true
+        });
+        
+        balance = balance
+        console.log(balance)
+        return balance;
+    },
+    viewProduct: async (req, res) => {
+        const singleProduct = await Product.findOne({
+            include : [
+                {
+                    model: User,
+                    attributes: ['username'],
                     include : [
                         {
-                            model : States,
-                            attributes : ['name']
-                        },
-                        {
-                            model : LGAs,
-                            attributes : ['name']
+                            model : SeedCompany,
+                            attributes: ['id', 'name_of_company', 'state_id'],
+                            include : [{model : States, attributes: ['id', 'name']}]
                         }
                     ]
-                });
+                }
+            ],
+            where: {id: req.params.id},
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at'],
+            raw: true
+        })
 
-                if (singleTrader) {
-                    trader = JSON.parse(JSON.stringify(singleTrader))
-                    console.log(singleTrader.toJSON())
-                };
 
-        
-        
-    
-    
-        res.render('admin/view-user', {
-            layout : 'admin-dashboard',
-            title : 'All Users',
-            sub_title : 'View User',
-            prev_link : '/admin/all-users',
-            username : user.username,
-            isVerified,
-            farmer,
-            delInfo,
-            company,
-            trader
+        return singleProduct;
+    },
+    productUpdate:async (data, id)=>{
+        Product.update(
+            data,
+            {
+                where : {id : id}
+            }
+        )
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
         })
     }
-
 
 }

@@ -79,13 +79,20 @@
              <div class="row">
                <div class="col-12">
                  <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
+                 <a href="#" class="float-end">View Wallet</a>
                </div>
-               <div class="row">
-                 <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub"><p>203,000</p></div>
+               <div>
+                {{#balance}}
+                 <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub"><p> &#8358; {{number this.amount}}</p></div>
+                 {{/balance}}
+                 <div class="dashboard_balance">
+                    <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp;  Cleared Balance: &#8358; {{this.amount}} </p>
+                   <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0 </p>
+                 </div>
+                 
+                 <p></p>
                  <div class="col-12">
-                  <div class=" mb-2 float-end">
-                    <button type="button  " class="btn button_update shadow-lg mb-1">Withdraw</button>
-                  </div>
+                    <button type="button " class="btn btn-theme" style="width: 100% !important;">Withdraw</button>
                  </div>
                </div>
              </div>
@@ -130,8 +137,10 @@
               <div class="col-12 co_12">
                 <div class="p-3 border text-center border-0 border-end ">
                   <h5 class="c_d_s2 c__h">Total Products</h5>
-                  <h1 class="c_d_s2_sales s_1 ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                  {{#productCount}}
+                  <h1 class="c_d_s2_sales s_1 ">{{this}}</h1>
+                  {{/productCount}}
+                  <a href="/seed-company/product-list" class="c_d_s2_link"> <h5>See Details</h5> </a>
                 </div>
               </div>
               <div class="col-12 co_12">

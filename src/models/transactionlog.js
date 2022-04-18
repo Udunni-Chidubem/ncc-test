@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     created_at : DataTypes.DATE,
     currency : DataTypes.STRING,
     updated_at : DataTypes.DATE,
+    transaction_id:DataTypes.STRING
   }, {
     underscored : true,
     sequelize,

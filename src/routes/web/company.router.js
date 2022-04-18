@@ -7,6 +7,8 @@ const companyController = require('../../controllers/company.controller');
 companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
+    let balance = await companyController.getWallet(req, res)
+    let productCount = await companyController.getProductCount(req, res)
 
     let isVerified = await utils.isVerified(user)
 
@@ -15,7 +17,9 @@ companyRouter.get('/dashboard', async (req, res)=>{
         title : 'Dashboard',
         company: company,
         page_title: '',
-        isVerified
+        isVerified,
+        balance,
+        productCount
     })
 });
 companyRouter.get('/update-profile', async (req, res)=>{
@@ -86,7 +90,7 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     }
     
 });
-companyRouter.get('/update-product/:id', async (req, res)=>{
+companyRouter.get('/products/update/:id', async (req, res)=>{
 
     let product = await companyController.updateProduct(req, res)
 
@@ -96,7 +100,7 @@ companyRouter.get('/update-product/:id', async (req, res)=>{
         title : 'Update Product',
     })
 });
-companyRouter.get('/view-product/:id', async (req, res)=>{
+companyRouter.get('/products/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 
@@ -108,5 +112,17 @@ companyRouter.get('/view-product/:id', async (req, res)=>{
         title : 'View Product',
     })
 });
+companyRouter.get('/view-order', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    
+    res.render('seed_company/view-order', {
+        layout : 'company-dashboard',
+        title : 'Order Management',
+        sub_title : 'View Order',
+    })
+});
+
+
 
 module.exports=companyRouter

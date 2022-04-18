@@ -1,4 +1,6 @@
- {{>breadcrumbs}}
+<div class="bg-primary">
+   {{>breadcrumbs}}
+ </div> 
   <div class="product-mgt-container">
         <div class="d-flex flex-row container mt-5">
             <div class="tab-btn active" data-id="all">ALL</div>
@@ -41,7 +43,7 @@
                                   {{/equals}}
                               {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
                         {{/each}}
                       </tbody>
@@ -84,7 +86,7 @@
                                   {{/equals}}
                               {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
                         {{/each}}                    
                       </tbody>
@@ -128,7 +130,7 @@
                                   {{/equals}}
                               {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
                         {{/each}}                        
                       </tbody>

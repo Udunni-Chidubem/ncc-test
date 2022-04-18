@@ -3,6 +3,7 @@ const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
 const paystack = require('../../helpers/paystack')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate } = require('../../helpers/formValidator')
+const companyController = require('../../controllers/company.controller')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -46,7 +47,7 @@ farmersRouter.get('/market_place', async (req, res) => {
 })
 
 farmersRouter.get('/product', farmerController.product)
-farmersRouter.get('/view-product/:id', async (req, res) => {
+farmersRouter.get('/products/:id', async (req, res) => {
 
     const resp = await farmerController.viewProduct(req, res)
     const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']
@@ -67,7 +68,7 @@ farmersRouter.get('/view-product/:id', async (req, res) => {
 farmersRouter.get('/checkout/preview', async (req, res)=>{
     let {getCartItems, farmer, isVerified}=await farmerController.cart(req, res);
     let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
-    console.log(deliveryInfo)
+   // console.log(deliveryInfo)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
             title: 'Order Preview',
@@ -86,7 +87,6 @@ farmersRouter.get("/product/price", async (req, res)=>{
 // Cart Route
 farmersRouter.get('/cart', async (req, res) => {
     let resp = await farmerController.cart(req, res)
-    console.log(resp.getCartItems)
     res.render('farmers/cart', {
         layout : 'farmers-dashboard',
         title: 'Cart',
@@ -132,9 +132,10 @@ farmersRouter.get('/get-cart-count', async (req, res) => {
 farmersRouter.post("/cart/checkout", async (req, res)=>{
    try{
         let paymentType = req.body.inlineRadioOptions
+        let total_sum = req.body.total_sum
         if(paymentType=='card'){  
-            let initial= await paystack.initialize('tipson664@gmail.com', 200000, req)
-           // console.log(initial)
+            
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, req)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, farmer}=await farmerController.cart(req, res)
@@ -146,8 +147,6 @@ farmersRouter.post("/cart/checkout", async (req, res)=>{
         console.log(e)
         res.send(e)
    }
-
-  
 })
 
 farmersRouter.get('/checkout/callback', async (req, res)=>{
@@ -161,16 +160,23 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
         if(paystackPayload.status==true){
             data.status='verified'
             data.currency=paystackPayload.data.currency,
-            data.amount = paystackPayload.data.amount
+            data.amount = paystackPayload.data.amount / 100
+            data.transaction_id=paystackPayload.data.id
+           // console.log(data.amount)
             data.description = paystackPayload.data.log.history[1].message
             farmerController.updateTransactionLog(data, ref)
-            let {farmer, isVerified} = await farmerController.cart(req, res)
+            let {farmer, isVerified, getCartItems} = await farmerController.cart(req, res)
             farmerController.updateCart(farmer.user_id)
+            getCartItems.forEach(item=>{
+                farmerController.productItemsUpdate(item.product_id, item.size, item.qty)
+            })
+            companyController.creditWallet(getCartItems)
             res.render('farmers/payment-success', {
                 layout : 'farmers-dashboard',
                 title: 'Success Page',
                 isVerified,
-                paystackPayload
+                paystackPayload,
+                data
             })
             return
         }
@@ -195,11 +201,13 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
-
+    let transactions=await farmerController.getTransactions(farmer.id)
+   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',
-        isVerified
+        isVerified,
+        transactions
     })
 })
 

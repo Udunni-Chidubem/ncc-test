@@ -23,7 +23,7 @@
 	height: 132px;
 	background: #24502A;
 	background-blend-mode: lighten;
-	box-shadow: 0px 3px 4px gray;
+
 }
 
 .nav-list{
@@ -414,6 +414,13 @@ th td {
    width: 50px;
 }
 
+.page-header{
+      box-shadow: 0px 2px 3px gray;
+      background-color: #FFFFFF;
+      height: 38px;
+      padding-left: 30px;
+}
+
 #page-content-wrapper {
    position: absolute;
    padding: 15px;
@@ -500,7 +507,7 @@ th td {
 
 @media (min-width: 768px) {
    #wrapper {
-      padding-left: 213px;
+      padding-left: 250px;
    }
    .fixed-brand {
       width: 250px;
@@ -634,6 +641,7 @@ th td {
 .admin-product{
    width: 991px;
    margin-bottom: 40px;
+   margin-top: 20px;
 }
 
 .admin-view-product{
@@ -814,7 +822,6 @@ color: #818E9B;
 .bio-data{
    display: grid;
    grid-template-columns: repeat(2, 50%);
-   grid-template-rows: repeat(3, 50%);
    font-family: 'Poppins';
    font-style: normal;
 }
@@ -863,12 +870,10 @@ color: #818E9B;
 
 .shipping-info-section{
    padding: 10px;
-   padding-left: 50px;
 }
 
 .activity-log-section{
    padding: 10px;
-   padding-left: 50px;
 }
 
 .shipping h3{
@@ -909,4 +914,99 @@ color: #818E9B;
    background: #F7685B !important;
    border-radius: 5px;
 }
+
+.account-details-section{
+   padding: 10px;
+   font-family: 'Poppins';
+   font-style: normal;
+}
+
+.balance-grid{
+   display: grid;
+   grid-template-columns: 30% repeat(2, 20%);
+}
+
+.account-details-section h5{
+   font-weight: 600;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.account-details-section h3{
+   font-weight: 700;
+   font-size: 35.3455px;
+   line-height: 53px;
+   letter-spacing: 0.01em;
+   color: #6C6C6C;
+}
+
+.account-details-section h6{
+   font-weight: 600;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.account-details-section .cleared-balance h4{
+   font-weight: 700;
+   font-size: 14px;
+   line-height: 10px;
+   letter-spacing: 0.01em;
+   color: #5DCD6D;
+}
+
+.account-details-section .uncleared-balance h4{
+   font-weight: 700;
+   font-size: 14px;
+   line-height: 10px;
+   letter-spacing: 0.01em;
+   color: #FFB946;
+}
+
+.cleared-balance{
+   padding-top: 30px;
+}
+
+.uncleared-balance{
+   padding-top: 30px;
+}
+
+.account-details-grid{
+   display: grid;
+   grid-template-columns: repeat(2, 30%);
+}
+
+.account-details-grid h6{
+   font-weight: 500;
+   font-size: 11px;
+   line-height: 16px;
+   letter-spacing: 0.01em;
+   color: #818E9B;
+}
+
+.account-details-grid p{
+   font-weight: 400;
+   font-size: 13px;
+   line-height: 20px;
+   letter-spacing: 0.01em;
+   color: #323C47;
+}
+
+.transaction-div{
+   padding: 10px;
+   scroll-behavior: smooth;
+   overflow-y: scroll;
+   background: #F5F6F8;
+   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.25);
+   scrollbar-width: thin;
+   height: 400px;
+}
+
+.transaction-div select{
+   width: fit-content;
+}
+
 /*Single User Profile Ends*/
