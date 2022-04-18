@@ -95,14 +95,21 @@ adminRouter.get('/products', async (req, res)=>{
     })
 });
 
-adminRouter.get('/users/:user_id', async (req, res)=>{
+adminRouter.get('/users/:id', async (req, res)=>{
+    let type=req.query.type
     const user = await req.user
     let isVerified = await utils.isVerified(user)
-    let farmer = await adminController.getOneFarmer(req, res);
-    let company = await adminController.getOneCompany(req, res);
-    let trader = await adminController.getOneTrader(req, res);
-    let products = await adminController.getProductsByUserID(req, res);
-    let balance = await adminController.getWallet(req, res);
+    let farmer=null, company=null, trader=null, products=null, balance=null;
+    if(type=="farmer")
+        farmer = await adminController.getOneFarmer(req, res);
+    if(type=="company"){
+        company = await adminController.getOneCompany(req, res);
+        products = await adminController.getProductsByUserID(req, res);
+    }
+    if(type=="trader")
+        trader = await adminController.getOneTrader(req, res);
+    
+    balance = await adminController.getWallet(req, res);
 
     res.render('admin/view-user', {
         layout : 'admin-dashboard',
