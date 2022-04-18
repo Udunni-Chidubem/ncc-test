@@ -1986,7 +1986,9 @@ input[type="number"] {
 }
 .red_link{
   margin-top: -15px;
-  color: #293a6c;
+  color: #484c58;
+  font-size: 13px;
+  margin-bottom: 5px;
 }
 
 .card_pay_inf2 h4 {
