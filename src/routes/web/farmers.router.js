@@ -175,7 +175,8 @@ farmersRouter.get('/checkout/callback', async (req, res)=>{
                 layout : 'farmers-dashboard',
                 title: 'Success Page',
                 isVerified,
-                paystackPayload
+                paystackPayload,
+                data
             })
             return
         }
