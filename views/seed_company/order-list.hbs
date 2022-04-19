@@ -15,11 +15,13 @@
               </tr>
             </thead>
             <tbody class="t_info_body">
+              {{#if orders}}
+              {{#each orders}}
               <tr class="t_info_row1">
-                  <th scope="row"  ><a href="#">12345678</a></th>
-                  <td>White Maize</td>
-                  <td>40KG</td>
-                  <td>2000</td>
+                  <th scope="row"  ><a href="#">{{TransactionCart.TransactionLog.transaction_id}}</a></th>
+                  <td>{{Product.product_name}}</td>
+                  <td>{{size}}KG</td>
+                  <td>{{total_amount}}</td>
                   <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
                   <td>
                     <a href="#"> 
@@ -40,7 +42,9 @@
                     </div>
                   </td>
                </tr>
-              <tr class="t_info_row2">
+               {{/each}}
+              {{/if}}
+              {{!-- <tr class="t_info_row2">
                   <th scope="row"><a href="#">12345678</a></th>
                   <td>Jacob</td>
                   <td>40KG</td>
@@ -116,7 +120,7 @@
                       <input class="form-check-input ck_box" type="checkbox" value="" id="flexCheckDefault">
                     </div>
                   </td>
-              </tr>
+              </tr> --}}
             </tbody>
         </table>
     </div>

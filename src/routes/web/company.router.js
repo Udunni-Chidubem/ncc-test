@@ -44,10 +44,11 @@ companyRouter.get('/create-product', async (req, res)=>{
     })
 });
 companyRouter.get('/orders', async (req, res)=>{
-    
+    let orders=await companyController.getOrders(req, res)
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
         title : 'Order List',
+        orders
     })
 });
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
@@ -129,7 +130,5 @@ companyRouter.get('/view-order', async (req, res)=>{
         sub_title : 'View Order'
     })
 });
-
-
 
 module.exports=companyRouter
