@@ -1086,8 +1086,17 @@ body {
 }
 
 .slide-2 {
-  padding-right: 85px;
-  padding-left: 85px;
+  background-image: url("../images/seedTrader-slide.png");
+  background-position: 50% 0%;
+  background-size: cover;
+  /* padding-right: 85px;
+  padding-left: 85px; */
+}
+.slide-4 {
+  background-image: url("../images/nigsims-slide2.png");
+  background-position: 50% 0%;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
 
 .slider-wrapper-wide {
@@ -1588,7 +1597,7 @@ padding-bottom: 40px;
 }
 
 .slide-3 {
-  background-image: url("../images/Artboard-1.jpg");
+  background-image: url("../images/seedCompany-slide.png");
   background-position: 0px 0px;
   background-size: cover;
 }
@@ -1739,8 +1748,8 @@ padding-bottom: 40px;
   line-height: 17px;
 }
 
-.slide-4 {
-  background-image: url("../images/medium-shot-farmers-with-smartphone.jpg");
+.slide-1 {
+  background-image: url("../images/farmer-slide.jpg");
   background-position: 50% 0%;
   background-size: cover;
 }
