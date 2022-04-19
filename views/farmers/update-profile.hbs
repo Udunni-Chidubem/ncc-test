@@ -47,21 +47,20 @@
                                         aria-label="Sizing example input" 
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="date_of_birth"
-                                        placeholder="dd/mm/yyyy"
+                                        value="{{ farmerData.date_of_birth }}"
                                         data-date-format="dd/mm/yyyy"
                                         id="dob"
                                         max="2019-12-31"
                                         data-dob="{{ farmerData.date_of_birth }}"
                                           
                                     />
-
                                   </div>
                                   <script>
                                         $('#dob').datepicker({
                                             uiLibrary: 'materialdesign',
                                             format:  'mm/dd/yyyy',
                                             maxDate: '12/12/2010',
-                                            value: '01/01/2010',
+                                            value: '{{dateFormat farmerData.date_of_birth "DD/MM/YYYY"}}',
                                             keyboardNavigation: true,
                                             // modal: true, 
                                             // header: true, 
@@ -74,7 +73,7 @@
                                 <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                                   <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
-                                    <option value="">Gender</option>
+                                    <option value="">{{ farmerData.gender }}</option>
                                   </select>
                                 </div>
                             </div>

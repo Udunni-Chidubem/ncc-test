@@ -2969,6 +2969,18 @@ justify-content: center;
   color: #b7b9cc;
 }
 
+
+.dropdown-menu-left {
+  right: auto !important;
+  left: 0 !important;
+}
+
+.dropdown-menu-right {
+  right: 0 !important;
+  left: auto !important;
+}
+
+
 .dropdown.no-arrow .dropdown-toggle::after {
   display: none;
 }
