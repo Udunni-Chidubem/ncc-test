@@ -23,6 +23,7 @@ siteRouter.get('/extension_worker', siteController.extension_worker)
 siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
+siteRouter.get('/faq', siteController.faq)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{

@@ -43,6 +43,12 @@ module.exports = {
             title : 'About Us'
         });
     },
+    faq: async (req,res) => {
+        res.render('site/faq', {
+            layout: 'common',
+            title : 'FAQ'
+        });
+    },
 
     farmer_signup: async (req,res) => {
 

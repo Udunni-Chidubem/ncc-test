@@ -1486,9 +1486,9 @@ input[type="number"] {
 
   color: #47749c;
 }
-.mbar {
-  /* margin-right: -7rem !important; */
-}
+/* .mbar {
+  margin-right: -7rem !important;
+} */
 
 .sidebar_arrow {
   border: none !important;
@@ -2641,10 +2641,10 @@ input[type="number"] {
   .ul_list_item {
     display: block !important;
   }
-  .t_info {
-    /* width: 484px !important; */
-    /* width: 100% !important; */
-  }
+  /* .t_info {
+    width: 484px !important;
+    width: 100% !important;
+  } */
   .card_home {
     width: 628px !important;
   }
@@ -2904,11 +2904,8 @@ input[type="number"] {
   padding-top: 20px;
 }
 
-<<<<<<< HEAD
+
 .extension-form-container {
   margin: 4rem auto;
-=======
-._col {
-  text-align: center;
->>>>>>> 3fd8368284f827a1742be6686770fa139a41187f
+
 }
