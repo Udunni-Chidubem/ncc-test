@@ -3182,10 +3182,10 @@ justify-content: center;
   letter-spacing: 0.15px;
   color: #47749C;
 }
-
+/*
 .profile_sub{
   font-size: 50px !important;
-}
+}*/
 
 .table-theme,
 .table-theme > td,
@@ -3295,4 +3295,18 @@ justify-content: center;
 
 .order_btn{
   font-size: 10px !important;
+}
+
+.empty {
+  background: #F7685B;
+  font-size: 10px;
+  padding: 5px;
+  color: #ffffff;
+}
+
+.in_stock {
+  background: #5DCD6D;
+  font-size: 10px;
+  padding: 5px;
+  color: #ffffff;
 }

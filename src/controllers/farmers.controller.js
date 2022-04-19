@@ -573,5 +573,14 @@ module.exports={
         Cart.destroy({
             where : {id : req.params.id}
         })
+    },
+    getTransactionlogCount : async (farmer_id)=>{
+        let transactionCount = await TransactionLog.count({
+            where : {
+                farmer_id : farmer_id
+            }
+        })
+
+        return transactionCount
     }
 }
