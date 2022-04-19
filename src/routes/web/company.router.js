@@ -43,8 +43,8 @@ companyRouter.get('/create-product', async (req, res)=>{
         title : 'Create Product',
     })
 });
-companyRouter.get('/order-list', async (req, res)=>{
-
+companyRouter.get('/orders', async (req, res)=>{
+    
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
         title : 'Order List',
@@ -64,7 +64,12 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
         res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
     }
 });
-companyRouter.get('/product-list', async (req, res)=>{
+companyRouter.post('/products/:id', async (req, res)=>{
+     companyController.updateProduct(req, res)
+     res.redirect("/seed-company/products")
+
+})
+companyRouter.get('/products', async (req, res)=>{
 
     let product = await companyController.listProducts(req, res)
     let paginate
@@ -90,9 +95,9 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     }
     
 });
-companyRouter.get('/products/update/:id', async (req, res)=>{
+companyRouter.get('/products/:id', async (req, res)=>{
 
-    let product = await companyController.updateProduct(req, res)
+    let product = await companyController.viewProduct(req, res)
 
     res.render('seed_company/update-product', {
         layout : 'company-dashboard',
@@ -100,7 +105,7 @@ companyRouter.get('/products/update/:id', async (req, res)=>{
         title : 'Update Product',
     })
 });
-companyRouter.get('/products/:id', async (req, res)=>{
+companyRouter.get('/product/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 
@@ -108,8 +113,10 @@ companyRouter.get('/products/:id', async (req, res)=>{
     
     res.render('seed_company/view-product', {
         layout : 'company-dashboard',
+        data,
         product,
-        title : 'View Product',
+        title : 'Products',
+        sub_title : 'View Product'
     })
 });
 companyRouter.get('/view-order', async (req, res)=>{
@@ -119,7 +126,7 @@ companyRouter.get('/view-order', async (req, res)=>{
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Order Management',
-        sub_title : 'View Order',
+        sub_title : 'View Order'
     })
 });
 

@@ -364,6 +364,11 @@ module.exports={
                   status: {
                     [Op.eq]: 0
                   }
+                },
+                {
+                   size : {
+                       [Op.eq] : size
+                   } 
                 }
               ]
         }, raw: true})
@@ -563,5 +568,19 @@ module.exports={
         }
         p.item=JSON.stringify(p.item, null, 2)
         p.save()
+    },
+    deleteItem : async (req, res)=>{
+        Cart.destroy({
+            where : {id : req.params.id}
+        })
+    },
+    getTransactionlogCount : async (farmer_id)=>{
+        let transactionCount = await TransactionLog.count({
+            where : {
+                farmer_id : farmer_id
+            }
+        })
+
+        return transactionCount
     }
 }

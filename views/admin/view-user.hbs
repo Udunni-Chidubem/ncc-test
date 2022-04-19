@@ -54,7 +54,12 @@
 							<div class="admin-view-user">
 								<div class="profile-image-section">
 									<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
-									<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+									{{farmer.User.username}}
+									{{#if farmer.User.status}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+									{{else}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
+									{{/if}}
 								</div>
 								<div class="profile-info-section">
 									<div class="bio-data">

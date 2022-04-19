@@ -2,6 +2,11 @@
 
 {{#if product}}
 	<div class="card admin-product container ">
+        <div class=" pt-2">
+            <span class="{{#if (eq product.status 1)}} published_product {{else if (eq product.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
+              {{#if (eq product.status 1)}} Published {{else}} Pending {{/if}}
+            </span> 
+        </div>
         <div class="card-body m-0 admin-view-product">
         	<div class="admin-product-img admin-product-img-min-hidden">
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
@@ -87,11 +92,7 @@
                                 </div>
                             {{/json}}
                             <div class="col col_sma">    
-                                <div class="p-0  sc-availbility-check">
-                                    <span class="{{#if product.status}} approved {{else}} pending {{/if}} px-1 text-small"><i class="bi bi-dot"></i>
-                                      {{#if product.status}} Published {{else}} Pending {{/if}}
-                                    </span> 
-                                </div>
+                                
                             </div>
                         </div>
                      </div>
@@ -106,13 +107,15 @@
 			</div>
 		</div>
 		<div class="float-end">
-            {{#if product.status}}
+            {{#if (or (eq product.status 0) (eq product.status 2)) }}
                 <div class="float-end m-2 mb-3">
-                    <button type="button" class="btn btn-theme float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/0'"><i class="fa fa-close"></i> Reject</button>                    
+                    <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/0'"><i class="fa fa-close"></i> Reject</button>  
+                    
+                    <button type="button" class="btn btn-success float-right submitBtn" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i class="fa fa-check"></i> Approve</button>                                      
                 </div>
             {{else}}
                 <div class="float-end m-2 mb-3">
-                    <a type="button" class="btn btn-theme float-right submitBtn" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i class="fa fa-check"></i> Approve</button>                    
+                    <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/2'"><i class="fa fa-close"></i> Revoke</button>                    
                 </div>
             {{/if}}
 	    </div>

@@ -31,6 +31,9 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
+                },
+                {
+                    model : User,
                 }
             ],
             order : [
@@ -53,6 +56,9 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
+                },
+                 {
+                    model : User,
                 }
             ],
             order : [
@@ -73,7 +79,8 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
-                }
+                },
+                
             ],
             order : [
             	['updated_at', 'DESC']
@@ -108,7 +115,7 @@ module.exports={
         let farmer
         /* Find Farmer Begins*/
         const singleFarmer = await Farmer.findOne({
-            where: {user_id: req.params.user_id},
+            where: {user_id: req.params.id},
             attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'address_of_farm', 'user_id', 'created_at'],
             include : [ 
                 {
@@ -121,7 +128,7 @@ module.exports={
                 },
                 {
                     model: User,
-                    attributes: ['id'],
+                    attributes: ['id', 'status'],
                     include : [
                         {
                             model: DeliveryInformation,
@@ -153,7 +160,7 @@ module.exports={
         let company
         /* FInd Seed Company - Begins*/
         const singleCompany = await SeedCompany.findOne({
-            where: {user_id: req.params.user_id},
+            where: {user_id: req.params.id},
             attributes: ['id', 'name_of_company', 'email', 'phone_no', 'address', 'licensed_no', 'certification_number', 'tin'],
             include : [
                 {
@@ -179,7 +186,7 @@ module.exports={
         let trader
         /* Find Seed Trader - Begin */
         const singleTrader = await SeedTrader.findOne({
-            where: {user_id: req.params.user_id},
+            where: {user_id: req.params.id},
             include : [
                 {
                     model : States,
@@ -202,7 +209,7 @@ module.exports={
     },
     getProductsByUserID:async (req, res)=>{
         let productsById =await Product.findAll({
-            where: {user_id: req.params.user_id}
+            where: {user_id: req.params.id}
         });
         productsById = JSON.stringify(productsById);
         return JSON.parse(productsById);
@@ -225,7 +232,7 @@ module.exports={
     },
     getWallet : async (req, res)=>{
        let balance = await Wallet.findOne({
-            where: {user_id: req.params.user_id},
+            where: {user_id: req.params.id},
             attributes : ['amount'],
             raw: true
         });

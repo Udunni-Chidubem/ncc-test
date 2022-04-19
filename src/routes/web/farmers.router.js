@@ -10,6 +10,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let {firstname, lastname, LGA, State }=farmer
+    let cartCount = await farmerController.getFarmerCartCount(req, res)
+    let transactionCount = await farmerController.getTransactionlogCount(farmer.id)
 
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -17,7 +19,10 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         fullname: firstname + ' ' + lastname, 
         lga : farmer['LGA.name'] ? farmer['LGA.name'] : null,
         state : farmer['State.name'] ? farmer['State.name'] : null,
-        isVerified
+        farmer,
+        isVerified,
+        cartCount,
+        transactionCount
     })
 })
 
@@ -209,6 +214,10 @@ farmersRouter.get('/transactions', async (req, res)=>{
         isVerified,
         transactions
     })
+})
+farmersRouter.get("/cart/delete/:id", async (req, res)=>{
+    farmerController.deleteItem(req, res)
+    res.redirect("/farmer/cart")
 })
 
 

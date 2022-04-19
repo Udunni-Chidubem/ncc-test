@@ -67,16 +67,15 @@
             </div>
             <div class="col-3">
               <div class="">
-                <p>2 hectares </p>
+                <p>{{ farmer.size_of_farm}} </p>
               </div>
             </div>
             <div class="col-6">
               <div class=" ">
                 <ul class=" ul_list_item    " >
-              <li class=" list_item ">Rice</li>
-              <li class="list_item  ">Maize</li>
-              <li class="list_item  ">Groundnut</li>
-              <li class=" list_item ">Cowpea</li>
+                  {{#farmer.product_farmed}}
+                    <li class=" list_item ">{{this}}</li>
+                  {{/farmer.product_farmed}}
             </ul>
               </div>
             </div>
@@ -149,35 +148,32 @@
 
         <div class="row">
               <div class="col-12">
-                <div class="card shadow card_home pl-0 mt-3 mb-2 ">
-                  <div class="card-body">
-                    <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2">
-                      <div class="col-6  ">
-                        <div class="p-3 border sal_bac text-center pt-5 border-0 border-end">
-                          <h5 class="c_d_s2 c_d_s2_sale">Total Sales &nbsp;   &nbsp; <span class="c_d_s2_sales ">2</span></h5>
-                         
+                <div class="card shadow card_home  pl-0 mt-3 mb-2 ">
+                  <div class="card-body card_comps">
+                    <div class="row row-cols-2  card_comp row-cols-lg-4 g-2 g-lg-2">
+                      <div class="col-lg-3 col-md-5 col-sm-6 ">
+                        <div class="p-3 border sal_bac card_dis text-center border-0 border-end">
+                          <h5 class="c_d_s2 c_d_s2_sale sales">Total Purchases </h5>
+                          <h1 class="c_d_s2_sales ">2</h1>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-3 col-md-5 col-sm-6 ">
                         <div class="p-3 border text-center border-0 border-end">
                           <h5 class="c_d_s2">Items In Cart</h5>
-                          <h1 class="c_d_s2_full ">0</h1>
-                         
+                          <h1 class="c_d_s2_full ">{{cartCount}}</h1>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-3 col-md-5 col-sm-6 ">
                         <div class="p-3 border text-center border-0 border-end">
-                          <h5 class="c_d_s2">Orders</h5>
-                          <h1 class=" c_d_s2_unfull">1</h1>
-                         
+                          <h5 class="c_d_s2 orders">Orders</h5>
+                          <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
                         </div>
                       </div>
   
-                      <div class="col-6">
+                      <div class="col-lg-3 col-md-5 col-sm-6 ">
                         <div class="p-3 border text-center border-0 border-end">
                           <h5 class="c_d_s2">Completed</h5>
                           <h1 class=" c_d_s2_unfull">1</h1>
-                         
                         </div>
                       </div>
                       </div>

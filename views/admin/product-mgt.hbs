@@ -33,14 +33,12 @@
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
-                              {{#if this.status}}
-                                  {{#equals this.status 1}}
-                                    <span class="published">Published</span>
-                                  {{/equals}}
-                                  {{else}}
-                                  {{#equals this.status 0}}
-                                    <span class="unpublished">Unpublished</span>
-                                  {{/equals}}
+                              {{#if (eq this.status 1)}}
+                                   <span class="published">Published</span>
+                                 {{else if (eq this.status 0)}}
+                                  <span class="unpublished">Unpublished</span>
+                                {{else}}
+                                  <span class="revoked_product">Revoked</span>
                               {{/if}}
                             </td>
                             <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>

@@ -33,18 +33,51 @@ module.exports = {
                 return res.redirect('admin/dashboard')
     },
     //this will be called on all farmers routes to see if the user role if farmer
-    farmerPermission: (req, res, next)=>{
-
+    farmerPermission:async (req, res, next)=>{
+        let user = JSON.parse(JSON.stringify(await req.user))
+       // console.log(user.UserRole.Role)
+        if(user.UserRole.Role.role_name=='farmer'){
+            return next()
+        }else{
+            req.logOut()
+            req.flash("error", "forbidden! this is not a farmer account")
+            res.redirect("/login")
+        }
     },
     //this will be called on all seed traders route to see the role is seed_trader
-    seedTraderPermission : (req, res, next)=>{
-
+    seedTraderPermission :async (req, res, next)=>{
+        let user = JSON.parse(JSON.stringify(await req.user))
+       // console.log(user.UserRole.Role)
+        if(user.UserRole.Role.role_name=='seed_trader'){
+            return next()
+        }else{
+            req.logOut()
+            req.flash("error", "forbidden! this is not a farmer account")
+            res.redirect("/login")
+        }
     },
     //this will be called on all seed company routes to see if the role is seed company
-    seedCompanyPermission : (req, res, next)=>{
-
+    seedCompanyPermission :async (req, res, next)=>{
+        let user = JSON.parse(JSON.stringify(await req.user))
+       // console.log(user.UserRole.Role)
+        if(user.UserRole.Role.role_name=='seed_company'){
+            return next()
+        }else{
+            req.logOut()
+            req.flash("error", "forbidden! this is not a farmer account")
+            res.redirect("/login")
+        }
     },
     //this will be called on all seed company routes to see if the role is seed company
-    adminPermission : (req, res, next)=>{
+    adminPermission :async (req, res, next)=>{
+        let user = JSON.parse(JSON.stringify(await req.user))
+       // console.log(user.UserRole.Role)
+        if(user.UserRole.Role.role_name=='admin'){
+            return next()
+        }else{
+            req.logOut()
+            req.flash("error", "forbidden! this is not a farmer account")
+            res.redirect("/login")
+        }
     }
 }
