@@ -22,6 +22,8 @@ companyRouter.get('/dashboard', async (req, res)=>{
         productCount
     })
 });
+
+/*Update Profile View*/
 companyRouter.get('/update-profile', async (req, res)=>{
     let states = await siteController.getStates();
     let user = await req.user
@@ -36,6 +38,9 @@ companyRouter.get('/update-profile', async (req, res)=>{
         isVerified
     })
 });
+
+
+/*Create Product View*/
 companyRouter.get('/create-product', async (req, res)=>{
 
     res.render('seed_company/create-products', {
@@ -43,13 +48,19 @@ companyRouter.get('/create-product', async (req, res)=>{
         title : 'Create Product',
     })
 });
+
+
+/*Order List*/
 companyRouter.get('/orders', async (req, res)=>{
     
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
-        title : 'Order List',
+        title : 'Order List'
     })
 });
+
+
+/*Create Product Logic*/
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
     let filename='';
     if(req.files){
@@ -64,11 +75,16 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
         res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
     }
 });
+
+/*Update Product Logic*/
 companyRouter.post('/products/:id', async (req, res)=>{
      companyController.updateProduct(req, res)
      res.redirect("/seed-company/products")
 
 })
+
+
+/*Product List*/
 companyRouter.get('/products', async (req, res)=>{
 
     let product = await companyController.listProducts(req, res)
@@ -85,6 +101,8 @@ companyRouter.get('/products', async (req, res)=>{
         title : 'Products',
     })
 });
+
+/*Update Profile*/
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
     let r = await companyController.updateProfile(req, res)
 
@@ -95,6 +113,8 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     }
     
 });
+
+/*Update Product Page*/
 companyRouter.get('/products/update/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
@@ -102,9 +122,13 @@ companyRouter.get('/products/update/:id', async (req, res)=>{
     res.render('seed_company/update-product', {
         layout : 'company-dashboard',
         product,
-        title : 'Update Product',
+        title : 'Products',
+        sub_title : 'Update Product',
+        prev_link : '/seed-company/products'
     })
 });
+
+/*View Product*/
 companyRouter.get('/products/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
@@ -116,9 +140,12 @@ companyRouter.get('/products/:id', async (req, res)=>{
         data,
         product,
         title : 'Products',
-        sub_title : 'View Product'
+        sub_title : 'View Product',
+        prev_link : '/seed-company/products'
     })
 });
+
+/*View Order*/
 companyRouter.get('/view-order', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
