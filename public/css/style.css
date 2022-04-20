@@ -1590,6 +1590,7 @@ input[type="number"] {
 .mls-auto {
   margin-left: auto !important;
   padding-right: 5rem;
+  margin-right: -135px;
 }
 
 .c_subhead {
