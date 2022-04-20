@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Op } = require("sequelize");
 const db = require('../models')
-const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart}  = db
+const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer}  = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -213,11 +213,19 @@ module.exports = {
                             user_id : user.id      
                      }
                 },
+                 {
+                    model : User,
+                    include : [
+                        {
+                            model : Farmer
+                        }
+                    ]
+                },
                 {
                     model : TransactionCarts,
                     include : [
                         {
-                            model : TransactionLog
+                            model : TransactionLog,
                         }
                     ]
                 }

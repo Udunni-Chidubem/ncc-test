@@ -145,6 +145,58 @@
                               </div>
                            </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <label for="account_name" class="input_form">Account Name <span class="profile_sub">*</span></label>
+                              <div class="input-group input-group-sm mb-3">
+                                 <input 
+                                    class="form-control" 
+                                    type="text" 
+                                    id="account_name" 
+                                    name="phone_no" 
+                                    placeholder="Account Name" 
+                                    value=""
+                                    minlength="11"
+                                    maxlength="11"
+                                    required>
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <label for="account_no" class="input_form">Account Number <span class="profile_sub">*</span></label>
+                              <div class="input-group input-group-sm mb-3">
+                                 <input 
+                                    type="text" 
+                                    class="form-control border-0 border-bottom" 
+                                    maxlength="10" 
+                                    minlength="10"
+                                    id="account_no"
+                                    name="account_no"
+                                    value=""
+                                    aria-label="Sizing example input" 
+                                    aria-describedby="inputGroup-sizing-sm"
+                                    pattern="[0-9]+"
+                                    placeholder="Account Number"
+                                    required
+                                    >
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <label for="bank" class="input_form">Bank <span class="profile_sub">*</span></label>
+                              <div class="input-group input-group-sm mb-3">
+                                 <select name="bank_name" class="form-control">
+                                    <option value="">Select Bank</option>
+                                    <option value="">Access Bank</option>
+                                    <option value="">UBA</option>
+                                    <option value="">GTB</option>
+                                    <option value="">Fidelity Bank</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+
                         <div class="row">
                            <div class="col-12">
                               <div class="columns mx-auto"  style="width: 160px;">

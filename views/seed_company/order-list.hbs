@@ -6,11 +6,11 @@
             <thead class="t_info_head ">
               <tr class="">
                   <th scope="col">ORDER ID</th>
-                  <th scope="col">PRODUCT NAME</th>
-                  <th scope="col">PACKAGE SIZE</th>
-                  <th scope="col">COST(&#8358;)</Nav></th>
-                  <th scope="col">STATUS</th>
-                  <th scope="col"></th>
+                  <th scope="col">DATE</th>
+                  <th scope="col">CUSTOMER NAME</th>
+                  <th scope="col">TOTAL AMOUNT(&#8358;)</Nav></th>
+                  <th scope="col">PAYMENT STATUS</th>
+                  <th scope="col">ORDER STATUS</th>
                   <th scope="col"></th>
               </tr>
             </thead>
@@ -19,9 +19,10 @@
               {{#each orders}}
               <tr class="t_info_row1">
                   <th scope="row"  ><a href="#">{{TransactionCart.TransactionLog.transaction_id}}</a></th>
-                  <td>{{Product.product_name}}</td>
-                  <td>{{size}}KG</td>
+                  <td>{{dateFormat TransactionCart.TransactionLog.created_at "DD/MM/YYYY"}}</td>
+                  <td>{{User.Farmer.firstname}} {{User.Farmer.lastname}}</td>
                   <td>{{total_amount}}</td>
+                  <td><span class=" "> <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> </td>
                   <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
                   <td>
                     <a href="#"> 
@@ -36,91 +37,9 @@
                       </div>
                     </a>
                   </td>
-                  <td>
-                    <div class="form-check">
-                      <input class="form-check-input ck_box" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
-                  </td>
                </tr>
                {{/each}}
               {{/if}}
-              {{!-- <tr class="t_info_row2">
-                  <th scope="row"><a href="#">12345678</a></th>
-                  <td>Jacob</td>
-                  <td>40KG</td>
-                  <td>2000</td>
-                    <td>
-                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-                  </td>
-                  <td><a href="#"> 
-                    <div class="dropdown d_t">
-                      <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Actions
-                      </a>
-
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item border-0 border-bottom" href="/seed-company/view-order">View Order</a></li>
-                      </ul>
-                    </div>
-                  </a></td>
-                  <td>
-                    <div class="form-check">
-                      <input class="form-check-input ck_box" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
-                  </td>
-              </tr>
-              <tr class="t_info_row1">
-                  <th scope="row"  ><a href="#">12345678</a></th>
-                  <td>White Maize</td>
-                  <td>40KG</td>
-                  <td>2000</td>
-                  <td>
-                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-                  </td>
-                  <td><a href="#"> 
-                    <div class="dropdown d_t">
-                      <a class="btn btn-secondary dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Actions
-                      </a>
-
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item border-0 border-bottom" href="/seed-company/view-order">View Order</a></li>
-                      </ul>
-                    </div>
-                  </a></td>
-                 <td>
-                    <div class="form-check">
-                      <input class="form-check-input ck_box" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
-                  </td>
-              </tr>
-              <tr class="t_info_row2">
-                  <th scope="row"><a href="#">12345678</a></th>
-                  <td>White Maize</td>
-                  <td>40KG</td>
-                  <td>2000</td>
-                    <td>
-                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-                  </td>
-                  <td><a href="#"> 
-                    <form action="" method="post"> 
-                    <div class="dropdown d_t">
-                      <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Actions
-                      </a>
-
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item border-0 border-bottom" href="/seed-company/view-order">View Order</a></li>
-                      </ul>
-                    </div>
-                    </form>
-                  </a></td>
-                  <td>
-                    <div class="form-check">
-                      <input class="form-check-input ck_box" type="checkbox" value="" id="flexCheckDefault">
-                    </div>
-                  </td>
-              </tr> --}}
             </tbody>
         </table>
     </div>
