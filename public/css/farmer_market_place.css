@@ -2770,12 +2770,13 @@ color: #818E9B;
   background-color: #c67605;
 }
 #lblCartCount {
-    font-size: 9px;
-    background: #ff0000;
-    color: #fff;
+    font-size: 12px;
+    /* background: #ff0000; */
+    color: rgb(255, 0, 0);
     padding: 0 5px;
     vertical-align: top;
     margin-left: -7px; 
+   
 }
 
 .datepicker td, .datepicker th {
