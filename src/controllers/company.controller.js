@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Op } = require("sequelize");
+const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
 const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer}  = db
 const utils = require('../helpers/utils');
@@ -204,20 +204,28 @@ module.exports = {
         return productCount;
     },
     getOrders : async (req, res)=>{
-        const user = await req.user
-        let order = await Cart.findAll({
+         const user = await req.user
+        let order= await db.rest.query("SELECT DISTINCT tl.id, tl.amount, tl.transaction_id, tl.created_at, tl.updated_at, tl.transaction_ref, "
+                +"f.firstname, f.lastname, c.status as order_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl "
+                +"on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id where p.user_id = "+user.id+" order by tl.id ", { type: QueryTypes.SELECT } )
+       console.log(order)
+       
+       /* let order = await Cart.findAll({
             include : [
                 {
                     model : Product,
+                    attributes : ['id', 'user_id'],
                     where : {
-                            user_id : user.id      
+                            user_id : user.id 
                      }
                 },
                  {
                     model : User,
+                    attributes : ['id'],
                     include : [
                         {
-                            model : Farmer
+                            model : Farmer,
+                            attributes : ['firstname', 'lastname']
                         }
                     ]
                 },
@@ -226,6 +234,7 @@ module.exports = {
                     include : [
                         {
                             model : TransactionLog,
+                            attributes : ['amount', 'created_at', "updated_at"]
                         }
                     ]
                 }
@@ -235,7 +244,8 @@ module.exports = {
             } 
         })
         order=JSON.parse(JSON.stringify(order))
-        console.log(order);
+       // console.log(order);
+       */
         return order
     }
 }
