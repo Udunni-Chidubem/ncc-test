@@ -14,13 +14,23 @@ $(document).ready(function(){
           // Stop acting like a button
           e.preventDefault();
           // Get the field name
+        let btnMinus=$(this).closest('.product-price').find('.quantity-left-minus')
+        let btnPlus=$(this).closest('.product-price').find('.quantity-right-plus')
           let input = $(this).closest('.input-group').find("#quantity")
           var quantity = parseInt(input.val())
+          let max = input.attr("max")
           // var quantity = parseInt($(this).find('#quantity').val());
           
           // If is not undefined
+              if(quantity<max){
+                input.val(quantity + 1);
+                btnMinus.removeAttr("disabled")
+                quantity=quantity+1
+              }
+
+              if(quantity==max)
+                btnPlus.attr("disabled", true)
               
-              input.val(quantity + 1);
   
             
               // Increment
@@ -32,15 +42,22 @@ $(document).ready(function(){
           e.preventDefault();
           // Get the field name
           // var quantity = parseInt($(this).find('#quantity').val());
+          let btnMinus=$(this).closest('.product-price').find('.quantity-left-minus')
+          let btnPlus=$(this).closest('.product-price').find('.quantity-right-plus')
+
           let input = $(this).closest('.input-group').find("#quantity")
           var quantity = parseInt(input.val());
-          
+          let min = input.attr("min")
           // If is not undefined
         
               // Increment
-              if(quantity>0){
+              if(quantity>min){
                 input.val(quantity - 1);
+                btnPlus.removeAttr("disabled")
+                quantity=quantity-1
               }
+              if(quantity==min)
+                btnMinus.attr("disabled", true)
       });
   
        $("input[type='radio']").click(function(){
@@ -55,6 +72,26 @@ $(document).ready(function() {
     "order": [[2, "desc"]]
   });
 });
+
+
+$(document).ready(function() {
+  $('#transactionTable').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function(){
+    $(".view-btn").click(function(){
+        $(this).text($(this).text() == 'Show Ledger' ? 'Hide Ledger' : 'Show Ledger');
+        if ($(this).text() === 'Show Ledger') {
+          $("#Myid").hide(300);
+        }
+        else
+          $("#Myid").show(300);
+    });
+});
+
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
@@ -161,4 +198,11 @@ function decreaseValue() {
   document.getElementById('number').value = value;
 }
 
- 
+/*  ==========================================
+    TRANSLATE
+* ========================================== */
+
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+}
+

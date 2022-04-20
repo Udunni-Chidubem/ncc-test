@@ -35,6 +35,7 @@
     "g": "^2.0.1",
     "handlebars": "^4.7.7",
     "handlebars-dateformat": "^1.1.2",
+    "handlebars.numeral": "^0.2.0",
     "jsonwebtoken": "^8.5.1",
     "lite-server": "^2.6.1",
     "method-override": "^3.0.0",

@@ -7,6 +7,9 @@
 }
 body {
   background: #e5e5e5 !important;
+  position: initial !important;
+  min-height: initial !important;
+  top: auto !important;
 }
 
 .listStyle {
@@ -14,19 +17,26 @@ body {
 }
 .goog-te-banner-frame {
   visibility: visible;
-  display: none;
+  display: none; 
 }
+.goog-logo-link {
+  display:none !important;
+} 
+  
+.goog-te-gadget {
+  color: transparent !important;
+  margin-left: 25px;
+}
+
+.goog-te-banner-frame.skiptranslate {
+display: none !important;
+} 
+
 .goog{
-  display:null;
+  display: none;
   color: white;
-  margin-top: -15px;
-  margin-bottom: 0px;
-  margin-right: -40px;
-  margin-left: 0px;
-  /* font-size: 1px; */
-}
-.goog-te-gadget{
-  margin-left: 15px;
+  margin-top: -10px;
+  margin-left: 20px;
 }
 .containers {
   /* background: #ffffff; */
@@ -2519,8 +2529,9 @@ input[type="number"] {
   .admin_container.mb-3 {
     width: 686px;
   }
+
   .c_d_s2_sales {
-    font-size: 23px;
+    font-size: 45px;
   }
 
   .c_h {

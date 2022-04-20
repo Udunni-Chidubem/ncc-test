@@ -98,5 +98,7 @@ siteRouter.delete('/logout', (req, res)=>{
     req.logOut();
     res.redirect('/login')
 }),
+siteRouter.get('/services', siteController.services)
+
 
 module.exports=siteRouter; 

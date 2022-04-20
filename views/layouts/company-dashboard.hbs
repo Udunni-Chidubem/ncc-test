@@ -1,7 +1,7 @@
    {{> dashboard_header}}
   <body class="body">
  
- <header>
+ <header class="container-fluid">
     <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_com_nav navbar-dark  ">
       <div class="container-fluid">
         <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
@@ -15,11 +15,57 @@
             <li class="nav-item">
               <a class="nav-link" href="#">You are logged in as:  {{ company.name_of_company }}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link  " href="#"><i class="bi bi-bell"></i> 
-                <!-- <span class="notrifications"></span> -->
-              </a>
-            </li>
+             <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw" ></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter" style="background-color: red; border-radius: 50%;">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+            
             <li class="nav-item">
                  <div class="nav-link goog" id="google_translate_element"></div>
             </li>
@@ -74,11 +120,16 @@
           </a>
           <ul class="submenu collapse">
             <li><a class="nav-link" href="./create-product">Add Product </a></li>
-            <li><a class="nav-link" href="./product-list">Product List </a></li>
-            <li><a class="nav-link" href="./order-list">Orders </a> </li>
+            <li><a class="nav-link" href="./products">Product List </a></li>
           </ul>
         </li>
-         
+
+        <li>
+          <a  href="/seed-company/orders">
+            <i class='bx bx-book'></i>
+            <span class="link_names">Order Management</span>
+          </a> 
+        </li>         
 
          <li>
           <a href="#">
@@ -125,7 +176,7 @@
         <div class="header-sub-title">
             <nav class="breadcrumb breadcrumb-dash">
                 <a href="/seed-company/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
-                <a class="breadcrumb-item " href="#">{{ title }}</a>
+                <a class="breadcrumb-item " href="{{prev_link}}">{{ title }}</a>
                 <span class="breadcrumb-item active" >{{ sub_title }}</span>
             </nav>
         </div>
@@ -149,11 +200,15 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js " ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
 
 
  <script type="text/javascript">
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 }
 </script>
    <script>
@@ -262,7 +317,7 @@ function googleTranslateElementInit() {
                 success_toastr(r.message)
 
                 setTimeout(function(){
-                  window.location='product-list'
+                  window.location='products'
                 }, 2000)
               }
           })
@@ -276,6 +331,10 @@ function googleTranslateElementInit() {
     function filesChange(file){
         files = file[0];
     }
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 </body>
 </html>

@@ -258,7 +258,9 @@ module.exports={
        // const {getCartItems}=await this.cart(req.res)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
-            title: 'Order Preview',
+            title: 'Market Place',
+            sub_title : 'Checkout',
+            prev_link: '/farmer/cart',
             fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer,
             isVerified
@@ -291,10 +293,6 @@ module.exports={
                                     model : SeedCompany,
                                     attributes: ['id', 'name_of_company', 'state_id'],
                                     include : [{model : States, attributes: ['id', 'name']}]
-                                },
-                                {
-                                    model : DeliveryInformation,
-                                    include :[{model : States}, {model : LGAs}]
                                 }
                             ]
                         }
@@ -366,6 +364,11 @@ module.exports={
                   status: {
                     [Op.eq]: 0
                   }
+                },
+                {
+                   size : {
+                       [Op.eq] : size
+                   } 
                 }
               ]
         }, raw: true})
@@ -499,7 +502,85 @@ module.exports={
         }
         
     },
-    updateCart:async (item)=>{
+    updateCart:async (items)=>{
+         let transaction =await db.rest.transaction()
+         try{
+           // for(let i=0; i<items.length; i++){
+                await  Cart.update({
+                    status : 1,
+                    updated_at: now()
+                },{
+                    where : {
+                        user_id : items
+                    }
+                }, {transaction : transaction})
+          //  }
+            transaction.commit()
+         }catch(e){
+            console.log(e)
+            transaction.rollback()
+         }
         
+    },
+    deliveryInfo : async (user_id)=>{
+        let d=await DeliveryInformation.findOne({
+            where : { user_id : user_id},
+            include :[{model : States}, {model : LGAs}],
+            attributes : ['address']
+        })
+        return JSON.parse(JSON.stringify(d))                              
+    },
+    getTransactions : async (farmer_id)=>{
+        let transactions= await TransactionLog.findAll({
+            include  : [
+                {
+                    model : TransactionCarts,
+                    include : [
+                        {
+                            model : Cart,
+                            attributes : [],
+                            include : [
+                               { 
+                                   model : Product,
+                                   attributes : ['product_name']
+                               }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            attributes : ['transaction_id','transaction_ref', 'status', 'created_at'],
+            where : {
+                farmer_id : farmer_id
+            }
+        });
+        return JSON.parse(JSON.stringify(transactions))
+    },
+    productItemsUpdate:async (product_id, size, quantity)=>{
+        let p = await Product.findOne({
+            where : {id : product_id}
+        })
+        p.item=JSON.parse(p.item)
+        for(let i=0; i<p.item.pkg.length; i++){
+            if(p.item.pkg[i]==size){
+                p.item.quantity[i]=p.item.quantity[i]-quantity
+            }
+        }
+        p.item=JSON.stringify(p.item, null, 2)
+        p.save()
+    },
+    deleteItem : async (req, res)=>{
+        Cart.destroy({
+            where : {id : req.params.id}
+        })
+    },
+    getTransactionlogCount : async (farmer_id)=>{
+        let transactionCount = await TransactionLog.count({
+            where : {
+                farmer_id : farmer_id
+            }
+        })
+
+        return transactionCount
     }
 }

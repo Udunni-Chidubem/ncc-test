@@ -74,7 +74,7 @@
 
           </li>
           <li>
-            <a href="#">
+            <a href="/farmer/transactions">
               <i class='bx bx-purchase-tag'></i>
               <span class="link_name">Transaction</span>
             </a>
@@ -134,10 +134,10 @@
       {{{body}}}
   </div>
 
- <script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-}
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+  }
 </script>
  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
@@ -149,6 +149,8 @@ function googleTranslateElementInit() {
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
  <script src="../../js/script.js"></script>
  <script src="../../js/payment_page_preview.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
  <script>
    $(document).ready(function(){
 
@@ -199,16 +201,36 @@ function googleTranslateElementInit() {
 
        fetch(url).then(r=>r.json()).then(r=>{
          let item = JSON.parse(r.item)
-         
+         let qty = $(this).closest('.product-price').find('#quantity')
          let price = null;
+         let btnMinus=$(this).closest('.product-price').find('.quantity-left-minus')
+         let btnPlus=$(this).closest('.product-price').find('.quantity-right-plus')
          for (let i=0; i < item.min.length; i++){
            if(item.pkg[i]==value){
-             $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
-           }
+              qty.attr("min", 1)
+              qty.attr("max", item.quantity[i])
+              qty.val(1)
+              if(item.min[i] != item.quantity[i])
+                btnPlus.removeAttr("disabled")
+              
+              if(item.quantity[i] < 1){
+                error_toastr("this particular size is out of stock for this company pls choose another size")
+                $(this).closest(".products-card").find(".add-to-cart").attr("disabled", true)
+              }
+              
+              //btnMinus.attr("disabled", true)
+              $('.price_'+ product_id).html("&#8358;" + (item.price[i]  ))
+            }
          }
        })
      })
-
+    $("#quantity").on('change', function(){
+      if($(this).val() < $(this).attr("min")){
+        $(this).val($(this).attr("min"))
+      }else if($(this).val() > $(this).attr("max")){
+        $(this).val($(this).attr("max"))
+      }
+    })
     $('.add-to-cart').on('click', function(){
       let content=$(this).closest('.products-content')
       let p = content.find('.product-price').find('h4').html()

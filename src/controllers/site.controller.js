@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
@@ -147,6 +147,10 @@ module.exports = {
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
+            Wallet.create({
+                user_id:user.id,
+                amount : 0.0
+            }, {transaction : transaction})
             const seed_company = await SeedCompany.create({
                 name_of_company:req.body.company_name,
                 phone_no:req.body.phone,
@@ -270,5 +274,11 @@ module.exports = {
             } })
 
         })
-    } 
+    },
+   services: async (req,res) => {
+        res.render('site/services', {
+            layout: 'common',
+            title : 'Services'
+        });
+    },
 }
