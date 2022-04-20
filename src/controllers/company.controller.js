@@ -1,6 +1,7 @@
 require('dotenv').config()
+const { Op } = require("sequelize");
 const db = require('../models')
-const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet}  = db
+const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer}  = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -142,19 +143,6 @@ module.exports = {
             console.log(e)
             transaction.rollback
         }
-       
-        // const user = await req.user
-        //  const product = await Product.findOne({ 
-        //     where: { id: req.params.id},
-        //     //attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name'],
-        //     //raw: true 
-        // })
-
-        //  if(product){
-        //     response = product
-        // }
-
-       // return response
         
     },
     viewProduct: async (req, res) => {
@@ -219,9 +207,35 @@ module.exports = {
         const user = await req.user
         let order = await Cart.findAll({
             include : [
-                {mode : Product}
+                {
+                    model : Product,
+                    where : {
+                            user_id : user.id      
+                     }
+                },
+                 {
+                    model : User,
+                    include : [
+                        {
+                            model : Farmer
+                        }
+                    ]
+                },
+                {
+                    model : TransactionCarts,
+                    include : [
+                        {
+                            model : TransactionLog,
+                        }
+                    ]
+                }
             ],
-            where : { user_id : user.id}
+            where : {
+                status :1        
+            } 
         })
+        order=JSON.parse(JSON.stringify(order))
+        console.log(order);
+        return order
     }
 }

@@ -64,17 +64,6 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bell"></i> 
-                <!-- <span class="notrifications"></span> -->
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
 
             
             <li class="nav-item">
@@ -136,7 +125,7 @@
         </li>
 
         <li>
-          <a  href="./orders">
+          <a  href="/seed-company/orders">
             <i class='bx bx-book'></i>
             <span class="link_names">Order Management</span>
           </a> 
@@ -187,7 +176,7 @@
         <div class="header-sub-title">
             <nav class="breadcrumb breadcrumb-dash">
                 <a href="/seed-company/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i>  Home</a>
-                <a class="breadcrumb-item " href="#">{{ title }}</a>
+                <a class="breadcrumb-item " href="{{prev_link}}">{{ title }}</a>
                 <span class="breadcrumb-item active" >{{ sub_title }}</span>
             </nav>
         </div>
@@ -342,6 +331,10 @@ function googleTranslateElementInit() {
     function filesChange(file){
         files = file[0];
     }
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 </body>
 </html>
