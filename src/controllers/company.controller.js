@@ -205,7 +205,7 @@ module.exports = {
     },
     getOrders : async (req, res)=>{
          const user = await req.user
-        let sql="SELECT tl.id, SUM(c.total_amount) as amount, p.id, tl.transaction_id, tl.created_at," 
+        let sql="SELECT distinct tl.id, SUM(c.total_amount) as amount, p.id, tl.transaction_id, tl.created_at," 
         +"tl.updated_at, tl.transaction_ref,f.firstname, f.lastname, c.status as order_status, "
         +"tl.status as payment_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl " 
         +"on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
