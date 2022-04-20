@@ -176,7 +176,8 @@ module.exports = {
         }catch(e){
             transaction.rollback()
             console.log(e)
-        }      
+        }
+       
     },
     getWallet : async (req, res)=>{
     const user = await req.user
@@ -204,15 +205,50 @@ module.exports = {
     },
     getOrders : async (req, res)=>{
          const user = await req.user
-        let order= await db.rest.query("SELECT DISTINCT tl.id, tl.amount, tl.transaction_id, tl.created_at, tl.updated_at, tl.transaction_ref, "
-                +"f.firstname, f.lastname, c.status as order_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl "
-                +"on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id where p.user_id = "+user.id+" order by tl.id ", { type: QueryTypes.SELECT } )
-       console.log(order)
+        let sql="SELECT tl.id, SUM(c.total_amount) as amount, p.id, tl.transaction_id, tl.created_at," 
+        +"tl.updated_at, tl.transaction_ref,f.firstname, f.lastname, c.status as order_status, "
+        +"tl.status as payment_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl " 
+        +"on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
+        +"where p.user_id = "+user.id+" GROUP by p.id, tl.id, c.id order by tl.created_at desc";
+        let order= await db.rest.query(sql, { type: QueryTypes.SELECT } )
+        console.log(order)
+       
+       /* let order = await Cart.findAll({
+            include : [
+                {
+                    model : Product,
+                    attributes : ['id', 'user_id'],
+                    where : {
+                            user_id : user.id 
+                     }
+                },
+                 {
+                    model : User,
+                    attributes : ['id'],
+                    include : [
+                        {
+                            model : Farmer,
+                            attributes : ['firstname', 'lastname']
+                        }
+                    ]
+                },
+                {
+                    model : TransactionCarts,
+                    include : [
+                        {
+                            model : TransactionLog,
+                            attributes : ['amount', 'created_at', "updated_at"]
+                        }
+                    ]
+                }
+            ],
+            where : {
+                status :1        
+            } 
+        })
+        order=JSON.parse(JSON.stringify(order))
+       // console.log(order);
+       */
         return order
-    },
-    getOrderByID : async (req, res)=>{
-        let orderById = await  db.rest.query("SELECT DISTINCT tl.id, tl.amount, tl.transaction_id, tl.created_at, tl.updated_at, tl.transaction_ref, "
-                +"f.firstname, f.lastname, c.status as order_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl "
-                +"on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id where p.user_id = "+user.id+" order by tl.id ", { type: QueryTypes.SELECT } )
     }
 }
