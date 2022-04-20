@@ -47,21 +47,20 @@
                                         aria-label="Sizing example input" 
                                         aria-describedby="inputGroup-sizing-sm"
                                         name="date_of_birth"
-                                        placeholder="dd/mm/yyyy"
+                                        value="{{ farmerData.date_of_birth }}"
                                         data-date-format="dd/mm/yyyy"
                                         id="dob"
                                         max="2019-12-31"
                                         data-dob="{{ farmerData.date_of_birth }}"
                                           
                                     />
-
                                   </div>
                                   <script>
                                         $('#dob').datepicker({
                                             uiLibrary: 'materialdesign',
                                             format:  'mm/dd/yyyy',
                                             maxDate: '12/12/2010',
-                                            value: '01/01/2010',
+                                            value: '{{dateFormat farmerData.date_of_birth "DD/MM/YYYY"}}',
                                             keyboardNavigation: true,
                                             // modal: true, 
                                             // header: true, 

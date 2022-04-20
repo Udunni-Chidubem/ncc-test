@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.SeedCompany)
       User.hasMany(models.Product)
       User.hasOne(models.DeliveryInformation)
+      User.hasOne(models.Wallet)
     }
   }
   User.init({

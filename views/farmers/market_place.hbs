@@ -60,7 +60,7 @@
                                         <option value="">Choose Qty</option>
                                         {{#json this.item}}
                                             {{#each this.pkg}}
-                                                  <option value="{{this}}">{{this}} kg</option>
+                                                  <option index="{{@index}}" value="{{this}}">{{this}} kg</option>
                                             {{/each}}
                                         {{/json}}
                                     </select>
@@ -69,13 +69,13 @@
                                 <p style="margin-bottom: 10px;">Select Amount</p>
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <button type="button" class="quantity-left-minus btn btn-count btn-number"  data-type="minus" data-field="">
-                                        <span class="fa fa-minus"></span>
+                                        <button type="button" class="quantity-left-minus btn btn-count btn-number" disabled="true"  data-type="minus" data-field="">
+                                            <span class="fa fa-minus"></span>
                                         </button>
                                     </span>
-                                    <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="1" max="100">
+                                    <input type="text" id="quantity" name="quantity" class="input-number" value="1" min="" max="{{this.quantity}}">
                                     <span class="input-group-btn">
-                                        <button type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
+                                        <button disabled="true" type="button" class="quantity-right-plus btn btn-count btn-number" data-type="plus" data-field="">
                                             <span class="fa fa-plus"></span>
                                         </button>
                                     </span>
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="product-actions">
-                            <button class="btn btn-place-order" onclick="window.location.href='/farmer/view-product/{{this.id}}'"><i class='fa fa-eye'></i>  View Product</button>
+                            <button class="btn btn-place-order" onclick="window.location.href='/farmer/products/{{this.id}}'"><i class='fa fa-eye'></i>  View Product</button>
                             <button class="btn btn-save-product add-to-cart" data-prodid="{{this.id}}"> <i class='bx bx-cart-add'></i>Add to Cart</button>
                         </div>
                     </div>

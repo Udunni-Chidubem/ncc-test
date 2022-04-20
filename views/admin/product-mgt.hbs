@@ -1,4 +1,6 @@
- {{>breadcrumbs}}
+<div class="bg-primary">
+   {{>breadcrumbs}}
+ </div> 
   <div class="product-mgt-container">
         <div class="d-flex flex-row container mt-5">
             <div class="tab-btn active" data-id="all">ALL</div>
@@ -31,66 +33,17 @@
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
-                              {{#equals this.status 1}}
-                                <span class="published">Published</span>
-                              {{/equals}}
-                              {{#equals this.status 0}}
-                                <span class="unpublished">Unpublished</span>
-                              {{/equals}}
+                              {{#if (eq this.status 1)}}
+                                   <span class="published">Published</span>
+                                 {{else if (eq this.status 0)}}
+                                  <span class="unpublished">Unpublished</span>
+                                {{else}}
+                                  <span class="revoked_product">Revoked</span>
+                              {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
                         {{/each}}
-                          {{!-- <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="unpublished">Unpublished</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="unpublished">Unpublished</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr> --}}
                       </tbody>
                     </table>
                 </div>
@@ -121,57 +74,19 @@
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
-                              {{#equals this.status 1}}
-                                <span class="published">Published</span>
-                              {{/equals}}
-                              {{#equals this.status 0}}
-                                <span class="unpublished">Unpublished</span>
-                              {{/equals}}
+                              {{#if this.status}}
+                                  {{#equals this.status 1}}
+                                    <span class="published">Published</span>
+                                  {{/equals}}
+                                  {{else}}
+                                  {{#equals this.status 0}}
+                                    <span class="unpublished">Unpublished</span>
+                                  {{/equals}}
+                              {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
-                        {{/each}}
-                          {{!-- <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="published">Published</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr> --}}
-                    
+                        {{/each}}                    
                       </tbody>
                     </table>
                 </div>
@@ -203,37 +118,19 @@
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
                             <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
-                              {{#if this.status 1}}
-                                <span class="published">Published</span>
-                              {}}
-                              {{#equals this.status 0}}
-                                <span class="unpublished">Unpublished</span>
-                              {{/equals}}
+                              {{#if this.status}}
+                                  {{#equals 1}}
+                                    <span class="published">Published</span>
+                                  {{/equals}}
+                                  {{else}}
+                                  {{#equals this.status 0}}
+                                    <span class="unpublished">Unpublished</span>
+                                  {{/equals}}
+                              {{/if}}
                             </td>
-                            <td scope="col"><a href="/admin/view-product">Details</a></td>
+                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
                           </tr>
-                        {{/each}}
-                          {{!-- <tr class="row-one row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="unpublished">Unpublished</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr>
-                          <tr class="row-two row-height">
-                            <td scope="col">01/04/2022</td>
-                            <td scope="col"><strong>RICE/WHITE</strong></td>
-                            <td scope="col"> <strong>SEED COMPANY NIG</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
-                            <td scope="col">
-                                <span class="unpublished">Unpublished</span>
-                            </td>
-                            <td scope="col">Details</td>
-                          </tr> --}}
-                        
+                        {{/each}}                        
                       </tbody>
                     </table>
                 </div>

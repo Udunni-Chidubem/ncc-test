@@ -11,6 +11,7 @@ const fileUpload = require('express-fileupload');
 const methodOveride = require('method-override')
 const session = require('express-session');
 const flash = require('express-flash')
+const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
 passpportInitializer(passport)
 
@@ -67,6 +68,26 @@ app.engine('hbs', handlebars({
 
 Handlebars.registerHelper('paginate', paginate);
 Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
+ NumeralHelper.registerHelpers(Handlebars);
+
+
+
+Handlebars.registerHelper({
+    eq: (v1, v2) => v1 === v2,
+    ne: (v1, v2) => v1 !== v2,
+    lt: (v1, v2) => v1 < v2,
+    gt: (v1, v2) => v1 > v2,
+    lte: (v1, v2) => v1 <= v2,
+    gte: (v1, v2) => v1 >= v2,
+    and() {
+        return Array.prototype.every.call(arguments, Boolean);
+    },
+    or() {
+        return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+    }
+});
+
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -85,13 +106,13 @@ app.use(fileUpload({
 }));
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
+const farmersController = require('./src/controllers/farmers.controller')
 app.use('/', mainRoute)
-
 app.use(async function (req, res) {
     //const user = await req.user
     //console.log(user);
     res.status(400).render('site/404', {
-        //layout: "main",
+        layout: "404",
         error_msg: 'We are unable to process your request. Please try again',
     })
 })
@@ -100,4 +121,4 @@ const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
- seedAdminData()
+// seedAdminData()

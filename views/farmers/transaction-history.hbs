@@ -1,0 +1,130 @@
+<div class="container-fluid  ">
+    <div class="card card_home mb-2 summary_tran">
+      <div class="card-body">
+
+      <table class="table con t_info table_info card_tab table-responsives table-borderless" id="transactionTable">
+        <thead class="t_info_head ">
+          <tr class="">
+            <th scope="col">S/N</th>
+            <th scope="col">Transaction ID</th>
+            <th scope="col">Transaction Ref.</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">STATUS</th>
+          </tr>
+        </thead>
+        <tbody class="t_info_body">
+          {{#each transactions}}
+          <tr class="t_info_row1">
+            <th scope="row"  >{{@index}}</th>
+            <td>{{this.transaction_id}}</td>
+            <td>{{this.transaction_ref}}</td>
+            <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
+            <br>
+            <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr>
+          {{/each}}
+          {{!-- <tr class="t_info_row2">
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>
+              <span  >  <span class="canceled px-1"><i class="bi bi-dot  "></i> Canceled</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr>
+
+          <tr class="t_info_row1">
+            <th scope="row"  >3</th>
+            <td>White Maize</td>
+            <td>
+              <span  >  <span class="paid px-1"><i class="bi bi-dot"></i> Paid</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr>
+          <tr class="t_info_row2">
+            <th scope="row">4</th>
+            <td>White Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr> 
+
+          <tr class="t_info_row2">
+            <th scope="row">5</th>
+            <td>White Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr> 
+
+          <tr class="t_info_row2">
+            <th scope="row">6</th>
+            <td>White Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr> 
+
+          <tr class="t_info_row2">
+            <th scope="row">7</th>
+            <td>White Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/APR/2020</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr>
+
+          <tr class="t_info_row2">
+            <th scope="row">8</th>
+            <td>White Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/AUG/2023</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr> 
+
+          <tr class="t_info_row2">
+            <th scope="row">9</th>
+            <td>White Rice</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 12/JUN/2021</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr>
+
+
+          <tr class="t_info_row2">
+            <th scope="row">10</th>
+            <td>Yellow Maize</td>
+            <td>
+              <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
+            <br>
+            <span>Paid on 15/Jan/2022</span> 
+            </td>
+            <td><a href="#"> See Details</a></td>
+          </tr> --}}
+          
+        </tbody>
+      </table>
+    </div>
+</div>

@@ -41,7 +41,7 @@
 								<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
 								<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} , {{this.State.name}}</td>
 								<td colspan="" rowspan="" headers=""> 
-									<a class="" href="/admin/view-user/{{this.id}}">
+									<a class="" href="/admin/users/{{this.user_id}}?type=farmer">
 										<i class="fa fa-eye"></i> View
 									</a>
 								</td>
@@ -65,7 +65,7 @@
 							<td colspan="" rowspan="" headers="">{{this.name_of_company}}</td>
 							<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} , {{this.State.name}}</td>
 							<td colspan="" rowspan="" headers=""> 
-								<a class="" href="#">
+								<a class="" href="/admin/users/{{this.user_id}}?type=company">
 									<i class="fa fa-eye"></i> View
 								</a>
 							</td>
@@ -87,7 +87,7 @@
 							<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
 							<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} , {{this.State.name}}</td>
 							<td colspan="" rowspan="" headers=""> 
-								<a class="" href="#">
+								<a class="" href="/admin/users/{{this.user_id}}?type=traders">
 									<i class="fa fa-eye"></i> View
 								</a>
 							</td>

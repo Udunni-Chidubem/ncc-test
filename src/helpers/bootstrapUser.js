@@ -1,5 +1,5 @@
 const db = require('../models');
-const {User, UserRole, Role }  = db
+const {User, UserRole, Role, SeedCompany, Wallet }  = db
 const bcrypt = require('bcrypt');
 const { raw } = require('body-parser');
 
@@ -14,6 +14,19 @@ const seedAdminData = async () => {
 				raw : true
 			}
 		);
+		let s = await SeedCompany.findAll({
+			attributes : ['user_id']
+		});
+		s.forEach(async e=>{
+			let w = await Wallet.findOne({where : { user_id :e.user_id }})
+			if(!w){
+				Wallet.upsert({
+					user_id : e.user_id,
+					amount : 0
+				})
+			}
+			
+		})
 	//	console.log(user)
 		if(user==null){
 			user = await User.create({
@@ -44,7 +57,6 @@ const seedAdminData = async () => {
 			where : {role_name : 'nasc'}
 		})
 		
-		console.log(JSON.stringify(n))
 		if(!n){
 			await Role.create({
 				role_name : 'nasc'
