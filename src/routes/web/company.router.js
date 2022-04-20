@@ -135,7 +135,7 @@ companyRouter.get('/products/:id', async (req, res)=>{
 });
 
 /*View Order*/
-companyRouter.get('/view-order', async (req, res)=>{
+companyRouter.get('/view-order/:transaction_id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
     

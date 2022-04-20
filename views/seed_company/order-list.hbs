@@ -18,10 +18,10 @@
               {{#if orders}}
               {{#each orders}}
               <tr class="t_info_row1">
-                  <th scope="row"  ><a href="#">{{TransactionCart.TransactionLog.transaction_id}}</a></th>
-                  <td>{{dateFormat TransactionCart.TransactionLog.created_at "DD/MM/YYYY"}}</td>
-                  <td>{{User.Farmer.firstname}} {{User.Farmer.lastname}}</td>
-                  <td>{{total_amount}}</td>
+                  <th scope="row"  ><a href="#">{{transaction_id}}</a></th>
+                  <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                  <td>{{firstname}} {{lastname}}</td>
+                  <td>{{amount}}</td>
                   <td><span class=" "> <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> </td>
                   <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
                   <td>
@@ -32,7 +32,7 @@
                         </a>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <li><a class="dropdown-item border-0 border-bottom" href="/seed-company/view-order">View Order</a></li>
+                          <li><a class="dropdown-item border-0 border-bottom" href="/seed-company/view-order/{{transaction_id}}">View Order</a></li>
                         </ul>
                       </div>
                     </a>
