@@ -19,7 +19,7 @@
                             <a class="nav-link" href="/seed-company/orders">
                                 <i class="fas fa-bell fa-fw" ></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter" id="noticeCount" style="background-color: red; border-radius: 50%;">3+</span>
+                                <span class="badge badge-counter" id="noticeCount" style="border-radius: 50%;"></span>
                             </a>
                             <!-- Dropdown - Alerts -->
                           <!--  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -345,8 +345,13 @@ function googleTranslateElementInit() {
       })
       .then(resp => resp.json())
       .then(json => {
-        $('#noticeCount').text(json.message)
-        console.log(json)
+        if(json.message>0){
+          let notice=$('#noticeCount')
+          notice.addClass('badge-danger')
+          notice.css('background-color', 'red')
+          notice.text(json.message)
+        }
+       // console.log(json)
       }).catch(error => {
          console.log(error)
       })

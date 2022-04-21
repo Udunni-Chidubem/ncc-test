@@ -225,9 +225,9 @@ module.exports = {
         console.log(order)
         return order
     },
-    getOrder: async (transaction_id, user_id) => {
+    getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
-        let farmer=null
+        let farmer=null, orderStatus=null
         let order = await TransactionCarts.findAll({
             include: [
                 {
@@ -243,7 +243,7 @@ module.exports = {
                 }
             ]
         })
-
+        
         order = JSON.parse(JSON.stringify(order))
         if(order.length){
             farmer = await Farmer.findOne({
@@ -260,12 +260,28 @@ module.exports = {
                     }
                 ]
             })
+
+            orderStatus=await Orders.findOne({
+                where :  {  
+                    [Op.and]: [
+                    {
+                        company_id: {
+                        [Op.eq]: company_id
+                        }
+                    },
+                    {
+                    transaction_log_id: {
+                        [Op.eq]: order[0].transaction_log_id
+                    }
+                    }
+                ]
+                }
+            })
         }
      
         farmer = JSON.parse(JSON.stringify(farmer))
-        console.log(order)
-        console.log(farmer)
-        return { order, farmer };
+        orderStatus = JSON.parse(JSON.stringify(orderStatus))
+        return { order, farmer, orderStatus };
     },
 
     getOrderCount : async (company_id)=>{
@@ -286,5 +302,8 @@ module.exports = {
             }
         }, {raw : true})
         return orderCount
+    },
+    updadeOrders:async (order_id, data)=>{
+        Orders.update(data, { where : {id : order_id}})
     }
 }
