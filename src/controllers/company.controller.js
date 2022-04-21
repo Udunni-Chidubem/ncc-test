@@ -214,6 +214,17 @@ module.exports = {
         console.log(order)
         return order
     },
+    getProductOrders : async (req, product)=>{
+        const user = await req.user
+        let sql = "SELECT distinct tl.id, SUM(c.total_amount) as amount, tl.transaction_id, tl.created_at,"
+            + "tl.updated_at, tl.transaction_ref,f.firstname, f.lastname, c.status as order_status, "
+            + "tl.status as payment_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl "
+            + "on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
+            + "where p.user_id = " + user.id + " and c.product_id ="+product+" GROUP by p.user_id, tl.id order by tl.created_at desc";
+        let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        console.log(order)
+        return order
+    },
     getOrder: async (transaction_id, user_id) => {
         // const user = await req.user
         let order = await TransactionCarts.findAll({

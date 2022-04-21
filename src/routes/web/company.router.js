@@ -44,11 +44,18 @@ companyRouter.get('/create-product', async (req, res)=>{
     })
 });
 companyRouter.get('/orders', async (req, res)=>{
-    let orders=await companyController.getOrders(req, res)
+    let orders=null;
+    product=null
+    if(req.query.product){
+        product=req.query.product
+        orders=await companyController.getProductOrders(req, product)
+    }else{
+        orders=await companyController.getOrders(req, res)
+    }
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
         title : 'Order List',
-        orders
+        orders,
     })
 });
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
