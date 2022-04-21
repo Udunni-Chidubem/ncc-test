@@ -13,7 +13,6 @@
 							<th>Package Size</th>
 							<th>Qty</th>
 							<th>Price</th>
-							<th class="w-25"></th>
 						</tr>
 					</thead>
 					<tbody class="t_info_body table-striped table-theme-secondary">
@@ -25,10 +24,6 @@
 							<td>{{Cart.size}}</td>
 							<td>{{Cart.qty}}</td>
 							<td>&#8358; {{Cart.total_amount}}</td>
-							<td>
-                               <button type="button" class="btn btn-success order_btn" style="background-color: #47BA5D;">Accept Order</button>
-                               <button type="button" class="btn btn-danger order_btn" style="background-color: #F7685B;">Reject Order</button>
-							</td>
 						</tr>
 						{{/if}}
 						{{/each}}
