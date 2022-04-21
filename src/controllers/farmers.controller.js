@@ -13,7 +13,8 @@ const {
         Cart, 
         TransactionLog, 
         TransactionCarts, 
-        Wallet 
+        Wallet,
+        Orders
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
@@ -474,10 +475,10 @@ module.exports={
                 transaction_ref : ref
             }
         })
-        if(t){
-            return true
-        }
-        return false
+        // if(t){
+        //     return t
+        // }
+        return t
     },
     updateTransactionLog:async (data, ref)=>{
         let transaction=await db.rest.transaction()
@@ -582,5 +583,22 @@ module.exports={
         })
 
         return transactionCount
+    },
+    createOrder:async (user_id, transaction_log_id)=>{
+        let sql = "SELECT distinct s.id as company_id FROM cart c join product p on p.id = c.product_id join seedcompany s on s.user_id = p.user_id WHERE c.user_id ="+user_id+" and c.status = 0"
+        let companys= await db.rest.query(sql, {type : QueryTypes.SELECT})
+        let transaction = await db.rest.transaction()
+        try{
+            for(let i=0; i<companys.length; i++){
+              await  Orders.create({
+                    transaction_log_id : transaction_log_id,
+                    company_id : companys[i].company_id,
+                }, {transaction : transaction})
+            }
+            transaction.commit()
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+        }
     }
 }

@@ -155,7 +155,11 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
         transaction_id : req.params.transaction_id
     })
 });
-
-
+companyRouter.get("/orders/count/company", async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let count = await companyController.getOrderCount(company.id)
+    res.json({ message: count , statusCode: 200 }).status(200)
+})
 
 module.exports=companyRouter
