@@ -135,14 +135,15 @@ companyRouter.get('/products/:id', async (req, res)=>{
 });
 
 /*View Order*/
-companyRouter.get('/view-order/:transaction_id', async (req, res)=>{
+companyRouter.get('/orders/:transaction_id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
-    
+    let order = await companyController.getOrder(req.params.transaction_id, user.is)
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Order Management',
-        sub_title : 'View Order'
+        sub_title : 'View Order',
+        order
     })
 });
 
