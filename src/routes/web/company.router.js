@@ -135,7 +135,7 @@ companyRouter.get('/products/:id', async (req, res)=>{
 });
 
 /*View Order*/
-companyRouter.get('/orders/:transaction_id', async (req, res)=>{
+companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
     let {order, farmer} = await companyController.getOrder(req.params.transaction_id, user.id)
