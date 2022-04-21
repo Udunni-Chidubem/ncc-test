@@ -143,7 +143,8 @@ companyRouter.get('/orders/:transaction_id', async (req, res)=>{
         layout : 'company-dashboard',
         title : 'Order Management',
         sub_title : 'View Order',
-        order
+        order,
+        transaction_id : req.params.transaction_id
     })
 });
 
