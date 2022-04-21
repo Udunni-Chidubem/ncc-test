@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const {User,UserRole, Role, SeedCompany, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer}  = db
+const {User,UserRole, Role, SeedCompany,DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer}  = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -220,7 +220,6 @@ module.exports = {
             include :[ 
                 {
                     model : TransactionLog,
-                    include : [ { model : farmer }],
                     where :{transaction_id : transaction_id}
                 },
                 {
@@ -232,8 +231,25 @@ module.exports = {
                 }
             ]
         })
+
         order =  JSON.parse(JSON.stringify(order))
+        let farmer = await Farmer.findOne({
+            where : {id : order[0].TransactionLog.farmer_id},
+            include : [
+                {
+                    model : User,
+                    include : [
+                        {
+                            model : DeliveryInformation,
+                            include:[{model : States}, {model:LGAs}]
+                        }
+                    ]
+                }
+            ]
+        })
+        farmer=JSON.parse(JSON.stringify(farmer))
         console.log(order)
-        return order;
+        console.log(farmer)
+        return {order, farmer};
     }
 }
