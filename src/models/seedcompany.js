@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       SeedCompany.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
       })
+      SeedCompany.hasMany(models.Orders, {
+        foreignKey : 'company_id'
+      })
     }
   }
   SeedCompany.init({
