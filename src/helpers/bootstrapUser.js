@@ -1,5 +1,6 @@
 const db = require('../models');
-const {User, UserRole, Role, SeedCompany, Wallet }  = db
+const { QueryTypes } = require("sequelize")
+const {User, UserRole, Role, SeedCompany, Wallet, Orders }  = db
 const bcrypt = require('bcrypt');
 const { raw } = require('body-parser');
 
@@ -25,7 +26,18 @@ const seedAdminData = async () => {
 					amount : 0
 				})
 			}
-			
+		})
+		let sql = "SELECT DISTINCT s.id as company_id, tl.id as t_id FROM transaction_log tl join transaction_carts tc on tl.id = tc.transaction_log_id "
+			+"join cart c on c.id = tc.cart_id join product p on p.id = c.product_id join seedcompany s on s.user_id = p.user_id"
+		let  t = await db.rest.query(sql, {type : QueryTypes.SELECT })
+		t.forEach(async e => {
+			let o = await Orders.findOne({where : {company_id : e.company_id}})
+			if(!o){
+				await Orders.create({
+					company_id:e.company_id,
+					transaction_log_id:e.t_id,
+				})
+			}
 		})
 	//	console.log(user)
 		if(user==null){

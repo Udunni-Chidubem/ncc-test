@@ -1,7 +1,7 @@
 <div class="card">
 	<div class="card-body">
 			<div class="order_id ">
-				Order: 17788200
+				Order {{ transaction_id }}
 			</div>
 			<div class="table-responsives table_t_info">
 				<h4 class="order_header">Order information</h4>
@@ -13,67 +13,58 @@
 							<th>Package Size</th>
 							<th>Qty</th>
 							<th>Price</th>
-							<th class="w-25"></th>
 						</tr>
 					</thead>
 					<tbody class="t_info_body table-striped table-theme-secondary">
+						{{#each order}}
+						{{#if Cart}}
 						<tr>
-							<td>Maize/White</td>
-							<td>12/12/2021</td>
-							<td>3kg</td>
-							<td>10</td>
-							<td>&#8358; 3,000</td>
-							<td>
-                               <button type="button" class="btn btn-success order_btn" style="background-color: #47BA5D;">Accept Order</button>
-                               <button type="button" class="btn btn-danger order_btn" style="background-color: #F7685B;">Reject Order</button>
-							</td>
+							<td>{{Cart.Product.product_name}}</td>
+							<td>{{dateFormat TransactionLog.created_at "dddd, MMMM Do YYYY"}}</td>
+							<td>{{Cart.size}}</td>
+							<td>{{Cart.qty}}</td>
+							<td>&#8358; {{Cart.total_amount}}</td>
 						</tr>
-						<tr>
-							<td>Rice/Yellow</td>
-							<td>12/12/2021</td>
-							<td>5kg</td>
-							<td>10</td>
-							<td>&#8358; 5,000</td>
-							<td>
-                               <button type="button" class="btn btn-success order_btn" style="background-color: #47BA5D;">Accept Order</button>
-                               <button type="button" class="btn btn-danger order_btn" style="background-color: #F7685B;">Reject Order</button>
-							</td>
-						</tr>
+						{{/if}}
+						{{/each}}
 					</tbody>
 				</table>
-				
-				<div class="dropdown d_t">
-                  <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Change Status
-                  </a>
+				{{#ifNotEquals orderStatus.status 2}}
+				<form action="" method="post">
+					<input name="order" id="order" type="hidden" value="{{orderStatus.id}}">
+					<select name="status" id="status" required="required">
+						<option value="">Change Status</option>
+						{{#ifEquals orderStatus.status null }}
+							<option value="1">Ready to Ship</option>
+						{{/ifEquals}}
+						{{#ifEquals orderStatus.status 1 }}
+							<option value="2">Shipped</option>
+						{{/ifEquals}}
+					</select>
 
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item  border-bottom" href="#">Ready to Ship</a></li>
-                    <li><a class="dropdown-item  " href="#">Shipped</a></li>
-                  </ul>
-                </div>
-
-				<hr>
-
-				<div class="buyer_info">
-					<div>
-						<h4>Buyer Information</h4>
-						<p>Name: <span>Fred Frank</span> </p>
-						<p>Phone Number: <span>09099887766</span> </p>
+					<hr>
+					{{/ifNotEquals}}
+					<div class="buyer_info">
+						<div>
+							<h4>Buyer Information</h4>
+							<p>Name: <span>{{farmer.firstname}} {{farmer.lastname}}</span> </p>
+							<p>Phone Number: <span>{{farmer.phone_no}}</span> </p>
+						</div>
+						
+						<div>
+							<h4>Shipping Address</h4>
+							<span>{{farmer.User.DeliveryInformation.address}} {{farmer.User.DeliveryInformation.LGA.name}}, {{farmer.User.DeliveryInformation.State.name}} </span>
+						</div>
 					</div>
-					
-					<div>
-						<h4>Shipping Address</h4>
-						<span>Lorem ipsum dolor sit amet, con</span>
+					{{#ifNotEquals orderStatus.status 2}}
+					<div class="float-end">
+						{{!-- <button type="button" class="btn btn-secondary">Save</button> --}}
+						
+							<button type="submit" class="btn btn-success">Submit</button>
+						
 					</div>
-				</div>
-
-				<div class="float-end">
-					<button type="button" class="btn btn-secondary">Save</button>
-					<button type="button" class="btn btn-success">Submit</button>
-				</div>
-				
-
+				</form>
+				{{/ifNotEquals}}
 			</div>
 	</div>	
 </div>
