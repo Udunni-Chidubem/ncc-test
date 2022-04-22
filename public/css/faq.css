@@ -64,7 +64,7 @@ p {
   }
 }
 
-.btn {
+/* .btn {
   text-transform: uppercase;
   background: transparent;
   color: #0f6b29;
@@ -75,7 +75,7 @@ p {
   cursor: pointer;
   box-shadow: 0 1px 3px #00000033;
   border-radius: 4px;
-}
+} */
 
 .section {
   padding: 5rem 0;
@@ -101,10 +101,10 @@ main {
 Questions
 ===============
 */
-.title {
+/* .title {
   margin-top: 15vh;
   margin-bottom: 4rem;
-}
+} */
 
 
 .question {
