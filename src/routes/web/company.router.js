@@ -44,11 +44,18 @@ companyRouter.get('/create-product', async (req, res)=>{
     })
 });
 companyRouter.get('/orders', async (req, res)=>{
-    let orders=await companyController.getOrders(req, res)
+    let orders=null;
+    product=null
+    if(req.query.product){
+        product=req.query.product
+        orders=await companyController.getProductOrders(req, product)
+    }else{
+        orders=await companyController.getOrders(req, res)
+    }
     res.render('seed_company/order-list', {
         layout : 'company-dashboard',
         title : 'Order List',
-        orders
+        orders,
     })
 });
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
@@ -135,20 +142,46 @@ companyRouter.get('/products/:id', async (req, res)=>{
 });
 
 /*View Order*/
-companyRouter.get('/orders/:transaction_id', async (req, res)=>{
+companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
-    let {order, farmer} = await companyController.getOrder(req.params.transaction_id, user.id)
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Order Management',
         sub_title : 'View Order',
         order,
         farmer,
+        orderStatus,
         transaction_id : req.params.transaction_id
     })
 });
-
-
+companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
+    let user = await req.user
+    let data={}
+    data.status = req.body.status
+    companyController.updadeOrders(req.body.order, data)
+    let isVerified = await utils.isVerified(user, 'company')
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
+    
+    
+    res.render('seed_company/view-order', {
+        layout : 'company-dashboard',
+        title : 'Order Management',
+        sub_title : 'View Order',
+        order,
+        farmer,
+        orderStatus,
+        transaction_id : req.params.transaction_id
+    })
+});
+companyRouter.get("/orders/count/company", async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let count = await companyController.getOrderCount(company.id)
+    res.json({ message: count , statusCode: 200 }).status(200)
+})
 
 module.exports=companyRouter

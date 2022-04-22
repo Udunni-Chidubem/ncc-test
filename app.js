@@ -28,6 +28,9 @@ app.engine('hbs', handlebars({
         ifEquals(arg1, arg2, options) {
             return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
         },
+        ifNotEquals(arg1, arg2, options) {
+            return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+        },
         concat(){
             arguments = [...arguments].slice(0, -1);
             return arguments.join('');
@@ -121,4 +124,4 @@ const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
-// seedAdminData()
+ seedAdminData()
