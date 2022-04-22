@@ -74,7 +74,7 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
 });
 
 /*Update Product Logic*/
-companyRouter.post('/products/:id', async (req, res)=>{
+companyRouter.post('/products/update/:id', async (req, res)=>{
      companyController.updateProduct(req, res)
      res.redirect("/seed-company/products")
 
@@ -182,6 +182,19 @@ companyRouter.get("/orders/count/company", async (req, res)=>{
     let company = await utils.getCompanyProfile(user)
     let count = await companyController.getOrderCount(company.id)
     res.json({ message: count , statusCode: 200 }).status(200)
-})
+});
+
+/* Wallet */
+companyRouter.get('/wallet', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    let wallet = await companyController.getWallet(req, res)
+    res.render('seed_company/wallet', {
+        layout : 'company-dashboard',
+        title : 'Wallet',
+        wallet
+    })
+});
+
 
 module.exports=companyRouter

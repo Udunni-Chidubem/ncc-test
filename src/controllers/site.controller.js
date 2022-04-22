@@ -24,9 +24,15 @@ module.exports = {
         });
     }, 
     extension_worker: async (req,res) => {
+        let state = await States.findAll({
+            attributes : ['id','name'],
+            raw : true
+        });
+        
         res.render('site/extension-worker', {
             title: 'Find and extension worker',
-            layout: 'header'
+            layout: 'header',
+            state : state
         });
     },
     success_page_test: async (req,res) => {
