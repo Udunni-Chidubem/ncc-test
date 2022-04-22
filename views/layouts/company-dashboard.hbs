@@ -291,35 +291,24 @@
               form.append(e.name, e.value)
             }
           })
-           let url = window.location.origin+"/seed-company/create-product";  
-          fetch(url, {
-            method:'POST',
-            body : form
-          }).then(r=>r.json())
-          .then(r=> {
-             $('.submitBtn').html('Submit')
-            if(r.statusCode === 402){
-                let msg = ''
-                let errors = r.data
-                errors.forEach((value, index) => {
-                  msg += (index + 1 ) + '.' + value.msg + ' \n'
-                })
-                error_toastr(msg)
-              }else if(r.statusCode == 500 || r.statusCode == 400){
-                error_toastr(r.data)
-              }else{
-
-                success_toastr(r.message)
-
-                setTimeout(function(){
-                  window.location='products'
-                }, 2000)
-              }
+          let url = window.location.origin+"/seed-company/products/create";  
+          productPosting(url, form)
+        })
+        $("#product-update-form").on('submit', function(){
+          event.preventDefault()
+          $('.submitBtn').html('Please Wait...')
+          const form = new FormData()
+          let id=window.location.pathname.split("/")
+          id=id[id.length-1]
+          let url = window.location.origin+"/seed-company/products/update/"+id;
+          form.append('upload', files);
+          let data = $(this).serializeArray()
+          data.forEach(e=>{
+            if(e.value != null && e.value != ""){
+              form.append(e.name, e.value)
+            }
           })
-          .catch(e=>{
-            console.log(e)
-          });
-          
+          productPosting(url, form)
         })
         //alert("my alert")
         getCartCount()
@@ -351,6 +340,34 @@
       }).catch(error => {
          console.log(error)
       })
+      const productPosting = (url, form)=>{
+          fetch(url, {
+            method:'POST',
+            body : form
+          }).then(r=>r.json())
+          .then(r=> {
+             $('.submitBtn').html('Submit')
+            if(r.statusCode === 402){
+                let msg = ''
+                let errors = r.data
+                errors.forEach((value, index) => {
+                  msg += (index + 1 ) + '.' + value.msg + ' \n'
+                })
+                error_toastr(msg)
+              }else if(r.statusCode == 500 || r.statusCode == 400){
+                error_toastr(r.data)
+              }else{
+                success_toastr(r.message)
+
+                setTimeout(function(){
+                  window.location='products'
+                }, 2000)
+              }
+          })
+          .catch(e=>{
+            console.log(e)
+          });
+      }
     }
 </script>
 </body>
