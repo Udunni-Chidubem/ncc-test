@@ -283,7 +283,6 @@ module.exports = {
         orderStatus = JSON.parse(JSON.stringify(orderStatus))
         return { order, farmer, orderStatus };
     },
-
     getOrderCount : async (company_id)=>{
        let orderCount=await Orders.count({
             where :  {  
