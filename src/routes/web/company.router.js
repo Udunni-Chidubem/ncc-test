@@ -156,6 +156,17 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     })
 });
 
+companyRouter.get('/wallet', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    let wallet = await companyController.getWallet(req, res)
+    res.render('seed_company/wallet', {
+        layout : 'company-dashboard',
+        title : 'Wallet',
+        wallet
+    })
+});
+
 
 
 module.exports=companyRouter
