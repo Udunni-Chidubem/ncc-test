@@ -103,32 +103,48 @@ siteRouter.get('/services', siteController.services)
 
 siteRouter.get('/knowledge-base', (req,res) => {
     res.render('knowledge_base', {
-        layout: 'knowledge_dashboard',
+        layout: '',
         title : 'Knowledge Base - Index'
     });
     
-    res.render('knowledge_base/cowpie', {
-        layout: 'knowledge_dashboard',
-        title : 'Knowledge Base - Index'
-    });
-
-    res.render('knowledge_base/groundnut', {
-        layout: 'knowledge_dashboard',
-        title : 'Knowledge Base - Index'
-    });
-
-    res.render('knowledge_base/maize', {
-        layout: 'knowledge_dashboard',
-        title : 'Knowledge Base - Index'
-    });
-
-    res.render('knowledge_base/rice', {
-        layout: 'knowledge_dashboard',
-        title : 'Knowledge Base - Index'
-    });
+    
+})
    
+siteRouter.get('/cowpie', (req,res) => {
+res.render('knowledge_base/cowpie', {
+    layout: 'knowledge_dashboard',
+    title : 'Knowledge Base - Cowpie' 
+
+     });
+
 })
 
+siteRouter.get('/groundnut', (req,res) => {
+ res.render('knowledge_base/groundnut', {
+     layout: 'knowledge_dashboard',
+     title : 'Knowledge Base - GroundNut'
+  
+    });
+
+})
+
+siteRouter.get('/maize', (req,res) => {
+ res.render('knowledge_base/maize', {
+     layout: 'knowledge_dashboard',
+     title : 'Knowledge Base - Maize'
+   
+    });
+
+})
+
+siteRouter.get('/rice', (req,res) => {
+ res.render('knowledge_base/rice', {
+     layout: 'knowledge_dashboard',
+     title : 'Knowledge Base - Rice'
+   
+    });
+
+})
 
 
 module.exports=siteRouter; 
