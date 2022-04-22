@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, UserRole, Role, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -225,8 +225,9 @@ module.exports = {
         console.log(order)
         return order
     },
-    getOrder: async (transaction_id, user_id) => {
+    getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
+        let farmer=null, orderStatus=null
         let order = await TransactionCarts.findAll({
             include: [
                 {
@@ -242,25 +243,67 @@ module.exports = {
                 }
             ]
         })
-
+        
         order = JSON.parse(JSON.stringify(order))
-        let farmer = await Farmer.findOne({
-            where: { id: order[0].TransactionLog.farmer_id },
-            include: [
-                {
-                    model: User,
-                    include: [
-                        {
-                            model: DeliveryInformation,
-                            include: [{ model: States }, { model: LGAs }]
+        if(order.length){
+            farmer = await Farmer.findOne({
+                where: { id: order[0].TransactionLog.farmer_id },
+                include: [
+                    {
+                        model: User,
+                        include: [
+                            {
+                                model: DeliveryInformation,
+                                include: [{ model: States }, { model: LGAs }]
+                            }
+                        ]
+                    }
+                ]
+            })
+
+            orderStatus=await Orders.findOne({
+                where :  {  
+                    [Op.and]: [
+                    {
+                        company_id: {
+                        [Op.eq]: company_id
                         }
-                    ]
+                    },
+                    {
+                    transaction_log_id: {
+                        [Op.eq]: order[0].transaction_log_id
+                    }
+                    }
+                ]
                 }
-            ]
-        })
+            })
+        }
+     
         farmer = JSON.parse(JSON.stringify(farmer))
-        console.log(order)
-        console.log(farmer)
-        return { order, farmer };
+        orderStatus = JSON.parse(JSON.stringify(orderStatus))
+        return { order, farmer, orderStatus };
+    },
+
+    getOrderCount : async (company_id)=>{
+       let orderCount=await Orders.count({
+            where :  {  
+                [Op.and]: [
+                {
+                    company_id: {
+                      [Op.eq]: company_id
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: null
+                  }
+                }
+              ]
+            }
+        }, {raw : true})
+        return orderCount
+    },
+    updadeOrders:async (order_id, data)=>{
+        Orders.update(data, { where : {id : order_id}})
     }
 }

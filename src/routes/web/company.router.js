@@ -145,28 +145,43 @@ companyRouter.get('/products/:id', async (req, res)=>{
 companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
-    let {order, farmer} = await companyController.getOrder(req.params.transaction_id, user.id)
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Order Management',
         sub_title : 'View Order',
         order,
         farmer,
+        orderStatus,
         transaction_id : req.params.transaction_id
     })
 });
-
-companyRouter.get('/wallet', async (req, res)=>{
+companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
+    let data={}
+    data.status = req.body.status
+    companyController.updadeOrders(req.body.order, data)
     let isVerified = await utils.isVerified(user, 'company')
-    let wallet = await companyController.getWallet(req, res)
-    res.render('seed_company/wallet', {
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
+    
+    
+    res.render('seed_company/view-order', {
         layout : 'company-dashboard',
-        title : 'Wallet',
-        wallet
+        title : 'Order Management',
+        sub_title : 'View Order',
+        order,
+        farmer,
+        orderStatus,
+        transaction_id : req.params.transaction_id
     })
 });
-
-
+companyRouter.get("/orders/count/company", async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let count = await companyController.getOrderCount(company.id)
+    res.json({ message: count , statusCode: 200 }).status(200)
+})
 
 module.exports=companyRouter

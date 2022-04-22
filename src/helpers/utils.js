@@ -32,7 +32,7 @@ module.exports = {
              where : {
                  user_id : user.id
              },
-             attributes: ['name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number', 'email', 'state_id', 'lg_id'],
+             attributes: ['id','name_of_company', 'phone_no', 'tin', 'address', 'licensed_no', 'certification_number', 'email', 'state_id', 'lg_id'],
              raw :true
          });
          return company;

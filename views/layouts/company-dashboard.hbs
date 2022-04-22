@@ -16,14 +16,13 @@
               <a class="nav-link" href="#">You are logged in as:  {{ company.name_of_company }}</a>
             </li>
              <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="/seed-company/orders">
                                 <i class="fas fa-bell fa-fw" ></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter" style="background-color: red; border-radius: 50%;">3+</span>
+                                <span class="badge badge-counter" id="noticeCount" style="border-radius: 50%;"></span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                          <!--  <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Alerts Center
@@ -62,7 +61,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
+                            </div>-->
                         </li>
 
             
@@ -326,6 +325,9 @@ function googleTranslateElementInit() {
           });
           
         })
+        //alert("my alert")
+        getCartCount()
+     
      })
 
     function filesChange(file){
@@ -335,6 +337,25 @@ function googleTranslateElementInit() {
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
+
+     const getCartCount = () => {
+       let url = window.location.origin + '/seed-company/orders/count/company'
+      fetch(url , {
+        method: 'GET'
+      })
+      .then(resp => resp.json())
+      .then(json => {
+        if(json.message>0){
+          let notice=$('#noticeCount')
+          notice.addClass('badge-danger')
+          notice.css('background-color', 'red')
+          notice.text(json.message)
+        }
+       // console.log(json)
+      }).catch(error => {
+         console.log(error)
+      })
+    }
 </script>
 </body>
 </html>
