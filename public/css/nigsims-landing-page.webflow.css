@@ -74,6 +74,13 @@
   color: #444;
   text-decoration: none;
 }
+/* :0.targetLanguage{
+  display:none;
+} */
+/* .goog-te-gadget .goog-te-comb{
+  margin-left: 0px;
+  margin-right: -100px;
+} */
 
 .nav-link:hover {
   text-decoration: underline;

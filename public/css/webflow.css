@@ -630,7 +630,9 @@ textarea.w-select {
   
 .goog-te-gadget {
   color: transparent !important;
-  margin-left: 25px;
+  margin-left: 15px;
+  width: 190px;
+  margin-top: -13px;
 }
 
 .goog-te-banner-frame.skiptranslate {
@@ -650,6 +652,11 @@ display: none !important;
   padding-bottom: 0px;
   /* margin-top: auto; */
 }
+/* .goog-te-gadget .goog-te-comb{
+  margin-left: 0px;
+  margin-right: -100px;
+} */
+
 
 @media screen and (max-width: 991px) {
   .w-container {
