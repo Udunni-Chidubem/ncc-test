@@ -105,9 +105,28 @@ siteRouter.get('/knowledge-base', (req,res) => {
     res.render('knowledge_base/index', {
         layout: 'knowledge_dashboard',
         title : 'Knowledge Base - Index'
+    });
     
+    res.render('knowledge_base/cowpie', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Index'
     });
 
+    res.render('knowledge_base/groundnut', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Index'
+    });
+
+    res.render('knowledge_base/maize', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Index'
+    });
+
+    res.render('knowledge_base/rice', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Index'
+    });
+   
 })
 
 
