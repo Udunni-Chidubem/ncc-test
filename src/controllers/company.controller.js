@@ -99,7 +99,7 @@ module.exports = {
             let min = [], qty = [], size = [], price = [];
             if (req.files) {
                 let p = await Product.findOne({
-                    attributes: file_name,
+                    attributes: ['file_name'],
                     where: { id: req.params.id }
                 })
                 let upload = req.files.upload

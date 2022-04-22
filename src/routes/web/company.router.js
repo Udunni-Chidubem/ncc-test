@@ -80,7 +80,7 @@ companyRouter.post('/products/create', productValidation(), validate, async (req
 /*Update Product Logic*/
 companyRouter.post('/products/update/:id', async (req, res)=>{
      companyController.updateProduct(req, res)
-     res.redirect("/seed-company/products")
+     res.json({statusCode : 200, message : "Product updated successfully", body : "Product updated succeessfully"}).status(200).send()
 
 })
 
