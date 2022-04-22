@@ -256,10 +256,12 @@ module.exports = {
             const genders = []
             const farmProduce = []
             const levelEdu = []
+            const banks = []
 
             let gender = data.gender
             let farm_Produce = data.farmProduce
             let level = data.levelEducation
+            let bank = data.banks
 
             gender.forEach((value, index, self) => {
                 genders.push(value)
@@ -273,10 +275,15 @@ module.exports = {
                 levelEdu.push(value)
             })
 
+            bank.forEach((value, index, self) => {
+                banks.push(value)
+            })
+
             res.json({statusCode: 200, error: false,  data: {
                 gender: genders, 
                 farm_produce: farmProduce,
-                eduLevel: levelEdu
+                eduLevel: levelEdu,
+                bank: banks
             } })
 
         })
