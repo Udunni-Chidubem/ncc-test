@@ -31,29 +31,29 @@
 						<option value="in_flow">In Flow</option>
 						<option value="withdrawal">Withdrawals</option>
 					</select>
-
-					<table class="container-fluid table con t_info  table-borderless in_flow walletTable" id="transactionTable">
+					<hr>
+					<div class="walletTable in_flow">
+						<table class="table-responsive table con t_info  table-borderless " id="in_flow_Table">
 			            <thead class="t_info_head ">
 			              <tr class="">
 			                  <th scope="col">ORDER ID</th>
 			                  <th scope="col">EARNING(&#8358;)</Nav></th>
+			                  <th scope="col">DATE</Nav></th>
 			                  <th scope="col">STATUS</th>
 			              </tr>
 			            </thead>
 			            <tbody class="t_info_body">
 			              <tr class="t_info_row1">
 			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
 			                 
 			               </tr>
 			              <tr class="t_info_row2">
 			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>3000</td>
-			                  <td>40KG</td>
-			                  <td>6000</td>
+			                  <td>&#8358; 3000</td>
+			                  <td>12/12/3032</td>
 			                    <td>
 			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
 			                  </td>
@@ -61,9 +61,8 @@
 			              </tr>
 			              <tr class="t_info_row1">
 			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                  <td>
 			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
 			                  </td>
@@ -71,9 +70,8 @@
 			              </tr>
 			              <tr class="t_info_row2">
 			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                    <td>
 			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
 			                  </td>
@@ -81,17 +79,15 @@
 			              </tr>
 			              <tr class="t_info_row1">
 			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
 			                 
 			               </tr>
 			              <tr class="t_info_row2">
 			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>3000</td>
-			                  <td>40KG</td>
-			                  <td>6000</td>
+			                  <td>&#8358; 3000</td>
+			                  <td>12/12/3032</td>
 			                    <td>
 			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
 			                  </td>
@@ -99,9 +95,8 @@
 			              </tr>
 			              <tr class="t_info_row1">
 			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                  <td>
 			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
 			                  </td>
@@ -109,39 +104,37 @@
 			              </tr>
 			              <tr class="t_info_row2">
 			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
 			                    <td>
 			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
 			                  </td>
 			                  
 			              </tr>
 			            </tbody>
-			        </table>
+			        </table>	
+					</div>
+					
 
-			        <table class="container-fluid table con t_info  table-borderless withdrawal walletTable" id="transactionTable">
+			       <div class="withdrawal walletTable">
+			       		 <table class="container-fluid table con t_info  table-borderless" id="transactionTable">
 			            <thead class="t_info_head ">
 			              <tr class="">
-			                  <th scope="col">ORDER ID</th>
-			                  <th scope="col">UNIT PRICE (&#8358;)</th>
-			                  <th scope="col">QTY</th>
-			                  <th scope="col">EARNING(&#8358;)</Nav></th>
-			                  <th scope="col">STATUS</th>
+			                  <th scope="col">TRANSACTION ID</th>
+			                  <th scope="col">AMOUNT (&#8358;)</th>
+			                  <th scope="col">DATE</th>
 			              </tr>
 			            </thead>
 			            <tbody class="t_info_body">
 			              <tr class="t_info_row1">
 			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>2000</td>
-			                  <td>40KG</td>
-			                  <td>4000</td>
-			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
-			                 
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>		                 
 			               </tr>
 			            
 			            </tbody>
 			        </table>
+			       </div>
 				</div>
 	</div>
   	</div>

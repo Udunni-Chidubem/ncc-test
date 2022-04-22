@@ -81,6 +81,13 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#in_flow_Table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
 $(document).ready(function(){
     $(".view-btn").click(function(){
         $(this).text($(this).text() == 'Show Ledger' ? 'Hide Ledger' : 'Show Ledger');
