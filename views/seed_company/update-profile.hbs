@@ -160,7 +160,6 @@
                                     value=""
                                     minlength="10"
                                     maxlength="50"
-                                    required>
                               </div>
                            </div>
                            <div class="col-sm-6">
@@ -188,12 +187,8 @@
                            <div class="col-sm-6">
                               <label for="bank" class="input_form">Bank <span class="profile_sub">*</span></label>
                               <div class="input-group input-group-sm mb-3">
-                                 <select name="bank_name" class="form-control">
+                                 <select name="bank" class="form-control" data-bank="{{company.bank}}" id="bank">
                                     <option value="">Select Bank</option>
-                                    <option value="">Access Bank</option>
-                                    <option value="">UBA</option>
-                                    <option value="">GTB</option>
-                                    <option value="">Fidelity Bank</option>
                                  </select>
                               </div>
                            </div>
@@ -268,6 +263,38 @@
             }, 1000)
         }
 
+
+        let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let bank, len, i
+
+                bank = response.data.bank
+
+                len = bank.length
+                var ele = document.getElementById('bank');
+
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + bank[i].name + '">' + bank[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let bank = $('#bank').data('bank')
+                    if(bank != null){
+                        $('#bank').val(bank)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
 
     $("#update").on('submit', function(e){
       e.preventDefault()

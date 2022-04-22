@@ -69,14 +69,17 @@
                                     </script>
                               </div>
 
-                              <div class="col-sm-6">
-                                <label for="gender" class="input_form">Gender <span class="profile_sub">*</span></label>
-                                <div class="input-group mb-3">
-                                  <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
-                                    <option value="">Gender</option>
-                                  </select>
-                                </div>
-                            </div>
+                              
+
+                              <div class="col-sm-6" class="input_form">
+                                 <label for="education" class="input_form"> Gender <span class="profile_sub">*</span></label>
+                                    <div class="input-group input-group-sm mb-3">
+                                      <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
+                                        <option value="">Select One</option>
+                                      </select>
+                                    </div>
+                              </div>
+
                            </div>
 
 
@@ -493,18 +496,24 @@
           .then(response => {
             if(response.statusCode === 200){
               
-                let objArray, len, i, farm_produce, level
-                objArray = response.data.gender
-                len = objArray.length
+                let gender, len, i, farm_produce, level
+                gender = response.data.gender
 
-                let Options =  '<option value="">Select One</option>'
-
+                len = gender.length
                 var ele = document.getElementById('gender');
 
+                
                 for(i=0; i < len; i++){
-                    ele.innerHTML = ele.innerHTML + '<option value="' + objArray[i].name + '">' + objArray[i].name + '</option>';
+                    ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
                 }
 
+                setTimeout(function(){
+
+                  let gender = $('#gender').data('gender')
+                    if(gender != null){
+                        $('#gender').val(gender)
+                    }
+                }, 1000)
 
                 level = response.data.eduLevel
 
