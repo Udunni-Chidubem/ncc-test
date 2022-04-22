@@ -22,6 +22,8 @@ companyRouter.get('/dashboard', async (req, res)=>{
         productCount
     })
 });
+
+
 companyRouter.get('/update-profile', async (req, res)=>{
     let states = await siteController.getStates();
     let user = await req.user
@@ -36,6 +38,11 @@ companyRouter.get('/update-profile', async (req, res)=>{
         isVerified
     })
 });
+
+
+/*Product Routes Begins*/
+
+/*Create Product GET request*/
 companyRouter.get('/create-product', async (req, res)=>{
 
     res.render('seed_company/create-products', {
@@ -43,21 +50,8 @@ companyRouter.get('/create-product', async (req, res)=>{
         title : 'Create Product',
     })
 });
-companyRouter.get('/orders', async (req, res)=>{
-    let orders=null;
-    product=null
-    if(req.query.product){
-        product=req.query.product
-        orders=await companyController.getProductOrders(req, product)
-    }else{
-        orders=await companyController.getOrders(req, res)
-    }
-    res.render('seed_company/order-list', {
-        layout : 'company-dashboard',
-        title : 'Order List',
-        orders,
-    })
-});
+
+/*Create Product POST request*/
 companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
     let filename='';
     if(req.files){
@@ -140,8 +134,29 @@ companyRouter.get('/products/:id', async (req, res)=>{
         prev_link : '/seed-company/products'
     })
 });
+/*Product Routes Ends*/
 
-/*View Order*/
+
+/*Order Routes Begins*/
+
+/*Order List*/
+companyRouter.get('/orders', async (req, res)=>{
+    let orders=null;
+    product=null
+    if(req.query.product){
+        product=req.query.product
+        orders=await companyController.getProductOrders(req, product)
+    }else{
+        orders=await companyController.getOrders(req, res)
+    }
+    res.render('seed_company/order-list', {
+        layout : 'company-dashboard',
+        title : 'Order List',
+        orders,
+    })
+});
+
+/*Order GET request*/
 companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
@@ -157,6 +172,8 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
         transaction_id : req.params.transaction_id
     })
 });
+
+/*Order POST request*/
 companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let data={}
@@ -177,12 +194,16 @@ companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
         transaction_id : req.params.transaction_id
     })
 });
+
+/*Order Count*/
 companyRouter.get("/orders/count/company", async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
     let count = await companyController.getOrderCount(company.id)
     res.json({ message: count , statusCode: 200 }).status(200)
 });
+
+/*Order Routes End*/
 
 /* Wallet */
 companyRouter.get('/wallet', async (req, res)=>{
