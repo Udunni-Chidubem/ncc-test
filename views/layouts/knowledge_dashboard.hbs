@@ -1,12 +1,53 @@
-
 {{> header}}
-<body class="body">
-{{> main_menu}}
-<div class="library-div">
-    <h1>name</h1>
-</div>
 
- {{{ body }}}
- {{> footer}}
+<body class="body">
+    {{> main_menu}}
+
+    <div class="searchBar-container">
+        <div>
+            <form action="#" class="form-search">
+                <input type="text" placeholder="What are you looking for?" name="search" class="search-bar">
+                <button type="button" class="search-btn">Search</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="knowledgeBody-grid">
+
+        <aside class="mini-sidebar">
+            <div>
+                <h3>Content</h3>
+                <ul class="sidebar-content">
+                    <li class="sidebar-content-items">
+                        <a href="">Description</a>
+                    </li>
+                    <li class="sidebar-content-items">
+                        <a href="">Importance</a>
+                    </li>
+                    <li class="sidebar-content-items">
+                        <a href="">Planting Cowpea</a>
+                    </li>
+                    <li class="sidebar-content-items">
+                        <a href="">Pest and Diseases</a>
+                    </li>
+                    <li class="sidebar-content-items">
+                        <a href="">Harvesting</a>
+                    </li>
+                    <li class="sidebar-content-items">
+                        <a href="">Economic Potential</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="knowledge-content">
+
+        </div>
+    </div>
+
+
+    {{{ body }}}
 </body>
- 
+
+{{> footer}}
