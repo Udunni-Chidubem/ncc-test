@@ -70,6 +70,7 @@ module.exports={
         const transaction = await db.rest.transaction();
         const user = await req.user
         let deliveryInformation
+        let filename
         try{
             if(req.files){
                 let upload=req.files.upload
@@ -111,7 +112,8 @@ module.exports={
                 farm_size,
                 product_farmed: farm_produce.toString(),
                 village,
-                ward
+                ward,
+                profile_pic:filename
             }
 
             const farmer = await Farmer.update( data , {

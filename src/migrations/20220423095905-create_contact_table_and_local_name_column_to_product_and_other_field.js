@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-     await queryInterface.createTable('contact', {
+    await queryInterface.createTable('contact', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -54,6 +54,10 @@ module.exports = {
     });
     await queryInterface.addColumn('product', 'local_name', {
       type : Sequelize.STRING,
+      allowNull : true
+    });
+    await queryInterface.addColumn('farmer', 'profile_pic', {
+      type : Sequelize.TEXT,
       allowNull : true
     });
   },
