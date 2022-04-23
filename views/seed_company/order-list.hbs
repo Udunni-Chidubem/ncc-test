@@ -16,6 +16,8 @@
         </tr>
       </thead>
       <tbody class="t_info_body">
+
+        
         {{#if orders}}
         {{#each orders}}
         <tr class="t_info_row1">
@@ -24,7 +26,21 @@
           <td>{{firstname}} {{lastname}}</td>
           <td>{{amount}}</td>
           <td><span class=" "> <span class="approved px-1"><i class="bi bi-dot"></i> Approved</span> </td>
-          <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> </td>
+          <td>                      
+          {{#ifEquals  status 3}}
+            <span class="approved px-1"><i class="bi bi-dot"></i>Fulfiled</span>
+          {{/ifEquals}}
+          {{#ifEquals  status 2}}
+            <span class="shipped px-1"><i class="bi bi-dot"></i>Shipped</span>
+          {{/ifEquals}}
+          {{#ifEquals  status 1}}
+            <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+          {{/ifEquals}}
+          {{#ifEquals  status null}}
+           <span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
+          {{/ifEquals}}
+          </td>
+          {{!-- <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> </td> --}}
           <td>
             <a href="#">
               <div class="dropdown d_t">
