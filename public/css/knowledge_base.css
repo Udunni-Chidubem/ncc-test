@@ -139,9 +139,152 @@ h3{
     display: grid;
     /* grid-template-columns: 320px 1fr; */
     margin-top: 15px;
-    padding: 20px;
-    width: 1180px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1200px;
     height: fit-content;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 
+                BODY
+                                                 */
+
+
+/*          
+                  DISCRIPTION GRID 
+                                                 */
+                                                
+.mainpage{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+     
+.heading1{
+    display: grid;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 15px;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+.underline{
+    margin-top: -10px;
+    margin-bottom: 30px;
+    border-top: 1px solid rgb(136, 133, 133);
+}
+
+.description-grid{
+    display: grid;
+    grid-template-columns: repeat(5 , 234px);
+    grid-row-gap: 35px;
+    /* margin-left: 10px; */
+ 
+}
+
+.text-descp{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+
+.pic-descp{
+    grid-column-start: 5;
+    grid-column-end: 5;
+}
+
+.text2-descp{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-bottom: 50px
+}
+
+.importance{
+   display: grid;
+   grid-template-columns: repeat(1, auto);
+   margin-bottom: 50px;
+}
+
+.subheading{
+    font-size: medium;
+    font-weight:700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.planting{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
+ }
+
+ .main-pests{
+     display: grid;
+     grid-template-columns: repeat(5 , 234px);
+     grid-template-rows: repeat(3 , auto);
+     grid-row-gap: 5px;
+     margin-bottom: 40px;
+
+ }
+
+ .pests-text1{
+     grid-row-start: 1;
+     grid-row-end: 1;
+     grid-column-start: 1;
+     grid-column-end: 4;
+ }
+ .pic-pests1{
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .pests-text2{
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+ }
+
+ .pic-pests2{
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .pests-text3{
+    grid-row-start: 3;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 4;
+ }
+
+ .pic-pests3{
+    grid-row-start: 3;
+    grid-row-end: 3;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .harvesting{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
+ }
+
+ .test-harvest{
+
+ }
+
+.economic{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
 }
