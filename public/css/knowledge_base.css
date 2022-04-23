@@ -159,10 +159,9 @@ h3{
                                                  */
                                                 
 .mainpage{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+padding: 15px;
+margin: auto;
+
 
 }
      
@@ -175,8 +174,8 @@ h3{
     font-family: sans-serif;
 }
 .underline{
-    margin-top: -10px;
-    margin-bottom: 30px;
+    /* margin-top: -10px;
+    margin-bottom: 30px; */
     border-top: 1px solid rgb(136, 133, 133);
 }
 
@@ -196,7 +195,14 @@ h3{
 .pic-descp{
     grid-column-start: 5;
     grid-column-end: 5;
+    width : 180px;
+    height:142px;
 }
+.pic-descp img {
+    width: 100%;
+    height: 100%;
+}
+
 
 .text2-descp{
     grid-column-start: 1;
@@ -278,13 +284,16 @@ h3{
     grid-template-columns: repeat(1, auto);
     margin-bottom: 50px;
  }
-
+/* 
  .test-harvest{
 
- }
+ } */
 
 .economic{
     display: grid;
     grid-template-columns: repeat(1, auto);
     margin-bottom: 50px;
+}
+.seed-mgt{
+    margin: 25px;
 }
