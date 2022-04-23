@@ -1,16 +1,51 @@
-{{!-- <div class="library-div">
-    <h1>name</h1>
-</div> --}}
-<div>
-    <h2>duhywuidwjiwuisejqiui</h2>
-</div>
+{{> header}}
+
+<body class="body">
+    {{> main_menu}}
+
+    <div class="searchBar-container">
+        <div>
+            <form action="#" class="form-search">
+                <input type="text" placeholder="What are you looking for?" name="search" class="search-bar">
+                <button type="button" class="search-btn">Search</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="valueSeeds-container">
+
+        <div>
+            <a href="/maize">
+                <img src="../images/Maize.png">
+            </a>
+            <p class="seed-title">Maize</p>
+        </div>
+
+        <div>
+            <a href="/groundnut">
+                <img src="../images/groundnut.png">
+            </a>
+            <p class="seed-title">Groundnut</p>
+
+        </div>
+
+        <div>
+            <a href="/cowpie">
+                <img src="../images/cowpea.png">
+            </a>
+            <p class="seed-title">Cowpea</p>
+        </div>
+        <div>
+            <a href="/rice">
+                <img src="../images/rice.png">
+            </a>
+            <p class="seed-title">Rice</p>
+        </div>
 
 
+    </div>
 
-<a href="/maize"> Maize </a>
-<br>
-<a href="/rice"> Rice </a>
-<br>
-<a href="/groundnut"> GroundNut </a>
-<br>
-<a href="/cowpie"> Cowpie </a>
+</body>
+
+{{> footer}}
