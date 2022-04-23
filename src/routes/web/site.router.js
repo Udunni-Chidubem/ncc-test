@@ -113,8 +113,8 @@ siteRouter.get('/knowledge-base', (req,res) => {
 siteRouter.get('/cowpie', (req,res) => {
 res.render('knowledge_base/cowpie', {
     layout: 'knowledge_dashboard',
-    title : 'Knowledge Base - Cowpie' 
-
+    title : 'Knowledge Base - Cowpie',
+    crop : "Cowpea"
      });
 
 })
@@ -122,8 +122,8 @@ res.render('knowledge_base/cowpie', {
 siteRouter.get('/groundnut', (req,res) => {
  res.render('knowledge_base/groundnut', {
      layout: 'knowledge_dashboard',
-     title : 'Knowledge Base - GroundNut'
-  
+     title : 'Knowledge Base - GroundNut',
+    crop : "Groundnut"
     });
 
 })
@@ -131,6 +131,7 @@ siteRouter.get('/groundnut', (req,res) => {
 siteRouter.get('/maize', (req,res) => {
  res.render('knowledge_base/maize', {
      layout: 'knowledge_dashboard',
+     crop : "Maize",
      title : 'Knowledge Base - Maize'
    
     });
@@ -140,8 +141,8 @@ siteRouter.get('/maize', (req,res) => {
 siteRouter.get('/rice', (req,res) => {
  res.render('knowledge_base/rice', {
      layout: 'knowledge_dashboard',
+     crop : "Rice",
      title : 'Knowledge Base - Rice'
-   
     });
 
 })
