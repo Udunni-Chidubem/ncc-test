@@ -3429,3 +3429,14 @@ justify-content: center;
   border-radius: 5px;
   color: #fff !important;
 }
+
+
+.shipped{
+  background: #C2E8FF;
+  border-radius: 10px;
+}
+
+.processing{
+  background: #FCC1BC;
+  border-radius: 10px;
+}
