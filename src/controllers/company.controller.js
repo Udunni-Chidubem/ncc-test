@@ -62,7 +62,8 @@ module.exports = {
                 variant: req.body.productVariant,
                 item: item,
                 user_id: user.id,
-                file_name: filename
+                file_name: filename,
+                local_name : req.body.productLocalName
             }, { transaction: transaction })
             transaction.commit()
             return p
@@ -129,7 +130,8 @@ module.exports = {
                     product_name: req.body.productName,
                     description: req.body.productDescription,
                     variant: req.body.productVariant,
-                    item: item
+                    item: item,
+                    local_name : req.body.productLocalName
                 },
                 {
                     where: { id: req.params.id }

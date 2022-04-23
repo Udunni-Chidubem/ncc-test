@@ -71,7 +71,12 @@ module.exports={
         const user = await req.user
         let deliveryInformation
         try{
-
+            if(req.files){
+                let upload=req.files.upload
+                name=upload.name.split(".")
+                filename=user.id+"."+name[name.length-1]
+                upload.mv('./public/profile_pics/'+filename)
+            }
             const { 
                 firstname, 
                 lastname, 
@@ -80,15 +85,17 @@ module.exports={
                 level_of_education, 
                 state_id, 
                 lg_id,
-                 nin, 
-                 bvn, 
-                 farm_produce, 
-                 state_of_delivery, 
-                 lga_of_delivery, 
-                 address, 
-                 source_type,  
-                 address_of_farm,
-                 farm_size } = req.body
+                nin, 
+                bvn, 
+                farm_produce, 
+                state_of_delivery, 
+                lga_of_delivery, 
+                address, 
+                source_type,  
+                address_of_farm,
+                farm_size,
+                village,
+                ward } = req.body
             const data = {
                 firstname, 
                 lastname, 
@@ -102,7 +109,9 @@ module.exports={
                 source_type,
                 address_of_farm,
                 farm_size,
-                product_farmed: farm_produce.toString()
+                product_farmed: farm_produce.toString(),
+                village,
+                ward
             }
 
             const farmer = await Farmer.update( data , {

@@ -15,7 +15,7 @@
         <tbody class="t_info_body">
           {{#each transactions}}
           <tr class="t_info_row1">
-            <th scope="row"  >{{@index}}</th>
+            <th scope="row"  >{{#add @index 1}} {{this}} {{/add}}</th>
             <td>{{this.transaction_id}}</td>
             <td>{{this.transaction_ref}}</td>
             <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
