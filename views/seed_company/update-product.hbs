@@ -4,13 +4,17 @@
         <div class="card-body">
             <form method="POST" action="" id="product-update-form">
                 <div class="form-row"  >
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="productName">Product Name <span class="required-feilds">*</span></label>
                         <input type="text" class="form-control" name="productName" id="productName" value="{{product.product_name}}" disabled>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="productVarient">Product Variant <span class="required-feilds">*</span></label>
                         <input type="text" class="form-control" name="productVariant" id="productVariant" value="{{product.variant}}" disabled>
+                    </div>
+                     <div class="form-group col-md-4">
+                        <label for="productVarient">Product Local Name <span class="required-feilds">*</span></label>
+                        <input type="text" class="form-control" name="productLocalName" id="productLocalName" placeholder="Product Local Name" required>
                     </div>
                 </div>
                 <div class="form-group prod-label">

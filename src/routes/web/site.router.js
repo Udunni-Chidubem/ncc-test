@@ -24,6 +24,7 @@ siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
 siteRouter.get('/faq', siteController.faq)
+// siteRouter.get('/knowledge_dashboard', siteController.knowledge_base)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
@@ -99,6 +100,16 @@ siteRouter.delete('/logout', (req, res)=>{
     res.redirect('/login')
 }),
 siteRouter.get('/services', siteController.services)
+
+siteRouter.get('/knowledge-base', (req,res) => {
+    res.render('knowledge_base/index', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Index'
+    
+    });
+
+})
+
 
 
 module.exports=siteRouter; 
