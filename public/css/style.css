@@ -454,12 +454,12 @@ body {
     padding-top: 0px !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
-    grid-template-columns: repeat(4, 400px);
+    grid-template-columns: repeat(2, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;
@@ -600,7 +600,7 @@ body {
   }
 
   .con {
-    width: 357px !important;
+    width: 590px !important;
   }
 
   .col_sma {
@@ -698,12 +698,12 @@ body {
     padding-top: 0px !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
     grid-template-columns: repeat(4, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;
@@ -2139,12 +2139,12 @@ input[type="number"] {
     padding-top: 0px !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
     grid-template-columns: repeat(4, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;
@@ -2475,12 +2475,12 @@ input[type="number"] {
     text-align: end !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
     grid-template-columns: repeat(4, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;
@@ -2666,12 +2666,12 @@ input[type="number"] {
     padding-top: 0px !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
     grid-template-columns: repeat(4, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;
@@ -2881,12 +2881,12 @@ input[type="number"] {
     padding-top: 0px !important;
   }
 
-  .card_comp {
+  /* .card_comp {
     display: grid;
     grid-gap: 63px;
     grid-template-columns: repeat(4, 400px);
     margin-right: 0px !important;
-  }
+  } */
 
   .card_dis {
     margin-bottom: -40px !important;

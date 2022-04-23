@@ -115,10 +115,11 @@
 .dropdown a{
 	text-decoration: none !important;
 	font-weight: 500;
-	font-size: 12px;
 	line-height: 37px;
 	color: white;
+
 }
+
 
 .dropdown a:hover{
 	text-decoration: none !important;

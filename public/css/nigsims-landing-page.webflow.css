@@ -1470,9 +1470,9 @@ body {
 }
 
 .nav-menu {
-  display: -webkit-box;
+  /* display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
+  display: -ms-flexbox; */
   display: flex;
   padding-top: 7px;
 }
