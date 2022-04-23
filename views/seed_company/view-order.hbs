@@ -9,6 +9,7 @@
            			<thead class="t_info_head ">
 						<tr>
 							<th>Item</th>
+							<th>Variant</th>
 							<th>Date</th>
 							<th>Package Size</th>
 							<th>Qty</th>
@@ -20,6 +21,7 @@
 						{{#if Cart}}
 						<tr>
 							<td>{{Cart.Product.product_name}}</td>
+							<td>{{Cart.Product.variant}}</td>
 							<td>{{dateFormat TransactionLog.created_at "dddd, MMMM Do YYYY"}}</td>
 							<td>{{Cart.size}}</td>
 							<td>{{Cart.qty}}</td>
