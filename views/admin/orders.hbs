@@ -38,7 +38,7 @@
 			  		<tbody>
 			  			{{#each orders}}
 							<tr class="table-theme-secondary">
-								<td colspan="" rowspan="" headers=""><a href="#">{{TransactionLog.transaction_id}}</a></td>
+								<td colspan="" rowspan="" headers=""><a href="{{this.id}}">{{TransactionLog.transaction_id}}</a></td>
 								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
 								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
 								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
