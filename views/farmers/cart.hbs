@@ -4,15 +4,19 @@
     <div class="col-8">
       <div class="p-3 ">
       {{!-- Start loop Here --}}
-    
+     
         {{#if cartItems}}
-
-          {{#each cartItems}}
-
-              <form action="" method="post" id="orderList">
+        <form action="/farmer/checkout/preview" method="post" id="orderList">
+       
                   <div class="row mb-2">
                   <div class="  ">
                     <div class="card card_products shadow">
+                      <div class="card-header">
+                        <div class="row">
+                          <input type="checkbox" class="form-check-input" id="check-all"> <strong>&nbsp;Select All</strong>
+                        </div>
+                      </div>
+                      {{#each cartItems}}
                       <div class="card-body">
                         <h5 class=" card-title card_title">
                         </h5>
@@ -23,7 +27,7 @@
                               
                               <div class="p_img"> 
                                 <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" name="{{this.id}}" value="{{this.id}}" id="{{this.id}}">
+                                  <input class="form-check-input item-check-box" type="checkbox" name="items" value="{{this.id}}" id="{{this.id}}">
                                 </div>
                                   <img src="/product_images/{{Product.file_name}}" alt="Product Image" class="rounded">
                               </div>
@@ -61,13 +65,14 @@
                           </div>
                           </div>
                       </div>
+                        {{/each}}
                     </div>
                   </div>
                 </div>
-              </form>
+             
 
-          {{/each}}
-
+        
+         </form>
         {{else}}
 
             <div class="alert alert-success alert-dismissible hideMsg" role="alert">
@@ -150,7 +155,7 @@
 
                      <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
                         <div class="p-3  text-center">
-                          <button type="button" class="btn btn_gr2 shadow " onclick="window.location.href='/farmer/checkout/preview'"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                          <button type="button" class="btn btn_gr2 shadow " onclick="document.getElementById('orderList').submit()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
  Check Out</button>
                           <div class="con_terms">
                             <a href="#" class="terms link-secondary">terms and Conditions</a>

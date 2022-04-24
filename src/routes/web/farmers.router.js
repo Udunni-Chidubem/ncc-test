@@ -70,8 +70,18 @@ farmersRouter.get('/products/:id', async (req, res) => {
         isVerified: resp.isVerified
     })
 })
-farmersRouter.get('/checkout/preview', async (req, res)=>{
-    let {getCartItems, farmer, isVerified}=await farmerController.cart(req, res);
+
+farmersRouter.post('/checkout/preview', async (req, res)=>{
+    let items = []
+    if(!Array.isArray(req.body.items))
+    {
+        items.push(req.body.items)
+    }else{
+        items=req.body.items
+    }
+ 
+    //let cart=await farmerController.getCartItemsByIds(items)
+    let {getCartItems, farmer, isVerified}=await farmerController.getCartItemsByIds(req, items)
     let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
    // console.log(deliveryInfo)
         res.render('farmers/order_preview', {
@@ -84,6 +94,74 @@ farmersRouter.get('/checkout/preview', async (req, res)=>{
             deliveryInfo
         })
 })
+
+farmersRouter.post("/cart/checkout", async (req, res)=>{
+   
+   try{
+        let items=[]
+        if(!Array.isArray(req.body.items))
+        {
+            items.push(req.body.items)
+        }else{
+            items=req.body.items
+        }
+        let paymentType = req.body.inlineRadioOptions
+        let total_sum = req.body.total_sum
+        if(paymentType=='card'){   
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, req)
+            if(initial.status==true){
+                let ref = initial.data.reference
+                let {getCartItems, farmer}=await farmerController.getCartItemsByIds(req,items)
+                await farmerController.initializeTransaction(req, res, ref, getCartItems, farmer)
+                res.redirect(initial.data.authorization_url);
+            }
+        }
+   }catch(e){
+        console.log(e)
+        res.send(e)
+   }
+})
+
+farmersRouter.get('/checkout/callback', async (req, res)=>{
+    let ref=req.query.reference
+    let check=await farmerController.checkTransaction(ref)
+    if(check){
+        let data={}
+        let items=[]
+        data.status='pending'
+        farmerController.updateTransactionLog(data, ref)
+        let paystackPayload = await paystack.callback(req, res)
+        if(paystackPayload.status==true){
+            data.status='verified'
+            data.currency=paystackPayload.data.currency,
+            data.amount = paystackPayload.data.amount / 100
+            data.transaction_id=paystackPayload.data.id
+            data.description = "payment for a seed purchase via card"
+            farmerController.updateTransactionLog(data, ref)
+            check.TransactionCarts.forEach(t=>{
+                items.push(t.cart_id)
+            })
+            let {farmer, isVerified, getCartItems} = await farmerController.getCartItemsByIds(req, items)
+            farmerController.createOrder(items, check.id)
+            farmerController.updateCart(items)
+            getCartItems.forEach(item=>{
+                farmerController.productItemsUpdate(item.product_id, item.size, item.qty)
+            })
+            companyController.creditWallet(getCartItems)
+            res.render('farmers/payment-success', {
+                layout : 'farmers-dashboard',
+                title: 'Success Page',
+                isVerified,
+                paystackPayload,
+                data
+            })
+            return
+        }
+    }
+    res.send("this is not a valid transaction reference, pls contact admin if this is a error")
+
+})
+
 farmersRouter.get("/product/price", async (req, res)=>{
     let product = await farmerController.singleProduct(req.query.product_id)
     res.send(product)
@@ -134,61 +212,9 @@ farmersRouter.get('/get-cart-count', async (req, res) => {
     res.json({ message: result , statusCode: 200 }).status(200)
 })
 
-farmersRouter.post("/cart/checkout", async (req, res)=>{
-   try{
-        let paymentType = req.body.inlineRadioOptions
-        let total_sum = req.body.total_sum
-        if(paymentType=='card'){  
-            
-            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, req)
-            if(initial.status==true){
-                let ref = initial.data.reference
-                let {getCartItems, farmer}=await farmerController.cart(req, res)
-                await farmerController.initializeTransaction(req, res, ref, getCartItems, farmer)
-                res.redirect(initial.data.authorization_url);
-            }
-        }
-   }catch(e){
-        console.log(e)
-        res.send(e)
-   }
-})
 
-farmersRouter.get('/checkout/callback', async (req, res)=>{
-    let ref=req.query.reference
-    let check=await farmerController.checkTransaction(ref)
-    if(check){
-        let data={}
-        data.status='pending'
-        farmerController.updateTransactionLog(data, ref)
-        let paystackPayload = await paystack.callback(req, res)
-        if(paystackPayload.status==true){
-            data.status='verified'
-            data.currency=paystackPayload.data.currency,
-            data.amount = paystackPayload.data.amount / 100
-            data.transaction_id=paystackPayload.data.id
-            data.description = paystackPayload.data.log.history[1].message
-            farmerController.updateTransactionLog(data, ref)
-            let {farmer, isVerified, getCartItems} = await farmerController.cart(req, res)
-            farmerController.createOrder(farmer.user_id, check.id)
-            farmerController.updateCart(farmer.user_id)
-            getCartItems.forEach(item=>{
-                farmerController.productItemsUpdate(item.product_id, item.size, item.qty)
-            })
-            companyController.creditWallet(getCartItems)
-            res.render('farmers/payment-success', {
-                layout : 'farmers-dashboard',
-                title: 'Success Page',
-                isVerified,
-                paystackPayload,
-                data
-            })
-            return
-        }
-    }
-    res.send("this is not a valid transaction reference, pls contact admin if this is a error")
 
-})
+
 
 farmersRouter.get('/payment-success', async (req, res)=>{
     let user = await req.user;

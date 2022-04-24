@@ -463,6 +463,7 @@ module.exports={
                 farmer_id : farmer.id,
                 transaction_ref : ref,
                 status : 'initiated',
+                pickup_point:req.body.pickup,
                 created_at : await now()
             }, {transaction : transaction})
             for(let i=0; i<getCartItems.length; i++){
@@ -482,6 +483,13 @@ module.exports={
     },
     checkTransaction: async (ref)=>{
         let t=await TransactionLog.findOne({
+            include : [
+                {
+                    model : TransactionCarts,
+                    attributes : ['cart_id']
+                    
+                }
+            ],
             where : {
                 transaction_ref : ref
             }
@@ -514,7 +522,7 @@ module.exports={
         }
         
     },
-    updateCart:async (items)=>{
+    updateCart:async (ids)=>{
          let transaction =await db.rest.transaction()
          try{
            // for(let i=0; i<items.length; i++){
@@ -523,7 +531,7 @@ module.exports={
                     updated_at: now()
                 },{
                     where : {
-                        user_id : items
+                        id: {[Op.in] : ids}
                     }
                 }, {transaction : transaction})
           //  }
@@ -595,9 +603,12 @@ module.exports={
 
         return transactionCount
     },
-    createOrder:async (user_id, transaction_log_id)=>{
-        let sql = "SELECT distinct s.id as company_id FROM cart c join product p on p.id = c.product_id join seedcompany s on s.user_id = p.user_id WHERE c.user_id ="+user_id+" and c.status = 0"
-        let companys= await db.rest.query(sql, {type : QueryTypes.SELECT})
+    createOrder:async (ids, transaction_log_id)=>{
+        let sql = "SELECT distinct s.id as company_id FROM cart c join product p on p.id = c.product_id join seedcompany s on s.user_id = p.user_id WHERE c.id IN (:ids)"
+        let companys= await db.rest.query(sql, {
+            replacements: { ids : ids },
+            type : QueryTypes.SELECT}
+            )
         let transaction = await db.rest.transaction()
         try{
             for(let i=0; i<companys.length; i++){
@@ -611,5 +622,37 @@ module.exports={
             console.log(e)
             transaction.rollback()
         }
+    },
+
+    getCartItemsByIds:async (req,ids)=>{
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+        let items=await Cart.findAll({
+             include : [
+                {
+                    model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+                    include : [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                            include : [
+                                {
+                                    model : SeedCompany,
+                                    attributes: ['id', 'name_of_company', 'state_id'],
+                                    include : [{model : States, attributes: ['id', 'name']}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            where : {
+               id: {[Op.in] : ids}
+            }
+        })
+        let getCartItems = JSON.parse(JSON.stringify(items))
+        return { farmer, isVerified, getCartItems }
     }
 }

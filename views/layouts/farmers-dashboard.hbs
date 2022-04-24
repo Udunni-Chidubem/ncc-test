@@ -340,6 +340,14 @@
         })
         .catch(error => console.log(error))
     })
+
+    $('#check-all').on('click', function(){
+      if($(this).prop('checked')==true){
+        $('.item-check-box').prop('checked', true)
+      }else{
+        $('.item-check-box').prop('checked', false)
+      }
+    })
     
    })
 
