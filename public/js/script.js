@@ -88,6 +88,41 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#all-orders-table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function() {
+  $('#active-orders-table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function() {
+  $('#shipped-table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function() {
+  $('#fulfilled-table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
+$(document).ready(function() {
+  $('#draft-table').DataTable({
+    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+
 $(document).ready(function(){
     $(".view-btn").click(function(){
         $(this).text($(this).text() == 'Show Ledger' ? 'Hide Ledger' : 'Show Ledger');
