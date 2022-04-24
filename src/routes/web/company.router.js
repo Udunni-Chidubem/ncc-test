@@ -164,11 +164,12 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
-        title : 'Order Management',
+        title : 'Order List',
         sub_title : 'View Order',
         order,
         farmer,
         orderStatus,
+        prev_link : '/seed-company/orders',
         transaction_id : req.params.transaction_id
     })
 });
