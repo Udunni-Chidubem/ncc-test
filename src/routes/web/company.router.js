@@ -29,13 +29,12 @@ companyRouter.get('/update-profile', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
     let company = await utils.getCompanyProfile(user)
-
     res.render('seed_company/update-profile', {
         layout : 'company-dashboard',
         title : 'Profile Update',
         states : states,
         company: company,
-        isVerified
+        isVerified,
     })
 });
 /*Update Profile*/
@@ -43,7 +42,7 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
     let r = await companyController.updateProfile(req, res)
 
     if(r.company) {
-        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
+        res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
     }else{
         res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
     }

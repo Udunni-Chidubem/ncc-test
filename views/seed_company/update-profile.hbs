@@ -155,9 +155,9 @@
                                     type="text" 
                                     required
                                     id="account_name" 
-                                    name="account_name" 
+                                    name="bank_account_name" 
                                     placeholder="Account Name" 
-                                    value=""
+                                    value="{{company.bank_account_name}}"
                                     minlength="10"
                                     maxlength="50"
                               </div>
@@ -168,12 +168,12 @@
                                  <input 
                                     type="text" 
                                     class="form-control border-0 border-bottom" 
-                                    minlength="11"
-                                    maxlength="11" 
+                                    minlength="10"
+                                    maxlength="10" 
                                     required
                                     id="account_no"
-                                    name="account_no"
-                                    value=""
+                                    name="bank_account_no"
+                                    value="{{company.bank_account_no}}"
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
                                     pattern="[0-9]+"
@@ -187,7 +187,7 @@
                            <div class="col-sm-6">
                               <label for="bank" class="input_form">Bank <span class="profile_sub">*</span></label>
                               <div class="input-group input-group-sm mb-3">
-                                 <select name="bank" class="form-control" data-bank="{{company.bank}}" id="bank">
+                                 <select name="bank_code" class="form-control" data-bank="{{company.bank_code}}" id="bank">
                                     <option value="">Select Bank</option>
                                  </select>
                               </div>
@@ -221,7 +221,7 @@
     $(document).ready(function(){ 
 
         let lga = $('#lgas').data('lga')
-
+          let bank = $('#bank').data('bank')
         const getDefaultLgas = (state_id) => {
             let url =  window.location.origin+'/api/base/lgas/'+ state_id
             fetch(url).then(r=>r.json())
@@ -271,16 +271,17 @@
           .then(response => {
             if(response.statusCode === 200){
               
-                let bank, len, i
+                let banks, len, i
 
-                bank = response.data.bank
+                banks = response.data.bank
 
-                len = bank.length
+                len = banks.length
                 var ele = document.getElementById('bank');
 
                 
                 for(i=0; i < len; i++){
-                    ele.innerHTML = ele.innerHTML + '<option value="' + bank[i].name + '">' + bank[i].name + '</option>';
+                   selected = (banks[i].code == bank ? 'selected' : null)
+                    ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="'+selected+'">' + banks[i].name + '</option>';
                 }
 
                 setTimeout(function(){

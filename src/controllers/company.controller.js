@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -12,21 +12,22 @@ module.exports = {
         const transaction = await db.rest.transaction();
         const user = await req.user
 
-        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email } = req.body
+        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_no, bank_account_name, bank_code } = req.body
 
         try {
-            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email }
-
+            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_name, bank_account_no, bank_code }
+            console.log(data)
             await User.update({ status: true }, { where: { id: user.id } })
 
             const company = await SeedCompany.update(data, {
                 where: { user_id: user.id }
             }, { transaction: transaction })
-
+            console.log(company)
             transaction.commit();
             return { company }
         } catch (e) {
             transaction.rollback();
+            console.log(e)
             return e
         }
     },

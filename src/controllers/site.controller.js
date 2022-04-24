@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
@@ -294,4 +294,9 @@ module.exports = {
             title : 'Services'
         });
     },
+
+    saveContact:async (req, res)=>{
+        Contact.create(req.body)
+    }
+
 }

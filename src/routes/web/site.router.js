@@ -18,6 +18,10 @@ const siteRouter = require('express').Router();
 
 siteRouter.get('/home', async (req, res) => {})
 siteRouter.get('/', siteController.home)
+siteRouter.post('/', (req, res)=>{
+    siteController.saveContact(req)
+    siteController.home(req, res)
+})
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/extension_worker', siteController.extension_worker)
 siteRouter.get('/about-us', siteController.aboutus)
