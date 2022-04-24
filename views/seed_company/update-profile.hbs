@@ -69,14 +69,12 @@
                                  <input 
                                     type="text" 
                                     class="form-control border-0 border-bottom" 
-                                    maxlength="14" 
-                                    minlength="13"
                                     id="tin"
                                     name="tin"
                                     value="{{company.tin}}"
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
-                                    pattern="[0-9]+"
+                                    data-role="tagsinput"
                                     >
                               </div>
                            </div>
@@ -147,7 +145,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                           <div class="col-sm-6">
+                           <div class="col-sm-6 col-lg-6">
                               <label for="account_name" class="input_form">Account Name <span class="profile_sub">*</span></label>
                               <div class="input-group input-group-sm mb-3">
                                  <input 
@@ -159,10 +157,10 @@
                                     placeholder="Account Name" 
                                     value="{{company.bank_account_name}}"
                                     minlength="10"
-                                    maxlength="50"
+                                    maxlength="50" >
                               </div>
                            </div>
-                           <div class="col-sm-6">
+                           <div class="col-sm-6 col-lg-6">
                               <label for="account_no" class="input_form">Account Number <span class="profile_sub">*</span></label>
                               <div class="input-group input-group-sm mb-3">
                                  <input 
@@ -359,4 +357,28 @@
 let image = document.getElementById("output");
 image.src = URL.createObjectURL(event.target.files[0]);
 };
+
+   $(function () {
+      $('input')
+        .on('change', function (event) {
+          var $element = $(event.target);
+          var $container = $element.closest('.example');
+
+          if (!$element.data('tagsinput')) return;
+
+          var val = $element.val();
+          if (val === null) val = 'null';
+          var items = $element.tagsinput('items');
+
+          $('code', $('pre.val', $container)).html(
+            $.isArray(val)
+              ? JSON.stringify(val)
+              : '"' + val.replace('"', '\\"') + '"'
+          );
+          $('code', $('pre.items', $container)).html(
+            JSON.stringify($element.tagsinput('items'))
+          );
+        })
+        .trigger('change');
+    });
 </script>

@@ -17,8 +17,8 @@
                         <tr class="row-height">
                             <th scope="col">UPLOAD DATE</th>
                             <th scope="col">PRODUCT NAME/VARIANT</th>
+                            <th scope="col">LOCAL NAME</th>
                             <th scope="col">COMPANY NAME</th>
-                            <th scope="col">PRICE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">
                                 <button class="btn  download-btn ">Download Report</button>
@@ -30,8 +30,8 @@
                           <tr class="row-one row-height">
                             <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
                             <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
                               {{#if (eq this.status 1)}}
                                    <span class="published">Published</span>
@@ -58,8 +58,8 @@
                         <tr class="row-height">
                             <th scope="col">UPLOAD DATE</th>
                             <th scope="col">PRODUCT NAME/VARIANT</th>
+                            <th scope="col">LOCAL NAME</th>
                             <th>COMPANY NAME</th>
-                            <th scope="col">PRICE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">
                                 <button class="btn download-btn ">Download Report</button>
@@ -71,8 +71,8 @@
                           <tr class="row-one row-height">
                             <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
                             <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
                               {{#if this.status}}
                                   {{#equals this.status 1}}
@@ -102,8 +102,8 @@
                         <tr class="row-height">
                             <th scope="col">UPLOAD DATE</th>
                             <th scope="col">PRODUCT NAME/VARIANT</th>
+                            <th scope="col">LOCAL NAME</th>
                             <th>COMPANY NAME</th>
-                            <th scope="col">PRICE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">
                                 <button class="btn download-btn ">Download Report</button>
@@ -115,8 +115,8 @@
                           <tr class="row-one row-height">
                             <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
                             <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
                             <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col"> <strong>1OOO</strong></td>
                             <td scope="col">
                               {{#if this.status}}
                                   {{#equals 1}}
