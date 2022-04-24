@@ -363,7 +363,7 @@ var profile_pic = null
         }).showToast();
       }
 
-      // success_toastr('You have successfully update your profile')
+     // success_toastr('You have successfully updated your profile')
 
     const error_toastr = (msg) => {
       Toastify({
@@ -377,6 +377,7 @@ var profile_pic = null
         stopOnFocus: true, // Prevents dismissing of toast on hover
         onClick: function () { }, // Callback after click
       }).showToast();
+        success_toastr('You have successfully updated your profile')
     }
 
    $('.js-example-basic-multiple').select2({
