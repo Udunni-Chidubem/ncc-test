@@ -8,7 +8,11 @@ p{
     margin-bottom: 0px;
 }
 
-
+ul{
+    margin-bottom: 0px;
+    list-style-type: disc;
+    margin-right: 0px;
+}
 
 
 
@@ -221,6 +225,7 @@ h3{
     font-weight:700;
     text-align: center;
     margin-bottom: 20px;
+    color: #6b6a6a;
 }
 
 .planting{
@@ -233,7 +238,7 @@ h3{
      display: grid;
      grid-template-columns: repeat(5 , 234px);
      grid-template-rows: repeat(3 , auto);
-     grid-row-gap: 12px;
+     grid-row-gap: 45px;
      margin-bottom: 40px;
 
  }
@@ -296,4 +301,11 @@ h3{
 }
 .seed-mgt{
     margin: 25px;
+}
+.list{
+    margin-left: 15px;
+}
+
+.mainheading{
+    color: #c4c4c4;
 }
