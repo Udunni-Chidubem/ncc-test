@@ -235,6 +235,13 @@ module.exports={
             farmerData: farmer,
             isVerified
         })
+
+        // res.render('knowledge_base', {
+        //     layout: '',
+        //     title : 'Knowledge Base - Index',
+        //     isVerified,
+        // })
+
     },
     viewProduct: async (req, res) => {
         const user = await req.user
@@ -655,4 +662,6 @@ module.exports={
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
     }
+
+
 }

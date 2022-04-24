@@ -69,14 +69,14 @@
                                  <input 
                                     type="text" 
                                     class="form-control border-0 border-bottom" 
-                                    maxlength="14" 
-                                    minlength="13"
+                                    {{!-- maxlength="14" 
+                                    minlength="13" --}}
                                     id="tin"
                                     name="tin"
                                     value="{{company.tin}}"
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
-                                    pattern="[0-9]+"
+                                    {{!-- pattern="[0-9]+" --}}
                                     >
                               </div>
                            </div>
@@ -158,7 +158,7 @@
                                     name="bank_account_name" 
                                     placeholder="Account Name" 
                                     value="{{company.bank_account_name}}"
-                                    minlength="10"
+                                    {{!-- minlength="" --}}
                                     maxlength="50"
                               </div>
                            </div>
