@@ -8,7 +8,11 @@ p{
     margin-bottom: 0px;
 }
 
-
+ul{
+    margin-bottom: 0px;
+    list-style-type: disc;
+    margin-right: 0px;
+}
 
 
 
@@ -159,10 +163,8 @@ h3{
                                                  */
                                                 
 .mainpage{
-padding: 15px;
-margin: auto;
-
-
+   padding: 15px;
+   margin: auto; 
 }
      
 .heading1{
@@ -172,11 +174,13 @@ margin: auto;
     font-weight: 15px;
     letter-spacing: 1px;
     font-family: sans-serif;
+    margin-top: 0px;
+    margin-bottom: 25px;
 }
 .underline{
-    /* margin-top: -10px;
-    margin-bottom: 30px; */
-    border-top: 1px solid rgb(136, 133, 133);
+    margin-top: -10px;
+    margin-bottom: 10px;
+    border-top: .5px solid rgb(224, 220, 220);
 }
 
 .description-grid{
@@ -195,13 +199,13 @@ margin: auto;
 .pic-descp{
     grid-column-start: 5;
     grid-column-end: 5;
-    width : 180px;
-    height:142px;
+    /* width : 180px;
+    height: 142px; */
 }
-.pic-descp img {
+/* .pic-descp img {
     width: 100%;
     height: 100%;
-}
+} */
 
 
 .text2-descp{
@@ -221,6 +225,7 @@ margin: auto;
     font-weight:700;
     text-align: center;
     margin-bottom: 20px;
+    color: #6b6a6a;
 }
 
 .planting{
@@ -233,7 +238,7 @@ margin: auto;
      display: grid;
      grid-template-columns: repeat(5 , 234px);
      grid-template-rows: repeat(3 , auto);
-     grid-row-gap: 5px;
+     grid-row-gap: 45px;
      margin-bottom: 40px;
 
  }
@@ -296,4 +301,11 @@ margin: auto;
 }
 .seed-mgt{
     margin: 25px;
+}
+.list{
+    margin-left: 15px;
+}
+
+.mainheading{
+    color: #c4c4c4;
 }

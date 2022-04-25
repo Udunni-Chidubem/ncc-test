@@ -45,7 +45,7 @@ module.exports = {
     },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
-            layout: 'common',
+            layout: 'main',
             title : 'About Us'
         });
     },

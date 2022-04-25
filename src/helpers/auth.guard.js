@@ -8,9 +8,21 @@ module.exports = {
     },
 
     //this check if you have a session and will be called on the login route
-    loggedIn: (req, res, next)=>{
+    loggedIn:async (req, res, next)=>{
         if(req.isAuthenticated()){
-           res.redirect('/dashboard');
+            let user=await req.user
+            let role = user.UserRole.Role.role_name
+             if( role == 'farmer')
+                return res.redirect('farmer/dashboard')
+
+            if(role == 'seed_trader')
+                return res.redirect('seed-trader/dashboard')
+
+            if(role == 'seed_company')
+                return res.redirect('seed-company/dashboard')
+
+            if(role == 'admin')
+                return res.redirect('admin/dashboard')
         }else{
             return next()
         }
