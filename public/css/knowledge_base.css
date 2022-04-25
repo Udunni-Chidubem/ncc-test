@@ -6,6 +6,7 @@ UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 p{
     margin-top: 0px;
     margin-bottom: 0px;
+    /* font-family: poppin; */
 }
 
 ul{
@@ -194,19 +195,14 @@ h3{
 .text-descp{
     grid-column-start: 1;
     grid-column-end: 4;
+    /* font-family: poppin; */
 }
 
 .pic-descp{
     grid-column-start: 5;
     grid-column-end: 5;
-    /* width : 180px;
-    height: 142px; */
+    
 }
-/* .pic-descp img {
-    width: 100%;
-    height: 100%;
-} */
-
 
 .text2-descp{
     grid-column-start: 1;
@@ -221,11 +217,12 @@ h3{
 }
 
 .subheading{
+    font-family: poppin;
     font-size: medium;
     font-weight:700;
     text-align: center;
     margin-bottom: 20px;
-    color: #6b6a6a;
+    color: #b5b5b5;
 }
 
 .planting{
@@ -314,3 +311,4 @@ h3{
     margin-top: 10px;
     margin-bottom: 0px;
 }
+
