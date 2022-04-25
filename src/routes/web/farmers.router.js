@@ -12,6 +12,7 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let {firstname, lastname, LGA, State }=farmer
     let cartCount = await farmerController.getFarmerCartCount(req, res)
     let transactionCount = await farmerController.getTransactionlogCount(farmer.id)
+    let transactions = await farmerController.getTransactions(farmer.id)
 
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -22,7 +23,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         farmer,
         isVerified,
         cartCount,
-        transactionCount
+        transactionCount,
+        transactions
     })
 })
 
