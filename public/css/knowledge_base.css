@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 /* 
 
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
@@ -10,17 +9,6 @@ p {
   margin-bottom: 0px;
 }
 
-<<<<<<< HEAD
-=======
-ul{
-    margin-bottom: 0px;
-    list-style-type: disc;
-    margin-right: 0px;
-}
-
-
-
->>>>>>> d24744f18f15b28a7fffab7668c76ff81269ce76
 /* 
 
 SEARCH BAR CODE STARTS 
@@ -105,7 +93,7 @@ h3 {
 }
 .mini-sidebar {
   width: 285px;
-  height: 450px;
+  height: 480px;
   background: #ffffff;
   box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.25);
   padding: 20px;
@@ -123,8 +111,11 @@ h3 {
 
 .sidebar-content-items a {
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
   text-align: left;
+  color: #000;
+  font-family: "Poppins";
+  font-weight: 400;
 }
 
 /* .side-gap {
@@ -133,8 +124,9 @@ h3 {
   border-bottom: 1px solid rgb(219, 219, 219);
 } */
 .sidebar-line {
-    background: #C4C4C4;
-
+  background: #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
+  margin: 22px;
 }
 
 .knowledgeBody-grid {
@@ -169,7 +161,7 @@ h3 {
   margin: auto;
 }
 .mainpage li {
-    list-style: disc;
+  list-style: disc;
 }
 
 .heading1 {
@@ -223,20 +215,12 @@ h3 {
   margin-bottom: 50px;
 }
 
-<<<<<<< HEAD
 .subheading {
   font-size: medium;
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
-=======
-.subheading{
-    font-size: medium;
-    font-weight:700;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #6b6a6a;
->>>>>>> d24744f18f15b28a7fffab7668c76ff81269ce76
+  color: #6b6a6a;
 }
 
 .planting {
@@ -245,22 +229,13 @@ h3 {
   margin-bottom: 50px;
 }
 
-<<<<<<< HEAD
 .main-pests {
   display: grid;
   grid-template-columns: repeat(5, 234px);
   grid-template-rows: repeat(3, auto);
-  grid-row-gap: 12px;
+  grid-row-gap: 45px;
   margin-bottom: 40px;
 }
-=======
- .main-pests{
-     display: grid;
-     grid-template-columns: repeat(5 , 234px);
-     grid-template-rows: repeat(3 , auto);
-     grid-row-gap: 45px;
-     margin-bottom: 40px;
->>>>>>> d24744f18f15b28a7fffab7668c76ff81269ce76
 
 .pests-text1 {
   grid-row-start: 1;
@@ -318,14 +293,19 @@ h3 {
   grid-template-columns: repeat(1, auto);
   margin-bottom: 50px;
 }
-<<<<<<< HEAD
 .seed-mgt {
   margin: 25px;
 }
+.list {
+  margin-left: 15px;
+}
 
-/*  */
+.mainheading {
+  color: #6e6e6e;
+  text-align: center;
+}
+
 .text-tags {
-  /* width: 641px; */
   font-family: "Poppins";
   font-weight: 400;
   font-size: 16px;
@@ -333,20 +313,3 @@ h3 {
   letter-spacing: 0.01em;
   color: #6a707e;
 }
-.mainheading {
-    text-align: center;
-    color: #6E6E6E;
-}
-
-=======
-.seed-mgt{
-    margin: 25px;
-}
-.list{
-    margin-left: 15px;
-}
-
-.mainheading{
-    color: #c4c4c4;
-}
->>>>>>> d24744f18f15b28a7fffab7668c76ff81269ce76
