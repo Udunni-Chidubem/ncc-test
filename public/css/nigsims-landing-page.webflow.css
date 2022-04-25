@@ -2075,14 +2075,46 @@ padding-bottom: 40px;
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }
-
-.about {
+.aboutUs-hero{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 40vh;
+  /* margin-top: 92px; */
+  margin-top: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-size: auto, cover;
+}
+.aboutUs-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about1 {
   width: 80%;
-  height: 200px;
+  height:230px;
   border-radius: 100px;
-  background-image: url("../images/Seeds.jpg");
+  background-image: url("../images/About-1.jpeg");
   background-position: 0px 0px;
   background-size: cover;
+  background-repeat: no-repeat;
+}
+.about2 {
+  width: 80%;
+  height: 230px;
+  border-radius: 100px;
+  background-image: url("../images/About-2.jpeg");
+  background-position: 0px 0px;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
 
 .grid {
