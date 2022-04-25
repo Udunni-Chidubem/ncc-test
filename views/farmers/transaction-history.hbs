@@ -6,10 +6,9 @@
         <thead class="t_info_head ">
           <tr class="">
             <th scope="col">S/N</th>
-            <th scope="col">Transaction ID</th>
-            <th scope="col">Transaction Ref.</th>
+            <th scope="col">Order ID</th>
             <th scope="col">STATUS</th>
-            <th scope="col">STATUS</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody class="t_info_body">
@@ -17,12 +16,11 @@
           <tr class="t_info_row1">
             <th scope="row"  >{{#add @index 1}} {{this}} {{/add}}</th>
             <td>{{this.transaction_id}}</td>
-            <td>{{this.transaction_ref}}</td>
             <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
             <br>
             <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span> 
             </td>
-            <td><a href="#"> See Details</a></td>
+            <td><a href="#">See Details</a></td>
           </tr>
           {{/each}}
         </tbody>

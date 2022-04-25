@@ -33,7 +33,7 @@
         </div> 
 
 
-        {{#if products }}
+        {{#ifNotEquals products.status  1}}
         
 
              <section class="products">
@@ -102,7 +102,7 @@
             <div class="paragraph" style="color: #34AFF9; text-align: center; size: 18px;height: 27px; font-size:medium;">
                 What are you looking for ?
             </div>
-        {{/if}}
+        {{/ifNotEquals}}
         
        
       

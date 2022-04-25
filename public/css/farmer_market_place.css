@@ -3440,3 +3440,12 @@ justify-content: center;
   background: #FCC1BC;
   border-radius: 10px;
 }
+
+.bootstrap-tagsinput .tag {
+  color: white !important;
+  background-color: #A2C4B2;
+  padding: 0.2rem;
+  width: fit-content;
+  border-radius: 20px;
+  box-shadow: inset 0 3px 3px rgba(0, 0, 0, 0.09);
+}
