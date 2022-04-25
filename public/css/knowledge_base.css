@@ -92,6 +92,7 @@ h3 {
   cursor: pointer;
 }
 .mini-sidebar {
+  /* position: fixed; */
   width: 285px;
   height: 480px;
   background: #ffffff;
@@ -312,4 +313,5 @@ h3 {
   line-height: 24px;
   letter-spacing: 0.01em;
   color: #6a707e;
+  padding: 13px;
 }
