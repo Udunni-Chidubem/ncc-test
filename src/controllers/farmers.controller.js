@@ -236,12 +236,6 @@ module.exports={
             isVerified
         })
 
-        // res.render('knowledge_base', {
-        //     layout: '',
-        //     title : 'Knowledge Base - Index',
-        //     isVerified,
-        // })
-
     },
     viewProduct: async (req, res) => {
         const user = await req.user

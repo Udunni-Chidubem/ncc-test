@@ -312,3 +312,35 @@ h3{
     margin-bottom: 0px;
 }
 
+/* 
+
+TABLE 
+
+*/
+
+/* .table-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.table_content{
+    padding: 8px 4px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+} */
+
+table{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-decoration: black;
+
+}
+
+td{
+    padding: 8px 4px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    text-decoration: black;
+}
