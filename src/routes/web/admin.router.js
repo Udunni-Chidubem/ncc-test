@@ -131,11 +131,49 @@ adminRouter.get('/products/approval/:id/:status', async (req, res)=>{
     adminController.productUpdate(data, id)
     res.redirect("/admin/products")
 })
+
+
 adminRouter.get("/users/activate/:id/:status", async (req, res)=>{
      let data={status : req.params.status, updated_at : now()}
     let id = req.params.id
     adminController.userUpdate(data, id)
     res.redirect("/admin/users")
+})
+
+
+/*Orders Route Begins*/
+adminRouter.get("/orders", async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user)
+    let orders = await adminController.getOrders(res, req)
+    
+    let pendingOrders = await orders.filter(e=>{
+        return e.status == 0
+    });
+    
+    let activeOrders=await orders.filter(e => {
+        return e.status == 1
+    });
+
+    let shippedOrders=await orders.filter(e => {
+        return e.status == 2
+    });
+
+    let fulfilledOrders = await orders.filter(e=>{
+        return e.status == 3
+    })
+    
+    res.render('admin/orders', {
+        layout : 'admin-dashboard',
+        title : 'Orders',
+        username : user.username,
+        isVerified,
+        orders,
+        pendingOrders,
+        activeOrders,
+        shippedOrders,
+        fulfilledOrders
+    })
 })
 
 
