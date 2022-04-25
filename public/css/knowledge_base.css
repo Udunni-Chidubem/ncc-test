@@ -4,9 +4,10 @@
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 
 */
-p {
-  margin-top: 0px;
-  margin-bottom: 0px;
+p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /* font-family: poppin; */
 }
 
 /* 
@@ -181,33 +182,22 @@ h3 {
   border-top: 0.5px solid rgb(224, 220, 220);
 }
 
-.description-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 234px);
-  grid-row-gap: 35px;
-  /* margin-left: 10px; */
+.text-descp{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    /* font-family: poppin; */
 }
 
-.text-descp {
-  grid-column-start: 1;
-  grid-column-end: 4;
+.pic-descp{
+    grid-column-start: 5;
+    grid-column-end: 5;
+    
 }
 
-.pic-descp {
-  grid-column-start: 5;
-  grid-column-end: 5;
-  /* width : 180px;
-    height: 142px; */
-}
-/* .pic-descp img {
-    width: 100%;
-    height: 100%;
-} */
-
-.text2-descp {
-  grid-column-start: 1;
-  grid-column-end: 5;
-  margin-bottom: 50px;
+.text2-descp{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-bottom: 50px;
 }
 
 .importance {
@@ -216,12 +206,13 @@ h3 {
   margin-bottom: 50px;
 }
 
-.subheading {
-  font-size: medium;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #6b6a6a;
+.subheading{
+    font-family: poppin;
+    font-size: medium;
+    font-weight:700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #b5b5b5;
 }
 
 .planting {
@@ -301,17 +292,44 @@ h3 {
   margin-left: 15px;
 }
 
-.mainheading {
-  color: #6e6e6e;
-  text-align: center;
+.mainheading{
+    color: #c4c4c4;
 }
 
-.text-tags {
-  font-family: "Poppins";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  color: #6a707e;
-  padding: 13px;
+.pests-image{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+/* 
+
+TABLE 
+
+*/
+
+/* .table-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.table_content{
+    padding: 8px 4px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+} */
+
+table{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-decoration: black;
+
+}
+
+td{
+    padding: 8px 4px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    text-decoration: black;
 }
