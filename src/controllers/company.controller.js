@@ -64,7 +64,8 @@ module.exports = {
                 item: item,
                 user_id: user.id,
                 file_name: filename,
-                local_name : req.body.productLocalName
+                local_name : req.body.productLocalName,
+                status : 0
             }, { transaction: transaction })
             transaction.commit()
             return p
