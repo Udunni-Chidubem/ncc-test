@@ -4,10 +4,10 @@
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 
 */
-p{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    /* font-family: poppin; */
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  /* font-family: poppin; */
 }
 
 /* 
@@ -163,7 +163,28 @@ h3 {
   margin: auto;
 }
 .mainpage li {
-  list-style: disc;
+  /* list-style: disc;   */
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #6a707e;
+  padding: 8px;
+}
+  .nested-lists{
+    list-style: none;
+    margin-left: 18px;
+  }
+
+.mainpage p {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #6a707e;
+  padding: 8px;
 }
 
 .heading1 {
@@ -181,23 +202,33 @@ h3 {
   margin-bottom: 10px;
   border-top: 0.5px solid rgb(224, 220, 220);
 }
-
-.text-descp{
-    grid-column-start: 1;
-    grid-column-end: 4;
-    /* font-family: poppin; */
+.underline2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 0.5px solid rgb(224, 220, 220);
+}
+.description-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 234px);
+  grid-row-gap: 35px;
+  /* margin-left: 10px; */
 }
 
-.pic-descp{
-    grid-column-start: 5;
-    grid-column-end: 5;
-    
+.text-descp {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  /* font-family: poppin; */
 }
 
-.text2-descp{
-    grid-column-start: 1;
-    grid-column-end: 5;
-    margin-bottom: 50px;
+.pic-descp {
+  grid-column-start: 5;
+  grid-column-end: 5;
+}
+
+.text2-descp {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  margin-bottom: 50px;
 }
 
 .importance {
@@ -206,13 +237,13 @@ h3 {
   margin-bottom: 50px;
 }
 
-.subheading{
-    font-family: poppin;
-    font-size: medium;
-    font-weight:700;
-    text-align: center;
-    margin-bottom: 20px;
-    color: #b5b5b5;
+.subheading {
+  font-family: poppin;
+  font-size: medium;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #b5b5b5;
 }
 
 .planting {
@@ -269,7 +300,13 @@ h3 {
   grid-column-start: 5;
   grid-column-end: 5;
 }
-
+.pest-pictures {
+  margin-bottom: 8px;
+}
+.pest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
 .harvesting {
   display: grid;
   grid-template-columns: repeat(1, auto);
@@ -292,13 +329,13 @@ h3 {
   margin-left: 15px;
 }
 
-.mainheading{
-    color: #c4c4c4;
+.mainheading {
+  color: #c4c4c4;
 }
 
-.pests-image{
-    margin-top: 10px;
-    margin-bottom: 0px;
+.pests-image {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }
 
 /* 
@@ -320,16 +357,15 @@ TABLE
     border-bottom: 1px solid black;
 } */
 
-table{
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    text-decoration: black;
-
+table {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  text-decoration: black;
 }
 
-td{
-    padding: 8px 4px;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    text-decoration: black;
+td {
+  padding: 8px 4px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  text-decoration: black;
 }
