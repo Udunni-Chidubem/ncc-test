@@ -235,6 +235,7 @@ module.exports={
             farmerData: farmer,
             isVerified
         })
+
     },
     viewProduct: async (req, res) => {
         const user = await req.user
@@ -655,4 +656,6 @@ module.exports={
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
     }
+
+
 }
