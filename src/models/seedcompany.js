@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       SeedCompany.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
       })
+      SeedCompany.hasMany(models.Orders, {
+        foreignKey : 'company_id'
+      })
     }
   }
   SeedCompany.init({
@@ -69,6 +72,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,
+    bank_account_name:DataTypes.STRING,
+    bank_account_no:DataTypes.STRING,
+    bank_code : DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
       defaultValue: new Date()

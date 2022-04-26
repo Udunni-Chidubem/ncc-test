@@ -6,10 +6,8 @@
         asterisk (*) are required.</em></div> --}}
     <div class="w-form">
       <form
-        id="wf-form-Contact-Form"
-        name="wf-form-Contact-Form"
-        data-name="Wf Form Contact Form"
-        method="get"
+        method="post"
+        action=""
       >
         <div class="contact-form-grid">
           <div><label
@@ -19,7 +17,7 @@
               type="text"
               class="w-input"
               maxlength="256"
-              name="First-Name"
+              name="Firstname"
               data-name="First Name"
               placeholder=""
               id="First-Name"
@@ -32,7 +30,7 @@
               type="text"
               class="w-input"
               maxlength="256"
-              name="Last-Name"
+              name="Lastname"
               data-name="Last Name"
               placeholder=""
               id="Last-Name"
@@ -58,7 +56,7 @@
               type="tel"
               class="w-input"
               maxlength="256"
-              name="Contact-Phone-Number"
+              name="phone"
               data-name="Contact Phone Number"
               placeholder=""
               id="Contact-Phone-Number"
@@ -72,10 +70,11 @@
               data-name="Message"
               maxlength="5000"
               id="Message"
-              name="Message"
+              name="message"
               placeholder=""
               class="w-input"
             ></textarea></div>
+            {{!-- <input type="submit" class="btn btn-primary" value="Submit"> --}}
         <input
           type="submit"
           value="Submit"
@@ -83,12 +82,12 @@
           class="footer-btn"
         />
       </form>
-      <div class="w-form-done">
+      {{!-- <div class="w-form-done">
         <div>Thank you! Your submission has been received!</div>
       </div>
       <div class="w-form-fail">
         <div>Oops! Something went wrong while submitting the form.</div>
-      </div>
+      </div> --}}
     </div>
   </div>
   <div class="secondGrid">

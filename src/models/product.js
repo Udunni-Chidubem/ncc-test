@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     item: DataTypes.STRING,
     file_name: DataTypes.STRING,
+    local_name:DataTypes.STRING,
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 1

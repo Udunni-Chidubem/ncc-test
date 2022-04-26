@@ -1,0 +1,215 @@
+{{>breadcrumbs}}
+
+<div id="page-content-wrapper">
+	<div class="card users_card">
+		<div class="card-body">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link active" id="all-orders-tab" data-bs-toggle="tab" data-bs-target="#all-orders" type="button" role="tab" aria-controls="all-orders" aria-selected="true">ALL ORDERS</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="active-orders-tab" data-bs-toggle="tab" data-bs-target="#active-orders" type="button" role="tab" aria-controls="active-orders" aria-selected="false">ACTIVE</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="shipped-tab" data-bs-toggle="tab" data-bs-target="#shipped" type="button" role="tab" aria-controls="shipped" aria-selected="false">SHIPPED</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="fulfilled-tab" data-bs-toggle="tab" data-bs-target="#fulfilled" type="button" role="tab" aria-controls="fulfilled" aria-selected="false">FULFILLED</button>
+			  </li>
+			  <li class="nav-item" role="presentation">
+			    <button class="nav-link" id="draft-tab" data-bs-toggle="tab" data-bs-target="#draft" type="button" role="tab" aria-controls="draft" aria-selected="false">DRAFT ORDERS</button>
+			  </li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+			  <div class="card tab-pane fade show active" style="padding: 8px;" id="all-orders" role="tabpanel" aria-labelledby="all-orders-tab">
+			  	<table class=" table table-theme  table-responsive table-hover" id="all-orders-table">
+			  		<thead>
+				  		<tr >
+				  			<th>ORDER ID</th>
+				  			<th>DATE</th>
+					  		<th>CUSTOMER NAME</th>
+					  		<th>SELLER</th>
+					  		<th>AMOUNT</th>
+					  		<th>PAYMENT STATUS</th>
+					  		<th>ORDER STATUS</th>
+				  		</tr>
+			  		</thead>	
+			  		
+			  		<tbody>
+			  			{{#each orders}}
+							<tr class="table-theme-secondary">
+								<td colspan="" rowspan="" headers=""><a href="{{this.id}}">{{TransactionLog.transaction_id}}</a></td>
+								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
+								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
+								<td colspan="" rowspan="" headers="" class="text-uppercase">
+									{{#if (eq TransactionLog.status "verified")}}
+										<span class="approved px-1"><i class="bi bi-dot"></i>Confirmed</span>
+										{{else}}
+										<span class="pending px-1"><i class="bi bi-dot"></i>Pending</span>
+									{{/if}}
+								</td>	
+								<td colspan="" rowspan="" headers="" class="text-uppercase">
+									{{#if (eq status "1")}}
+										<span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+									{{else if (eq status "2")}}
+							     	    <span class="shipped px-1"><i class="bi bi-dot"></i>Shipped</span>
+									{{else if (eq status "3")}}
+							            <span class="approved px-1"><i class="bi bi-dot"></i>Fulfilled</span>
+							        {{else}}
+     						        	<span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
+									{{/if}}	
+								</td>	
+							</tr>
+						{{/each}}
+			  		</tbody>	
+			  	</table>
+			  </div>
+			 
+			  <div class="card tab-pane fade" style="padding: 8px;" id="active-orders" role="tabpanel" aria-labelledby="active-orders-tab">
+			  	<table class="table table-theme  table-responsive table-hover" id="active-orders-table">
+			  		<thead>
+				  		<tr >
+				  			<th>ORDER ID</th>
+				  			<th>DATE</th>
+					  		<th>CUSTOMER NAME</th>
+					  		<th>SELLER</th>
+					  		<th>AMOUNT</th>
+					  		<th>PAYMENT STATUS</th>
+				  		</tr>
+			  		</thead>
+					<tbody>
+						{{#each activeOrders}}
+							<tr class="table-theme-secondary">
+								<td colspan="" rowspan="" headers="">{{TransactionLog.transaction_id}}</td>
+								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
+								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
+								<td colspan="" rowspan="" headers="" class="text-uppercase">{{TransactionLog.status}}</td>	
+							</tr>
+							{{else}}
+								<tr class="table-light table-striped">
+									<td colspan="6" >
+										<div class="d-flex justify-content-center">
+											NO ACTIVE ORDERS
+										</div>
+									</td>
+								</tr>
+							{{/each}}
+					</tbody>							
+			  	</table>
+			  </div>
+
+
+			  <div class="card tab-pane fade" style="padding: 8px;" id="shipped" role="tabpanel" aria-labelledby="shipped-tab">
+			  	<table class="table table-theme  table-responsive table-hover" id="shipped-table">
+			  		<thead>
+				  		<tr >
+				  			<th>ORDER ID</th>
+				  			<th>DATE</th>
+					  		<th>CUSTOMER NAME</th>
+					  		<th>SELLER</th>
+					  		<th>AMOUNT</th>
+					  		<th>PAYMENT STATUS</th>
+				  		</tr>
+			  		</thead>
+					<tbody>
+						{{#each shippedOrders}}
+							<tr class="table-theme-secondary">
+								<td colspan="" rowspan="" headers="">{{TransactionLog.transaction_id}}</td>
+								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
+								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
+								<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
+								<td colspan="" rowspan="" headers="" class="text-uppercase">{{TransactionLog.status}}</td>	
+							</tr>
+							{{else}}
+							<tr class="table-light table-striped">
+								<td colspan="6" >
+									<div class="d-flex justify-content-center">
+										NO SHIPPED ORDERS YET
+									</div>
+								</td>
+							</tr>
+						{{/each}}
+					</tbody>
+			  	</table>			  	
+			  </div>
+			  <div class="card tab-pane fade" style="padding: 8px;" id="fulfilled" role="tabpanel" aria-labelledby="fulfilled">
+			  	<table class="table table-theme  table-responsive table-hover" id="fulfilled-table">
+			  		<thead>
+				  		<tr >
+				  			<th>ORDER ID</th>
+				  			<th>DATE</th>
+					  		<th>CUSTOMER NAME</th>
+					  		<th>SELLER</th>
+					  		<th>AMOUNT</th>
+					  		<th>PAYMENT STATUS</th>
+				  		</tr>	
+			  		</thead>	  		
+			  		<tbody>
+			  		{{#each	fulfilledOrders}}
+						<tr class="table-theme-secondary">
+							<td colspan="" rowspan="" headers="">{{TransactionLog.transaction_id}}</td>
+							<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
+							<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
+							<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
+							<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
+							<td colspan="" rowspan="" headers="" class="text-uppercase">{{TransactionLog.status}}</td>	
+						</tr>
+						{{else}}
+						<tr class="table-light table-striped">
+							<td colspan="6" >
+								<div class="d-flex justify-content-center">
+									NO FULILLED ORDERS YET
+								</div>
+							</td>
+						</tr>
+					{{/each}}
+			  		</tbody>
+			  		
+			  	</table>
+			  </div>
+			  <div class="card tab-pane fade" style="padding: 8px;" id="draft" role="tabpanel" aria-labelledby="draft">
+			  	<table class="table table-theme  table-responsive table-hover" id="draft-table">
+			  		<thead>
+				  		<tr >
+				  			<th>ORDER ID</th>
+				  			<th>DATE</th>
+					  		<th>CUSTOMER NAME</th>
+					  		<th>SELLER</th>
+					  		<th>AMOUNT</th>
+					  		<th>PAYMENT STATUS</th>
+				  		</tr>	
+			  		</thead>	 		
+			  		<tbody>
+			  		{{#each draftOrders}}
+						<tr class="table-theme-secondary">
+							<td colspan="" rowspan="" headers="">{{TransactionLog.transaction_id}}</td>
+							<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at 'DD/MM/YYYY'}}</td>
+							<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}} {{TransactionLog.Farmer.lastname}}</td>
+							<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
+							<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
+							<td colspan="" rowspan="" headers="" class="text-uppercase">{{TransactionLog.status}}</td>	
+						</tr>
+					{{else}}
+						<tr class="table-light table-striped">
+							<td colspan="6" >
+								<div class="d-flex justify-content-center">
+									NO DRAFT ORDERS YET
+								</div>
+							</td>
+						</tr>
+					{{/each}}
+			  		</tbody>
+			  		
+			  	</table>
+			  </div>
+			</div>	
+		</div>
+	</div>	
+</div>
+
+

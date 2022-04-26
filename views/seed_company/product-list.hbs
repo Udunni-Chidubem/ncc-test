@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row  ">
       <div class="col-12   ">
-        <a href="./create-product" class="btn create_p mb-2  float_end ">
+        <a href="./products/create" class="btn create_p mb-2  float_end ">
           <span><i class=" fa fa-solid fa-plus"></i></span> Create New Product
         </a>
       </div>
@@ -40,7 +40,7 @@
           </td>
 
           <td>{{ this.variant }}</td>
-          <td></td>
+          <td>{{this.local_name}}</td>
           <td>
             <span class="{{#if this.status}} approved {{else}} pending {{/if}} px-1"><i class="bi bi-dot"></i>
               {{#if this.status}} Published {{else}} Pending {{/if}}

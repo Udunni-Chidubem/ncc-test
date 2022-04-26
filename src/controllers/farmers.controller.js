@@ -13,7 +13,8 @@ const {
         Cart, 
         TransactionLog, 
         TransactionCarts, 
-        Wallet 
+        Wallet,
+        Orders
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
@@ -69,8 +70,14 @@ module.exports={
         const transaction = await db.rest.transaction();
         const user = await req.user
         let deliveryInformation
+        let filename
         try{
-
+            if(req.files){
+                let upload=req.files.upload
+                name=upload.name.split(".")
+                filename=user.id+"."+name[name.length-1]
+                upload.mv('./public/profile_pics/'+filename)
+            }
             const { 
                 firstname, 
                 lastname, 
@@ -79,15 +86,17 @@ module.exports={
                 level_of_education, 
                 state_id, 
                 lg_id,
-                 nin, 
-                 bvn, 
-                 farm_produce, 
-                 state_of_delivery, 
-                 lga_of_delivery, 
-                 address, 
-                 source_type,  
-                 address_of_farm,
-                 farm_size } = req.body
+                nin, 
+                bvn, 
+                farm_produce, 
+                state_of_delivery, 
+                lga_of_delivery, 
+                address, 
+                source_type,  
+                address_of_farm,
+                farm_size,
+                village,
+                ward } = req.body
             const data = {
                 firstname, 
                 lastname, 
@@ -101,7 +110,10 @@ module.exports={
                 source_type,
                 address_of_farm,
                 farm_size,
-                product_farmed: farm_produce.toString()
+                product_farmed: farm_produce.toString(),
+                village,
+                ward,
+                profile_pic:filename
             }
 
             const farmer = await Farmer.update( data , {
@@ -451,6 +463,7 @@ module.exports={
                 farmer_id : farmer.id,
                 transaction_ref : ref,
                 status : 'initiated',
+                pickup_point:req.body.pickup,
                 created_at : await now()
             }, {transaction : transaction})
             for(let i=0; i<getCartItems.length; i++){
@@ -470,14 +483,21 @@ module.exports={
     },
     checkTransaction: async (ref)=>{
         let t=await TransactionLog.findOne({
+            include : [
+                {
+                    model : TransactionCarts,
+                    attributes : ['cart_id']
+                    
+                }
+            ],
             where : {
                 transaction_ref : ref
             }
         })
-        if(t){
-            return true
-        }
-        return false
+        // if(t){
+        //     return t
+        // }
+        return t
     },
     updateTransactionLog:async (data, ref)=>{
         let transaction=await db.rest.transaction()
@@ -502,7 +522,7 @@ module.exports={
         }
         
     },
-    updateCart:async (items)=>{
+    updateCart:async (ids)=>{
          let transaction =await db.rest.transaction()
          try{
            // for(let i=0; i<items.length; i++){
@@ -511,7 +531,7 @@ module.exports={
                     updated_at: now()
                 },{
                     where : {
-                        user_id : items
+                        id: {[Op.in] : ids}
                     }
                 }, {transaction : transaction})
           //  }
@@ -582,5 +602,57 @@ module.exports={
         })
 
         return transactionCount
+    },
+    createOrder:async (ids, transaction_log_id)=>{
+        let sql = "SELECT distinct s.id as company_id FROM cart c join product p on p.id = c.product_id join seedcompany s on s.user_id = p.user_id WHERE c.id IN (:ids)"
+        let companys= await db.rest.query(sql, {
+            replacements: { ids : ids },
+            type : QueryTypes.SELECT}
+            )
+        let transaction = await db.rest.transaction()
+        try{
+            for(let i=0; i<companys.length; i++){
+              await  Orders.create({
+                    transaction_log_id : transaction_log_id,
+                    company_id : companys[i].company_id,
+                }, {transaction : transaction})
+            }
+            transaction.commit()
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+        }
+    },
+
+    getCartItemsByIds:async (req,ids)=>{
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+        let items=await Cart.findAll({
+             include : [
+                {
+                    model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+                    include : [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                            include : [
+                                {
+                                    model : SeedCompany,
+                                    attributes: ['id', 'name_of_company', 'state_id'],
+                                    include : [{model : States, attributes: ['id', 'name']}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            where : {
+               id: {[Op.in] : ids}
+            }
+        })
+        let getCartItems = JSON.parse(JSON.stringify(items))
+        return { farmer, isVerified, getCartItems }
     }
 }

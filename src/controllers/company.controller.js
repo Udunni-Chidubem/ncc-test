@@ -1,7 +1,7 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, UserRole, Role, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 
@@ -12,21 +12,22 @@ module.exports = {
         const transaction = await db.rest.transaction();
         const user = await req.user
 
-        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email } = req.body
+        const { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_no, bank_account_name, bank_code } = req.body
 
         try {
-            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email }
-
+            const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_name, bank_account_no, bank_code }
+            console.log(data)
             await User.update({ status: true }, { where: { id: user.id } })
 
             const company = await SeedCompany.update(data, {
                 where: { user_id: user.id }
             }, { transaction: transaction })
-
+            console.log(company)
             transaction.commit();
             return { company }
         } catch (e) {
             transaction.rollback();
+            console.log(e)
             return e
         }
     },
@@ -62,7 +63,8 @@ module.exports = {
                 variant: req.body.productVariant,
                 item: item,
                 user_id: user.id,
-                file_name: filename
+                file_name: filename,
+                local_name : req.body.productLocalName
             }, { transaction: transaction })
             transaction.commit()
             return p
@@ -84,7 +86,7 @@ module.exports = {
             order: [
                 ['id', 'DESC'],
             ],
-            attributes: ['id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+            attributes: ['id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status', 'local_name'],
             raw: true, limit, offset
         })
 
@@ -99,7 +101,7 @@ module.exports = {
             let min = [], qty = [], size = [], price = [];
             if (req.files) {
                 let p = await Product.findOne({
-                    attributes: file_name,
+                    attributes: ['file_name'],
                     where: { id: req.params.id }
                 })
                 let upload = req.files.upload
@@ -129,7 +131,8 @@ module.exports = {
                     product_name: req.body.productName,
                     description: req.body.productDescription,
                     variant: req.body.productVariant,
-                    item: item
+                    item: item,
+                    local_name : req.body.productLocalName
                 },
                 {
                     where: { id: req.params.id }
@@ -151,7 +154,7 @@ module.exports = {
 
         const singleProduct = await Product.findOne({
             where: { user_id: user.id, id: req.params.id },
-            attributes: ['id', 'product_name', 'variant', 'description', 'item', 'file_name'],
+            attributes: ['id', 'product_name', 'variant', 'description', 'item', 'file_name', 'local_name'],
             raw: true
         })
 
@@ -206,12 +209,15 @@ module.exports = {
     getOrders: async (req, res) => {
         const user = await req.user
         let sql = "SELECT distinct tl.id, SUM(c.total_amount) as amount, tl.transaction_id, tl.created_at,"
-            + "tl.updated_at, tl.transaction_ref,f.firstname, f.lastname, c.status as order_status, "
+            + "tl.updated_at, tl.transaction_ref,f.firstname, f.lastname, c.status as order_status, o.status, "
             + "tl.status as payment_status from cart c join transaction_carts tc on c.id = tc.cart_id join transaction_log tl "
-            + "on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
-            + "where p.user_id = " + user.id + " GROUP by p.user_id, tl.id order by tl.created_at desc";
+            + "on tl.id=tc.transaction_log_id join orders o on tl.id = o.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
+            + "where p.user_id = " + user.id + " and (tl.transaction_id is not null and transaction_id <> '') GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
         console.log(order)
+
+        let orderStatus = order.orders_status
+        console.log(orderStatus)
         return order
     },
     getProductOrders : async (req, product)=>{
@@ -225,8 +231,9 @@ module.exports = {
         console.log(order)
         return order
     },
-    getOrder: async (transaction_id, user_id) => {
+    getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
+        let farmer=null, orderStatus=null
         let order = await TransactionCarts.findAll({
             include: [
                 {
@@ -242,25 +249,66 @@ module.exports = {
                 }
             ]
         })
-
+        
         order = JSON.parse(JSON.stringify(order))
-        let farmer = await Farmer.findOne({
-            where: { id: order[0].TransactionLog.farmer_id },
-            include: [
-                {
-                    model: User,
-                    include: [
-                        {
-                            model: DeliveryInformation,
-                            include: [{ model: States }, { model: LGAs }]
+        if(order.length){
+            farmer = await Farmer.findOne({
+                where: { id: order[0].TransactionLog.farmer_id },
+                include: [
+                    {
+                        model: User,
+                        include: [
+                            {
+                                model: DeliveryInformation,
+                                include: [{ model: States }, { model: LGAs }]
+                            }
+                        ]
+                    }
+                ]
+            })
+
+            orderStatus=await Orders.findOne({
+                where :  {  
+                    [Op.and]: [
+                    {
+                        company_id: {
+                        [Op.eq]: company_id
                         }
-                    ]
+                    },
+                    {
+                    transaction_log_id: {
+                        [Op.eq]: order[0].transaction_log_id
+                    }
+                    }
+                ]
                 }
-            ]
-        })
+            })
+        }
+     
         farmer = JSON.parse(JSON.stringify(farmer))
-        console.log(order)
-        console.log(farmer)
-        return { order, farmer };
+        orderStatus = JSON.parse(JSON.stringify(orderStatus))
+        return { order, farmer, orderStatus };
+    },
+    getOrderCount : async (company_id)=>{
+       let orderCount=await Orders.count({
+            where :  {  
+                [Op.and]: [
+                {
+                    company_id: {
+                      [Op.eq]: company_id
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: null
+                  }
+                }
+              ]
+            }
+        }, {raw : true})
+        return orderCount
+    },
+    updadeOrders:async (order_id, data)=>{
+        Orders.update(data, { where : {id : order_id}})
     }
 }

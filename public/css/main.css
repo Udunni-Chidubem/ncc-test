@@ -980,3 +980,12 @@ input[name="Accountnumber"] {
               background-color: #70c1e2 !important;
               overflow-y: hidden;
             }
+
+.services_dropdown{
+  padding: 3px !important;
+  padding-left: 10px !important;
+}
+
+.dropdown-content{
+  background-color: #ffffff !important;
+}

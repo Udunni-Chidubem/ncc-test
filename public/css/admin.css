@@ -115,10 +115,11 @@
 .dropdown a{
 	text-decoration: none !important;
 	font-weight: 500;
-	font-size: 12px;
 	line-height: 37px;
 	color: white;
+
 }
+
 
 .dropdown a:hover{
 	text-decoration: none !important;
@@ -660,10 +661,10 @@ th td {
 }
 
 
-.table-theme-secondary a{
+/*.table-theme-secondary a{
    color: #000 !important;
    text-decoration: none;
-}
+}*/
 
 
 .admin-product{
@@ -1038,3 +1039,17 @@ color: #818E9B;
 }
 
 /*Single User Profile Ends*/
+
+
+/*Orders Ends*/
+
+.shipped{
+  background: #C2E8FF;
+  border-radius: 10px;
+}
+
+.processing{
+  background: #FCC1BC;
+  border-radius: 10px;
+}
+/*Orders Begins*/
