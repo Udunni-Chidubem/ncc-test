@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-body">
+        <div class="order_id ">
+            Order {{ transaction_id }}
+        </div>
+        <div class="table-responsives table_t_info">
+            <h4 class="order_header">Order information</h4>
+            <table class="table con t_info  table-border">
+                <thead class="t_info_head ">
+                    <tr>
+                        <th>Item</th>
+                        <th>Variant</th>
+                        <th>Date</th>
+                        <th>Package Size</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody class="t_info_body table-striped table-theme-secondary">
+                    {{#each order}}
+                    {{#if Cart}}
+                    <tr>
+                        <td>{{Cart.Product.product_name}}</td>
+                        <td>{{Cart.Product.variant}}</td>
+                        <td>{{dateFormat TransactionLog.created_at "dddd, MMMM Do YYYY"}}</td>
+                        <td>{{Cart.size}}</td>
+                        <td>{{Cart.qty}}</td>
+                        <td>&#8358; {{Cart.total_amount}}</td>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+            {{#ifNotEquals orderStatus.status 2}}
+            <form action="" method="post">
+                <input name="order" id="order" type="hidden" value="{{orderStatus.id}}">
+                <select name="status" id="status" required="required">
+                    <option value="">Change Status</option>
+                    {{#ifEquals orderStatus.status null }}
+                    <option value="1">Ready to Ship</option>
+                    {{/ifEquals}}
+                    {{#ifEquals orderStatus.status 1 }}
+                    <option value="2">Shipped</option>
+                    {{/ifEquals}}
+                </select>
+
+                <hr>
+                {{/ifNotEquals}}
+                <div class="buyer_info">
+                    <div>
+                        <h4>Buyer Information</h4>
+                        <p>Name: <span>{{farmer.firstname}} {{farmer.lastname}}</span> </p>
+                        <p>Phone Number: <span>{{farmer.phone_no}}</span> </p>
+                    </div>
+
+                    <div>
+                        <h4>Shipping Address</h4>
+                        <span>{{farmer.User.DeliveryInformation.address}} {{farmer.User.DeliveryInformation.LGA.name}},
+                            {{farmer.User.DeliveryInformation.State.name}} </span>
+                    </div>
+                </div>
+                {{#ifNotEquals orderStatus.status 2}}
+                <div class="float-end">
+                    {{!-- <button type="button" class="btn btn-secondary">Save</button> --}}
+
+                    <button type="submit" class="btn btn-success">Submit</button>
+
+                </div>
+            </form>
+            {{/ifNotEquals}}
+        </div>
+    </div>
+</div>

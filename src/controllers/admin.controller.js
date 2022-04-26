@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models')
 const utils = require('../helpers/utils');
-const {User, UserRole, Role, Farmer, SeedCompany, States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog}  = db
+const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 
@@ -261,7 +261,7 @@ module.exports={
             raw: true
         })
 
-
+        console.log(req.params.singleProduct)
         return singleProduct;
     },
     productUpdate:async (data, id)=>{
@@ -284,14 +284,14 @@ module.exports={
             include : [
                 {
                     model : SeedCompany,
-                    attributes : ['name_of_company']
+                    attributes : ['name_of_company','id']
                 },
                 {
                     model : TransactionLog,
                     include : [
                             {
                                 model : Farmer,
-                                attributes : ['firstname', 'lastname']
+                                attributes : ['firstname', 'lastname', 'id']
                             }
                     ]
                 }
@@ -302,6 +302,69 @@ module.exports={
         orders = JSON.stringify(orders);
         console.log(orders)
         return JSON.parse(orders);
-    }
+    },
 
+    getOrder: async (transaction_id, user_id, company_id) => {
+        // const user = await req.user
+        let farmer=null, orderStatus=null
+        let order = await TransactionCarts.findAll({
+            include: [
+                {
+                    model: TransactionLog,
+                    where: { transaction_id: transaction_id }
+                },
+                {
+                    model: Cart,
+                    include: [{
+                        model: Product,
+                    },
+                    {
+                        model : User,
+                        include : [{model : Farmer}]
+                    }
+                ]
+                }
+            ]
+        })
+        
+        order = JSON.parse(JSON.stringify(order))
+        if(order.length){
+            farmer = await Farmer.findOne({
+                where: { id: order[0].TransactionLog.farmer_id },
+                include: [
+                    {
+                        model: User,
+                        include: [
+                            {
+                                model: DeliveryInformation,
+                                include: [{ model: States }, { model: LGAs }]
+                            }
+                        ]
+                    }
+                ]
+            })
+
+            orderStatus=await Orders.findOne({
+                where :  {  
+                    [Op.and]: [
+                    {
+                        company_id: {
+                        [Op.eq]: company_id
+                        }
+                    },
+                    {
+                    transaction_log_id: {
+                        [Op.eq]: order[0].transaction_log_id
+                    }
+                    }
+                ]
+                }
+            })
+        }
+     
+        farmer = JSON.parse(JSON.stringify(farmer))
+        orderStatus = JSON.parse(JSON.stringify(orderStatus))
+        console.log(order)
+        return { order, farmer, orderStatus };
+    },
 }
