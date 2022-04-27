@@ -559,7 +559,6 @@ module.exports={
                     include : [
                         {
                             model : Cart,
-                            attributes : [],
                             include : [
                                { 
                                    model : Product,
@@ -575,6 +574,7 @@ module.exports={
                 farmer_id : farmer_id
             }
         });
+        console.log(JSON.parse(JSON.stringify(transactions)))
         return JSON.parse(JSON.stringify(transactions))
     },
     productItemsUpdate:async (product_id, size, quantity)=>{
@@ -655,6 +655,26 @@ module.exports={
         })
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
+    },
+
+    getOrder: async (req,res) =>{
+        let transaction_id = req.params.transaction_id
+        let order = await TransactionCarts.findAll({
+            include: [
+                {
+                    model: TransactionLog,
+                    where: { transaction_id: transaction_id }
+                },
+                {
+                    model: Cart,
+                    include: [{
+                        model: Product
+                    }]
+                }
+            ]
+        })
+        order = JSON.parse(JSON.stringify(order))
+        return order
     }
 
 

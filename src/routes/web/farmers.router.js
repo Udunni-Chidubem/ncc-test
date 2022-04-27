@@ -242,6 +242,19 @@ farmersRouter.get('/transactions', async (req, res)=>{
         transactions
     })
 })
+farmersRouter.get('/order/:transaction_id', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+    let transactions=await farmerController.getOrder(req,res)
+    console.log(transactions)
+    res.render('farmers/view-order', {
+        layout : 'farmers-dashboard',
+        title: 'Order View',
+        isVerified,
+        transactions
+    })
+})
 farmersRouter.get("/cart/delete/:id", async (req, res)=>{
     farmerController.deleteItem(req, res)
     res.redirect("/farmer/cart")
