@@ -1,31 +1,33 @@
 <div class="container-fluid pt=5">
         <div class="card card-4"> 
             <div class="card-body">
+                {{#if message}} 
+                   `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {{/if}}
+
                 <form method="get" class="ml-5 mr-4 search-form">
                     <div class="input-group">
                         <input class="input--style-4 inputs" type="search" placeholder="Search for product" name="Search" required>
                         <div class="input-group-append min-search-btn">
-                          <button class="btn btn-secondary btn--blue " type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-secondary btn--blue " type="submit"><i class="fa fa-search"></i></button>
                         </div>  
                         <button class="btns btn--radius-2 btn--blue ml-2 pri-search-btn" type="submit">Search</button>
                     </div>
-
-                    {{!-- <div class="search-tip">
-                        <p ><i class="fa fa-lightbulb"></i> Recomendation: You need 3kg of maize seed for your farm</p>
-                    </div> --}}
-                
-                {{#if products}}
-                <div class="search-filter ml-5 mr-4 mt-2">
-                      <div class="input-field">
-                        <label><b >Results: &nbsp; </b> Sort By</label>
-                        <select name="sorting">
-                          <option value="" disabled selected>Choose your option</option>
-                          <option value="highest-price">Highest Price</option>
-                          <option value="lowest-prices">Lowest Price</option>
-                        </select>
-                      </div>
-                </div>
-                {{/if}}
+                    {{#if products}}
+                    <div class="search-filter ml-5 mr-4 mt-2">
+                        <div class="input-field">
+                            <label><b >Results: &nbsp; </b> Sort By</label>
+                            <select name="sorting">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="highest-price">Highest Price</option>
+                            <option value="lowest-prices">Lowest Price</option>
+                            </select>
+                        </div>
+                    </div>
+                    {{/if}}
 
                 </form>
             </div>

@@ -2134,6 +2134,9 @@ input[type="number"] {
 }
 
 @media (min-width: 321px) and (max-width: 580px) {
+  .col-4.c0l_4 {
+    width: 90.667% !important;
+  }
   .card_products {
     width: 322px;
   }
