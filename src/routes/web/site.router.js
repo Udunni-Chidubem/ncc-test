@@ -117,7 +117,7 @@ siteRouter.get('/knowledge-base', (req,res) => {
 siteRouter.get('/cowpie', (req,res) => {
 res.render('knowledge_base/cowpie', {
     layout: 'knowledge_dashboard',
-    title : 'Knowledge Base - Cowpie',
+    title : 'Knowledge Base - Cowpea',
     crop : "Cowpea"
      });
 
