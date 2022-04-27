@@ -43,13 +43,19 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 
 farmersRouter.get('/market_place', async (req, res) => {
     let resp = await farmerController.marketPlace(req, res)
+    let message = null;
     const products = resp.response
+    
+    if(req.query.Search && products.result.length <= 0){
+        message = "No product found"
+    }
     res.render('farmers/market_place', {
         layout : 'farmers-dashboard',
         title: 'Market Place',
         fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
         farmerData: resp.farmer,
         products,
+        message,
         isVerified: resp.isVerified
     })
 })
