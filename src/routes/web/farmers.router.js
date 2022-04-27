@@ -247,11 +247,11 @@ farmersRouter.get("/cart/delete/:id", async (req, res)=>{
     res.redirect("/farmer/cart")
 })
 
-farmersRouter.get('/knowledge-base', (req,res) => {
-    res.render('knowledge_base', {
-        layout: '',
-        title : 'Knowledge Base - Index'
-    }); 
-})
+// farmersRouter.get('/knowledge-base', (req,res) => {
+//     res.render('/index', {
+//         layout: 'farmers-dashboard',
+//         title : 'Knowledge Base - Index'
+//     }); 
+// })
 
 module.exports=farmersRouter;
