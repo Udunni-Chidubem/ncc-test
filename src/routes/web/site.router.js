@@ -29,6 +29,8 @@ siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
 siteRouter.get('/faq', siteController.faq)
 siteRouter.get('/forgot_password', siteController.Forgot_Password)
+siteRouter.get('/otp', siteController.OTP)
+siteRouter.get('/new_password', siteController.NewPassword)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
@@ -162,16 +164,17 @@ siteRouter.get('/recommendation', (req,res) => {
 
 siteRouter.post('/forgot_password', async (req, res)=>{
     let pass=await siteController.ForgotPassword(req, res)
-    res.json({data : pass}).send().status(200)
+    // res.json({data : pass}).send().status(200)
+    
  })
 
- siteRouter.post('/otp', async (req, res)=>{
-    res.render('/otp', {
-       form_banner:'Group.png',
-       title: 'OTP',
-       layout : 'form',
-    });
- })
+//  siteRouter.get('/otp', (req, res)=>{
+//     res.render('/otp', {
+//        form_banner:'Group.png',
+//        title: 'OTP',
+//        layout : 'form',
+//     });
+//  })
 
    
 
