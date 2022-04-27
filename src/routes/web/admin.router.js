@@ -5,6 +5,7 @@ const utils = require('../../helpers/utils')
 const { adminValidation, validate, productValidation } = require('../../helpers/formValidator');
 const adminController = require('../../controllers/admin.controller');
 const { now } = require('moment');
+const companyController = require('../../controllers/company.controller');
 
 adminRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
@@ -176,5 +177,24 @@ adminRouter.get("/orders", async (req, res)=>{
     })
 })
 
+adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    // company_name = req.params.company_name;
+    // let company = await utils.getCompanyProfile(user)
+    transaction_id = req.params.transaction_id;
+    console.log(req.params.id)
+    let {order, farmer, orderStatus} = await adminController.getOrder(req.params.transaction_id, req.params.id, req.params.company_id)
+    res.render('admin/order-view', {
+        layout : 'admin-dashboard',
+        title : 'Order View',
+        order,
+        farmer,
+        orderStatus,
+        username : user.username,
+        isVerified,
+        transaction_id: transaction_id
+    })
+});
 
 module.exports = adminRouter

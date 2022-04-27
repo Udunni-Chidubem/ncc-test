@@ -1847,7 +1847,7 @@ input[name="Accountnumber"] {
 }
 
 .card-4 {
-  background: #FFFF(255, 255, 255, 0.582) !important;
+  background: #FFFF!important;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px !important;
@@ -1880,7 +1880,7 @@ input[name="Accountnumber"] {
     /* width: 400px !important; */
   }
   .input--style-4 inputs{
-    margin-left: ;
+    /* margin-left: ; */
   }
 }
 
