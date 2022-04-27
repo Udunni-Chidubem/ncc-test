@@ -227,7 +227,7 @@
         $(this).val($(this).attr("max"))
       }
     })
-    $('.add-to-cart').on('click', function(){
+    $('.add-to-cart, .btn-place-order').on('click', function(){
       let content=$(this).closest('.products-content')
       let p = content.find('.product-price').find('h4').html()
       let s = content.find('select').val()
@@ -246,7 +246,7 @@
         'quantity' : q,
         'pid': pid
       }
-
+    console.log(data)
       if(data.price != null || data.size != null || data.quantity != null){
         $(this).html('<i class="fa fa-spinner"></i> Please wait...')
 
@@ -267,9 +267,15 @@
               msg += (index + 1 ) + '. ' + value.msg + ' \n'
             })
             error_toastr(msg)
+           
           }else if(response.statusCode == 500 || response.statusCode == 400){
             error_toastr(response.message)
           }else{
+            if($(this).hasClass('btn-place-order')){
+              setTimeout(function(){
+                window.location.href='/farmer/checkout/preview?product='+pid+'&size='+s+'&qty='+q;
+              }, 3000)
+            }
             success_toastr(response.message)
           }
         })
@@ -312,26 +318,24 @@
         'size' : kg, 
         'quantity' : qty
       }
+      let url = baseUrl + '/farmer/single-cart-item/' + pid
 
-
-
-        let url = baseUrl + '/farmer/single-cart-item/' + pid
-
-        fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {"Content-type": "application/json; charset=UTF-8"}
-        })
-        .then(r => r.json())
-        .then(response => {
-          $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
-          if(response.statusCode == 402){
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+      })
+      .then(r => r.json())
+      .then(response => {
+      $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+      if(response.statusCode == 402){
             let msg = ''
             let errors = response.data
             errors.forEach((value, index) => {
               msg += (index + 1 ) + '. ' + value.msg + ' \n'
             })
             error_toastr(msg)
+           
           }else if(response.statusCode == 500 || response.statusCode == 400){
             error_toastr(response.message)
           }else{
