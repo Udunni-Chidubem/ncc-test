@@ -12,6 +12,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let isVerified = await utils.isVerified(user)
     let farmerCount = await adminController.getFarmerCount(req, res)
     let companyCount = await adminController.getCompanyCount(req, res)
+    let seedtraderCount = await adminController.getSeedTraderCount(req, res)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
@@ -19,7 +20,8 @@ adminRouter.get('/dashboard', async (req, res)=>{
         username : user.username,
         isVerified,
         farmerCount,
-        companyCount
+        companyCount,
+        seedtraderCount
     })
 });
 

@@ -222,6 +222,14 @@ module.exports={
         farmerCount = farmerCount;
         return farmerCount;
     },
+    getSeedTraderCount : async (req, res)=>{
+        let seedtraderCount =await SeedTrader.count({
+            // where: {id: req.params.id}
+        });
+
+        seedtraderCount = seedtraderCount;
+        return seedtraderCount;
+    },
     getCompanyCount : async (req, res)=>{
         let companyCount =await SeedCompany.count({
             // where: {id: req.params.id}
