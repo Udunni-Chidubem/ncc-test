@@ -56,7 +56,7 @@ SEARCH BAR CODE STARTS
 
 .valueSeeds-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 2.5rem;
   place-items: center;
   width: fit-content;
@@ -80,7 +80,7 @@ h3 {
   font-weight: 25px;
   letter-spacing: 1px;
   font-family: sans-serif;
-  margin-top: 20px;
+  margin-top: 65px;
   margin-left: 15px;
 }
 
@@ -92,13 +92,18 @@ h3 {
   color: rgb(182, 178, 178);
   cursor: pointer;
 }
+.fa-solid{
+  font-size: 18px;
+  color: #000;
+}
 .mini-sidebar {
-  /* position: fixed; */
-  width: 285px;
-  height: 480px;
+  position: sticky;
+  top: 0;
+  width: 275px;
+  height: fit-content;
   background: #ffffff;
   box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.25);
-  padding: 20px;
+  padding: 5px;
   margin-top: 15px;
   margin-left: 20px;
 }
@@ -181,10 +186,11 @@ h3 {
   font-family: "Poppins";
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
+  line-height: 26px;
+  letter-spacing: 0.02em;
   color: #6a707e;
   padding: 8px;
+  margin: 19px;
 }
 
 .heading1 {
@@ -238,12 +244,21 @@ h3 {
 }
 
 .subheading {
-  font-family: poppin;
-  font-size: medium;
+  font-family: poppins;
+  font-size: 16px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
-  color: #b5b5b5;
+  color:#6E6E6E;
+
+}
+
+.subheading-headers{
+  font-family: poppins;
+  font-size: 18px;
+  font-weight: 700;
+  color:#6E6E6E;
+  margin: 20px;
 }
 
 .planting {
@@ -311,6 +326,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(1, auto);
   margin-bottom: 50px;
+
 }
 /* 
  .test-harvest{
@@ -330,7 +346,8 @@ h3 {
 }
 
 .mainheading {
-  color: #c4c4c4;
+  color: #6E6E6E;
+
 }
 
 .pests-image {
@@ -361,6 +378,7 @@ table {
   border-top: 1px solid black;
   border-right: 1px solid black;
   text-decoration: black;
+ 
 }
 
 td {
