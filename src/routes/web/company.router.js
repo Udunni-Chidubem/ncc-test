@@ -161,6 +161,7 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let isVerified = await utils.isVerified(user, 'company')
     let company = await utils.getCompanyProfile(user)
     let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
+    let shipping_address = order[0].TransactionLog.pickup_point
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
         title : 'Orders',
@@ -168,6 +169,7 @@ companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
         order,
         farmer,
         orderStatus,
+        shipping_address,
         prev_link : '/seed-company/orders',
         transaction_id : req.params.transaction_id
     })
