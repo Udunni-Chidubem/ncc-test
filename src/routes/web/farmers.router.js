@@ -13,6 +13,7 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let {firstname, lastname, LGA, State }=farmer
     let cartCount = await farmerController.getFarmerCartCount(req, res)
     let transactionCount = await farmerController.getTransactionlogCount(farmer.id)
+    let transactions = await farmerController.getTransactions(farmer.id)
 
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -23,7 +24,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         farmer,
         isVerified,
         cartCount,
-        transactionCount
+        transactionCount,
+        transactions
     })
 })
 
@@ -71,20 +73,11 @@ farmersRouter.get('/products/:id', async (req, res) => {
         isVerified: resp.isVerified
     })
 })
-
-farmersRouter.post('/checkout/preview', async (req, res)=>{
-    let items = []
-    if(!Array.isArray(req.body.items))
-    {
-        items.push(req.body.items)
-    }else{
-        items=req.body.items
-    }
- 
-    //let cart=await farmerController.getCartItemsByIds(items)
-    let {getCartItems, farmer, isVerified}=await farmerController.getCartItemsByIds(req, items)
-    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
-   // console.log(deliveryInfo)
+farmersRouter.get("/checkout/preview", async (req, res)=>{
+    if(req.query.product){
+        console.log(req.query.product)
+        let {getCartItems, farmer, isVerified}= await farmerController.cartByProductId(req)
+        let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
             title: 'Order Preview',
@@ -94,6 +87,41 @@ farmersRouter.post('/checkout/preview', async (req, res)=>{
             getCartItems,
             deliveryInfo
         })
+    }else{
+        res.redirect('back')
+    }
+})
+
+farmersRouter.post('/checkout/preview', async (req, res)=>{
+    let items = []
+    let data=[];
+    
+    if(!Array.isArray(req.body.items))
+    {
+        items.push(req.body.items)
+    }else{
+        items=req.body.items
+    }
+    console.log(items)
+    //let cart=await farmerController.getCartItemsByIds(items)
+    if(!req.body.items){
+       data =await farmerController.cart(req, res)
+    }else{
+        data=await farmerController.getCartItemsByIds(req, items)
+    }
+
+    let {getCartItems, farmer, isVerified}=data
+    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
+   // console.log(deliveryInfo)
+    res.render('farmers/order_preview', {
+        layout : 'farmers-dashboard',
+        title: 'Order Preview',
+        fullname: farmer.firstname + ' ' + farmer.lastname,
+        farmer: farmer,
+        isVerified,
+        getCartItems,
+        deliveryInfo
+    })
 })
 
 farmersRouter.post("/cart/checkout", async (req, res)=>{
