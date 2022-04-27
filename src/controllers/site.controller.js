@@ -80,6 +80,22 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
+    Forgot_Password: async (req,res) => {
+        res.render('site/forgot_password',{
+            form_banner:'Group.png',
+            title: 'Forgot-Password',
+            layout : 'form',
+            errors : req.flash('errors')
+        });
+    },
+    otp: async (req,res) => {
+        res.render('site/otp',{
+            form_banner:'Group.png',
+            title: 'OTP',
+            layout : 'form',
+            errors : req.flash('errors')
+        });
+    },
     seedcompanysignup: async (req,res) => {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
@@ -297,6 +313,17 @@ module.exports = {
 
     saveContact:async (req, res)=>{
         Contact.create(req.body)
+    },
+
+    ForgotPassword: async (req, res) =>{
+        let pass =await User.findOne({
+            attributes :  ['id', 'username'],
+             where : {
+                username : req.body.username
+             }
+         });
+         return pass;
+        
     }
 
 }

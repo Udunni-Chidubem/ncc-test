@@ -13,6 +13,7 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let {firstname, lastname, LGA, State }=farmer
     let cartCount = await farmerController.getFarmerCartCount(req, res)
     let transactionCount = await farmerController.getTransactionlogCount(farmer.id)
+    let transactions = await farmerController.getTransactions(farmer.id)
 
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -23,7 +24,8 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         farmer,
         isVerified,
         cartCount,
-        transactionCount
+        transactionCount,
+        transactions
     })
 })
 
@@ -41,13 +43,19 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 
 farmersRouter.get('/market_place', async (req, res) => {
     let resp = await farmerController.marketPlace(req, res)
+    let message = null;
     const products = resp.response
+    
+    if(req.query.Search && products.result.length <= 0){
+        message = "No product found"
+    }
     res.render('farmers/market_place', {
         layout : 'farmers-dashboard',
         title: 'Market Place',
         fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
         farmerData: resp.farmer,
         products,
+        message,
         isVerified: resp.isVerified
     })
 })
@@ -273,11 +281,11 @@ farmersRouter.get("/cart/delete/:id", async (req, res)=>{
     res.redirect("/farmer/cart")
 })
 
-farmersRouter.get('/knowledge-base', (req,res) => {
-    res.render('knowledge_base', {
-        layout: '',
-        title : 'Knowledge Base - Index'
-    }); 
-});
+// farmersRouter.get('/knowledge-base', (req,res) => {
+//     res.render('/index', {
+//         layout: 'farmers-dashboard',
+//         title : 'Knowledge Base - Index'
+//     }); 
+// })
 
 module.exports=farmersRouter;

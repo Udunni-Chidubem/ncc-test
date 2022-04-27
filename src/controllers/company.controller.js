@@ -288,6 +288,7 @@ module.exports = {
      
         farmer = JSON.parse(JSON.stringify(farmer))
         orderStatus = JSON.parse(JSON.stringify(orderStatus))
+        console.log(order)
         return { order, farmer, orderStatus };
     },
     getOrderCount : async (company_id)=>{
