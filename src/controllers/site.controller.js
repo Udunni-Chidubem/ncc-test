@@ -331,9 +331,16 @@ module.exports = {
              }
          });
          return pass;
+    },
+
+    OTP: async (req, res)=>{
+        // console.log("votp" votp);
         
+
     }
 
-    
+
+
+
 
 }

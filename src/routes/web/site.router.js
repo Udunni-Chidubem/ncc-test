@@ -166,7 +166,10 @@ siteRouter.post('/forgot_password', async (req, res)=>{
     let pass=await siteController.ForgotPassword(req, res)
     // res.json({data : pass}).send().status(200)
     
+
+
  })
+
 
 //  siteRouter.get('/otp', (req, res)=>{
 //     res.render('/otp', {
