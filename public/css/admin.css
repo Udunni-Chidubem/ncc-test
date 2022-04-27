@@ -1053,3 +1053,61 @@ color: #818E9B;
   border-radius: 10px;
 }
 /*Orders Begins*/
+
+/* order view */
+.buyer_info{
+   display: grid;
+   grid-template-columns: repeat(2, 30%);
+   font-family: 'Poppins';
+   font-style: normal;
+ }
+ 
+ .buyer_info h4{
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 21px;
+   color: #47749C
+ }
+ 
+ .buyer_info p{
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 17px;
+   color: #6F6F6F;
+ }
+ 
+ .buyer_info span{
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 700;
+   font-size: 14px;
+   line-height: 17px;
+   color: #6F6F6F;
+ }
+ 
+ .order_id{
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 28px;
+   line-height: 34px;
+   color: #47749C;
+   margin-bottom: 20px;
+ }
+ 
+ .order_header{
+   font-family: 'Poppins';
+   font-style: normal;
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 21px;
+   color: #47749C;
+   margin-bottom: 15px;
+ }
+ 
+ .order_btn{
+   font-size: 10px !important;
+ }
+ 

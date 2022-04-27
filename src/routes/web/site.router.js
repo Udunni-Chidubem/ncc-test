@@ -28,7 +28,6 @@ siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
 siteRouter.get('/faq', siteController.faq)
-// siteRouter.get('/knowledge_dashboard', siteController.knowledge_base)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
@@ -150,6 +149,15 @@ siteRouter.get('/rice', (req,res) => {
     });
 
 })
+
+siteRouter.get('/recommendation', (req,res) => {
+    res.render('knowledge_base/recommendation', {
+        layout: 'knowledge_dashboard',
+        crop : "Recommendation",
+        title : 'Knowledge Base - Recommendation'
+       });
+   
+   })
 
 
 module.exports=siteRouter; 

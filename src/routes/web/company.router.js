@@ -218,5 +218,11 @@ companyRouter.get('/wallet', async (req, res)=>{
     })
 });
 
+companyRouter.get('/knowledge-base', (req,res) => {
+    res.render('knowledge_base', {
+        layout: '',
+        title : 'Knowledge Base - Index'
+    }); 
+})
 
 module.exports=companyRouter
