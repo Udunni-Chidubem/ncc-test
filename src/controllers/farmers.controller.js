@@ -655,7 +655,69 @@ module.exports={
         })
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
+    },
+    cartByProductId : async (req)=>{
+       // let product_id = req.query.product
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+        let items=await Cart.findAll({
+             include : [
+                {
+                    model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+                    include : [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                            include : [
+                                {
+                                    model : SeedCompany,
+                                    attributes: ['id', 'name_of_company', 'state_id'],
+                                    include : [{model : States, attributes: ['id', 'name']}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            where : {
+            [Op.and]: [
+                {
+                    product_id: {
+                      [Op.eq]: req.query.product
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0 //o means items has not been paid for, 1 means item has been purchased
+                  }
+                },
+                {
+                  user_id: {
+                    [Op.eq]: user.id //o means items has not been paid for, 1 means item has been purchased
+                  }
+                },
+                  {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                    size: {
+                      [Op.eq]: req.query.size
+                    }
+                },
+                {
+                    qty: {
+                      [Op.eq]: req.query.qty
+                    }
+                },
+            ]
+        }
+        })
+        let getCartItems = JSON.parse(JSON.stringify(items))
+        return { farmer, isVerified, getCartItems }
     }
-
 
 }
