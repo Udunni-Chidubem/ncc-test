@@ -28,6 +28,9 @@ siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
 siteRouter.get('/faq', siteController.faq)
+siteRouter.get('/forgot_password', siteController.Forgot_Password)
+siteRouter.get('/otp', siteController.OTP)
+siteRouter.get('/new_password', siteController.NewPassword)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
@@ -116,7 +119,7 @@ siteRouter.get('/knowledge-base', (req,res) => {
 siteRouter.get('/cowpie', (req,res) => {
 res.render('knowledge_base/cowpie', {
     layout: 'knowledge_dashboard',
-    title : 'Knowledge Base - Cowpie',
+    title : 'Knowledge Base - Cowpea',
     crop : "Cowpea"
      });
 
@@ -149,6 +152,34 @@ siteRouter.get('/rice', (req,res) => {
     });
 
 })
+
+siteRouter.get('/recommendation', (req,res) => {
+    res.render('knowledge_base/recommendation', {
+        layout: 'knowledge_dashboard',
+        title : 'Knowledge Base - Recommendation'
+       });
+   
+   })
+
+
+siteRouter.post('/forgot_password', async (req, res)=>{
+    let pass=await siteController.ForgotPassword(req, res)
+    // res.json({data : pass}).send().status(200)
+    
+ })
+
+//  siteRouter.get('/otp', (req, res)=>{
+//     res.render('/otp', {
+//        form_banner:'Group.png',
+//        title: 'OTP',
+//        layout : 'form',
+//     });
+//  })
+
+   
+
+
+ 
 
 
 module.exports=siteRouter; 

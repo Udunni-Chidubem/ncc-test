@@ -158,7 +158,7 @@ body {
 
 .nav-links li a {
   text-decoration: none;
-  color: #334d6e;
+  color: #192a3e;;
 }
 
 #settings {
@@ -182,7 +182,12 @@ body {
 }
 
 @media (max-width: 768px) {
-
+  .s_chart{
+    width: 100% !important;
+  }
+.home{
+  width: 100% !important;
+}
   /*(min-width: 500px) and*/
   .sidebar {
     width: 50%;
@@ -386,7 +391,8 @@ body {
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -443,6 +449,9 @@ body {
 
 
 @media (max-width: 320px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .home{
     width: calc(100%);
   }
@@ -650,7 +659,8 @@ body {
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -690,6 +700,9 @@ body {
 }
 
 @media (max-width: 299px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .home{
     width: calc(100%);
   }
@@ -893,7 +906,8 @@ body {
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -2153,6 +2167,9 @@ input[type="number"] {
 }
 
 @media (min-width: 321px) and (max-width: 580px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .home{
     width: calc(100%);
   }
@@ -2319,6 +2336,9 @@ input[type="number"] {
 }
 
 @media (max-width: 600px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .home{
     width: calc(100%);
   }
@@ -2524,6 +2544,9 @@ input[type="number"] {
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .card_products {
     width: 462px;
   }
@@ -2745,6 +2768,9 @@ input[type="number"] {
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1080px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .card_products {
     width: 462px;
   }

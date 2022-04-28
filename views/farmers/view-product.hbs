@@ -5,7 +5,7 @@
         	 <div class="search-tip">
                 <p ><i class="fa fa-lightbulb"></i> Recommendation: You need 3kg of maize seed for your farm</p>
              </div>
-             <div class="product-grid">
+             <div class="product-grid products-content">
              	<div class="product-img">
              		 <img src="../../product_images/{{product.file_name}}" alt="Product Image">
              	</div>
@@ -21,10 +21,10 @@
 					
 					{{!-- <button class="btn btn-save-product mr-2"><i class="fa fa-cart-add"></i>Add to Cart</button> --}}
                      <button class="btn btn-save-product mr-2 addCart" data-prodid="{{product.id}}"> <i class='bx bx-cart-add'></i>Add to Cart</button>
-	                <button class="btn btn-place-order">Place Order</button>
+	                <button class="btn btn-place-order" data-prodid="{{product.id}}">Place Order</button>
 	                {{!-- <button class="btn btn-place-order" onclick="window.location.href='./payment_page_preview'">Place Order</button> --}}
              	</div>
-             	<div class="view-product-price">                
+             	<div class="view-product-price product-price">                
              	    <p>Unit Price</p>
                   <h4 class="price_{{product.id}}" id="price"></h4>
                   <div class="input-field product-size">
