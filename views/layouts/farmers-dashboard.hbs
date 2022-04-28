@@ -259,7 +259,11 @@
         })
         .then(r => r.json())
         .then(response => {
-          
+           if($(this).hasClass('btn-place-order')){
+              $(this).html('<i class="bx bx-cart-add"></i>Place Order')
+            }else{
+              $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+            }
           if(response.statusCode == 402){
             let msg = ''
             let errors = response.data
@@ -272,12 +276,9 @@
             error_toastr(response.message)
           }else{
             if($(this).hasClass('btn-place-order')){
-              $(this).html('<i class="bx bx-cart-add"></i>Place Order')
               setTimeout(function(){
                 window.location.href='/farmer/checkout/preview?product='+pid+'&size='+s+'&qty='+q;
               }, 3000)
-            }else{
-              $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
             }
             success_toastr(response.message)
           }
