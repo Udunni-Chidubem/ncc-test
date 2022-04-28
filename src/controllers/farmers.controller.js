@@ -352,6 +352,7 @@ module.exports={
 
         return cartCount
     },
+
     addToCart: async (req, res) => {
         const user = await req.user
         const {pid, price, size, quantity} = req.body

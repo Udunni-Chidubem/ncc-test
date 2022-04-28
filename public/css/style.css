@@ -321,7 +321,7 @@ body {
   }
 
   .card_home {
-    width: 353px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -372,9 +372,13 @@ body {
   .table-responsives {
     overflow-x: auto;
   }
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
+  }
 
   .table_t_info {
-    width: 375px !important;
+    /* width: 375px !important; */
+    width: 100%;
   }
 
   .create_p {
@@ -439,6 +443,9 @@ body {
 
 
 @media (max-width: 320px) {
+  .home{
+    width: calc(100%);
+  }
 
   /* (min-width: 300px) and */
   .sidebar {
@@ -575,7 +582,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -625,6 +632,9 @@ body {
 
   .table-responsives {
     overflow-x: auto;
+  }
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
   }
 
   .table_info {
@@ -680,7 +690,9 @@ body {
 }
 
 @media (max-width: 299px) {
-
+  .home{
+    width: calc(100%);
+  }
   /*(min-width: 100px) and*/
   .sidebar {
     width: 50%;
@@ -815,7 +827,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -864,11 +876,15 @@ body {
   }
 
   .table-responsives {
-    overflow-x: auto;
+    overflow-x: auto ;
   }
 
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
+  }
   .table_t_info {
-    width: 375px !important;
+    /* width: 375px !important; */
+    width: 100%;
   }
 
   .create_p {
@@ -1793,6 +1809,9 @@ input[type="number"] {
 .t_info_head {
   background: #049648;
 }
+.t_info__head {
+  background: #FFB946;
+}
 
 .t_info_row1 {
   background: #eefdf1 !important;
@@ -1927,7 +1946,7 @@ input[type="number"] {
 } */
 
 .table_img img {
-  width: 100%;
+  /* width: 100%; */
   height: 75px;
   object-fit: cover;
 }
@@ -2134,6 +2153,9 @@ input[type="number"] {
 }
 
 @media (min-width: 321px) and (max-width: 580px) {
+  .home{
+    width: calc(100%);
+  }
   .col-4.c0l_4 {
     width: 90.667% !important;
   }
@@ -2297,6 +2319,9 @@ input[type="number"] {
 }
 
 @media (max-width: 600px) {
+  .home{
+    width: calc(100%);
+  }
   .card_products {
     width: 322px;
   }
@@ -2605,7 +2630,7 @@ input[type="number"] {
   }
 
   .card_home {
-    width: 735px !important;
+    width: 100% !important;
   }
 
   .col__4 {
@@ -2826,7 +2851,7 @@ input[type="number"] {
     width: 100% !important;
   } */
   .card_home {
-    width: 628px !important;
+    width: 100% !important;
   }
 
   .col__4 {
@@ -3124,4 +3149,22 @@ input[type="number"] {
 .extension-form-container {
   margin: 4rem auto;
 
+}
+
+.container.table-responsives.table_t_info {
+  overflow-x: auto;
+}
+.row.row-cols-2.row-cols-lg-6.g-2.g-lg-2.col_rma.m-0 {
+  width: 100%;
+  justify-content: space-around;
+}
+.row.row-cols-2.row-cols-lg-6.g-2.g-lg-2.mb-2.col_rma {
+  width: 100%;
+  justify-content: space-around;
+}
+.farmer_dashboard_table.table-responsives {
+  overflow-x: auto;
+}
+.row.r_charts {
+  justify-content: left;
 }

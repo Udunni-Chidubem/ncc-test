@@ -1,4 +1,5 @@
 require('dotenv').config()
+const {QueryTypes } = require("sequelize");
 const db = require('../models')
 const utils = require('../helpers/utils');
 const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog}  = db
@@ -375,4 +376,45 @@ module.exports={
         console.log(order)
         return { order, farmer, orderStatus };
     },
+
+    getFarmerlist: async (req,res) => {
+        let sql = "SELECT count(u.id) as count from user u join farmer f on u.id = f.user_id where u.status = '1' ";
+        let farmeractivelist = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        console.log(farmeractivelist)
+
+        let sql2 = "SELECT count(u.id) as count from user u join farmer f on u.id = f.user_id where u.status = '0' ";
+        let farmerinactivelist = await db.rest.query(sql2, { type: QueryTypes.SELECT })
+        console.log(farmerinactivelist)
+
+        let sql3 = "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status = '1' ";
+        let seedcompanyactivelist = await db.rest.query(sql3, { type: QueryTypes.SELECT })
+        console.log(seedcompanyactivelist)
+
+        let sql4 = "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status = '0' ";
+        let seedcompanyinactivelist = await db.rest.query(sql4, { type: QueryTypes.SELECT })
+        console.log(seedcompanyinactivelist)
+
+        let SQL5 = "SELECT count(u.id) as count from user u join seedtrader st on u.id = st.user_id where u.status = '1' ";
+        let seedtraderactivelist = await db.rest.query(SQL5, { type: QueryTypes.SELECT })
+        console.log(seedtraderactivelist)
+
+        let sql6 = "SELECT count(u.id) as count from user u join seedtrader st on u.id = st.user_id where u.status = '0' ";
+        let seedtraderinactivelist = await db.rest.query(sql6, { type: QueryTypes.SELECT })
+        console.log(seedtraderinactivelist)
+
+
+        return {farmerinactivelist,farmeractivelist,seedcompanyactivelist,seedcompanyinactivelist,seedtraderactivelist,seedtraderinactivelist}
+    },
+
+    getProductStatus: async (req,res) => {
+        let sql = "SELECT count(id) as count from product where u.status = '1' ";
+        let activeProduct = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        console.log(activeProduct)
+
+        let sql2 = "SELECT count(id) count from product where u.status = '0' ";
+        let inactiveProduct = await db.rest.query(sql2, { type: QueryTypes.SELECT })
+        console.log(inactiveProduct)
+
+        return {activeProduct, inactiveProduct}
+    }
 }

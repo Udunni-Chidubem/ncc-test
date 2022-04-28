@@ -1,3 +1,30 @@
+{{#farmerinactivelist}}
+<p id="farmercount_1" farmerinactivelist="{{count}}"> </p>
+{{/farmerinactivelist}}
+
+{{#farmeractivelist}}
+<p id="farmercount_2" farmeractivelist="{{count}}"> </p>
+{{/farmeractivelist}}
+
+{{!-- seed company --}}
+{{#seedcompanyinactivelist}}
+<p id="seedcompany_1" seedcompanyinactivelist="{{count}}"> </p>
+{{/seedcompanyinactivelist}}
+
+{{#seedcompanyactivelist}}
+<p id="seedcompany_2" seedcompanyactivelist="{{count}}"> </p>
+{{/seedcompanyactivelist}}
+
+{{!-- seed trader --}}
+
+{{#seedtraderinactivelist}}
+<p id="seedtrader_1" seedtraderinactivelist="{{count}}"> </p>
+{{/seedtraderinactivelist}}
+
+{{#seedtraderactivelist}}
+<p id="seedtrader_2" seedtraderactivelist="{{count}}"> </p>
+{{/seedtraderactivelist}}
+
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 ">
 
@@ -140,10 +167,10 @@
   <div class="col-12">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <div class="row ">
-              <div class="col-lg-3 col-md-3">
+        <div class="row ">
+          <div class="col-12 ">
+            <div class="row  r_charts">
+              <div class="col-lg-3 col-md-3 " style="width:150px;">
                 <div class=" ">
                   <span class="sp_a_accout "></span>
                   <p class="a_accout pl-3"> Active Account</p>
@@ -154,17 +181,17 @@
 
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="farmer" width="500" height="500"></canvas>
+                  <canvas id="farmer" width="200" height="200"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedcompany" width="500" height="500"></canvas>
+                  <canvas id="seedcompany" width="200" height="200"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedtrader" width="500" height="500"></canvas>
+                  <canvas id="seedtrader" width="200" height="200"></canvas>
                 </div>
               </div>
             </div>
@@ -206,6 +233,28 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
+
+  /* farmer count*/
+  const farmercount_1 = document.getElementById('farmercount_1');
+  farmerinactivelist = farmercount_1.getAttribute("farmerinactivelist")
+
+  const farmercount_2 = document.getElementById('farmercount_2');
+  farmeractivelist = farmercount_2.getAttribute("farmeractivelist")
+
+  /* seed company count*/
+  const seedcompany_1 = document.getElementById('seedcompany_1');
+  seedcompanyinactivelist = seedcompany_1.getAttribute("seedcompanyinactivelist")
+
+  const seedcompany_2 = document.getElementById('seedcompany_2');
+  seedcompanyactivelist = seedcompany_2.getAttribute("seedcompanyactivelist")
+
+  /* seed trader count*/
+  const seedtrader_1 = document.getElementById('seedtrader_1');
+  seedtraderinactivelist = seedtrader_1.getAttribute("seedtraderinactivelist")
+
+  const seedtrader_2 = document.getElementById('seedtrader_2');
+  seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
+
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
@@ -245,7 +294,7 @@
 
 
   var xactorValues = ["Active Account", "Inactive Account"];
-  var yfarmerValues = [55, 19];
+  var yfarmerValues = [farmeractivelist, farmerinactivelist];
   var barColors = [
     "#FFB946",
     "#5DCD6D",
@@ -270,7 +319,7 @@
   });
 
 
-  var yseedcompanyValues = [55, 19];
+  var yseedcompanyValues = [seedcompanyactivelist, seedcompanyinactivelist];
 
   new Chart("seedcompany", {
     type: "doughnut",
@@ -289,7 +338,7 @@
     }
   });
 
-  var yseedtraderValues = [55, 19];
+  var yseedtraderValues = [seedtraderinactivelist, seedtraderactivelist];
 
   new Chart("seedtrader", {
     type: "doughnut",
