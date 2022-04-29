@@ -12,6 +12,11 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let isVerified = await utils.isVerified(user)
     let farmerCount = await adminController.getFarmerCount(req, res)
     let companyCount = await adminController.getCompanyCount(req, res)
+    let user_status = await adminController.getUserStatus(req, res)
+    let user_role = await adminController.getUserRole(req, res)
+
+    console.log(user_role)
+
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
@@ -19,11 +24,13 @@ adminRouter.get('/dashboard', async (req, res)=>{
         username : user.username,
         isVerified,
         farmerCount,
-        companyCount
+        companyCount,
+        user_status: JSON.stringify(user_status),
+        user_role
     })
 });
 
-adminRouter.get('/user/create', async (req, res)=>{
+adminRouter.get('/users/create', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
@@ -84,7 +91,11 @@ adminRouter.get('/products', async (req, res)=>{
     });
     let rejectedProducts = await products.filter(e=>{
         return e.status == 0
+    });
+    let revokedProducts = await products.filter(e=>{
+        return e.status == 2
     })
+
     res.render('admin/product-mgt', {
         layout : 'admin-dashboard',
         title : 'Product Management',
@@ -92,7 +103,8 @@ adminRouter.get('/products', async (req, res)=>{
         isVerified,
         products,
         approvedProducts,
-        rejectedProducts
+        rejectedProducts,
+        revokedProducts
     })
 });
 
@@ -183,7 +195,7 @@ adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
     // company_name = req.params.company_name;
     // let company = await utils.getCompanyProfile(user)
     transaction_id = req.params.transaction_id;
-    console.log(req.params.id)
+
     let {order, farmer, orderStatus} = await adminController.getOrder(req.params.transaction_id, req.params.id, req.params.company_id)
     res.render('admin/order-view', {
         layout : 'admin-dashboard',

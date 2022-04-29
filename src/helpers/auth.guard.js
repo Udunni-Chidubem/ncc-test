@@ -23,6 +23,9 @@ module.exports = {
 
             if(role == 'admin')
                 return res.redirect('admin/dashboard')
+
+            if(role == 'nasc')
+                return res.redirect('admin/dashboard')
         }else{
             return next()
         }
@@ -42,6 +45,9 @@ module.exports = {
                 return res.redirect('seed-company/dashboard')
             
             if(role == 'admin')
+                return res.redirect('admin/dashboard')
+
+            if(role == 'nasc')
                 return res.redirect('admin/dashboard')
     },
     //this will be called on all farmers routes to see if the user role if farmer
@@ -84,12 +90,13 @@ module.exports = {
     adminPermission :async (req, res, next)=>{
         let user = JSON.parse(JSON.stringify(await req.user))
        // console.log(user.UserRole.Role)
-        if(user.UserRole.Role.role_name=='admin'){
+        if(user.UserRole.Role.role_name=='admin' || user.UserRole.Role.role_name=='nasc' ){
             return next()
         }else{
             req.logOut()
-            req.flash("error", "forbidden! this is not a farmer account")
+            req.flash("error", "Unauthorized")
             res.redirect("/login")
         }
     }
+
 }

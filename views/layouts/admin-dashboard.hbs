@@ -21,6 +21,8 @@
               <a class="nav-link" href="#"><i class='bx bx-library'></i> Knowledge Base</a>
             </li>
 
+            {{#if (or  (eq user_role.Role.role_name nasc) 
+                      (eq user_role.Role.role_name admin))}}
             <li class="nav-item dropdown">
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
               <ul class="dropdown-content arrow-top">
@@ -32,7 +34,9 @@
                   </li>
                 </ul>
             </li>
+            {{/if}}
 
+             {{#if (eq user_role.Role.role_name admin)}}
             <li class="nav-item">
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
             </li>
@@ -40,6 +44,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
             </li>
+            {{/if}}
              
           </ul>
         
