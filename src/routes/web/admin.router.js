@@ -15,7 +15,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
 
-    console.log(user_role)
+    console.log(user_role.Role.role_name)
 
 
     res.render('admin/dashboard', {
@@ -26,7 +26,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
         farmerCount,
         companyCount,
         user_status: JSON.stringify(user_status),
-        user_role
+        user_role: user_role.Role.role_name
     })
 });
 
@@ -34,6 +34,8 @@ adminRouter.get('/users/create', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+
 
     res.render('admin/create-user', {
         layout : 'admin-dashboard',
@@ -42,7 +44,8 @@ adminRouter.get('/users/create', async (req, res)=>{
         username : user.username,
         prev_link: '/admin/all-users',
         isVerified,
-        roles : roles
+        roles : roles,
+        user_role: user_role.Role.role_name
     })
 });
 
@@ -53,6 +56,8 @@ adminRouter.get('/users', async (req, res)=>{
     let traders = await adminController.getTraders(req, res)
     let companies= await adminController.getCompanies(req, res)
     let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+
     res.render('admin/all-users', {
         layout : 'admin-dashboard',
         title : 'User Management',
@@ -61,7 +66,8 @@ adminRouter.get('/users', async (req, res)=>{
         isVerified,
         farmers,
         companies,
-        traders
+        traders,
+        user_role: user_role.Role.role_name
     })
 });
 
@@ -69,6 +75,7 @@ adminRouter.get('/products/:id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let product = await adminController.viewProduct(req, res);
+    let user_role = await adminController.getUserRole(req, res)
 
     
     res.render('admin/view-product', {
@@ -78,7 +85,8 @@ adminRouter.get('/products/:id', async (req, res)=>{
         prev_link: '/admin/products',
         username : user.username,
         isVerified,
-        product
+        product,
+        user_role: user_role.Role.role_name
     })
 });
 
@@ -95,6 +103,8 @@ adminRouter.get('/products', async (req, res)=>{
     let revokedProducts = await products.filter(e=>{
         return e.status == 2
     })
+    let user_role = await adminController.getUserRole(req, res)
+
 
     res.render('admin/product-mgt', {
         layout : 'admin-dashboard',
@@ -104,7 +114,8 @@ adminRouter.get('/products', async (req, res)=>{
         products,
         approvedProducts,
         rejectedProducts,
-        revokedProducts
+        revokedProducts,
+        user_role: user_role.Role.role_name
     })
 });
 
@@ -123,6 +134,8 @@ adminRouter.get('/users/:id', async (req, res)=>{
         trader = await adminController.getOneTrader(req, res);
     
     balance = await adminController.getWallet(req, res);
+    let user_role = await adminController.getUserRole(req, res)
+
 
     res.render('admin/view-user', {
         layout : 'admin-dashboard',
@@ -135,7 +148,8 @@ adminRouter.get('/users/:id', async (req, res)=>{
         company,
         trader,
         products,
-        balance
+        balance,
+        user_role: user_role.Role.role_name
     })
 });
 adminRouter.get('/products/approval/:id/:status', async (req, res)=>{
@@ -175,6 +189,8 @@ adminRouter.get("/orders", async (req, res)=>{
     let fulfilledOrders = await orders.filter(e=>{
         return e.status == 3
     })
+    let user_role = await adminController.getUserRole(req, res)
+
     
     res.render('admin/orders', {
         layout : 'admin-dashboard',
@@ -185,7 +201,8 @@ adminRouter.get("/orders", async (req, res)=>{
         pendingOrders,
         activeOrders,
         shippedOrders,
-        fulfilledOrders
+        fulfilledOrders,
+        user_role: user_role.Role.role_name
     })
 })
 
@@ -195,6 +212,8 @@ adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
     // company_name = req.params.company_name;
     // let company = await utils.getCompanyProfile(user)
     transaction_id = req.params.transaction_id;
+    let user_role = await adminController.getUserRole(req, res)
+
 
     let {order, farmer, orderStatus} = await adminController.getOrder(req.params.transaction_id, req.params.id, req.params.company_id)
     res.render('admin/order-view', {
@@ -205,7 +224,8 @@ adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
         orderStatus,
         username : user.username,
         isVerified,
-        transaction_id: transaction_id
+        transaction_id: transaction_id,
+        user_role: user_role.Role.role_name
     })
 });
 

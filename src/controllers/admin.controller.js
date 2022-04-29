@@ -389,10 +389,8 @@ module.exports={
             include : [
                 {
                     model : Role
-
                 }
-            ],
-            raw: true
+            ]
         })
 
         return user_role
