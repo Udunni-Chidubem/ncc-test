@@ -259,7 +259,11 @@
         })
         .then(r => r.json())
         .then(response => {
-          $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+           if($(this).hasClass('btn-place-order')){
+              $(this).html('<i class="bx bx-cart-add"></i>Place Order')
+            }else{
+              $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+            }
           if(response.statusCode == 402){
             let msg = ''
             let errors = response.data
