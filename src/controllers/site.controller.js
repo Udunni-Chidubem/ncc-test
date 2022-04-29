@@ -88,10 +88,18 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-    otp: async (req,res) => {
+    OTP: async (req,res) => {
         res.render('site/otp',{
             form_banner:'Group.png',
             title: 'OTP',
+            layout : 'form',
+            errors : req.flash('errors')
+        });
+    },
+    NewPassword: async (req,res) => {
+        res.render('site/new_password',{
+            form_banner:'Group.png',
+            title: 'New-Password',
             layout : 'form',
             errors : req.flash('errors')
         });
@@ -325,5 +333,7 @@ module.exports = {
          return pass;
         
     }
+
+    
 
 }
