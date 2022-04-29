@@ -39,34 +39,27 @@
                               <div class="col-sm-6">
                                 <label for="dob" class="input_form">Date of Birth </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <input
-                                        style="color:rgb(58, 56, 56);"
-                                        width="312"
-                                        type="numeric" 
-                                        class="form-control border-0 border-bottom" 
-                                        aria-label="Sizing example input" 
-                                        aria-describedby="inputGroup-sizing-sm"
-                                        name="date_of_birth"
-                                        value="{{ farmerData.date_of_birth }}"
-                                        data-date-format="dd/mm/yyyy"
-                                        id="dob"
-                                        max="2019-12-31"
-                                        data-dob="{{ farmerData.date_of_birth }}"
-                                          
-                                    />
+                                    <select name="date_of_birth" class="form-select border-0 border-bottom"  value="{{ farmerData.date_of_birth }}" data-dob="{{ farmerData.date_of_birth }}">
+                                     <option value="">Select Age Range</option> 
+                                     <option value="1">15-19</option>   
+                                     <option value="2">20-30</option> 
+                                     <option value="3">31-40</option>
+                                     <option value="4">41-50</option>
+                                     <option value="5">51-60</option>
+                                    </select>
                                   </div>
-                                  <script>
+                                  {{!-- <script>
                                         $('#dob').datepicker({
                                             uiLibrary: 'materialdesign',
                                             format:  'mm/dd/yyyy',
                                             maxDate: '12/12/2010',
                                             value: '{{dateFormat farmerData.date_of_birth "DD/MM/YYYY"}}',
                                             keyboardNavigation: true,
-                                            // modal: true, 
-                                            // header: true, 
-                                            // footer: true
+                                            modal: true, 
+                                            header: true, 
+                                            footer: true
                                         })
-                                    </script>
+                                    </script> --}}
                               </div>
 
                               

@@ -399,9 +399,41 @@ MEDIA QUERIES
 */
 
 @media (min-width:200px) and (max-width:320px) {
+  .mainpage p{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+    text-align: center;
+  }
 
   .mainpage{
     width: 300px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+
+  }
+
+  .mainpage li{
+    /* width: 300px; */
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 
   }
 
@@ -416,10 +448,18 @@ MEDIA QUERIES
 
   .knowledge-content{
     display: grid;
-    width: 300px;
+    width: 320px;
     /* grid-template-columns: auto auto; */
   }
 
-  .
+  .description-grid{
+    display: grid;
+    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-rows: repeat(1, 1fr);
+  }
   
+  /* .text-descp{
+    grid-column-start: 1;
+    grid-column-end: 5;
+  } */
 }
