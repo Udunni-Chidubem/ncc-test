@@ -499,6 +499,10 @@ MEDIA QUERIES
     padding: 0px 0px 0px 0px;
   }
 
+  .pest-pictures{
+    display: none;
+  }
+
   /* .c70{
     overflow: auto; 
     text-overflow: ellipsis; 
@@ -599,6 +603,10 @@ MEDIA QUERIES
     text-overflow: ellipsis !important;
     word-wrap: break-word !important;
     padding: 0px 0px 0px 0px;
+  }
+
+  .pest-pictures{
+    display: none;
   }
 
   /* .c70{
@@ -703,6 +711,10 @@ MEDIA QUERIES
     padding: 0px 0px 0px 0px;
   }
 
+  .pest-pictures{
+    display: none;
+  }
+
   /* .c70{
     overflow: auto; 
     text-overflow: ellipsis; 
@@ -803,6 +815,10 @@ MEDIA QUERIES
     text-overflow: ellipsis !important;
     word-wrap: break-word !important;
     padding: 0px 0px 0px 0px;
+  }
+
+  .pest-pictures{
+    display: none;
   }
 
   /* .c70{
