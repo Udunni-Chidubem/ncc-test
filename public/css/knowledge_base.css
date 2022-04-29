@@ -4,12 +4,15 @@
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 
 */
+<<<<<<< HEAD
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+=======
+>>>>>>> 17907df1e9ae39d43d2ea8acbef257fb59e2c4bd
 
 p {
   margin-top: 0px;
@@ -241,6 +244,7 @@ h3 {
 .description-grid {
   display: grid;
   grid-template-columns: repeat(5, 234px);
+  /* grid-template-columns: repeat(2, auto); */
   grid-row-gap: 35px;
   /* margin-left: 10px; */
 }
@@ -400,6 +404,7 @@ TABLE
 } */
 
 table {
+  table-layout: fixed;
   border-top: 1px solid black;
   border-right: 1px solid black;
   text-decoration: black;
@@ -412,6 +417,7 @@ td {
   border-left: 1px solid black;
   text-decoration: black;
 }
+<<<<<<< HEAD
 .dropdown .dropbtn {
   font-size: 17px;
   border: none;
@@ -476,4 +482,118 @@ td {
   .mini-sidebar{
     display: none;
   }
+=======
+
+.dub_image{
+  display: none;
+ 
+}
+
+/* 
+
+MEDIA QUERIES 
+
+*/
+
+@media (min-width:200px) and (max-width:320px) {
+  .mainpage p{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+    text-align: center;
+  }
+
+  .mainpage{
+    width: 300px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+
+  }
+
+  .mainpage li{
+    /* width: 300px; */
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+
+  }
+
+  .knowledgeBody-grid{
+    display: grid;
+    grid-template-columns: 80px 1fr;
+  }
+
+  .mini-sidebar{
+    display: none;
+  }
+
+  .knowledge-content{
+    display: grid;
+    width: 320px;
+    /* grid-template-columns: auto auto; */
+  }
+
+  .description-grid,
+  .main-pests{
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(1, 1fr);
+    /* grid-template-columns: repeat(1, 150px ); */
+  }
+  
+  .text-descp,
+  .pests-text1,
+  .pests-text2,
+  .pests-text3{
+    grid-column-start: 1;
+    grid-column-end: 6;
+  }
+
+  .pic-descp,
+  .pic-pests1, 
+  .pic-pests2, 
+  .pic-pests3,
+  .pests-image{
+    display: none;
+   
+  }
+
+  .dub-image{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 35px;
+  }
+
+  table{
+    font-size: smaller;
+    width: 100%;
+    overflow: scroll !important;
+    text-overflow: ellipsis !important;
+    word-wrap: break-word !important;
+    padding: 0px 0px 0px 0px;
+  }
+
+  /* .c70{
+    overflow: auto; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+  } */
+
+>>>>>>> 17907df1e9ae39d43d2ea8acbef257fb59e2c4bd
 }

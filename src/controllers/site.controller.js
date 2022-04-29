@@ -7,6 +7,8 @@ const uniqid = require('uniqid');
 const directoryPath = './src/data/'
 const path = require('path')
 const fs = require('fs')
+var otpGenerator = require('otp-generator');
+// const {OTP} = require('../otp');
 
 
 module.exports = {
@@ -331,9 +333,29 @@ module.exports = {
              }
          });
          return pass;
+    },
+
+    OTP: async (req, res)=>{
+
+        //Generate OTP 
+    const otp = otp-Generator.generate(6, { alphabets: false, upperCase: false, specialChars: false });
+    const now = new Date();
+    const expiration_time = AddMinutesToDate(now,10);
+    console.log(otp)
+
+    // Create OTP instance in DB
+    const otp_instance = await OTP.create({
+      otp: otp,
+      expiration_time: expiration_time
+    });
         
+    phone_message=message(otp)
+
+   
     }
 
-    
+
+
+
 
 }
