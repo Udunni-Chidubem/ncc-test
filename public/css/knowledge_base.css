@@ -4,6 +4,7 @@
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 
 */
+
 p {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -219,6 +220,7 @@ h3 {
 .description-grid {
   display: grid;
   grid-template-columns: repeat(5, 234px);
+  /* grid-template-columns: repeat(2, auto); */
   grid-row-gap: 35px;
   /* margin-left: 10px; */
 }
@@ -378,6 +380,7 @@ TABLE
 } */
 
 table {
+  table-layout: fixed;
   border-top: 1px solid black;
   border-right: 1px solid black;
   text-decoration: black;
@@ -391,6 +394,10 @@ td {
   text-decoration: black;
 }
 
+.dub_image{
+  display: none;
+ 
+}
 
 /* 
 
@@ -452,14 +459,50 @@ MEDIA QUERIES
     /* grid-template-columns: auto auto; */
   }
 
-  .description-grid{
+  .description-grid,
+  .main-pests{
     display: grid;
-    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-columns: repeat(5, 60px);
     grid-template-rows: repeat(1, 1fr);
+    /* grid-template-columns: repeat(1, 150px ); */
   }
   
-  /* .text-descp{
+  .text-descp,
+  .pests-text1,
+  .pests-text2,
+  .pests-text3{
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 6;
+  }
+
+  .pic-descp,
+  .pic-pests1, 
+  .pic-pests2, 
+  .pic-pests3,
+  .pests-image{
+    display: none;
+   
+  }
+
+  .dub-image{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 35px;
+  }
+
+  table{
+    font-size: smaller;
+    width: 100%;
+    overflow: scroll !important;
+    text-overflow: ellipsis !important;
+    word-wrap: break-word !important;
+    padding: 0px 0px 0px 0px;
+  }
+
+  /* .c70{
+    overflow: auto; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
   } */
+
 }
