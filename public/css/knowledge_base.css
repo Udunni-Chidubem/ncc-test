@@ -387,3 +387,36 @@ td {
   border-left: 1px solid black;
   text-decoration: black;
 }
+
+
+/* 
+
+MEDIA QUERIES 
+
+*/
+
+@media (min-width:200px) and (max-width:320px) {
+
+  .mainpage{
+    width: 300px;
+
+  }
+
+  .knowledgeBody-grid{
+    display: grid;
+    grid-template-columns: 80px 1fr;
+  }
+
+  .mini-sidebar{
+    display: none;
+  }
+
+  .knowledge-content{
+    display: grid;
+    width: 300px;
+    /* grid-template-columns: auto auto; */
+  }
+
+  .
+  
+}

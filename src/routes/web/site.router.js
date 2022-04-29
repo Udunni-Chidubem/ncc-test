@@ -164,19 +164,19 @@ siteRouter.get('/recommendation', (req,res) => {
 
 siteRouter.post('/forgot_password', async (req, res)=>{
     let pass=await siteController.ForgotPassword(req, res)
-    // res.json({data : pass}).send().status(200)
-    
-
+    // return res.status(400).send(pass)
 
  })
 
 
-//  siteRouter.get('/otp', (req, res)=>{
+//  siteRouter.post('/otp', async (req, res)=>{
+//   let result = await siteController.OTP(req, res)
 //     res.render('/otp', {
 //        form_banner:'Group.png',
 //        title: 'OTP',
 //        layout : 'form',
 //     });
+//     return result;
 //  })
 
    
