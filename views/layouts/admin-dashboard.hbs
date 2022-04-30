@@ -21,25 +21,34 @@
               <a class="nav-link" href="#"><i class='bx bx-library'></i> Knowledge Base</a>
             </li>
 
+
+            {{#if (or  (eq user_role "nigsims") 
+                      (eq user_role "admin"))}}
             <li class="nav-item dropdown">
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
-              <ul class="dropdown-content arrow-top">
+              <ul class="dropdown-content arrow-top"> 
+                {{#if (eq user_role "admin")}}
                   <li>
                     <a href="/admin/products">Product Management</a>
                   </li>
+                 {{/if}}
                   <li>
                     <a href="./orders">Order Management</a>
                   </li>
+                  
                 </ul>
             </li>
+            {{/if}}
 
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
-            </li>
+             {{#if (eq user_role "admin")}}
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
+              </li>
+            {{/if}}
              
           </ul>
         

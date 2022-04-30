@@ -5,7 +5,8 @@
   <div class="d-flex flex-row container mt-5">
     <div class="tab-btn active" data-id="all">ALL</div>
     <div class="tab-btn" data-id="approved">APPROVED</div>
-    <div class="tab-btn" data-id="rejected">REJECTED</div>
+    <div class="tab-btn" data-id="rejected">UNPUBLISHED</div>
+    <div class="tab-btn" data-id="revoked">REVOKED</div>
   </div>
   <div>
 
@@ -137,6 +138,49 @@
   </div>
 </div>
 <!-- end of single item -->
+
+<!-- Revoked Products -->
+  <div class="content" id="revoked">
+    <div class=" container table-responsives table_t_info">
+      <table class="table con t_info  table-borderless" id="product-table-revoked">
+        <thead class="t_info_head ">
+          <tr class="row-height">
+            <th scope="col">UPLOAD DATE</th>
+            <th scope="col">PRODUCT NAME/VARIANT</th>
+            <th scope="col">LOCAL NAME</th>
+            <th>COMPANY NAME</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">
+              <button class="btn download-btn ">Download Report</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each revokedProducts}}
+          <tr class="row-one row-height">
+            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+            <td scope="col"> <strong>{{this.local_name}}</strong></td>
+            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+            <td scope="col">
+             {{#if (eq this.status 1)}}
+                <span class="published">Published</span>
+                {{else if (eq this.status 0)}}
+                <span class="unpublished">Unpublished</span>
+                {{else}}
+                <span class="revoked_product">Revoked</span>
+                {{/if}}
+            </td>
+            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of single item -->
+
 <div class="paginate-wrapper">
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">

@@ -65,6 +65,7 @@ const seedAdminData = async () => {
 				}
 			}
 		}
+
 		let n = await Role.findOne({
 			where : {role_name : 'nasc'}
 		})
@@ -74,12 +75,32 @@ const seedAdminData = async () => {
 				role_name : 'nasc'
 			}, {transaction : transaction});
 		}
+
+		let r = await Role.findOne({
+			where : {role_name : 'rra'}
+		})
+		
+		if(!r){
+			await Role.create({
+				role_name : 'rra'
+			}, {transaction : transaction});
+		}
+
+		let ns = await Role.findOne({
+			where : {role_name : 'nigsims'}
+		})
+		
+		if(!ns){
+			await Role.create({
+				role_name : 'nigsims'
+			}, {transaction : transaction});
+		}
 		transaction.commit();
+
 	}catch(e){
 		transaction.rollback();
 		console.log(e)
 	}
-
 
 }
 

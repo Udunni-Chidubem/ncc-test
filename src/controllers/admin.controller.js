@@ -3,7 +3,7 @@ const db = require('../models')
 const utils = require('../helpers/utils');
 const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
-const { Op } = require("sequelize");
+const { Op, QueryTypes } = require("sequelize");
 
 
 module.exports={
@@ -12,7 +12,9 @@ module.exports={
             where : {
              [Op.or] :   [
                     {role_name : 'admin'},
-                    {role_name : 'nasc'}
+                    {role_name : 'nasc'},
+                    {role_name : 'rra'},
+                    {role_name : 'nigsims'}
                 ]
                     
             },
@@ -42,7 +44,6 @@ module.exports={
          })
          farmers=JSON.stringify(farmers)
 
-         console.log(farmers)
 
         return JSON.parse(farmers)
     },
@@ -300,7 +301,6 @@ module.exports={
 
 
         orders = JSON.stringify(orders);
-        console.log(orders)
         return JSON.parse(orders);
     },
 
@@ -367,4 +367,32 @@ module.exports={
         console.log(order)
         return { order, farmer, orderStatus };
     },
+     getUserStatus:async (req, res)=>{
+        let f_sql = "SELECT u.status, count(f.id) as f_count from farmer f join user u WHERE f.user_id = u.id group by u.status";
+        let sc_sql = "SELECT u.status, count(sc.id) as sc_count from seedcompany sc join user u WHERE sc.user_id = u.id group by u.status";
+        let st_sql = "SELECT u.status, count(st.id) as st_count from seedtrader st join user u WHERE st.user_id = u.id group by u.status";
+        
+        let f_count = await db.rest.query(f_sql, {type: QueryTypes.SELECT})
+        let sc_count = await db.rest.query(sc_sql, {type: QueryTypes.SELECT})
+        let st_count = await db.rest.query(st_sql, {type: QueryTypes.SELECT})
+
+        f_count = JSON.parse(JSON.stringify(f_count))
+        sc_count = JSON.parse(JSON.stringify(sc_count))
+        st_count = JSON.parse(JSON.stringify(st_count))
+        return {f_count, sc_count,st_count};
+    },
+
+    getUserRole:async (req, res)=>{
+        const user = await req.user
+        let user_role = await UserRole.findOne({
+            where : { user_id: user.id},
+            include : [
+                {
+                    model : Role
+                }
+            ]
+        })
+
+        return user_role
+    }
 }
