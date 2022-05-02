@@ -162,11 +162,17 @@ siteRouter.get('/recommendation', (req,res) => {
    })
 
 
-siteRouter.post('/forgot_password', async (req, res)=>{
-    let pass=await siteController.ForgotPassword(req, res)
-    // return res.status(400).send(pass)
+// siteRouter.post('/forgot_password', async (req, res)=>{
+//     let pass=await siteController.ForgotPassword(req, res)
+//     return res.status(400).send(pass)
 
- })
+//  })
+
+// siteRouter.post('/otp', async (req, res)=>{
+//     let p=await siteController.OTP(req, res)
+//     return res.status(400).send(p)
+
+// })
 
 
 //  siteRouter.post('/otp', async (req, res)=>{
