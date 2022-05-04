@@ -993,3 +993,6 @@ input[name="Accountnumber"] {
 .ck_{
   width: 1rem;
 }
+.password_ck{
+  float: right;
+}
