@@ -346,7 +346,7 @@ module.exports = {
 
      // SAVING GENERATED OTP in DB
     //  const otp_gen = otp_code
-
+     
 
 
     // FINDING OTP in DB
