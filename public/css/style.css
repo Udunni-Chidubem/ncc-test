@@ -2304,7 +2304,7 @@ input[type="number"] {
   }
 
   .card_tab {
-    width: 600px !important;
+    width: 100% !important;
   }
 
 }
@@ -2649,7 +2649,8 @@ input[type="number"] {
   }
 
   .t_info {
-    width: 735px !important;
+  /* width: 735px !important; */
+  width: 100% !important;
   }
 
   .card_home {
@@ -3193,4 +3194,7 @@ input[type="number"] {
 }
 .row.r_charts {
   justify-content: left;
+}
+.table-responsives.table_t_info {
+  overflow-x: auto;
 }

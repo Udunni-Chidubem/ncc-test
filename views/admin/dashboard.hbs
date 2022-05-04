@@ -204,6 +204,9 @@
 
 </div>
 
+
+
+
 <div class="row chart_">
   <div class="col-4">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
@@ -219,13 +222,9 @@
   </div>
 
 </div>
+{{!-- <div class="stat" data-user="{{user_status}}">
 
-
-
-
-
-
-
+</div> --}}
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
@@ -255,6 +254,10 @@
   const seedtrader_2 = document.getElementById('seedtrader_2');
   seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
 
+  // let x = $('.stat').data('user')
+  // console.log(x)
+
+
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
@@ -263,7 +266,7 @@
       datasets: [{
 
         label: 'Monthly',
-        data: [7, 9, 12, 14],
+        data: [12, 64, 76, 676],
         backgroundColor: [
           '#F99746',
           '#F99746',
@@ -295,6 +298,8 @@
 
   var xactorValues = ["Active Account", "Inactive Account"];
   var yfarmerValues = [farmeractivelist, farmerinactivelist];
+  // var yfarmerValues = [x.f_count[0].f_count, x.f_count[1].f_count];
+  //var yfarmerValues = [33,99];
   var barColors = [
     "#FFB946",
     "#5DCD6D",
@@ -304,13 +309,16 @@
   new Chart("farmer", {
     type: "doughnut",
     data: {
-
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yfarmerValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Farmer"
@@ -320,17 +328,22 @@
 
 
   var yseedcompanyValues = [seedcompanyactivelist, seedcompanyinactivelist];
+  // var yseedcompanyValues = [x.sc_count[0].sc_count, x.sc_count[1].sc_count];
+  //var yseedcompanyValues = [12,33];
 
   new Chart("seedcompany", {
     type: "doughnut",
     data: {
-
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yseedcompanyValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Seed Company"
@@ -339,17 +352,22 @@
   });
 
   var yseedtraderValues = [seedtraderinactivelist, seedtraderactivelist];
+  // var yseedtraderValues = [x.st_count[0].st_count, x.st_count[1].st_count];
+  //var yseedtraderValues = [54,34];
 
   new Chart("seedtrader", {
     type: "doughnut",
     data: {
-      labels: xproductValues,
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yseedtraderValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Seed Traders"
@@ -377,6 +395,9 @@
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Total Products"
