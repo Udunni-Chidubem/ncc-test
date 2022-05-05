@@ -561,8 +561,8 @@ MEDIA QUERIES
   } */
 
 }
-<<<<<<< HEAD
-=======
+
+
 
 @media (min-width:321px) and (max-width:376px) {
   .mainpage p{
@@ -665,6 +665,7 @@ MEDIA QUERIES
   } */
 
 }
+
 
 @media (min-width:377px) and (max-width:426px) {
   .mainpage p{
@@ -874,5 +875,5 @@ MEDIA QUERIES
   .dub-image{
     display: none;
   }
->>>>>>> 889584116dc4019d2eeb213624b5726bbd7f75ce
+}
 }
