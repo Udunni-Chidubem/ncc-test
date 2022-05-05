@@ -1,71 +1,65 @@
-<div class="card">
-	<div class="card-body">
+<div class="container__">
+	<div class="card">
+		<div class="card-body">
 			<div class="order_id ">
-				Order 
+				Order {{transaction_id}}
 			</div>
 			<div class="table-responsives table_t_info">
 				<h4 class="order_header">Order information</h4>
 				<table class="table con t_info  table-border">
-           			<thead class="t_info_head ">
+					<thead class="t_info__head ">
 						<tr>
 							<th>Item</th>
-							<th>Variant</th>
-							<th>Date</th>
+							<th>Seller</th>
 							<th>Package Size</th>
 							<th>Qty</th>
 							<th>Price</th>
+							<th>Status</th>
 						</tr>
 					</thead>
+					{{#each transactions}}
 					<tbody class="t_info_body table-striped table-theme-secondary">
-						
 						<tr>
-							<td>{{Cart.Product.product_name}}</td>
-							<td>{{Cart.Product.variant}}</td>
-							<td>{{dateFormat TransactionLog.created_at "dddd, MMMM Do YYYY"}}</td>
-							<td>{{Cart.size}}</td>
-							<td>{{Cart.qty}}</td>
-							<td>&#8358; {{Cart.total_amount}}</td>
+							<td style="width: 150px;">
+								<p>{{this.Cart.Product.product_name}}</p>
+								<div class="table_img">
+									<a href=""><img src="../../product_images/{{this.Cart.Product.file_name}}"
+											alt="Product Image"></a>
+								</div>
+								<p>{{this.Cart.Product.description}}</p>
+							</td>
+							<td>kk</td>
+							<td>{{this.Cart.size}}Kg</td>
+							<td>{{this.Cart.qty}}</td>
+							<td>&#8358; {{this.Cart.unit_price}}</td>
+							<td> <span class=" approved  px-1"><i class="bi bi-dot"></i> approved</span>
+								<p>09/87/54</p>
+								<input class="form-check-input item-check-box" type="hidden" name="items"
+									value="{{this.Cart.Product.id}}" id="{{this.Cart.Product.id}}">
+								<p><button class="btn btn-save-product add-to-cart" data-prodid="{{this.id}}">Order
+										Again</button></p>
+							</td>
 						</tr>
-						{{/if}}
-						{{/each}}
 					</tbody>
+					{{/each}}
 				</table>
-				{{#ifNotEquals orderStatus.status 2}}
-				<form action="" method="post">
-					<input name="order" id="order" type="hidden" value="{{orderStatus.id}}">
-					<select name="status" id="status" required="required">
-						<option value="">Change Status</option>
-						{{#ifEquals orderStatus.status null }}
-							<option value="1">Ready to Ship</option>
-						{{/ifEquals}}
-						{{#ifEquals orderStatus.status 1 }}
-							<option value="2">Shipped</option>
-						{{/ifEquals}}
-					</select>
-
-					<hr>
-					{{/ifNotEquals}}
-					<div class="buyer_info">
-						<div>
-							<h4>Buyer Information</h4>
-							<p>Name: <span>{{farmer.firstname}} {{farmer.lastname}}</span> </p>
-							<p>Phone Number: <span>{{farmer.phone_no}}</span> </p>
-						</div>
-						
-						<div>
-							<h4>Shipping Address</h4>
-							<span>{{farmer.User.DeliveryInformation.address}} {{farmer.User.DeliveryInformation.LGA.name}}, {{farmer.User.DeliveryInformation.State.name}} </span>
-						</div>
-					</div>
-					{{#ifNotEquals orderStatus.status 2}}
-					<div class="float-end">
-						{{!-- <button type="button" class="btn btn-secondary">Save</button> --}}
-						
-							<button type="submit" class="btn btn-success">Submit</button>
-						
-					</div>
-				</form>
-				{{/ifNotEquals}}
 			</div>
-	</div>	
+			<hr>
+			<div class="buyer_info">
+				<div>
+					<h4>Payment Information</h4>
+					<p>Payment Mode: <span>{{currency_}}</span> </p>
+					<p>Amount Paid: <span>{{total_amount}}</span> </p>
+				</div>
+
+				<div>
+					<h4>Delivery information</h4>
+					<span>{{pick_up}}
+						{{!-- {{farmer.User.DeliveryInformation.LGA.name}},
+						{{farmer.User.DeliveryInformation.State.name}} --}}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

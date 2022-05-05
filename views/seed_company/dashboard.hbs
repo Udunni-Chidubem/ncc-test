@@ -19,54 +19,6 @@
           </div>
 
           <div class="row">
-            <div class="col-8">
-              <div class="card shadow card_home  card_seed pl-0 mb-2 ">
-                <div class="card-body">
-                  <div class="row graph">
-                    <div class="col-12">
-                      <canvas id="myChart" class="canvas_stuff" width="400" height="135"
-                        style="background:#fff;"></canvas>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-4 col__4">
-              <div class="card shadow card_home card_seed card-wallet pl-0 mb-2 ">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
-                      <a href="#" class="float-end">View Wallet</a>
-                    </div>
-                    <div>
-                      {{#balance}}
-                      <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub">
-                        <p> &#8358; {{number this.amount}}</p>
-                      </div>
-
-                      <div class="dashboard_balance">
-                        <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp; Cleared Balance: &#8358;
-                          {{this.amount}} </p>
-                        <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0 </p>
-                      </div>
-                      {{/balance}}
-
-                      <p></p>
-                      <div class="col-12">
-                        <button type="button " class="btn btn-theme" style="width: 100% !important;">Withdraw</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="row">
             <div class="col-12">
               <div class="card shadow card_home card_seed pl-0 mb-2 ">
                 <div class="card-body">
@@ -152,7 +104,7 @@
       </div>
 
       <div class="row">
-        <div class="col-8">
+        <div class="col-8 s_chart">
           <div class="card shadow card_home  card_seed pl-0 mb-2 ">
             <div class="card-body">
               <div class="row graph">

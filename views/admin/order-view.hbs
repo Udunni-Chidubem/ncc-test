@@ -39,7 +39,7 @@
                 <select name="status" id="status" required="required">
                     <option value="">Change Status</option>
                     {{#ifEquals orderStatus.status null }}
-                    <option value="1">Ready to Ship</option>
+                    <option value="1">Fullfiled</option>
                     {{/ifEquals}}
                     {{#ifEquals orderStatus.status 1 }}
                     <option value="2">Shipped</option>

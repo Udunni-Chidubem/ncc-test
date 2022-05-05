@@ -989,3 +989,10 @@ input[name="Accountnumber"] {
 .dropdown-content{
   background-color: #ffffff !important;
 }
+
+.ck_{
+  width: 1rem;
+}
+.password_ck{
+  float: right;
+}
