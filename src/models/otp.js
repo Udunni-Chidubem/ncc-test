@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Otp.init({
-    user_id: DataTypes.INTEGER,
+    user_id:{ 
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
     otp_code: {
       allowNull: false,
       unique: true,

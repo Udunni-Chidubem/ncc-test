@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
 			primaryKey: true,
 			defaultValue: DataTypes.UUIDV4,
 		},
-
+       
 		otp: DataTypes.STRING,
 		expiration_time: DataTypes.DATE,
 		verified: {

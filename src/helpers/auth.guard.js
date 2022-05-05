@@ -21,11 +21,9 @@ module.exports = {
             if(role == 'seed_company')
                 return res.redirect('seed-company/dashboard')
 
-            if(role == 'admin')
+            if(role == 'admin' || role == 'nigsims' || role == 'nasc' || role == 'rra' )
                 return res.redirect('admin/dashboard')
 
-            if(role == 'nasc')
-                return res.redirect('admin/dashboard')
         }else{
             return next()
         }
@@ -44,11 +42,9 @@ module.exports = {
             if(role == 'seed_company')
                 return res.redirect('seed-company/dashboard')
             
-            if(role == 'admin')
+            if(role == 'admin' || role == 'nigsims' || role == 'nasc' || role == 'rra' )
                 return res.redirect('admin/dashboard')
 
-            if(role == 'nasc')
-                return res.redirect('admin/dashboard')
     },
     //this will be called on all farmers routes to see if the user role if farmer
     farmerPermission:async (req, res, next)=>{
@@ -90,7 +86,7 @@ module.exports = {
     adminPermission :async (req, res, next)=>{
         let user = JSON.parse(JSON.stringify(await req.user))
        // console.log(user.UserRole.Role)
-        if(user.UserRole.Role.role_name=='admin' || user.UserRole.Role.role_name=='nasc' ){
+        if(user.UserRole.Role.role_name=='admin' || user.UserRole.Role.role_name=='nasc' || user.UserRole.Role.role_name=='nigsims' || user.UserRole.Role.role_name=='rra' ){
             return next()
         }else{
             req.logOut()

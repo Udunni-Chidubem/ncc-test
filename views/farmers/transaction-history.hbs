@@ -1,6 +1,6 @@
 <div class="container-fluid  ">
-    <div class="card card_home mb-2 summary_tran">
-      <div class="card-body">
+  <div class="card card_home mb-2 summary_tran">
+    <div class="card-body">
 
       <table class="table con t_info table_info card_tab table-responsives table-borderless" id="transactionTable">
         <thead class="t_info_head ">
@@ -14,16 +14,17 @@
         <tbody class="t_info_body">
           {{#each transactions}}
           <tr class="t_info_row1">
-            <th scope="row"  >{{#add @index 1}} {{this}} {{/add}}</th>
+            <th scope="row">{{#add @index 1}} {{this}} {{/add}}</th>
             <td>{{this.transaction_id}}</td>
-            <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  {{status}}</span> 
-            <br>
-            <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span> 
+            <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i> {{status}}</span>
+                <br>
+                <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span>
             </td>
-            <td><a href="#">See Details</a></td>
+            <td><a href="/farmer/order/{{this.transaction_id}} ">See
+                Details</a></td>
           </tr>
           {{/each}}
         </tbody>
       </table>
     </div>
-</div>
+  </div>
