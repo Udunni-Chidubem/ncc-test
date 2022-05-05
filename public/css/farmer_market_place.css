@@ -1612,7 +1612,7 @@ input[name="Accountnumber"] {
   font-size: 16px;
   color: #555;
   text-transform: capitalize;
-  display: block;
+  /* display: block; */
   margin-bottom: 5px;
 }
 
@@ -2023,6 +2023,10 @@ select::-ms-expand {
     justify-content: center;
     /* margin-top: 120px;
     margin-bottom: 0px; */
+}
+
+.bootstrap-tagsinput{
+  width: 100% !important;
 }
 
 .btn-place-order {
@@ -2448,7 +2452,9 @@ font-size: 12px;
   padding: 0px;
   height: fit-content;
 }
-
+.productTags {
+  font-family: Poppins;
+}
 .min-search-btn{
   display: none !important;
 }
