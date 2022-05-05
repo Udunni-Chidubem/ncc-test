@@ -12,31 +12,42 @@
 							<th>Item</th>
 							<th>Seller</th>
 							<th>Package Size</th>
+							<th>Transaction Ref</th>
 							<th>Qty</th>
-							<th>Price</th>
+							<th>Price </th>
 							<th>Status</th>
 						</tr>
 					</thead>
-					{{#each transactions}}
+					{{#each orderStatus}}
 					<tbody class="t_info_body table-striped table-theme-secondary">
 						<tr>
 							<td>
-								<p>{{this.Cart.Product.product_name}}</p>
+								<p>{{this.product_name}}</p>
 								<div class="table_img" style="width: 150px;">
-									<a href=""><img src="../../product_images/{{this.Cart.Product.file_name}}"
+									<a href=""><img src="../../product_images/{{this.file_name}}"
 											alt="Product Image"></a>
 								</div>
-								<p>{{this.Cart.Product.description}}</p>
+								<p>{{this.description}}</p>
 							</td>
-							<td>{{this.Cart.Product.User.SeedCompany.name_of_company}}</td>
-							<td>{{this.Cart.size}}Kg</td>
-							<td>{{this.Cart.qty}}</td>
-							<td>&#8358; {{this.Cart.unit_price}}</td>
-							<td> <span class=" approved  px-1"><i class="bi bi-dot"></i> approved</span>
-								<p>09/87/54</p>
-								<input class="form-check-input item-check-box" type="hidden" name="items"
-									value="{{this.Cart.Product.id}}" id="{{this.Cart.Product.id}}">
-								<p><button class="btn btn-save-product add-to-cart" data-prodid="{{this.id}}">Order
+							<td>{{this.name_of_company}}</td>
+							<td>{{this.size}}Kg</td>
+							<td>{{this.transaction_ref}}Kg</td>
+							<td>{{this.qty}}</td>
+							<td>&#8358; {{this.price}}</td>
+							<td>
+								{{#if (eq this.status "1")}}
+								<span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+								{{else if (eq this.status "2")}}
+								<span class="shipped px-1"><i class="bi bi-dot"></i>Shipped</span>
+								{{else if (eq this.status "3")}}
+								<span class="approved px-1"><i class="bi bi-dot"></i>Fulfilled</span>
+								{{else}}
+								<span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
+								{{/if}}
+								<p>{{dateFormat updated_at "DD/MM/YYYY"}}</p>
+								{{!-- <input class="form-check-input item-check-box" type="hidden" name="items"
+									value="{{this.p_id}}" id="{{this.p_id}}"> --}}
+								<p><button class="btn btn-save-product add-to-cart" data-prodid="{{this.p_id}}">Order
 										Again</button></p>
 							</td>
 						</tr>

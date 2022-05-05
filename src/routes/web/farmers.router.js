@@ -282,10 +282,11 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
     const isVerified = await utils.isVerified(user, 'farmer')
     let transaction_id = req.params.transaction_id
     let transactions=await farmerController.getOrder(req,res)
+    let orderStatus=await farmerController.orderStatus(req,res)
     let currency_ = transactions[0].TransactionLog.currency
     let total_amount = transactions[0].TransactionLog.amount
     let pick_up = transactions[0].TransactionLog.pickup_point
-    console.log(currency_)
+    console.log(orderStatus)
     res.render('farmers/view-order', {
         layout : 'farmers-dashboard',
         title: 'Order View',
@@ -294,7 +295,8 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
         transaction_id,
         currency_,
         total_amount,
-        pick_up
+        pick_up,
+        orderStatus 
     })
 })
 farmersRouter.get("/cart/delete/:id", async (req, res)=>{
