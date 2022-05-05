@@ -20,15 +20,15 @@
 					{{#each transactions}}
 					<tbody class="t_info_body table-striped table-theme-secondary">
 						<tr>
-							<td style="width: 150px;">
+							<td>
 								<p>{{this.Cart.Product.product_name}}</p>
-								<div class="table_img">
+								<div class="table_img" style="width: 150px;">
 									<a href=""><img src="../../product_images/{{this.Cart.Product.file_name}}"
 											alt="Product Image"></a>
 								</div>
 								<p>{{this.Cart.Product.description}}</p>
 							</td>
-							<td>kk</td>
+							<td>{{this.Cart.Product.User.SeedCompany.name_of_company}}</td>
 							<td>{{this.Cart.size}}Kg</td>
 							<td>{{this.Cart.qty}}</td>
 							<td>&#8358; {{this.Cart.unit_price}}</td>

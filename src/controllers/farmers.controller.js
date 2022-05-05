@@ -669,7 +669,13 @@ module.exports={
                 {
                     model: Cart,
                     include: [{
-                        model: Product
+                        model: Product,
+                        include: [{
+                            model: User,
+                            include: [{
+                                model: SeedCompany
+                            }]
+                        }]
                     }]
                 }
             ]
