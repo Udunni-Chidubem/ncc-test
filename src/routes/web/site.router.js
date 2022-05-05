@@ -155,7 +155,7 @@ siteRouter.get('/rice', (req,res) => {
 
 siteRouter.get('/recommendation', (req,res) => {
     res.render('knowledge_base/recommendation', {
-        layout: 'knowledge_dashboard',
+        layout: '',
         title : 'Knowledge Base - Recommendation'
        });
    
