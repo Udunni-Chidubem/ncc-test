@@ -11,10 +11,10 @@ UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 }
 
 
-p {
+.mainpage p {
   margin-top: 0px;
   margin-bottom: 0px;
-  font-family: poppins;
+
 }
 
 /* 
@@ -190,7 +190,8 @@ h3 {
 
 .mainpage {
   padding: 15px;
-  margin: auto;
+  margin: auto
+  font-family: poppins;;
 }
 .mainpage li {
   /* list-style: disc;   */
