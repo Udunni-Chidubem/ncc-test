@@ -162,9 +162,16 @@ siteRouter.get('/recommendation', (req,res) => {
    })
 
 
-// siteRouter.post('/forgot_password', async (req, res)=>{
-//     let pass=await siteController.ForgotPassword(req, res)
-//     return res.status(400).send(pass)
+siteRouter.post('/forgot_password', async (req, res)=>{
+    let pass=await siteController.ForgotPassword(req, res)
+    if(!pass){
+        const response={"Status":"Failure","Details":"Phone Number not provided"}
+        return res.status(400).send(response) 
+    }
+     else{}
+
+    });
+     
 
 //  })
 
