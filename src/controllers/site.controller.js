@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact, Otp }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
@@ -9,6 +9,7 @@ const path = require('path')
 const fs = require('fs')
 var otpGenerator = require('otp-generator');
 const otp = require('../models/otp');
+// const AddMinutesToDate = require('../public/js/script')
 
 
 module.exports = {
@@ -333,24 +334,34 @@ module.exports = {
                 username : req.body.username
              }
          });
-         return pass;
+         if(!pass){
+             console.log('Wrong Number')
+         } else{
+            return pass;
+         }
     },
 
     OTP: async (req, res)=>{
 
         //Generate OTP 
-    const otp_gen = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, length:6,  });
+    const otp_code = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, length:6,  });
     const now = new Date();
-    // const expiration_time = AddMinutesToDate(now,10);
-    console.log(otp_code);
+    const expiration_time = AddMinutesToDate(now,10);
+
+    // console.log(otp_gen);
+
 
      // SAVING GENERATED OTP in DB
-    //  const otp_gen = otp_code
+     const otp_instance = await Otp.create({
+        otp_code: otp_code,
+        expiration_time: expiration_time
 
+     });
+     
 
-
-    // FINDING OTP in DB
-     let otp_instance = await otp_gen.findOne({
+    // FINDING OTP in DB AND THEN VERIFYING
+    console.log(otp_print);
+     let otp_print = await Otp.findOne({
          attributes: ['id', 'otp_code'],
           where:{
               otp_code: req.OTP
@@ -359,11 +370,15 @@ module.exports = {
     //   expiration_time: expiration_time
      });
 
+
+     function AddMinutesToDate(date, minutes) {
+        return new Date(date.getTime() + minutes*60000);
+      };
    
-    }
+    },
 
 
 
-
+   
 
 }

@@ -248,3 +248,11 @@ function googleTranslateElementInit() {
   new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 }
 
+
+
+
+
+/*  ==========================================
+    TIMER FOR OTP
+* ========================================== */
+
