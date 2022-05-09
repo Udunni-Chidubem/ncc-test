@@ -3208,3 +3208,7 @@ input[type="number"] {
 ._settings .list-group{
   cursor: pointer;
 }
+._settings .list-group .list-group-item.active {
+  background-color: #FABA23 !important;
+  border-color: #FABA23 !important;
+}

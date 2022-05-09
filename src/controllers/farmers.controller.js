@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const {
         User, 
         Farmer, 
@@ -78,6 +79,18 @@ module.exports={
             farmerData: farmer,
             isVerified,
         })
+    },
+    updatePassword: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message = "Updated Successfully"
+
+        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            return {status,farmer,isVerified,message}
     },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
@@ -768,7 +781,6 @@ module.exports={
                "  on c.id = tc.cart_id JOIN product as p on c.product_id = p.id JOIN seedcompany as sc on sc.user_id = p.user_id )  JOIN orders as o on o.transaction_log_id "
                + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
-            // console.log(status)
             return status
     }
 

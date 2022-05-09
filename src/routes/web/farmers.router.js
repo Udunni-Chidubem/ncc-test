@@ -33,7 +33,7 @@ farmersRouter.get('/update-profile', farmerController.updateProfile)
 farmersRouter.get('/settings', farmerController.settings)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
+    let response = await farmerController.updatePassword(req, res)
     if(response.farmer || response.deliveryInformation){
         res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
     }else{
@@ -43,12 +43,21 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
-    if(response.farmer || response.deliveryInformation){
-        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
-    }else{
-        res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
-    }
+     let {status,farmer,isVerified,message} = await farmerController.updatePassword(req, res)
+        if(status){
+            res.render('farmers/settings', {
+                layout : 'farmers-dashboard',
+                title: 'Settings',
+                fullname: farmer.firstname + ' ' + farmer.lastname,
+                farmerData: farmer,
+                isVerified : isVerified,
+                password_change_status : message
+            })
+       }else{
+            req.flash('errors', r.errors)
+           res.redirect('back');
+       }
+
 
 })
 

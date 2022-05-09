@@ -1,6 +1,7 @@
 const { body, validationResult } = require('express-validator')
 const db = require('../models')
 const { SeedCompany, User, SeedTrader } = db
+const bcrypt = require('bcrypt');
 
 
 const profileUpdateValidation = () => {
@@ -28,12 +29,37 @@ const profileUpdateValidation = () => {
 }
 const settingsValidation = () => {
     return [
+        body('confirmpassword')
+        .not().isEmpty().withMessage('Confirm Password field is required'),
+    body('newpassword')
+        .not().isEmpty().withMessage('New Password field is required'),
+    body('confirmpassword')
+        .custom((value, { req }) => {
+        if (value !== req.body.newpassword) {
+            throw new Error('Password confirmation does not match Password');
+        }
+        return true
+    }),
         body('currentpassword')
-            .not().isEmpty().withMessage('Phone Number field is required')
+            .not().isEmpty().withMessage('Current Password field is required')
             .custom((value, { req }) => {
                 return User.findOne({ where: { username: req.body.userphoneno } }).then(user => {
+                    console.log(user.password)
                     if (user) {
-                        return Promise.reject('Phone Number is already in use. Please try another one!');
+                        bcrypt.compare(req.body.currentpassword, user.password, function(err, res) {
+                            if (err){
+                              // handle error
+
+                            }
+                            if (res==false) {
+                                console.log('no')
+
+                                return Promise.reject('Incorrect Password');
+                            } 
+                            if (res==true) {
+                                console.log('yes')
+                            } 
+                          });
                     }
                 });
             }),
