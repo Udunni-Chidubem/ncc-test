@@ -162,7 +162,7 @@ module.exports={
         /* FInd Seed Company - Begins*/
         const singleCompany = await SeedCompany.findOne({
             where: {user_id: req.params.id},
-            attributes: ['id', 'name_of_company', 'email', 'phone_no', 'address', 'licensed_no', 'certification_number', 'tin'],
+            // attributes: ['id', 'name_of_company', 'email', 'phone_no', 'address', 'licensed_no', 'certification_number', 'tin'],
             include : [
                 {
                     model : States,

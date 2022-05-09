@@ -1,6 +1,6 @@
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
-
+    {{#if (or (eq user_role "admin") (eq user_role "rra"))}}
     <div class="col co_12 ">
       <div class="">
         <div class="card card_admin_home">
@@ -40,9 +40,53 @@
         </div>
       </div>
     </div>
+    {{/if}}
 
+    {{#if (eq user_role "nigsims")}}
+    <div class="col co_12 ">
+      <div class="">
+        <div class="card card_admin_home">
+          <div class="card-body">
+            <h5 class="card-title text-center">Published Products</h5>
+            {{#farmerCount}}
+            <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
+            {{/farmerCount}}
+            <a href="/admin/all-users" class="card-link float-end">View details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col co_12">
+      <div class="">
+        <div class="card card_admin_home">
+          <div class="card-body">
+            <h5 class="card-title text-center">Unpublished Products</h5>
+            {{#companyCount}}
+            <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
+            {{/companyCount}}
+            <a href="/admin/all-users" class="card-link float-end">View details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col co_12">
+      <div class="">
+        <div class="card card_admin_home">
+          <div class="card-body">
+            <h5 class="card-title text-center">Revoked Products</h5>
+            <p class="card-text text-center c_d_s2_sales s_1 ">2200</p>
+            <a href="#" class="card-link float-end">View details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
   </div>
 </div>
+
+{{#if (or (eq user_role "admin") (eq user_role "rra"))}}
 
 <div class="row chart_">
   <div class="col-8">
@@ -106,6 +150,7 @@
           </div>
         </div>
 
+        {{#if (ne user_role "rra")}}
         <div class="row lic_req0 row-cols-2 row-cols-lg-1 g-2 g-lg-2">
           <div class="col text-center">
             <div class="py-2  ">
@@ -115,12 +160,13 @@
             </div>
           </div>
         </div>
-
+        {{/if}}
 
       </div>
     </div>
   </div>
 </div>
+
 
 <div class="row chart_">
   <div class="col-12">
@@ -163,8 +209,7 @@
 
 </div>
 
-
- 
+ {{/if}}
 
 <div class="row chart_">
   <div class="col-4">
@@ -172,7 +217,19 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
+            <div class="row">
+              <div class="col-lg-4">
+              <span class="published_products "></span>
+                  <p class="a_accout pl-3"> Published Products</p>
+                  <span class="unpublished_products"></span>
+                  <p class="i_account  pl-3">Unpublished Products</p>
+                  <span class="revoked_products"></span>
+                  <p class="i_account  pl-3">Revoked Products</p>
+            </div>
+            <div class="col-lg-8">
+             <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
+            </div>
+            </div>
           </div>
            
         </div>  
@@ -191,6 +248,35 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
+
+  var xproductValues = ["published", "unpublished", "revoked"];
+  var yproductValues = [55, 19,12];
+  var productbarColors = [
+    "#FB8200",
+    "#7B61FF",
+    "#C61000",
+
+  ];
+
+  new Chart("totalproduct", {
+    type: "pie",
+    data: {
+      labels: xproductValues,
+      datasets: [{
+        backgroundColor: productbarColors,
+        data: yproductValues
+      }]
+    },
+    options: {
+       legend : {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Total Products"
+      }
+    }
+  });
   
   // let x = $('.stat').data('user')
   // console.log(x)
@@ -312,31 +398,5 @@
 
 
 
-  var xproductValues = ["published", "unpublished"];
-  var yproductValues = [55, 19];
-  var productbarColors = [
-    "#FB8200",
-    "#7B61FF",
 
-  ];
-
-  new Chart("totalproduct", {
-    type: "doughnut",
-    data: {
-      labels: xproductValues,
-      datasets: [{
-        backgroundColor: productbarColors,
-        data: yproductValues
-      }]
-    },
-    options: {
-       legend : {
-        display: false
-      },
-      title: {
-        display: true,
-        text: "Total Products"
-      }
-    }
-  });
 </script>

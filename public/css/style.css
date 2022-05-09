@@ -3125,3 +3125,28 @@ input[type="number"] {
   margin: 4rem auto;
 
 }
+
+
+.published_products {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background: #FB8200;
+}
+
+.unpublished_products {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background: #7B61FF;
+}
+
+.revoked_products {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background: #C61000;
+}
