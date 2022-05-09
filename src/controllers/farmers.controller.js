@@ -66,6 +66,19 @@ module.exports={
             deliveryInfo
         })
     },
+    settings: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        res.render('farmers/settings', {
+            layout : 'farmers-dashboard',
+            title: 'Settings',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified,
+        })
+    },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user

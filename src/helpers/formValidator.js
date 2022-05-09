@@ -26,6 +26,19 @@ const profileUpdateValidation = () => {
         
    ] 
 }
+const settingsValidation = () => {
+    return [
+        body('currentpassword')
+            .not().isEmpty().withMessage('Phone Number field is required')
+            .custom((value, { req }) => {
+                return User.findOne({ where: { username: req.body.userphoneno } }).then(user => {
+                    if (user) {
+                        return Promise.reject('Phone Number is already in use. Please try another one!');
+                    }
+                });
+            }),
+    ]
+}
 
 const companyValidation = () => {
     return [
@@ -269,5 +282,6 @@ module.exports = {
     seedTraderValidate,
     cartValidation,
     cartSingleValidation,
-    productValidation
+    productValidation,
+    settingsValidation
 }

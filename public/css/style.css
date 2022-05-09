@@ -3198,3 +3198,13 @@ input[type="number"] {
 .table-responsives.table_t_info {
   overflow-x: auto;
 }
+
+.settings_.active{
+  display: block !important;
+}
+.settings_{
+  display: none !important;
+}
+._settings .list-group{
+  cursor: pointer;
+}
