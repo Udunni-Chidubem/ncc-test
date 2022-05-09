@@ -12,6 +12,13 @@
         </div>
         <div class="col-9">
 
+            {{#if password_change_status}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-success">
+                    {{password_change_status}}
+                </div>
+            </div>
+            {{/if}}
             {{#if messages.error}}
             <div class="row d-flex justify-content-center">
                 <div class="col-12 alert alert-danger">
@@ -19,10 +26,10 @@
                 </div>
             </div>
             {{/if}}
-            {{#if data}}
+            {{#if message}}
             <div class="row d-flex justify-content-center">
                 <div class="col-12 alert alert-danger">
-                    {{this.msg}}
+                    {{message}}
                 </div>
             </div>
             {{/if}}
@@ -57,18 +64,19 @@
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="input-group mb-3">
-                            <input type="password" required minlength="6" class="form-control" name="currentpassword"
-                                placeholder="Current Password" aria-label="Current Password"
-                                aria-describedby="basic-addon1">
+                            <input type="password" value="{{ formData.phone }}" required minlength="6"
+                                class="form-control" name="currentpassword" placeholder="Current Password"
+                                aria-label="Current Password" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" minlength="6" class="form-control" id="newpassword"
-                                name="newpassword" placeholder="New Password" aria-label="New Password"
+                            <input type="password" value="{{ formData.phone }}" minlength="6" class="form-control"
+                                id="newpassword" name="newpassword" placeholder="New Password" aria-label="New Password"
                                 aria-describedby="basic-addon1" onkeyup='check();'>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="password" required minlength="6" class="form-control" id="confirmpassword"
-                                name="confirmpassword" placeholder="Retype New Password" aria-label="Confirm Password"
+                            <input type="password" value="{{ formData.phone }}" required minlength="6"
+                                class="form-control" id="confirmpassword" name="confirmpassword"
+                                placeholder="Retype New Password" aria-label="Confirm Password"
                                 aria-describedby="basic-addon1" onkeyup='check();'>
                         </div>
                         <div class="input-group mb-3">

@@ -2,7 +2,7 @@ const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
 const paystack = require('../../helpers/paystack')
-const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation,passwordChangeValidate } = require('../../helpers/formValidator')
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
  
@@ -43,7 +43,7 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
-     let {status,farmer,isVerified,message} = await farmerController.updatePassword(req, res)
+     let {status,farmer,isVerified,message_} = await farmerController.updatePassword(req, res)
         if(status){
             res.render('farmers/settings', {
                 layout : 'farmers-dashboard',
@@ -51,7 +51,7 @@ farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) 
                 fullname: farmer.firstname + ' ' + farmer.lastname,
                 farmerData: farmer,
                 isVerified : isVerified,
-                password_change_status : message
+                password_change_status : message_
             })
        }else{
             req.flash('errors', r.errors)
@@ -288,7 +288,6 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let transactions=await farmerController.getTransactions(farmer.id)
-   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',
@@ -306,7 +305,6 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
     let currency_ = transactions[0].TransactionLog.currency
     let total_amount = transactions[0].TransactionLog.amount
     let pick_up = transactions[0].TransactionLog.pickup_point
-    console.log(orderStatus)
     res.render('farmers/view-order', {
         layout : 'farmers-dashboard',
         title: 'Order View',

@@ -86,11 +86,17 @@ module.exports={
         const isVerified = await utils.isVerified(user.dataValues)
         let newpassword = await bcrypt.hash(req.body.newpassword, 10)
         let username = req.body.userphoneno
-        let message = "Updated Successfully"
-
+        let message_ = "Updated Successfully"
+        try{
         let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
             let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
-            return {status,farmer,isVerified,message}
+            return {status,farmer,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
     },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
