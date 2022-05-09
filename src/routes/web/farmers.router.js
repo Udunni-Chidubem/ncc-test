@@ -5,6 +5,7 @@ const paystack = require('../../helpers/paystack')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
+const { now } = require('moment');
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -313,6 +314,14 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
 farmersRouter.get("/cart/delete/:id", async (req, res)=>{
     farmerController.deleteItem(req, res)
     res.redirect("/farmer/cart")
+})
+
+farmersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+   let id = req.params.id
+   console.log(id)
+   farmerController.userUpdate(data, id)
+   res.redirect("/login")
 })
 
 // farmersRouter.get('/knowledge-base', (req,res) => {

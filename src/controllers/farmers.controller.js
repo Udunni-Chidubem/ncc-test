@@ -77,6 +77,15 @@ module.exports={
             fullname: farmer.firstname + ' ' + farmer.lastname,
             farmerData: farmer,
             isVerified,
+            farmer
+        })
+        
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
         })
     },
     editProfileData: async (req, res) => {
