@@ -2,7 +2,7 @@ const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
 const paystack = require('../../helpers/paystack')
-const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation,passwordChangeValidate } = require('../../helpers/formValidator')
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
 const { now } = require('moment');
@@ -34,7 +34,7 @@ farmersRouter.get('/update-profile', farmerController.updateProfile)
 farmersRouter.get('/settings', farmerController.settings)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
+    let response = await farmerController.updatePassword(req, res)
     if(response.farmer || response.deliveryInformation){
         res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
     }else{
@@ -44,12 +44,21 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
-    if(response.farmer || response.deliveryInformation){
-        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
-    }else{
-        res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
-    }
+     let {status,farmer,isVerified,message_} = await farmerController.updatePassword(req, res)
+        if(status){
+            res.render('farmers/settings', {
+                layout : 'farmers-dashboard',
+                title: 'Settings',
+                fullname: farmer.firstname + ' ' + farmer.lastname,
+                farmerData: farmer,
+                isVerified : isVerified,
+                password_change_status : message_
+            })
+       }else{
+            req.flash('errors', r.errors)
+           res.redirect('back');
+       }
+
 
 })
 
@@ -280,7 +289,6 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let transactions=await farmerController.getTransactions(farmer.id)
-   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',
@@ -298,7 +306,6 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
     let currency_ = transactions[0].TransactionLog.currency
     let total_amount = transactions[0].TransactionLog.amount
     let pick_up = transactions[0].TransactionLog.pickup_point
-    console.log(orderStatus)
     res.render('farmers/view-order', {
         layout : 'farmers-dashboard',
         title: 'Order View',

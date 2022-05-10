@@ -13,6 +13,7 @@
 
 
         <div class="col-9">
+<<<<<<< HEAD
             <div class="card settings_  content account pt-3 pb-3">
                 <div class="card-body text-center">
                     <h3 class="text-center deactivate-intro">We hate to see you go</h3>
@@ -29,6 +30,55 @@
                     <div class="text-center">
                     <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn">Deactivate Account</button>
                     </div>
+=======
+
+            {{#if password_change_status}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-success">
+                    {{password_change_status}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if messages.error}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{messages.error}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if message}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{message}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if errors.length}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    <ul>
+                        {{#each errors}}
+                        <li>{{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if extractedErrors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul style="padding: 5px;">
+                    {{#each extractedErrors}}
+                    <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            <div class="card settings_  content account">
+                <div class="card-body">
+                    Deactivate Account
+>>>>>>> f170e6a3a835fcb3f8eb27e5037d4dcce2b69267
                 </div>
             </div>
 
@@ -37,23 +87,26 @@
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="currentpassword"
-                                placeholder="Current Password" aria-label="Current Password"
-                                aria-describedby="basic-addon1">
+                            <input type="password" value="{{ formData.phone }}" required minlength="6"
+                                class="form-control" name="currentpassword" placeholder="Current Password"
+                                aria-label="Current Password" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="newpassword" placeholder="New Password"
-                                aria-label="New Password" aria-describedby="basic-addon1">
+                            <input type="password" value="{{ formData.phone }}" minlength="6" class="form-control"
+                                id="newpassword" name="newpassword" placeholder="New Password" aria-label="New Password"
+                                aria-describedby="basic-addon1" onkeyup='check();'>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" value="{{ formData.phone }}" required minlength="6"
+                                class="form-control" id="confirmpassword" name="confirmpassword"
+                                placeholder="Retype New Password" aria-label="Confirm Password"
+                                aria-describedby="basic-addon1" onkeyup='check();'>
                         </div>
                         <div class="input-group mb-3">
                             <input type="hidden" class="form-control" value="{{farmerData.phone_no}}" name="userphoneno"
                                 aria-label=" User Phoneno" aria-describedby="basic-addon1">
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="confirmpassword"
-                                placeholder="Confirm Password" aria-label="Confirm Password"
-                                aria-describedby="basic-addon1">
-                        </div>
+                        <span id='message'></span>
                         <div class="col-12  ">
                             <div class="columns mx-auto" style="width: 160px;">
                                 <button type="button float-end" class="btn  mb-1">Update</button>
@@ -67,6 +120,7 @@
 </div>
 
 <script>
+    //tab toggle
     const btns = document.querySelectorAll(".tab_info_");
     const card = document.querySelectorAll(".content");
 
@@ -86,5 +140,15 @@
         }
     }
 
-
+    //password retype
+    var check = function () {
+        if (document.getElementById('newpassword').value ==
+            document.getElementById('confirmpassword').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Password matching';
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Password not matching';
+        }
+    }
 </script>

@@ -229,7 +229,6 @@ module.exports = {
             + "on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
             + "where p.user_id = " + user.id + " and c.product_id ="+product+" GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(order)
         return order
     },
     getOrder: async (transaction_id, user_id, company_id) => {
@@ -288,7 +287,6 @@ module.exports = {
      
         farmer = JSON.parse(JSON.stringify(farmer))
         orderStatus = JSON.parse(JSON.stringify(orderStatus))
-        console.log(order)
         return { order, farmer, orderStatus };
     },
     getOrderCount : async (company_id)=>{
