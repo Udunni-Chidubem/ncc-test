@@ -32,7 +32,7 @@ function initialize(passport){
             // console.log(user)
             if(user != null ){
                 if(await bcrypt.compare(password, user.password) == true){
-                    if(user.status){
+                    if(user.status!=2){
                         return done(null, user);
                     }else{
                         return done(null, false, {message : "Account is not activated"});

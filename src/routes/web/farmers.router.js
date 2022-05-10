@@ -321,6 +321,7 @@ farmersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
    let id = req.params.id
    console.log(id)
    farmerController.userUpdate(data, id)
+   req.logOut();
    res.redirect("/login")
 })
 
