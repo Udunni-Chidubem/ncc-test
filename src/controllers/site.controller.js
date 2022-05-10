@@ -355,7 +355,6 @@ module.exports = {
      const otp_instance = await Otp.create({
         otp_code: otp_code,
         expiration_time: expiration_time
-
      });
      
 
@@ -366,6 +365,7 @@ module.exports = {
           where:{
               otp_code: req.OTP
           }
+
     //    otp_instance : otp_code,
     //   expiration_time: expiration_time
      });

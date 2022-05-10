@@ -4257,6 +4257,52 @@ select.form-control-lg:not([size]):not([multiple]) {
   background-color: rgba(40, 167, 69, 0.8);
   border-radius: 0.2rem;
 }
+
+/* 
+
+PASSWORD VALIDATOR 
+
+*/
+
+#message {
+  display:none;
+  background: #fff;
+  color: rgb(174, 167, 167);
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 14px;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✓";
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "\2718";
+}
+ 
+
+
+
+
+
 .custom-select.is-valid,
 .form-control.is-valid,
 .was-validated .custom-select:valid,
