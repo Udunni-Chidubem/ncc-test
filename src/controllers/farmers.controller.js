@@ -97,6 +97,50 @@ module.exports={
             console.log(e)       
             return e
            }
+
+            // try{
+        // let sql = "select password from user where username ="+ farmer.phone_no +";"
+        //     let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //     console.log(password_verify.password)
+        //     if(password_verify=''){
+        // let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //     let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //     return {status,farmer,isVerified,message_}}
+        //     else{
+        //         console.log(sql)
+        //         return {error_message_}
+        //     }
+            
+        //    } 
+        //    catch(e){
+        //     console.log(e)       
+        //     return e
+        //    }
+
+        // try{
+        //     let sql = "select password from user where username ="+ farmer.phone_no +"';"
+        //         let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //         bcrypt.compare(req.body.currentpassword, password_verify.password, function(err, res) {
+        //             if(err){
+    
+        //             }
+        //             if(res == true){
+        //                 let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //                 let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //                 return {status,farmer,isVerified,message_}
+        //             }
+        //             if(res == false){
+        //                 console.log(sql)
+        //                 return {error_message_}
+        //             }
+        //         });
+    
+                
+        //        } 
+        //        catch(e){
+        //         console.log(e)       
+        //         return e
+        //        }
     },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();

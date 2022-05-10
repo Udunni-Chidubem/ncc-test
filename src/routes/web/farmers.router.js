@@ -2,7 +2,7 @@ const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
 const paystack = require('../../helpers/paystack')
-const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation,passwordChangeValidate } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
  
@@ -43,20 +43,29 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
-     let {status,farmer,isVerified,message_} = await farmerController.updatePassword(req, res)
-        if(status){
-            res.render('farmers/settings', {
-                layout : 'farmers-dashboard',
-                title: 'Settings',
-                fullname: farmer.firstname + ' ' + farmer.lastname,
-                farmerData: farmer,
-                isVerified : isVerified,
-                password_change_status : message_
-            })
-       }else{
-            req.flash('errors', r.errors)
-           res.redirect('back');
-       }
+     let response= await farmerController.updatePassword(req, res)
+    //  {status,farmer,isVerified,message_}
+     
+     if(response.message_){
+        return res.json({ message: response.message_, statusCode: 200 }).status(200)
+    }
+    //  if(response.error_message_){
+    //     return res.json({ message: response.error_message_, statusCode: 400 }).status(400)
+    // }
+    //     if(response.status){
+    //             // res.json({ message_: message_ , statusCode: 200 }).status(200)
+    //         res.render('farmers/settings', {
+    //             layout : 'farmers-dashboard',
+    //             title: 'Settings',
+    //             fullname: response.farmer.firstname + ' ' + response.farmer.lastname,
+    //             farmerData: response.farmer,
+    //             isVerified : response.isVerified,
+    //             password_change_status : response.message_
+    //         })
+    //    }else{
+    //         req.flash('errors', r.errors)
+    //        res.redirect('back');
+    //    }
 
 
 })
