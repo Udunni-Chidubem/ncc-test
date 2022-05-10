@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row _settings">
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item active tab_info_" id="password" aria-current="true" onclick="tab(this)">
+                    Password and Security
+                </li>
+                <li class="list-group-item  tab_info_" id="account" onclick="tab(this)">
+                    Deactivate Account
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-9">
+            <div class="card settings_  content account pt-3 pb-3">
+                <div class="card-body">
+                    <h3 class="text-center">We hate to lose you {{fullname}}</h3>
+                    <p class="text-start">This will happen if you deactivate your account? </p>
+                    <ul>
+                        <li class="p-2">You will lose access to your dashboard.</li>
+                        <li class="p-2">You cannot search for seeds or purchase them if you deactivate your account.</li>
+                    </ul>
+                    <p class="p-2"><strong>Are you sure about this?</strong></p>
+                    {{!-- {{farmer.user_id}} --}}
+                    <div class="text-center">
+                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card settings_ active content password">
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="currentpassword"
+                                placeholder="Current Password" aria-label="Current Password"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="newpassword" placeholder="New Password"
+                                aria-label="New Password" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="hidden" class="form-control" value="{{farmerData.phone_no}}" name="userphoneno"
+                                aria-label=" User Phoneno" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="confirmpassword"
+                                placeholder="Confirm Password" aria-label="Confirm Password"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-12  ">
+                            <div class="columns mx-auto" style="width: 160px;">
+                                <button type="button float-end" class="btn  mb-1">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const btns = document.querySelectorAll(".tab_info_");
+    const card = document.querySelectorAll(".content");
+
+    function tab(obj) {
+        const id = obj.getAttribute('id');
+        //console.log(id)
+        if (id) {
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            obj.classList.add("active");
+            card.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.querySelector('.' + id);
+            element.classList.add("active");
+        }
+    }
+
+
+</script>
