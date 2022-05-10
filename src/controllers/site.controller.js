@@ -11,6 +11,7 @@ var otpGenerator = require('otp-generator');
 const otp = require('../models/otp');
 // const AddMinutesToDate = require('../public/js/script')
 
+global.pass = 0;
 
 module.exports = {
     home: async (req, res) => {
@@ -326,13 +327,15 @@ module.exports = {
         Contact.create(req.body)
     },
 
+
     ForgotPassword: async (req, res) =>{
         console.log(pass)
-        let pass =await User.findOne({
+        pass =await User.findOne({
             attributes :  ['id', 'username'],
              where : {
                 username : req.body.username
-             }
+             },
+
          });
          if(!pass){
              console.log('Wrong Number')
@@ -341,6 +344,7 @@ module.exports = {
          }
     },
 
+    
     OTP: async (req, res)=>{
 
         //Generate OTP 
@@ -354,21 +358,25 @@ module.exports = {
      // SAVING GENERATED OTP in DB
      const otp_instance = await Otp.create({
         otp_code: otp_code,
-        expiration_time: expiration_time
+        expiration_time: expiration_time,
+        number_id:pass
+
      });
      
 
-    // FINDING OTP in DB AND THEN VERIFYING
-    console.log(otp_print);
+    // FIND OTP in DB AND THEN VERIFY
      let otp_print = await Otp.findOne({
-         attributes: ['id', 'otp_code'],
+         attributes: [ 'otp_code' ],
           where:{
               otp_code: req.OTP
           }
-
     //    otp_instance : otp_code,
     //   expiration_time: expiration_time
      });
+      
+     console.log(otp_print);
+
+
 
 
      function AddMinutesToDate(date, minutes) {
@@ -377,8 +385,5 @@ module.exports = {
    
     },
 
-
-
-   
 
 }
