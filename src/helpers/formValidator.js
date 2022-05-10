@@ -42,7 +42,7 @@ const settingsValidation =  () => {
         body('currentpassword')
             .not().isEmpty().withMessage('Current Password field is required')
             .custom(async (value, { req }) => {
-                let user= await User.findOne({ where: { username: req.body.userphoneno } });
+                let user= await User.findOne({ where: { username: req.body.userphoneno.trim() } });
                 if (user) {
                     if(await bcrypt.compare(req.body.currentpassword, user.password)){
                     }else{

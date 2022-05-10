@@ -4,6 +4,7 @@ const db = require('../models')
 const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
+const bcrypt = require('bcrypt');
 
 
 
@@ -310,5 +311,23 @@ module.exports = {
     },
     updadeOrders:async (order_id, data)=>{
         Orders.update(data, { where : {id : order_id}})
-    }
+    },
+
+    updatePassword: async (req, res) => {
+        let user = await req.user
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message_ = "Updated Successfully"
+        try{
+        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            return {status,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+    },
 }

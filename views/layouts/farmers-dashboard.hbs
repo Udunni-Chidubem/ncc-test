@@ -400,10 +400,6 @@
               error_toastr(response.message)
             } else {
               success_toastr(response.message)
-              currentpassword = $('#currentpassword').val('')
-              newpassword = $('#newpassword').val('')
-              confirmpassword = $('#confirmpassword').val('')
-              userphoneno = $('#userphoneno').val('')
             }
           })
           .catch(error => console.log(error))
