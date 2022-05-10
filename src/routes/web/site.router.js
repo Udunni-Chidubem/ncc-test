@@ -155,16 +155,23 @@ siteRouter.get('/rice', (req,res) => {
 
 siteRouter.get('/recommendation', (req,res) => {
     res.render('knowledge_base/recommendation', {
-        layout: 'knowledge_dashboard',
+        layout: '',
         title : 'Knowledge Base - Recommendation'
        });
    
    })
 
 
-// siteRouter.post('/forgot_password', async (req, res)=>{
-//     let pass=await siteController.ForgotPassword(req, res)
-//     return res.status(400).send(pass)
+siteRouter.post('/forgot_password', async (req, res)=>{
+    let pass=await siteController.ForgotPassword(req, res)
+    if(!pass){
+        const response={"Status":"Failure","Details":"Phone Number not provided"}
+        return res.status(400).send(response) 
+    }
+     else{}
+
+    });
+     
 
 //  })
 
