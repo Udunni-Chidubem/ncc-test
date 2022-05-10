@@ -66,6 +66,28 @@ module.exports={
             deliveryInfo
         })
     },
+    settings: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        res.render('farmers/settings', {
+            layout : 'farmers-dashboard',
+            title: 'Settings',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified,
+            farmer
+        })
+        
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
+        })
+    },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user
@@ -669,7 +691,13 @@ module.exports={
                 {
                     model: Cart,
                     include: [{
-                        model: Product
+                        model: Product,
+                        include: [{
+                            model: User,
+                            include: [{
+                                model: SeedCompany
+                            }]
+                        }]
                     }]
                 }
             ]
@@ -739,6 +767,18 @@ module.exports={
         })
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
+    },
+    orderStatus : async (req,res) =>{
+        let transaction_id = req.params.transaction_id
+            let sql = "select o.id as order_id ,p.description as description, p.product_name as product_name, p.file_name as" +
+            " file_name, sc.name_of_company as name_of_company, c.size as size , c.product_id as p_id,tl.transaction_ref as transaction_ref, "
+            + " c.qty as qty, c.unit_price as price, c.total_amount as total_amount, o.status as status, o.updated_at as updated_at, tl.currency "
+            +" as currency , tl.pickup_point as pickup_point FROM (transaction_carts tc  JOIN  transaction_log tl on tc.transaction_log_id=tl.id  JOIN cart as c " +
+               "  on c.id = tc.cart_id JOIN product as p on c.product_id = p.id JOIN seedcompany as sc on sc.user_id = p.user_id )  JOIN orders as o on o.transaction_log_id "
+               + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
+            let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
+            // console.log(status)
+            return status
     }
 
 }

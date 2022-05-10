@@ -4625,6 +4625,9 @@ padding-bottom: 5px;
   background-color: #cfe1d2;
   border-radius: 4px;
 }
+.slide-text{
+  font-size: clamp(0.5rem 2.5vw 1.5rem);
+}
 @media only screen and (max-width: 600px){
   .contact-form-grid {
     display: block;
