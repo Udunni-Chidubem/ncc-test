@@ -32,7 +32,11 @@ function initialize(passport){
             // console.log(user)
             if(user != null ){
                 if(await bcrypt.compare(password, user.password) == true){
-                    return done(null, user);
+                    if(user.status){
+                        return done(null, user);
+                    }else{
+                        return done(null, false, {message : "Account is not activated"});
+                    } 
                 }
             }
             return done(null, false, {message : "You have entered Invalid credentials. Please try again!!!"});
