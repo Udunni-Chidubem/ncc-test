@@ -14,17 +14,20 @@
 
         <div class="col-9">
             <div class="card settings_  content account pt-3 pb-3">
-                <div class="card-body">
-                    <h3 class="text-center">We hate to lose you {{fullname}}</h3>
-                    <p class="text-start">This will happen if you deactivate your account? </p>
-                    <ul>
-                        <li class="p-2">You will lose access to your dashboard.</li>
-                        <li class="p-2">You cannot search for seeds or purchase them if you deactivate your account.</li>
-                    </ul>
+                <div class="card-body text-center">
+                    <h3 class="text-center deactivate-intro">We hate to see you go</h3>
+                    <h3 class="deactivate-intro">{{fullname}}</h3>
+                    <div class="text-center deactivate-texts">
+                    <p>This will happen if you deactivate your account? </p>
+                        <p class="p-2">You will lose access to your dashboard.</p>
+                        <p class="p-2">You cannot search for seeds or purchase them if you deactivate your account.</p>
+                    </div>
+
+                    <div>
                     <p class="p-2"><strong>Are you sure about this?</strong></p>
                     {{!-- {{farmer.user_id}} --}}
                     <div class="text-center">
-                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn">Deactivate Account</button>
                     </div>
                 </div>
             </div>
