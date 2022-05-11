@@ -163,14 +163,14 @@ siteRouter.get('/recommendation', (req,res) => {
 
 
 siteRouter.post('/forgot_password', async (req, res)=>{
-    let pass=await siteController.ForgotPassword(req, res)
-    if(!pass){
+    let passw=await siteController.ForgotPassword(req, res)
+    if(!passw){
         const response={"Status":"Failure","Details":"Phone Number not provided"}
         return res.status(400).send(response) 
     }
      else{}
 
-    });
+});
      
 
 //  })
@@ -182,15 +182,14 @@ siteRouter.post('/forgot_password', async (req, res)=>{
 // })
 
 
-//  siteRouter.post('/otp', async (req, res)=>{
-//   let result = await siteController.OTP(req, res)
-//     res.render('/otp', {
-//        form_banner:'Group.png',
-//        title: 'OTP',
-//        layout : 'form',
-//     });
-//     return result;
-//  })
+ siteRouter.get('/otp', async (req, res)=>{
+  let result = await siteController.OTP(req, res)
+
+
+  console.log(otp_print);
+    });
+    
+ 
 
    
 
