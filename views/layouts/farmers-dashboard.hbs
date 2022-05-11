@@ -403,6 +403,8 @@
               let currentpassword = $('#currentpassword').val('')
               let newpassword = $('#newpassword').val('')
               let confirmpassword = $('#confirmpassword').val('')
+              document.querySelector('#btn_update_password').removeAttribute('enabled');
+              document.querySelector('#btn_update_password').setAttribute('disabled', true);
             }
           })
           .catch(error => console.log(error))
