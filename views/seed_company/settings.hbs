@@ -10,8 +10,6 @@
                 </li>
             </ul>
         </div>
-
-
         <div class="col-9">
 
             {{#if password_change_status}}
@@ -59,21 +57,9 @@
 
             <div class="card settings_  content account">
                 <div class="card-body">
-                    <h3 class="text-center">We hate to lose you {{fullname}}</h3>
-                    <p class="text-start">This will happen if you deactivate your account? </p>
-                    <ul>
-                        <li class="p-2">You will lose access to your dashboard.</li>
-                        <li class="p-2">You cannot search for seeds or purchase them if you deactivate your account.</li>
-                    </ul>
-                    <p class="p-2"><strong>Are you sure about this?</strong></p>
-                    {{!-- {{farmer.user_id}} --}}
-                    <div class="text-center">
-                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
-                    </div>
+                    Deactivate Account
                 </div>
             </div>
-
-
             <div class="card settings_ active content password">
                 <div class="card-body">
                     <div class="input-group mb-3">
@@ -92,7 +78,7 @@
                             aria-describedby="basic-addon1" onkeyup='check();'>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="hidden" class="form-control" id="userphoneno" value="{{farmerData.phone_no}}"
+                        <input type="hidden" class="form-control" id="userphoneno" value=" {{company.phone_no}}"
                             name="userphoneno" aria-label=" User Phoneno" aria-describedby="basic-addon1">
                     </div>
                     <span id='message'></span>

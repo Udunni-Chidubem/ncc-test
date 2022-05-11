@@ -34,7 +34,7 @@ farmersRouter.get('/update-profile', farmerController.updateProfile)
 farmersRouter.get('/settings', farmerController.settings)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
+    let response = await farmerController.updatePassword(req, res)
     if(response.farmer || response.deliveryInformation){
         res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
     }else{
@@ -44,12 +44,30 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
-    if(response.farmer || response.deliveryInformation){
-        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
-    }else{
-        res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
+     let response= await farmerController.updatePassword(req, res)
+    //  {status,farmer,isVerified,message_}
+     
+     if(response.message_){
+        return res.json({ message: response.message_, statusCode: 200 }).status(200)
     }
+    //  if(response.error_message_){
+    //     return res.json({ message: response.error_message_, statusCode: 400 }).status(400)
+    // }
+    //     if(response.status){
+    //             // res.json({ message_: message_ , statusCode: 200 }).status(200)
+    //         res.render('farmers/settings', {
+    //             layout : 'farmers-dashboard',
+    //             title: 'Settings',
+    //             fullname: response.farmer.firstname + ' ' + response.farmer.lastname,
+    //             farmerData: response.farmer,
+    //             isVerified : response.isVerified,
+    //             password_change_status : response.message_
+    //         })
+    //    }else{
+    //         req.flash('errors', r.errors)
+    //        res.redirect('back');
+    //    }
+
 
 })
 
@@ -280,7 +298,6 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let transactions=await farmerController.getTransactions(farmer.id)
-   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',
@@ -298,7 +315,6 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
     let currency_ = transactions[0].TransactionLog.currency
     let total_amount = transactions[0].TransactionLog.amount
     let pick_up = transactions[0].TransactionLog.pickup_point
-    console.log(orderStatus)
     res.render('farmers/view-order', {
         layout : 'farmers-dashboard',
         title: 'Order View',

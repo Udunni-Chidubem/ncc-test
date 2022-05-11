@@ -1,6 +1,8 @@
 const { body, validationResult } = require('express-validator')
 const db = require('../models')
 const { SeedCompany, User, SeedTrader } = db
+const bcrypt = require('bcrypt');
+const utils = require('../helpers/utils');
 
 
 const profileUpdateValidation = () => {
@@ -26,16 +28,29 @@ const profileUpdateValidation = () => {
         
    ] 
 }
-const settingsValidation = () => {
+const settingsValidation =  () => {
     return [
+    body('newpassword')
+        .not().isEmpty().withMessage('New Password field is required'),
+    body('confirmpassword')
+        .custom((value, { req }) => {
+        if (value !== req.body.newpassword) {
+            throw new Error('Password confirmation does not match Password');
+        }
+        return true
+    }),
         body('currentpassword')
-            .not().isEmpty().withMessage('Phone Number field is required')
-            .custom((value, { req }) => {
-                return User.findOne({ where: { username: req.body.userphoneno } }).then(user => {
-                    if (user) {
-                        return Promise.reject('Phone Number is already in use. Please try another one!');
+            .not().isEmpty().withMessage('Current Password field is required')
+            .custom(async (value, { req }) => {
+                let user= await User.findOne({ where: { username: req.body.userphoneno.trim() } });
+                if (user) {
+                    if(await bcrypt.compare(req.body.currentpassword, user.password)){
+                    }else{
+                        throw new Error('Incorrect Password');
+                        return "Incorrect Password"
                     }
-                });
+                }
+                return true
             }),
     ]
 }
@@ -283,5 +298,5 @@ module.exports = {
     cartValidation,
     cartSingleValidation,
     productValidation,
-    settingsValidation
+    settingsValidation,
 }

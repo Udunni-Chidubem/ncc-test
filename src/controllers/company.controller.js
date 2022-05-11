@@ -4,6 +4,7 @@ const db = require('../models')
 const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
+const bcrypt = require('bcrypt');
 
 
 
@@ -229,7 +230,6 @@ module.exports = {
             + "on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
             + "where p.user_id = " + user.id + " and c.product_id ="+product+" GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(order)
         return order
     },
     getOrder: async (transaction_id, user_id, company_id) => {
@@ -288,7 +288,6 @@ module.exports = {
      
         farmer = JSON.parse(JSON.stringify(farmer))
         orderStatus = JSON.parse(JSON.stringify(orderStatus))
-        console.log(order)
         return { order, farmer, orderStatus };
     },
     getOrderCount : async (company_id)=>{
@@ -312,5 +311,23 @@ module.exports = {
     },
     updadeOrders:async (order_id, data)=>{
         Orders.update(data, { where : {id : order_id}})
-    }
+    },
+
+    updatePassword: async (req, res) => {
+        let user = await req.user
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message_ = "Updated Successfully"
+        try{
+        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            return {status,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+    },
 }

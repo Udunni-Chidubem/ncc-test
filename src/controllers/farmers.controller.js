@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const {
         User, 
         Farmer, 
@@ -87,6 +88,68 @@ module.exports={
         {
             where : {id : id}
         })
+    },
+    updatePassword: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message_ = "Updated Successfully"
+        try{
+        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            return {status,farmer,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+
+            // try{
+        // let sql = "select password from user where username ="+ farmer.phone_no +";"
+        //     let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //     console.log(password_verify.password)
+        //     if(password_verify=''){
+        // let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //     let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //     return {status,farmer,isVerified,message_}}
+        //     else{
+        //         console.log(sql)
+        //         return {error_message_}
+        //     }
+            
+        //    } 
+        //    catch(e){
+        //     console.log(e)       
+        //     return e
+        //    }
+
+        // try{
+        //     let sql = "select password from user where username ="+ farmer.phone_no +"';"
+        //         let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //         bcrypt.compare(req.body.currentpassword, password_verify.password, function(err, res) {
+        //             if(err){
+    
+        //             }
+        //             if(res == true){
+        //                 let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //                 let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //                 return {status,farmer,isVerified,message_}
+        //             }
+        //             if(res == false){
+        //                 console.log(sql)
+        //                 return {error_message_}
+        //             }
+        //         });
+    
+                
+        //        } 
+        //        catch(e){
+        //         console.log(e)       
+        //         return e
+        //        }
     },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
@@ -777,7 +840,6 @@ module.exports={
                "  on c.id = tc.cart_id JOIN product as p on c.product_id = p.id JOIN seedcompany as sc on sc.user_id = p.user_id )  JOIN orders as o on o.transaction_log_id "
                + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
-            // console.log(status)
             return status
     }
 
