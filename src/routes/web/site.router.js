@@ -28,8 +28,7 @@ siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
 siteRouter.get('/faq', siteController.faq)
-siteRouter.get('/forgot_password', siteController.Forgot_Password)
-siteRouter.get('/otp', siteController.OTP)
+
 siteRouter.get('/new_password', siteController.NewPassword)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
@@ -157,20 +156,114 @@ siteRouter.get('/recommendation', (req,res) => {
     res.render('knowledge_base/recommendation', {
         layout: '',
         title : 'Knowledge Base - Recommendation'
-       });
-   
-   })
+    });
+})
 
-
+siteRouter.get('/forgot_password', async (req, res)=>{
+    res.render('site/forgot_password',{
+        form_banner:'Group.png',
+        title: 'Forgot-Password',
+        layout : 'form',
+       // errors : req.flash('errors')
+    });
+})
 siteRouter.post('/forgot_password', async (req, res)=>{
-    let passw=await siteController.ForgotPassword(req, res)
-    if(!passw){
-        const response={"Status":"Failure","Details":"Phone Number not provided"}
-        return res.status(400).send(response) 
+    let messages=[];
+    if(req.body.username){
+        let passw=await siteController.ForgotPassword(req, res)
+        if(!passw){
+            const response={"Status":"Failure","Details":"Account does not exist"}
+            messages.error=response.Details
+            res.render('site/forgot_password',{
+                form_banner:'Group.png',
+                title: 'Forgot-Password',
+                layout : 'form',
+                messages
+            });
+        }else{
+            let otp_instance=await siteController.otp(passw.username)
+           // req.flash('phone', passw.username)
+            //req.flash('otp', otp_instance.otp_code)
+            res.render('site/otp',{
+                form_banner:'Group.png',
+                title: 'OTP',
+                layout : 'form',
+                phone : passw.username
+            // phone
+            })
+            
+        }
     }
-     else{}
+
+    if(req.body.otp){
+        let otp = req.body.otp
+        let phone = req.body.phone
+       // res.send({'phone': phone, 'otp':otp})
+       // return
+        let otp_instance = siteController.getOTPByCode(otp, phone)
+        if(otp_instance){
+             res.render('site/new_password',{
+                form_banner:'Group.png',
+                title: 'Forgot-Password',
+                layout : 'form',
+                phone : phone
+            });
+        }else{
+            messages.error="invalid OTP"
+            res.render('site/forgot_password',{
+                form_banner:'Group.png',
+                title: 'Forgot-Password',
+                layout : 'form',
+                messages
+            });
+        }
+       
+    }
+
+    if(req.body.newpassword){
+        if(req.body.newpassword === req.body.confirmpassword){
+            let rst = siteController.updatePassword(req.body.newpassword, req.body.phone)
+            if(rst){
+                res.redirect("/login")
+            }
+        }else{
+            messages.error="Passwords do not match"
+            res.render('site/new_password',{
+                form_banner:'Group.png',
+                title: 'Forgot-Password',
+                layout : 'form',
+                phone : req.body.phone,
+                messages
+            });
+        }
+    }
+   
+  
 
 });
+
+siteRouter.get('/otp', async(req, res)=>{
+  //  let otp=req.flash('otp')
+   
+    res.render('site/otp',{
+        form_banner:'Group.png',
+        title: 'OTP',
+        layout : 'form',
+       // phone
+    })
+})
+
+siteRouter.post('/otp', async(req, res)=>{
+    let otp = req.body.otp
+     let phone=req.flash('phone')
+     let otp_instance = siteController.getOTPByCode(otp, phone)
+    res.render('otp',{
+        form_banner:'Group.png',
+        title: 'OTP',
+        layout : 'form',
+        phone
+    })
+})
      
 
 //  })
@@ -182,12 +275,12 @@ siteRouter.post('/forgot_password', async (req, res)=>{
 // })
 
 
- siteRouter.get('/otp', async (req, res)=>{
-  let result = await siteController.OTP(req, res)
+//  siteRouter.get('/otp', async (req, res)=>{
+//   let result = await siteController.OTP(req, res)
 
 
-  console.log(otp_print);
-    });
+//   console.log(otp_print);
+//     });
     
  
 

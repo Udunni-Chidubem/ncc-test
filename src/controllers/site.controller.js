@@ -84,22 +84,22 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-    Forgot_Password: async (req,res) => {
-        res.render('site/forgot_password',{
-            form_banner:'Group.png',
-            title: 'Forgot-Password',
-            layout : 'form',
-            errors : req.flash('errors')
-        });
-    },
-    OTP: async (req,res) => {
-        res.render('site/otp',{
-            form_banner:'Group.png',
-            title: 'OTP',
-            layout : 'form',
-            errors : req.flash('errors')
-        });
-    },
+    // Forgot_Password: async (req,res) => {
+    //     res.render('site/forgot_password',{
+    //         form_banner:'Group.png',
+    //         title: 'Forgot-Password',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
+    // OTP: async (req,res) => {
+    //     res.render('site/otp',{
+    //         form_banner:'Group.png',
+    //         title: 'OTP',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
     NewPassword: async (req,res) => {
         res.render('site/new_password',{
             form_banner:'Group.png',
@@ -329,7 +329,6 @@ module.exports = {
 
 
     ForgotPassword: async (req, res) =>{
-        console.log(pass)
         pass =await User.findOne({
             attributes :  ['id', 'username'],
              where : {
@@ -345,45 +344,55 @@ module.exports = {
     },
 
     
-    OTP: async (req, res)=>{
+    otp: async (phone)=>{
+        let transaction=await db.rest.transaction()
+            //Generate OTP 
+        try{
+            const otp_code = otpGenerator.generate(6, { digits: true,lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+            const now = new Date();
+            const expiration_time = new Date(now.getTime() + 10*60000)
 
-        //Generate OTP 
-    const otp_code = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, length:6,  });
-    const now = new Date();
-    const expiration_time = AddMinutesToDate(now,10);
-
-    // console.log(otp_gen);
-
-
-     // SAVING GENERATED OTP in DB
-     const otp_instance = await Otp.create({
-        otp_code: otp_code,
-        expiration_time: expiration_time,
-        number_id:pass
-
-     });
-     
-
-    // FIND OTP in DB AND THEN VERIFY
-     let otp_print = await Otp.findOne({
-         attributes: [ 'otp_code' ],
-          where:{
-              otp_code: req.OTP
-          }
-    //    otp_instance : otp_code,
-    //   expiration_time: expiration_time
-     });
-      
-     console.log(otp_print);
-
-
-
-
-     function AddMinutesToDate(date, minutes) {
-        return new Date(date.getTime() + minutes*60000);
-      };
-   
+            // console.log(otp_gen);
+            const otp_instance = await Otp.create({
+                otp_code: otp_code,
+                expiration_time: expiration_time,
+                phone : phone,
+                verified : false
+            }, {transaction : transaction});
+            transaction.commit()
+            return otp_instance
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return e
+        }
     },
+
+    getOTPByCode : async (otp_code, phone)=>{
+
+        let otp=await Otp.findOne({
+            where :{ otp_code : otp_code, phone : phone}
+        })
+        otp=JSON.parse(JSON.stringify(otp))
+        console.log(otp)
+        return otp;
+
+    },
+    updatePassword : async (password, phone)=>{
+        let transaction = await db.rest.transaction()
+        try{
+            let user=await User.update({
+                password : await bcrypt.hash(password, 10)
+            }, {where : {username : phone}}, {transaction : transaction})
+            transaction.commit()
+            return true
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return false
+        }
+       
+    }
 
 
 }
