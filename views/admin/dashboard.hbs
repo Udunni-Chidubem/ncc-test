@@ -1,3 +1,15 @@
+{{!-- product list --}}
+
+{{#activeProduct}}
+<p id="productlist_1" activeProduct="{{count}}"> </p>
+{{/activeProduct}}
+
+{{#inactiveProduct}}
+<p id="productlist_2" inactiveProduct="{{count}}"> </p>
+{{/inactiveProduct}}
+
+
+{{!-- farmer --}}
 {{#farmerinactivelist}}
 <p id="farmercount_1" farmerinactivelist="{{count}}"> </p>
 {{/farmerinactivelist}}
@@ -220,6 +232,12 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
+  /* product count*/
+  const productlist_1 = document.getElementById('productlist_1');
+  activeProduct = productlist_1.getAttribute("activeProduct")
+
+  const productlist_2 = document.getElementById('productlist_2');
+  inactiveProduct = productlist_2.getAttribute("inactiveProduct")
 
   /* farmer count*/
   const farmercount_1 = document.getElementById('farmercount_1');
@@ -339,7 +357,7 @@
     }
   });
 
-  var yseedtraderValues = [seedtraderinactivelist, seedtraderactivelist];
+  var yseedtraderValues = [seedtraderactivelist, seedtraderinactivelist];
   // var yseedtraderValues = [x.st_count[0].st_count, x.st_count[1].st_count];
   //var yseedtraderValues = [54,34];
 
@@ -366,7 +384,7 @@
 
 
   var xproductValues = ["published", "unpublished"];
-  var yproductValues = [55, 19];
+  var yproductValues = [activeProduct, inactiveProduct];
   var productbarColors = [
     "#FB8200",
     "#7B61FF",
