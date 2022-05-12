@@ -364,7 +364,50 @@
         }
       })
 
+      /* change password*/
+
+      $('.btn_update_password').on('click', function () {
+        let currentpassword = $('#currentpassword').val()
+        let newpassword = $('#newpassword').val()
+        let confirmpassword = $('#confirmpassword').val()
+        let userphoneno = $('#userphoneno').val()
+
+        const ch_pass_data = {
+          'currentpassword': currentpassword,
+          'newpassword': newpassword,
+          'confirmpassword': confirmpassword,
+          'userphoneno': userphoneno
+        }
+
+        let settingsurl = baseUrl + '/farmer/settings'
+
+        fetch(settingsurl, {
+          method: 'POST',
+          body: JSON.stringify(ch_pass_data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+          .then(r => r.json())
+          .then(response => {
+            if (response.statusCode == 402) {
+              let msg = ''
+              let errors = response.data
+              errors.forEach((value, index) => {
+                msg += (index + 1) + '. ' + value.msg + ' \n'
+              })
+              error_toastr(msg)
+
+            } else if (response.statusCode == 500 || response.statusCode == 400) {
+              error_toastr(response.message)
+            } else {
+              success_toastr(response.message)
+            }
+          })
+          .catch(error => console.log(error))
+      })
+
     })
+
+
 
 
   </script>

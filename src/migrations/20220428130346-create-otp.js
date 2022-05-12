@@ -14,13 +14,9 @@ module.exports = {
         defaultValue: false,
         allowNull: true
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id',
-          name: 'user_id_key'
-        }, 
+      phone: {
+        type: Sequelize.STRING,
+       
       },
       otp_code: {
         type: Sequelize.STRING,

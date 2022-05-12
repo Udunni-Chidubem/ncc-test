@@ -1,7 +1,7 @@
 const companyRouter=require('express').Router()
 const siteController = require('../../controllers/site.controller');
 const utils = require('../../helpers/utils')
-const { companyValidation, validate, productValidation } = require('../../helpers/formValidator');
+const { companyValidation, validate, productValidation, settingsValidation } = require('../../helpers/formValidator');
 const companyController = require('../../controllers/company.controller');
 
 companyRouter.get('/dashboard', async (req, res)=>{
@@ -37,6 +37,7 @@ companyRouter.get('/update-profile', async (req, res)=>{
         isVerified,
     })
 });
+
 /*Update Profile*/
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
     let r = await companyController.updateProfile(req, res)
@@ -59,6 +60,29 @@ companyRouter.get('/products/create', async (req, res)=>{
         title : 'Create Product',
     })
 });
+// change password
+companyRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
+
+    let response= await companyController.updatePassword(req, res)
+    if(response.message_){
+       return res.json({ message: response.message_, statusCode: 200 }).status(200)
+   }
+})
+
+// settings page
+companyRouter.get('/settings', async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user, 'company')
+
+    res.render('seed_company/settings', {
+        layout : 'company-dashboard',
+        title : 'Settings',
+        isVerified,
+        company
+    })
+}); 
+
 
 /*Create Product POST request*/
 companyRouter.post('/products/create', productValidation(), validate, async (req, res)=>{

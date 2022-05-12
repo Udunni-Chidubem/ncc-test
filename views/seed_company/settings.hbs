@@ -10,28 +10,7 @@
                 </li>
             </ul>
         </div>
-
-
         <div class="col-9">
-<<<<<<< HEAD
-            <div class="card settings_  content account pt-3 pb-3">
-                <div class="card-body text-center">
-                    <h3 class="text-center deactivate-intro">We hate to see you go</h3>
-                    <h3 class="deactivate-intro">{{fullname}}</h3>
-                    <div class="text-center deactivate-texts">
-                    <p>This will happen if you deactivate your account? </p>
-                        <p class="p-2">You will lose access to your dashboard.</p>
-                        <p class="p-2">You cannot search for seeds or purchase them if you deactivate your account.</p>
-                    </div>
-
-                    <div>
-                        <p class="p-2"><strong>Are you sure about this?</strong></p>
-                        <div class="text-center">
-                            <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
-                        </div>
-                    </div>
-=======
->>>>>>> 265baccd25c9e24d20ce7bbe873182b7112625a0
 
             {{#if password_change_status}}
             <div class="row d-flex justify-content-center">
@@ -76,17 +55,11 @@
             </div>
             {{/if}}
 
-<<<<<<< HEAD
-            {{!-- <div class="card settings_  content account">
-=======
             <div class="card settings_  content account">
->>>>>>> 265baccd25c9e24d20ce7bbe873182b7112625a0
                 <div class="card-body">
                     Deactivate Account
                 </div>
-            </div> --}}
-
-
+            </div>
             <div class="card settings_ active content password">
                 <div class="card-body">
                     <div class="input-group mb-3">
@@ -105,7 +78,7 @@
                             aria-describedby="basic-addon1" onkeyup='check();'>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="hidden" class="form-control" id="userphoneno" value="{{farmerData.phone_no}}"
+                        <input type="hidden" class="form-control" id="userphoneno" value=" {{company.phone_no}}"
                             name="userphoneno" aria-label=" User Phoneno" aria-describedby="basic-addon1">
                     </div>
                     <span id='message'></span>
@@ -114,32 +87,7 @@
                             <button class="btn btn_update_password mb-1" disabled id="btn_update_password">
                                 Update</button>
                         </div>
-<<<<<<< HEAD
-                        <div class="input-group mb-3">
-                            <input type="password" value="{{ formData.phone }}" minlength="6" class="form-control"
-                                id="newpassword" name="newpassword" placeholder="New Password" aria-label="New Password"
-                                aria-describedby="basic-addon1" onkeyup='check();'>
-                        </div>4
-                        <div class="input-group mb-3">
-                            <input type="password" value="{{ formData.phone }}" required minlength="6"
-                                class="form-control" id="confirmpassword" name="confirmpassword"
-                                placeholder="Retype New Password" aria-label="Confirm Password"
-                                aria-describedby="basic-addon1" onkeyup='check();'>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="hidden" class="form-control" value="{{farmerData.phone_no}}" name="userphoneno"
-                                aria-label=" User Phoneno" aria-describedby="basic-addon1">
-                        </div>
-                        <span id='message'></span>
-                        <div class="col-12  ">
-                            <div class="columns mx-auto" style="width: 160px;">
-                                <button type="button float-end" class="btn  mb-1">Update</button>
-                            </div>
-                        </div>
-                    </form>
-=======
                     </div>
->>>>>>> 265baccd25c9e24d20ce7bbe873182b7112625a0
                 </div>
             </div>
         </div>
