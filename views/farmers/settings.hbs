@@ -15,53 +15,19 @@
         <div class="col-9">
 
             {{#if password_change_status}}
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 alert alert-success">
-                    {{password_change_status}}
-                </div>
-            </div>
-            {{/if}}
-            {{#if messages.error}}
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 alert alert-danger">
-                    {{messages.error}}
-                </div>
-            </div>
-            {{/if}}
-            {{#if message_}}
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 alert alert-danger">
-                    {{message_}}
-                </div>
-            </div>
-            {{/if}}
-            {{#if errors.length}}
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 alert alert-danger">
-                    <ul>
-                        {{#each errors}}
-                        <li>{{this.message}}</li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
-            {{/if}}
 
-            {{#if extractedErrors}}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul style="padding: 5px;">
-                    {{#each extractedErrors}}
-                    <li>{{msg}}</li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{/if}}
-
-            <div class="card settings_  content account">
+                <div class="card settings_  content account">
                 <div class="card-body">
-                    Deactivate Account
+                    <h3 class="deactivate-intro">we hate to see you go</h3>
+                    <h3 class="deactivate-intro">{{ fullname}}</h3>
+                    <p class="deactivate-texts">This is what will happen when you deactivate your account</p>
+                    <p class="deactivate-texts">You will lose access to your dashboard</p>
+                    <p class="deactivate-texts">You cannot search for seeds or purchase seeds on NIGSIMS</p>
+                    <div>
+                        <img src="../../images/deactivate-pic.png" class="img-fluid">
+                    </div>
                 </div>
-            </div>
+            </div> 
 
 
             <div class="card settings_ active content password">

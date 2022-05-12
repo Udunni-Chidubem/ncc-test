@@ -7,6 +7,7 @@
   text-align: center;
   letter-spacing: -0.011em; 
   color: #2b6952;
+  text-transform: capitalize;
   /* width: 533px; */
 }
 .deactivate-texts {
