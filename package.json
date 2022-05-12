@@ -7,11 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server",
     "start": "env NODE_ENV=development nodemon app",
-    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3306/db_nigsims",
+    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3307/db_nigsims",
     "migration": "npx sequelize-cli migration:create --name create_wallets_table",
     "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
     "seeder": "npx sequelize-cli seed:create --name my-seed-file",
-    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1:33076db_nigsims",
+    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1:3307/db_nigsims",
     "seed-single": "npx sequelize-cli db:seed --seed <name of seed file>",
     "test_local": "NODE=test yarn jest --silent=false --verbose --forceExit --runInBand",
     "test2": "NODE=test jest --forceExit --runInBand"

@@ -117,17 +117,26 @@
 
     //password retype
     var check = function () {
-        if (document.getElementById('newpassword').value ==
-            document.getElementById('confirmpassword').value) {
-            document.getElementById('message').style.color = 'green';
-            document.getElementById('message').innerHTML = 'Password matching';
-            document.querySelector('#btn_update_password').removeAttribute('disabled');
-            document.querySelector('#btn_update_password').setAttribute('enabled', true);
-        } else {
+        if (document.getElementById('currentpassword').value ==
+            document.getElementById('newpassword').value) {
             document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'Password not matching';
+            document.getElementById('message').innerHTML = 'Cant use Current Password as new password';
             document.querySelector('#btn_update_password').removeAttribute('enabled');
             document.querySelector('#btn_update_password').setAttribute('disabled', true);
+        }
+        else {
+            if (document.getElementById('newpassword').value ==
+                document.getElementById('confirmpassword').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Password matching';
+                document.querySelector('#btn_update_password').removeAttribute('disabled');
+                document.querySelector('#btn_update_password').setAttribute('enabled', true);
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Password not matching';
+                document.querySelector('#btn_update_password').removeAttribute('enabled');
+                document.querySelector('#btn_update_password').setAttribute('disabled', true);
+            }
         }
     }
 </script>
