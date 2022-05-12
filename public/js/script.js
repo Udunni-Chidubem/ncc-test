@@ -73,6 +73,21 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#farmers-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
+$(document).ready(function() {
+  $('#seed-trader-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
+$(document).ready(function() {
+  $('#seed-company-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
 
 $(document).ready(function() {
   $('#transactionTable').DataTable({

@@ -26,7 +26,7 @@
 {{/seedtraderactivelist}}
 
 <div class="admin_container mb-3">
-  <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 ">
+  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 ">
 
     <div class="col co_12 ">
       <div class="">
@@ -36,7 +36,7 @@
             {{#farmerCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/farmerCount}}
-            <a href="/admin/all-users" class="card-link float-end">View details</a>
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
             {{#companyCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/companyCount}}
-            <a href="/admin/all-users" class="card-link float-end">View details</a>
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -64,19 +64,7 @@
             {{#seedtraderCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/seedtraderCount}}
-            <a href="/admin/all-users" class="card-link float-end">View details</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col co_12">
-      <div class="">
-        <div class="card card_admin_home">
-          <div class="card-body">
-            <h5 class="card-title text-center">New Seed Certifications</h5>
-            <p class="card-text text-center c_d_s2_sales s_1 ">2200</p>
-            <a href="#" class="card-link float-end">View details</a>
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -86,7 +74,7 @@
 </div>
 
 <div class="row chart_">
-  <div class="col-8">
+  <div class="col-12">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
@@ -98,7 +86,7 @@
       </div>
     </div>
   </div>
-
+  {{!--
   <div class="col-4 col__4">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
@@ -155,7 +143,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
       </div>
@@ -301,8 +289,8 @@
   // var yfarmerValues = [x.f_count[0].f_count, x.f_count[1].f_count];
   //var yfarmerValues = [33,99];
   var barColors = [
-    "#FFB946",
     "#5DCD6D",
+    "#FFB946",
 
   ];
 
