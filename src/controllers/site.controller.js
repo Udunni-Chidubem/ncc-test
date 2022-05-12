@@ -379,19 +379,19 @@ module.exports = {
 
     },
 
-    validation : async (otp_code) =>{
-        let transaction = await db.rest.transaction()
+    // validation : async (otp_code) =>{
+    //     let transaction = await db.rest.transaction()
 
-            let otp_stuff = req.body.otp
-            let otp_ver = otp_code
+    //         let otp_stuff = req.body.otp
+    //         let otp_ver = otp_code
 
-            if(otp_stuff == otp_ver){
-                res.render stuffffff
-            }
+    //         if(otp_stuff == otp_ver){
+    //             res.render stuffffff
+    //         }
 
 
         
-    },
+    // },
 
     updatePassword : async (password, phone)=>{
         let transaction = await db.rest.transaction()
