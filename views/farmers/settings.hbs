@@ -13,7 +13,6 @@
 
 
         <div class="col-9">
-<<<<<<< HEAD
             <div class="card settings_  content account pt-3 pb-3">
                 <div class="card-body text-center">
                     <h3 class="text-center deactivate-intro">We hate to see you go</h3>
@@ -25,16 +24,11 @@
                     </div>
 
                     <div>
-                    <p class="p-2"><strong>Are you sure about this?</strong></p>
-                    {{!-- {{farmer.user_id}} --}}
-                    <div class="text-center">
-<<<<<<< HEAD
-                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn">Deactivate Account</button>
-=======
-                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
->>>>>>> f11770e55febb37695ce83608db080f0fa5350a2
+                        <p class="p-2"><strong>Are you sure about this?</strong></p>
+                        <div class="text-center">
+                            <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+                        </div>
                     </div>
-=======
 
             {{#if password_change_status}}
             <div class="row d-flex justify-content-center">
@@ -79,12 +73,11 @@
             </div>
             {{/if}}
 
-            <div class="card settings_  content account">
+            {{!-- <div class="card settings_  content account">
                 <div class="card-body">
                     Deactivate Account
->>>>>>> f170e6a3a835fcb3f8eb27e5037d4dcce2b69267
                 </div>
-            </div>
+            </div> --}}
 
 
             <div class="card settings_ active content password">
@@ -99,7 +92,7 @@
                             <input type="password" value="{{ formData.phone }}" minlength="6" class="form-control"
                                 id="newpassword" name="newpassword" placeholder="New Password" aria-label="New Password"
                                 aria-describedby="basic-addon1" onkeyup='check();'>
-                        </div>
+                        </div>4
                         <div class="input-group mb-3">
                             <input type="password" value="{{ formData.phone }}" required minlength="6"
                                 class="form-control" id="confirmpassword" name="confirmpassword"
