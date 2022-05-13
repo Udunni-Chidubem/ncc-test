@@ -69,14 +69,13 @@
 								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
 									alt="user profile image">
 								{{farmer.User.username}}
-								{{#if farmer.User.status}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'"
-									class="btn btn-danger deactivate-btn"> Deactivate User</button>
-								{{else}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'"
-									class="btn btn-success activate-btn"> Activate User</button>
+
+								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
+									{{#if farmer.User.status}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+										{{else}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
+									{{/if}}
 								{{/if}}
 							</div>
 							<div class="profile-info-section">
