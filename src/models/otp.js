@@ -14,9 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Otp.init({
-    user_id:{ 
-      allowNull: false,
-      type: DataTypes.INTEGER,
+    // id: {
+		// 	type: DataTypes.INTEGER,
+		// 	primaryKey: true,
+		// 	// defaultValue: DataTypes.UUIDV4,
+		// },
+		expiration_time: DataTypes.DATE,
+		verified: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+			allowNull: true
+		},
+    phone:{ 
+      allowNull:    false,
+      type: DataTypes.STRING,
     },
     otp_code: {
       allowNull: false,

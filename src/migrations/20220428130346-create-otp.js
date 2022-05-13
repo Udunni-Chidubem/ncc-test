@@ -8,29 +8,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      expiration_time: DataTypes.DATE,
+      expiration_time: Sequelize.DATE,
       verified: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: true
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id',
-          name: 'user_id_key'
-        }, 
+      phone: {
+        type: Sequelize.STRING,
+       
       },
       otp_code: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

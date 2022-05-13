@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact, Otp }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
@@ -9,7 +9,9 @@ const path = require('path')
 const fs = require('fs')
 var otpGenerator = require('otp-generator');
 const otp = require('../models/otp');
+// const AddMinutesToDate = require('../public/js/script')
 
+global.pass = 0;
 
 module.exports = {
     home: async (req, res) => {
@@ -82,22 +84,22 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-    Forgot_Password: async (req,res) => {
-        res.render('site/forgot_password',{
-            form_banner:'Group.png',
-            title: 'Forgot-Password',
-            layout : 'form',
-            errors : req.flash('errors')
-        });
-    },
-    OTP: async (req,res) => {
-        res.render('site/otp',{
-            form_banner:'Group.png',
-            title: 'OTP',
-            layout : 'form',
-            errors : req.flash('errors')
-        });
-    },
+    // Forgot_Password: async (req,res) => {
+    //     res.render('site/forgot_password',{
+    //         form_banner:'Group.png',
+    //         title: 'Forgot-Password',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
+    // OTP: async (req,res) => {
+    //     res.render('site/otp',{
+    //         form_banner:'Group.png',
+    //         title: 'OTP',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
     NewPassword: async (req,res) => {
         res.render('site/new_password',{
             form_banner:'Group.png',
@@ -325,45 +327,72 @@ module.exports = {
         Contact.create(req.body)
     },
 
+
     ForgotPassword: async (req, res) =>{
-        console.log(pass)
-        let pass =await User.findOne({
+        pass =await User.findOne({
             attributes :  ['id', 'username'],
              where : {
                 username : req.body.username
-             }
+             },
+
          });
-         return pass;
+         if(!pass){
+             console.log('Wrong Number')
+         } else{
+            return pass;
+         }
     },
 
-    OTP: async (req, res)=>{
+    
+    otp: async (phone)=>{
+        let transaction=await db.rest.transaction()
+            //Generate OTP 
+        try{
+            const otp_code = otpGenerator.generate(6, { digits: true,lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+            const now = new Date();
+            const expiration_time = new Date(now.getTime() + 10*60000)
 
-        //Generate OTP 
-    const otp_gen = otpGenerator.generate(6, { alphabets: false, upperCase: false, specialChars: false, length:6,  });
-    const now = new Date();
-    // const expiration_time = AddMinutesToDate(now,10);
-    console.log(otp_code);
+            // console.log(otp_gen);
+            const otp_instance = await Otp.create({
+                otp_code: otp_code,
+                expiration_time: expiration_time,
+                phone : phone,
+                verified : false
+            }, {transaction : transaction});
+            transaction.commit()
+            return otp_instance
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return e
+        }
+    },
 
-     // SAVING GENERATED OTP in DB
-    //  const otp_gen = otp_code
+    getOTPByCode : async (otp_code, phone)=>{
 
+        let otp=await Otp.findOne({
+            where :{ otp_code : otp_code, phone : phone}
+        })
+        otp=JSON.parse(JSON.stringify(otp))
+        console.log(otp)
+        return otp;
 
-
-    // FINDING OTP in DB
-     let otp_instance = await otp_gen.findOne({
-         attributes: ['id', 'otp_code'],
-          where:{
-              otp_code: req.OTP
-          }
-    //    otp_instance : otp_code,
-    //   expiration_time: expiration_time
-     });
-
-   
+    },
+    updatePassword : async (password, phone)=>{
+        let transaction = await db.rest.transaction()
+        try{
+            let user=await User.update({
+                password : await bcrypt.hash(password, 10)
+            }, {where : {username : phone}}, {transaction : transaction})
+            transaction.commit()
+            return true
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return false
+        }
+       
     }
-
-
-
 
 
 }

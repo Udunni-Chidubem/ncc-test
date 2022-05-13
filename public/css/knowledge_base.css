@@ -4,11 +4,17 @@
 UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
 
 */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-p {
+
+.mainpage p {
   margin-top: 0px;
   margin-bottom: 0px;
-  /* font-family: poppin; */
+
 }
 
 /* 
@@ -19,7 +25,9 @@ SEARCH BAR CODE STARTS
 
 .searchBar-container {
   margin-top: 4rem;
-  /* width: ; */
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 324px; */
   height: 152px;
   background: #fff;
   box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.2);
@@ -34,6 +42,8 @@ SEARCH BAR CODE STARTS
   justify-content: center;
   padding-top: 4rem;
   vertical-align: middle;
+  /* width: 324px; */
+  margin: auto;
 }
 
 ::placeholder {
@@ -63,9 +73,20 @@ SEARCH BAR CODE STARTS
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 2.5rem;
   place-items: center;
-  width: fit-content;
+  width: fit-content ;
   margin: 5rem auto;
   padding-top: 2rem;
+}
+
+
+.valueSeeds-image {
+  width: 187px;
+  height: 220px;
+}
+.valueSeeds-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .seed-title {
@@ -170,6 +191,7 @@ h3 {
 .mainpage {
   padding: 15px;
   margin: auto;
+  font-family: poppins;
 }
 .mainpage li {
   /* list-style: disc;   */
@@ -360,6 +382,10 @@ h3 {
   margin-bottom: 0px;
 }
 
+.recommended-stuff{
+  padding-top: 80px;
+}
+
 /* 
 
 TABLE 
@@ -393,6 +419,40 @@ td {
   border-left: 1px solid black;
   text-decoration: black;
 }
+
+@media (max-width:715px) {
+  .valueSeeds-container {
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-gap: 2rem;
+    place-items: center;
+    width: 75% ;
+    margin: 5rem auto;
+    padding-top: 2rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+
+  .form-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+    /* vertical-align: middle; */
+    width: 324px; 
+  }
+  .valueSeeds-container {
+    display: grid;
+    grid-template-columns:1fr;
+    grid-gap: 2.5rem;
+    place-items: center;
+    width: 75% ;
+    margin: 5rem auto;
+    padding-top: 2rem;
+  }
+  /* .mini-sidebar{
+    display: none;
+  } */
 
 .dub_image{
   display: none;
@@ -449,9 +509,9 @@ MEDIA QUERIES
     grid-template-columns: 80px 1fr;
   }
 
-  .mini-sidebar{
+  /* .mini-sidebar{
     display: none;
-  }
+  } */
 
   .knowledge-content{
     display: grid;
@@ -510,6 +570,8 @@ MEDIA QUERIES
   } */
 
 }
+
+
 
 @media (min-width:321px) and (max-width:376px) {
   .mainpage p{
@@ -616,6 +678,7 @@ MEDIA QUERIES
   } */
 
 }
+
 
 @media (min-width:377px) and (max-width:426px) {
   .mainpage p{
@@ -833,4 +896,5 @@ MEDIA QUERIES
   .dub-image{
     display: none;
   }
+}
 }
