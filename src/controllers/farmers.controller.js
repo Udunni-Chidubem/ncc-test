@@ -190,7 +190,7 @@ module.exports={
                 level_of_education, 
                 state_id, 
                 lg_id, 
-                nin, 
+                // nin, 
                 bvn,
                 source_type,
                 address_of_farm,

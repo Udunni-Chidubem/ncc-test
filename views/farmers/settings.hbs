@@ -15,19 +15,66 @@
         <div class="col-9">
 
             {{#if password_change_status}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-success">
+                    {{password_change_status}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if messages.error}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{messages.error}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if message_}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{message_}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if errors.length}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    <ul>
+                        {{#each errors}}
+                        <li>{{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
 
-                <div class="card settings_  content account">
+            {{#if extractedErrors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul style="padding: 5px;">
+                    {{#each extractedErrors}}
+                    <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            <div class="card settings_  content account">
                 <div class="card-body">
                     <h3 class="deactivate-intro">we hate to see you go</h3>
                     <h3 class="deactivate-intro">{{ fullname}}</h3>
-                    <p class="deactivate-texts">This is what will happen when you deactivate your account</p>
-                    <p class="deactivate-texts">You will lose access to your dashboard</p>
-                    <p class="deactivate-texts">You cannot search for seeds or purchase seeds on NIGSIMS</p>
-                    <div>
-                        <img src="../../images/deactivate-pic.png" class="img-fluid">
+                    <div class="m-5">
+                    <p class="deactivate-texts mt-2">This is what will happen when you deactivate your account</p>
+                    <p class="deactivate-texts mt-2">You will lose access to your dashboard</p>
+                    <p class="deactivate-texts mt-2">You cannot search for seeds or purchase seeds on NIGSIMS</p>
+                    </div>
+                    
+                    <div class="d-flex align-items-center justify-content-center m-5">
+                        <img src="../../images/deactivate-pic.png">
+                    </div>
+                    <div class="text-center m-5">
+                    <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
                     </div>
                 </div>
-            </div> 
+            </div>
 
 
             <div class="card settings_ active content password">
@@ -87,27 +134,17 @@
 
     //password retype
     var check = function () {
-
-        if (document.getElementById('currentpassword').value ==
-            document.getElementById('newpassword').value) {
+        if (document.getElementById('newpassword').value ==
+            document.getElementById('confirmpassword').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'Password matching';
+            document.querySelector('#btn_update_password').removeAttribute('disabled');
+            document.querySelector('#btn_update_password').setAttribute('enabled', true);
+        } else {
             document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'Cant use Current Password as new password';
+            document.getElementById('message').innerHTML = 'Password not matching';
             document.querySelector('#btn_update_password').removeAttribute('enabled');
             document.querySelector('#btn_update_password').setAttribute('disabled', true);
-        }
-        else {
-            if (document.getElementById('newpassword').value ==
-                document.getElementById('confirmpassword').value) {
-                document.getElementById('message').style.color = 'green';
-                document.getElementById('message').innerHTML = 'Password matching';
-                document.querySelector('#btn_update_password').removeAttribute('disabled');
-                document.querySelector('#btn_update_password').setAttribute('enabled', true);
-            } else {
-                document.getElementById('message').style.color = 'red';
-                document.getElementById('message').innerHTML = 'Password not matching';
-                document.querySelector('#btn_update_password').removeAttribute('enabled');
-                document.querySelector('#btn_update_password').setAttribute('disabled', true);
-            }
         }
     }
 </script>

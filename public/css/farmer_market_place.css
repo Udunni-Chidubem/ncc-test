@@ -1945,7 +1945,9 @@ select {
 select:disabled {
   color: rgba(0, 0, 0, 0.42);
 }
-
+.welcome-message{
+  text-transform: capitalize;
+}
 select:focus {
   border: none;
   outline: 0;
