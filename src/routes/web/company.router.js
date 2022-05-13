@@ -6,6 +6,7 @@ const companyController = require('../../controllers/company.controller');
 
 companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
+    console.log(user.id)
     let company = await utils.getCompanyProfile(user)
     let balance = await companyController.getWallet(req, res)
     let productCount = await companyController.getProductCount(req, res)
@@ -91,9 +92,7 @@ companyRouter.get('/products', async (req, res)=>{
     let paginate
     if(product){
         paginate = { page: req.query.page || 1, pageCount: product.totalPages }
-        // console.log(paginate);
     }
-    console.log(paginate)
     res.render('seed_company/product-list', {
         layout : 'company-dashboard',
         product,
