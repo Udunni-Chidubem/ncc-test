@@ -309,7 +309,7 @@ module.exports = {
     updatePassword: async (req, res) => {
         let user = await req.user
         const isVerified = await utils.isVerified(user.dataValues)
-        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        // let newpassword = await bcrypt.hash(req.body.newpassword, 10)
         let username = req.body.userphoneno
         let message_ = "Updated Successfully"
         try{
