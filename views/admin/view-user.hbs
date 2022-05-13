@@ -199,7 +199,13 @@
 							<div class="profile-image-section">
 								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
 									alt="user profile image">
-								<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
+									{{#if company.User.status}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+										{{else}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
+									{{/if}}
+								{{/if}}
 							</div>
 							<div class="profile-info-section">
 								<div class="  bio-data">
