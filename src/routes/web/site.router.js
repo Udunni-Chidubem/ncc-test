@@ -264,29 +264,6 @@ siteRouter.post('/otp', async(req, res)=>{
         phone
     })
 })
-     
-
-//  })
-
-// siteRouter.post('/otp', async (req, res)=>{
-//     let p=await siteController.OTP(req, res)
-//     return res.status(400).send(p)
-
-// })
-
-
-//  siteRouter.get('/otp', async (req, res)=>{
-//   let result = await siteController.OTP(req, res)
-
-
-//   console.log(otp_print);
-//     });
-    
- 
-
-   
-
-
  
 
 

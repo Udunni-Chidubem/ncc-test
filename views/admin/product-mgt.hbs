@@ -21,9 +21,12 @@
               <th scope="col">LOCAL NAME</th>
               <th scope="col">COMPANY NAME</th>
               <th scope="col">STATUS</th>
+               {{#if (or (eq user_role "nigsims")
+                (eq user_role "admin"))}}
               <th scope="col">
                 <button class="btn  download-btn ">Download Report</button>
               </th>
+              {{/if}}
             </tr>
           </thead>
           <tbody>
@@ -42,7 +45,10 @@
                 <span class="revoked_product">Revoked</span>
                 {{/if}}
               </td>
+               {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
               <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+              {{/if}}
             </tr>
             {{/each}}
           </tbody>
@@ -62,9 +68,12 @@
               <th scope="col">LOCAL NAME</th>
               <th>COMPANY NAME</th>
               <th scope="col">STATUS</th>
+               {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
               <th scope="col">
                 <button class="btn download-btn ">Download Report</button>
               </th>
+              {{/if}}
             </tr>
           </thead>
           <tbody>
@@ -85,7 +94,10 @@
                 {{/equals}}
                 {{/if}}
               </td>
+               {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
               <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+              {{/if}}
             </tr>
             {{/each}}
           </tbody>
@@ -106,9 +118,12 @@
             <th scope="col">LOCAL NAME</th>
             <th>COMPANY NAME</th>
             <th scope="col">STATUS</th>
+             {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
             <th scope="col">
               <button class="btn download-btn ">Download Report</button>
             </th>
+            {{/if}}
           </tr>
         </thead>
         <tbody>
@@ -129,7 +144,10 @@
               {{/equals}}
               {{/if}}
             </td>
+             {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
             <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+            {{/if}}
           </tr>
           {{/each}}
         </tbody>
@@ -150,9 +168,12 @@
             <th scope="col">LOCAL NAME</th>
             <th>COMPANY NAME</th>
             <th scope="col">STATUS</th>
+             {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
             <th scope="col">
               <button class="btn download-btn ">Download Report</button>
             </th>
+            {{/if}}
           </tr>
         </thead>
         <tbody>
@@ -171,7 +192,10 @@
                 <span class="revoked_product">Revoked</span>
                 {{/if}}
             </td>
+             {{#if (or (eq user_role "nigsims")
+            (eq user_role "admin"))}}
             <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+            {{/if}}
           </tr>
           {{/each}}
         </tbody>

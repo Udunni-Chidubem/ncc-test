@@ -12,8 +12,9 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let isVerified = await utils.isVerified(user)
     let farmerCount = await adminController.getFarmerCount(req, res)
     let companyCount = await adminController.getCompanyCount(req, res)
+    let {activeProduct, inactiveProduct} = await adminController.getProductStatus(req,res)
     let {farmerinactivelist,farmeractivelist,seedcompanyactivelist,seedcompanyinactivelist,
-        seedtraderactivelist,seedtraderinactivelist}= await adminController.getFarmerlist(req, res)
+        seedtraderactivelist,seedtraderinactivelist}= await adminController.getUserslist(req, res)
     let seedtraderCount = await adminController.getSeedTraderCount(req, res)
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
@@ -35,6 +36,8 @@ adminRouter.get('/dashboard', async (req, res)=>{
         seedcompanyinactivelist,
         seedtraderactivelist,
         seedtraderinactivelist,
+        activeProduct,
+        inactiveProduct,
         user_status: JSON.stringify(user_status),
         user_role: user_role.Role.role_name
     })

@@ -17,18 +17,15 @@ module.exports = {
 
         try {
             const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_name, bank_account_no, bank_code }
-            console.log(data)
             await User.update({ status: true }, { where: { id: user.id } })
 
             const company = await SeedCompany.update(data, {
                 where: { user_id: user.id }
             }, { transaction: transaction })
-            console.log(company)
             transaction.commit();
             return { company }
         } catch (e) {
             transaction.rollback();
-            console.log(e)
             return e
         }
     },
@@ -194,7 +191,6 @@ module.exports = {
         });
 
         balance = singleBalance
-        console.log(balance)
         return balance;
     },
     getProductCount: async (req, res) => {
@@ -205,7 +201,6 @@ module.exports = {
         });
 
         productCount = countProducts
-        console.log(productCount)
         return productCount;
     },
     getOrders: async (req, res) => {
@@ -216,10 +211,8 @@ module.exports = {
             + "on tl.id=tc.transaction_log_id join orders o on tl.id = o.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
             + "where p.user_id = " + user.id + " and (tl.transaction_id is not null and transaction_id <> '') GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(order)
 
         let orderStatus = order.orders_status
-        console.log(orderStatus)
         return order
     },
     getProductOrders : async (req, product)=>{
