@@ -636,6 +636,7 @@ var profile_pic = null
         error_toastr(r.data)
       }else{
         success_toastr(r.message)
+        window.location.href='/farmer/dashboard'
       }
     })
     .catch(e=>{

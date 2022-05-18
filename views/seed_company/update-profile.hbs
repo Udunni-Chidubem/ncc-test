@@ -69,15 +69,12 @@
                                  <input 
                                     type="text" 
                                     class="form-control border-0 border-bottom" 
-                                    {{!-- maxlength="14" 
-                                    minlength="13" --}}
                                     id="tin"
                                     name="tin"
                                     value="{{company.tin}}"
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
                                     data-role="tagsinput"
-                                    {{!-- pattern="[0-9]+" --}}
                                     >
                               </div>
                            </div>
@@ -340,7 +337,7 @@
 
             setTimeout(function(){
               if(!state){
-                window.location='dashboard'
+                window.location.href='/seed_company/dashboard'
               }
               
             }, 2000)

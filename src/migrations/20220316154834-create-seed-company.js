@@ -29,7 +29,7 @@ module.exports = {
       tin: {
         type: Sequelize.STRING(25),
         allowNull: true,
-        unique:true
+        unique: false
       },
       address: {
         type: Sequelize.TEXT,
