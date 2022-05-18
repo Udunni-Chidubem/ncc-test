@@ -360,11 +360,11 @@ module.exports = {
                 phone : phone,
                 verified : false
             }, {transaction : transaction});
-            axios.get(`${process.env.sms_api}?username=${process.env.sms_username}&password=${process.env.sms_password}&message=${otp_code}&sender=NIGSIMS&mobiles=${phone}`, {
-                headers: {
-                    'Content-Type' : 'application/json',
-                    'Accept': 'application/json'
-                }
+            axios.post(`${process.env.sms_api}?token=${process.env.token_number}&type=${process.env.type_number}&message=${otp_code}&sender=NIGSIMS&to=${phone}&routing=${process.env.route_number}`, {
+                // headers: {
+                //     'Content-Type' : 'application/json',    
+                //     'Accept': 'application/json'
+                // }
             });
             transaction.commit()
             return otp_instance
