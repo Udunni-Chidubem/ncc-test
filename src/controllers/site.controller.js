@@ -10,6 +10,7 @@ const fs = require('fs')
 var otpGenerator = require('otp-generator');
 const otp = require('../models/otp');
 const { default: axios } = require('axios');
+var FormData = require('form-data');
 // const AddMinutesToDate = require('../public/js/script')
 
 global.pass = 0;
@@ -360,12 +361,9 @@ module.exports = {
                 phone : phone,
                 verified : false
             }, {transaction : transaction});
-            axios.post(`${process.env.sms_api}?token=${process.env.token_number}&type=${process.env.type_number}&message=${otp_code}&sender=NIGSIMS&to=${phone}&routing=${process.env.route_number}`, {
-                // headers: {
-                //     'Content-Type' : 'application/json',    
-                //     'Accept': 'application/json'
-                // }
-            });
+
+            let r = await axios.get(`${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`)
+            console.log(r.data)
             transaction.commit()
             return otp_instance
         }catch(e){
