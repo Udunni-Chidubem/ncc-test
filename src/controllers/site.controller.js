@@ -7,7 +7,7 @@ const uniqid = require('uniqid');
 const directoryPath = './src/data/'
 const path = require('path')
 const fs = require('fs')
-var otpGenerator = require('otp-generator');
+const Random = require("random-js").Random;
 const otp = require('../models/otp');
 const { default: axios } = require('axios');
 var FormData = require('form-data');
@@ -350,7 +350,8 @@ module.exports = {
         let transaction=await db.rest.transaction()
             //Generate OTP 
         try{
-            const otp_code = otpGenerator.generate(6, { digits: true,lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+            const random = new Random();
+            const otp_code = random.integer(1, 1000000);
             const now = new Date();
             const expiration_time = new Date(now.getTime() + 10*60000)
 
