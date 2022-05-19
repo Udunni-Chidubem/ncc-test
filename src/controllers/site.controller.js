@@ -382,7 +382,6 @@ module.exports = {
         otp=JSON.parse(JSON.stringify(otp))
         console.log(otp)
         return otp;
-
     },
 
     // validation : async (otp_code) =>{

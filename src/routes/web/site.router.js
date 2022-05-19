@@ -201,7 +201,7 @@ siteRouter.post('/forgot_password', async (req, res)=>{
        // res.send({'phone': phone, 'otp':otp})
        // return
         let otp_instance = siteController.getOTPByCode(otp, phone)
-        if(otp_instance){
+        if(otp_instance.otp_code){
              res.render('site/new_password',{
                 form_banner:'Group.png',
                 title: 'Forgot-Password',
@@ -210,7 +210,7 @@ siteRouter.post('/forgot_password', async (req, res)=>{
             });
         }else{
             messages.error="invalid OTP"
-            res.render('site/forgot_password',{
+            res.render('site/otp',{
                 form_banner:'Group.png',
                 title: 'Forgot-Password',
                 layout : 'form',
