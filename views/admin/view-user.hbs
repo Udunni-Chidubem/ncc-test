@@ -3,527 +3,571 @@
 <div class="container pt-4">
 	{{#if farmer}}
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">PERSONAL INFORMATION</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">SHIPPING INFORMATION</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="activity-log-tab" data-bs-toggle="tab" data-bs-target="#activity-log" type="button" role="tab" aria-controls="activity-log" aria-selected="false">ACTIVITY LOG</button>
-			  </li>
-			</ul>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal"
+				type="button" role="tab" aria-controls="personal" aria-selected="true">PERSONAL INFORMATION</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button"
+				role="tab" aria-controls="shipping" aria-selected="false">SHIPPING INFORMATION</button>
+		</li>
+		{{!-- <li class="nav-item" role="presentation">
+			<button class="nav-link" id="activity-log-tab" data-bs-toggle="tab" data-bs-target="#activity-log"
+				type="button" role="tab" aria-controls="activity-log" aria-selected="false">ACTIVITY LOG</button>
+		</li> --}}
+	</ul>
 	{{else if company}}
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link active" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" type="button" role="tab" aria-controls="business" aria-selected="true">BUSINESS INFORMATION</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="dropOffInfo-tab" data-bs-toggle="tab" data-bs-target="#dropOffInfo" type="button" role="tab" aria-controls="dropOffInfo" aria-selected="false">DROP OFF INFORMATION</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab" aria-controls="products" aria-selected="false">PRODUCTS</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="account-details-tab" data-bs-toggle="tab" data-bs-target="#account-details" type="button" role="tab" aria-controls="account-details" aria-selected="false">ACCOUNT DETAILS</button>
-			  </li>
-			</ul>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="business-tab" data-bs-toggle="tab" data-bs-target="#business"
+				type="button" role="tab" aria-controls="business" aria-selected="true">BUSINESS INFORMATION</button>
+		</li>
+		{{!-- <li class="nav-item" role="presentation">
+			<button class="nav-link" id="dropOffInfo-tab" data-bs-toggle="tab" data-bs-target="#dropOffInfo"
+				type="button" role="tab" aria-controls="dropOffInfo" aria-selected="false">DROP OFF INFORMATION</button>
+		</li> --}}
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button"
+				role="tab" aria-controls="products" aria-selected="false">PRODUCTS</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="account-details-tab" data-bs-toggle="tab" data-bs-target="#account-details"
+				type="button" role="tab" aria-controls="account-details" aria-selected="false">ACCOUNT DETAILS</button>
+		</li>
+	</ul>
 	{{else}}
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link active" id="trader-details-tab" data-bs-toggle="tab" data-bs-target="#trader-details" type="button" role="tab" aria-controls="trader-details" aria-selected="true">PERSONAL INFORMATION</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="referrals-tab" data-bs-toggle="tab" data-bs-target="#referrals" type="button" role="tab" aria-controls="referrals" aria-selected="false">REFERALS</button>
-			  </li>
-			  <li class="nav-item" role="presentation">
-			    <button class="nav-link" id="trader-account-details-tab" data-bs-toggle="tab" data-bs-target="#trader-account-details" type="button" role="tab" aria-controls="trader-account-details" aria-selected="false">ACCOUNT DETAILS</button>
-			  </li>
-			</ul>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<button class="nav-link active" id="trader-details-tab" data-bs-toggle="tab"
+				data-bs-target="#trader-details" type="button" role="tab" aria-controls="trader-details"
+				aria-selected="true">PERSONAL INFORMATION</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="referrals-tab" data-bs-toggle="tab" data-bs-target="#referrals" type="button"
+				role="tab" aria-controls="referrals" aria-selected="false">REFERALS</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="trader-account-details-tab" data-bs-toggle="tab"
+				data-bs-target="#trader-account-details" type="button" role="tab" aria-controls="trader-account-details"
+				aria-selected="false">ACCOUNT DETAILS</button>
+		</li>
+	</ul>
 	{{/if}}
 	<div class="card">
-		
+
 		<div class="card-body">
 			{{#if farmer}}
-				{{#if farmer}}
-				<div class="">
-					
-					<div class="tab-content" id="myTabContent">
-						{{!-- Personal Info - Begins --}}
-				  		<div class="tab-pane fade show active " id="personal" role="tabpanel" aria-labelledby="personal-tab">
-							<div class="admin-view-user">
-								<div class="profile-image-section">
-									<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
-									{{farmer.User.username}}
+			{{#if farmer}}
+			<div class="">
+
+				<div class="tab-content" id="myTabContent">
+					{{!-- Personal Info - Begins --}}
+					<div class="tab-pane fade show active " id="personal" role="tabpanel"
+						aria-labelledby="personal-tab">
+						<div class="admin-view-user">
+							<div class="profile-image-section">
+								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
+									alt="user profile image">
+								{{farmer.User.username}}
+
+								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 									{{#if farmer.User.status}}
 										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-									{{else}}
+										{{else}}
 										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
 									{{/if}}
-								</div>
-								<div class="profile-info-section">
-									<div class="bio-data">
-										<div>
-											<h5>First name</h5>
-											<p>{{farmer.firstname}}</p>
-										</div>
-										
-										<div>
-											<h5>Last name</h5>
-											<p>{{farmer.lastname}}</p>
-										</div>
-
-										<div>
-											<h5>Date of Birth</h5>
-											<p>{{dateFormat farmer.date_of_birth "DD/MM/YYYY"}}</p>
-										</div>
-										
-										<div>
-											<h5>Gender</h5>
-											<p>{{farmer.gender}}</p>
-										</div>
-
-										<div>
-											<h5>Level of Education</h5>
-											<p>{{farmer.level_of_education}}</p>
-										</div>
-
-										<div>
-											<h5>Phone Number</h5>
-											<p>{{farmer.phone_no}}</p>
-										</div>
-									</div>
-									<div class="other-data">
-										<div>
-											<h5>BVN</h5>
-											<p>{{farmer.bvn}}</p>
-										</div>
-										
-										<div>
-											<h5>NIN</h5>
-											<p>{{farmer.nin}}</p>
-										</div>
-										
-										<div>
-											<h5>State</h5>
-											<p>{{farmer.State.name}}</p>
-										</div>
-										
-										<div>
-											<h5>LGA</h5>
-											<p>{{farmer.LGA.name}}</p>
-										</div>
-									</div>
-								</div>
+								{{/if}}
 							</div>
-						</div>
-						{{!-- Personal Info - Ends --}}
-
-						{{!-- Shipping Info - Begins --}}
-				  		<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
-				  			<div class="shipping">
-				  				<h3>MAIN SHIPPING ADDRESS</h3>
-				  				<div class="shipping-details">
-				  					<div>
-										<h5>State</h5>
-										<p>{{farmer.User.DeliveryInformation.State.name }}</p>
-									</div>
-									
-									<div>
-										<h5>LGA</h5>
-										<p>{{farmer.User.DeliveryInformation.LGA.name}}</p>
-									</div>
-
-				  					<div>
-				  						<h5>Address</h5>
-										<p>{{ farmer.User.DeliveryInformation.address}}</p>	
-				  					</div>
-				  				</div>
-				  			</div>
-				  		</div>
-						{{!-- Shipping Info - Ends --}}
-
-						{{!-- Activity Log - Begins --}}						
-				  		<div class="tab-pane activity-log-section fade" id="activity-log" role="tabpanel" aria-labelledby="activity-log-tab">
-				  			<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
-				  				<thead>
-				  					<tr>
-				  						<th>Name</th>
-				  						<th>Phone</th>
-				  						<th>Book</th>
-				  						<th>Address</th>
-				  					</tr>
-				  				</thead>
-				  				<tbody>
-				  					<tr>
-				  						<td>data</td>
-				  						<td>data</td>
-				  						<td>data</td>
-				  						<td>data</td>
-				  					</tr>
-				  				</tbody>
-				  			</table>
-				  		</div>
-						{{!-- Activity log - Ends --}}				  		
-					</div>
-				</div>
-				{{/if}}
-			{{else if company}}
-				{{#if company}}
-					<div class="">
-						
-						<div class="tab-content" id="myTabContent">
-							{{!-- Business Info - Begins --}}
-					  		<div class="tab-pane fade show active  " id="business" role="tabpanel" aria-labelledby="business-tab">
-					  			<div class="admin-view-user">
-					  				<div class="profile-image-section">
-										<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
-										<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-									</div>
-									<div class="profile-info-section">
-										<div class="  bio-data">
-											<div>
-												<h5>Company Name</h5>
-												<p>{{company.name_of_company}}</p>
-											</div>
-											
-											<div>
-												<h5>Email</h5>
-												<p>{{company.email}}</p>
-											</div>
-
-											<div>
-												<h5>Phone Number</h5>
-												<p>{{company.phone_no}}</p>
-											</div>
-
-											<div>
-												<h5>TIN</h5>
-												<p>{{company.tin}}</p>
-											</div>
-
-											<div>
-												<h5>Licence Number</h5>
-												<p>{{company.licensed_no}}</p>
-											</div>
-
-											<div>
-												<h5>Certification Number</h5>
-												<p>{{company.certification_number}}</p>
-											</div>
-
-											<div>
-												<h5>Address</h5>
-												<p>{{company.address}}</p>
-											</div>
-
-											<div>
-												<h5>LGA</h5>
-												<p>{{company.LGA.name}}</p>
-											</div>
-
-											<div>
-												<h5>State</h5>
-												<p>{{company.State.name}}</p>
-											</div>
-										</div>
-									</div>
-									
-					  			</div>
-							</div>
-					  		{{!-- Business Info - Ends --}}
-
-					  		{{!-- Drop Off Info - Begins --}}
-					  		<div class="tab-pane shipping-info-section fade" id="dropOffInfo" role="tabpanel" aria-labelledby="dropOffInfo-tab">
-					  			<div class="dropOffInfo">
-					  				<h3>Drop Off ADDRESS</h3>
-					  				<div class="shipping-details">
-					  					<div>
-											<h5>State</h5>
-											<p></p>
-										</div>
-										
-										<div>
-											<h5>LGA</h5>
-											<p></p>
-										</div>
-
-					  					<div>
-					  						<h5>Address</h5>
-											<p></p>	
-					  					</div>
-					  				</div>
-					  			</div>
-					  		</div>
-					  		{{!-- Drop OFf Info - Ends --}}
-
-					  		{{!-- Products - Begins --}}
-					  		<div class="tab-pane activity-log-section fade" id="products" role="tabpanel" aria-labelledby="products-tab">
-					  			<table class="table table-responsive table-bordered table-theme table-striped" id="activity-log-table">
-					  				<thead>
-					  					<tr>
-					  						<th>Date</th>
-					  						<th>Product Name</th>
-					  						<th>Amount</th>
-					  						<th>Status</th>
-					  					</tr>
-					  				</thead>
-					  				<tbody>
-					  					 {{#each products}}
-					                          <tr class="row-one row-height">
-					                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-					                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-					                            <td scope="col"> <strong>1OOO</strong></td>
-					                            <td scope="col">
-					                              {{#if this.status}}
-					                                  {{#equals this.status 1}}
-					                                    <span class="published">Published</span>
-					                                  {{/equals}}
-					                                  {{else}}
-					                                  {{#equals this.status 0}}
-					                                    <span class="unpublished">Unpublished</span>
-					                                  {{/equals}}
-					                              {{/if}}
-					                            </td>
-					                          </tr>
-					                        {{/each}}
-					  				</tbody>
-					  			</table>
-					  		</div>
-					  		{{!-- Products - Ends --}}
-
-					  		{{!-- Account Details - Begins --}}
-					  		<div class="tab-pane account-details-section fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
-					  			{{!-- Balance Grid - Begins --}}
-					  			<div class="balance-grid">
-					  				<div>
-					  					<h5>Total Wallet Balance</h5>
-					  					{{#balance}}
-					  						<h3>&#8358; {{number this.amount}}</h3>	
-					  					{{/balance}}
-					  				</div>
-
-					  				<div class="cleared-balance">
-					  					<h6>Cleared Balance</h6>
-					  					<h4>&#8358; 20,000</h4>
-					  				</div>
-
-					  				<div class="uncleared-balance">
-					  					<h6>Uncleared Balance</h6>
-					  				    <h4>&#8358; 20,000</h4>
-					  				</div>
-					  			</div>
-					  			{{!-- Balance Grid - Ends --}}
-					  			<a href="#" class="view-btn">Show Ledger</a>
-								<div id="Myid" style="display:none">
-									<div class="transaction-div">
-										<select name="transaction-types" class="custom-select form-control mb-2" >
-											<option value="">Sales History</option>
-											<option value="">Withdrawals</option>
-										</select>
-										<table class="container-fluid table con t_info  table-borderless" id="transactionTable">
-							            <thead class="t_info_head ">
-							              <tr class="">
-							                  <th scope="col">ORDER ID</th>
-							                  <th scope="col">UNIT PRICE (&#8358;)</th>
-							                  <th scope="col">QTY</th>
-							                  <th scope="col">EARNING(&#8358;)</Nav></th>
-							                  <th scope="col">STATUS</th>
-							              </tr>
-							            </thead>
-							            <tbody class="t_info_body">
-							              <tr class="t_info_row1">
-							                  <th scope="row"  ><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
-							                 
-							               </tr>
-							              <tr class="t_info_row2">
-							                  <th scope="row"><a href="#">12345678</a></th>
-							                  <td>3000</td>
-							                  <td>40KG</td>
-							                  <td>6000</td>
-							                    <td>
-							                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-							                  </td>
-							                 
-							              </tr>
-							              <tr class="t_info_row1">
-							                  <th scope="row"  ><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                  <td>
-							                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-							                  </td>
-							                  
-							              </tr>
-							              <tr class="t_info_row2">
-							                  <th scope="row"><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                    <td>
-							                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-							                  </td>
-							                  
-							              </tr>
-							              <tr class="t_info_row1">
-							                  <th scope="row"  ><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
-							                 
-							               </tr>
-							              <tr class="t_info_row2">
-							                  <th scope="row"><a href="#">12345678</a></th>
-							                  <td>3000</td>
-							                  <td>40KG</td>
-							                  <td>6000</td>
-							                    <td>
-							                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-							                  </td>
-							                 
-							              </tr>
-							              <tr class="t_info_row1">
-							                  <th scope="row"  ><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                  <td>
-							                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-							                  </td>
-							                  
-							              </tr>
-							              <tr class="t_info_row2">
-							                  <th scope="row"><a href="#">12345678</a></th>
-							                  <td>2000</td>
-							                  <td>40KG</td>
-							                  <td>4000</td>
-							                    <td>
-							                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-							                  </td>
-							                  
-							              </tr>
-							            </tbody>
-							        </table>
-									</div>
-								</div>
-								
-								<hr>
-
-								<div class="account-details-grid">
-									<div>
-										<h6>Bank Name</h6>
-										<p>Access Bank</p>
-									</div>
-									
-									<div>
-										<h6>Account Name</h6>
-										<p>Chinedu Olufemi Umar</p>
-									</div>
-									
-									<div>
-										<h6>Account Number</h6>
-										<p>0099887766</p>
-									</div>
-								</div>
-					  		</div>
-					  		{{!-- Account Details - Ends --}}
-						</div>
-					</div>
-					{{/if}}				
-				{{else}}
-					{{#if trader}}
-						<div class="admin-view-user">
-						<div class="profile-image-section">
-							<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round" alt="user profile image">
-							<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-						</div>
-						<div class="tab-content" id="myTabContent">
-					  		<div class="tab-pane fade show active profile-info-section" id="trader-details" role="tabpanel" aria-labelledby="trader-details-tab">
+							<div class="profile-info-section">
 								<div class="bio-data">
 									<div>
-										<h5>First Name</h5>
-										<p>{{trader.firstname}}</p>
+										<h5>First name</h5>
+										<p>{{farmer.firstname}}</p>
 									</div>
-									
+
 									<div>
-										<h5>Last Name</h5>
-										<p>{{trader.lastname}}</p>
+										<h5>Last name</h5>
+										<p>{{farmer.lastname}}</p>
+									</div>
+
+									<div>
+										<h5>Date of Birth</h5>
+										<p>{{dateFormat farmer.date_of_birth "DD/MM/YYYY"}}</p>
+									</div>
+
+									<div>
+										<h5>Gender</h5>
+										<p>{{farmer.gender}}</p>
+									</div>
+
+									<div>
+										<h5>Level of Education</h5>
+										<p>{{farmer.level_of_education}}</p>
 									</div>
 
 									<div>
 										<h5>Phone Number</h5>
-										<p>{{trader.phone_no}}</p>
+										<p>{{farmer.phone_no}}</p>
+									</div>
+								</div>
+								<div class="other-data">
+									<div>
+										<h5>BVN</h5>
+										<p>{{farmer.bvn}}</p>
 									</div>
 
 									<div>
-										<h5>Unique No.</h5>
-										<p>{{trader.unique_no}}</p>
-									</div>
-
-									<div>
-										<h5>LGA</h5>
-										<p>{{trader.LGA.name}}</p>
+										<h5>NIN</h5>
+										<p>{{farmer.nin}}</p>
 									</div>
 
 									<div>
 										<h5>State</h5>
-										<p>{{trader.State.name}}</p>
+										<p>{{farmer.State.name}}</p>
 									</div>
 
+									<div>
+										<h5>LGA</h5>
+										<p>{{farmer.LGA.name}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{!-- Personal Info - Ends --}}
+
+					{{!-- Shipping Info - Begins --}}
+					<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel"
+						aria-labelledby="shipping-tab">
+						<div class="shipping">
+							<h3>MAIN SHIPPING ADDRESS</h3>
+							<div class="shipping-details">
+								<div>
+									<h5>State</h5>
+									<p>{{farmer.User.DeliveryInformation.State.name }}</p>
+								</div>
+
+								<div>
+									<h5>LGA</h5>
+									<p>{{farmer.User.DeliveryInformation.LGA.name}}</p>
+								</div>
+
+								<div>
+									<h5>Address</h5>
+									<p>{{ farmer.User.DeliveryInformation.address}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{!-- Shipping Info - Ends --}}
+
+					{{!-- Activity Log - Begins --}}
+					<div class="tab-pane activity-log-section fade" id="activity-log" role="tabpanel"
+						aria-labelledby="activity-log-tab">
+						<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Book</th>
+									<th>Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					{{!-- Activity log - Ends --}}
+				</div>
+			</div>
+			{{/if}}
+			{{else if company}}
+			{{#if company}}
+			<div class="">
+
+				<div class="tab-content" id="myTabContent">
+					{{!-- Business Info - Begins --}}
+					<div class="tab-pane fade show active  " id="business" role="tabpanel"
+						aria-labelledby="business-tab">
+						<div class="admin-view-user">
+							<div class="profile-image-section">
+								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
+									alt="user profile image">
+								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
+									{{#if company.User.status}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+										{{else}}
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
+									{{/if}}
+								{{/if}}
+							</div>
+							<div class="profile-info-section">
+								<div class="  bio-data">
+									<div>
+										<h5>Company Name</h5>
+										<p>{{company.name_of_company}}</p>
+									</div>
+
+									<div>
+										<h5>Email</h5>
+										<p>{{company.email}}</p>
+									</div>
+
+									<div>
+										<h5>Phone Number</h5>
+										<p>{{company.phone_no}}</p>
+									</div>
+
+									<div>
+										<h5>TIN</h5>
+										<p>{{company.tin}}</p>
+									</div>
+
+									<div>
+										<h5>Licence Number</h5>
+										<p>{{company.licensed_no}}</p>
+									</div>
+
+									<div>
+										<h5>Certification Number</h5>
+										<p>{{company.certification_number}}</p>
+									</div>
+
+									<div>
+										<h5>Address</h5>
+										<p>{{company.address}}</p>
+									</div>
+
+									<div>
+										<h5>LGA</h5>
+										<p>{{company.LGA.name}}</p>
+									</div>
+
+									<div>
+										<h5>State</h5>
+										<p>{{company.State.name}}</p>
+									</div>
 								</div>
 							</div>
 
-					  		<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel" aria-labelledby="referrals-tab">
-					  			<div class="shipping">
-					  				<h3>MAIN SHIPPING ADDRESS</h3>
-					  				<div class="shipping-details">
-					  					<div>
-											<h5>State</h5>
-											<p></p>
-										</div>
-										
-										<div>
-											<h5>LGA</h5>
-											<p></p>
-										</div>
-
-					  					<div>
-					  						<h5>Address</h5>
-											<p></p>	
-					  					</div>
-					  				</div>
-					  			</div>
-					  		</div>
-
-					  		<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel" aria-labelledby="trader-account-details-tab">
-					  			<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
-					  				<thead>
-					  					<tr>
-					  						<th>Name</th>
-					  						<th>Phone</th>
-					  						<th>Book</th>
-					  						<th>Address</th>
-					  					</tr>
-					  				</thead>
-					  				<tbody>
-					  					<tr>
-					  						<td>data</td>
-					  						<td>data</td>
-					  						<td>data</td>
-					  						<td>data</td>
-					  					</tr>
-					  				</tbody>
-					  			</table>
-					  		</div>
 						</div>
 					</div>
-					{{/if}}
+					{{!-- Business Info - Ends --}}
+
+					{{!-- Drop Off Info - Begins --}}
+					<div class="tab-pane shipping-info-section fade" id="dropOffInfo" role="tabpanel"
+						aria-labelledby="dropOffInfo-tab">
+						<div class="dropOffInfo">
+							<h3>Drop Off ADDRESS</h3>
+							<div class="shipping-details">
+								<div>
+									<h5>State</h5>
+									<p></p>
+								</div>
+
+								<div>
+									<h5>LGA</h5>
+									<p></p>
+								</div>
+
+								<div>
+									<h5>Address</h5>
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{!-- Drop OFf Info - Ends --}}
+
+					{{!-- Products - Begins --}}
+					<div class="tab-pane activity-log-section fade" id="products" role="tabpanel"
+						aria-labelledby="products-tab">
+						<table class="table table-responsive table-bordered table-theme table-striped"
+							id="activity-log-table">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Product Name</th>
+									<th>Amount</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each products}}
+								<tr class="row-one row-height">
+									<td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+									<td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+									<td scope="col"> <strong>1OOO</strong></td>
+									<td scope="col">
+										{{#if this.status}}
+										{{#equals this.status 1}}
+										<span class="published">Published</span>
+										{{/equals}}
+										{{else}}
+										{{#equals this.status 0}}
+										<span class="unpublished">Unpublished</span>
+										{{/equals}}
+										{{/if}}
+									</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+					{{!-- Products - Ends --}}
+
+					{{!-- Account Details - Begins --}}
+					<div class="tab-pane account-details-section fade" id="account-details" role="tabpanel"
+						aria-labelledby="account-details-tab">
+						{{!-- Balance Grid - Begins --}}
+						<div class="balance-grid">
+							<div>
+								<h5>Total Wallet Balance</h5>
+								{{#balance}}
+								<h3>&#8358; {{number this.amount}}</h3>
+								{{/balance}}
+							</div>
+
+							<div class="cleared-balance">
+								<h6>Cleared Balance</h6>
+								<h4>&#8358; 20,000</h4>
+							</div>
+
+							<div class="uncleared-balance">
+								<h6>Uncleared Balance</h6>
+								<h4>&#8358; 20,000</h4>
+							</div>
+						</div>
+						{{!-- Balance Grid - Ends --}}
+						<a href="#" class="view-btn">Show Ledger</a>
+						<div id="Myid" style="display:none">
+							<div class="transaction-div">
+								<select name="transaction-types" class="custom-select form-control mb-2">
+									<option value="">Sales History</option>
+									<option value="">Withdrawals</option>
+								</select>
+								<table class="container-fluid table con t_info  table-borderless" id="transactionTable">
+									<thead class="t_info_head ">
+										<tr class="">
+											<th scope="col">ORDER ID</th>
+											<th scope="col">UNIT PRICE (&#8358;)</th>
+											<th scope="col">QTY</th>
+											<th scope="col">EARNING(&#8358;)</Nav>
+											</th>
+											<th scope="col">STATUS</th>
+										</tr>
+									</thead>
+									<tbody class="t_info_body">
+										<tr class="t_info_row1">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>
+														Pending</span> </td>
+
+										</tr>
+										<tr class="t_info_row2">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>3000</td>
+											<td>40KG</td>
+											<td>6000</td>
+											<td>
+												<span> <span class="approved px-1"><i class="bi bi-dot  "></i>
+														Approved</span>
+											</td>
+
+										</tr>
+										<tr class="t_info_row1">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td>
+												<span> <span class="pending px-1"><i class="bi bi-dot"></i>
+														Pending</span>
+											</td>
+
+										</tr>
+										<tr class="t_info_row2">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td>
+												<span> <span class="approved px-1"><i class="bi bi-dot"></i>
+														Approved</span>
+											</td>
+
+										</tr>
+										<tr class="t_info_row1">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>
+														Pending</span> </td>
+
+										</tr>
+										<tr class="t_info_row2">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>3000</td>
+											<td>40KG</td>
+											<td>6000</td>
+											<td>
+												<span> <span class="approved px-1"><i class="bi bi-dot  "></i>
+														Approved</span>
+											</td>
+
+										</tr>
+										<tr class="t_info_row1">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td>
+												<span> <span class="pending px-1"><i class="bi bi-dot"></i>
+														Pending</span>
+											</td>
+
+										</tr>
+										<tr class="t_info_row2">
+											<th scope="row"><a href="#">12345678</a></th>
+											<td>2000</td>
+											<td>40KG</td>
+											<td>4000</td>
+											<td>
+												<span> <span class="approved px-1"><i class="bi bi-dot"></i>
+														Approved</span>
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<hr>
+
+						<div class="account-details-grid">
+							<div>
+								<h6>Bank Name</h6>
+								<p>Access Bank</p>
+							</div>
+
+							<div>
+								<h6>Account Name</h6>
+								<p>Chinedu Olufemi Umar</p>
+							</div>
+
+							<div>
+								<h6>Account Number</h6>
+								<p>0099887766</p>
+							</div>
+						</div>
+					</div>
+					{{!-- Account Details - Ends --}}
+				</div>
+			</div>
+			{{/if}}
+			{{else}}
+			{{#if trader}}
+			<div class="admin-view-user">
+				<div class="profile-image-section">
+					<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
+						alt="user profile image">
+					<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+				</div>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active profile-info-section" id="trader-details" role="tabpanel"
+						aria-labelledby="trader-details-tab">
+						<div class="bio-data">
+							<div>
+								<h5>First Name</h5>
+								<p>{{trader.firstname}}</p>
+							</div>
+
+							<div>
+								<h5>Last Name</h5>
+								<p>{{trader.lastname}}</p>
+							</div>
+
+							<div>
+								<h5>Phone Number</h5>
+								<p>{{trader.phone_no}}</p>
+							</div>
+
+							<div>
+								<h5>Unique No.</h5>
+								<p>{{trader.unique_no}}</p>
+							</div>
+
+							<div>
+								<h5>LGA</h5>
+								<p>{{trader.LGA.name}}</p>
+							</div>
+
+							<div>
+								<h5>State</h5>
+								<p>{{trader.State.name}}</p>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel"
+						aria-labelledby="referrals-tab">
+						<div class="shipping">
+							<h3>MAIN SHIPPING ADDRESS</h3>
+							<div class="shipping-details">
+								<div>
+									<h5>State</h5>
+									<p></p>
+								</div>
+
+								<div>
+									<h5>LGA</h5>
+									<p></p>
+								</div>
+
+								<div>
+									<h5>Address</h5>
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel"
+						aria-labelledby="trader-account-details-tab">
+						<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Book</th>
+									<th>Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			{{/if}}
 			{{/if}}
 		</div>
 	</div>

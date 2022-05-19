@@ -34,7 +34,7 @@ farmersRouter.get('/update-profile', farmerController.updateProfile)
 farmersRouter.get('/settings', farmerController.settings)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.updatePassword(req, res)
+    let response = await farmerController.editProfileData(req,res)
     if(response.farmer || response.deliveryInformation){
         res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
     }else{

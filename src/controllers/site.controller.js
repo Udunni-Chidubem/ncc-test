@@ -9,6 +9,8 @@ const path = require('path')
 const fs = require('fs')
 var otpGenerator = require('otp-generator');
 const otp = require('../models/otp');
+const { default: axios } = require('axios');
+var FormData = require('form-data');
 // const AddMinutesToDate = require('../public/js/script')
 
 global.pass = 0;
@@ -359,6 +361,9 @@ module.exports = {
                 phone : phone,
                 verified : false
             }, {transaction : transaction});
+
+            let r = await axios.get(`${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`)
+            console.log(r.data)
             transaction.commit()
             return otp_instance
         }catch(e){
@@ -368,7 +373,7 @@ module.exports = {
         }
     },
 
-    getOTPByCode : async (otp_code, phone)=>{
+    getOTPByCode : async (otp_code, phone)=>{ 
 
         let otp=await Otp.findOne({
             where :{ otp_code : otp_code, phone : phone}
@@ -378,6 +383,21 @@ module.exports = {
         return otp;
 
     },
+
+    // validation : async (otp_code) =>{
+    //     let transaction = await db.rest.transaction()
+
+    //         let otp_stuff = req.body.otp
+    //         let otp_ver = otp_code
+
+    //         if(otp_stuff == otp_ver){
+    //             res.render stuffffff
+    //         }
+
+
+        
+    // },
+
     updatePassword : async (password, phone)=>{
         let transaction = await db.rest.transaction()
         try{
