@@ -13,6 +13,7 @@ const session = require('express-session');
 const flash = require('express-flash')
 const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
+
 passpportInitializer(passport)
 
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
@@ -124,4 +125,7 @@ const PORT = process.env.ACCESS_PORT || 5800
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
+// const random = new Random();
+// const value = random.integer(1, 1000000);
+// console.log(value)
  seedAdminData()

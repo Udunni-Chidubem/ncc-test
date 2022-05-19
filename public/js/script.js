@@ -91,7 +91,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#transactionTable').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [ 10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
@@ -105,21 +105,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#all-orders-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
 
 $(document).ready(function() {
   $('#active-orders-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
 
 $(document).ready(function() {
   $('#shipped-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [ 10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });

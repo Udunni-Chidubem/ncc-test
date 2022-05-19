@@ -376,6 +376,9 @@ module.exports={
         console.log(order)
         return { order, farmer, orderStatus };
     },
+    updadeOrders:async (order_id, data)=>{
+        Orders.update(data, { where : {id : order_id}})
+    },
 
     getUserslist: async (req,res) => {
         let sql = "SELECT count(u.id) as count from user u join farmer f on u.id = f.user_id where u.status = '1' ";

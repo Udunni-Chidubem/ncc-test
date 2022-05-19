@@ -7,8 +7,10 @@ const uniqid = require('uniqid');
 const directoryPath = './src/data/'
 const path = require('path')
 const fs = require('fs')
-var otpGenerator = require('otp-generator');
+const Random = require("random-js").Random;
 const otp = require('../models/otp');
+const { default: axios } = require('axios');
+var FormData = require('form-data');
 // const AddMinutesToDate = require('../public/js/script')
 
 global.pass = 0;
@@ -348,7 +350,8 @@ module.exports = {
         let transaction=await db.rest.transaction()
             //Generate OTP 
         try{
-            const otp_code = otpGenerator.generate(6, { digits: true,lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+            const random = new Random();
+            const otp_code = random.integer(1, 1000000);
             const now = new Date();
             const expiration_time = new Date(now.getTime() + 10*60000)
 
@@ -359,6 +362,9 @@ module.exports = {
                 phone : phone,
                 verified : false
             }, {transaction : transaction});
+
+            let r = await axios.get(`${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`)
+            console.log(r.data)
             transaction.commit()
             return otp_instance
         }catch(e){

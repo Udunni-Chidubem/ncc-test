@@ -242,4 +242,16 @@ adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
     })
 });
 
+/*Order POST request*/
+adminRouter.post('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
+    let user = await req.user
+    let data={}
+    data.status = req.body.status
+    adminController.updadeOrders(req.body.order, data)
+    let {order, farmer, orderStatus} = await adminController.getOrder(req.params.transaction_id, req.params.id, req.params.company_id)
+    
+    
+    res.redirect("/admin/orders")
+});
+
 module.exports = adminRouter

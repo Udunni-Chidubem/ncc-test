@@ -1157,3 +1157,9 @@ color: #818E9B;
    border-radius: 12px;
    background: #7B61FF;
  }
+
+ .hub {
+  background: #d7d2398c;
+  border-radius: 10px;
+  color: #7d7f00;
+}
