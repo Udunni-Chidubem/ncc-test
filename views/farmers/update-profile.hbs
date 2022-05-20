@@ -37,15 +37,15 @@
 
                              <div class="row">
                               <div class="col-sm-6">
-                                <label for="dob" class="input_form">Date of Birth </label>
+                                <label for="dob" class="input_form">Age Range </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <select name="date_of_birth" class="form-select border-0 border-bottom"  value="{{ farmerData.date_of_birth }}" data-dob="{{ farmerData.date_of_birth }}">
+                                    <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ farmerData.date_of_birth }}">
                                      <option value="">Select Age Range</option> 
-                                     <option value="1">15-19</option>   
-                                     <option value="2">20-30</option> 
-                                     <option value="3">31-40</option>
-                                     <option value="4">41-50</option>
-                                     <option value="5">51 and above</option>
+                                     <option value="15-19">15-19</option>   
+                                     <option value="20-30">20-30</option> 
+                                     <option value="31-40">31-40</option>
+                                     <option value="41-50">41-50</option>
+                                     <option value="51 and above">51 and above</option>
                                     </select>
                                   </div>
                                   {{!-- <script>
@@ -247,12 +247,12 @@
                                               />
                                   </div>
                                   <div class="input-group-append">
-                                     <select class="custom-select" id="inputGroupSelect01" required>
+                                     <select class="custom-select" data-val="{{ farmerData.farm_size_measurement }}" id="farm_size_measurement" name="farm_size_measurement" required>
                                         <option selected>Choose...</option>
-                                        <option value="1">Hectares</option>
-                                        <option value="2">Acres</option>
-                                        <option value="3">Sqm</option>
-                                        <option value="4">Plot</option>
+                                        <option value="Hectares">Hectares</option>
+                                        <option value="Acres">Acres</option>
+                                        <option value="Sqm">Sqm</option>
+                                        <option value="Plot">Plot</option>
                                       </select>
                                   </div>
                             </div>
@@ -389,7 +389,10 @@ var profile_pic = null
 
       let lga = $('#lgas').data('lga')
       let banked = $('#bvn').data('val')
+      let nin = $('#nin').data('val')
       let type = $('#source_type').data('val')
+      let farm_size_measurement = $('#farm_size_measurement').data('val')
+      let dob = $('#date_of_birth').data('val')
 
       if(banked != null){
         $('#bvn').val(banked)
@@ -397,6 +400,18 @@ var profile_pic = null
 
       if(type != null){
         $('#source_type').val(type)
+      }
+      
+      if(nin != null){
+        $('#nin').val(nin)
+      }
+      
+      if(farm_size_measurement != null){
+        $('#farm_size_measurement').val(farm_size_measurement)
+      }
+      
+      if(dob != null){
+        $('#date_of_birth').val(dob)
       }
 
 
