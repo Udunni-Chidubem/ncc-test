@@ -10,6 +10,25 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         title : 'Dashboard',
         isVerified
     })
+
+
+
+}),
+    
+tradersRouter.get('/market_place', async (res, req)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'trader')
+
+  res.render('seed_trader/market_place', {
+    layout : 'traders-dashboard',
+    title : 'Market-Place',
+    isVerified
+
 })
+   
+})
+
+
+
 
 module.exports=tradersRouter
