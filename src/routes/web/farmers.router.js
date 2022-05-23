@@ -50,6 +50,8 @@ farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) 
      if(response.message_){
         return res.json({ message: response.message_, statusCode: 200 }).status(200)
     }
+    return res.json({message:response})
+
     //  if(response.error_message_){
     //     return res.json({ message: response.error_message_, statusCode: 400 }).status(400)
     // }
