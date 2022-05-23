@@ -11,6 +11,7 @@ color: #47749C;
 background: linear-gradient(133.24deg, #20201F 29.02%, #192A3E 51.72%, #2A588D 73.59%);
 border-radius: 1.25rem !important;
 color: #fff;
+padding: 1rem;
 }
 .col-6.id {
     text-align: end;
