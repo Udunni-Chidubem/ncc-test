@@ -7,5 +7,9 @@ userRouter.get('/home', (req, res)=>{
         res.send(r);
     })
 });
+userRouter.post('/login',async (req, res)=>{
+    let resp=await siteController.apiLogin(req);
+    res.status(resp.statusCode).json(resp);
+})
 
 module.exports = userRouter
