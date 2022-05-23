@@ -17,7 +17,8 @@ module.exports={
                     amount : amount,
                     callback_url : req.get('origin')+'/farmer/checkout/callback',
                     key : process.env.paystack_secret_key,
-                    reference : ref
+                    reference : ref,
+                    subaccount: process.env.paystack_subaccount
                 },
                 {
                     headers: {
