@@ -118,7 +118,7 @@ module.exports={
         /* Find Farmer Begins*/
         const singleFarmer = await Farmer.findOne({
             where: {user_id: req.params.id},
-            attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'address_of_farm', 'user_id', 'created_at'],
+            attributes : ['id', 'firstname', 'lastname','gender', 'date_of_birth', 'level_of_education', 'nin', 'bvn', 'phone_no', 'address_of_farm', 'user_id', 'created_at', 'profile_pic'],
             include : [ 
                 {
                     model : States,
@@ -267,12 +267,9 @@ module.exports={
                 }
             ],
             where: {id: req.params.id},
-            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at'],
-            raw: true
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at']
         })
-
-        console.log(req.params.singleProduct)
-        return singleProduct;
+        return JSON.parse(JSON.stringify(singleProduct));
     },
     productUpdate:async (data, id)=>{
         Product.update(

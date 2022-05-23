@@ -180,6 +180,7 @@ module.exports={
                 source_type,  
                 address_of_farm,
                 farm_size,
+                farm_size_measurement,
                 village,
                 ward } = req.body
             const data = {
@@ -194,7 +195,8 @@ module.exports={
                 bvn,
                 source_type,
                 address_of_farm,
-                farm_size,
+                farm_size, 
+                farm_size_measurement,
                 product_farmed: farm_produce.toString(),
                 village,
                 ward,
