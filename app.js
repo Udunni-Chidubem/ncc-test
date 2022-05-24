@@ -13,9 +13,19 @@ const session = require('express-session');
 const flash = require('express-flash')
 const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec=require('./src/config/swaggerOptions')
 
 passpportInitializer(passport)
 
+const uid = () => {
+  return Date.now().toString(36) 
+  // Math.random().toString(36).substr(2);
+};
+
+// Usage. Example, id = khhry2hb7uip12rj2iu
+const id = uid();
+console.log('random', id)
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
 app.set('view engine', 'hbs')
@@ -72,9 +82,7 @@ app.engine('hbs', handlebars({
 
 Handlebars.registerHelper('paginate', paginate);
 Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
- NumeralHelper.registerHelpers(Handlebars);
-
-
+NumeralHelper.registerHelpers(Handlebars);
 
 Handlebars.registerHelper({
     eq: (v1, v2) => v1 === v2,
@@ -90,7 +98,6 @@ Handlebars.registerHelper({
         return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
     }
 });
-
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -108,13 +115,58 @@ app.use(methodOveride('_method'))
 app.use(fileUpload({
     createParentPath: true
 }));
+// Define Swagger Middleware
+const options = {
+    swaggerDefinition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'INPAY',
+            version: 'v1',
+            description: 'API Documentation for INPAY',
+            contact: {
+                name: 'Oyedele Olufemi',
+                emal: 'ooyedele@interranetworks.com'
+            },
+        },
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'Authorization',
+                    bearerFormat: 'JWT'
+                }
+            }
+        },
+        security: [
+            {
+                bearerAuth: [],
+            },
+        ],
+        servers: [
+            {
+                url: 'http://localhost:5200',
+                description: 'Development Server'
+            },
+            {
+                url: 'http://inpay.interranetworks.com',
+                description: 'Staging Server'
+            }
+        ]
+    },
+    apis: [`/src/routes/api/*.js`]
+};
+console.log(options)
+//   let specs=swaggerJsdoc(options)
+console.log(swaggerSpec)
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, { explorer: true })
+);
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
-const farmersController = require('./src/controllers/farmers.controller')
 app.use('/', mainRoute)
 app.use(async function (req, res) {
-    //const user = await req.user
-    //console.log(user);
     res.status(400).render('site/404', {
         layout: "404",
         error_msg: 'We are unable to process your request. Please try again',

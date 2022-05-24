@@ -30,6 +30,14 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         title : 'Dashboard',
         isVerified
     })
-})
+
+
+
+}),
+    
+
+
+
+
 
 module.exports=tradersRouter

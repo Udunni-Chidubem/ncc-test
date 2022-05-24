@@ -267,12 +267,9 @@ module.exports={
                 }
             ],
             where: {id: req.params.id},
-            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at'],
-            raw: true
+            attributes: ['id','product_name', 'variant', 'description', 'item', 'file_name', 'status', 'created_at']
         })
-
-        console.log(req.params.singleProduct)
-        return singleProduct;
+        return JSON.parse(JSON.stringify(singleProduct));
     },
     productUpdate:async (data, id)=>{
         Product.update(

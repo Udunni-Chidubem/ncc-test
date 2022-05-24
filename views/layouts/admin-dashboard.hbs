@@ -23,26 +23,24 @@
               <a class="nav-link" href="#"><i class='bx bx-library'></i> Knowledge Base</a>
             </li> --}}
 
-
-            {{#if (or (eq user_role "nigsims")
-            (eq user_role "admin") (eq user_role "rra"))}}
             <li class="nav-item dropdown">
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
               <ul class="dropdown-content arrow-top">
-                {{#if (or (eq user_role "admin") (eq user_role "rra"))}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nasc"))}}
                 <li>
                   <a href="/admin/products">Product Management</a>
                 </li>
                 {{/if}}
+                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="./orders">Order Management</a>
                 </li>
+                {{/if}}
 
               </ul>
             </li>
-            {{/if}}
 
-            {{#if (or (eq user_role "admin") (eq user_role "rra"))}}
+            {{#if (or (eq user_role "admin") (eq user_role "rra") )}}
             <li class="nav-item">
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
             </li>
@@ -65,12 +63,6 @@
             <i class="bi bi-bell"></i> {{ username }}
           </a>
           <ul class="dropdown-content username arrow-top">
-            <li>
-              <a href="#">Link 1</a>
-            </li>
-            <li>
-              <a href="#">Link 2</a>
-            </li>
             <li class="nav-item">
               <form method="post" action="/logout?_method=DELETE">
                 <button class="nav-link nav-btn" type="submit">

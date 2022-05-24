@@ -89,7 +89,7 @@ adminRouter.get('/products/:id', async (req, res)=>{
     let isVerified = await utils.isVerified(user);
     let product = await adminController.viewProduct(req, res);
     let user_role = await adminController.getUserRole(req, res)
-
+    console.log(product)
     
     res.render('admin/view-product', {
         layout : 'admin-dashboard',
@@ -199,8 +199,12 @@ adminRouter.get("/orders", async (req, res)=>{
         return e.status == 2
     });
 
-    let fulfilledOrders = await orders.filter(e=>{
+    let hubOrders = await orders.filter(e=>{
         return e.status == 3
+    })
+    
+    let fulfilledOrders = await orders.filter(e=>{
+        return e.status == 4
     })
     let user_role = await adminController.getUserRole(req, res)
 
