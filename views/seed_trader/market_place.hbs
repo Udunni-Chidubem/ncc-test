@@ -1,20 +1,20 @@
 <div class="container">
-  <div class="card card-4">
+    <div class="card card-4">
     <div class="card-body">
-{{!--        
+             {{#if message}}
           <div
             class="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
-           
+            {{message}}
             <button
               type="button"
               class="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
             ></button>
-          </div> --}}
-
+          </div>
+        {{/if}}
       <form method="get" class="ml-5 mr-4 search-form">
         <div class="input-group">
           <input
@@ -34,7 +34,7 @@
             type="submit"
           >Search</button>
         </div>
-        
+        {{#if products}}
           <div class="search-filter ml-5 mr-4 mt-2">
             <div class="input-field">
               <label><b>Results: &nbsp; </b> Sort By</label>
@@ -45,16 +45,17 @@
               </select>
             </div>
           </div>
-    
+        {{/if}}
 
       </form>
     </div>
+
   </div>
 
-  
+  {{#ifNotEquals products.status 1}}
 
     <section class="products">
-    
+      {{#each products.result}}
         <div class="card products-card">
           <div class="card-body products-content">
             <div class="product-img">
@@ -65,10 +66,13 @@
             </div>
             <div class="product-info">
               <div class="product-details">
-                <h4 class="product-name">You dey whine me?</h4>
-                <p class="product-variant">Variant: That Soft One</p>
-                <p class="product-seller">Seller: And so?</p>
-                <p class="product-location">Location: for here?</p>
+                <h4 class="product-name">{{this.product_name}}</h4>
+                <p class="product-variant">Variant: {{this.variant}}</p>
+                <p class="product-seller">Seller:
+                  {{"User.SeedCompany.name_of_company"}}</p>
+                <p class="product-location">Location:
+                  {{"User.SeedCompany.State.name"}}
+                  State</p>
               </div>
               <div class="product-price">
                 <p>Unit Price per KG</p>
@@ -77,8 +81,12 @@
                 <div class="input-field product-size">
                   <select id="{{this.id}}" class="size">
                     <option value="">Choose Qty</option>
-                        <option index="{{@index}}" value="{{this}}">
+                    {{#json this.item}}
+                      {{#each this.pkg}}
+                        <option index="{{@index}}" value="{{this}}">{{this}}
                           kg</option>
+                      {{/each}}
+                    {{/json}}
                   </select>
                 </div>
 
@@ -131,10 +139,11 @@
           </div>
         </div>
 
+      {{/each}}
 
     </section>
 
-  
+  {{else}}
     <br /><br /><br />
     <center><i
         class="fa fa-search"
@@ -148,6 +157,7 @@
     >
       What are you looking for ?
     </div>
+  {{/ifNotEquals}}
 
 
 
