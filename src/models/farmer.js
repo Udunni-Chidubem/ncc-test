@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       })
       Farmer.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
+      }),
+      Farmer.belongsTo(models.SeedTrader, {
+        foreignKey : 'referee',
+        targetKey : 'id'
       })
     }
   }
@@ -47,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
     village : DataTypes.STRING,
     ward : DataTypes.STRING,
     profile_pic : DataTypes.TEXT,
+    referee: {
+      type :DataTypes.INTEGER,
+    },
     user_id: {
       type :DataTypes.INTEGER,
       unique : true

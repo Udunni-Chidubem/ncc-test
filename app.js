@@ -18,7 +18,14 @@ const swaggerSpec=require('./src/config/swaggerOptions')
 
 passpportInitializer(passport)
 
+const uid = () => {
+  return Date.now().toString(36) 
+  // Math.random().toString(36).substr(2);
+};
 
+// Usage. Example, id = khhry2hb7uip12rj2iu
+const id = uid();
+console.log('random', id)
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
 app.set('view engine', 'hbs')
