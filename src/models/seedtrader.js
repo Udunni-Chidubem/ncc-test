@@ -74,6 +74,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    referal_code : {
+      type : DataTypes.STRING,
+      allowNull : false,
+      unique : true
+    }
   }, {
     underscored: true,
     tableName : 'seedtrader',

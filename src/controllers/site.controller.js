@@ -227,7 +227,8 @@ module.exports = {
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
                 unique_no: unique,
-                user_id : user.id
+                user_id : user.id,
+                referal_code : Date.now().toString(36)+req.body.firstname.substr(0,1)+req.body.lastname.substr(0,1)
             }, {transaction :transaction});
             
             transaction.commit();
