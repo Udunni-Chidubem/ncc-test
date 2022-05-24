@@ -11,7 +11,8 @@
                                 <div class="row">
                                     <ul>
                                         <li class="trader_id">Trader ID</li>
-                                        <li><span>STD-234</span> <span class="folder">
+                                        <li><span class="code_" id="code_">STD-234</span> <span class="folder"
+                                                onclick="CopyToClipboard('code_')">
                                                 <i class="bi bi-file-earmark"></i></span></li>
                                     </ul>
                                 </div>
@@ -75,3 +76,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function CopyToClipboard(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            alert("Code has been copied.")
+        }
+    }
+</script>
