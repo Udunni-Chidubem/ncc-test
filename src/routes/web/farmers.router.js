@@ -44,9 +44,10 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
+    console.log('initial password reset log', req.body)
      let response= await farmerController.updatePassword(req, res)
     //  {status,farmer,isVerified,message_}
-     
+     console.log('response on password reset', response)
      if(response.message_){
         return res.json({ message: response.message_, statusCode: 200 }).status(200)
     }
