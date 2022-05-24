@@ -146,16 +146,26 @@ module.exports = {
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
+            let referee=null;
+            if(rq.body.referral){
+               let s=await SeedTrader.findOne(
+                    {where : {referal_code : rq.body.referral }}
+                )
+                referee=s.user_id
+            }
             const farmer = await Farmer.create({
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
                 phone_no:rq.body.phone_number,
-                user_id:user.id
+                user_id:user.id,
+                referee: referee
             }, {transaction : transaction} );
             await transaction.commit();
             return {user, farmer};
         }catch(e){
+            console.log(e)
             await transaction.rollback();
+            
             return e
         }
     },
@@ -227,7 +237,8 @@ module.exports = {
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
                 unique_no: unique,
-                user_id : user.id
+                user_id : user.id,
+                referal_code : Date.now().toString(36)+req.body.firstname.substr(0,1)+req.body.lastname.substr(0,1)
             }, {transaction :transaction});
             
             transaction.commit();
