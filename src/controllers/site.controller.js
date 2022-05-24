@@ -7,11 +7,10 @@ const uniqid = require('uniqid');
 const directoryPath = './src/data/'
 const path = require('path')
 const fs = require('fs')
-var otpGenerator = require('otp-generator');
+const Random = require("random-js").Random;
 const otp = require('../models/otp');
 const { default: axios } = require('axios');
-var FormData = require('form-data');
-// const AddMinutesToDate = require('../public/js/script')
+const jwt = require('jsonwebtoken')
 
 global.pass = 0;
 
@@ -350,7 +349,8 @@ module.exports = {
         let transaction=await db.rest.transaction()
             //Generate OTP 
         try{
-            const otp_code = otpGenerator.generate(6, { digits: true,lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+            const random = new Random();
+            const otp_code = random.integer(1, 1000000);
             const now = new Date();
             const expiration_time = new Date(now.getTime() + 10*60000)
 
@@ -381,22 +381,12 @@ module.exports = {
         otp=JSON.parse(JSON.stringify(otp))
         console.log(otp)
         return otp;
-
     },
-
-    // validation : async (otp_code) =>{
-    //     let transaction = await db.rest.transaction()
-
-    //         let otp_stuff = req.body.otp
-    //         let otp_ver = otp_code
-
-    //         if(otp_stuff == otp_ver){
-    //             res.render stuffffff
-    //         }
-
-
-        
-    // },
+    deleteOTP : async (otp, phone)=>{
+        Otp.destroy({
+            where : {otp_code : otp, phone : phone}
+        })
+    },
 
     updatePassword : async (password, phone)=>{
         let transaction = await db.rest.transaction()
@@ -412,6 +402,42 @@ module.exports = {
             return false
         }
        
+    },
+
+    apiLogin : async (req)=>{
+        try{
+            const user = await User.findOne(
+                { 
+                    include : [{
+                        model : UserRole,
+                        include : [{model : Role}]
+                    }],  
+                    where: { 
+                        username: req.body.username
+                    },
+                }
+            );
+            if(user != null ){
+                if(await bcrypt.compare(req.body.password, user.password) == true){
+                    if(user.status!=2){
+                        let payload = {
+                            sub : user.id,
+                            role : user.UserRole.Role.role_name,
+                            username : user.username
+                        }
+                        let token = jwt.sign(payload, 'secret123', {expiresIn : '60m'})
+                        return {status : true, statusCode:200, body : {access_token:token, type : 'Bearer', expiresIn : '60m'}};
+                    }else{
+                        return {status: false, statusCode : 401, body : {message : "Account is not activated"}};
+                    } 
+                }
+            }
+            return {status : false, statusCode : 401, body :  {message : "You have entered Invalid credentials. Please try again!!!"}};
+        }catch(e){
+           // console.log(e.message())
+            return {status : false, statusCode : 500, body : {message : e}}
+        } 
+        
     }
 
 

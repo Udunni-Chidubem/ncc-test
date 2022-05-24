@@ -209,16 +209,7 @@ companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
     let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
     
     
-    res.render('seed_company/view-order', {
-        layout : 'company-dashboard',
-        title : 'Orders',
-        sub_title : 'View Order',
-        prev_link : '/admin/orders',
-        order,
-        farmer,
-        orderStatus,
-        transaction_id : req.params.transaction_id
-    })
+    res.redirect("/seed-company/orders")
 });
 
 /*Order Count*/

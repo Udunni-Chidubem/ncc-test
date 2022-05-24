@@ -89,7 +89,7 @@ adminRouter.get('/products/:id', async (req, res)=>{
     let isVerified = await utils.isVerified(user);
     let product = await adminController.viewProduct(req, res);
     let user_role = await adminController.getUserRole(req, res)
-
+    console.log(product)
     
     res.render('admin/view-product', {
         layout : 'admin-dashboard',
@@ -199,8 +199,12 @@ adminRouter.get("/orders", async (req, res)=>{
         return e.status == 2
     });
 
-    let fulfilledOrders = await orders.filter(e=>{
+    let hubOrders = await orders.filter(e=>{
         return e.status == 3
+    })
+    
+    let fulfilledOrders = await orders.filter(e=>{
+        return e.status == 4
     })
     let user_role = await adminController.getUserRole(req, res)
 
@@ -240,6 +244,18 @@ adminRouter.get('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
         transaction_id: transaction_id,
         user_role: user_role.Role.role_name
     })
+});
+
+/*Order POST request*/
+adminRouter.post('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
+    let user = await req.user
+    let data={}
+    data.status = req.body.status
+    adminController.updadeOrders(req.body.order, data)
+    let {order, farmer, orderStatus} = await adminController.getOrder(req.params.transaction_id, req.params.id, req.params.company_id)
+    
+    
+    res.redirect("/admin/orders")
 });
 
 module.exports = adminRouter
