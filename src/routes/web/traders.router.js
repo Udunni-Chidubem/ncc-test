@@ -11,6 +11,16 @@ tradersRouter.get('/referal', async (req, res)=>{
         isVerified
     })
 })
+tradersRouter.get('/orders', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'trader')
+    
+    res.render('seed_trader/orders', {
+        layout : 'traders-dashboard',
+        title : 'Orders',
+        isVerified
+    })
+})
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
