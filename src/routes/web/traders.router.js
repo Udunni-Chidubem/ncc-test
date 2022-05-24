@@ -1,6 +1,16 @@
 const tradersRouter=require('express').Router()
 const utils = require('../../helpers/utils')
 
+tradersRouter.get('/referal', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'trader')
+    
+    res.render('seed_trader/referal', {
+        layout : 'traders-dashboard',
+        title : 'Referal',
+        isVerified
+    })
+})
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')

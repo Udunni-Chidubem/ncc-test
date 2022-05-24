@@ -66,7 +66,7 @@
 						aria-labelledby="personal-tab">
 						<div class="admin-view-user">
 							<div class="profile-image-section">
-								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
+								<img src="{{#if farmer.profile_pic}} /profile_pics/{{farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
 									alt="user profile image">
 								{{farmer.User.username}}
 
@@ -92,7 +92,7 @@
 
 									<div>
 										<h5>Date of Birth</h5>
-										<p>{{dateFormat farmer.date_of_birth "DD/MM/YYYY"}}</p>
+										<p>{{ farmer.date_of_birth}}</p>
 									</div>
 
 									<div>
@@ -197,7 +197,7 @@
 						aria-labelledby="business-tab">
 						<div class="admin-view-user">
 							<div class="profile-image-section">
-								<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
+								<img src="{{#if company.profile_pic}} /profile_pics/{{company.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
 									alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 									{{#if company.User.status}}
