@@ -11,16 +11,20 @@ tradersRouter.get('/referal', async (req, res)=>{
         isVerified
     })
 })
-tradersRouter.get('/orders', async (req, res)=>{
+
+
+tradersRouter.get('/market_place', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
-    
-    res.render('seed_trader/orders', {
-        layout : 'traders-dashboard',
-        title : 'Orders',
-        isVerified
-    })
+
+  res.render('seed_trader/market_place', {
+    layout : 'traders-dashboard',
+    title : 'Market-Place',
+    isVerified
+   })
+   
 })
+
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
@@ -30,6 +34,14 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         title : 'Dashboard',
         isVerified
     })
-})
+
+
+
+}),
+    
+
+
+
+
 
 module.exports=tradersRouter
