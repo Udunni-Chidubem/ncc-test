@@ -57,7 +57,7 @@ module.exports={
             attributes: ['state_id', 'lg_id', 'address'], raw: true
         })
 
-        res.render('traders/update-profile', {
+        res.render('seed_trader/update-profile', {
             layout : 'traders-dashboard',
             title: 'Update Profile',
             fullname: trader.firstname + ' ' + trader.lastname,
