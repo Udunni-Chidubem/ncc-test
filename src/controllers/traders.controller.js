@@ -57,8 +57,8 @@ module.exports={
             attributes: ['state_id', 'lg_id', 'address'], raw: true
         })
 
-        res.render('traderss/update-profile', {
-            layout : 'traderss-dashboard',
+        res.render('seed_trader/update-profile', {
+            layout : 'traders-dashboard',
             title: 'Update Profile',
             fullname: trader.firstname + ' ' + trader.lastname,
             tradersData: trader,
@@ -172,34 +172,28 @@ module.exports={
                 state_id, 
                 lg_id,
                 nin, 
-                bvn, 
-                farm_produce, 
+                bvn,  
                 state_of_delivery, 
                 lga_of_delivery, 
-                address, 
-                source_type,  
-                address_of_farm,
-                farm_size,
-                farm_size_measurement,
-                village,
-                ward } = req.body
+                address,
+                bank_account_no, bank_account_name, bank_code
+                } = req.body
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth: date_of_birth ? date_of_birth : '1960-01-01', 
+                date_of_birth, 
                 gender, 
                 level_of_education, 
                 state_id, 
-                lg_id, 
+                lg_id,
                 nin, 
-                bvn,
-                source_type,
-                address_of_farm,
-                farm_size, 
-                farm_size_measurement,
-                product_farmed: farm_produce.toString(),
-                village,
-                ward,
+                bvn,  
+                state_of_delivery, 
+                lga_of_delivery, 
+                address,
+                bank_account_no, 
+                bank_account_name, 
+                bank_code,
                 profile_pic:filename
             }
 

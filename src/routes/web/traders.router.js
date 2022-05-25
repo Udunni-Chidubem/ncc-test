@@ -36,6 +36,7 @@ tradersRouter.get('/market_place', async (req, res)=>{
 
 tradersRouter.get('/orders', async (req, res)=>{
     let user = await req.user
+    console.log(user)
     let isVerified = await utils.isVerified(user, 'trader')
     
     res.render('seed_trader/orders', {
@@ -47,7 +48,8 @@ tradersRouter.get('/orders', async (req, res)=>{
 
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
-    let isVerified = await utils.isVerified(user, 'trader')
+    console.log(user)
+    let isVerified = await utils.isVerified(user)
     
     res.render('seed_trader/dashboard', {
         layout : 'traders-dashboard',
