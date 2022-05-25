@@ -52,12 +52,7 @@ tradersRouter.get('/dashboard', async (req, res)=>{
             res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
         }else{
             res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
-        }
-        
-    
-    
-    
-    
+        }    
     });
 
 }),

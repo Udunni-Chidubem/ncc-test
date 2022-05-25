@@ -99,7 +99,7 @@ module.exports={
         try{
         let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
             let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
-            return {status,farmer,isVerified,message_}
+            return {status,trader,isVerified,message_}
             
            } 
            catch(e){
@@ -183,7 +183,7 @@ module.exports={
                 }, {transaction: transaction})
             }
             transaction.commit();
-            return {farmer, deliveryInformation};
+            return {trader, deliveryInformation};
         }catch(e){
             console.log(e);
             transaction.rollback();
@@ -257,8 +257,8 @@ module.exports={
         const trader = await utils.getTraderProfile(user)
         const isVerified = await utils.isVerified(user)
 
-        res.render('farmers/product', {
-            layout : 'farmers-dashboard',
+        res.render('seed_trader/product', {
+            layout : 'traders-dashboard',
             title: 'Product',
             fullname: trader.firstname + ' ' + trader.lastname,
             traderData: trader,
@@ -298,11 +298,11 @@ module.exports={
        // const trader = await utils.getTraderProfile(user)
        // const isVerified = await utils.isVerified(user)
        // const {getCartItems}=await this.cart(req.res)
-        res.render('farmers/order_preview', {
+        res.render('seed_trader/order_preview', {
             layout : 'traders-dashboard',
             title: 'Market Place',
             sub_title : 'Checkout',
-            prev_link: '/farmer/cart',
+            prev_link: '/seed_trader/cart',
             fullname: trader.firstname + ' ' + trader.lastname,
             traderData: trader,
             isVerified
@@ -362,7 +362,7 @@ module.exports={
         getCartItems = JSON.parse(JSON.stringify(getCartItems))
         return { trader, isVerified, getCartItems }
     },
-    getFarmerCartCount: async (req, res) => {
+    getTraderCartCount: async (req, res) => {
         const user = await req.user
         const cartCount = await Cart.count({ where: {
             [Op.and]: [
@@ -486,7 +486,6 @@ module.exports={
         return {cartItems, isItemAlreadyAdded, product}
     },
     initializeTransaction : async (req, res, ref, getCartItems, trader)=>{
-        //const {getCartItems, farmer}=await cart(req, res)
         
         let transaction =await db.rest.transaction()
         try{
@@ -625,10 +624,10 @@ module.exports={
             where : {id : req.params.id}
         })
     },
-    getTransactionlogCount : async (farmer_id)=>{
+    getTransactionlogCount : async (seedtrader_id)=>{
         let transactionCount = await TransactionLog.count({
             where : {
-                trader_id : trader_id
+                seedtrader_id : seedtrader_id
             }
         })
 

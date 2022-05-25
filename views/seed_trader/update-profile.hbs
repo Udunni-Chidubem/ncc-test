@@ -6,20 +6,20 @@
                     <div class="col-sm-6">
                         <label for="firstname" class="input_form">First name <span class="profile_sub">*</span> </label>
                         <div class="input-group input-group-sm mb-3">
-                            <input type="text" readonly required id="firstname" name="firstname" value="{{ traderData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input type="text" readonly required id="firstname" name="firstname" value="{{ tradersData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="lastname" class="input_form">Last name <span class="profile_sub">*</span> </label>
                         <div class="input-group input-group-sm mb-3">
-                        <input type="text" readonly required id="lastname" name="lastname" value="{{ traderData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <input type="text" readonly required id="lastname" name="lastname" value="{{ tradersData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                     </div>
                         <div class="col-sm-6">
                         <label for="dob" class="input_form">Age Range </label>
                             <div class="input-group input-group-sm mb-3">
-                            <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ farmerData.date_of_birth }}">
+                            <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ tradersData.date_of_birth }}">
                                 <option value="">Select Age Range</option> 
                                 <option value="15-19">15-19</option>   
                                 <option value="20-30">20-30</option> 
@@ -35,7 +35,7 @@
                         <div class="col-sm-6" class="input_form">
                             <label for="education" class="input_form"> Gender <span class="profile_sub">*</span></label>
                             <div class="input-group input-group-sm mb-3">
-                                <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ farmerData.gender }}">
+                                <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ tradersData.gender }}">
                                 <option value="">Select One</option>
                                 </select>
                             </div>
@@ -105,7 +105,6 @@ var profile_pic = null
       let banked = $('#bvn').data('val')
       let nin = $('#nin').data('val')
       let type = $('#source_type').data('val')
-      let farm_size_measurement = $('#farm_size_measurement').data('val')
       let dob = $('#date_of_birth').data('val')
 
       if(banked != null){
@@ -222,7 +221,7 @@ var profile_pic = null
           .then(response => {
             if(response.statusCode === 200){
               
-                let gender, len, i, farm_produce, level
+                let gender, len, i, level
                 gender = response.data.gender
 
                 len = gender.length
@@ -258,17 +257,6 @@ var profile_pic = null
                         $('#levelE').val(level)
                     }
                 }, 1000)
-
-
-                farm_produce = response.data.farm_produce
-                len = farm_produce.length
-
-                var ele = document.getElementById('farmProduce');
-                //$(ele).atrr('val')
-                let val =ele.getAttribute('value')
-                for(i=0; i < len; i++){ 
-                    ele.innerHTML = ele.innerHTML + '<option value="' + farm_produce[i].name + '"' + (val.includes(farm_produce[i].name) ? 'selected="'+true+'"' : null)+'>' + farm_produce[i].name + '</option>';
-                }
             }
         }).catch(e => {
           console.log(e)
@@ -282,64 +270,6 @@ var profile_pic = null
            let updateURL =  window.location.origin+'/seed-trader/update-profile'
           let data = $(this).serializeArray()
           updateProfile(updateURL, data)
-         /* let _data = {
-            file: $('#file').val(),
-            firstname: $('#firstname').val(),
-            lastname: $('#lastname').val(),
-            date_of_birth: $('#dob').val(),
-            gender: $('#gender').val(),
-            level_of_education: $('#levelE').val(),
-            state_id: $('#state').val(),
-            lg_id: $('#lgas').val(),
-            bvn: $('#bvn').val(),
-            nin: $('#nin').val(),
-            state_of_delivery: $('#stateDelivery').val(),
-            lga_of_delivery: $('#lgaDelivery').val(),
-            address: $('#address').text(),
-            farm_produce: $('#farmProduce').val()
-          }
-
-          let updateURL =  window.location.origin+'/farmer/update-profile'
-          
-
-
-          $.ajax({
-              type: 'POST',
-              url: updateURL,
-              data: $(this).serialize(),
-              beforeSend: () => {
-                $('.submitBtn').html('Please Wait...')
-              },
-              success: (response) => {
-                if(response.statusCode == 402){
-                    let msg = ''
-                    let errors = response.data
-                    errors.forEach((value, index) => {
-                      msg += (index + 1 ) + '.' + value.msg + ' \n'
-                    })
-                    error_toastr(msg)
-                  }else if(response.statusCode == 500 || response.statusCode == 400){
-                    error_toastr(response.data)
-                  }else{
-
-                    let m = state != null ? 'Your profile has been updated successfully.' : response.message
-                    success_toastr(m)
-
-                    setTimeout(function(){
-                      if(!state){
-                        window.location='dashboard'
-                      }
-                    }, 2000)
-                  }
-              },
-              complete: () => {
-                  $('.submitBtn').html('Update')
-              },
-              error: (err) => {
-
-              }
-          })
-          */
         })
     })
 
@@ -367,7 +297,7 @@ var profile_pic = null
         error_toastr(r.data)
       }else{
         success_toastr(r.message)
-        window.location.href='/farmer/dashboard'
+        window.location.href='/seed-trader/dashboard'
       }
     })
     .catch(e=>{
