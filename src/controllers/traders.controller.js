@@ -63,16 +63,7 @@ marketPlace: async (req, res) => {
                         [Op.like]: `%${Search}%`
                       }
                     },
-                    // {
-                    //   variant: {
-                    //     [Op.like]: `%${Search}%`
-                    //   }
-                    // },
-                    // {
-                    //     description: {
-                    //         [Op.like]: `%${Search}%`
-                    //     }
-                    // }
+                   
                 ],
                 [Op.and]: [
                   {
