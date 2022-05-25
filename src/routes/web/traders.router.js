@@ -1,14 +1,22 @@
 const tradersRouter=require('express').Router()
 const utils = require('../../helpers/utils')
+const tradersController = require('../../controllers/traders.controller')
 
 tradersRouter.get('/referal', async (req, res)=>{
     let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let referal_id = trader.user_id
     let isVerified = await utils.isVerified(user, 'trader')
+    let traderRefres = await tradersController.traderRefres(req,referal_id)
+    let traderRefres_len = traderRefres.length
     
     res.render('seed_trader/referal', {
         layout : 'traders-dashboard',
         title : 'Referal',
-        isVerified
+        isVerified,
+        trader,
+        traderRefres,
+        traderRefres_len
     })
 })
 tradersRouter.get('/orders', async (req, res)=>{

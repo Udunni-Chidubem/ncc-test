@@ -95,6 +95,12 @@ $(document).ready(function() {
     "order": [[1, "desc"]]
   });
 });
+$(document).ready(function() {
+  $('#referesTable').DataTable({
+    "aLengthMenu": [ 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
 
 $(document).ready(function() {
   $('#in_flow_Table').DataTable({
