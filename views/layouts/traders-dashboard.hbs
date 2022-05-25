@@ -4,7 +4,7 @@
 
   {{#if isVerified}}
   <header>
-    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_trader_nav navbar-dark  ">
+    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_com_nav navbar-dark  ">
       <div class="container-fluid">
         <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
         <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse"
@@ -46,16 +46,35 @@
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
-          <a href="/seed-trader/dashboard">
+          <a href="#">
             <i class='bx bx-grid-alt'></i>
             <span class="link_name">Dashboard</span>
           </a>
 
         </li>
-       
+        <li>
+          <a href="/seed-trader/market_place">
+            <i class='bx bx-cart-add'></i>
+            <span class="link_name">whatever i want</span>
+          </a>
+
+        </li>
 
         <li>
-          <a href="/seed-trader/update-profile">
+          <a href="/seed-trader/referal">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Referal</span>
+          </a>
+        </li>
+        <li>
+          <a href="/seed-trader/orders">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Orders</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{{#if isVerified }} # {{else}} # {{/if}}">
             <i class='bx bx-user'></i>
             <span class="link_name">Profile</span>
             {{#if isVerified }}
@@ -68,33 +87,40 @@
 
         {{#unless isVerified}}
 
-         <li>
-          <a href="/seed-trader/market_place">
+        <li>
+          <a href="#">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Order Management</span>
+          </a>
+        </li>
+
+        {{!-- <li>
+          <a href="/seed_trader/market-place">
             <i class='bx bx-cart-add'></i>
             <span class="link_name">Market Place</span>
           </a>
+        </li> --}}
 
-        </li>
-
-         <li>
-          <a href="/knowledge-base">
-            <i class='bx bx-library'></i>
-            <span class="link_name">Knowledge Base</span>
-          </a>
-
-        </li>
-
-       <li>
-          <a href="/seed-trader/referal">
-            <i class='bx bx-user'></i>
-            <span class="link_name">Referral</span>
-          </a>
-        </li>
         <li>
-          <a href="/seed-trader/orders">
+          <a href="/knowledge-base">
             <i class='bx bx-user'></i>
-            <span class="link_name">Orders</span>
+            <span class="link_name">knowledge Base</span>
           </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Help</span>
+          </a>
+        </li>
+
+        <li id="settings">
+          <a href="#">
+            <i class='bx bx-cog'></i>
+            <span class="link_name">Settings</span>
+          </a>
+
         </li>
         {{/unless}}
         <li>
@@ -117,7 +143,7 @@
     <div class="page-header">
       <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
-          <a href="/seed-trader/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i> Home</a>
+          <a href="/seed-traded/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i> Home</a>
           <a class="breadcrumb-item " href="#">{{ title }}</a>
           <span class="breadcrumb-item active">{{ sub_title }}</span>
         </nav>
@@ -138,6 +164,9 @@
     crossorigin="anonymous"></script>
   <script src="../js/script.js"></script>
   <script src="../js/payment_page_preview.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../../js/script.js"></script>
 
 </body>
 
