@@ -6,6 +6,7 @@ tradersRouter.get('/referal', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
     let referal_id = trader.user_id
+    let referal_code = trader.referal_code
     let isVerified = await utils.isVerified(user, 'trader')
     let traderRefres = await tradersController.traderRefres(req,referal_id)
     let traderRefres_len = traderRefres.length
@@ -16,7 +17,8 @@ tradersRouter.get('/referal', async (req, res)=>{
         isVerified,
         trader,
         traderRefres,
-        traderRefres_len
+        traderRefres_len,
+        referal_code
     })
 })
 tradersRouter.get('/orders', async (req, res)=>{
