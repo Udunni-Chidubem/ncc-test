@@ -24,7 +24,7 @@ module.exports = {
 
         return farmer;
     },
-    getTraderProfile: (user) => {
+    getTraderProfile: async (user) => {
         const trader = await SeedTrader.findOne({
             where : {
                 user_id : user.id
