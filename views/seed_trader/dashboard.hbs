@@ -7,14 +7,16 @@
                <div class="col-12">
                  <h4>Welcome, {{trader.firstname}} {{trader.lastname}}!</h4>
                </div>
+               {{#if isVerified}}
                <div class="row">
                  <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
                  <div class="col-6">
                   <div class="  float-end">
-                    <a href="/seed-trader/construction" class="btn button_update mb-1 shadow-lg">Update Profile</a>
+                    <a href="/seed-trader/update-profile" class="btn button_update mb-1 shadow-lg">Update Profile</a>
                   </div>
                  </div>
                </div>
+               {{/if}}
              </div>
             </div>
           </div>

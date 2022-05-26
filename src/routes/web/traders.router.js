@@ -24,6 +24,20 @@ tradersRouter.get('/referal', async (req, res)=>{
         referal_code
     })
 })
+tradersRouter.get('/view-farmer/:user_id', async (req, res)=>{
+    let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    let farmer_info = await tradersController.farmer_info(req,res)
+    
+    res.render('seed_trader/view_farmer', {
+        layout : 'traders-dashboard',
+        title : 'Referal',
+        isVerified,
+        trader,
+        farmer_info
+    })
+})
 tradersRouter.get('/orders', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
@@ -62,11 +76,31 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     tradersRouter.get('/update-profile', tradersController.updateProfile)
     tradersRouter.get('/settings', tradersController.settings)
     tradersRouter.post('/update-profile', profileUpdateValidation(), validate, async (req, res) => {
-        let r = await tradersController.updateProfile(req, res)
-        if(r.trader) {
-            res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
+        let response = await tradersController.editProfileData(req,res)
+        if(response.trader || response.deliveryInformation){
+            res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
         }else{
-            res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
-        }    
+            res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
+        }       
     });
+
+    tradersRouter.get('/market_place', async (req, res)=>{
+        let user = await req.user
+        let isVerified = await utils.isVerified(user, 'trader')
+        let resp = await tradersController.marketPlace(req, res)
+        let message = null;
+        const products = resp.response
+        if(req.query.Search && products.result.length <= 0){
+            message = "No product found"
+        }
+    
+        res.render('seed_trader/market_place', {
+        layout : 'traders-dashboard',
+        title : 'Market-Place',
+        products,
+        message,
+        isVerified: resp.isVerified
+    })
+   
+})
 module.exports=tradersRouter
