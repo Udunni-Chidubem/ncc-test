@@ -1,6 +1,9 @@
 const tradersRouter=require('express').Router()
 const utils = require('../../helpers/utils')
 const tradersController = require('../../controllers/traders.controller')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
+
+
 
 tradersRouter.get('/referal', async (req, res)=>{
     let user = await req.user
@@ -33,15 +36,26 @@ tradersRouter.get('/orders', async (req, res)=>{
 })
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
-    let isVerified = await utils.isVerified(user, 'trader')
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
     
     res.render('seed_trader/dashboard', {
         layout : 'traders-dashboard',
         title : 'Dashboard',
-        isVerified
+        isVerified,
+        trader
     })
 
-
+    tradersRouter.get('/update-profile', tradersController.updateProfile)
+    tradersRouter.get('/settings', tradersController.settings)
+    tradersRouter.post('/update-profile', profileUpdateValidation(), validate, async (req, res) => {
+        let r = await tradersController.updateProfile(req, res)
+        if(r.trader) {
+            res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
+        }else{
+            res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
+        }    
+    });
 
 }),
     

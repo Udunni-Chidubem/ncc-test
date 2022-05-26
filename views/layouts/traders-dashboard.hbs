@@ -4,8 +4,8 @@
 
   {{#if isVerified}}
   <header>
-    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_com_nav navbar-dark  ">
-      <div class="container-fluid">
+    <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_trader_nav navbar-dark  ">
+       <div class="container-fluid">
         <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
         <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -17,7 +17,7 @@
           <ul class="navbar-nav ms-auto mls-auto mb-2 mb-lg-0">
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Adamu Garba</a>
+              <a class="nav-link" href="#">{{trader.firstname}} {{trader.lastname}}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link  " href="#"><i class="bi bi-bell"></i>
@@ -46,16 +46,33 @@
       <ul class="nav-links">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
-          <a href="#">
+          <a href="/seed-trader/dashboard">
             <i class='bx bx-grid-alt'></i>
             <span class="link_name">Dashboard</span>
           </a>
 
         </li>
+
         <li>
+          <a href="/seed-trader/update-profile">
+            <i class='bx bx-user'></i>
+            <span class="link_name">Profile</span>
+            {{#if isVerified }}
+            <span class="p_red">(Unverified)</span>
+            {{/if}}
+
+          </a>
+
+        </li>
+
+       
+        
+
+        {{#unless isVerified}}
+         <li>
           <a href="/seed-trader/market_place">
             <i class='bx bx-cart-add'></i>
-            <span class="link_name">whatever i want</span>
+            <span class="link_name">Market Place</span>
           </a>
 
         </li>
@@ -72,34 +89,6 @@
             <span class="link_name">Orders</span>
           </a>
         </li>
-
-        <li>
-          <a href="{{#if isVerified }} # {{else}} # {{/if}}">
-            <i class='bx bx-user'></i>
-            <span class="link_name">Profile</span>
-            {{#if isVerified }}
-            <span class="p_red">(Unverified)</span>
-            {{/if}}
-
-          </a>
-
-        </li>
-
-        {{#unless isVerified}}
-
-        <li>
-          <a href="#">
-            <i class='bx bx-user'></i>
-            <span class="link_name">Order Management</span>
-          </a>
-        </li>
-
-        {{!-- <li>
-          <a href="/seed_trader/market-place">
-            <i class='bx bx-cart-add'></i>
-            <span class="link_name">Market Place</span>
-          </a>
-        </li> --}}
 
         <li>
           <a href="/knowledge-base">
