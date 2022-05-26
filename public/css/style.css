@@ -1707,6 +1707,10 @@ input[type="number"] {
   background: #f99746;
 }
 
+.seed_trader_nav {
+  background: #008346;
+}
+
 .seed_com_side {
   background: #24502a;
 }

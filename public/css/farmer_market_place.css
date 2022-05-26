@@ -2528,6 +2528,10 @@ font-size: 12px;
       margin-left: 0px !important;
     }
 
+    .min-search-btn{
+      display: block !important;
+    }
+
 
 }
 
@@ -3462,4 +3466,219 @@ justify-content: center;
   background: #d7d2398c;
   border-radius: 10px;
   color: #7d7f00;
+}
+
+.sidebar .nav-item.dropdown .dropdown-toggle::after,
+.seed_trader_nav .nav-item.dropdown .dropdown-toggle::after {
+  width: 1rem;
+  text-align: center;
+  float: right;
+  vertical-align: 0;
+  border: 0;
+  font-weight: 900;
+  content: '\f105';
+  font-family: 'Font Awesome 5 Free';
+}
+
+.sidebar .nav-item.dropdown.show .dropdown-toggle::after,
+.seed_trader_nav .nav-item.dropdown.show .dropdown-toggle::after {
+  content: '\f107';
+}
+
+.sidebar .nav-item .nav-link,
+.seed_trader_nav .nav-item .nav-link {
+  position: relative;
+}
+
+.sidebar .nav-item .nav-link .badge-counter,
+.seed_trader_nav .nav-item .nav-link .badge-counter {
+  position: absolute;
+  transform: scale(0.7);
+  transform-origin: top right;
+  right: .25rem;
+  margin-top: -.25rem;
+}
+
+.sidebar .nav-item .nav-link .img-profile,
+.seed_trader_nav .nav-item .nav-link .img-profile {
+  height: 2rem;
+  width: 2rem;
+}
+
+.seed_trader_nav {
+  height: 4.375rem;
+}
+
+.seed_trader_nav #sidebarToggleTop {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.seed_trader_nav #sidebarToggleTop:hover {
+  background-color: #eaecf4;
+}
+
+.seed_trader_nav #sidebarToggleTop:active {
+  background-color: #dddfeb;
+}
+
+.seed_trader_nav .navbar-search {
+  width: 25rem;
+}
+
+.seed_trader_nav .navbar-search input {
+  font-size: 0.85rem;
+  height: auto;
+}
+
+.seed_trader_nav .seed_trader_nav-divider {
+  width: 0;
+  border-right: 1px solid #e3e6f0;
+  height: calc(4.375rem - 2rem);
+  margin: auto 1rem;
+}
+
+.seed_trader_nav .nav-item .nav-link {
+  height: 4.375rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+
+.seed_trader_nav .nav-item .nav-link:focus {
+  outline: none;
+}
+
+.seed_trader_nav .nav-item:focus {
+  outline: none;
+}
+
+.seed_trader_nav .dropdown {
+  position: static;
+}
+
+.seed_trader_nav .dropdown .dropdown-menu {
+  width: calc(100% - 1.5rem);
+  right: 0.75rem;
+}
+
+.seed_trader_nav .dropdown-list {
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-header {
+  background-color: #4e73df;
+  border: 1px solid #4e73df;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #fff;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item {
+  white-space: normal;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 1px solid #e3e6f0;
+  border-right: 1px solid #e3e6f0;
+  border-bottom: 1px solid #e3e6f0;
+  line-height: 1.3rem;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item .dropdown-list-image {
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item .dropdown-list-image img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
+  background-color: #eaecf4;
+  height: 0.75rem;
+  width: 0.75rem;
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0.125rem solid #fff;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item .text-truncate {
+  max-width: 10rem;
+}
+
+.seed_trader_nav .dropdown-list .dropdown-item:active {
+  background-color: #eaecf4;
+  color: #3a3b45;
+}
+
+@media (min-width: 576px) {
+  .seed_trader_nav .dropdown {
+    position: relative;
+  }
+  .seed_trader_nav .dropdown .dropdown-menu {
+    width: auto;
+    right: 0;
+  }
+  .seed_trader_nav .dropdown-list {
+    width: 20rem !important;
+  }
+  .seed_trader_nav .dropdown-list .dropdown-item .text-truncate {
+    max-width: 13.375rem;
+  }
+}
+
+.seed_trader_nav.navbar-dark .navbar-nav .nav-item .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seed_trader_nav.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+  color: #fff;
+}
+
+.seed_trader_nav.navbar-dark .navbar-nav .nav-item .nav-link:active {
+  color: #fff;
+}
+
+.seed_trader_nav.navbar-light .navbar-nav .nav-item .nav-link {
+  color: #d1d3e2;
+}
+
+.seed_trader_nav.navbar-light .navbar-nav .nav-item .nav-link:hover {
+  color: #b7b9cc;
+}
+
+.seed_trader_nav.navbar-light .navbar-nav .nav-item .nav-link:active {
+  color: #858796;
+}
+
+.trader-profile{
+  display: grid;
+  grid-template-columns: 70% auto;
+}
+
+.trader-profile-img{
+  position: relative;
+  top: -48px;
+  right: 79px;
+}
+
+.edit-profile-img {
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  float: right;
+  font-size: 25px;
+  text-align: center;
+  background-color: #06fe3c2e;
+}
+.edit-profile-img p{
+  padding: 6px;
 }
