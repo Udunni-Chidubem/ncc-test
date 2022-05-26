@@ -109,13 +109,13 @@
           </a>
         </li>
 
-        <li id="settings">
+        {{!-- <li id="settings">
           <a href="#">
             <i class='bx bx-cog'></i>
             <span class="link_name">Settings</span>
           </a>
 
-        </li>
+        </li> --}}
         {{/unless}}
         <li>
           <form method="post" action="/logout?_method=DELETE">
@@ -124,6 +124,14 @@
               <span class="link_name">Log Out</span>
             </button>
           </form>
+        </li>
+
+              <li id="settings">
+          <a href="/seed-trader/settings">
+            <i class='bx bx-cog'></i>
+            <span class="link_name">Settings</span>
+          </a>
+
         </li>
 
 
