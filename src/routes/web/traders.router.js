@@ -83,4 +83,24 @@ tradersRouter.get('/dashboard', async (req, res)=>{
             res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
         }       
     });
+
+    tradersRouter.get('/market_place', async (req, res)=>{
+        let user = await req.user
+        let isVerified = await utils.isVerified(user, 'trader')
+        let resp = await tradersController.marketPlace(req, res)
+        let message = null;
+        const products = resp.response
+        if(req.query.Search && products.result.length <= 0){
+            message = "No product found"
+        }
+    
+        res.render('seed_trader/market_place', {
+        layout : 'traders-dashboard',
+        title : 'Market-Place',
+        products,
+        message,
+        isVerified: resp.isVerified
+    })
+   
+})
 module.exports=tradersRouter
