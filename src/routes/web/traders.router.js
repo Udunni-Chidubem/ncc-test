@@ -36,12 +36,14 @@ tradersRouter.get('/orders', async (req, res)=>{
 })
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
-    let isVerified = await utils.isVerified(user, 'trader')
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
     
     res.render('seed_trader/dashboard', {
         layout : 'traders-dashboard',
         title : 'Dashboard',
-        isVerified
+        isVerified,
+        trader
     })
 
     tradersRouter.get('/update-profile', tradersController.updateProfile)
