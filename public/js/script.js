@@ -64,7 +64,11 @@ $(document).ready(function(){
   var sim = $("input[type='radio']:checked").val();
   //alert(sim);
   if (sim<3) { $('.myratings').css('color','red'); $(".myratings").text(sim); }else{ $('.myratings').css('color','green'); $(".myratings").text(sim); } });
-      
+     
+  $("#uploadImage").click(function(e) {
+  $("#file").click();
+});
+
   });
   
 $(document).ready(function() {
@@ -91,6 +95,12 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#transactionTable').DataTable({
+    "aLengthMenu": [ 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+$(document).ready(function() {
+  $('#referesTable').DataTable({
     "aLengthMenu": [ 10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });

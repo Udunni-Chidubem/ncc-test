@@ -1,5 +1,316 @@
 <div class="card">
     <div class="card-body">
-        
+        <form action="POST">
+            <div class="trader-profile">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="firstname" class="input_form">First name <span class="profile_sub">*</span> </label>
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" readonly required id="firstname" name="firstname" value="{{ tradersData.firstname }}" class="form-control border-0 border-bottom  input_borderless" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="lastname" class="input_form">Last name <span class="profile_sub">*</span> </label>
+                        <div class="input-group input-group-sm mb-3">
+                        <input type="text" readonly required id="lastname" name="lastname" value="{{ tradersData.lastname }}" class="form-control border-0 border-bottom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                    </div>
+                        <div class="col-sm-6">
+                        <label for="dob" class="input_form">Age Range </label>
+                            <div class="input-group input-group-sm mb-3">
+                            <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ tradersData.date_of_birth }}">
+                                <option value="">Select Age Range</option> 
+                                <option value="15-19">15-19</option>   
+                                <option value="20-30">20-30</option> 
+                                <option value="31-40">31-40</option>
+                                <option value="41-50">41-50</option>
+                                <option value="51 and above">51 and above</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="col-sm-6" class="input_form">
+                            <label for="education" class="input_form"> Gender <span class="profile_sub">*</span></label>
+                            <div class="input-group input-group-sm mb-3">
+                                <select name="gender" required class="form-select border-0 border-bottom gender" id="gender" data-gender="{{ tradersData.gender }}">
+                                <option value="">Select One</option>
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div>
+                    <img src="../images/profile-avatar.png" id="output" class=" mb-2 mx-auto d-block img_round" alt="user profile image">
+                    {{!-- <button class="btn edit-profile-img"><i id="uploadImage" class="ri-camera-fill upload-button"></i><input id="imageUpload" type="file" name="profile_photo" capture=""></button> --}}
+                    <label class="edit-profile-img trader-profile-img" for="file">
+                    <p ><i class="fa fa-camera" aria-hidden="true"></i></p>
+                    </label>
+                    <input id="file" class="fileDisplay" type="file" onchange="loadFile(event)"/>
+                </div>
+            </div>
+             
+        </form>
     </div>
 </div>
+
+      
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+var profile_pic = null
+    const success_toastr = (msg) => {
+      Toastify({
+          text: msg,
+          duration: 4000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to bottom, #00b09b, #28a745)", //#00b09b #96c93d
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
+     // success_toastr('You have successfully updated your profile')
+
+    const error_toastr = (msg) => {
+      Toastify({
+        text: msg,
+        duration: 5000,
+        newWindow: true,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        onClick: function () { }, // Callback after click
+      }).showToast();
+        success_toastr('You have successfully updated your profile')
+    }
+
+   $('.js-example-basic-multiple').select2({
+        placeholder: "Select multiple items",
+        allowClear: true
+    });
+
+    $(document).ready(function(){
+
+      let lga = $('#lgas').data('lga')
+      let banked = $('#bvn').data('val')
+      let nin = $('#nin').data('val')
+      let type = $('#source_type').data('val')
+      let dob = $('#date_of_birth').data('val')
+
+      if(banked != null){
+        $('#bvn').val(banked)
+      }
+
+      if(type != null){
+        $('#source_type').val(type)
+      }
+      
+      if(nin != null){
+        $('#nin').val(nin)
+      }
+      
+      if(dob != null){
+        $('#date_of_birth').val(dob)
+      }
+
+
+      let state = $('#state').data('state')
+
+        const getDefaultLgas = (state_id) => {
+            let url =  window.location.origin+'/api/base/lgas/'+ state_id
+            fetch(url).then(r=>r.json())
+            .then(r => {
+                let selected,Options
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgas').innerHTML= Options
+
+                $('#lgas').val(lga)
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        }
+
+
+        //Get All LGAs based on selected value of the state
+        
+        if(state != null){
+          $('#state').val(state)
+
+          getDefaultLgas(state)
+        }
+
+
+        let gender = $('#gender').data('gender')
+        $('.gender').val(gender)
+        
+        if(gender != null){
+          $('.gender').val(gender)
+        }
+
+
+        document.querySelector('#state').addEventListener('change', function(){
+              let url =  window.location.origin+'/api/base/lgas/'+this.value
+              fetch(url).then(r=>r.json())
+              .then(r=>{
+                  let Options =  '<option value="">Select LGA</option>'
+                  r.forEach(e=>{
+                      Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                  })
+                  document.querySelector('#lgas').innerHTML=Options
+              }
+              ).catch(e=>{
+                  //console.log(e)
+              })
+          })
+
+        document.querySelector('#stateDelivery').addEventListener('change', function(){
+          let url =  window.location.origin+'/api/base/lgas/'+this.value
+          fetch(url).then(r=>r.json())
+            .then(r=>{
+                let Options =  '<option value="">Select LGA</option>'
+                r.forEach(e=>{
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                })
+                document.querySelector('#lgaDelivery').innerHTML=Options
+            }
+            ).catch(e=>{
+                console.log(e)
+            })
+        })
+        
+        let stateD = $('#stateDelivery').data('statedelivery')
+        let lgaDelivery = $('#lgaDelivery').data('lgadelivery')
+        if(stateD != null){
+          $('#stateDelivery').val(stateD)
+
+          setTimeout(function(){
+                let url =  window.location.origin+'/api/base/lgas/'+ stateD
+                fetch(url).then(r=>r.json())
+                .then(r => { 
+                    let selected,Options
+                    r.forEach(e=>{
+                        Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                    })
+                    document.querySelector('#lgaDelivery').innerHTML= Options
+
+                    $('#lgaDelivery').val(lgaDelivery)
+                }
+                ).catch(e=>{
+                    console.log(e)
+                })
+            }, 1000)
+        }
+
+        let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let gender, len, i, level
+                gender = response.data.gender
+
+                len = gender.length
+                var ele = document.getElementById('gender');
+
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let gender = $('#gender').data('gender')
+                    if(gender != null){
+                        $('#gender').val(gender)
+                    }
+                }, 1000)
+
+                level = response.data.eduLevel
+
+                len = level.length
+                var ele = document.getElementById('levelE');
+
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + level[i].name + '">' + level[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let level = $('#levelE').data('level')
+                    if(level != null){
+                        $('#levelE').val(level)
+                    }
+                }, 1000)
+            }
+        }).catch(e => {
+          console.log(e)
+        })
+        
+
+
+        $("#updateProfile").on('submit', function(e){
+          e.preventDefault()
+           $('.submitBtn').html('Please Wait...')
+           let updateURL =  window.location.origin+'/seed-trader/update-profile'
+          let data = $(this).serializeArray()
+          updateProfile(updateURL, data)
+        })
+    })
+
+  const updateProfile = (url, data)=>{
+    let form=new FormData()
+    form.append('upload', profile_pic)
+    data.forEach(e=>{
+      form.append(e.name, e.value)
+    })
+
+    fetch(url, {
+        method:'POST',
+        body : form
+    }).then(r=>r.json())
+    .then(r=> {
+      $('.submitBtn').html('Submit')
+      if(r.statusCode === 402){
+        let msg = ''
+        let errors = r.data
+        errors.forEach((value, index) => {
+          msg += (index + 1 ) + '.' + value.msg + ' \n'
+        })
+        error_toastr(msg)
+      }else if(r.statusCode == 500 || r.statusCode == 400){
+        error_toastr(r.data)
+      }else{
+        success_toastr(r.message)
+        window.location.href='/seed-trader/dashboard'
+      }
+    })
+    .catch(e=>{
+      console.log(e)
+    });
+  }
+
+  const loadFile = function (event) {
+  event.preventDefault()
+let image = document.getElementById("output");
+image.src = URL.createObjectURL(event.target.files[0]);
+profile_pic=event.target.files[0]
+};
+
+    
+</script>

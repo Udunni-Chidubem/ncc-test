@@ -57,8 +57,8 @@ module.exports={
             attributes: ['state_id', 'lg_id', 'address'], raw: true
         })
 
-        res.render('traderss/update-profile', {
-            layout : 'traderss-dashboard',
+        res.render('seed_trader/update-profile', {
+            layout : 'traders-dashboard',
             title: 'Update Profile',
             fullname: trader.firstname + ' ' + trader.lastname,
             tradersData: trader,
@@ -99,7 +99,7 @@ module.exports={
         try{
         let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
             let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
-            return {status,farmer,isVerified,message_}
+            return {status,trader,isVerified,message_}
             
            } 
            catch(e){
@@ -107,49 +107,7 @@ module.exports={
             return e
            }
 
-            // try{
-        // let sql = "select password from user where username ="+ farmer.phone_no +";"
-        //     let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        //     console.log(password_verify.password)
-        //     if(password_verify=''){
-        // let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
-        //     let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
-        //     return {status,farmer,isVerified,message_}}
-        //     else{
-        //         console.log(sql)
-        //         return {error_message_}
-        //     }
-            
-        //    } 
-        //    catch(e){
-        //     console.log(e)       
-        //     return e
-        //    }
-
-        // try{
-        //     let sql = "select password from user where username ="+ farmer.phone_no +"';"
-        //         let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        //         bcrypt.compare(req.body.currentpassword, password_verify.password, function(err, res) {
-        //             if(err){
-    
-        //             }
-        //             if(res == true){
-        //                 let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
-        //                 let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
-        //                 return {status,farmer,isVerified,message_}
-        //             }
-        //             if(res == false){
-        //                 console.log(sql)
-        //                 return {error_message_}
-        //             }
-        //         });
-    
-                
-        //        } 
-        //        catch(e){
-        //         console.log(e)       
-        //         return e
-        //        }
+           
     },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
@@ -173,33 +131,27 @@ module.exports={
                 lg_id,
                 nin, 
                 bvn, 
-                farm_produce, 
                 state_of_delivery, 
                 lga_of_delivery, 
-                address, 
-                source_type,  
-                address_of_farm,
-                farm_size,
-                farm_size_measurement,
-                village,
-                ward } = req.body
+                address,
+                bank_account_no, bank_account_name, bank_code
+                } = req.body
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth: date_of_birth ? date_of_birth : '1960-01-01', 
+                date_of_birth, 
                 gender, 
                 level_of_education, 
                 state_id, 
                 lg_id, 
                 nin, 
-                bvn,
-                source_type,
-                address_of_farm,
-                farm_size, 
-                farm_size_measurement,
-                product_farmed: farm_produce.toString(),
-                village,
-                ward,
+                bvn,  
+                state_of_delivery, 
+                lga_of_delivery, 
+                address,
+                bank_account_no, 
+                bank_account_name, 
+                bank_code,
                 profile_pic:filename
             }
 
@@ -231,7 +183,7 @@ module.exports={
                 }, {transaction: transaction})
             }
             transaction.commit();
-            return {farmer, deliveryInformation};
+            return {trader, deliveryInformation};
         }catch(e){
             console.log(e);
             transaction.rollback();
@@ -305,8 +257,8 @@ module.exports={
         const trader = await utils.getTraderProfile(user)
         const isVerified = await utils.isVerified(user)
 
-        res.render('farmers/product', {
-            layout : 'farmers-dashboard',
+        res.render('seed_trader/product', {
+            layout : 'traders-dashboard',
             title: 'Product',
             fullname: trader.firstname + ' ' + trader.lastname,
             traderData: trader,
@@ -346,11 +298,11 @@ module.exports={
        // const trader = await utils.getTraderProfile(user)
        // const isVerified = await utils.isVerified(user)
        // const {getCartItems}=await this.cart(req.res)
-        res.render('farmers/order_preview', {
+        res.render('seed_trader/order_preview', {
             layout : 'traders-dashboard',
             title: 'Market Place',
             sub_title : 'Checkout',
-            prev_link: '/farmer/cart',
+            prev_link: '/seed_trader/cart',
             fullname: trader.firstname + ' ' + trader.lastname,
             traderData: trader,
             isVerified
@@ -410,7 +362,7 @@ module.exports={
         getCartItems = JSON.parse(JSON.stringify(getCartItems))
         return { trader, isVerified, getCartItems }
     },
-    getFarmerCartCount: async (req, res) => {
+    getTraderCartCount: async (req, res) => {
         const user = await req.user
         const cartCount = await Cart.count({ where: {
             [Op.and]: [
@@ -534,7 +486,6 @@ module.exports={
         return {cartItems, isItemAlreadyAdded, product}
     },
     initializeTransaction : async (req, res, ref, getCartItems, trader)=>{
-        //const {getCartItems, farmer}=await cart(req, res)
         
         let transaction =await db.rest.transaction()
         try{
@@ -673,10 +624,10 @@ module.exports={
             where : {id : req.params.id}
         })
     },
-    getTransactionlogCount : async (farmer_id)=>{
+    getTransactionlogCount : async (seedtrader_id)=>{
         let transactionCount = await TransactionLog.count({
             where : {
-                trader_id : trader_id
+                seedtrader_id : seedtrader_id
             }
         })
 
