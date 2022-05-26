@@ -76,11 +76,11 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     tradersRouter.get('/update-profile', tradersController.updateProfile)
     tradersRouter.get('/settings', tradersController.settings)
     tradersRouter.post('/update-profile', profileUpdateValidation(), validate, async (req, res) => {
-        let r = await tradersController.updateProfile(req, res)
-        if(r.trader) {
-            res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
+        let response = await tradersController.editProfileData(req,res)
+        if(response.trader || response.deliveryInformation){
+            res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
         }else{
-            res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
-        }    
+            res.json({ message: response.errors, error: true, statusCode: 400 }).status(400)
+        }       
     });
 module.exports=tradersRouter

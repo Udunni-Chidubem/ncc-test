@@ -3657,7 +3657,7 @@ justify-content: center;
 
 .trader-profile{
   display: grid;
-  grid-template-columns: 70% auto;
+  grid-template-columns: 72% auto;
 }
 
 .trader-profile-img{
