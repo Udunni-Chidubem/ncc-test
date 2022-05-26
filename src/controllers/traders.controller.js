@@ -22,6 +22,7 @@ const { getPagination, getPagingData } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const { now } = require('moment');
+const { json } = require('body-parser');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -798,6 +799,38 @@ module.exports={
                 console.log(e)       
                 return e
                }
+        },
+        farmer_info: async (req,res) => {
+            let farmer_id = req.params.user_id
+            try{
+                let farmer_info = await Farmer.findOne({
+                    where: {user_id: farmer_id},
+                    include: [
+                        {
+                            model: States,
+                        },
+                        {
+                            model: LGAs 
+                        },
+                       {
+                            model: User,
+                            include: [
+                                {
+                                    model: DeliveryInformation,
+                                    include: [{ model: States }, { model: LGAs }]
+                                }
+                            ]
+                        }
+                    ]
+                })
+                farmer_info = JSON.parse(JSON.stringify(farmer_info))
+                console.log(farmer_info)
+                return farmer_info
+            }
+            catch(e){
+                console.log(e)
+                return e
+            }
         }
 
 }
