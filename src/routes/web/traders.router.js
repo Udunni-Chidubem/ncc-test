@@ -24,6 +24,20 @@ tradersRouter.get('/referal', async (req, res)=>{
         referal_code
     })
 })
+tradersRouter.get('/view-farmer/:user_id', async (req, res)=>{
+    let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    let farmer_info = await tradersController.farmer_info(req,res)
+    
+    res.render('seed_trader/view_farmer', {
+        layout : 'traders-dashboard',
+        title : 'Referal',
+        isVerified,
+        trader,
+        farmer_info
+    })
+})
 tradersRouter.get('/orders', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
