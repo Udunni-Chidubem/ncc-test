@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="referal_header">Orders</h5>
+        <ul class="nav nav-pills orders_">
+            <li class="nav-item">
+                <p class="nav-link active tab_info_" id="ord" onclick="tab(this)" aria-current="page">ALL ORDERS</p>
+            </li>
+            <li class="nav-item">
+                <p class="nav-link  tab_info_" id="comp" onclick="tab(this)">COMPLETED</p>
+            </li>
+        </ul>
+        <div class="row ">
+            <div class="col-12">
+                <div class="main-content content ord active">
+                    <div class="   table-responsives table_t_info">
+
+                        <table class="table con t_info  table-borderless">
+                            <thead class="t_info_head ">
+                                <tr class="">
+                                    <th scope="col">ORDER ID</th>
+                                    <th scope="col">ITEMS</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="t_info_body">
+
+                                <tr class="t_info_row1">
+                                    <td><a href="#">2345676</a></td>
+                                    <td>ll</td>
+                                    <td>
+                                        <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+                                        <br>
+                                        <span>on 15/APR/2020</span>
+                                    </td>
+                                    <td><a href="#">See Details</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="main-content content comp ">
+                    <div class="   table-responsives table_t_info">
+
+                        <table class="table con t_info  table-borderless">
+                            <thead class="t_info_head ">
+                                <tr class="">
+                                    <th scope="col">ORDER ID</th>
+                                    <th scope="col">ITEMS</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="t_info_body">
+
+                                <tr class="t_info_row1">
+                                    <td><a href="#">234567</a></td>
+                                    <td>ll</td>
+                                    <td>
+                                        <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+                                        <br>
+                                        <span>on 15/APR/2020</span>
+                                    </td>
+                                    <td><a href="#">See Details</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<SCript>
+    const btns = document.querySelectorAll(".tab_info_");
+    const tables = document.querySelectorAll(".content");
+
+    function tab(obj) {
+        const id = obj.getAttribute('id');
+        //console.log(id)
+        if (id) {
+            // remove selected from other buttons
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            obj.classList.add("active");
+            // hide other tables
+            tables.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.querySelector('.' + id);
+            console.log("'" + '.' + id + "'")
+            //console.log(element)
+            element.classList.add("active");
+        }
+    }
+</SCript>

@@ -32,14 +32,14 @@
 
                             {{!-- Unique Id Field --}}
                               <div class="form-group">
-                                    <input class="form-control" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type="password" minlength="6" name="password" placeholder="Enter Your Password">
+                                    <input class="form-control" id="psw" type="password" minlength="6" name="password" placeholder="Enter Your Password">
                                 </div>
                                 <div id="message">
                                       <h5>A Strong Password should contain the following:</h5>
-                                      <p id="letter" class="invalid">A <b>small (lowercase)</b> letter (a,b) </p>
-                                      <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter (A,B)</p>
-                                      <p id="number" class="invalid">A <b>number</b> (1,2,3)</p>
-                                      <p id="length" class="invalid">Minimum <b>6 characters</b></p>
+                                      <p id="letter" class="invalid">A <b>Lowercase</b> letter (a,b)</p>
+                                      <p id="capital" class="invalid">A <b>Uppercase</b> letter (A,B)</p>
+                                      <p id="number" class="invalid"><b> Figures (1,2,3)</b></p>
+                                      <p id="length" class="invalid"> A Minimum of <b>6 characters</b></p>
                                 </div>
 
                               
@@ -115,7 +115,7 @@ myInput.onkeyup = function() {
   }
 
   // Validate length
-  if(myInput.value.length >= 8) {
+  if(myInput.value.length >= 6) {
     length.classList.remove("invalid");
     length.classList.add("valid");
   } else {

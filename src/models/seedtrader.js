@@ -18,6 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       })
       SeedTrader.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
+      }),
+      SeedTrader.hasMany(models.Farmer, {
+        foreignKey : 'referee',
+        sourceKey : 'id'
+      })
+      SeedTrader.hasMany(models.TransactionLog, {
+        foreignKey : 'seedtrader_id',
+        sourceKey : 'id'
       })
     }
   }
@@ -74,6 +82,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    referal_code : {
+      type : DataTypes.STRING,
+      allowNull : false,
+      unique : true
+    }
   }, {
     underscored: true,
     tableName : 'seedtrader',
