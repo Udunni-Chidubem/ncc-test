@@ -313,8 +313,7 @@ module.exports = {
         let username = req.body.userphoneno
         let message_ = "Updated Successfully"
         try{
-        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
-            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            let status = User.update({password:newpassword}, { where : {username: username}})
             return {status,isVerified,message_}
             
            } 

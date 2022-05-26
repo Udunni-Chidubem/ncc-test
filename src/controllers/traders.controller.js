@@ -106,9 +106,8 @@ module.exports={
             console.log(e)       
             return e
            }
-
-           
     },
+
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user
@@ -686,13 +685,12 @@ module.exports={
         return { trader, isVerified, getCartItems }
     },
 
-    getOrder: async (req,res) =>{
-        let transaction_id = req.params.transaction_id
+    getOrder: async (req,seedtrader_id) =>{
         let order = await TransactionCarts.findAll({
             include: [
                 {
                     model: TransactionLog,
-                    where: { transaction_id: transaction_id }
+                    where: { seedtrader_id: seedtrader_id }
                 },
                 {
                     model: Cart,
