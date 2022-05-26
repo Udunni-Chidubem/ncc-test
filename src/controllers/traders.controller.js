@@ -106,9 +106,8 @@ module.exports={
             console.log(e)       
             return e
            }
-
-           
     },
+
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user
@@ -686,13 +685,12 @@ module.exports={
         return { trader, isVerified, getCartItems }
     },
 
-    getOrder: async (req,res) =>{
-        let transaction_id = req.params.transaction_id
+    getOrder: async (req,seedtrader_id) =>{
         let order = await TransactionCarts.findAll({
             include: [
                 {
                     model: TransactionLog,
-                    where: { transaction_id: transaction_id }
+                    where: { seedtrader_id: seedtrader_id }
                 },
                 {
                     model: Cart,
@@ -784,6 +782,22 @@ module.exports={
                + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
             return status
-    }
+    },
+
+    traderRefres: async (req,referal_id) => {
+        try{
+            let Referes = await Farmer.findAll({
+                where: {referee: referal_id},
+                attributes: ['created_at','firstname','lastname','id','user_id'],
+                raw: true
+            }) 
+            Referes = JSON.parse(JSON.stringify(Referes))
+            return Referes
+        }
+            catch(e){
+                console.log(e)       
+                return e
+               }
+        }
 
 }

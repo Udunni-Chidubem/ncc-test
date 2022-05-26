@@ -14,7 +14,7 @@ tradersRouter.get('/referal', async (req, res)=>{
     let traderRefres = await tradersController.traderRefres(req,referal_id)
     let traderRefres_len = traderRefres.length
     
-    res.render('seed_trader/referal', {
+    res.render('seed_trader/referral', {
         layout : 'traders-dashboard',
         title : 'Referal',
         isVerified,
@@ -45,6 +45,19 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         isVerified,
         trader
     })
+})
+    tradersRouter.get('/construction', async (req, res)=>{
+        let user = await req.user
+        let trader = await utils.getTraderPofile(user)
+        let isVerified = await utils.isVerified(user)
+        
+        res.render('seed_trader/under_construction', {
+            layout : 'traders-dashboard',
+            title : 'Under Construction',
+            isVerified,
+            trader
+        })
+    })
 
     tradersRouter.get('/update-profile', tradersController.updateProfile)
     tradersRouter.get('/settings', tradersController.settings)
@@ -56,12 +69,4 @@ tradersRouter.get('/dashboard', async (req, res)=>{
             res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
         }    
     });
-
-}),
-    
-
-
-
-
-
 module.exports=tradersRouter
