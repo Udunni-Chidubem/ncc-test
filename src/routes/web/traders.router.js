@@ -14,7 +14,7 @@ tradersRouter.get('/referal', async (req, res)=>{
     let traderRefres = await tradersController.traderRefres(req,referal_id)
     let traderRefres_len = traderRefres.length
     
-    res.render('seed_trader/referal', {
+    res.render('seed_trader/referral', {
         layout : 'traders-dashboard',
         title : 'Referal',
         isVerified,

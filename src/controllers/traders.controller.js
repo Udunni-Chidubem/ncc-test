@@ -782,6 +782,22 @@ module.exports={
                + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
             return status
-    }
+    },
+
+    traderRefres: async (req,referal_id) => {
+        try{
+            let Referes = await Farmer.findAll({
+                where: {referee: referal_id},
+                attributes: ['created_at','firstname','lastname','id','user_id'],
+                raw: true
+            }) 
+            Referes = JSON.parse(JSON.stringify(Referes))
+            return Referes
+        }
+            catch(e){
+                console.log(e)       
+                return e
+               }
+        }
 
 }
