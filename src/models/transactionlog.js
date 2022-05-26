@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey : 'farmer_id'
         })
         TransactionLog.belongsTo(models.SeedTrader, {
-            foreignKey : 'sseedtrader_id'
+            foreignKey : 'seedtrader_id'
         })
         TransactionLog.belongsTo(models.SeedCompany,{
             foreignKey : 'company_id'

@@ -215,6 +215,17 @@ module.exports = {
         let orderStatus = order.orders_status
         return order
     },
+    getTotalSales: async (company_id) => {
+        let sql = "SELECT COUNT(status) as count, status FROM `orders` WHERE " + company_id + " and status is not null GROUP BY status";
+
+        let totalsales = await db.rest.query(sql, {type: QueryTypes.SELECT})
+        // console.log(totalsales)
+        // console.log(sql)
+        // console.log(company_id)
+        // console.log('company_id')
+        return totalsales
+        
+    },
     getProductOrders : async (req, product)=>{
         const user = await req.user
         let sql = "SELECT distinct tl.id, SUM(c.total_amount) as amount, tl.transaction_id, tl.created_at,"
@@ -254,6 +265,7 @@ module.exports = {
                         include: [
                             {
                                 model: DeliveryInformation,
+                                attributes:['address'],
                                 include: [{ model: States }, { model: LGAs }]
                             }
                         ]
