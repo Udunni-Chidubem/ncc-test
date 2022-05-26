@@ -2,10 +2,9 @@
 
 <body class="body">
 
-  {{#if isVerified}}
   <header>
     <nav class="navbar navbar-defaults navbar-expand-lg fixed-top seed_trader_nav navbar-dark  ">
-       <div class="container-fluid">
+      <div class="container-fluid">
         <a class="navbar-brand navbar-heading   " href="#">{{ title }}</a>
         <button class="navbar-toggler mbar" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,7 +34,6 @@
       </div>
     </nav>
   </header>
-  {{/if}}
 
 
   <aside class="sidebar close seed_com_side">
@@ -65,11 +63,11 @@
 
         </li>
 
-       
-        
+
+
 
         {{#unless isVerified}}
-         <li>
+        <li>
           <a href="/seed-trader/market_place">
             <i class='bx bx-cart-add'></i>
             <span class="link_name">Market Place</span>

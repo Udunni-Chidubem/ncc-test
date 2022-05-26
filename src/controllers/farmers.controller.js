@@ -19,7 +19,7 @@ const {
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const { now } = require('moment');
 
@@ -97,8 +97,11 @@ module.exports={
         let username = req.body.userphoneno
         let message_ = "Updated Successfully"
         try{
-        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
-            let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+           let data={};
+           data.password=newpassword
+        let status = User.update({password:newpassword}, { where : {username: username}})
+         //let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            // let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
             return {status,farmer,isVerified,message_}
             
            } 

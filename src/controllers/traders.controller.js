@@ -22,6 +22,7 @@ const { getPagination, getPagingData } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const { now } = require('moment');
+const { json } = require('body-parser');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -106,9 +107,8 @@ module.exports={
             console.log(e)       
             return e
            }
-
-           
     },
+
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user
@@ -124,7 +124,7 @@ module.exports={
             const { 
                 firstname, 
                 lastname, 
-                date_of_birth, 
+                age, 
                 gender, 
                 level_of_education, 
                 state_id, 
@@ -139,7 +139,7 @@ module.exports={
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth, 
+                age, 
                 gender, 
                 level_of_education, 
                 state_id, 
@@ -155,7 +155,7 @@ module.exports={
                 profile_pic:filename
             }
 
-            const trader = await Trader.update( data , {
+            const trader = await SeedTrader.update( data , {
                 where: { user_id: user.id }
             }, {transaction: transaction})
 
@@ -686,13 +686,12 @@ module.exports={
         return { trader, isVerified, getCartItems }
     },
 
-    getOrder: async (req,res) =>{
-        let transaction_id = req.params.transaction_id
+    getOrder: async (req,seedtrader_id) =>{
         let order = await TransactionCarts.findAll({
             include: [
                 {
                     model: TransactionLog,
-                    where: { transaction_id: transaction_id }
+                    where: { seedtrader_id: seedtrader_id }
                 },
                 {
                     model: Cart,
@@ -784,6 +783,54 @@ module.exports={
                + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
             return status
-    }
+    },
+
+    traderRefres: async (req,referal_id) => {
+        try{
+            let Referes = await Farmer.findAll({
+                where: {referee: referal_id},
+                attributes: ['created_at','firstname','lastname','id','user_id'],
+                raw: true
+            }) 
+            Referes = JSON.parse(JSON.stringify(Referes))
+            return Referes
+        }
+            catch(e){
+                console.log(e)       
+                return e
+               }
+        },
+        farmer_info: async (req,res) => {
+            let farmer_id = req.params.user_id
+            try{
+                let farmer_info = await Farmer.findOne({
+                    where: {user_id: farmer_id},
+                    include: [
+                        {
+                            model: States,
+                        },
+                        {
+                            model: LGAs 
+                        },
+                       {
+                            model: User,
+                            include: [
+                                {
+                                    model: DeliveryInformation,
+                                    include: [{ model: States }, { model: LGAs }]
+                                }
+                            ]
+                        }
+                    ]
+                })
+                farmer_info = JSON.parse(JSON.stringify(farmer_info))
+                console.log(farmer_info)
+                return farmer_info
+            }
+            catch(e){
+                console.log(e)
+                return e
+            }
+        }
 
 }
