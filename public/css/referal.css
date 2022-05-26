@@ -76,6 +76,9 @@ letter-spacing: 0.01em;
 text-decoration-line: underline;
 color: #FFFFFF;
 }
+.refral_card_link a:hover{
+    color: #fff !important;
+}
 
 @media (min-width: 320px) and (max-width: 810px){
     .earnings .total_num {

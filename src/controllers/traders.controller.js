@@ -24,5 +24,31 @@ module.exports = {
             console.log(e)       
             return e
            }
-    }
+    },
+
+    
+    getOrder: async (req,seedtrader_id) =>{
+        let order = await TransactionCarts.findAll({
+            include: [
+                {
+                    model: TransactionLog,
+                    where: { seedtrader_id: seedtrader_id }
+                },
+                {
+                    model: Cart,
+                    include: [{
+                        model: Product,
+                        include: [{
+                            model: User,
+                            include: [{
+                                model: SeedCompany
+                            }]
+                        }]
+                    }]
+                }
+            ]
+        })
+        order = JSON.parse(JSON.stringify(order))
+        return order
+    },
 }
