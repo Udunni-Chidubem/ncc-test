@@ -128,8 +128,29 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     })
 })
 
-tradersRouter.get("/checkout/preview", async (req, res)=>{
+tradersRouter.get("/product/price", async (req, res)=>{
+    let product = await tradersController.singleProduct(req.query.product_id)
+    res.send(product)
+})
 
+tradersRouter.get("/checkout/preview", async (req, res)=>{
+    if(req.query.product){
+        console.log(req.query.product)
+        let {getCartItems, farmer, isVerified}= await tradersController.cartByProductId(req)
+        let deliveryInfo = await tradersController.deliveryInfo(farmer.user_id)
+        res.render('seed_trader/order_preview', {
+            layout : 'traders-dashboard',
+            title: 'Order Preview',
+            fullname: trader.firstname + ' ' + trader.lastname,
+            farmer: farmer,
+            isVerified,
+            getCartItems,
+            deliveryInfo
+        })
+    }else{
+        res.redirect('back')
+    }
+})
 
 
    
