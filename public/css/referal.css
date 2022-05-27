@@ -25,6 +25,28 @@ line-height: 24px;
 letter-spacing: 0.01em;
 color: #F5F6F8;
 }
+
+.referal_card_dashboard{
+    background: linear-gradient(133.24deg, #464646 29.02%, #6b6e6c 51.72%, #454847 73.59%);
+    border-radius: 1.25rem !important;
+    color: #fff;
+    padding: 1rem;
+}
+
+.referal_card_dashboard .row{
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0.01em;
+color: #F5F6F8;
+}
+
+.referal_card_dashboard .trader_id{
+    font-size: 13px;
+    color: #b1b5b9 !important;
+}
 .col-6.id .row ul{
 list-style-type: none;
 }

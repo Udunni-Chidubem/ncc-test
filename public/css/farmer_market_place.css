@@ -3680,3 +3680,7 @@ justify-content: center;
 .edit-profile-img p{
   padding: 6px;
 }
+
+.bg-white{
+  background: #ffffff !important;
+}
