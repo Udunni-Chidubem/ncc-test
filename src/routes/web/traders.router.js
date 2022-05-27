@@ -1,5 +1,7 @@
 const tradersRouter=require('express').Router()
 const utils = require('../../helpers/utils')
+const paystack = require('../../helpers/paystack')
+const companyController = require('../../controllers/company.controller')
 const tradersController = require('../../controllers/traders.controller')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
 
@@ -97,10 +99,39 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         res.render('seed_trader/market_place', {
         layout : 'traders-dashboard',
         title : 'Market-Place',
+        fullname: resp.trader.firstname + ' ' + resp.trader.lastname,
+        traderData: resp.trader,
         products,
         message,
         isVerified: resp.isVerified
-    })
-   
+    });
+
 })
+
+    tradersRouter.get('/product', tradersController.product)
+    tradersRouter.get('/products/:id', async (req, res) => {
+
+    const resp = await tradersController.viewProduct(req, res)
+    const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']
+    const items = JSON.stringify(JSON.parse(resp.singleProduct.item))
+    const data = Object.entries(items)
+    
+    res.render('seed_trader/view-product', {
+        layout : 'traders-dashboard',
+        title: 'Product',
+        fullname: resp.trader.firstname + ' ' + resp.trader.lastname,
+        traderData: resp.trader,
+        product: resp.singleProduct,
+        seedCompany,
+        items: items.min,
+        isVerified: resp.isVerified
+    })
+})
+
+tradersRouter.get("/checkout/preview", async (req, res)=>{
+
+
+
+   
+
 module.exports=tradersRouter
