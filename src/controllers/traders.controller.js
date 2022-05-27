@@ -831,7 +831,6 @@ module.exports={
                 console.log(e)
                 return e
             }
-        },
-        
+        }
 
 }
