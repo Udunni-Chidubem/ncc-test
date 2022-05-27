@@ -19,6 +19,11 @@
               <a class="nav-link" href="#">{{trader.firstname}} {{trader.lastname}}</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/trader/cart"><i class="bx bx-cart"></i>
+                <span class='badge badge-warning' id='lblCartCount'> </span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link  " href="#"><i class="bi bi-bell"></i>
                 <!-- <span class="notrifications"></span> -->
               </a>
@@ -76,9 +81,9 @@
         </li>
 
         <li>
-          <a href="/seed-trader/referal">
+          <a href="/seed-trader/referral">
             <i class='bx bx-user'></i>
-            <span class="link_name">Referal</span>
+            <span class="link_name">Referral</span>
           </a>
         </li>
         <li>
@@ -154,7 +159,281 @@
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
   <script src="../../js/script.js"></script>
+  <script>
+    $(document).ready(function () {
 
+      let baseUrl = window.location.origin
+
+      const success_toastr = (msg) => {
+        Toastify({
+          text: msg,
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom", // `top` or `bottom`
+          position: "left", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to bottom, #00b09b, #28a745)", //#00b09b #96c93d
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
+
+      const error_toastr = (msg) => {
+        Toastify({
+          text: msg,
+          duration: 4000,
+          newWindow: true,
+          close: false,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          backgroundColor: "linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,1))",
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          onClick: function () { }, // Callback after click
+        }).showToast();
+      }
+
+      let itemTotalsum = $('.item-sum').html()
+      let shippingCost = $('.shipping-cost').html()
+
+      if (shippingCost != null) {
+        shippingCost = shippingCost.replace(',', '');
+        $(".t_price").html(Number(shippingCost) + Number(itemTotalsum))
+      }
+
+      $('.size').on('change', function () {
+        let qty = document.getElementById('quantity').value;
+        let product_id = $(this).attr('id');
+        let value = $(this).val();
+        let url = baseUrl + '/seed-trader/product/price?product_id=' + product_id
+
+        fetch(url).then(r => r.json()).then(r => {
+          let item = JSON.parse(r.item)
+          let qty = $(this).closest('.product-price').find('#quantity')
+          let price = null;
+          let btnMinus = $(this).closest('.product-price').find('.quantity-left-minus')
+          let btnPlus = $(this).closest('.product-price').find('.quantity-right-plus')
+          for (let i = 0; i < item.min.length; i++) {
+            if (item.pkg[i] == value) {
+              qty.attr("min", 1)
+              qty.attr("max", item.quantity[i])
+              qty.val(1)
+              if (item.min[i] != item.quantity[i])
+                btnPlus.removeAttr("disabled")
+
+              if (item.quantity[i] < 1) {
+                error_toastr("this particular size is out of stock for this company pls choose another size")
+                $(this).closest(".products-card").find(".add-to-cart").attr("disabled", true)
+              }
+
+              //btnMinus.attr("disabled", true)
+              $('.price_' + product_id).html("&#8358;" + (item.price[i]))
+            }
+          }
+        })
+      })
+      $("#quantity").on('change', function () {
+        if ($(this).val() < $(this).attr("min")) {
+          $(this).val($(this).attr("min"))
+        } else if ($(this).val() > $(this).attr("max")) {
+          $(this).val($(this).attr("max"))
+        }
+      })
+      $('.add-to-cart, .btn-place-order').on('click', function () {
+        let content = $(this).closest('.products-content')
+        let p = content.find('.product-price').find('h4').html()
+        let s = content.find('select').val()
+        let q = content.find('#quantity').val()
+        let pid = $(this).data('prodid')
+
+        let price = p ? p.split('₦')[1].trim() : null
+
+        if (q == 0) {
+          error_toastr('You have not selected a quantity.')
+        }
+
+        const data = {
+          'price': price,
+          'size': s,
+          'quantity': q,
+          'pid': pid
+        }
+        console.log(data)
+        if (data.price != null || data.size != null || data.quantity != null) {
+          $(this).html('<i class="fa fa-spinner"></i> Please wait...')
+
+          let url = baseUrl + '/seed-trader/add-to-cart'
+
+          fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+          })
+            .then(r => r.json())
+            .then(response => {
+              if ($(this).hasClass('btn-place-order')) {
+                $(this).html('<i class="bx bx-cart-add"></i>Place Order')
+              } else {
+                $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+              }
+              if (response.statusCode == 402) {
+                let msg = ''
+                let errors = response.data
+                errors.forEach((value, index) => {
+                  msg += (index + 1) + '. ' + value.msg + ' \n'
+                })
+                error_toastr(msg)
+
+              } else if (response.statusCode == 500 || response.statusCode == 400) {
+                error_toastr(response.message)
+              } else {
+                if ($(this).hasClass('btn-place-order')) {
+                  setTimeout(function () {
+                    window.location.href = '/seed-trader/checkout/preview?product=' + pid + '&size=' + s + '&qty=' + q;
+                  }, 3000)
+                }
+                success_toastr(response.message)
+              }
+            })
+            .catch(error => console.log(error))
+        } else {
+          error_toastr('Ensure you have selected a price, size and quantity before you can proceed')
+        }
+
+
+      })
+
+      const getCartCount = () => {
+        fetch(baseUrl + '/seed-trader/get-cart-count', {
+          method: 'GET'
+        })
+          .then(resp => resp.json())
+          .then(json => {
+            $('#lblCartCount').text(json.message)
+          }).catch(error => {
+            console.log(error)
+          })
+      }
+
+      setInterval(getCartCount, 1000) //fetch the db to update the cart items without refreshing the page
+
+      //Single Add to Cart
+      $('.addCart').on('click', function () {
+        let price = $('#price').html()
+        let kg = $('.size').val()
+        let qty = $('#quantity').val()
+        let pid = $(this).data('prodid')
+
+
+        if (qty == 0) {
+          error_toastr('You have not selected a quantity.')
+        }
+
+        const data = {
+          'price': price,
+          'size': kg,
+          'quantity': qty
+        }
+        let url = baseUrl + '/seed-trader/single-cart-item/' + pid
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+          .then(r => r.json())
+          .then(response => {
+            $(this).html('<i class="bx bx-cart-add"></i>Add to Cart')
+            if (response.statusCode == 402) {
+              let msg = ''
+              let errors = response.data
+              errors.forEach((value, index) => {
+                msg += (index + 1) + '. ' + value.msg + ' \n'
+              })
+              error_toastr(msg)
+
+            } else if (response.statusCode == 500 || response.statusCode == 400) {
+              error_toastr(response.message)
+            } else {
+              success_toastr(response.message)
+            }
+          })
+          .catch(error => console.log(error))
+      })
+
+      $('#check-all').on('click', function () {
+        if ($(this).prop('checked') == true) {
+          $('.item-check-box').prop('checked', true)
+        } else {
+          $('.item-check-box').prop('checked', false)
+        }
+      })
+
+      /* change password*/
+
+      $('.btn_update_password').on('click', function () {
+        let currentpassword = $('#currentpassword').val()
+        let newpassword = $('#newpassword').val()
+        let confirmpassword = $('#confirmpassword').val()
+        let userphoneno = $('#userphoneno').val()
+
+        const ch_pass_data = {
+          'currentpassword': currentpassword,
+          'newpassword': newpassword,
+          'confirmpassword': confirmpassword,
+          'userphoneno': userphoneno
+        }
+
+        let settingsurl = baseUrl + '/seed-trader/settings'
+
+        fetch(settingsurl, {
+          method: 'POST',
+          body: JSON.stringify(ch_pass_data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+          .then(r => r.json())
+          .then(response => {
+            if (response.statusCode == 402) {
+              let msg = ''
+              let errors = response.data
+              errors.forEach((value, index) => {
+                msg += (index + 1) + '. ' + value.msg + ' \n'
+              })
+              error_toastr(msg)
+
+            } else if (response.statusCode == 500 || response.statusCode == 400) {
+              error_toastr(response.message)
+            } else {
+              success_toastr(response.message)
+              let currentpassword = $('#currentpassword').val('')
+              let newpassword = $('#newpassword').val('')
+              let confirmpassword = $('#confirmpassword').val('')
+              document.querySelector('#btn_update_password').removeAttribute('enabled');
+              document.querySelector('#btn_update_password').setAttribute('disabled', true);
+            }
+          })
+          .catch(error => console.log(error))
+      })
+
+    })
+
+function CopyToClipboard(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            alert("Code has been copied.")
+        }
+    }
+
+
+  </script>
 </body>
 
 </html>

@@ -22,4 +22,45 @@
           </div>
       </div>
     </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card referal_card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">Referral Summary</div>
+                        <div class="col-6 id">
+                            <div class="row">
+                                <ul>
+                                    <li class="trader_id">Trader ID</li>
+                                    <li><span class="code_" id="code_">{{referal_code}}</span> <span class="folder"
+                                            onclick="CopyToClipboard('code_')">
+                                            <i class="bi bi-file-earmark"></i></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="earnings">
+                                <li class="total">Total Earnings</li>
+                                <li class="total_num">N 20,000</li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="earnings">
+                                <li class="total">Total Referrals</li>
+                                <li class="total_num">{{traderRefres_len}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-end refral_card_link">
+                            <a href="#">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
  </div>

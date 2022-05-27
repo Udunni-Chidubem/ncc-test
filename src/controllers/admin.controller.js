@@ -172,6 +172,10 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'status']
                 }
             ]
         });
@@ -197,6 +201,25 @@ module.exports={
                 {
                     model : LGAs,
                     attributes : ['name']
+                },
+                {
+                    model: User,
+                    attributes: ['id', 'status'],
+                    include : [
+                        {
+                            model: DeliveryInformation,
+                            include : [
+                                {
+                                    model : States,
+                                    attributes : ['name']
+                                },
+                                {
+                                    model : LGAs,
+                                    attributes : ['name']
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         });
