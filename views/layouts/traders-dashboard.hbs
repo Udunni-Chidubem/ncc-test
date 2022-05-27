@@ -81,9 +81,9 @@
         </li>
 
         <li>
-          <a href="/seed-trader/referal">
+          <a href="/seed-trader/referral">
             <i class='bx bx-user'></i>
-            <span class="link_name">Referal</span>
+            <span class="link_name">Referral</span>
           </a>
         </li>
         <li>
@@ -417,7 +417,20 @@
 
     })
 
-
+function CopyToClipboard(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            alert("Code has been copied.")
+        }
+    }
 
 
   </script>
