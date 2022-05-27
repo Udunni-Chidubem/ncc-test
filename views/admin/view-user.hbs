@@ -331,19 +331,20 @@
 								<h5>Total Wallet Balance</h5>
 								{{#balance}}
 								<h3>&#8358; {{number this.amount}}</h3>
-								{{/balance}}
+								
 							</div>
 
 							<div class="cleared-balance">
 								<h6>Cleared Balance</h6>
-								<h4>&#8358; 20,000</h4>
+								<h4>&#8358; 0</h4>
 							</div>
 
 							<div class="uncleared-balance">
 								<h6>Uncleared Balance</h6>
-								<h4>&#8358; 20,000</h4>
+								<h4>&#8358; {{number this.amount}}</h4>
 							</div>
 						</div>
+						{{/balance}}
 						{{!-- Balance Grid - Ends --}}
 						<a href="#" class="view-btn">Show Ledger</a>
 						<div id="Myid" style="display:none">
@@ -458,17 +459,17 @@
 						<div class="account-details-grid">
 							<div>
 								<h6>Bank Name</h6>
-								<p>Access Bank</p>
+								<p>{{company.bank_code}}</p>
 							</div>
 
 							<div>
 								<h6>Account Name</h6>
-								<p>Chinedu Olufemi Umar</p>
+								<p>{{company.bank_account_name}}</p>
 							</div>
 
 							<div>
 								<h6>Account Number</h6>
-								<p>0099887766</p>
+								<p>{{company.bank_account_no}}</p>
 							</div>
 						</div>
 					</div>
