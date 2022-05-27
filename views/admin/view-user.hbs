@@ -43,8 +43,12 @@
 				aria-selected="true">PERSONAL INFORMATION</button>
 		</li>
 		<li class="nav-item" role="presentation">
+			<button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button"
+				role="tab" aria-controls="shipping" aria-selected="false">SHIPPING INFORMATION</button>
+		</li>
+		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="referrals-tab" data-bs-toggle="tab" data-bs-target="#referrals" type="button"
-				role="tab" aria-controls="referrals" aria-selected="false">REFERALS</button>
+				role="tab" aria-controls="referrals" aria-selected="false">REFERRALS</button>
 		</li>
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="trader-account-details-tab" data-bs-toggle="tab"
@@ -479,93 +483,108 @@
 			{{/if}}
 			{{else}}
 			{{#if trader}}
-			<div class="admin-view-user">
-				<div class="profile-image-section">
-					<img src="../../images/farmer-with-vege-p-500.jpeg" class="d-block img_round"
-						alt="user profile image">
-					<button type="button" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-				</div>
+			<div>
+				
 				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active profile-info-section" id="trader-details" role="tabpanel"
-						aria-labelledby="trader-details-tab">
-						<div class="bio-data">
-							<div>
-								<h5>First Name</h5>
-								<p>{{trader.firstname}}</p>
-							</div>
+					<div class="tab-pane fade show active" id="trader-details" role="tabpanel"
+							aria-labelledby="trader-details-tab">
+							<div  class="admin-view-user">
+								<div class="profile-image-section">
+									<img src="{{#if trader.profile_pic}} /profile_pics/{{trader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
+													alt="user profile image">
+									{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
+										{{#if trader.User.status}}
+											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+											{{else}}
+											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
+										{{/if}}
+									{{/if}}
+								</div>
+								<div class="profile-info-section">
+									<div class="bio-data">
+										<div>
+											<h5>First Name</h5>
+											<p>{{trader.firstname}}</p>
+										</div>
 
-							<div>
-								<h5>Last Name</h5>
-								<p>{{trader.lastname}}</p>
-							</div>
+										<div>
+											<h5>Last Name</h5>
+											<p>{{trader.lastname}}</p>
+										</div>
 
-							<div>
-								<h5>Phone Number</h5>
-								<p>{{trader.phone_no}}</p>
-							</div>
+										<div>
+											<h5>Phone Number</h5>
+											<p>{{trader.phone_no}}</p>
+										</div>
 
-							<div>
-								<h5>Unique No.</h5>
-								<p>{{trader.unique_no}}</p>
-							</div>
+										<div>
+											<h5>Unique No.</h5>
+											<p>{{trader.unique_no}}</p>
+										</div>
 
-							<div>
-								<h5>LGA</h5>
-								<p>{{trader.LGA.name}}</p>
-							</div>
+										<div>
+											<h5>LGA</h5>
+											<p>{{trader.LGA.name}}</p>
+										</div>
 
-							<div>
-								<h5>State</h5>
-								<p>{{trader.State.name}}</p>
-							</div>
-
+										<div>
+											<h5>State</h5>
+											<p>{{trader.State.name}}</p>
+										</div>
+									</div>
+								</div>
+							</div>						
 						</div>
-					</div>
 
-					<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel"
-						aria-labelledby="referrals-tab">
-						<div class="shipping">
-							<h3>MAIN SHIPPING ADDRESS</h3>
-							<div class="shipping-details">
-								<div>
+						<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel"
+							aria-labelledby="shipping-tab">
+							<div class="shipping">
+								<h3>MAIN SHIPPING ADDRESS</h3>
+								<div class="shipping-details">
+									<div>
 									<h5>State</h5>
-									<p></p>
+									<p>{{trader.User.DeliveryInformation.State.name }}</p>
 								</div>
 
 								<div>
 									<h5>LGA</h5>
-									<p></p>
+									<p>{{trader.User.DeliveryInformation.LGA.name}}</p>
 								</div>
 
 								<div>
 									<h5>Address</h5>
-									<p></p>
+									<p>{{ trader.User.DeliveryInformation.address}}</p>
+								</div>
 								</div>
 							</div>
 						</div>
-					</div>
+						
+						<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel"
+							aria-labelledby="referrals-tab">
+							<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Phone</th>
+										<th>Book</th>
+										<th>Address</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>data</td>
+										<td>data</td>
+										<td>data</td>
+										<td>data</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 
-					<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel"
-						aria-labelledby="trader-account-details-tab">
-						<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Phone</th>
-									<th>Book</th>
-									<th>Address</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>data</td>
-									<td>data</td>
-									<td>data</td>
-									<td>data</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+						<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel"
+							aria-labelledby="trader-account-details-tab">
+							
+						</div>
 				</div>
 			</div>
 			{{/if}}
