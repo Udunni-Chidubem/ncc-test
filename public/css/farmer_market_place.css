@@ -3684,3 +3684,13 @@ justify-content: center;
 .bg-white{
   background: #ffffff !important;
 }
+
+.trader_cart_icon {
+  font-size: 12px;
+  background: #ff0000 !important;
+  color: rgb(255, 255, 255) !important;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -7px; 
+  margin-top: -12px;
+}

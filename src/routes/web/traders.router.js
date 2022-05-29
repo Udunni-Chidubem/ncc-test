@@ -355,7 +355,7 @@ tradersRouter.get('/order/:transaction_id', async (req, res)=>{
 })
 tradersRouter.get("/cart/delete/:id", async (req, res)=>{
     tradersController.deleteItem(req, res)
-    res.redirect("/seed_trader/cart")
+    res.redirect("/seed-trader/cart")
 })
 
    
