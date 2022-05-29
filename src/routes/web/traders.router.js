@@ -227,7 +227,7 @@ tradersRouter.get('/checkout/callback', async (req, res)=>{
             data.currency=paystackPayload.data.currency,
             data.amount = paystackPayload.data.amount / 100
             data.transaction_id=paystackPayload.data.id
-            data.description = "payment for a seed purchase via card"
+            data.description = "Payment for a seed purchase via Card"
             tradersController.updateTransactionLog(data, ref)
             check.TransactionCarts.forEach(t=>{
                 items.push(t.cart_id)

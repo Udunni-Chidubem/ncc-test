@@ -490,7 +490,7 @@ module.exports={
         let transaction =await db.rest.transaction()
         try{
             let log=await TransactionLog.create({
-                trader_id : trader.id,
+                seedtrader_id : trader.id,
                 transaction_ref : ref,
                 status : 'initiated',
                 pickup_point:req.body.pickup,
