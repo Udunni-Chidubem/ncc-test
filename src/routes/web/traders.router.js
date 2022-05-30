@@ -138,6 +138,7 @@ tradersRouter.get('/dashboard', async (req, res)=>{
 tradersRouter.get("/product/price", async (req, res)=>{
     let product = await tradersController.singleProduct(req.query.product_id)
     res.send(product)
+    console.log(product)
 })
 
 tradersRouter.get("/checkout/preview", async (req, res)=>{
