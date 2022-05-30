@@ -59,6 +59,7 @@
 
             <div class="card settings_  content account">
                 <div class="card-body">
+<<<<<<< HEAD
                     <h3 class="deactivate-intro">we hate to see you go</h3>
                     <h3 class="deactivate-intro">{{ fullname}}</h3>
                     <div class="m-5">
@@ -72,6 +73,21 @@
                     </div>
                     <div class="text-center m-5">
                     <button type="button" onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'" class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+=======
+                    <h3 class="text-center">We hate to lose you {{fullname}}</h3>
+                    <p class="text-start">This will happen if you deactivate your account? </p>
+                    <ul>
+                        <li class="p-2">You will lose access to your dashboard.</li>
+                        <li class="p-2">You cannot search for seeds or purchase them if you deactivate your account.
+                        </li>
+                    </ul>
+                    <p class="p-2"><strong>Are you sure about this?</strong></p>
+                    {{!-- {{farmer.user_id}} --}}
+                    <div class="text-center">
+                        <button type="button"
+                            onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'"
+                            class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+>>>>>>> 818e2e09f0ceffbcc5af3e536a677a0f8b9e96a8
                     </div>
                 </div>
             </div>
@@ -82,7 +98,7 @@
                     <div class="input-group mb-3">
                         <input type="password" required minlength="6" id="currentpassword" class="form-control"
                             name="currentpassword" placeholder="Current Password" aria-label="Current Password"
-                            aria-describedby="basic-addon1">
+                            aria-describedby="basic-addon1" onkeyup='check();'>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" minlength="6" class="form-control" id="newpassword" name="newpassword"

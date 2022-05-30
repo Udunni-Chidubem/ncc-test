@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         Orders.belongsTo(models.SeedCompany, {
             foreignKey : 'company_id'
         })
-        Orders.belongsTo(models.TransactionLog,{
+        Orders.belongsTo(models.TransactionLog, {
             foreignKey : 'transaction_log_id'
         })
     }
