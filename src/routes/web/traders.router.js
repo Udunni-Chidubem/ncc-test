@@ -4,9 +4,10 @@ const paystack = require('../../helpers/paystack')
 const companyController = require('../../controllers/company.controller')
 const tradersController = require('../../controllers/traders.controller')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
+const { now } = require('moment');
 
 
-
+tradersRouter.get('/settings', tradersController.settings)
 tradersRouter.get('/referral', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
@@ -55,6 +56,7 @@ tradersRouter.get('/orders', async (req, res)=>{
 })
 tradersRouter.get('/settings', async (req, res)=>{
     let user = await req.user
+    const trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user, 'trader')
     
     res.render('seed_trader/settings', {
@@ -75,6 +77,15 @@ tradersRouter.get('/market_place', async (req, res)=>{
     isVerified
    })
    
+})
+
+tradersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+   let id = req.params.id
+   console.log(id)
+   tradersController.userUpdate(data, id)
+   req.logOut();
+   res.redirect("/login")
 })
 // tradersRouter.get('/settings', async (req, res)=>{
 //     let user = await req.user
