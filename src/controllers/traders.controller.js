@@ -580,7 +580,7 @@ module.exports={
         })
         return JSON.parse(JSON.stringify(d))                              
     },
-    getTransactions : async (trader_id)=>{
+    getTransactions : async (seedtrader_id)=>{
         let transactions= await TransactionLog.findAll({
             include  : [
                 {
@@ -600,7 +600,7 @@ module.exports={
             ],
             attributes : ['transaction_id','transaction_ref', 'status', 'created_at'],
             where : {
-                trader_id : trader_id
+                seedtrader_id : seedtrader_id
             }
         });
         console.log(JSON.parse(JSON.stringify(transactions)))

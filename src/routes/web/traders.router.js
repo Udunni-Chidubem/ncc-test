@@ -58,7 +58,10 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     let isVerified = await utils.isVerified(user, 'trader')
     let traderRefres = await tradersController.traderRefres(req,referal_id)
     let traderRefres_len = traderRefres.length
-    
+    let cartCount = await tradersController.getTraderCartCount(req, res)
+    let transactionCount = await tradersController.getTransactionlogCount(trader.id)
+    let transactions = await tradersController.getTransactions(trader.id)
+
     res.render('seed_trader/dashboard', {
         layout : 'traders-dashboard',
         title : 'Dashboard',
@@ -66,7 +69,10 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         trader,
         traderRefres,
         traderRefres_len,
-        referal_code
+        referal_code,
+        cartCount,
+        transactionCount,
+        transactions
     })
 })
     tradersRouter.get('/construction', async (req, res)=>{
