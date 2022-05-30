@@ -180,7 +180,8 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     
     res.render('seed_trader/view-product', {
         layout : 'traders-dashboard',
-        title: 'Product',
+        title: 'Market Place',
+        sub_title: 'Product',
         fullname: resp.trader.firstname + ' ' + resp.trader.lastname,
         traderData: resp.trader,
         product: resp.singleProduct,
