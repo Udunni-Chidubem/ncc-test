@@ -22,9 +22,10 @@
           </div>
       </div>
     </div>
+    {{#unless isVerified}}
     <div class="row">
-        <div class="col-6">
-            <div class="card referal_card">
+        <div class="col-12">
+            <div class="card referal_card_dashboard">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">Referral Summary</div>
@@ -32,9 +33,9 @@
                             <div class="row">
                                 <ul>
                                     <li class="trader_id">Trader ID</li>
-                                    <li><span class="code_" id="code_">{{referal_code}}</span> <span class="folder"
-                                            onclick="CopyToClipboard('code_')">
-                                            <i class="bi bi-file-earmark"></i></span></li>
+                                    <li><span class="code_" id="code_">{{referal_code}}</span> 
+                                    <span onclick="CopyToClipboard('code_')">
+                                            <i class='bx bx-copy bx-tada'></i></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -44,7 +45,7 @@
                         <div class="col-6">
                             <ul class="earnings">
                                 <li class="total">Total Earnings</li>
-                                <li class="total_num">N 20,000</li>
+                                <li class="total_num"> &#8358; 0</li>
                             </ul>
                         </div>
                         <div class="col-6">
@@ -56,11 +57,80 @@
                     </div>
                     <div class="row">
                         <div class="col-12 text-end refral_card_link">
-                            <a href="#">View details</a>
+                            <a href="/seed-trader/referral">View details</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{!-- <div class="col-6">
+            <div class="card referal_card bg-white">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-12">
+                        <h4 class="c_d_s2 float-start">Wallet</h4>
+                        <a href="./wallet" class="float-end">View Wallet</a>
+                        </div>
+                        <div>
+                        <div class="col-12 text-center  c_d_s2_full profile_sub">
+                            <p class="m-0"> &#8358; {{number this.amount}}</p>
+                        </div>
+                        <div class="dashboard_balance">
+                            <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp; Cleared Balance: &#8358;
+                            {{number this.amount}}
+                            </p>
+                            <p class="m-0"><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <button type="button " class="btn btn-theme" style="margin-top: 4.5px; width: 100% !important;"
+                            onclick="window.location.href='./wallet'">Withdraw</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     </div>
+      <div class="row">
+    <div class="col-12">
+      <div class="card shadow card_home  pl-0 mt-3 mb-2 ">
+        <div class="card-body card_comps">
+          <div class="row row-cols-2  card_comp row-cols-lg-4 g-2 g-lg-2">
+            <div class="col-lg-4 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 ">
+                <h5 class="c_d_s2">Total Orders</h5>
+                <h1 class="c_d_s2_full ">{{cartCount}}</h1>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 ">
+                <h5 class="c_d_s2 orders">Processing Orders</h5>
+                {{#if (eq transactionStatus.status "3")}}
+                <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
+                {{else}}
+                <h1 class=" c_d_s2_unfull">0</h1>
+                {{/if}}
+              </div>
+            </div>
+
+            {{transactions.TransactionCarts}}
+            <div class="col-lg-4 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 ">
+                <h5 class="c_d_s2">Completed Orders</h5>
+                {{#if (eq transactionStatus.status "3")}}
+                <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
+                {{else}}
+                <h1 class=" c_d_s2_unfull">0</h1>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/unless}}
+
  </div>

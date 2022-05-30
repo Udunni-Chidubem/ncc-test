@@ -19,8 +19,8 @@
               <a class="nav-link" href="#">{{trader.firstname}} {{trader.lastname}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/trader/cart"><i class="bx bx-cart"></i>
-                <span class='badge badge-warning' id='lblCartCount'> </span>
+              <a class="nav-link" href="/seed-trader/cart"><i class="bx bx-cart"></i>
+                <span class='badge badge-warning trader_cart_icon' id='lblCartCount'> </span>
               </a>
             </li>
             <li class="nav-item">
@@ -81,33 +81,43 @@
         </li>
 
         <li>
-          <a href="/seed-trader/referral">
-            <i class='bx bx-user'></i>
-            <span class="link_name">Referral</span>
+          <a href="/seed-trader/cart">
+            <i class='bx bxs-cart'></i>
+            <span class="link_name">Cart</span>
           </a>
         </li>
+        
         <li>
           <a href="/seed-trader/orders">
-            <i class='bx bx-user'></i>
+            <i class='bx bxs-receipt'></i>
             <span class="link_name">Orders</span>
           </a>
         </li>
+        
+        <li>
+          <a href="/seed-trader/referral">
+            <span style="font-weight: bold;"> &#8358;</span>
+            <span class="link_name">Earnings &amp; Referral</span>
+          </a>
+        </li>
+        
 
         <li>
           <a href="/knowledge-base">
-            <i class='bx bx-user'></i>
-            <span class="link_name">knowledge Base</span>
+            <i class='bx bxs-book-open'></i>
+            <span class="link_name">Knowledge Base</span>
           </a>
         </li>
 
         <li>
           <a href="#">
-            <i class='bx bx-user'></i>
+            <i class='bx bx-help-circle' ></i>
             <span class="link_name">Help</span>
           </a>
         </li>
 
         <li id="settings">
+          <hr style="background-color: #fff;">
           <a href="#">
             <i class='bx bx-cog'></i>
             <span class="link_name">Settings</span>
@@ -135,7 +145,7 @@
     <div class="page-header">
       <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
-          <a href="/seed-traded/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i> Home</a>
+          <a href="/seed-trader/dashboard" class="breadcrumb-item"><i class="fa fa-home m-r-5"></i> Home</a>
           <a class="breadcrumb-item " href="#">{{ title }}</a>
           <span class="breadcrumb-item active">{{ sub_title }}</span>
         </nav>
@@ -159,6 +169,7 @@
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
   <script src="../../js/script.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script>
     $(document).ready(function () {
 
@@ -428,11 +439,14 @@ function CopyToClipboard(containerid) {
             range.selectNode(document.getElementById(containerid));
             window.getSelection().addRange(range);
             document.execCommand("copy");
-            alert("Code has been copied.")
+            navigator.clipboard.writeText(range);
+             swal({
+              title: "Copy Successful!",
+              text: "Referral Code Copied: " + range,
+              icon: "success",
+              });
         }
     }
-
-
   </script>
 </body>
 

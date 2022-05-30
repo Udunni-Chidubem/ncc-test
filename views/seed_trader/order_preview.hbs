@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-<form class="form-container" action="/farmer/cart/checkout" method="post">
+<form class="form-container" action="/seed-trader/cart/checkout" method="post">
       <div class="container2">
         <h1 class="h1">Delivery information</h1>
         <div class="horizontalLine"></div>
@@ -54,8 +54,8 @@
       {{/each}}
         <div class="shippingGrid">
           <div class="shippingAddress">
-            <h4>{{farmer.firstname}} {{farmer.lastname}}, {{farmer.phone_no}}</h4>
-            <p>Address:{{farmer.address}}  {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</p>
+            <h4>{{trader.firstname}} {{trader.lastname}}, {{trader.phone_no}}</h4>
+            <p>Address:{{trader.address}}  {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</p>
             <p>Pick up point: <textarea name="pickup" id="pickup" style="width: 400px;">{{deliveryInfo.address}}, {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</textarea></p>
           </div>
         </div>
@@ -100,35 +100,4 @@
         </div>
       </div>
        </form>
-      {{!-- <div class="container4">
-        <h1>order summary</h1>
-        <div class="horizontalLine"></div>
-        <div class="firstSummary">
-          <div class="order">
-            <h4>White Maize</h4>
-            <p>Variant</p>
-          </div>
-          <div class="orderQty">
-            <p>Qty</p>
-            <p>2kg</p>
-          </div>
-        </div>
-        <div class="horizontalLine"></div>
-        <div class="secondSummary">
-          <div class="amountCalc">
-            <p>Subtotal</p>
-            <p>Shipping</p>
-            <p>Total</p>
-          </div>
-          <div class="summaryAmount">
-            <p>4,999</p>
-            <p class="shippingFee">250</p>
-            <h3>5,249</h3>
-          </div>
-        </div>
-        <div>
-          <button type="button" class="summaryBtn">Pay</button>
-          <!-- <button type="button" class="summaryBtn">Save</button> -->
-        </div>
-      </div> --}}
     </section>
