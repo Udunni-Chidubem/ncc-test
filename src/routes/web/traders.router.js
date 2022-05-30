@@ -34,7 +34,6 @@ tradersRouter.get('/orders', async (req, res)=>{
         isVerified
     })
 })
-<<<<<<< HEAD
 tradersRouter.get('/settings', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'trader')
@@ -70,8 +69,6 @@ tradersRouter.get('/market_place', async (req, res)=>{
    
 // })
 
-=======
->>>>>>> 0257610fbdf40fbcef5bace8ca18fd5c1849d7b9
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let trader = await utils.getTraderPofile(user)
