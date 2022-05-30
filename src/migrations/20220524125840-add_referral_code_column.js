@@ -11,7 +11,7 @@ module.exports = {
     queryInterface.addColumn('seedtrader', 'referal_code', {
       type : Sequelize.STRING,
       unique : true,
-      allowNull : false
+      allowNull : true
     });
     queryInterface.addColumn('farmer', 'referee', {
       type : Sequelize.INTEGER,

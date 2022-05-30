@@ -124,7 +124,7 @@ module.exports={
             const { 
                 firstname, 
                 lastname, 
-                date_of_birth, 
+                age, 
                 gender, 
                 level_of_education, 
                 state_id, 
@@ -139,7 +139,7 @@ module.exports={
             const data = {
                 firstname, 
                 lastname, 
-                date_of_birth, 
+                age, 
                 gender, 
                 level_of_education, 
                 state_id, 
@@ -155,7 +155,7 @@ module.exports={
                 profile_pic:filename
             }
 
-            const trader = await Trader.update( data , {
+            const trader = await SeedTrader.update( data , {
                 where: { user_id: user.id }
             }, {transaction: transaction})
 
@@ -490,7 +490,7 @@ module.exports={
         let transaction =await db.rest.transaction()
         try{
             let log=await TransactionLog.create({
-                trader_id : trader.id,
+                seedtrader_id : trader.id,
                 transaction_ref : ref,
                 status : 'initiated',
                 pickup_point:req.body.pickup,
@@ -580,7 +580,7 @@ module.exports={
         })
         return JSON.parse(JSON.stringify(d))                              
     },
-    getTransactions : async (trader_id)=>{
+    getTransactions : async (seedtrader_id)=>{
         let transactions= await TransactionLog.findAll({
             include  : [
                 {
@@ -600,7 +600,7 @@ module.exports={
             ],
             attributes : ['transaction_id','transaction_ref', 'status', 'created_at'],
             where : {
-                trader_id : trader_id
+                seedtrader_id : seedtrader_id
             }
         });
         console.log(JSON.parse(JSON.stringify(transactions)))

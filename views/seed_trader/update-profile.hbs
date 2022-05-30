@@ -1,8 +1,11 @@
-<div class="card">
+<div class="card p-3">
     <div class="card-body">
-        <form action="POST">
+        <form method="POST" id="updateProfile">
             <div class="trader-profile">
+              
                 <div class="row">
+                  <h5 class="card-header card-c p-0 profile_header">Personal Information</h5>
+                          <hr/>
                     <div class="col-sm-6">
                         <label for="firstname" class="input_form">First name <span class="profile_sub">*</span> </label>
                         <div class="input-group input-group-sm mb-3">
@@ -19,7 +22,7 @@
                         <div class="col-sm-6">
                         <label for="dob" class="input_form">Age Range </label>
                             <div class="input-group input-group-sm mb-3">
-                            <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ tradersData.date_of_birth }}">
+                            <select name="age" id="age" class="form-select border-0 border-bottom"  data-val="{{ tradersData.age }}">
                                 <option value="">Select Age Range</option> 
                                 <option value="15-19">15-19</option>   
                                 <option value="20-30">20-30</option> 
@@ -40,6 +43,72 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-sm-12" class="input_form">
+                               <label for="education" class="input_form">Level of Education <span class="profile_sub">*</span></label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <select name="level_of_education" required class="form-select border-0 border-bottom" id="levelE" data-level="{{ tradersData.level_of_education }}">
+                                      <option value="">Select One</option>
+                                    </select>
+                                  </div>
+                        </div>
+
+                            <div class="col-sm-6">
+                                <label for="nin" class="input_form">Do you have your National Identity Number (NIN) <span class="text-black-50">( Optional )</span> </label>
+                                <div class="input-group input-group-sm mb-3">
+                                   <select class="form-select border-0 border-bottom" data-val="{{ tradersData.nin }}" id="nin" name="nin" required>                                    
+                                      <option value="">Select One</option>
+                                      <option value="Yes">Yes</option>
+                                      <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                              <div class="col-sm-6 mt-2">
+                                <label for="bvn" class="input_form">Do you have a bank account?</label>
+                                  <div class="input-group input-group-sm mb-3">
+
+                                    <select class="form-select border-0 border-bottom" data-val="{{ tradersData.bvn }}" id="bvn" name="bvn" required>                                    
+                                      <option value="">Select One</option>
+                                      <option value="Yes">Yes</option>
+                                      <option value="No">No</option>
+
+                                    </select>
+                                  </div>
+                              </div>
+
+                              <div class="col-sm-6" >
+                                <div class="input-group input-group-sm mb-3">
+                                  
+                                  <label for="state" required class="input_form">State <span class="profile_sub">*</span></label>
+                                <div class="input-group mb-3">
+                              
+                                  <select class="form-select border-0 border-bottom" data-state="{{ tradersData.state_id }}" id="state" name="state_id">                                    
+                                    <option value="">Select State</option>
+                                    {{#each states}}
+                                        <option value="{{this.id}}">{{this.name}}</option>
+                                    {{/each}}
+                                  </select>
+                                </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                              <div class="input-group input-group-sm mb-3">
+                                
+                                <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
+                                <div class="input-group mb-3">
+                              
+                                  <select required class="form-select border-0 border-bottom" id="lgas" data-lga="{{ tradersData.lg_id }}" name="lg_id">
+                                     <option value=""></option>
+                                  </select>
+                                </div>
+
+                              </div>
+                            </div>
+
+                         
                 </div>
                 <div>
                     <img src="../images/profile-avatar.png" id="output" class=" mb-2 mx-auto d-block img_round" alt="user profile image">
@@ -47,14 +116,138 @@
                     <label class="edit-profile-img trader-profile-img" for="file">
                     <p ><i class="fa fa-camera" aria-hidden="true"></i></p>
                     </label>
-                    <input id="file" class="fileDisplay" type="file" onchange="loadFile(event)"/>
+                    <input id="file" name="profile_pic" class="fileDisplay" type="file" onchange="loadFile(event)"/>
                 </div>
             </div>
+            
              
-        </form>
+        
     </div>
 </div>
 
+<div class="card mt-2 p-3">
+  <div class="card-content">
+        <h5 class="card-header card-c p-0 bg-light profile_header">Shipping Information</h5>
+        <hr/>
+
+        <div class="row">
+           <div class="col-sm-6">
+               <div class="input-group input-group-sm mb-3">                              
+                  <label for="state" class="input_form">State <span class="profile_sub">*</span></label>
+                  <div class="input-group mb-3">
+                
+                    <select 
+                      class="form-select border-0 border-bottom" 
+                      name="state_of_delivery" 
+                      id="stateDelivery" 
+                      required 
+                      data-stateDelivery="{{ deliveryInfo.state_id }}" />
+                        <option value="">Select One</option>
+                        {{#each states}}
+                          <option value="{{this.id}}">{{this.name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+           </div>
+
+           <div class="col-sm-6">
+              <div class="input-group input-group-sm mb-3">
+                
+                <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
+                  <div class="input-group mb-3">
+                
+                    <select 
+                        class="form-select border-0 border-bottom" 
+                        name="lga_of_delivery" 
+                        id="lgaDelivery" 
+                        required
+                          data-lgaDelivery="{{ deliveryInfo.lg_id }}" />               
+                      <option value=""></option>
+                    </select>
+                  </div>
+              </div>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="col-sm-12 ">
+              <div class="input-group input-group-sm mb-3">
+                
+                <label for="address" class="input_form">Address <span class="profile_sub">*</span></label>
+                <div class="input-group mb-3">
+
+                  <textarea class="form-control border-0 border-bottom" name="address" style="align-content:left; overflow:auto" id="address" cols="30" rows="3" required>{{ deliveryInfo.address }} </textarea>
+                </div>
+
+              </div>
+
+             
+          </div> 
+        </div>
+  </div>
+</div>
+<div class="card mt-3 p-3">
+  <div class="card-content">
+    <h5 class="card-header card-c p-0 profile_header">Account Information</h5>
+        <hr/>
+    <div class="row">
+        <div class="col-sm-6 col-lg-6">
+          <label for="account_name" class="input_form">Account Name <span class="profile_sub">*</span></label>
+          <div class="input-group input-group-sm mb-3">
+              <input 
+                class="form-control" 
+                type="text" 
+                required
+                id="account_name" 
+                name="bank_account_name" 
+                placeholder="Account Name" 
+                value="{{tradersData.bank_account_name}}"
+                {{!-- minlength="" --}}
+                maxlength="50">
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+          <label for="account_no" class="input_form">Account Number <span class="profile_sub">*</span></label>
+          <div class="input-group input-group-sm mb-3">
+              <input 
+                type="text" 
+                class="form-control border-0 border-bottom" 
+                minlength="10"
+                maxlength="10" 
+                required
+                id="account_no"
+                name="bank_account_no"
+                value="{{tradersData.bank_account_no}}"
+                aria-label="Sizing example input" 
+                aria-describedby="inputGroup-sizing-sm"
+                pattern="[0-9]+"
+                placeholder="Account Number"
+                required
+                >
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+          <label for="bank" class="input_form">Bank <span class="profile_sub">*</span></label>
+          <div class="input-group input-group-sm mb-3">
+              <select name="bank_code" class="form-control" data-bank="{{tradersData.bank_code}}" id="bank">
+                <option value="">Select Bank</option>
+              </select>
+          </div>
+        </div>
+    </div>
+     <div class="col-12">
+      <hr/>
+        <div class="columns mx-auto" >
+          <button type="submit" class="btn float-end mb-1 submitBtn">Update</button>
+        </div>
+      </div>
+
+  </div>
+</div>
+</form>
       
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -105,7 +298,7 @@ var profile_pic = null
       let banked = $('#bvn').data('val')
       let nin = $('#nin').data('val')
       let type = $('#source_type').data('val')
-      let dob = $('#date_of_birth').data('val')
+      let age = $('#age').data('val')
 
       if(banked != null){
         $('#bvn').val(banked)
@@ -119,8 +312,8 @@ var profile_pic = null
         $('#nin').val(nin)
       }
       
-      if(dob != null){
-        $('#date_of_birth').val(dob)
+      if(age != null){
+        $('#age').val(age)
       }
 
 
@@ -262,7 +455,37 @@ var profile_pic = null
           console.log(e)
         })
         
+        
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let banks, len, i
 
+                banks = response.data.bank
+
+                len = banks.length
+                var ele = document.getElementById('bank');
+
+                
+                for(i=0; i < len; i++){
+                   selected = (banks[i].code == bank ? 'selected' : null)
+                    ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="'+selected+'">' + banks[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let bank = $('#bank').data('bank')
+                    if(bank != null){
+                        $('#bank').val(bank)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
 
         $("#updateProfile").on('submit', function(e){
           e.preventDefault()

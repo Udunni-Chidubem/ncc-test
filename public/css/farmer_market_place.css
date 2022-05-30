@@ -3657,7 +3657,7 @@ justify-content: center;
 
 .trader-profile{
   display: grid;
-  grid-template-columns: 70% auto;
+  grid-template-columns: 72% auto;
 }
 
 .trader-profile-img{
@@ -3679,4 +3679,18 @@ justify-content: center;
 }
 .edit-profile-img p{
   padding: 6px;
+}
+
+.bg-white{
+  background: #ffffff !important;
+}
+
+.trader_cart_icon {
+  font-size: 12px;
+  background: #ff0000 !important;
+  color: rgb(255, 255, 255) !important;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -7px; 
+  margin-top: -12px;
 }

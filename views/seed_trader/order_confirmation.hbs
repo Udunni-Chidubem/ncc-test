@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="card card_home px-3 pt-5 pb-5">
+      <div class="card-body">
+         <div class="row">
+            <div class="col-sm-6">
+              <div  class="  ord_con_img  ">
+                <img class="con_img " src="../images/farmer-with-vege-p-2000.jpeg" alt="">
+              </div>
+            </div>
+  
+  <div class="col-sm-6 mt-2">
+    
+            <form action=""> 
+          <div class="alert  con_alart" role="alert">
+            tip: You need 3kg of maize seed for your farm!
+          </div>
+            
+    
+  
+   <div class="row mt-1 ">
+    <div class="col-6 bd_columns columns ">
+      <div class="  ">
+        {{#if getCartItems}}
+        <h4>
+          Maize FM/123
+        </h4>
+       {{/if}}
+        <h5>
+          Seed Company Name
+        </h5>
+      </div>
+    </div>
+    <div class="col-6 columns">
+      <div class="  ">
+        <h4>
+          N 3,999
+        </h4>
+        <h5>
+          per KG
+        </h5>
+        <div class="">
+          select quantiy
+        </div>
+         <h5>
+          <div class="form">
+            <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+            <input type="number" id="number" value="0" />
+            <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+          </div>
+         </h5>
+         
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-1 ">
+    <div class="col-6 columns">
+      <div class="  "><h4>
+        Description
+      </h4>
+      <p>Lorem ipsum dolor sit amet consectur leviec sectoram jut sertaome </p></div>
+    </div>
+  </div>
+  
+  <div class="row mt-1 columns">
+    <div class="col-6">
+      <div class="  ">
+        <button type="button" class="btn  mb-1">Save</button>
+        <button type="button" class="btn mb-1">Place Order</button>
+      </div>
+    </div>
+  </div>
+</form>
+  
+</div>
+      </div>
+    </div>
+  </div>
