@@ -1,0 +1,28 @@
+.message_profile {
+    width: 60px;
+    height: 60px;
+  }
+  .card.msg_card.m-2 {
+    border-radius: 13px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5), inset 2px 2px 15px rgba(255, 255, 255, 0.5);
+  }
+  .msg_container{
+    /* max-width: 794px !important; */
+  }
+  .tab_info_.active{
+      display: block;
+  }
+  .tab_info_{
+      display: none;
+  }
+  .content_{
+      display: none;
+  }
+  .content_.active{
+      display: block;
+  }
+  @media (min-width: 320px) and (max-width: 810px){
+      .msg_view{
+          width: 100% !important;
+      }
+  }

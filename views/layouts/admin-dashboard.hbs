@@ -31,7 +31,7 @@
                   <a href="/admin/products">Product Management</a>
                 </li>
                 {{/if}}
-                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="./orders">Order Management</a>
                 </li>
@@ -45,9 +45,15 @@
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
             </li>
             {{/if}}
-             {{#if (eq user_role "admin") }}
+            {{#if (eq user_role "admin") }}
             <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
+            </li>
+            {{/if}}
+            {{#if (eq user_role "admin") }}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/messages"> <i class="bi bi-envelope"></i>
+                Messages</a>
             </li>
             {{/if}}
 
@@ -100,6 +106,43 @@
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
+  <script>
+    $(document).ready(function () {
+      let baseUrl = window.location.origin
+      // send message
+
+      $('.send').on('click', function () {
+        let message = $('#message').val()
+        let from_user = $('#to_user').val()
+
+        const ch_pass_data = {
+          'message': message,
+          'to_user': from_user,
+        }
+        // console.log(ch_pass_data)
+        let messageurl = baseUrl + '/admin/message'
+
+        fetch(messageurl, {
+          method: 'POST',
+          body: JSON.stringify(ch_pass_data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        }).then(r => r.json())
+          .then(response => {
+            if (response.message) {
+              let message = $('#message').val('')
+
+              //let div = $(".messages").find('.admin-messages-div')
+              // div.find('p').html(message)
+              // $('.messages').append(div)
+              location.reload();
+              return false;
+            }
+          })
+          .catch(error => console.log(error))
+      })
+    })
+
+  </script>
 
 </body>
 

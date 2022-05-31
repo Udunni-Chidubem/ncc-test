@@ -61,8 +61,52 @@ adminRouter.get('/users/create', async (req, res)=>{
         user_role: user_role.Role.role_name
     })
 });
+adminRouter.get('/messages', async (req, res)=>{
+    let user = await req.user
+    let roles =await adminController.getNascAdminRoles(req, res)
+    let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+    let getMessages = await adminController.getMessages(req, res)
+    let getNewmessages = await adminController.getNewmessages(req, res)
 
 
+    res.render('admin/messages', {
+        layout : 'admin-dashboard',
+        title : 'View Messages',
+        username : user.username,
+        isVerified,
+        roles : roles,
+        user_role: user_role.Role.role_name,
+        getMessages,
+        getNewmessages
+    })
+});
+
+adminRouter.get('/view_message/:user_id', async (req, res)=>{
+    let user = await req.user
+    let roles =await adminController.getNascAdminRoles(req, res)
+    let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+    let {messages,to_userid} = await adminController.getmessages(req, res)
+    let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
+    let user_id = user.id
+    
+    res.render('admin/view-message', {
+        layout : 'admin-dashboard',
+        title : 'View Message',
+        isVerified,
+        user_role,
+        messages,
+        user_id,
+        to_userid
+    })
+})
+adminRouter.post('/message', async (req, res)=>{
+    let user = await req.user
+    let user_id = user.id
+    let response = await adminController.message(req,user_id)
+    res.json({ message: response }).status(200)
+})
 adminRouter.get('/users', async (req, res)=>{
     let user = await req.user
     let farmers=await adminController.getFarmers(req, res)
