@@ -238,7 +238,8 @@ tradersRouter.post("/cart/checkout", async (req, res)=>{
         let paymentType = req.body.inlineRadioOptions
         let total_sum = req.body.total_sum
         if(paymentType=='card'){   
-            let initial= await paystack.initializeTrader('tipson664@gmail.com', total_sum*100, req)
+            let callback=req.get('origin')+'/seed-trader/checkout/callback'
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, callback, req)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, trader}=await tradersController.getCartItemsByIds(req,items)
