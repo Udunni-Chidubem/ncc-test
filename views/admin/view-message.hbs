@@ -23,21 +23,21 @@
 							</div>
 						</div>
                         {{/if}}
-        <div class="card-body">
+        <div class="card-body p-0">
             <div class="messages" style="height: 300px; overflow-y: scroll; overflow-x:hidden">
                 {{#each messages}}
                 {{#if (eq this.from_user ../user_id)}}
                 <div class="d-flex justify-content-end mb-4">
                     <div class="msg_cotainer">
                         {{this.message}}
-                        <span class="msg_time_send">9:10 AM, Today</span>
+                        <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
                     </div>
                 </div>
                 {{else}}
                 <div  class="d-flex justify-content-start mb-4">
                     <div class="msg_cotainer_send">
                             {{this.message}}
-                            <span class="msg_time_send">9:10 AM, Today</span>
+                            <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
                     </div>
                 </div>
                
