@@ -31,5 +31,28 @@ module.exports={
         }catch(e){
             console.log(e)
         }
+    },
+    initializeTrader : async (email, amount, req)=>{
+        try{
+            let ref=uniqid()
+             let resp=await axios.post(process.env.paystack_initialize, {
+                    email : email,
+                    amount : amount,
+                    callback_url : req.get('origin')+'/seed-trader/checkout/callback',
+                    key : process.env.paystack_secret_key,
+                    reference : ref,
+                    subaccount: process.env.paystack_subaccount
+                },
+                {
+                    headers: {
+                        Authorization : 'Bearer '+process.env.paystack_secret_key
+                    }
+                }
+            )
+           // console.log(resp.data.data.authorization_url)
+           return resp.data
+        }catch(e){
+            console.log(e)
+        }
     }
 }

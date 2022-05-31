@@ -11,7 +11,8 @@
                                 <div class="row">
                                     <ul>
                                         <li class="trader_id">Trader ID</li>
-                                        <li><span>STD-234</span> <span class="folder">
+                                        <li><span class="code_" id="code_">{{referal_code}}</span> <span class="folder"
+                                                onclick="CopyToClipboard('code_')">
                                                 <i class="bi bi-file-earmark"></i></span></li>
                                     </ul>
                                 </div>
@@ -22,19 +23,19 @@
                             <div class="col-4">
                                 <ul class="earnings">
                                     <li class="total">Total Earnings</li>
-                                    <li class="total_num">N 20,000</li>
+                                    <li class="total_num">&#8358; 0</li>
                                 </ul>
                             </div>
                             <div class="col-8">
                                 <ul class="earnings">
                                     <li class="total">Total Referrals</li>
-                                    <li class="total_num">15</li>
+                                    <li class="total_num">{{traderRefres_len}}</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 text-end refral_card_link">
-                                <a href="#">View details</a>
+                                <a href="#">Withdraw</a>
                             </div>
                         </div>
                     </div>
@@ -46,27 +47,22 @@
                 <div class="main-content">
                     <div class="   table-responsives table_t_info">
 
-                        <table class="table con t_info  table-borderless">
+                        <table class="table con t_info  table-borderless" id="referesTable">
                             <thead class="t_info_head ">
                                 <tr class="">
                                     <th scope="col">REG DATE</th>
                                     <th scope="col">NAME</th>
-                                    <th scope="col">STATUS</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody class="t_info_body">
-
+                                {{#each traderRefres}}
                                 <tr class="t_info_row1">
-                                    <td>kjjj</td>
-                                    <td>ll</td>
-                                    <td>
-                                        <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
-                                        <br>
-                                        <span>on 15/APR/2020</span>
-                                    </td>
-                                    <td><a href="#">See Details</a></td>
+                                    <td> {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                                    <td> {{this.firstname}} {{this.lastname}}</td>
+                                    <td><a href="/seed-trader/view-farmer/{{this.user_id}}">See Details</a></td>
                                 </tr>
+                                {{/each}}
                             </tbody>
                         </table>
                     </div>

@@ -24,8 +24,14 @@ module.exports = {
 
         return farmer;
     },
-    getTraderProfile: (user) => {
-        
+    getTraderProfile: async (user) => {
+        const trader = await SeedTrader.findOne({
+            where : {
+                user_id : user.id
+            },
+            raw :true
+        });
+        return trader;
     },
     getCompanyProfile: async (user) => {
         const company = await SeedCompany.findOne({
@@ -36,6 +42,16 @@ module.exports = {
              raw :true
          });
          return company;
+    },
+    getTraderPofile: async (user) => {
+        const trader = await SeedTrader.findOne({
+             where : {
+                 user_id : user.id
+             },
+             attributes: ['id','user_id','firstname','lastname', 'phone_no', 'state_id', 'lg_id', 'referal_code' ],
+             raw :true
+         });
+         return trader;
     },
     isVerified: async (user) => {
         let status = true

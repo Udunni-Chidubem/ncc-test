@@ -1,0 +1,34 @@
+.farm_view_inf{
+margin-left: 1rem ;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 13px;
+line-height: 20px;
+letter-spacing: 0.01em;
+color: #323C47;
+}
+.fprofile_header{
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 18px;
+letter-spacing: 0.01em;
+color: #AEAEAE;
+margin-top: 0.5rem;
+}
+.farm_view_inf_pre{
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 11px;
+line-height: 16px;
+letter-spacing: 0.01em;
+color: #818E9B;
+}
+@media (min-width: 320px) and (max-width: 810px){
+    .view_far_in{
+        width: 100% !important;
+    }
+}

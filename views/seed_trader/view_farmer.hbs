@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 view_far_in mx-auto">
+                <img src="{{#if farmer_info.profile_pic }} /profile_pics/{{farmer_info.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                    id="output" class=" mb-2 mx-auto d-block img_round" alt="user profile image">
+            </div>
+            <div class="col-6 view_far_in ">
+                <h5 class="card-header card-c p-0 mb-3 bg-light fprofile_header">Framer Information</h5>
+                <div class="row">
+                    <div class="col-6"><span class="farm_view_inf_pre">FirstName: </span> </span><span
+                            class="farm_view_inf">{{farmer_info.firstname}}</span></div>
+                    <div class="col-6"><span class="farm_view_inf_pre">LastName: </span><span
+                            class="farm_view_inf">{{farmer_info.lastname}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><span class="farm_view_inf_pre">State: </span><span
+                            class="farm_view_inf">{{farmer_info.State.name}}</span></div>
+                    <div class="col-6"><span class="farm_view_inf_pre">Lga: </span><span
+                            class="farm_view_inf">{{farmer_info.LGA.name}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><span class="farm_view_inf_pre">Gender: </span><span
+                            class="farm_view_inf">{{farmer_info.gender}}</span></div>
+                    <div class="col-6"><span class="farm_view_inf_pre">Farm Produce: </span><span
+                            class="farm_view_inf">{{farmer_info.product_farmed}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><span class="farm_view_inf_pre">Phone no: </span><span
+                            class="farm_view_inf">{{farmer_info.phone_no}}</span></div>
+                </div>
+            </div>
+            <h5 class="card-header card-c p-0 mb-3 bg-light fprofile_header mt-3">Farm Information</h5>
+            <div class="row">
+                <div class="col-6"><span class="farm_view_inf_pre">Fram Location: </span><span
+                        class="farm_view_inf">{{farmer_info.location_of_farm}}</span></div>
+                <div class="col-6"><span class="farm_view_inf_pre">Village: </span><span
+                        class="farm_view_inf">{{farmer_info.village}}</span></div>
+            </div>
+            <div class="row">
+                <div class="col-6"><span class="farm_view_inf_pre">Ward: </span><span
+                        class="farm_view_inf">{{farmer_info.ward}}</span>
+                </div>
+                <div class="col-6"><span class="farm_view_inf_pre">Size of Farm: </span><span
+                        class="farm_view_inf">{{farmer_info.farm_size_measurement}}</span></div>
+            </div>
+            <h5 class="card-header card-c p-0 mb-3 bg-light fprofile_header mt-3">Delivery Information</h5>
+            <div class="row">
+                <div class="col-6"><span class="farm_view_inf_pre">State: </span> <span
+                        class="farm_view_inf">{{farmer_info.User.DeliveryInformation.State.name}}</span></div>
+                <div class="col-6"><span class="farm_view_inf_pre">Lga: </span><span
+                        class="farm_view_inf">{{farmer_info.User.DeliveryInformation.LGA.name}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6"><span class="farm_view_inf_pre">Address: </span><span
+                        class="farm_view_inf">{{farmer_info.User.DeliveryInformation.address}}</span></div>
+            </div>
+        </div>
+    </div>
+</div>
