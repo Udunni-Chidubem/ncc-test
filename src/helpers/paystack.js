@@ -9,13 +9,13 @@ module.exports={
         })
         return resp.data
     },
-    initialize : async (email, amount, req)=>{
+    initialize : async (email, amount, callback, req)=>{
         try{
             let ref=uniqid()
              let resp=await axios.post(process.env.paystack_initialize, {
                     email : email,
                     amount : amount,
-                    callback_url : req.get('origin')+'/farmer/checkout/callback',
+                    callback_url : callback,
                     key : process.env.paystack_secret_key,
                     reference : ref,
                     subaccount: process.env.paystack_subaccount
