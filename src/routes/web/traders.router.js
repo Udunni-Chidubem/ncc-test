@@ -398,6 +398,26 @@ tradersRouter.get("/cart/delete/:id", async (req, res)=>{
     res.redirect("/seed-trader/cart")
 })
 
+tradersRouter.get("/checkout/preview", async (req, res)=>{
+    if(req.query.product){
+        console.log(req.query.product)
+        let {getCartItems, farmer, isVerified}= await tradersController.cartByProductId(req)
+        let deliveryInfo = await tradersController.deliveryInfo(farmer.user_id)
+        res.render('seed_trader/order_preview', {
+            layout : 'traders-dashboard',
+            title: 'Order Preview',
+            fullname: trader.firstname + ' ' + trader.lastname,
+            farmer: farmer,
+            isVerified,
+            getCartItems,
+            deliveryInfo
+        })
+    }else{
+        res.redirect('back')
+    }
+})
+
+
    
 
 module.exports=tradersRouter

@@ -6,6 +6,7 @@ const { adminValidation, validate, productValidation } = require('../../helpers/
 const adminController = require('../../controllers/admin.controller');
 const { now } = require('moment');
 const companyController = require('../../controllers/company.controller');
+const { UserConversationList } = require('twilio/lib/rest/conversations/v1/user/userConversation');
 
 adminRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
@@ -300,6 +301,35 @@ adminRouter.post('/orders/:id/:transaction_id/:company_id', async (req, res)=>{
     
     
     res.redirect("/admin/orders")
+});
+
+adminRouter.get('/user_report', async (req,res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+   
+    res.render('admin/user_report', {
+        layout : 'admin-dashboard',
+        title : 'User-Report',
+        username : user.username,
+        isVerified,  
+        user_role: user_role.Role.role_name
+    })
+    
+});
+
+adminRouter.get('/transactions', async (req,res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+
+    res.render('admin/transactions', {
+        layout : 'admin-dashboard',
+        title : 'Transaction-Report',
+        username : user.username,
+        isVerified,  
+        user_role: user_role.Role.role_name
+    })
 });
 
 module.exports = adminRouter
