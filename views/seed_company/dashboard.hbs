@@ -38,7 +38,7 @@
                       <div class="p-3 border text-center  border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Active</h5>
                         <h1 class="c_d_s2_full ">0</h1>
-                        <a href="#" class="c_d_s2_link">
+                        <a href="/seed-company/products" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>
                       </div>
@@ -47,7 +47,7 @@
                       <div class="p-3 border text-center border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Sold out</h5>
                         <h1 class=" c_d_s2_unfull">0</h1>
-                        <a href="#" class="c_d_s2_link">
+                        <a href="/seed-company/products" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>
                       </div>
@@ -72,27 +72,30 @@
                 <div class="col-12 co_12">
                   <div class="p-3 border text-center border-0 border-end ">
                     <h5 class="c_d_s2 c__h">Total Sales</h5>
-                    <h1 class="c_d_s2_sales s_1 ">0</h1>
-                    <a href="#" class="c_d_s2_link">
-                      <h5>See Details</h5>
-                    </a>
+                  
+                    <h1 class="c_d_s2_sales s_1 "> {{ total }} </h1>
+                     <a href="/seed-company/order-list" class="c_d_s2_link">
+                          <h5>See Details</h5>
+                        </a>
                   </div>
                 </div>
                 <div class="col-12 co_12">
                   <div class="p-3 border text-center  border-0 border-end  ">
                     <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
-                    <h1 class="c_d_s2_full ">0</h1>
-                    <a href="#" class="c_d_s2_link">
-                      <h5>See Details</h5>
-                    </a>
+                    
+                    <h1 class="c_d_s2_full "> {{fulfilled}} </h1>
+                    <a href="/seed-company/order-list" class="c_d_s2_link">
+                          <h5>See Details</h5>
+                     </a>
                   </div>
                 </div>
                 <div class="col-12 co_12">
                   <div class="p-3 border text-center border-0 border-end  ">
                     <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
-                    <h1 class=" c_d_s2_unfull">0</h1>
-                    <a href="#" class="c_d_s2_link">
-                      <h5>See Details</h5>
+                    
+                    <h1 class=" c_d_s2_unfull"> {{unfulfilled}} </h1>
+                    <a href="/seed-company/order-list" class="c_d_s2_link">
+                          <h5>See Details</h5>
                     </a>
                   </div>
                 </div>
@@ -173,7 +176,7 @@
                   <div class="p-3 border text-center  border-0 border-end  ">
                     <h5 class="c_d_s2 c__h">Active</h5>
                     <h1 class="c_d_s2_full ">0</h1>
-                    <a href="#" class="c_d_s2_link">
+                    <a href="/seed-company/products" class="c_d_s2_link">
                       <h5>See Details</h5>
                     </a>
                   </div>
@@ -182,7 +185,7 @@
                   <div class="p-3 border text-center border-0 border-end  ">
                     <h5 class="c_d_s2 c__h">Sold out</h5>
                     <h1 class=" c_d_s2_unfull">0</h1>
-                    <a href="#" class="c_d_s2_link">
+                     <a href="/seed-company/products" class="c_d_s2_link">
                       <h5>See Details</h5>
                     </a>
                   </div>
@@ -206,12 +209,18 @@
         const myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'July'],
+            labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'July'],
             datasets: [{
 
               label: 'Monthly',
-              data: [12, 19, 3, 5, 2, 3],
+              data: [22, 19, 3, 5, 2, 3, 7],
               backgroundColor: [
+                '#47BA5D',
+                '#47BA5D',
+                '#47BA5D',
+                '#47BA5D',
+                '#47BA5D',
+                '#47BA5D',
                 '#47BA5D',
                 '#47BA5D',
                 '#47BA5D',
@@ -226,6 +235,12 @@
                 'white',
                 'white',
                 'white',
+                'white',
+                'white',
+                'white',
+                'white',
+                'white',
+                'white'
               ],
               borderWidth: 1
             }]

@@ -1,0 +1,178 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-8">
+      <div class="p-3 ">
+      {{!-- Start loop Here --}}
+     
+        {{#if cartItems}}
+        <form action="/seed-trader/checkout/preview" method="post" id="orderList">
+       
+                  <div class="row mb-2">
+                  <div class="  ">
+                    <div class="card card_products shadow">
+                      <div class="card-header">
+                        <div class="row">
+                          <input type="checkbox" class="form-check-input" id="check-all"> <strong>&nbsp;Select All</strong>
+                        </div>
+                      </div>
+                      {{#each cartItems}}
+                      <div class="card-body">
+                        <h5 class=" card-title card_title">
+                        </h5>
+                        <div class="row  ">
+                          <div class="col-lg-4 col-sm-6">
+                            
+                            <div class="py_3">
+                              
+                              <div class="p_img"> 
+                                <div class="form-check">
+                                  <input class="form-check-input item-check-box" type="checkbox" name="items" value="{{this.id}}" id="{{this.id}}">
+                                </div>
+                                  <img src="/product_images/{{Product.file_name}}" alt="Product Image" class="rounded">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-8 col-sm-6 c_inf">
+                            <div class="p-3  p_b1">
+                              <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 mb-2">
+                                <div class="col p_in">
+                                  <div class="  ">
+                                    <h1>{{Product.product_name}} </h1>
+                                    <p>Variant: {{Product.variant}}</p>
+                                    <p>Seller: {{Product.User.SeedCompany.name_of_company}}</p>
+                                    <p>Location: {{Product.User.SeedCompany.State.name}}</p>
+                                  </div>
+                                </div>
+                                <div class="col c_inf2">
+                                  <div class="px-3 px_3">
+                                    <p>Price</p>
+                                    <h1>&#8358; {{'total_amount'}}</h1>
+
+                                  </div>
+                                </div>
+                                <div class="col-12 r_mt">
+                                  <div class="p-3 p_b3 ">
+                                    <div class="text-end">
+                                      <a href="/seed-trader/cart/delete/{{this.id}}" class="trash__"><i class="bi bi-trash-fill"></i></a>                                      
+                                    </div>
+                                    {{!-- <button type="submit" class="btn btn_gr shadow">Buy Now</button> --}}
+                                    {{!-- <input class="form-check-input float-end ck2" type="checkbox" value="{{this.id}}" id="{{this.id}}"> --}}
+                                  </div>
+                                </div>
+                                </div>
+                            </div>
+                          </div>
+                          </div>
+                      </div>
+                        {{/each}}
+                    </div>
+                  </div>
+                </div>
+             
+
+        
+         </form>
+        {{else}}
+
+            <div class="alert alert-success alert-dismissible hideMsg" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>You cart is empty at the moment. </strong>
+            </div>
+
+        {{/if}}
+
+      {{!-- End Loop Here --}} 
+      </div>
+    </div>
+
+      
+    {{#if cartItems }}
+
+       <div class="col-4 c0l_4">
+        <form action="" method="post" id="orderSummary"> 
+        <div class="p-3 ">
+          <div class="card card_pay ">
+            <div class="card-body  ">
+              <h5 class="card-title">
+                <h1 class="text-center "> Order Summary </h1>
+                <hr>
+              </h5>
+{{!-- 
+                   <div class="items_ border-0 border-bottom">
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                      <div class="col">
+                        <div class=" ">
+                          White Maize
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="  float-end">3kg</div>
+                      </div>
+                    </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="col">
+                          <div class=" ">Brown Rice</div>
+                        </div>
+                        <div class="col">
+                          <div class="float-end ">2kg</div>
+                        </div>
+                      </div> 
+                    </div>  --}}
+
+                   <div class="cost_ border-0 border-bottom">
+                       <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                      <div class="col">
+                        <div class="">Subtotal</div>
+                      </div>
+                      {{#itemSum cartItems}}
+                      <div class="col">
+                        <div class=" float-end item-sum">{{this}}</div>
+                      </div>
+                      {{/itemSum}}
+                    </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="col">
+                          <div class=" ">Shipping</div>
+                        </div>
+                        <div class="col">
+                          <div class="float-end shipping-cost">0</div>
+                        </div>
+                      </div>  
+                    </div>
+
+                    <div class="total_">
+                       <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                          <div class="col">
+                            <div class=" t_text">Total</div>
+                          </div>
+                          <div class="col">
+                            <div class="float-end t_price"></div>
+                          </div>
+                        </div>  
+
+                     <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="p-3  text-center">
+                          <button type="button" class="btn btn_gr2 shadow " onclick="document.getElementById('orderList').submit()"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ Check Out</button>
+                          <div class="con_terms">
+                            <a href="#" class="terms link-secondary">terms and Conditions</a>
+                          </div>
+                        </div>
+                      </div>  
+                   </div>
+
+                    
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+
+      {{/if}}     
+    
+      
+</div>

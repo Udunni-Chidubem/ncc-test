@@ -162,7 +162,7 @@ body {
 }
 
 #settings {
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
   /* margin-top: 3.5rem;
   width: 259px;
   border-top: 1px solid #cccc;
@@ -1705,6 +1705,10 @@ input[type="number"] {
 
 .seed_com_nav {
   background: #f99746;
+}
+
+.seed_trader_nav {
+  background: #008346;
 }
 
 .seed_com_side {

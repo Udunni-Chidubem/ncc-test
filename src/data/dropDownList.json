@@ -29,6 +29,14 @@
     ],
     "levelEducation": [
         {
+            "id": "BSC",
+            "name": "BSC"
+        },
+        {
+            "id": "NCE",
+            "name": "NCE"
+        }
+        ,{
             "id": "HND",
             "name": "HND"
         },
