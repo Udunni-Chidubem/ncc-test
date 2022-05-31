@@ -2,9 +2,10 @@ require('dotenv').config()
 const {QueryTypes } = require("sequelize");
 const db = require('../models')
 const utils = require('../helpers/utils');
-const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog}  = db
+const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog, Message}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
+const seedtrader = require('../models/seedtrader');
 
 
 module.exports={
@@ -426,6 +427,73 @@ module.exports={
         return {farmerinactivelist,farmeractivelist,seedcompanyactivelist,seedcompanyinactivelist,seedtraderactivelist,seedtraderinactivelist}
     },
 
+    getMessages: async (req,res) => {
+      try{
+          let admin_messages = await Message.findAll({
+              where : {to_user : 'Admin'},
+              group : 'from_user',
+              include: [
+                  {
+                    model : User,
+                    include  : [
+                        {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
+                  ]
+                    
+                  }
+              ] 
+          })
+          admin_messages = JSON.parse(JSON.stringify(admin_messages))
+          console.log(admin_messages)
+          return admin_messages
+      }
+      catch(e){
+          console.log(e)
+          return e
+      }
+    },
+
+    getNewmessages: async (req,res) => {
+        // let sql = "SELECT status , from_user from messages WHERE status = 'new' GROUP by status,from_user";
+        // let newmessages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        // console.log(newmessages)
+        // return newmessages
+
+        try{
+            let admin_messages = await Message.findAll({
+                where : {to_user : 'Admin', status : 'new'},
+                group : 'from_user',
+                include: [
+                    {
+                      model : User,
+                      include  : [
+                          {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
+                    ]
+                      
+                    }
+                ] 
+            })
+            admin_messages = JSON.parse(JSON.stringify(admin_messages))
+            console.log(admin_messages)
+            return admin_messages
+        }
+        catch(e){
+            console.log(e)
+            return e
+        }
+    },
+    updateMessagestatus: async (req,to_userid) => {
+
+        try{
+            let status = Message.update({status:''}, { where : {from_user: to_userid}})
+            return status
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+    },
+
     getProductStatus: async (req,res) => {
         let sql = "SELECT count(id) as count from product as p where p.status = '1' ";
         let activeProduct = await db.rest.query(sql, { type: QueryTypes.SELECT })
@@ -449,6 +517,38 @@ module.exports={
         st_count = JSON.parse(JSON.stringify(st_count))
         return {f_count, sc_count,st_count};
     },
+
+    getmessages : async (req,res) =>{
+        let to_userid = req.params.user_id
+        let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
+        let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        console.log(messages)
+        return {messages,to_userid}
+    },
+    message: async (req,user_id) => {
+        const transaction = await db.rest.transaction();
+        let success_message = 'Sent'
+        let messages = req.body.message 
+        let from_user =user_id
+        let to_user = req.body.to_user
+        let status = 'new'
+      try{
+            await  Message.create({
+                message : messages,
+                from_user : from_user,
+                to_user : to_user,
+                status : status
+            }, {transaction : transaction})
+        transaction.commit()
+        return success_message
+    }catch(e){
+        console.log(e)
+        transaction.rollback()
+
+    }
+
+    },
+
 
     getUserRole:async (req, res)=>{
         const user = await req.user

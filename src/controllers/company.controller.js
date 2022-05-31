@@ -334,4 +334,27 @@ module.exports = {
             return e
            }
     },
+
+    settings: async (req, res) => {
+        const user = await req.user
+        const company = await utils.getCompanyProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        res.render('seed_company/settings', {
+            layout : 'company-dashboard',
+            title: 'Settings',
+            fullname: company.name_of_company,
+            companyData: company,
+            isVerified,
+            company
+        })
+        
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
+        })
+    },
 }

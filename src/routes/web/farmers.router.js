@@ -44,9 +44,10 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
 })
 farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
 
+    console.log('initial password reset log', req.body)
      let response= await farmerController.updatePassword(req, res)
     //  {status,farmer,isVerified,message_}
-     
+     console.log('response on password reset', response)
      if(response.message_){
         return res.json({ message: response.message_, statusCode: 200 }).status(200)
     }
@@ -173,8 +174,9 @@ farmersRouter.post("/cart/checkout", async (req, res)=>{
         }
         let paymentType = req.body.inlineRadioOptions
         let total_sum = req.body.total_sum
+        let callback=req.get('origin')+'/farmer/checkout/callback'
         if(paymentType=='card'){   
-            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, req)
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, callback, req)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, farmer}=await farmerController.getCartItemsByIds(req,items)

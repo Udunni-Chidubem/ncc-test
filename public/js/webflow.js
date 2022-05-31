@@ -143,8 +143,6 @@ nextBtn.addEventListener("click", function () {
     currentItem++;
     // wrap.classList.add(item.bg);
   
-   
-
-    
-    
   }
+
+  

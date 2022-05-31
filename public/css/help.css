@@ -1,0 +1,11 @@
+#send{
+    background: #24502a;
+    color: #fff;
+}
+#message {
+    border-radius: 10px;
+  }
+.modal-footer.msg {
+border-top: none;
+flex-wrap: nowrap;
+}
