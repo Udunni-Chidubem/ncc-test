@@ -68,6 +68,13 @@
 
              {{#if (eq user_role "admin") }}
             <li class="nav-item">
+              <a class="nav-link" href="/admin/messages"> <i class="bi bi-envelope"></i>
+                Messages</a>
+            </li>
+            {{/if}}
+
+             {{#if (eq user_role "admin") }}
+            <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
             </li>
             {{/if}}
@@ -123,5 +130,42 @@
 
 
 </body>
+<script>
+    $(document).ready(function () {
+      let baseUrl = window.location.origin
+      // send message
+
+      $('.send').on('click', function () {
+        let message = $('#message').val()
+        let from_user = $('#to_user').val()
+
+        const ch_pass_data = {
+          'message': message,
+          'to_user': from_user,
+        }
+        // console.log(ch_pass_data)
+        let messageurl = baseUrl + '/admin/message'
+
+        fetch(messageurl, {
+          method: 'POST',
+          body: JSON.stringify(ch_pass_data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        }).then(r => r.json())
+          .then(response => {
+            if (response.message) {
+              let message = $('#message').val('')
+
+              //let div = $(".messages").find('.admin-messages-div')
+              // div.find('p').html(message)
+              // $('.messages').append(div)
+              location.reload();
+              return false;
+            }
+          })
+          .catch(error => console.log(error))
+      })
+    })
+
+  </script>
 
 </html>

@@ -1,22 +1,52 @@
 <div class="container">
     <div class="card m-4">
+        {{#if messages}}
+        <div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>Chat with {{this.from_user}}</span>
+									<p>1767 Messages</p>
+								</div>
+							</div>
+							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+							<div class="action_menu">
+								<ul>
+									<li><i class="fas fa-user-circle"></i> View profile</li>
+									<li><i class="fas fa-users"></i> Add to close friends</li>
+									<li><i class="fas fa-plus"></i> Add to group</li>
+									<li><i class="fas fa-ban"></i> Block</li>
+								</ul>
+							</div>
+						</div>
+                        {{/if}}
         <div class="card-body">
             <div class="messages" style="height: 300px; overflow-y: scroll; overflow-x:hidden">
                 {{#each messages}}
                 {{#if (eq this.from_user ../user_id)}}
-                <div class="" style="text-align: right;">
-                    <p style="background-color: #B2BEB5; word-wrap:break-word; 
-                display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
+                <div class="d-flex justify-content-end mb-4">
+                    <div class="msg_cotainer">
                         {{this.message}}
-                    </p>
+                        <span class="msg_time_send">9:10 AM, Today</span>
+                    </div>
                 </div>
                 {{else}}
-                <div class="" style="text-align: left;" class="admin-messages-div">
+                <div  class="d-flex justify-content-start mb-4">
+                    <div class="msg_cotainer_send">
+                            {{this.message}}
+                            <span class="msg_time_send">9:10 AM, Today</span>
+                    </div>
+                </div>
+               
+                {{!-- <div class="" style="text-align: left;" class="admin-messages-div">
                     <p style="background-color: #D3D3D3; word-wrap:break-word; 
                 display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
                         {{this.message}}
                     </p>
-                </div>
+                </div> --}}
                 {{/if}}
                 {{/each}}
             </div>
@@ -31,3 +61,5 @@
     </div>
 </div>
 </div>
+
+{{!--  --}}
