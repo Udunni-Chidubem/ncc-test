@@ -45,6 +45,27 @@
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
             </li>
             {{/if}}
+
+            {{#if (eq user_role "admin") }}
+            <li class="nav-item dropdown">
+              <a class=" dropbtn" href="#"><i class='fa fa-briefcase'></i> Report</a>
+              <ul class="dropdown-content arrow-top">
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims"))}}
+                <li>
+                  <a href="/admin/user_report">User Report</a>
+                </li>
+                {{/if}}
+                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                <li>
+                  <a href="/admin/transactions">Transaction Report</a>
+                </li>
+                {{/if}}
+
+              </ul>
+            </li>
+
+             {{/if}}
+
              {{#if (eq user_role "admin") }}
             <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
