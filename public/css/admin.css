@@ -1167,8 +1167,18 @@ color: #818E9B;
 .buttonbackground{
   background-color: #008341;
   padding: 20px;
+  border: block;
 }
 
 .btnreport{
   margin: 5px;
+}
+
+.btnreport_search{
+  margin-left: 0px;
+  margin-right:0px
+}
+
+.btn-width{
+  width: 100%;
 }

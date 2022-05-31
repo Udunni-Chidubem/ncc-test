@@ -1,69 +1,127 @@
 <div class="bg-primary">
-  {{>breadcrumbs}}
+    {{>breadcrumbs}}
 </div>
 
 <br>
 <br>
 
-// table-responsives table_t_info
 
-<div class="container-fluid buttonbackground">   
+<div class="content active" id="all">
+    <div class=" container table-responsives table_t_info">
+        <table class="table con t_info  table-borderless" id="product-table-all">
+            <thead class="t_info_head ">
+                <tr class="row-height">
+                    <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            State
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                             {{#each states}}
+                            <li value="{{this.id}}" class="dropdown-item">{{this.name}}</li>
+                             {{/each}}
+                            {{!-- <li class="dropdown-item">Another action</li>
+                            <li class="dropdown-item">Something else here</li> --}}
+                        </ul>
+                    </div>
+                    </th>
+                     <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            Product
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <li class="dropdown-item">Cowpea</li>
+                            <li class="dropdown-item">Maize</li>
+                            <li class="dropdown-item">Rice</li>
+                            <li class="dropdown-item">Groundnut</li>
+                        </ul>
+                    </div>
+                    </th>
+                    <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            Status
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <li class="dropdown-item">Pending</li>
+                            <li class="dropdown-item">Confirmed</li>
+                        
+                        </ul>
+                    </div>
+                    </th>
+                    <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            Start Date
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <li class="dropdown-item"><input type="date"></li>
+                        
+                        </ul>
+                    </div>
+                    </th>
+                    <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            End Date
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <li class="dropdown-item"><input type="date"></li>
+                       
+                        </ul>
+                    </div>
+                    </th>
+                    <th scope="col">
+                    <div class="btn-group btnreport_search">
+                        <button type="button" class="btn btn-primary">Search</button>
+                    </div>
+                    </th>
+                     <th scope="col">
+                    <div class="">
+                        <button class="btn btn-width download-btn btn-outline-light">Export</button>
+                    </div>
+                    </th>
+                </tr>
+                <tr class="row-height">
+                    <th scope="col">NAME</th>
+                    <th scope="col">STATE</th>
+                    <th scope="col">PRODUCT</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">AMOUNT</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">
+                       
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
 
-<div class="btn-group btnreport">
-     <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-    State
-  </button>
-  <ul class="dropdown-menu"  aria-labelledby="defaultDropdown">
-    <li class="dropdown-item">Action</li>
-    <li class="dropdown-item">Another action</li>
-    <li class="dropdown-item">Something else here</li>
-  </ul>
-</div>
+                <tr class="row-one row-height">
+                    <td scope="col">Name</td>
+                    <td scope="col"><strong>State</strong></td>
+                    <td scope="col"> <strong>Product</strong></td>
+                    <td scope="col"> <strong>Date</strong></td>
+                     <td scope="col"> <strong>Amount</strong></td>
+                    <td scope="col">
 
+                        <span class="published">Confirmed</span>
 
-<div class="btn-group btnreport">
-  <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-   Product
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-  </ul>
-</div>
+                        <span class="unpublished">Pending</span>
 
-<div class="btn-group btnreport">
-  <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-  Status
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-  </ul>
-</div>
+                        {{!-- <span class="revoked_product">Revoked</span> --}}
 
-<div class="btn-group btnreport">
-  <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-  Start Date
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-  </ul>
-</div>
+                    </td>
+                    <td scope="col"></td>
+                    {{!-- <a href="/admin/products/{{this.id}}">Details</a> --}}
+                </tr>
 
-<div class="btn-group btnreport">
-  <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-   End Date
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-    <li class="dropdown-item">Menu item</li>
-  </ul>
-</div>
-
-
+            </tbody>
+        </table>
+    </div>
 </div>
