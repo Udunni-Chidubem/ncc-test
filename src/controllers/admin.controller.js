@@ -350,7 +350,10 @@ module.exports={
                     },
                     {
                         model : User,
-                        include : [{model : Farmer}]
+                        include : [
+                            {model : Farmer},
+                            {model: SeedTrader}
+                        ]
                     }
                 ]
                 }
