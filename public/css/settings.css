@@ -20,14 +20,9 @@
     letter-spacing: -0.011em;
     color: #1D1D1D;
 }
-.yes-btn{
-  padding: 2px 8px !important;
-  font-size: 12px !important;
-}
+
 .no-btn{
   background-color: #FABA23 !important;
-  padding: 2px 8px !important;
-  font-size: 8px;
 }
 .modal-grid-btns{
   display: grid;
