@@ -490,7 +490,7 @@ module.exports={
         let transaction =await db.rest.transaction()
         try{
             let log=await TransactionLog.create({
-                trader_id : trader.id,
+                seedtrader_id : trader.id,
                 transaction_ref : ref,
                 status : 'initiated',
                 pickup_point:req.body.pickup,
@@ -580,7 +580,7 @@ module.exports={
         })
         return JSON.parse(JSON.stringify(d))                              
     },
-    getTransactions : async (trader_id)=>{
+    getTransactions : async (seedtrader_id)=>{
         let transactions= await TransactionLog.findAll({
             include  : [
                 {
@@ -600,7 +600,7 @@ module.exports={
             ],
             attributes : ['transaction_id','transaction_ref', 'status', 'created_at'],
             where : {
-                trader_id : trader_id
+                seedtrader_id : seedtrader_id
             }
         });
         console.log(JSON.parse(JSON.stringify(transactions)))
@@ -686,12 +686,13 @@ module.exports={
         return { trader, isVerified, getCartItems }
     },
 
-    getOrder: async (req,seedtrader_id) =>{
+    getOrder: async (req,res) =>{
+        let transaction_id = req.params.transaction_id
         let order = await TransactionCarts.findAll({
             include: [
                 {
                     model: TransactionLog,
-                    where: { seedtrader_id: seedtrader_id }
+                    where: { transaction_id: transaction_id }
                 },
                 {
                     model: Cart,

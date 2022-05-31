@@ -24,17 +24,20 @@
                                 </tr>
                             </thead>
                             <tbody class="t_info_body">
-
-                                <tr class="t_info_row1">
-                                    <td><a href="#">2345676</a></td>
-                                    <td>ll</td>
-                                    <td>
-                                        <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
-                                        <br>
-                                        <span>on 15/APR/2020</span>
-                                    </td>
-                                    <td><a href="#">See Details</a></td>
-                                </tr>
+                                {{#each transactions}}
+                                    {{#if (eq status "verified")}}
+                                        <tr class="t_info_row1">
+                                            <th scope="row">{{#add @index 1}} {{this}} {{/add}}</th>
+                                            <td>{{this.transaction_id}}</td>
+                                            {{!-- <td> {{this.transaction_ref}} </td> --}}
+                                            <td>
+                                                <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span>
+                                            </td>
+                                            <td><a href="/seed-trader/order/{{this.transaction_id}} ">See
+                                                Details</a></td>
+                                        </tr>
+                                    {{/if}}
+                                {{/each}}
                             </tbody>
                         </table>
                     </div>

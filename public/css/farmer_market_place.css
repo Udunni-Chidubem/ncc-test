@@ -1945,7 +1945,9 @@ select {
 select:disabled {
   color: rgba(0, 0, 0, 0.42);
 }
-
+.welcome-message{
+  text-transform: capitalize;
+}
 select:focus {
   border: none;
   outline: 0;
@@ -3679,4 +3681,18 @@ justify-content: center;
 }
 .edit-profile-img p{
   padding: 6px;
+}
+
+.bg-white{
+  background: #ffffff !important;
+}
+
+.trader_cart_icon {
+  font-size: 12px;
+  background: #ff0000 !important;
+  color: rgb(255, 255, 255) !important;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -7px; 
+  margin-top: -12px;
 }
