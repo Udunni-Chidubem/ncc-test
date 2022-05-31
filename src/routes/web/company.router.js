@@ -3,6 +3,8 @@ const siteController = require('../../controllers/site.controller');
 const utils = require('../../helpers/utils')
 const { companyValidation, validate, productValidation, settingsValidation } = require('../../helpers/formValidator');
 const companyController = require('../../controllers/company.controller');
+const { now } = require('moment');
+
 
 companyRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
@@ -102,7 +104,14 @@ companyRouter.get('/settings', async (req, res)=>{
         company
     })
 }); 
-
+companyRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+   let id = req.params.id
+   console.log(id)
+   companyController.userUpdate(data, id)
+   req.logOut();
+   res.redirect("/login")
+})
 
 /*Create Product POST request*/
 companyRouter.post('/products/create', productValidation(), validate, async (req, res)=>{
