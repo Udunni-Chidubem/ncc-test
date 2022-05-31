@@ -1,0 +1,22 @@
+.deactivate-intro {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 52px;
+  text-align: center;
+  letter-spacing: -0.011em; 
+  color: #2b6952;
+  text-transform: capitalize;
+  /* width: 533px; */
+}
+.deactivate-texts {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 8px;
+    text-align: center;
+    letter-spacing: -0.011em;
+    color: #1D1D1D;
+}

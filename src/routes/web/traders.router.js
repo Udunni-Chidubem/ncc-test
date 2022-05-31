@@ -4,9 +4,10 @@ const paystack = require('../../helpers/paystack')
 const companyController = require('../../controllers/company.controller')
 const tradersController = require('../../controllers/traders.controller')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
+const { now } = require('moment');
 
 
-
+tradersRouter.get('/settings', tradersController.settings)
 tradersRouter.get('/referral', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
@@ -53,6 +54,51 @@ tradersRouter.get('/orders', async (req, res)=>{
         transactions
     })
 })
+tradersRouter.get('/settings', async (req, res)=>{
+    let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    
+    res.render('seed_trader/settings', {
+        layout : 'traders-dashboard',
+        title : 'Settings',
+        isVerified
+    })
+})
+
+
+tradersRouter.get('/market_place', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'trader')
+
+  res.render('seed_trader/market_place', {
+    layout : 'traders-dashboard',
+    title : 'Market-Place',
+    isVerified
+   })
+   
+})
+
+tradersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+   let id = req.params.id
+   console.log(id)
+   tradersController.userUpdate(data, id)
+   req.logOut();
+   res.redirect("/login")
+})
+// tradersRouter.get('/settings', async (req, res)=>{
+//     let user = await req.user
+//     let isVerified = await utils.isVerified(user, 'trader')
+
+//   res.render('seed_trader/settings', {
+//     layout : 'traders-dashboard',
+//     title : 'settings',
+//     isVerified
+//    })
+   
+// })
+
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let trader = await utils.getTraderPofile(user)
@@ -134,7 +180,8 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     
     res.render('seed_trader/view-product', {
         layout : 'traders-dashboard',
-        title: 'Product',
+        title: 'Market Place',
+        sub_title: 'Product',
         fullname: resp.trader.firstname + ' ' + resp.trader.lastname,
         traderData: resp.trader,
         product: resp.singleProduct,
