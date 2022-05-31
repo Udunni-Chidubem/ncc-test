@@ -15,7 +15,8 @@ const {
         TransactionLog, 
         TransactionCarts, 
         Wallet,
-        Orders
+        Orders,
+        Message
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
@@ -785,6 +786,30 @@ module.exports={
             let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
             return status
     },
+    getmessages : async (req,user_id) =>{
+            let sql = "SELECT * FROM messages where from_user ="+user_id+" or to_user ="+ user_id + ";"
+            let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+            //console.log(messages)
+            return messages
+    },
+    getmessagescount : async (req,user_id) =>{
+            let sql = "SELECT * FROM messages where to_user ="+ user_id + " and status = 'new';"
+            let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+            //console.log(messages)
+            return messages
+    },
+    updateMessagestatus: async (req,user_id) => {
+
+        try{
+            let status = Message.update({status:''}, { where : {to_user: user_id}})
+            return status
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+    },
 
     traderRefres: async (req,referal_id) => {
         try{
@@ -800,6 +825,29 @@ module.exports={
                 console.log(e)       
                 return e
                }
+        },
+        message: async (req,res) => {
+            const transaction = await db.rest.transaction();
+            let success_message = 'Sent'
+            let messages = req.body.message 
+            let from_user = req.body.from_user 
+            let to_user = 'Admin'
+            let status = 'new'
+          try{
+                await  Message.create({
+                    message : messages,
+                    from_user : from_user,
+                    to_user : to_user,
+                    status : status
+                }, {transaction : transaction})
+            transaction.commit()
+            return success_message
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+
+        }
+
         },
         farmer_info: async (req,res) => {
             let farmer_id = req.params.user_id

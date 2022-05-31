@@ -86,21 +86,21 @@
             <span class="link_name">Cart</span>
           </a>
         </li>
-        
+
         <li>
           <a href="/seed-trader/orders">
             <i class='bx bxs-receipt'></i>
             <span class="link_name">Orders</span>
           </a>
         </li>
-        
+
         <li>
           <a href="/seed-trader/referral">
             <span style="font-weight: bold;"> &#8358;</span>
             <span class="link_name">Earnings &amp; Referral</span>
           </a>
         </li>
-        
+
 
         <li>
           <a href="/knowledge-base">
@@ -110,9 +110,9 @@
         </li>
 
         <li>
-          <a href="#">
-            <i class='bx bx-help-circle' ></i>
-            <span class="link_name">Help</span>
+          <a href="/seed-trader/help">
+            <i class='bx bx-help-circle'></i>
+            <span class="link_name">Help <span class="badge rounded-pill bg-danger" id="help_"></span></span>
           </a>
         </li>
 
@@ -426,26 +426,74 @@
           .catch(error => console.log(error))
       })
 
+      // send message
+
+      $('.send').on('click', function () {
+        let message = $('#message').val()
+        let from_user = $('#from_user').val()
+
+        const ch_pass_data = {
+          'message': message,
+          'from_user': from_user,
+        }
+
+        let messageurl = baseUrl + '/seed-trader/message'
+
+        fetch(messageurl, {
+          method: 'POST',
+          body: JSON.stringify(ch_pass_data),
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+        }).then(r => r.json())
+          .then(response => {
+            if (response.message) {
+              let message = $('#message').val('')
+              location.reload();
+              return false;
+            }
+          })
+          .catch(error => console.log(error))
+      })
+
+      function getmessagescount() {
+        let url = baseUrl + '/seed-trader/getmessagescount'
+
+        fetch(url)
+          .then(r => r.json())
+          .then(response => {
+
+            if (response.message !== '') {
+              $('#help_').text(response.message)
+
+            }
+          }).catch(error => {
+            console.log(error)
+          })
+      }
+      setInterval(getmessagescount, 1000) //fetch the db to update the cart items without refreshing the page
+
+
     })
 
-function CopyToClipboard(containerid) {
-        if (document.selection) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(document.getElementById(containerid));
-            range.select().createTextRange();
-            document.execCommand("copy");
-        } else if (window.getSelection) {
-            var range = document.createRange();
-            range.selectNode(document.getElementById(containerid));
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            navigator.clipboard.writeText(range);
-             swal({
-              title: "Copy Successful!",
-              text: "Referral Code Copied: " + range,
-              icon: "success",
-              });
-        }
+    function CopyToClipboard(containerid) {
+      if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select().createTextRange();
+        document.execCommand("copy");
+      } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        navigator.clipboard.writeText(range);
+        swal({
+          title: "Copy Successful!",
+          text: "Referral Code Copied: " + range,
+          icon: "success",
+        });
+      }
+
+
     }
   </script>
 </body>

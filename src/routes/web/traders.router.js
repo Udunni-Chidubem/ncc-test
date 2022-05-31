@@ -26,6 +26,28 @@ tradersRouter.get('/referral', async (req, res)=>{
         referal_code
     })
 })
+tradersRouter.get('/help', async (req, res)=>{
+    let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    let user_id = trader.user_id
+    let getmessages = await tradersController.getmessages(req,user_id)
+    let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
+    
+    res.render('seed_trader/help', {
+        layout : 'traders-dashboard',
+        title : 'Referral',
+        isVerified,
+        trader,
+        getmessages,
+        user_id
+    })
+})
+tradersRouter.post('/message', async (req, res)=>{
+
+    let response = await tradersController.message(req,res)
+    res.json({ message: response }).status(200)
+})
 tradersRouter.get('/view-farmer/:user_id', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
@@ -52,6 +74,14 @@ tradersRouter.get('/orders', async (req, res)=>{
         isVerified,
         transactions
     })
+})
+tradersRouter.get('/getmessagescount', async (req, res) => {
+    let user = await req.user
+    let trader = await utils.getTraderPofile(user)
+    let getmessagescount = await tradersController.getmessagescount(req,trader.user_id)
+    getmessagescount = getmessagescount.length
+        res.json({ message: getmessagescount }).status(200)
+
 })
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
