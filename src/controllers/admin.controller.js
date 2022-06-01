@@ -484,7 +484,7 @@ module.exports={
     updateMessagestatus: async (req,to_userid) => {
 console.log(to_userid)
         try{
-            let status = Message.update({status:''}, { where : {from_user: to_userid}})
+            let status = Message.update({status:'0'}, { where : {from_user: to_userid}})
             return status
             
            } 
