@@ -112,6 +112,7 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
     let isVerified = await utils.isVerified(user)
     let user_role = await adminController.getUserRole(req, res)
     let {messages,to_userid} = await adminController.getmessages(req, res)
+    console.log(to_userid)
     let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
     let user_id = user.id
     
