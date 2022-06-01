@@ -380,17 +380,17 @@ module.exports={
             orderStatus=await Orders.findOne({
                 where :  {  
                     [Op.and]: [
-                    {
-                        company_id: {
-                        [Op.eq]: company_id
+                        {
+                            company_id: {
+                            [Op.eq]: company_id
+                            }
+                        },
+                        {
+                        transaction_log_id: {
+                            [Op.eq]: order[0].transaction_log_id
                         }
-                    },
-                    {
-                    transaction_log_id: {
-                        [Op.eq]: order[0].transaction_log_id
-                    }
-                    }
-                ]
+                        }
+                    ]
                 }
             })
         }
@@ -482,7 +482,7 @@ module.exports={
         }
     },
     updateMessagestatus: async (req,to_userid) => {
-
+console.log(to_userid)
         try{
             let status = Message.update({status:''}, { where : {from_user: to_userid}})
             return status
@@ -520,10 +520,52 @@ module.exports={
 
     getmessages : async (req,res) =>{
         let to_userid = req.params.user_id
-        let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
-        let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+
+        let messages = await Message.findAll({
+            where: {
+                // [Op.or] :   [
+                //     {from_user : to_userid }, 
+                //     {to_user : to_userid  }
+                // ]
+
+                [Op.or]: [
+                    {
+                        from_user: {
+                        [Op.eq]: to_userid
+                        }
+                    },
+                    {
+                    to_user: {
+                        [Op.eq]: to_userid
+                    }
+                    }
+                ]
+                    
+            },
+            include: [
+                {
+                   model : User,
+                   include: [
+                     { model: SeedTrader }
+                   ]
+                }
+            ],
+            raw:true
+        });
+
+        messages = JSON.parse(JSON.stringify(messages))
+        console.log('messages')
         console.log(messages)
-        return {messages,to_userid}
+        console.log(to_userid)
+                return {messages,to_userid}
+       
+        // let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
+        // let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        // console.log(messages)
+        // return {messages,to_userid}
+
+        
+    
     },
     message: async (req,user_id) => {
         const transaction = await db.rest.transaction();

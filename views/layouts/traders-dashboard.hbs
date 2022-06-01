@@ -454,8 +454,8 @@
           .then(response => {
             if (response.message) {
               let message = $('#message').val('')
-              location.reload();
-              return false;
+              // location.reload();
+              //return false;
             }
           })
           .catch(error => console.log(error))
@@ -477,8 +477,6 @@
           })
       }
       setInterval(getmessagescount, 1000) //fetch the db to update the cart items without refreshing the page
-
-
     })
 
     function CopyToClipboard(containerid) {

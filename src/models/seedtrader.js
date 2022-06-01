@@ -82,6 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    profile_pic : DataTypes.TEXT,
     gender: DataTypes.STRING,
     level_of_education: DataTypes.STRING,
     bank_account_name:DataTypes.STRING,
