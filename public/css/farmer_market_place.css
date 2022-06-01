@@ -3696,3 +3696,15 @@ justify-content: center;
   margin-left: -7px; 
   margin-top: -12px;
 }
+
+.text-green{
+  color:#008341;
+}
+
+.text-red{
+  color: #ff0000;
+}
+
+.icon-font-20{
+    font-size: 20px;
+}

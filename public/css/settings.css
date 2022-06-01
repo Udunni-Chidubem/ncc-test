@@ -20,3 +20,12 @@
     letter-spacing: -0.011em;
     color: #1D1D1D;
 }
+
+.no-btn{
+  background-color: #FABA23 !important;
+}
+.modal-grid-btns{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 35px;
+}

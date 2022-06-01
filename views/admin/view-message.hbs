@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="card chat_card m-4">
+        {{#if messages}}
+        <div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>Chat with 
+                                        {{#if (eq this.User.UserRole.role_id 3)}}
+                                            {{this.User.SeedTrader.firstname}}
+                                                {{this.User.SeedTrader.lastname}}
+                                            {{else if (eq this.User.UserRole.role_id 1)}}
+                                                {{this.User.Farmer.firstname}}
+                                                {{this.User.Farmer.lastname}}
+                                            {{else }}
+                                                {{this.User.SeedCompany.name_of_company}}
+                                            {{/if}}
+                                            {{#if (eq this.status "new")}}
+                                                <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
+                                            {{/if}}
+                                    </span>
+									<p>1767 Messages</p>
+								</div>
+							</div>
+							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+							<div class="action_menu">
+								<ul>
+									<li><i class="fas fa-user-circle"></i> View profile</li>
+									<li><i class="fas fa-users"></i> Add to close friends</li>
+									<li><i class="fas fa-plus"></i> Add to group</li>
+									<li><i class="fas fa-ban"></i> Block</li>
+								</ul>
+							</div>
+						</div>
+                        {{/if}}
+        <div class="card-body p-0">
+            <div class="messages" style="height: 350px;" >
+                {{#each messages}}
+                {{#if (eq this.from_user ../user_id)}}
+                <div class="d-flex justify-content-end mb-4">
+                    
+                    <div class="msg_cotainer">
+                        {{this.message}}
+                        <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+                    </div>
+                    <div class="img_cont_msg_end">
+                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                </div>
+                {{else}}
+                <div  class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg_end">
+                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                    </div>
+                    <div class="msg_cotainer_send">
+                            {{this.message}}
+                            <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+                    </div>
+                </div>
+               
+                {{!-- <div class="" style="text-align: left;" class="admin-messages-div">
+                    <p style="background-color: #D3D3D3; word-wrap:break-word; 
+                display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
+                        {{this.message}}
+                    </p>
+                </div> --}}
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="modal-footer msg">
+            <input type="hidden" value="{{to_userid}}" id="to_user">
+            <textarea name="message" id="message" class="form-control" placeholder="Your message.... "
+                style="height: 70px;"></textarea>
+            <button id="send" class="btn send " style="height: 70%;">Send</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
