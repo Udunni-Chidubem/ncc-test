@@ -30,17 +30,17 @@ tradersRouter.get('/help', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user, 'trader')
-    // let user_id = trader.user_id
-    // let getmessages = await tradersController.getmessages(req,user_id)
+    let user_id = trader.user_id
+    let getmessages = await tradersController.getmessages(req,user_id)
     // let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
     
     res.render('seed_trader/under_construction', {
         layout : 'traders-dashboard',
         title : 'Referral',
         isVerified,
-        // trader,
+        trader,
         // getmessages,
-        // user_id
+        user_id
     })
 })
 tradersRouter.post('/message', async (req, res)=>{
