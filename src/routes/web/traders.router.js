@@ -32,7 +32,7 @@ tradersRouter.get('/help', async (req, res)=>{
     let isVerified = await utils.isVerified(user, 'trader')
     let user_id = trader.user_id
     let getmessages = await tradersController.getmessages(req,user_id)
-    // let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
+    let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
     
     res.render('seed_trader/help', {
         layout : 'traders-dashboard',
