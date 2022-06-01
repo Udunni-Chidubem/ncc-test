@@ -546,8 +546,11 @@ console.log(to_userid)
                 {
                    model : User,
                    include: [
-                     { model: SeedTrader }
-                   ]
+                     { model: Farmer },
+                     { model: SeedTrader },
+                     { model: SeedCompany }
+                   ],
+                   raw:true
                 }
             ],
             raw:true

@@ -8,7 +8,20 @@
 									<span class="online_icon"></span>
 								</div>
 								<div class="user_info">
-									<span>Chat with {{this.from_user.User.name}}</span>
+									<span>Chat with 
+                                        {{#if (eq this.User.UserRole.role_id 3)}}
+                                            {{this.User.SeedTrader.firstname}}
+                                                {{this.User.SeedTrader.lastname}}
+                                            {{else if (eq this.User.UserRole.role_id 1)}}
+                                                {{this.User.Farmer.firstname}}
+                                                {{this.User.Farmer.lastname}}
+                                            {{else }}
+                                                {{this.User.SeedCompany.name_of_company}}
+                                            {{/if}}
+                                            {{#if (eq this.status "new")}}
+                                                <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
+                                            {{/if}}
+                                    </span>
 									<p>1767 Messages</p>
 								</div>
 							</div>
