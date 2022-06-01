@@ -39,7 +39,7 @@ tradersRouter.get('/help', async (req, res)=>{
         title : 'Referral',
         isVerified,
         trader,
-        // getmessages,
+        getmessages,
         user_id
     })
 })
