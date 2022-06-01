@@ -169,6 +169,11 @@ const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
+
+app.use('/robots.txt', function (req, res, next) {
+    res.type('text/plain')
+    res.send("");
+});
 // const random = new Random();
 // const value = random.integer(1, 1000000);
 // console.log(value)
