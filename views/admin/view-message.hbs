@@ -2,25 +2,40 @@
     <div class="card chat_card m-4">
         {{#if messages}}
         <div class="card-header msg_head">
-							<div class="d-flex bd-highlight">
+							 {{#each getuserdata}}
+                             <div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
-									<span class="online_icon"></span>
+									{{#if (eq ../role_id 3)}}
+                                    <img src="{{#if this.SeedTrader.profile_pic}} /profile_pics/{{this.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                                        alt="user profile image">
+                                    {{else if (eq ../role_id 1)}}
+                                    <img src="{{#if this.Farmer.profile_pic}} /profile_pics/{{this.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                                        alt="user profile image">
+                                    {{else }}
+                                    <img src="{{#if this.SeedCompany.profile_pic}} /profile_pics/{{this.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                                        alt="user profile image">
+                                    {{/if}}
 								</div>
 								<div class="user_info">
 									<span>Chat with 
-                                        {{#if (eq this.User.UserRole.role_id 3)}}
-                                            {{this.User.SeedTrader.firstname}}
-                                                {{this.User.SeedTrader.lastname}}
-                                            {{else if (eq this.User.UserRole.role_id 1)}}
-                                                {{this.User.Farmer.firstname}}
-                                                {{this.User.Farmer.lastname}}
+                                                   
+                                   
+                                        {{#if (eq ../role_id 3)}}
+                                            {{this.SeedTrader.firstname}}
+                                                {{this.SeedTrader.lastname}}
+                                            {{else if (eq ../role_id 1)}}
+                                                {{this.Farmer.firstname}}
+                                                {{this.Farmer.lastname}}
                                             {{else }}
-                                                {{this.User.SeedCompany.name_of_company}}
+                                                {{this.SeedCompany.name_of_company}}
                                             {{/if}}
                                             {{#if (eq this.status "new")}}
                                                 <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
-                                            {{/if}}
+                                            {{/if}} 
+                                    {{/each}}
                                     </span>
 									<p>1767 Messages</p>
 								</div>
@@ -46,14 +61,25 @@
                         {{this.message}}
                         <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
                     </div>
-                    <div class="img_cont_msg_end">
-                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
-                    </div>
                 </div>
                 {{else}}
                 <div  class="d-flex justify-content-start mb-4">
                     <div class="img_cont_msg_end">
-                        <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                        {{#each ../getuserdata}} 
+                        {{#if (eq ../../role_id 3)}}
+                                    <img src="{{#if this.SeedTrader.profile_pic}} /profile_pics/{{this.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class="rounded-circle user_img_msg"
+                                        alt="user profile image">
+                                    {{else if (eq ../../role_id 1)}}
+                                    <img src="{{#if this.Farmer.profile_pic}} /profile_pics/{{this.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class="rounded-circle user_img_msg"
+                                        alt="user profile image"> 
+                                    {{else }}
+                                    <img src="{{#if this.SeedCompany.profile_pic}} /profile_pics/{{this.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                                        id="output" class="rounded-circle user_img_msg"
+                                        alt="user profile image">
+                                    {{/if}}
+                        {{/each}}
                     </div>
                     <div class="msg_cotainer_send">
                             {{this.message}}
@@ -82,3 +108,6 @@
 </div>
 
 
+<script>
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+</script>
