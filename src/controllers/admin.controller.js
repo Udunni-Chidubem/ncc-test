@@ -545,21 +545,15 @@ console.log(to_userid)
             include: [
                 {
                    model : User,
-                   include: [
-                     { model: Farmer },
-                     { model: SeedTrader },
-                     { model: SeedCompany }
-                   ],
-                   raw:true
+                //    include: [
+                //      { model: SeedTrader }
+                //    ]
                 }
             ],
             raw:true
         });
 
         messages = JSON.parse(JSON.stringify(messages))
-        console.log('messages')
-        console.log(messages)
-        console.log(to_userid)
                 return {messages,to_userid}
        
         // let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
@@ -569,6 +563,58 @@ console.log(to_userid)
 
         
     
+    },
+    getuserrole : async (req,to_userid) =>{
+
+        let messages = await User.findOne({
+            where: { id : to_userid},
+            include: [
+                {
+                   model : UserRole,
+                }
+            ],
+        });
+
+        messages = JSON.parse(JSON.stringify(messages))
+                return {messages}
+    },
+    getuserdata : async (role_id,to_userid) =>{
+        let messages
+        if(role_id == 1){
+
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : Farmer,
+                    }
+                ],
+            });
+        }
+
+        else if(role_id == 2){
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : SeedCompany,
+                    }
+                ],
+            });
+        } 
+        else if(role_id == 3){
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : SeedTrader,
+                    }
+                ],
+            });
+        } 
+
+        messages = JSON.parse(JSON.stringify(messages))
+                return {messages}
     },
     message: async (req,user_id) => {
         const transaction = await db.rest.transaction();
