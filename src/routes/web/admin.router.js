@@ -69,6 +69,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
+    // let {messages,to_userid} = await adminController.getmessages(req, res)
 
 
     res.render('admin/messages', {
@@ -79,7 +80,29 @@ adminRouter.get('/messages', async (req, res)=>{
         roles : roles,
         user_role: user_role.Role.role_name,
         getMessages,
-        getNewmessages
+        getNewmessages,
+    })
+});
+
+adminRouter.get('/message_test', async (req, res)=>{
+    let user = await req.user
+    let roles =await adminController.getNascAdminRoles(req, res)
+    let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+    let getMessages = await adminController.getMessages(req, res)
+    let getNewmessages = await adminController.getNewmessages(req, res)
+    // let {messages,to_userid} = await adminController.getmessages(req, res)
+
+
+    res.render('admin/message_test', {
+        layout : 'admin-dashboard',
+        title : 'View Messages',
+        username : user.username,
+        isVerified,
+        roles : roles,
+        user_role: user_role.Role.role_name,
+        getMessages,
+        getNewmessages,
     })
 });
 
@@ -90,16 +113,23 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
     let user_role = await adminController.getUserRole(req, res)
     let {messages,to_userid} = await adminController.getmessages(req, res)
     let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
+    let getuserrole = await adminController.getuserrole(req, to_userid)
+    let role_id = getuserrole.messages.UserRole.role_id
+    let getuserdata = await adminController.getuserdata(role_id, to_userid)
+    console.log(getuserdata)
+
     let user_id = user.id
     
     res.render('admin/view-message', {
         layout : 'admin-dashboard',
         title : 'View Message',
         isVerified,
-        user_role,
+        user_role: user_role.Role.role_name,
         messages,
         user_id,
-        to_userid
+        to_userid,
+        getuserdata,
+        role_id
     })
 })
 adminRouter.post('/message', async (req, res)=>{

@@ -380,17 +380,17 @@ module.exports={
             orderStatus=await Orders.findOne({
                 where :  {  
                     [Op.and]: [
-                    {
-                        company_id: {
-                        [Op.eq]: company_id
+                        {
+                            company_id: {
+                            [Op.eq]: company_id
+                            }
+                        },
+                        {
+                        transaction_log_id: {
+                            [Op.eq]: order[0].transaction_log_id
                         }
-                    },
-                    {
-                    transaction_log_id: {
-                        [Op.eq]: order[0].transaction_log_id
-                    }
-                    }
-                ]
+                        }
+                    ]
                 }
             })
         }
@@ -482,7 +482,7 @@ module.exports={
         }
     },
     updateMessagestatus: async (req,to_userid) => {
-
+console.log(to_userid)
         try{
             let status = Message.update({status:''}, { where : {from_user: to_userid}})
             return status
@@ -520,10 +520,101 @@ module.exports={
 
     getmessages : async (req,res) =>{
         let to_userid = req.params.user_id
-        let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
-        let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(messages)
-        return {messages,to_userid}
+
+        let messages = await Message.findAll({
+            where: {
+                // [Op.or] :   [
+                //     {from_user : to_userid }, 
+                //     {to_user : to_userid  }
+                // ]
+
+                [Op.or]: [
+                    {
+                        from_user: {
+                        [Op.eq]: to_userid
+                        }
+                    },
+                    {
+                    to_user: {
+                        [Op.eq]: to_userid
+                    }
+                    }
+                ]
+                    
+            },
+            include: [
+                {
+                   model : User,
+                //    include: [
+                //      { model: SeedTrader }
+                //    ]
+                }
+            ],
+            raw:true
+        });
+
+        messages = JSON.parse(JSON.stringify(messages))
+                return {messages,to_userid}
+       
+        // let sql = "SELECT * FROM messages where from_user ="+to_userid+" or to_user ="+ to_userid + ";"
+        // let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        // console.log(messages)
+        // return {messages,to_userid}
+
+        
+    
+    },
+    getuserrole : async (req,to_userid) =>{
+
+        let messages = await User.findOne({
+            where: { id : to_userid},
+            include: [
+                {
+                   model : UserRole,
+                }
+            ],
+        });
+
+        messages = JSON.parse(JSON.stringify(messages))
+                return {messages}
+    },
+    getuserdata : async (role_id,to_userid) =>{
+        let messages
+        if(role_id == 1){
+
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : Farmer,
+                    }
+                ],
+            });
+        }
+
+        else if(role_id == 2){
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : SeedCompany,
+                    }
+                ],
+            });
+        } 
+        else if(role_id == 3){
+             messages = await User.findOne({
+                where: { id : to_userid},
+                include: [
+                    {
+                       model : SeedTrader,
+                    }
+                ],
+            });
+        } 
+
+        messages = JSON.parse(JSON.stringify(messages))
+                return {messages}
     },
     message: async (req,user_id) => {
         const transaction = await db.rest.transaction();
