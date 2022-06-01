@@ -1,6 +1,9 @@
 <div class="container">
     <div class="card m-4">
         <div class="card-body">
+            {{#each getuserdata}}
+            <div class="">{{this.SeedTrader.firstname}}</div>
+            {{/each}}
             <div class="messages" style="height: 300px; overflow-y: scroll; overflow-x:hidden">
                 {{#each messages}}
                 {{#if (eq this.from_user ../user_id)}}

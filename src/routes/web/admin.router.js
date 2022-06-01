@@ -88,8 +88,12 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
     let isVerified = await utils.isVerified(user)
     let user_role = await adminController.getUserRole(req, res)
     let {messages,to_userid} = await adminController.getmessages(req, res)
-    console.log(to_userid)
     let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
+    let getuserrole = await adminController.getuserrole(req, to_userid)
+    let role_id = getuserrole.messages.UserRole.role_id
+    let getuserdata = await adminController.getuserdata(role_id, to_userid)
+    console.log(getuserdata)
+
     let user_id = user.id
     
     res.render('admin/view-message', {
@@ -99,7 +103,8 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
         user_role,
         messages,
         user_id,
-        to_userid
+        to_userid,
+        getuserdata
     })
 })
 adminRouter.post('/message', async (req, res)=>{
