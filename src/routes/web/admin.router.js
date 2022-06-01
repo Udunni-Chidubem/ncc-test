@@ -128,7 +128,8 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
         messages,
         user_id,
         to_userid,
-        getuserdata
+        getuserdata,
+        role_id
     })
 })
 adminRouter.post('/message', async (req, res)=>{
