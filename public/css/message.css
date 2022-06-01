@@ -1,3 +1,22 @@
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #24502a; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 .message_profile {
     width: 60px;
     height: 60px;
@@ -201,7 +220,7 @@ right:0;
 bottom: -15px;
 color: rgba(255,255,255,0.5);
 font-size: 10px;
-width: 76px;
+width: max-content;
 }
 .msg_head{
 position: relative;
