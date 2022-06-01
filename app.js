@@ -18,6 +18,14 @@ const swaggerSpec=require('./src/config/swaggerOptions')
 
 passpportInitializer(passport)
 
+const uid = () => {
+  return Date.now().toString(36) 
+  // Math.random().toString(36).substr(2);
+};
+
+// Usage. Example, id = khhry2hb7uip12rj2iu
+const id = uid();
+console.log('random', id)
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
 app.set('view engine', 'hbs')
@@ -147,9 +155,9 @@ const options = {
     },
     apis: [`/src/routes/api/*.js`]
 };
-//console.log(options)
+console.log(options)
 //   let specs=swaggerJsdoc(options)
-//console.log(swaggerSpec)
+console.log(swaggerSpec)
 app.use(
   "/api-docs",
   swaggerUi.serve,
@@ -172,7 +180,7 @@ server.listen(PORT, function(){
 
 app.use('/robots.txt', function (req, res, next) {
     res.type('text/plain')
-    res.send("");
+    res.send("User-agent: *\Disallow: /");
 });
 // const random = new Random();
 // const value = random.integer(1, 1000000);
