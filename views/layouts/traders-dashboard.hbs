@@ -18,11 +18,13 @@
             <li class="nav-item">
               <a class="nav-link" href="#">{{trader.firstname}} {{trader.lastname}}</a>
             </li>
+            {{#unless isVerified}}
             <li class="nav-item">
               <a class="nav-link" href="/seed-trader/cart"><i class="bx bx-cart"></i>
-                <span class='badge badge-warning trader_cart_icon' id='lblCartCount'> </span>
+                <span class='badge badge-warning trader_cart_icon' id='lblCartCount'> </span> 
               </a>
             </li>
+            {{/unless}}
             <li class="nav-item">
               <a class="nav-link  " href="#"><i class="bi bi-bell"></i>
                 <!-- <span class="notrifications"></span> -->
@@ -81,7 +83,7 @@
         </li>
 
         <li>
-          <a href="/seed-trader/cart">
+          <a href="/seed-trader/sales-sheet">
             <i class='bx bx-shield-quarter'></i>
             <span class="link_name">Sales Sheet</span>
           </a>
@@ -448,8 +450,8 @@
           .then(response => {
             if (response.message) {
               let message = $('#message').val('')
-              location.reload();
-              return false;
+              /*location.reload();
+              return false;*/
             }
           })
           .catch(error => console.log(error))

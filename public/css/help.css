@@ -3,6 +3,17 @@
     color: #fff;
     font-size: 24px;
 }
+/* .send_ {
+  background: #24502a;
+  color: #fff;
+} */
+#send\ {
+  color: #fff;
+  font-size: 24px;
+}
+.card-header.msg_head.text-light {
+  background: #008346;
+}
 #message {
     border-radius: 10px;
   }
