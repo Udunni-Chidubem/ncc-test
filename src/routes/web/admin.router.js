@@ -138,6 +138,13 @@ adminRouter.post('/message', async (req, res)=>{
     let response = await adminController.message(req,user_id)
     res.json({ message: response }).status(200)
 })
+adminRouter.get('/getmessagescount', async (req, res) => {
+    let user = await req.user
+    let getmessagescount = await adminController.getmessagescount(req,res)
+    getmessagescount = getmessagescount.length
+        res.json({ message: getmessagescount }).status(200)
+
+})
 adminRouter.get('/users', async (req, res)=>{
     let user = await req.user
     let farmers=await adminController.getFarmers(req, res)
