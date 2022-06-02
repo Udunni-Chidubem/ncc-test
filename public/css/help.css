@@ -1,6 +1,7 @@
 #send{
-    background: #24502a;
+    /* background: #24502a; */
     color: #fff;
+    font-size: 24px;
 }
 #message {
     border-radius: 10px;
@@ -8,4 +9,8 @@
 .modal-footer.msg {
 border-top: none;
 flex-wrap: nowrap;
+background: #2F6637;
+}
+.card-header.msg_head {
+  background: #24502A;
 }

@@ -108,7 +108,7 @@
             <span class="link_name">Knowledge Base</span>
           </a>
         </li>
-
+      {{/unless}}
         <li>
           <a href="/seed-trader/help">
             <i class='bx bx-help-circle'></i>
@@ -116,6 +116,7 @@
           </a>
         </li>
 
+        {{#unless isVerified}}
         <li id="settings">
           <hr style="background-color: #fff;">
           <a href="/seed-trader/settings">
