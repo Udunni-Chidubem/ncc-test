@@ -6,6 +6,9 @@ const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, 
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 const seedtrader = require('../models/seedtrader');
+const user = require('../models/user');
+const farmer = require('../models/farmer');
+// const { Json } = require('sequelize/types/lib/utils');
 
 
 module.exports={
@@ -482,7 +485,7 @@ module.exports={
         }
     },
     updateMessagestatus: async (req,to_userid) => {
-console.log(to_userid)
+        console.log(to_userid)
         try{
             let status = Message.update({status:''}, { where : {from_user: to_userid}})
             return status
@@ -653,5 +656,70 @@ console.log(to_userid)
         })
 
         return user_role
+    },
+
+
+    getAllUsers: async (req, res)=>{
+        // let sql = "SELECT username FROM `user` WHERE 1;" 
+        // let username = await db.rest.query(sql, {type: QueryTypes.SELECT})
+        // let username = JSON.parse(JSON.stringify(username))
+        // return(username);
+
+        let username = await User.findAll({
+           attributes : ['username', 'created_at', 'updated_at'],
+            include: [
+                {
+                    model: Farmer,
+                    attributes: ['firstname', 'lastname', 'gender', 'date_of_birth', 'created_at', 'updated_at'],
+                    include : [
+                        {
+                            model : States,
+                            attributes: ['name']
+                        },
+                        {
+                            model : LGAs,
+                            attributes: ['name']
+                        }
+                    ]
+                },
+                {
+                    model: SeedCompany,
+                    attributes: ['name_of_company', 'address', 'created_at', 'updated_at'],
+                    include : [
+                        {
+                            model : States,
+                            attributes: ['name']
+                        },
+                        {
+                            model : LGAs,
+                            attributes: ['name']
+                        }
+                    ]
+                },
+                {
+                    model: SeedTrader,
+                    attributes: ['firstname', 'lastname', 'age', 'created_at', 'updated_at', 'gender', 'location_of_seed'],
+                    include : [
+                        {
+                            model : States,
+                            attributes: ['name']
+                        },
+                        {
+                            model : LGAs,
+                            attributes: ['name']
+                        }
+                    ]
+                },
+                {
+                    model: UserRole,
+                    attributes:['role_id'],
+                    where :{role_id : ['1','4','6']}
+                }
+            ]
+        })
+        username = JSON.parse(JSON.stringify(username))
+        //ageRange = Json.parse(JSON.stringify(ageRange))
+        console.log(username)
+        return(username);
     }
 }

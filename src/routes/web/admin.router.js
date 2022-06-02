@@ -337,14 +337,18 @@ adminRouter.get('/user_report', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
+    let getUsers =  await adminController.getAllUsers(req, res)
    
     res.render('admin/user_report', {
         layout : 'admin-dashboard',
         title : 'User-Report',
         username : user.username,
-        isVerified,  
+        isVerified,
+        getUsers,  
         user_role: user_role.Role.role_name
     })
+
+    
     
 });
 

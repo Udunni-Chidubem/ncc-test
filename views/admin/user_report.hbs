@@ -6,7 +6,7 @@
 <br>
 
 
-
+<form action="get">
 <div class="content active" id="all">
     <div class=" container table-responsives table_t_info">
         <table class="table con t_info  table-borderless" id="product-table-all">
@@ -26,18 +26,7 @@
                     </div>
                     </th>
                      <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Product
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                           <li class="dropdown-item">Cowpea</li>
-                            <li class="dropdown-item">Maize</li>
-                            <li class="dropdown-item">Rice</li>
-                            <li class="dropdown-item">Groundnut</li>
-                        </ul>
-                    </div>
+
                     </th>
                     <th scope="col">
                     <div class="btn-group btnreport">
@@ -105,9 +94,9 @@
                     <th scope="col">NAME</th>
                     <th scope="col">PHONE NUMBER</th>
                     <th scope="col">LOCATION</th>
-                    <th scope="col">PRODUCT</th>
                     <th scope="col">GENDER</th>
                     <th scope="col">AGE RANGE</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                        
@@ -115,19 +104,66 @@
                 </tr>
             </thead>
             <tbody>
-
+                  {{#each getUsers}}
                 <tr class="row-one row-height">
-                    <td scope="col">Name</td>
-                    <td scope="col"> <strong>phone no</strong></td>
-                    <td scope="col"> <strong>location</strong></td>
-                    <td scope="col"> <strong>product</strong></td>
-                    <td scope="col"> <strong>gender</strong></td>
-                    <td scope="col"> <strong>age range</strong></td>
+                    {{#if Farmer}}
+                        <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedTrader}}
+                        <td scope="col"> <strong>{{SeedTrader.firstname}}  {{SeedTrader.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                        <td scope="col"> <strong>{{SeedCompany.name_of_company}} </strong></td>
+                    {{/if}}
+
+
+                    
+                    <td scope="col"> <strong>{{username}}</strong></td>
+
+
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong> {{Farmer.LGA.name}}, {{Farmer.State.name}}</strong></td>         
+                    {{/if}}
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong> {{SeedTrader.LGA.name}}, {{SeedTrader.State.name}}</strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong> {{SeedCompany.LGA.name}}, {{SeedCompany.State.name}}</strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong>{{Farmer.gender}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong>{{SeedTrader.gender}}</strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong></strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong>{{Farmer.date_of_birth}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong>{{SeedTrader.age}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong></strong></td>
+                    {{/if}}
+
+                    <td scope="col"> <strong></strong></td>
                     <td scope="col"> </td>
                     <td scope="col"> </td>
                 </tr>
-
+                  {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+</form>
