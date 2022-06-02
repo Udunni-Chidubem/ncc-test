@@ -466,7 +466,18 @@ module.exports={
                     {
                       model : User,
                       include  : [
-                          {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
+                        {
+                            model : SeedCompany
+                        }, 
+                        {
+                            model : SeedTrader
+                        }, 
+                        {
+                            model : Farmer
+                        }, 
+                        {
+                            model : UserRole
+                        }
                     ],
                     raw: true                      
                     }
