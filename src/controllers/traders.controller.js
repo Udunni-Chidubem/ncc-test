@@ -799,16 +799,22 @@ module.exports={
             return messages
     },
     updateMessagestatus: async (req,user_id) => {
-
         try{
-            let status = Message.update({status:''}, { where : {to_user: user_id}})
-            return status
-            
-           } 
-           catch(e){
+             Message.update(
+                {
+                    status:'0'
+                }, 
+                { 
+                    where : 
+                    {
+                        to_user: user_id
+                    }
+                }
+            )
+        } 
+        catch(e){
             console.log(e)       
-            return e
-           }
+        }
     },
 
     traderRefres: async (req,referal_id) => {
@@ -838,7 +844,9 @@ module.exports={
                     message : messages,
                     from_user : from_user,
                     to_user : to_user,
-                    status : status
+                    status : status,
+                    created_at : now(),
+                    updated_at : now()
                 }, {transaction : transaction})
             transaction.commit()
             return success_message

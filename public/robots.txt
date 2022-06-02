@@ -1,5 +1,8 @@
 User-agent: Googlebot
 Disallow: /nogooglebot/
 
+User-agent: Twitterbot
+Disallow:
+
 User-agent: *
 Disallow: /

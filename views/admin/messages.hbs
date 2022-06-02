@@ -79,6 +79,11 @@
         {{/if}}
     </div>
     <div class="content_  all">
+        {{#if (eq getMessages.length 0)}}
+        <div class="alert alert-dark" role="alert">
+            Sorry! you have no new message.
+        </div>
+        {{else}}
         {{#each getMessages }}
         <div class="card msg_card m-2 ">
             <div class="card-body">
@@ -112,7 +117,7 @@
                                 {{/if}}
                             </div>
                             <div class="col-6">
-                                {{{dateFormat this.created_at "HH:mm" timeStamp}}}
+                                {{!-- {{{dateFormat this.created_at "HH:mm" timeStamp}}} --}}
                             </div>
                         </div>
                         <div class="row">
@@ -142,6 +147,7 @@
             </div>
         </div>
         {{/each}}
+        {{/if}}
     </div>
 </div>
 

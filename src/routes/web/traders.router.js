@@ -28,12 +28,13 @@ tradersRouter.get('/referral', async (req, res)=>{
 })
 tradersRouter.get('/help', async (req, res)=>{
     let user = await req.user
+    
     const trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user, 'trader')
     let user_id = trader.user_id
-    let getmessages = await tradersController.getmessages(req,user_id)
     let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
-    
+    let getmessages = await tradersController.getmessages(req,user_id)
+   
     res.render('seed_trader/help', {
         layout : 'traders-dashboard',
         title : 'Referral',
@@ -143,6 +144,7 @@ tradersRouter.get('/dashboard', async (req, res)=>{
 
     tradersRouter.get('/market_place', async (req, res)=>{
         let user = await req.user
+        let trader = await utils.getTraderPofile(user)
         let isVerified = await utils.isVerified(user, 'trader')
         let resp = await tradersController.marketPlace(req, res)
         let message = null;
@@ -158,14 +160,15 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         traderData: resp.trader,
         products,
         message,
-        isVerified: resp.isVerified
+        isVerified: resp.isVerified,
+        trader
     });
 
 })
 
-    tradersRouter.get('/product', tradersController.product)
-    tradersRouter.get('/products/:id', async (req, res) => {
-
+tradersRouter.get('/product', tradersController.product)
+tradersRouter.get('/products/:id', async (req, res) => {
+    let trader = await utils.getTraderPofile(user)
     const resp = await tradersController.viewProduct(req, res)
     const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']
     const items = JSON.stringify(JSON.parse(resp.singleProduct.item))
@@ -179,7 +182,8 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         product: resp.singleProduct,
         seedCompany,
         items: items.min,
-        isVerified: resp.isVerified
+        isVerified: resp.isVerified,
+        trader
     })
 })
 
@@ -426,6 +430,18 @@ tradersRouter.get("/checkout/preview", async (req, res)=>{
     }
 })
 
+tradersRouter.get('/sales-sheet', async (req, res)=>{
+    let user = await req.user
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('seed_trader/under_construction', {
+        layout : 'traders-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        trader
+    })
+})
 
    
 

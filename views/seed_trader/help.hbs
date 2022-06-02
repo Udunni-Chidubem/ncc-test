@@ -1,21 +1,25 @@
 <div class="card chat_card">
     <div class="card-header msg_head text-light">Chat with Admin</div>
-    <div class="card-body">
-        <div class="con_body_" style="height: 300px; overflow-y: scroll; overflow-x:hidden">
+    <div class="card-body p-0">
+        <div class="con_body_ messages" style="height: 300px; ">
             {{#each getmessages}}
             {{#if (eq this.from_user ../user_id)}}
             <div class="" style="text-align: right;">
-                <p style="background-color: #78e08f ; word-wrap:break-word; 
-                display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
+                <p class="msg_view_r">
                     {{this.message}}
                 </p>
+                <br>
+                <span class="msg_time_send_r">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+
             </div>
             {{else}}
             <div class="" style="text-align: left;">
-                <p style="background-color: #82ccdd; word-wrap:break-word; 
-                display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
+                <p class="msg_view_l">
                     {{this.message}}
                 </p>
+                <br>
+                <span class="msg_time_send_l">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+
             </div>
             {{/if}}
             {{/each}}
@@ -46,9 +50,9 @@
 <script src="../../js/script.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-
+    $(".con_body_").animate({ scrollTop: $(document).height() }, "fast");
     $(document).ready(function () {
-        $(".chat_card").animate({ scrollTop: $(document).height() }, "fast");
+
         let base_url = window.location.origin
 
         function messages_() {
@@ -59,27 +63,36 @@
                     console.log(data)
                     let userid = response.user_id
                     let content = ''
+                    let week_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
                     data.forEach((value, index) => {
+                        let raw_date = '"' + data[index].created_at + '"'
+                        const date_ = new Date(data[index].created_at)
                         if (data[index].from_user == userid) {
                             content +=
                                 ' <div class="" style="text-align: right;"> ' +
-                                ' <p style="background-color: #78e08f ; word-wrap:break-word; ' +
-                                ' display:inline-block; padding:5px; border-radius:10px; max-width:70% ">' +
+                                ' <p class="msg_view_r" >' +
                                 data[index].message +
                                 ' </p>' +
+                                '<br>' +
+                                ' <span class="msg_time_send_r"> ' +
+                                date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] + '</span> ' +
+
                                 ' </div>'
                         }
                         else {
                             content +=
                                 ' <div class="" style="text-align: left;">' +
-                                '<p style="background-color: #82ccdd; word-wrap:break-word; ' +
-                                'display:inline-block; padding:5px; border-radius:10px; max-width:70% ">' +
+                                '<p class="msg_view_l">' +
                                 data[index].message +
                                 ' </p>' +
+                                '<br>' +
+                                ' <span class="msg_time_send_r"> ' +
+                                date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] + '</span> ' +
                                 ' </div>'
                         }
                     })
                     document.querySelector('.con_body_').innerHTML = content
+                    console.log(data[0].created_at)
                 })
         }
 

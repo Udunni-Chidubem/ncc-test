@@ -6,6 +6,7 @@ const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, 
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
 const seedtrader = require('../models/seedtrader');
+const { now } = require('moment');
 
 
 module.exports={
@@ -484,7 +485,7 @@ module.exports={
     updateMessagestatus: async (req,to_userid) => {
 console.log(to_userid)
         try{
-            let status = Message.update({status:''}, { where : {from_user: to_userid}})
+            let status = Message.update({status:'0'}, { where : {from_user: to_userid}})
             return status
             
            } 
@@ -628,7 +629,9 @@ console.log(to_userid)
                 message : messages,
                 from_user : from_user,
                 to_user : to_user,
-                status : status
+                status : status,
+                created_at : now(),
+                updated_at : now()
             }, {transaction : transaction})
         transaction.commit()
         return success_message
@@ -639,7 +642,12 @@ console.log(to_userid)
     }
 
     },
-
+    getmessagescount : async (req,res) =>{
+        let sql = "SELECT * FROM messages where to_user = "+ " 'Admin' " + " and status = 'new';"
+        let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //console.log(messages)
+        return messages
+},
 
     getUserRole:async (req, res)=>{
         const user = await req.user
