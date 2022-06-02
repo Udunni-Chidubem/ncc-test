@@ -102,20 +102,6 @@
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{/if}}
-                        
-                        {{#if (eq User.UserRole.role_id "3")}}
-                        <img src="{{#if User.SeedTrader.profile_pic}} /profile_pics/{{User.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
-                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
-                            alt="user profile image">
-                        {{else if (eq this.User.UserRole.role_id "1")}}
-                        <img src="{{#if User.Farmer.profile_pic}} /profile_pics/{{User.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
-                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
-                            alt="user profile image">
-                        {{else }}
-                        <img src="{{#if User.SeedCompany.profile_pic}} /profile_pics/{{User.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
-                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
-                            alt="user profile image">
-                        {{/if}}
                     </div>
                     <div class="col-9">
                         <div class="row">
