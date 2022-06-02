@@ -69,6 +69,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
+    console.log(getMessages)
     // let {messages,to_userid} = await adminController.getmessages(req, res)
 
 
