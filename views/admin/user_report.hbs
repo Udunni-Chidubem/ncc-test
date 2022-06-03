@@ -1,11 +1,12 @@
 <div class="bg-primary">
-    {{>breadcrumbs}}
+  {{>breadcrumbs}}
 </div>
 
 <br>
 <br>
 
 
+<form action="get">
 <div class="content active" id="all">
     <div class=" container table-responsives table_t_info">
         <table class="table con t_info  table-borderless" id="product-table-all">
@@ -15,43 +16,17 @@
                     <div class="btn-group btnreport">
                         <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" id="defaultDropdown"
                             data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            State
+                            Location
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                             {{#each states}}
-                            <li value="{{this.id}}" class="dropdown-item">{{this.name}}</li>
-                             {{/each}}
-                            {{!-- <li class="dropdown-item">Another action</li>
-                            <li class="dropdown-item">Something else here</li> --}}
+                            <li class="dropdown-item">Action</li>
+                            <li class="dropdown-item">Another action</li>
+                            <li class="dropdown-item">Something else here</li>
                         </ul>
                     </div>
                     </th>
                      <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Product
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li class="dropdown-item">Cowpea</li>
-                            <li class="dropdown-item">Maize</li>
-                            <li class="dropdown-item">Rice</li>
-                            <li class="dropdown-item">Groundnut</li>
-                        </ul>
-                    </div>
-                    </th>
-                    <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Status
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li class="dropdown-item">Pending</li>
-                            <li class="dropdown-item">Confirmed</li>
-                        
-                        </ul>
-                    </div>
+
                     </th>
                     <th scope="col">
                     <div class="btn-group btnreport">
@@ -61,7 +36,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
                             <li class="dropdown-item"><input type="date"></li>
-                        
+                           
                         </ul>
                     </div>
                     </th>
@@ -73,7 +48,34 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
                             <li class="dropdown-item"><input type="date"></li>
-                       
+                        </ul>
+                    </div>
+                    </th>
+                    <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            Gender
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                           <li class="dropdown-item">Male</li>
+                           <li class="dropdown-item">Female</li>
+                           
+                        </ul>
+                    </div>
+                    </th>
+                     <th scope="col">
+                    <div class="btn-group btnreport">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
+                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            Age Range
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                             <li class="dropdown-item">15-19</li>
+                            <li class="dropdown-item">20-30</li>
+                            <li class="dropdown-item">31-40</li>
+                            <li class="dropdown-item">41-50</li>
+                            <li class="dropdown-item">51 and above</li>
                         </ul>
                     </div>
                     </th>
@@ -90,38 +92,78 @@
                 </tr>
                 <tr class="row-height">
                     <th scope="col">NAME</th>
-                    <th scope="col">STATE</th>
-                    <th scope="col">PRODUCT</th>
-                    <th scope="col">DATE</th>
-                    <th scope="col">AMOUNT</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">
+                    <th scope="col">PHONE NUMBER</th>
+                    <th scope="col">LOCATION</th>
+                    <th scope="col">GENDER</th>
+                    <th scope="col">AGE RANGE</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                        
                     </th>
                 </tr>
             </thead>
             <tbody>
-
+                  {{#each getUsers}}
                 <tr class="row-one row-height">
-                    <td scope="col">Name</td>
-                    <td scope="col"><strong>State</strong></td>
-                    <td scope="col"> <strong>Product</strong></td>
-                    <td scope="col"> <strong>Date</strong></td>
-                     <td scope="col"> <strong>Amount</strong></td>
-                    <td scope="col">
+                    {{#if Farmer}}
+                        <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedTrader}}
+                        <td scope="col"> <strong>{{SeedTrader.firstname}}  {{SeedTrader.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                        <td scope="col"> <strong>{{SeedCompany.name_of_company}} </strong></td>
+                    {{/if}}
 
-                        <span class="published">Confirmed</span>
 
-                        <span class="unpublished">Pending</span>
+                    
+                    <td scope="col"> <strong>{{username}}</strong></td>
 
-                        {{!-- <span class="revoked_product">Revoked</span> --}}
 
-                    </td>
-                    <td scope="col"></td>
-                    {{!-- <a href="/admin/products/{{this.id}}">Details</a> --}}
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong> {{Farmer.LGA.name}}, {{Farmer.State.name}}</strong></td>         
+                    {{/if}}
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong> {{SeedTrader.LGA.name}}, {{SeedTrader.State.name}}</strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong> {{SeedCompany.LGA.name}}, {{SeedCompany.State.name}}</strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong>{{Farmer.gender}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong>{{SeedTrader.gender}}</strong></td>
+                    {{/if}}
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong></strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer}}
+                    <td scope="col"> <strong>{{Farmer.date_of_birth}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedTrader}}
+                    <td scope="col"> <strong>{{SeedTrader.age}}</strong></td>
+                    {{/if}}
+
+                    {{#if SeedCompany}}
+                    <td scope="col"> <strong></strong></td>
+                    {{/if}}
+
+                    <td scope="col"> <strong></strong></td>
+                    <td scope="col"> </td>
+                    <td scope="col"> </td>
                 </tr>
-
+                  {{/each}}
             </tbody>
         </table>
     </div>
 </div>
+</form>

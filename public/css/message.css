@@ -25,7 +25,6 @@
         padding: 10px;
         overflow-y: scroll;
         overflow-x: hidden;
-        padding: 10px;
   }
   .card.msg_card.m-2 {
     border-radius: 13px;
@@ -223,6 +222,19 @@ bottom: -15px;
 font-size: 10px;
 width: max-content;
 color: #000;
+}
+
+.msg_time_send_r {
+  right: 0;
+  font-size: 10px;
+  width: max-content;
+  color: #000;
+}
+.msg_time_send_l{
+  right: 0;
+  font-size: 10px;
+  width: max-content;
+  color: #000;
 }
 .msg_head{
 position: relative;

@@ -69,6 +69,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
+    console.log(getMessages)
     // let {messages,to_userid} = await adminController.getmessages(req, res)
 
 
@@ -137,6 +138,13 @@ adminRouter.post('/message', async (req, res)=>{
     let user_id = user.id
     let response = await adminController.message(req,user_id)
     res.json({ message: response }).status(200)
+})
+adminRouter.get('/getmessagescount', async (req, res) => {
+    let user = await req.user
+    let getmessagescount = await adminController.getmessagescount(req,res)
+    getmessagescount = getmessagescount.length
+        res.json({ message: getmessagescount }).status(200)
+
 })
 adminRouter.get('/users', async (req, res)=>{
     let user = await req.user
@@ -337,14 +345,18 @@ adminRouter.get('/user_report', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
+    let getUsers =  await adminController.getAllUsers(req, res)
    
     res.render('admin/user_report', {
         layout : 'admin-dashboard',
         title : 'User-Report',
         username : user.username,
-        isVerified,  
+        isVerified,
+        getUsers,  
         user_role: user_role.Role.role_name
     })
+
+    
     
 });
 

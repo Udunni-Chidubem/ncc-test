@@ -3,6 +3,17 @@
     color: #fff;
     font-size: 24px;
 }
+/* .send_ {
+  background: #24502a;
+  color: #fff;
+} */
+#send\ {
+  color: #fff;
+  font-size: 24px;
+}
+.card-header.msg_head.text-light {
+  background: #008346;
+}
 #message {
     border-radius: 10px;
   }
@@ -13,4 +24,22 @@ background: #2F6637;
 }
 .card-header.msg_head {
   background: #24502A;
+}
+.msg_view_r{
+  background-color: #78e08f ;
+  word-wrap:break-word; 
+  display:inline-block; 
+  padding:5px; 
+  margin-bottom:0px !important; 
+  border-radius:10px;
+  max-width:70% 
+}
+.msg_view_l{
+  background-color: #82ccdd; 
+  word-wrap:break-word; 
+  display:inline-block; 
+  padding:5px; 
+  margin-bottom:0px !important; 
+  border-radius:10px; 
+  max-width:70%
 }

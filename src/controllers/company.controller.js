@@ -325,7 +325,7 @@ module.exports = {
         let username = req.body.userphoneno
         let message_ = "Updated Successfully"
         try{
-            let status = User.update({password:newpassword}, { where : {username: username}})
+            let status = await User.update({password:newpassword}, { where : {username: username}})
             return {status,isVerified,message_}
             
            } 

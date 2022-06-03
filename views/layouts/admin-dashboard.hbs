@@ -31,7 +31,7 @@
                   <a href="/admin/products">Product Management</a>
                 </li>
                 {{/if}}
-                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="./orders">Order Management</a>
                 </li>
@@ -55,7 +55,7 @@
                   <a href="/admin/user_report">User Report</a>
                 </li>
                 {{/if}}
-                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="/admin/transactions">Transaction Report</a>
                 </li>
@@ -64,16 +64,16 @@
               </ul>
             </li>
 
-             {{/if}}
+            {{/if}}
 
-             {{#if (eq user_role "admin") }}
+            {{#if (eq user_role "admin") }}
             <li class="nav-item">
               <a class="nav-link" href="/admin/messages"> <i class="bi bi-envelope"></i>
-                Messages</a>
+                Messages <span class="badge rounded-pill bg-danger" id="messages"></span></a>
             </li>
             {{/if}}
 
-             {{#if (eq user_role "admin") }}
+            {{#if (eq user_role "admin") }}
             <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-cog'></i> General Settings</a>
             </li>
@@ -131,41 +131,60 @@
 
 </body>
 <script>
-    $(document).ready(function () {
-      let baseUrl = window.location.origin
-      // send message
+  $(document).ready(function () {
+    let baseUrl = window.location.origin
+    // send message
 
-      $('.send').on('click', function () {
-        let message = $('#message').val()
-        let from_user = $('#to_user').val()
+    $('.send').on('click', function () {
+      let message = $('#message').val()
+      let from_user = $('#to_user').val()
 
-        const ch_pass_data = {
-          'message': message,
-          'to_user': from_user,
-        }
-        // console.log(ch_pass_data)
-        let messageurl = baseUrl + '/admin/message'
+      const ch_pass_data = {
+        'message': message,
+        'to_user': from_user,
+      }
+      // console.log(ch_pass_data)
+      let messageurl = baseUrl + '/admin/message'
 
-        fetch(messageurl, {
-          method: 'POST',
-          body: JSON.stringify(ch_pass_data),
-          headers: { "Content-type": "application/json; charset=UTF-8" }
-        }).then(r => r.json())
-          .then(response => {
-            if (response.message) {
-              let message = $('#message').val('')
+      fetch(messageurl, {
+        method: 'POST',
+        body: JSON.stringify(ch_pass_data),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      }).then(r => r.json())
+        .then(response => {
+          if (response.message) {
+            let message = $('#message').val('')
 
-              //let div = $(".messages").find('.admin-messages-div')
-              // div.find('p').html(message)
-              // $('.messages').append(div)
-              location.reload();
-              return false;
-            }
-          })
-          .catch(error => console.log(error))
-      })
+            //let div = $(".messages").find('.admin-messages-div')
+            // div.find('p').html(message)
+            // $('.messages').append(div)
+            location.reload();
+            return false;
+          }
+        })
+        .catch(error => console.log(error))
     })
 
-  </script>
+    function getmessagescount() {
+      let url = baseUrl + '/admin/getmessagescount'
+
+      fetch(url)
+        .then(r => r.json())
+        .then(response => {
+
+          if (response.message !== '') {
+            console.log(response.message)
+            $('#messages').text(response.message)
+
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+    }
+    setInterval(getmessagescount, 1000) //fetch the db to update the cart items without refreshing the page
+
+  })
+
+</script>
 
 </html>

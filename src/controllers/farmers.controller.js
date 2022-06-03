@@ -99,7 +99,7 @@ module.exports={
         try{
            let data={};
            data.password=newpassword
-        let status = User.update({password:newpassword}, { where : {username: username}})
+        let status = await User.update({password:newpassword}, { where : {username: username}})
          //let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
             // let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
             return {status,farmer,isVerified,message_}
