@@ -1182,3 +1182,12 @@ color: #818E9B;
 .btn-width{
   width: 100%;
 }
+
+.btndropdown{
+  border-radius: 3px;
+  padding: 10px 10px;
+  border: none;
+  text-align: center;
+  background-color: #049648;
+  color: white;
+}
