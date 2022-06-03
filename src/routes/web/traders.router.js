@@ -26,6 +26,14 @@ tradersRouter.get('/referral', async (req, res)=>{
         referal_code
     })
 })
+// change password
+tradersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
+
+    let response= await tradersController.updatePassword(req, res)
+    if(response.message_){
+       return res.json({ message: response.message_, statusCode: 200 }).status(200)
+   }
+})
 tradersRouter.get('/help', async (req, res)=>{
     let user = await req.user
     

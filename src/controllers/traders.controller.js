@@ -99,7 +99,7 @@ module.exports={
         let username = req.body.userphoneno
         let message_ = "Updated Successfully"
         try{
-        let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        let sql =  await "update user set password='"  + newpassword + "' where username = " +  username +";"
             let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
             return {status,trader,isVerified,message_}
             
@@ -844,7 +844,9 @@ module.exports={
                     message : messages,
                     from_user : from_user,
                     to_user : to_user,
-                    status : status
+                    status : status,
+                    created_at : now(),
+                    updated_at : now()
                 }, {transaction : transaction})
             transaction.commit()
             return success_message

@@ -223,6 +223,19 @@ font-size: 10px;
 width: max-content;
 color: #000;
 }
+
+.msg_time_send_r {
+  right: 0;
+  font-size: 10px;
+  width: max-content;
+  color: #000;
+}
+.msg_time_send_l{
+  right: 0;
+  font-size: 10px;
+  width: max-content;
+  color: #000;
+}
 .msg_head{
 position: relative;
 }

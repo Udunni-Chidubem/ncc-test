@@ -5,10 +5,7 @@ const utils = require('../helpers/utils');
 const {User, UserRole, Role, Farmer, SeedCompany,TransactionCarts, Cart,States, LGAs, DeliveryInformation, SeedTrader, Product, Wallet, Orders, TransactionLog, Message}  = db
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const { Op } = require("sequelize");
-const seedtrader = require('../models/seedtrader');
-const user = require('../models/user');
-const farmer = require('../models/farmer');
-// const { Json } = require('sequelize/types/lib/utils');
+const { now } = require('moment');
 
 
 module.exports={
@@ -440,8 +437,8 @@ module.exports={
                     model : User,
                     include  : [
                         {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
-                  ]
-                    
+                  ],
+                  raw: true   
                   }
               ] 
           })
@@ -469,9 +466,20 @@ module.exports={
                     {
                       model : User,
                       include  : [
-                          {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
-                    ]
-                      
+                        {
+                            model : SeedCompany
+                        }, 
+                        {
+                            model : SeedTrader
+                        }, 
+                        {
+                            model : Farmer
+                        }, 
+                        {
+                            model : UserRole
+                        }
+                    ],
+                    raw: true                      
                     }
                 ] 
             })
@@ -631,7 +639,9 @@ module.exports={
                 message : messages,
                 from_user : from_user,
                 to_user : to_user,
-                status : status
+                status : status,
+                created_at : now(),
+                updated_at : now()
             }, {transaction : transaction})
         transaction.commit()
         return success_message
@@ -642,7 +652,12 @@ module.exports={
     }
 
     },
-
+    getmessagescount : async (req,res) =>{
+        let sql = "SELECT * FROM messages where to_user = "+ " 'Admin' " + " and status = 'new';"
+        let messages = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //console.log(messages)
+        return messages
+},
 
     getUserRole:async (req, res)=>{
         const user = await req.user
