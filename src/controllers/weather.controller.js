@@ -7,7 +7,7 @@ module.exports={
             const cor_state=states.filter(e => {
                 return e.LocalizedName==state || e.EnglishName==state
             })
-            let url=`${process.env.wheather_base_url}/locations/v1/cities/neighbors/${cor_state[0].Key}?apikey='${process.env.wheather_api_key}`
+            let url=`${process.env.wheather_base_url}/locations/v1/cities/neighbors/${cor_state[0].Key}?apikey=${process.env.wheather_api_key}`
             console.log(url)
             let res=await axios.get(url)
             let lgs=locals.find(e=>{
