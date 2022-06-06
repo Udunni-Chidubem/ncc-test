@@ -6,6 +6,7 @@ const { profileUpdateValidation, cartValidation, cartSingleValidation, validate,
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
 const { now } = require('moment');
+const weatherController =require('../../controllers/weather.controller')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -281,9 +282,6 @@ farmersRouter.get('/get-cart-count', async (req, res) => {
 })
 
 
-
-
-
 farmersRouter.get('/payment-success', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
@@ -352,5 +350,15 @@ farmersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
 //         title : 'Knowledge Base - Index'
 //     }); 
 // })
+farmersRouter.get('/forecast', async (req, res)=>{
+    let user = await req.user
+    let farmer = await utils.getFarmerProfile(user)
+    let forecast=await weatherController.forecast(farmer['State.name'], farmer['LGA.name'])
+    if(forecast.Headline){
+        res.send({statusCode:200, body : forecast});
+        return
+    }
+    res.send({statusCode : 404, body : forecast})
+})
 
 module.exports=farmersRouter;
