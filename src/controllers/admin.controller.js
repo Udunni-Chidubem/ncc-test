@@ -434,7 +434,7 @@ module.exports={
               group : 'from_user',
               include: [
                   {
-                    model : User,
+                    model : User, as: 'Sender',
                     include  : [
                         {model : SeedCompany}, {model : SeedTrader}, {model : Farmer}, {model : UserRole}
                   ],
@@ -464,7 +464,7 @@ module.exports={
                 group : 'from_user',
                 include: [
                     {
-                      model : User,
+                      model : User, as: 'Sender',
                       include  : [
                         {
                             model : SeedCompany
@@ -555,7 +555,7 @@ module.exports={
             },
             include: [
                 {
-                   model : User,
+                   model : User, as: 'Sender',
                 //    include: [
                 //      { model: SeedTrader }
                 //    ]
