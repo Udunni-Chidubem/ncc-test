@@ -3708,3 +3708,18 @@ justify-content: center;
 .icon-font-20{
     font-size: 20px;
 }
+
+.weather_card{
+  display: grid;
+  grid-template-columns: repeat(5, 150px);
+  grid-gap: 40px;
+}
+
+.weather_card_box{
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: rgba(238, 237, 237, 0.22);
+  border-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 5px 6px 3px 0px #e9ecef5e;
+}
