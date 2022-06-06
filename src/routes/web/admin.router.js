@@ -345,14 +345,19 @@ adminRouter.get('/user_report', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
-    let getUsers =  await adminController.getAllUsers(req, res)
-   
+    let {username, states} =  await adminController.getAllUsers(req, res)
+    
+    if(req.query.datepic){
+        const {...rest} = req.query
+        console.log(rest)
+    }
     res.render('admin/user_report', {
         layout : 'admin-dashboard',
         title : 'User-Report',
         username : user.username,
         isVerified,
-        getUsers,  
+        username,
+        states, 
         user_role: user_role.Role.role_name
     })
 
@@ -364,12 +369,15 @@ adminRouter.get('/transactions', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
+    let {states} =  await adminController.getAllUsers(req, res)
+   
 
     res.render('admin/transactions', {
         layout : 'admin-dashboard',
         title : 'Transaction-Report',
         username : user.username,
-        isVerified,  
+        isVerified, 
+        states, 
         user_role: user_role.Role.role_name
     })
 });
