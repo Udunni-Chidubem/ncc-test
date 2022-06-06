@@ -433,6 +433,8 @@
               $('#day'+count).html(weekday[date.getDay()])
             
             $('#date'+count).html(date.getDate()+' '+ month[date.getMonth()])
+            $('#dayimg'+count).attr('src', "../weather-icon/"+d.Day.Icon+'.png')
+            $('#nightimg'+count).attr('src', "../weather-icon/"+d.Night.Icon+'.png')
             count=count+1
           })
         }
