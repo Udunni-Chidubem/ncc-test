@@ -1,5 +1,5 @@
 require('dotenv').config()
-const weatherController =require('../controllers/weather.controller')
+
 const router = require('express').Router()
 const siteController = require('../controllers/site.controller')
 const api = require('./api/api.router');

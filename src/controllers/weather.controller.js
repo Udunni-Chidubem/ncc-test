@@ -2,7 +2,7 @@ const states = require('../data/state-weather.json')
 const locals=require('../data/lgaAccuList.json')
 const { default: axios } = require('axios')
 module.exports={
-    getCities:async (state, local)=>{
+    forecast:async (state, local)=>{
         try{
             const cor_state=states.filter(e => {
                 return e.LocalizedName==state || e.EnglishName==state
