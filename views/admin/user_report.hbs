@@ -5,6 +5,7 @@
 <br>
 <br>
 
+{{!-- btn-outline-light btn-sm dropdown-toggle --}}
 
 <form action="get">
 <div class="content active" id="all">
@@ -14,20 +15,18 @@
                 <tr class="row-height">
                     <th scope="col">
                     <div class="btn-group btnreport">
-                        <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle" id="defaultDropdown"
+                        <button type="button" class="btn dropdown-menu defaultDropdown btndropdown" id="defaultDropdown"
                             data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                             Location
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li class="dropdown-item">Action</li>
-                            <li class="dropdown-item">Another action</li>
-                            <li class="dropdown-item">Something else here</li>
-                        </ul>
+                         <select class="btndropdown" aria-labelledby="">
+                            <option id="1" class="dropdown-item">Action</option>
+                            <option id="2" class="dropdown-item">Another action</option>
+                            <option id="3" class="dropdown-item">Something else here</option>
+                        </select>
                     </div>
                     </th>
-                     <th scope="col">
-
-                    </th>
+                   
                     <th scope="col">
                     <div class="btn-group btnreport">
                         <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
@@ -88,6 +87,9 @@
                     <div class="">
                         <button class="btn btn-width download-btn btn-outline-light">Export</button>
                     </div>
+                    </th>
+                     <th scope="col">
+
                     </th>
                 </tr>
                 <tr class="row-height">

@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,
     bank_account_name:DataTypes.STRING,
-    bank_account_no:DataTypes.STRING,
+    bank_account_no:DataTypes.BIGINT.UNSIGNED,
     bank_code : DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,

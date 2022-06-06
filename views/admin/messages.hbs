@@ -1,11 +1,11 @@
 <div class="container msg_container">
     <ul class="nav nav-tabs m-5">
         <li class="nav-item ">
-            <p class="nav-link active tab_info_" id="new" onclick="tab(this)" aria-current="page" >New
+            <p class="nav-link active tab_info_" id="new" onclick="tab(this)" aria-current="page">New
                 Messages</p>
         </li>
         <li class="nav-item">
-            <p class="nav-link tab_info_" id="all" onclick="tab(this)" >All Messages</p>
+            <p class="nav-link tab_info_" id="all" onclick="tab(this)">All Messages</p>
         </li>
     </ul>
     <div class="content_ active new">
@@ -20,16 +20,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                        {{#if (eq this.User.UserRole.role_id 3)}}
-                        <img src="{{#if this.User.SeedTrader.profile_pic}} /profile_pics/{{this.User.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        {{#if (eq this.Sender.UserRole.role_id 3)}}
+                        <img src="{{#if this.Sender.SeedTrader.profile_pic}} /profile_pics/{{this.Sender.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{else if (eq this.User.UserRole.role_id 1)}}
-                        <img src="{{#if this.User.Farmer.profile_pic}} /profile_pics/{{this.User.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        <img src="{{#if this.Sender.Farmer.profile_pic}} /profile_pics/{{this.Sender.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{else }}
-                        <img src="{{#if this.User.SeedCompany.profile_pic}} /profile_pics/{{this.User.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        <img src="{{#if this.Sender.SeedCompany.profile_pic}} /profile_pics/{{this.Sender.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{/if}}
@@ -37,14 +37,14 @@
                     <div class="col-9">
                         <div class="row">
                             <div class="col-6">
-                                {{#if (eq this.User.role_id 3)}}
-                                <p>{{this.User.SeedTrader.firstname}}
-                                    {{this.User.SeedTrader.lastname}}</p>
-                                {{else if (eq this.User.role_id 1)}}
-                                <p>{{this.User.Farmer.firstname}}
-                                    {{this.User.Farmer.lastname}}</p>
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>{{this.Sender.SeedTrader.firstname}}
+                                    {{this.Sender.SeedTrader.lastname}}</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>{{this.Sender.Farmer.firstname}}
+                                    {{this.Sender.Farmer.lastname}}</p>
                                 {{else }}
-                                <p>{{this.User.SeedCompany.name_of_company}}</p>
+                                <p>{{this.Sender.SeedCompany.name_of_company}}</p>
                                 {{/if}}
                             </div>
                             <div class="col-6">
@@ -53,9 +53,9 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                {{#if (eq this.User.role_id 3)}}
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
                                 <p>SeedTrader</p>
-                                {{else if (eq this.User.role_id 1)}}
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
                                 <p>Farmer</p>
                                 {{else }}
                                 <p>SeedCompany</p>
@@ -89,16 +89,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                       {{#if (eq User.UserRole.role_id 3)}}
-                        <img src="{{#if User.SeedTrader.profile_pic}} /profile_pics/{{User.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        {{#if (eq Sender.UserRole.role_id 3)}}
+                        <img src="{{#if Sender.SeedTrader.profile_pic}} /profile_pics/{{Sender.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
-                        {{else if (eq this.User.UserRole.role_id 1)}}
-                        <img src="{{#if User.Farmer.profile_pic}} /profile_pics/{{User.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        {{else if (eq this.Sender.UserRole.role_id 1)}}
+                        <img src="{{#if Sender.Farmer.profile_pic}} /profile_pics/{{Sender.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{else }}
-                        <img src="{{#if User.SeedCompany.profile_pic}} /profile_pics/{{User.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        <img src="{{#if Sender.SeedCompany.profile_pic}} /profile_pics/{{Sender.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
                         {{/if}}
@@ -106,14 +106,14 @@
                     <div class="col-9">
                         <div class="row">
                             <div class="col-6">
-                                {{#if (eq this.User.UserRole.role_id 3)}}
-                                <p>{{this.User.SeedTrader.firstname}}
-                                    {{this.User.SeedTrader.lastname}}</p>
-                                {{else if (eq this.User.UserRole.role_id 1)}}
-                                <p>{{this.User.Farmer.firstname}}
-                                    {{this.User.Farmer.lastname}}</p>
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>{{this.Sender.SeedTrader.firstname}}
+                                    {{this.Sender.SeedTrader.lastname}}</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>{{this.Sender.Farmer.firstname}}
+                                    {{this.Sender.Farmer.lastname}}</p>
                                 {{else }}
-                                <p>{{this.User.SeedCompany.name_of_company}}</p>
+                                <p>{{this.Sender.SeedCompany.name_of_company}}</p>
                                 {{/if}}
                             </div>
                             <div class="col-6">
@@ -122,9 +122,9 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                {{#if (eq this.User.UserRole.role_id 3)}}
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
                                 <p>SeedTrader</p>
-                                {{else if (eq this.User.UserRole.role_id 1)}}
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
                                 <p>Farmer</p>
                                 {{else }}
                                 <p>SeedCompany</p>

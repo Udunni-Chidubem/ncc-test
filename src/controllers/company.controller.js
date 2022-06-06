@@ -216,7 +216,7 @@ module.exports = {
         return order
     },
     getTotalSales: async (company_id) => {
-        let sql = "SELECT COUNT(status) as count, status FROM `orders` WHERE " + company_id + " and status is not null GROUP BY status";
+        let sql = "SELECT COUNT(status) as count, status FROM `orders` WHERE company_id=" + company_id + " and status is not null GROUP BY status";
 
         let totalsales = await db.rest.query(sql, {type: QueryTypes.SELECT})
         // console.log(totalsales)
