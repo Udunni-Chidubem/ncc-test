@@ -334,6 +334,7 @@ module.exports={
         return JSON.parse(orders);
     },
 
+
     getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
         let farmer=null, orderStatus=null
@@ -744,5 +745,43 @@ module.exports={
         //ageRange = Json.parse(JSON.stringify(ageRange))
         // console.log(states)
         return {username, states};
-    }
+    },
+
+    getAllTransaction: async (req,res) =>{
+        let transaction = await TransactionCarts.findAll({
+            include : [
+                {model : TransactionLog,
+                include : [
+                    {
+                        model : Farmer,
+                        include : [
+                            {
+                                model : States,
+                                attributes: ['name']
+                            },
+                            {
+                                model : LGAs,
+                                attributes: ['name']
+                            }
+                        ]
+                    }
+                ]
+                },
+                {
+                    model : Cart ,
+                    include : [
+                       { model : Product}
+                    ]
+                }
+            ]
+        })
+
+        transaction = JSON.parse(JSON.stringify(transaction))
+        // console.log('transaction')
+
+        console.log(transaction)
+        return transaction
+    },
+
+
 }

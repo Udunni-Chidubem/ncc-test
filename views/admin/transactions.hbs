@@ -97,23 +97,32 @@
             </thead>
             <tbody>
 
+                 {{#each transaction}}
                 <tr class="row-one row-height">
-                    <td scope="col">Name</td>
-                    <td scope="col"><strong>State</strong></td>
-                    <td scope="col"> <strong>Product</strong></td>
-                    <td scope="col"> <strong>Date</strong></td>
-                     <td scope="col"> <strong>Amount</strong></td>
+                    <td scope="col">{{this.TransactionLog.Farmer.firstname}} {{this.TransactionLog.Farmer.lastname}}</td>
+                    <td scope="col"><strong>{{this.TransactionLog.Farmer.LGA.name}}, {{this.TransactionLog.Farmer.State.name}}</strong></td>
+                    <td scope="col"> <strong> {{this.Cart.Product.product_name}} </strong></td>
+                    <td scope="col"> <strong>{{dateFormat this.TransactionLog.created_at	'DD/MM/YYYY'}}</strong></td>
+                    <td scope="col"> <strong>{{TransactionLog.amount}}</strong></td>
                     <td scope="col">
 
-                        <span class="published">Confirmed</span>
+                        {{#if (eq TransactionLog.status "verified")}}
 
+							{{!-- <span class="approved px-1"><i class="bi bi-dot"></i>Confirmed</span>
+								
+							<span class="pending px-1"><i class="bi bi-dot"></i>Pending</span>
+							 --}}
+
+                        <span class="published">Confirmed</span>
+                          {{else}}
                         <span class="unpublished">Pending</span>
+                        {{/if}}
 
                     </td>
                     <td scope="col"></td>
                     <td scope="col"></td>
                 </tr>
-
+                {{/each}}
             </tbody>
         </table>
     </div>
