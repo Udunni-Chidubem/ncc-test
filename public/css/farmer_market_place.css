@@ -3711,13 +3711,18 @@ justify-content: center;
 
 .weather_card{
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 200px);
   grid-gap: 40px;
+  overflow-x: scroll;
+}
+
+.weather_card::-webkit-scrollbar {
+  display: none;
 }
 
 .weather_card_box{
   text-align: center;
-  padding: 1rem;
+  padding: 5px;
   border-radius: 1rem;
   background-color: rgba(238, 237, 237, 0.22);
   border-color: rgba(238, 237, 237, 0.22);
