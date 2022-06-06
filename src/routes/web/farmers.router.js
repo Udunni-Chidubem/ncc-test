@@ -305,7 +305,8 @@ farmersRouter.get('/transactions', async (req, res)=>{
         layout : 'farmers-dashboard',
         title: 'Transaction History',
         isVerified,
-        transactions
+        transactions,
+        fullname: farmer.firstname + ' ' + farmer.lastname
     })
 })
 farmersRouter.get('/order/:transaction_id', async (req, res)=>{
@@ -327,7 +328,8 @@ farmersRouter.get('/order/:transaction_id', async (req, res)=>{
         currency_,
         total_amount,
         pick_up,
-        orderStatus 
+        orderStatus,
+        fullname: farmer.firstname + ' ' + farmer.lastname
     })
 })
 farmersRouter.get("/cart/delete/:id", async (req, res)=>{
