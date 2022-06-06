@@ -24,16 +24,16 @@
 
 
                         {{#if (eq ../role_id 3)}}
-                            {{this.SeedTrader.firstname}}
-                            {{this.SeedTrader.lastname}}
+                        {{this.SeedTrader.firstname}}
+                        {{this.SeedTrader.lastname}}
                         {{else if (eq ../role_id 1)}}
-                            {{this.Farmer.firstname}}
-                            {{this.Farmer.lastname}}
+                        {{this.Farmer.firstname}}
+                        {{this.Farmer.lastname}}
                         {{else }}
-                            {{this.SeedCompany.name_of_company}}
+                        {{this.SeedCompany.name_of_company}}
                         {{/if}}
                         {{#if (eq this.status "new")}}
-                            <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
+                        <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
                         {{/if}}
                         {{/each}}
                     </span>
