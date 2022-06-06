@@ -3711,7 +3711,7 @@ justify-content: center;
 
 .weather_card{
   display: grid;
-  grid-template-columns: repeat(5, 150px);
+  grid-template-columns: repeat(5, auto);
   grid-gap: 40px;
 }
 
