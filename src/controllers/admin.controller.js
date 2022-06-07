@@ -790,7 +790,7 @@ module.exports={
         if(req.query.datepic){
 
         }
-        if(req.query.)
+
         
         let user=await db.rest.query(sql, { nest:true, type: QueryTypes.SELECT})
         user-JSON.stringify(user, null, 2)
