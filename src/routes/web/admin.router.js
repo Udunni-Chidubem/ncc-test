@@ -373,7 +373,7 @@ adminRouter.get('/user_report', async (req,res)=>{
         layout : 'admin-dashboard',
         title : 'User-Report',
         isVerified,
-        users,
+        //users,
         states, 
         user_role: user_role.Role.role_name
     })
