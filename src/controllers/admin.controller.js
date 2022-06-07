@@ -740,7 +740,7 @@ module.exports={
                 }
             ]
         })
-        users = JSON.parse(JSON.stringify(username))
+        users = JSON.parse(JSON.stringify(users))
         states = JSON.parse(JSON.stringify(states))
         //ageRange = Json.parse(JSON.stringify(ageRange))
         // console.log(states)
