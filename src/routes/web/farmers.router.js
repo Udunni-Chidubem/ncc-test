@@ -354,6 +354,7 @@ farmersRouter.get('/forecast', async (req, res)=>{
     let user = await req.user
     let farmer = await utils.getFarmerProfile(user)
     let forecast=await weatherController.forecast(farmer['State.name'], farmer['LGA.name'])
+    console.log(forecast)
     if(forecast.Headline){
         res.send({statusCode:200, body : forecast});
         return
