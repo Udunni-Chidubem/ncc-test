@@ -69,12 +69,12 @@
                     </th>
                     <th scope="col">
                     <div class="btn-group btnreport_search">
-                        <button type="submit" class="btn btn-primary" id="btnsub" name="btnsub">Search</button>
+                        <button type="submit" class="btn btn-primary btnsearch" id="btnsub" name="btnsub">Search</button>
                     </div>
                     </th>
                      <th scope="col">
                     <div class="">
-                        <button class="btn btn-width download-btn btn-outline-light" name="export">Export</button>
+                        <button class="btn btn-width download-btn btn-outline-light btnsearch" name="export">Export</button>
                     </div>
                     </th>
                      <th scope="col">
@@ -95,7 +95,7 @@
                 </tr>
             </thead>
             <tbody>
-                  {{#each username}}
+                  {{#each users}}
                 <tr class="row-one row-height">
                     {{#if Farmer}}
                         <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>

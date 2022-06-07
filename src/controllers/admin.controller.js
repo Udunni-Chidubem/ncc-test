@@ -688,7 +688,7 @@ module.exports={
         });
 
 
-        let username = await User.findAll({
+        let users = await User.findAll({
            attributes : ['username', 'created_at', 'updated_at'],
             include: [
                 {
@@ -740,11 +740,14 @@ module.exports={
                 }
             ]
         })
-        username = JSON.parse(JSON.stringify(username))
+        users = JSON.parse(JSON.stringify(username))
         states = JSON.parse(JSON.stringify(states))
         //ageRange = Json.parse(JSON.stringify(ageRange))
         // console.log(states)
-        return {username, states};
+        return {users, states};
+    },
+    getUsersByFilter: async (req, res)=>{
+
     },
 
     getAllTransaction: async (req,res) =>{
@@ -777,7 +780,6 @@ module.exports={
         })
 
         transaction = JSON.parse(JSON.stringify(transaction))
-        // console.log('transaction')
 
         console.log(transaction)
         return transaction
