@@ -12,7 +12,8 @@ const {
     registerSeedCompanyValidate,
     seedTraderValidation,
     seedTraderValidate
-}  = require('../../helpers/formValidator')
+}  = require('../../helpers/formValidator');
+const adminController = require('../../controllers/admin.controller');
 
 const siteRouter = require('express').Router();
 
@@ -99,7 +100,10 @@ siteRouter.post('/seed-trader-signup', seedTraderValidation(), seedTraderValidat
         //res.redirect('back');
      })
 }), 
-siteRouter.get('/test2', siteController.authenticate)
+siteRouter.get('/test2', (req, res)=>{
+    adminController.testquery();
+    res.send("Hello world")
+})
 siteRouter.delete('/logout', (req, res)=>{
     req.logOut();
     res.redirect('/login')

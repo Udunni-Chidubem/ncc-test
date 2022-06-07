@@ -785,5 +785,16 @@ module.exports={
         return transaction
     },
 
+    testquery:async (req)=>{
+        let sql = "SELECT u.username, f.firstname as `Farmer.firstname`, f.lastname as `Farmer.lastname`, s.name as `Farmer.State.name`, l.name as `Farmer.LGA.name`, st.firstname as `SeedTrader.firstname`, st.lastname as `SeedTrader.lastname`,  s1.name as 'SeedTrader.State.name', l1.name as `SeedTrader.LGA.name`,  sc.name_of_company as `Seedcompany.name_of_company` FROM user u left join farmer f on f.user_id=u.id left join lgas l on l.id =f.lg_id left join states s on s.id=f.state_id left join seedtrader st on st.user_id = u.id left join lgas l1 on l1.id =st.lg_id left join states s1 on s1.id=st.state_id left join seedcompany sc on sc.user_id = u.id left join lgas l2 on l2.id =sc.lg_id left join states s2 on s2.id=sc.state_id";
+        if(req.query.datepic){
+
+        }
+        if(req.query.)
+        
+        let user=await db.rest.query(sql, { nest:true, type: QueryTypes.SELECT})
+        user-JSON.stringify(user, null, 2)
+        console.log(user)
+    }
 
 }
