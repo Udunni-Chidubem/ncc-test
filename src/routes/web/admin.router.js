@@ -66,7 +66,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
-    //let user_role = await adminController.getUserRole(req, res)
+    let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
     console.log('getMessages')
@@ -84,7 +84,7 @@ adminRouter.get('/messages', async (req, res)=>{
         username : user.username,
         isVerified,
         roles : roles,
-        //user_role: user_role.Role.role_name,
+        user_role: user_role.Role.role_name,
         getMessages,
         getNewmessages,
     })
