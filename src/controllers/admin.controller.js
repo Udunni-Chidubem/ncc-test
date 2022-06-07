@@ -334,6 +334,7 @@ module.exports={
         return JSON.parse(orders);
     },
 
+
     getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
         let farmer=null, orderStatus=null
@@ -679,8 +680,15 @@ module.exports={
         // let username = await db.rest.query(sql, {type: QueryTypes.SELECT})
         // let username = JSON.parse(JSON.stringify(username))
         // return(username);
+        // const transaction = await db.rest.transaction();
 
-        let username = await User.findAll({
+        let states = await States.findAll({
+            attributes : ['id', 'name'],
+            raw: true
+        });
+
+
+        let users = await User.findAll({
            attributes : ['username', 'created_at', 'updated_at'],
             include: [
                 {
@@ -732,9 +740,50 @@ module.exports={
                 }
             ]
         })
-        username = JSON.parse(JSON.stringify(username))
+        users = JSON.parse(JSON.stringify(username))
+        states = JSON.parse(JSON.stringify(states))
         //ageRange = Json.parse(JSON.stringify(ageRange))
-        console.log(username)
-        return(username);
-    }
+        // console.log(states)
+        return {users, states};
+    },
+    getUsersByFilter: async (req, res)=>{
+
+    },
+
+    getAllTransaction: async (req,res) =>{
+        let transaction = await TransactionCarts.findAll({
+            include : [
+                {model : TransactionLog,
+                include : [
+                    {
+                        model : Farmer,
+                        include : [
+                            {
+                                model : States,
+                                attributes: ['name']
+                            },
+                            {
+                                model : LGAs,
+                                attributes: ['name']
+                            }
+                        ]
+                    }
+                ]
+                },
+                {
+                    model : Cart ,
+                    include : [
+                       { model : Product}
+                    ]
+                }
+            ]
+        })
+
+        transaction = JSON.parse(JSON.stringify(transaction))
+
+        console.log(transaction)
+        return transaction
+    },
+
+
 }

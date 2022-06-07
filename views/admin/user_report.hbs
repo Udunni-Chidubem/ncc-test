@@ -5,87 +5,76 @@
 <br>
 <br>
 
-{{!-- btn-outline-light btn-sm dropdown-toggle --}}
 
-<form action="get">
+<form action="" method="get">
 <div class="content active" id="all">
     <div class=" container table-responsives table_t_info">
         <table class="table con t_info  table-borderless" id="product-table-all">
             <thead class="t_info_head ">
                 <tr class="row-height">
                     <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button type="button" class="btn dropdown-menu defaultDropdown btndropdown" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Location
-                        </button>
-                         <select class="btndropdown" aria-labelledby="">
-                            <option id="1" class="dropdown-item">Action</option>
-                            <option id="2" class="dropdown-item">Another action</option>
-                            <option id="3" class="dropdown-item">Something else here</option>
+                    <div class="btnreport datecycle">
+                        <label for="selectico">Location </label>
+                         <select class="btndropdown" aria-labelledby="" id="locationselect" name="locationselect">
+                             {{#each states}}
+                            <option value="{{this.id}}"> {{this.name}} </option>
+                             {{/each}}
+                            {{!-- <option id="2" class="dropdown-item">Action</option>
+                            <option id="3" class="dropdown-item">Another action</option>
+                            <option id="4" class="dropdown-item">Something else here</option> --}}
                         </select>
+                       
                     </div>
                     </th>
                    
                     <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Start Date
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li class="dropdown-item"><input type="date"></li>
-                           
-                        </ul>
+                    <div class="btnreport btndropdown datecycle">
+                        <label for="datepic">Start Date</label>
+                        <input class="btndropdown" type="date" id="datepic" name="datepic">
+                        
+                    </div>
+                    </th>
+
+                    <th scope="col">
+                     <div class="btnreport btndropdown datecycle">
+                        <label for="datepic">End Date</label>
+                        <input class="btndropdown" type="date" id="datepic" name="datepic2">
+                        
                     </div>
                     </th>
                     <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            End Date
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li class="dropdown-item"><input type="date"></li>
-                        </ul>
-                    </div>
-                    </th>
-                    <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Gender
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                           <li class="dropdown-item">Male</li>
-                           <li class="dropdown-item">Female</li>
-                           
-                        </ul>
+                    <div class="btnreport datecycle">
+                        <label for="btndropdown">Gender</label>
+                         <select class="btndropdown" aria-labelledby="" id="genderselect" name="genderselect">
+                              <option id="1" class="dropdown-item">Gender</option>
+                            <option id="2" class="dropdown-item">Male</option>
+                            <option id="3" class="dropdown-item">Female</option>
+                        </select>
+                       
                     </div>
                     </th>
                      <th scope="col">
-                    <div class="btn-group btnreport">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="defaultDropdown"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                            Age Range
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                             <li class="dropdown-item">15-19</li>
-                            <li class="dropdown-item">20-30</li>
-                            <li class="dropdown-item">31-40</li>
-                            <li class="dropdown-item">41-50</li>
-                            <li class="dropdown-item">51 and above</li>
-                        </ul>
+                    <div class="btnreport datecycle">
+                        <label for="btndropdown">Age-Range</label>
+                         <select class="btndropdown" aria-labelledby="" id="ageselect" name="ageselect">
+                            <option id="1" class="dropdown-item">Age-Range</option>
+                            <option id="2" class="dropdown-item">15-19</option>
+                            <option id="3" class="dropdown-item">20-30</option>
+                            <option id="4" class="dropdown-item">31-40</option>
+                            <option id="5" class="dropdown-item">41-50</option>
+                            <option id="6" class="dropdown-item">51 and above</option>
+                        </select>
+                       
                     </div>
                     </th>
                     <th scope="col">
                     <div class="btn-group btnreport_search">
-                        <button type="button" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary btnsearch" id="btnsub" name="btnsub">Search</button>
                     </div>
                     </th>
                      <th scope="col">
                     <div class="">
-                        <button class="btn btn-width download-btn btn-outline-light">Export</button>
+                        <button class="btn btn-width download-btn btn-outline-light btnsearch" name="export">Export</button>
                     </div>
                     </th>
                      <th scope="col">
@@ -106,7 +95,7 @@
                 </tr>
             </thead>
             <tbody>
-                  {{#each getUsers}}
+                  {{#each users}}
                 <tr class="row-one row-height">
                     {{#if Farmer}}
                         <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>
