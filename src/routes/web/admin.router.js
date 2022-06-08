@@ -374,7 +374,6 @@ adminRouter.get('/user_report', async (req,res)=>{
     })
 
     
-    
 });
 
 adminRouter.get('/transactions', async (req,res)=>{
