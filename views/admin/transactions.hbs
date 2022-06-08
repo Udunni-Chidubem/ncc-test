@@ -14,7 +14,8 @@
                     <th scope="col">
                     <div class="btnreport datecycle">
                         <label for="selectico" class="labelos">State </label>
-                         <select class="btndropdown" aria-labelledby="" id="selectico">
+                         <select class="btndropdown" aria-labelledby="" id="locationselect" name="locationselect">
+                             <option value="">Select State</option>
                              {{#each states}}
                             <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
                              {{/each}}
@@ -29,12 +30,12 @@
                     <th scope="col">
                     <div class="btnreport datecycle">
                         <label for="btndropdown" class="labelos">Product</label>
-                         <select class="btndropdown" aria-labelledby="">
-                            <option id="1" class="dropdown-item">Product</option>
-                            <option id="2" class="dropdown-item">Cowpea</option>
-                            <option id="3" class="dropdown-item">Maize</option>
-                            <option id="4" class="dropdown-item">Rice</option>
-                            <option id="5" class="dropdown-item">Groundnut</option>
+                         <select class="btndropdown" aria-labelledby="" id="productselect" name="productselect">
+                            <option value="">Select Product</option>
+                            <option id="1" class="dropdown-item">Cowpea</option>
+                            <option id="2" class="dropdown-item">Maize</option>
+                            <option id="3" class="dropdown-item">Rice</option>
+                            <option id="4" class="dropdown-item">Groundnut</option>
                         </select>
                        
                     </div>
@@ -43,8 +44,8 @@
                     <th scope="col">
                     <div class="btnreport datecycle">
                         <label for="btndropdown" class="labelos">Status</label>
-                         <select class="btndropdown" aria-labelledby="">
-                            <option id="1" class="dropdown-item">Status</option>
+                         <select class="btndropdown" aria-labelledby="" id="selectstatus" name="selectstatus">
+                            <option value="">Select Status</option>
                             <option id="2" class="dropdown-item">Pending</option>
                             <option id="3" class="dropdown-item">Confirmed</option>
                         </select>
@@ -71,12 +72,12 @@
                      
                     <th scope="col">
                     <div class="btn-group btnreport_search">
-                        <button type="submit" class="btn btn-primary btnsearch">Search</button>
+                        <button type="submit" class="btn btn-primary btnsearch" id="btnsub" name="btnsub">Search</button>
                     </div>
                     </th>
                      <th scope="col">
                     <div class="">
-                        <button class="btn btn-width download-btn btn-outline-light btnsearch">Export</button>
+                        <button class="btn btn-width download-btn btn-outline-light btnsearch" name="export">Export</button>
                     </div>
                     </th>
                      <th scope="col">
@@ -99,11 +100,28 @@
 
                  {{#each transaction}}
                 <tr class="row-one row-height">
-                    <td scope="col">{{this.TransactionLog.Farmer.firstname}} {{this.TransactionLog.Farmer.lastname}}</td>
-                    <td scope="col"><strong>{{this.TransactionLog.Farmer.LGA.name}}, {{this.TransactionLog.Farmer.State.name}}</strong></td>
-                    <td scope="col"> <strong> {{this.Cart.Product.product_name}} </strong></td>
+                   {{#if Farmer.firstname}}
+                        <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedTrader.firstname}}
+                        <td scope="col"> <strong>{{SeedTrader.firstname}}  {{SeedTrader.lastname}} </strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer.firstname}}
+                    <td scope="col"> <strong> {{Farmer.LGA.name}}, {{Farmer.State.name}}</strong></td>         
+                    {{/if}}
+                    {{#if SeedTrader.firstname}}
+                    <td scope="col"> <strong> {{SeedTrader.LGA.name}}, {{SeedTrader.State.name}}</strong></td>
+                    {{/if}}
+
+                     
+                    <td scope="col"> <strong> {{Product.product_name}} </strong></td>
+
                     <td scope="col"> <strong>{{dateFormat this.TransactionLog.created_at	'DD/MM/YYYY'}}</strong></td>
+
                     <td scope="col"> <strong>{{TransactionLog.amount}}</strong></td>
+                    
                     <td scope="col">
 
                         {{#if (eq TransactionLog.status "verified")}}

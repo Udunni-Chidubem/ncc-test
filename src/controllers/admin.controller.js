@@ -23,6 +23,7 @@ const {
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
 const { now } = require("moment");
+const { query } = require("express");
 
 module.exports = {
     getNascAdminRoles: async (req, res) => {
@@ -724,11 +725,6 @@ module.exports = {
     },
 
     getAllUsers: async (req, res) => {
-        // let sql = "SELECT username FROM `user` WHERE 1;"
-        // let username = await db.rest.query(sql, {type: QueryTypes.SELECT})
-        // let username = JSON.parse(JSON.stringify(username))
-        // return(username);
-        // const transaction = await db.rest.transaction();
 
         let states = await States.findAll({
             attributes: ["id", "name"],
@@ -808,7 +804,7 @@ module.exports = {
             ],
         });*/
         let sql =
-        "SELECT distinct u.username, u.created_at, u.updated_at, f.firstname as `Farmer.firstname`, f.lastname as `Farmer.lastname`, s.name as `Farmer.State.name`, l.name as `Farmer.LGA.name`, f.date_of_birth as `Farmer.date_of_birth`, f.gender as `Farmer.gender`, st.firstname as `SeedTrader.firstname`, st.lastname as `SeedTrader.lastname`,  s1.name as 'SeedTrader.State.name', l1.name as `SeedTrader.LGA.name`, st.age as `SeedTrader.age`, st.gender as 'SeedTrader.gender', sc.name_of_company as `SeedCompany.name_of_company`, s2.name as `SeedCompany.State.name`, l2.name as `SeedCompany.LGA.name` FROM user u left join farmer f on f.user_id=u.id left join lgas l on l.id =f.lg_id left join states s on s.id=f.state_id left join seedtrader st on st.user_id = u.id left join lgas l1 on l1.id =st.lg_id left join states s1 on s1.id=st.state_id left join seedcompany sc on sc.user_id = u.id left join lgas l2 on l2.id =sc.lg_id left join states s2 on s2.id=sc.state_id left join  user_role ur on ur.user_id=u.id left join role r on r.id - ur.role_id where (r.role_name <> 'admin' AND r.role_name <> 'nasc' AND r.role_name <> 'rra' AND r.role_name <> 'nigsims')";
+        "SELECT distinct u.username, u.created_at, u.updated_at, f.firstname as `Farmer.firstname`, f.lastname as `Farmer.lastname`, s.name as `Farmer.State.name`, l.name as `Farmer.LGA.name`, f.date_of_birth as `Farmer.date_of_birth`, f.gender as `Farmer.gender`, st.firstname as `SeedTrader.firstname`, st.lastname as `SeedTrader.lastname`,  s1.name as 'SeedTrader.State.name', l1.name as `SeedTrader.LGA.name`, st.age as `SeedTrader.age`, st.gender as 'SeedTrader.gender', sc.name_of_company as `SeedCompany.name_of_company`, s2.name as `SeedCompany.State.name`, l2.name as `SeedCompany.LGA.name` FROM user u left join farmer f on f.user_id=u.id left join lgas l on l.id =f.lg_id left join states s on s.id=f.state_id left join seedtrader st on st.user_id = u.id left join lgas l1 on l1.id =st.lg_id left join states s1 on s1.id=st.state_id left join seedcompany sc on sc.user_id = u.id left join lgas l2 on l2.id =sc.lg_id left join states s2 on s2.id=sc.state_id left join  user_role ur on ur.user_id=u.id left join role r on r.id = ur.role_id where r.role_name <> 'admin' AND r.role_name <> 'nasc' AND r.role_name <> 'rra' AND r.role_name <> 'nigsims'";
     
     if (req.query.startdate && req.query.startdate!="") {
         sql =sql+" AND u.created_at >= '"+req.query.startdate+"'"
@@ -824,6 +820,9 @@ module.exports = {
     if (req.query.locationselect && req.query.locationselect!=""){
         sql =sql+" AND (f.state_id = '"+req.query.locationselect + "' or st.state_id ='" +req.query.locationselect + "' or sc.state_id ='" +req.query.locationselect +"')"
     }
+    if (req,query.ageselect && req.query.ageselect!=""){
+        sql =sql+"AND (f.date_of_birth = '"+req.query.ageselect + "' or st.age ='" +req.query.ageselect + "')"
+    }
     console.log("the sql is", sql)
     
     let users = await db.rest.query(sql, {
@@ -837,35 +836,62 @@ module.exports = {
         console.log(users)
         return { users, states };
     },
-    getUsersByFilter: async (req, res) => { },
 
     getAllTransaction: async (req, res) => {
-        let transaction = await TransactionCarts.findAll({
-            include: [
-                {
-                    model: TransactionLog,
-                    include: [
-                        {
-                            model: Farmer,
-                            include: [
-                                {
-                                    model: States,
-                                    attributes: ["name"],
-                                },
-                                {
-                                    model: LGAs,
-                                    attributes: ["name"],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    model: Cart,
-                    include: [{ model: Product }],
-                },
-            ],
+        // let transaction = await TransactionCarts.findAll({
+        //     include: [
+        //         {
+        //             model: TransactionLog,
+        //             include: [
+        //                 {
+        //                     model: Farmer,
+        //                     include: [
+        //                         {
+        //                             model: States,
+        //                             attributes: ["name"],
+        //                         },
+        //                         {
+        //                             model: LGAs,
+        //                             attributes: ["name"],
+        //                         },
+        //                     ],
+        //                 },
+        //             ],
+        //         },
+        //         {
+        //             model: Cart,
+        //             include: [{ model: Product }],
+        //         },
+        //     ],
+        // });
+
+
+        let sql = "SELECT distinct f.firstname as `Farmer.firstname`, f.lastname as `Farmer.lastname`, s.name as `Farmer.State.name`, l.name as `Farmer.LGA.name`, st.firstname as `SeedTrader.firstname`, st.lastname as `SeedTrader.lastname`,  s1.name as 'SeedTrader.State.name', l1.name as `SeedTrader.LGA.name`, p.product_name as `Product.product_name`, tl.created_at as `TransactionLog.created_at`, tl.amount as `TransactionLog.amount`, tl.status as `TransactionLog.status` FROM transaction_carts tc left join transaction_log tl on tl.id=tc.transaction_log_id left join farmer f on f.id=tl.farmer_id left join lgas l on l.id =f.lg_id left join seedtrader st on st.id=tl.seedtrader_id left join lgas l1 on l1.id =st.lg_id left join states s1 on s1.id=st.state_id left join states s on s.id=f.state_id left join cart c on c.id=tc.cart_id left join product p on p.id=c.product_id where 1 "
+
+        if (req.query.startdate && req.query.startdate!="") {
+            sql =sql+" AND u.created_at >= '"+req.query.startdate+"'"
+        }
+    
+        if (req.query.enddate && req.query.enddate!="") {
+            sql =sql+" AND u.created_at <= '"+req.query.enddate+"'"
+        }
+    
+        if (req.query.productselect && req.query.productselect!=""){
+            sql =sql+" AND p.product_name = '"+req.query.productselect+"'"
+        }
+        if (req.query.locationselect && req.query.locationselect!=""){
+            sql =sql+" AND (f.state_id = '"+req.query.locationselect + "' or st.state_id ='" +req.query.locationselect +"')"
+        }
+        if (req,query.statusselect && req.query.statusselect!=""){
+            sql =sql+" AND tl.status = '"+req.query.statusselect + "'"
+        }
+
+          let transaction = await db.rest.query(sql, {
+            nest: true,
+            type: QueryTypes.SELECT,
         });
+
+        
 
         transaction = JSON.parse(JSON.stringify(transaction));
 
@@ -873,33 +899,5 @@ module.exports = {
         return transaction;
     },
 
-    testquery: async (req) => {
-        let sql =
-            "SELECT u.username, u.created_at, u.updated_at, f.firstname as `Farmer.firstname`, f.lastname as `Farmer.lastname`, s.name as `Farmer.State.name`, l.name as `Farmer.LGA.name`, f.date_of_birth as `Farmer.date_of_birth`, f.gender as `Farmer.gender`, st.firstname as `SeedTrader.firstname`, st.lastname as `SeedTrader.lastname`,  s1.name as 'SeedTrader.State.name', l1.name as `SeedTrader.LGA.name`, st.age as `SeedTrader.age`, st.gender as 'SeedTrader.gender', sc.name_of_company as `SeedCompany.name_of_company`, s2.name as `SeedCompany.State.name`, l2.name as `SeedCompany.LGA.name` FROM user u left join farmer f on f.user_id=u.id left join lgas l on l.id =f.lg_id left join states s on s.id=f.state_id left join seedtrader st on st.user_id = u.id left join lgas l1 on l1.id =st.lg_id left join states s1 on s1.id=st.state_id left join seedcompany sc on sc.user_id = u.id left join lgas l2 on l2.id =sc.lg_id left join states s2 on s2.id=sc.state_id left join  user_role ur on ur.user_id=u.id left join role r on r.id = ur.role_id where r.role_name <> 'admin' and r.role_name <> 'superadmin";
-        
-        if (req.query.startdate) {
-            sql =sql+' AND u.created_at >= `'+req.query.startdate+'`'
-        }
-
-        if (req.query.enddate) {
-            sql =sql+' AND u.created_at <= `'+req.query.enddate+'`'
-        }
-
-        if (req.query.genderselect){
-            sql =sql+' AND (f.gender = `'+req.query.genderselect + '` or st.gender =`' +req.query.genderselect +'`)'
-        }
-        if (req.query.locationselect){
-            sql =sql+' AND (f.state_id = `'+req.query.locationselect + '` or st.state_id =`' +req.query.locationselect + '` or sc.state_id =`' +req.query.locationselect +'`)'
-        }
-        if (req.query.ageselect){
-
-        }
-
-        let user = await db.rest.query(sql, {
-            nest: true,
-            type: QueryTypes.SELECT,
-        });
-        user - JSON.stringify(user, null, 2);
-        console.log(user);
-    },
+    
 };
