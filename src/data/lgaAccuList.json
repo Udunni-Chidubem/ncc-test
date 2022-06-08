@@ -52,8 +52,16 @@
         "name" : "Yobe",
         "value":[
             {
-                "name": "Shongom",
-                "accu_name":"Kushi"
+                "name": "Bade",
+                "accu_name": "Jajimaji"
+            },
+            {
+                "name": "Gujba",
+                "accu_name":"Gujba"
+            },
+            {
+                "name": "Damaturu",
+                "accu_name":"Damaturu"
             }
         ]
     }
