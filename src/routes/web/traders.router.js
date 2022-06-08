@@ -4,7 +4,8 @@ const paystack = require('../../helpers/paystack')
 const companyController = require('../../controllers/company.controller')
 const tradersController = require('../../controllers/traders.controller')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
-
+const db = require('../../models');
+const {States}  = db
 
 
 tradersRouter.get('/referral', async (req, res)=>{
@@ -442,12 +443,18 @@ tradersRouter.get('/sales-sheet', async (req, res)=>{
     let user = await req.user
     let trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user)
+
+    let states = await States.findAll({
+        attributes : ['id', 'name'],
+        raw: true
+    });
     
-    res.render('seed_trader/under_construction', {
+    res.render('seed_trader/sales_sheet', {
         layout : 'traders-dashboard',
         title : 'Sales Sheet',
         isVerified,
-        trader
+        trader,
+        states: states
     })
 })
 

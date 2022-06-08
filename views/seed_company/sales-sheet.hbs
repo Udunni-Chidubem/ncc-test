@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-6">
                 <label for="state" class="form-label salesLabel">State<span class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" data-state="{{ tradersData.state_id }}"
+                <select class="form-select salesSelect border-bottom" data-state="{{ company.state_id }}"
                     name="state_id" id="state" required>
                     <option value="">Select State</option>
                     {{#each states}}
@@ -61,7 +61,7 @@
             <div></div>
             <div class="col-md-6">
                 <label for="lga" class="form-label salesLabel">LGA<span class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" data-lga="{{ tradersData.lg_id }}" name="lg_id" id="lgas" required>
+                <select class="form-select salesSelect border-bottom" data-lga="{{ company.lg_id }}" name="lg_id" id="lgas" required>
                     <option value="">Select LGA</option>
                 </select>
             </div>

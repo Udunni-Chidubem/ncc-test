@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+.horizontalLine{
+    border-bottom: 1px solid #ccc;
+    padding: 1.5rem;
+}
+
+.asterisk{
+    color: #f21818;
+    font-size: 18px;
+}
+.salesLabel{
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: #818e9b;
+}
+
+.salesSelect{
+ height: 2.45rem;
+}
+
+.salesButton{
+    padding: 0.65rem 1.25rem !important;
+}
