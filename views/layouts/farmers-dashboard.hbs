@@ -409,6 +409,37 @@
           .catch(error => console.log(error))
       })
 
+      let forecasturl=baseUrl+'/farmer/forecast'
+      fetch(forecasturl, {
+        method: 'GET',
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      })
+      .then(r=>r.json())
+      .then(r=>{
+        if(r.statusCode==200){
+          let dailyForecast=r.body.DailyForecasts
+          let count = 0
+          const weekday = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+          const month = ["Jan.","Feb.","March","April","May","June","July","August","Sept.","Oct.","Nov.","Dec."];
+          dailyForecast.forEach(d=>{
+            let max=d.Temperature.Maximum.Value
+            let min=d.Temperature.Minimum.Value
+            max = Math.round((max-32)*(5/9))
+            min=Math.round((min-32)*(5/9))
+            $('#min'+count).html(min)
+            $('#max'+count).html(max)
+            let date=new Date(d.Date)
+            if(count>1)
+              $('#day'+count).html(weekday[date.getDay()])
+            
+            $('#date'+count).html(date.getDate()+' '+ month[date.getMonth()])
+            $('#dayimg'+count).attr('src', "../weather-icon/"+d.Day.Icon+'.png')
+            $('#nightimg'+count).attr('src', "../weather-icon/"+d.Night.Icon+'.png')
+            count=count+1
+          })
+        }
+      })
+
     })
 
 

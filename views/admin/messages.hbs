@@ -1,0 +1,176 @@
+<div class="container msg_container">
+    <ul class="nav nav-tabs m-5">
+        <li class="nav-item ">
+            <p class="nav-link active tab_info_" id="new" onclick="tab(this)" aria-current="page">New
+                Messages</p>
+        </li>
+        <li class="nav-item">
+            <p class="nav-link tab_info_" id="all" onclick="tab(this)">All Messages</p>
+        </li>
+    </ul>
+    <div class="content_ active new">
+        {{#if (eq getNewmessages.length 0)}}
+        <div class="alert alert-dark" role="alert">
+            Sorry! you have no new message.
+        </div>
+        {{else}}
+        {{#each getNewmessages }}
+        {{!-- <p>{{this.User.UserRole.role_id}}</p> --}}
+        <div class="card msg_card m-2 ">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        {{#if (eq this.Sender.UserRole.role_id 3)}}
+                        <img src="{{#if this.Sender.SeedTrader.profile_pic}} /profile_pics/{{this.Sender.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{else if (eq this.User.UserRole.role_id 1)}}
+                        <img src="{{#if this.Sender.Farmer.profile_pic}} /profile_pics/{{this.Sender.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{else }}
+                        <img src="{{#if this.Sender.SeedCompany.profile_pic}} /profile_pics/{{this.Sender.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{/if}}
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-6">
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>{{this.Sender.SeedTrader.firstname}}
+                                    {{this.Sender.SeedTrader.lastname}}</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>{{this.Sender.Farmer.firstname}}
+                                    {{this.Sender.Farmer.lastname}}</p>
+                                {{else }}
+                                <p>{{this.Sender.SeedCompany.name_of_company}}</p>
+                                {{/if}}
+                            </div>
+                            <div class="col-6">
+                                {{{dateFormat this.created_at "HH:mm" timeStamp}}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>SeedTrader</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>Farmer</p>
+                                {{else }}
+                                <p>SeedCompany</p>
+                                {{/if}}
+                            </div>
+                            <div class="col-3">
+                                <span class="badge bg-danger" id="msg_status">{{this.status}}</span>
+                            </div>
+                            <div class="col-3 msg_view text-end">
+                                <form action="/admin/view_message/{{this.from_user}}" method="get">
+                                    {{!-- <input type="hidden" name="user_id" value="{{this.from_user}}"> --}}
+                                    <button type="submit" class="btn btn-success">View</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+    <div class="content_  all">
+        {{#if (eq getMessages.length 0)}}
+        <div class="alert alert-dark" role="alert">
+            Sorry! you have no new message.
+        </div>
+        {{else}}
+        {{#each getMessages }}
+        <div class="card msg_card m-2 ">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                        {{#if (eq Sender.UserRole.role_id 3)}}
+                        <img src="{{#if Sender.SeedTrader.profile_pic}} /profile_pics/{{Sender.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{else if (eq this.Sender.UserRole.role_id 1)}}
+                        <img src="{{#if Sender.Farmer.profile_pic}} /profile_pics/{{Sender.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{else }}
+                        <img src="{{#if Sender.SeedCompany.profile_pic}} /profile_pics/{{Sender.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class=" mb-2 mx-auto d-block img_round message_profile"
+                            alt="user profile image">
+                        {{/if}}
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-6">
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>{{this.Sender.SeedTrader.firstname}}
+                                    {{this.Sender.SeedTrader.lastname}}</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>{{this.Sender.Farmer.firstname}}
+                                    {{this.Sender.Farmer.lastname}}</p>
+                                {{else }}
+                                <p>{{this.Sender.SeedCompany.name_of_company}}</p>
+                                {{/if}}
+                            </div>
+                            <div class="col-6">
+                                {{!-- {{{dateFormat this.created_at "HH:mm" timeStamp}}} --}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{#if (eq this.Sender.UserRole.role_id 3)}}
+                                <p>SeedTrader</p>
+                                {{else if (eq this.Sender.UserRole.role_id 1)}}
+                                <p>Farmer</p>
+                                {{else }}
+                                <p>SeedCompany</p>
+                                {{/if}}
+                            </div>
+                            {{!-- {{#each getNewmessages}} --}}
+                            {{!-- <div class="col-3">
+                                <span class="badge bg-danger" id="msg_status">New</span>
+                            </div> --}}
+                            {{!-- {{/each}} --}}
+                            <div class="col-6 msg_view text-end">
+                                <form action="/admin/view_message/{{this.from_user}}" method="get">
+                                    {{!-- <input type="hidden" name="user_id" value="{{this.from_user}}"> --}}
+                                    <button type="submit" class="btn btn-success">View</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</div>
+
+<script>
+    const btns = document.querySelectorAll(".tab_info_");
+    const tables = document.querySelectorAll(".content_");
+    function tab(obj) {
+        const id = obj.getAttribute('id');
+        //console.log(id)
+        if (id) {
+            // remove selected from other buttons
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            obj.classList.add("active");
+            // hide other tables
+            tables.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.querySelector('.' + id);
+            //console.log("'" + '.' + id + "'")
+            //console.log(element)
+            element.classList.add("active");
+        }
+    }
+</script>

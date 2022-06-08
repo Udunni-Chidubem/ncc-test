@@ -76,10 +76,12 @@ companyRouter.post('/update-profile', companyValidation(), validate, async (req,
 
 /*Create Product GET request*/
 companyRouter.get('/products/create', async (req, res)=>{
-
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
     res.render('seed_company/create-products', {
         layout : 'company-dashboard',
         title : 'Create Product',
+        company: company
     })
 });
 // change password
@@ -139,7 +141,8 @@ companyRouter.post('/products/update/:id', async (req, res)=>{
 
 /*Product List*/
 companyRouter.get('/products', async (req, res)=>{
-
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
     let product = await companyController.listProducts(req, res)
     let paginate
     if(product){
@@ -150,6 +153,7 @@ companyRouter.get('/products', async (req, res)=>{
         product,
         pagination: paginate,
         title : 'Products',
+        company: company
     })
 });
 
@@ -191,6 +195,8 @@ companyRouter.get('/products/:id', async (req, res)=>{
 
 /*Order List*/
 companyRouter.get('/orders', async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
     let orders=null;
     product=null
     if(req.query.product){
@@ -203,6 +209,7 @@ companyRouter.get('/orders', async (req, res)=>{
         layout : 'company-dashboard',
         title : 'Order List',
         orders,
+        company: company
     })
 });
 

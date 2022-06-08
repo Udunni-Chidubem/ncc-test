@@ -13,7 +13,7 @@ const options = {
   // Paths to files containing OpenAPI definitions
   apis: [`../routes/api/*.js`],
 };
-console.log(options)
+//console.log(options)
 
 const swaggerSpec = swaggerJSDoc(options);
 module.exports=swaggerSpec

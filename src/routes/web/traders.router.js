@@ -4,10 +4,9 @@ const paystack = require('../../helpers/paystack')
 const companyController = require('../../controllers/company.controller')
 const tradersController = require('../../controllers/traders.controller')
 const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
-const { now } = require('moment');
 
 
-tradersRouter.get('/settings', tradersController.settings)
+
 tradersRouter.get('/referral', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
@@ -26,6 +25,46 @@ tradersRouter.get('/referral', async (req, res)=>{
         traderRefres_len,
         referal_code
     })
+})
+// change password
+tradersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
+
+    let response= await tradersController.updatePassword(req, res)
+    if(response.message_){
+       return res.json({ message: response.message_, statusCode: 200 }).status(200)
+   }
+})
+tradersRouter.get('/help', async (req, res)=>{
+    let user = await req.user
+    
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    let user_id = trader.user_id
+    let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
+    let getmessages = await tradersController.getmessages(req,user_id)
+   
+    res.render('seed_trader/help', {
+        layout : 'traders-dashboard',
+        title : 'Referral',
+        isVerified,
+        trader,
+        getmessages,
+        user_id
+    })
+})
+tradersRouter.get('/messages', async (req, res)=>{
+    let user = await req.user
+    const trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user, 'trader')
+    let user_id = trader.user_id
+    let getmessages = await tradersController.getmessages(req,user_id)
+    let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
+    res.json({ message: getmessages, user_id: user_id }).status(200)
+})
+tradersRouter.post('/message', async (req, res)=>{
+
+    let response = await tradersController.message(req,res)
+    res.json({ message: response }).status(200)
 })
 tradersRouter.get('/view-farmer/:user_id', async (req, res)=>{
     let user = await req.user
@@ -54,51 +93,14 @@ tradersRouter.get('/orders', async (req, res)=>{
         transactions
     })
 })
-tradersRouter.get('/settings', async (req, res)=>{
+tradersRouter.get('/getmessagescount', async (req, res) => {
     let user = await req.user
-    const trader = await utils.getTraderPofile(user)
-    let isVerified = await utils.isVerified(user, 'trader')
-    
-    res.render('seed_trader/settings', {
-        layout : 'traders-dashboard',
-        title : 'Settings',
-        isVerified
-    })
+    let trader = await utils.getTraderPofile(user)
+    let getmessagescount = await tradersController.getmessagescount(req,trader.user_id)
+    getmessagescount = getmessagescount.length
+        res.json({ message: getmessagescount }).status(200)
+
 })
-
-
-tradersRouter.get('/market_place', async (req, res)=>{
-    let user = await req.user
-    let isVerified = await utils.isVerified(user, 'trader')
-
-  res.render('seed_trader/market_place', {
-    layout : 'traders-dashboard',
-    title : 'Market-Place',
-    isVerified
-   })
-   
-})
-
-tradersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
-    let data={status : req.params.status, updated_at : now()}
-   let id = req.params.id
-   console.log(id)
-   tradersController.userUpdate(data, id)
-   req.logOut();
-   res.redirect("/login")
-})
-// tradersRouter.get('/settings', async (req, res)=>{
-//     let user = await req.user
-//     let isVerified = await utils.isVerified(user, 'trader')
-
-//   res.render('seed_trader/settings', {
-//     layout : 'traders-dashboard',
-//     title : 'settings',
-//     isVerified
-//    })
-   
-// })
-
 tradersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user
     let trader = await utils.getTraderPofile(user)
@@ -150,6 +152,7 @@ tradersRouter.get('/dashboard', async (req, res)=>{
 
     tradersRouter.get('/market_place', async (req, res)=>{
         let user = await req.user
+        let trader = await utils.getTraderPofile(user)
         let isVerified = await utils.isVerified(user, 'trader')
         let resp = await tradersController.marketPlace(req, res)
         let message = null;
@@ -165,14 +168,15 @@ tradersRouter.get('/dashboard', async (req, res)=>{
         traderData: resp.trader,
         products,
         message,
-        isVerified: resp.isVerified
+        isVerified: resp.isVerified,
+        trader
     });
 
 })
 
-    tradersRouter.get('/product', tradersController.product)
-    tradersRouter.get('/products/:id', async (req, res) => {
-
+tradersRouter.get('/product', tradersController.product)
+tradersRouter.get('/products/:id', async (req, res) => {
+    let trader = await utils.getTraderPofile(user)
     const resp = await tradersController.viewProduct(req, res)
     const seedCompany = resp.singleProduct['User.SeedCompany.name_of_company']
     const items = JSON.stringify(JSON.parse(resp.singleProduct.item))
@@ -180,14 +184,14 @@ tradersRouter.get('/dashboard', async (req, res)=>{
     
     res.render('seed_trader/view-product', {
         layout : 'traders-dashboard',
-        title: 'Market Place',
-        sub_title: 'Product',
+        title: 'Product',
         fullname: resp.trader.firstname + ' ' + resp.trader.lastname,
         traderData: resp.trader,
         product: resp.singleProduct,
         seedCompany,
         items: items.min,
-        isVerified: resp.isVerified
+        isVerified: resp.isVerified,
+        trader
     })
 })
 
@@ -255,7 +259,8 @@ tradersRouter.post("/cart/checkout", async (req, res)=>{
         let paymentType = req.body.inlineRadioOptions
         let total_sum = req.body.total_sum
         if(paymentType=='card'){   
-            let initial= await paystack.initializeTrader('tipson664@gmail.com', total_sum*100, req)
+            let callback=req.get('origin')+'/seed-trader/checkout/callback'
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, callback, req)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, trader}=await tradersController.getCartItemsByIds(req,items)
@@ -412,6 +417,38 @@ tradersRouter.get('/order/:transaction_id', async (req, res)=>{
 tradersRouter.get("/cart/delete/:id", async (req, res)=>{
     tradersController.deleteItem(req, res)
     res.redirect("/seed-trader/cart")
+})
+
+tradersRouter.get("/checkout/preview", async (req, res)=>{
+    if(req.query.product){
+        console.log(req.query.product)
+        let {getCartItems, farmer, isVerified}= await tradersController.cartByProductId(req)
+        let deliveryInfo = await tradersController.deliveryInfo(farmer.user_id)
+        res.render('seed_trader/order_preview', {
+            layout : 'traders-dashboard',
+            title: 'Order Preview',
+            fullname: trader.firstname + ' ' + trader.lastname,
+            farmer: farmer,
+            isVerified,
+            getCartItems,
+            deliveryInfo
+        })
+    }else{
+        res.redirect('back')
+    }
+})
+
+tradersRouter.get('/sales-sheet', async (req, res)=>{
+    let user = await req.user
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
+    
+    res.render('seed_trader/under_construction', {
+        layout : 'traders-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        trader
+    })
 })
 
    

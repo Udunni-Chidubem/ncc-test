@@ -3696,3 +3696,35 @@ justify-content: center;
   margin-left: -7px; 
   margin-top: -12px;
 }
+
+.text-green{
+  color:#008341;
+}
+
+.text-red{
+  color: #ff0000;
+}
+
+.icon-font-20{
+    font-size: 20px;
+}
+
+.weather_card{
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  grid-gap: 40px;
+  overflow-x: scroll;
+}
+
+.weather_card::-webkit-scrollbar {
+  display: none;
+}
+
+.weather_card_box{
+  text-align: center;
+  padding: 5px;
+  border-radius: 1rem;
+  background-color: rgba(238, 237, 237, 0.22);
+  border-color: rgba(238, 237, 237, 0.22);
+  box-shadow: 5px 6px 3px 0px #e9ecef5e;
+}
