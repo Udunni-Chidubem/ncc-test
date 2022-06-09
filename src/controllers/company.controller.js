@@ -237,7 +237,7 @@ module.exports = {
         return order
     },
     getchartamount : async (req, id)=>{
-        let sql = "SELECT * FROM orders as o join transaction_log as t WHERE o.transaction_log_id = t.id  and o.status = 4 and o.company_id = "+id ;
+        let sql = "SELECT t.amount as amount, o.updated_at as updated_at FROM orders as o join transaction_log as t WHERE o.transaction_log_id = t.id  and o.status = 4 and o.company_id = "+id ;
         let chartamount = await db.rest.query(sql, { type: QueryTypes.SELECT })
         chartamount = JSON.parse(JSON.stringify(chartamount));
         return chartamount
