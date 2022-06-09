@@ -265,6 +265,7 @@
                       let amount = []
                       month = getMonth()
                       let subamt = ''
+                      console.log(month)
                       month.forEach((value, index) => {
                         subamt = 0
                         chartamount.forEach((value2, index) => {
@@ -277,6 +278,7 @@
                           }
                         })
                         amount.push(subamt)
+                        console.log(amount)
 
                       })
                       myChart.data.datasets[0].data = amount;
