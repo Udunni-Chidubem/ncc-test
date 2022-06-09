@@ -253,7 +253,7 @@
                 month = month + 1
                 for (var i = 0; i < month; i++) {
                   new_val = i + 1
-                  months.push(year + '-' + month_name[new_val-1])
+                  months.push(month_name[new_val-1] + '-' + year )
                 }
                 console.log(months)
                 return months
