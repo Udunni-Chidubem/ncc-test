@@ -169,7 +169,7 @@
             let baseUrl = window.location.origin
             $(document).ready(function () {
 
-              label_value = getMonth()
+              label_value = gechtMonth()
               let dt = []
               const ctx = document.getElementById('myChart').getContext('2d');
               const myChart = new Chart(ctx, {
@@ -229,6 +229,22 @@
                 for (var i = 0; i < month; i++) {
                   new_val = i + 1
                   months.push(year + '-' + '0' + new_val)
+                }
+                console.log(months)
+                return months
+
+              }
+
+              function gechtMonth() {
+                let month_name = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+                let months = []
+                let year = new Date().getFullYear()
+                let month = new Date().getMonth()
+                month = month + 1
+                for (var i = 0; i < month; i++) {
+                  new_val = i + 1
+                  months.push(year + '-' + month_name[new_val])
                 }
                 console.log(months)
                 return months
