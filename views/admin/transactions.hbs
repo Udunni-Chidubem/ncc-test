@@ -13,9 +13,9 @@
                 <tr class="row-height">
                     <th scope="col">
                     <div class="btnreport datecycle">
-                        <label for="selectico" class="labelos">State </label>
+                        <label for="selectico" class="labelos">Location </label>
                          <select class="btndropdown" aria-labelledby="" id="locationselect" name="locationselect">
-                             <option value="">Select State</option>
+                             <option value="">Select Location</option>
                              {{#each states}}
                             <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
                              {{/each}}
@@ -118,23 +118,21 @@
                      
                     <td scope="col"> <strong> {{Product.product_name}} </strong></td>
 
-                    <td scope="col"> <strong>{{dateFormat this.TransactionLog.created_at	'DD/MM/YYYY'}}</strong></td>
+                    <td scope="col"> <strong>{{dateFormat this.TransactionLog.created_at 'DD/MM/YYYY'}}</strong></td>
 
                     <td scope="col"> <strong>{{TransactionLog.amount}}</strong></td>
                     
                     <td scope="col">
 
-                        {{#if (eq TransactionLog.status "verified")}}
-
-							{{!-- <span class="approved px-1"><i class="bi bi-dot"></i>Confirmed</span>
-								
-							<span class="pending px-1"><i class="bi bi-dot"></i>Pending</span>
-							 --}}
+                    {{#if (eq TransactionLog.status "verified")}}
 
                         <span class="published">Confirmed</span>
-                          {{else}}
+
+                     {{else}}
+
                         <span class="unpublished">Pending</span>
-                        {{/if}}
+
+                    {{/if}}
 
                     </td>
                     <td scope="col"></td>
