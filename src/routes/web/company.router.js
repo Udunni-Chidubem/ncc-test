@@ -61,6 +61,14 @@ companyRouter.get('/update-profile', async (req, res)=>{
         isVerified,
     })
 });
+companyRouter.get('/getchartamount', async (req, res)=>{
+    let states = await siteController.getStates();
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    let company = await utils.getCompanyProfile(user)
+    let getchartamount = await companyController.getchartamount(req,company.id)
+    res.json({ message: getchartamount, statusCode: 200 }).status(200)
+});
 
 /*Update Profile*/
 companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
