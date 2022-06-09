@@ -215,6 +215,15 @@
                 options: {
                   scales: {
                     y: {
+                      ticks:{
+                        callback: (data, index) =>{
+                          return new Intl.NumberFormat('en-NG', {
+                            style: 'currency',
+                            currency: 'NGN',
+                            maximumSignificantDigits: 3
+                          }).format(data)
+                        }
+                      },
                       beginAtZero: true
                     }
                   }
@@ -244,7 +253,7 @@
                 month = month + 1
                 for (var i = 0; i < month; i++) {
                   new_val = i + 1
-                  months.push(year + '-' + month_name[new_val])
+                  months.push(year + '-' + month_name[new_val-1])
                 }
                 console.log(months)
                 return months
@@ -274,13 +283,16 @@
                           console.log(monthval.getMonth())
                           if (_date.getMonth() == monthval.getMonth()) {
                             subamt += value2.amount
+                            console.log('subamt')
                             console.log(subamt)
                           }
                         })
                         amount.push(subamt)
-                        console.log(amount)
+                        console.log('av')
+        
 
                       })
+                      console.log(amount)
                       myChart.data.datasets[0].data = amount;
                       myChart.update();
                       //console.log(myChart.data.datasets[0].data)
