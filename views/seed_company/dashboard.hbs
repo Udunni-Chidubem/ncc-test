@@ -71,6 +71,8 @@
                 <div class="card-body">
                   <div class="row graph">
                     <div class="col-12">
+                      <!-- As a link -->
+                      <span>INCOME</span>
                       <canvas id="myChart" class="canvas_stuff" width="400" height="160"
                         style="background:#fff;"></canvas>
                     </div>
@@ -215,8 +217,8 @@
                 options: {
                   scales: {
                     y: {
-                      ticks:{
-                        callback: (data, index) =>{
+                      ticks: {
+                        callback: (data, index) => {
                           return new Intl.NumberFormat('en-NG', {
                             style: 'currency',
                             currency: 'NGN',
@@ -253,7 +255,7 @@
                 month = month + 1
                 for (var i = 0; i < month; i++) {
                   new_val = i + 1
-                  months.push(year + '-' + month_name[new_val-1])
+                  months.push(year + '-' + month_name[new_val - 1])
                 }
                 console.log(months)
                 return months
@@ -289,7 +291,7 @@
                         })
                         amount.push(subamt)
                         console.log('av')
-        
+
 
                       })
                       console.log(amount)
