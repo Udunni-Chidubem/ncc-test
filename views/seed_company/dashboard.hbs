@@ -75,6 +75,7 @@
                       <span>INCOME</span>
                       <canvas id="myChart" class="canvas_stuff" width="400" height="160"
                         style="background:#fff;"></canvas>
+                      <button class="sd_chart_btn" type="button" onclick="download()">Download</button>
                     </div>
 
                   </div>
@@ -306,4 +307,12 @@
 
               setInterval(chtamt, 1000)
             })
+
+            function download() {
+              const imageLink = document.createElement('a');
+              const canvas = document.getElementById('myChart');
+              imageLink.download = 'income_chart.png';
+              imageLink.href = canvas.toDataURL('image/png', 1);
+              imageLink.click();
+            }
           </script>
