@@ -1,4 +1,5 @@
 node_modules
+logs
 .env
 .sequelizerc
 public/product_images
