@@ -66,7 +66,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
-    //let user_role = await adminController.getUserRole(req, res)
+    let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
     console.log('getMessages')
@@ -84,7 +84,7 @@ adminRouter.get('/messages', async (req, res)=>{
         username : user.username,
         isVerified,
         roles : roles,
-        //user_role: user_role.Role.role_name,
+        user_role: user_role.Role.role_name,
         getMessages,
         getNewmessages,
     })
@@ -364,6 +364,7 @@ adminRouter.get('/user_report', async (req,res)=>{
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
     let {users, states} =  await adminController.getAllUsers(req, res)
+
     res.render('admin/user_report', {
         layout : 'admin-dashboard',
         title : 'User-Report',
@@ -383,40 +384,12 @@ adminRouter.get('/transactions', async (req,res)=>{
     let {states} =  await adminController.getAllUsers(req, res)
     let transaction = await adminController.getAllTransaction(req, res)
 
-    // let orders = await adminController.getOrders(res, req)
-    
-    // let pendingOrders = await orders.filter(e=>{
-    //     return e.status == 0
-    // });
-    
-    // let activeOrders=await orders.filter(e => {
-    //     return e.status == 1
-    // });
-
-    // let shippedOrders=await orders.filter(e => {
-    //     return e.status == 2
-    // });
-
-    // let hubOrders = await orders.filter(e=>{
-    //     return e.status == 3
-    // })
-    
-    // let fulfilledOrders = await orders.filter(e=>{
-    //     return e.status == 4
-    // })
-   
-
     res.render('admin/transactions', {
         layout : 'admin-dashboard',
         title : 'Transaction-Report',
         username : user.username,
         isVerified, 
         states, 
-        // orders,
-        // pendingOrders,
-        // activeOrders,
-        // shippedOrders,
-        // fulfilledOrders,
         transaction,
         user_role: user_role.Role.role_name
     })
