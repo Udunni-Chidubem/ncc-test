@@ -12,8 +12,10 @@ let original = document.getElementById('duplicater');
 
 function duplicate() {
     let clone = original.cloneNode(true);
+   // console.log(original.innerHTML)
     clone.id = "duplicater" + ++x;
-    original.append(clone);
+    
+    original.after(clone);
 }
 
 
