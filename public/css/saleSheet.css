@@ -20,8 +20,14 @@
 
 .salesSelect{
  height: 2.45rem;
+
 }
 
 .salesButton{
     padding: 0.65rem 1.25rem !important;
+}
+
+.formicContainer{
+    border: 1px solid #ccc;
+    margin: auto;
 }
