@@ -10,10 +10,13 @@ for (var i = 0; i < arrow.length; i++) {
 let x = 0;
 let original = document.getElementById('duplicater');
 
+
 function duplicate() {
     let clone = original.cloneNode(true);
-    clone.id = "duplicater" + ++x;
-    original.append(clone);
+    let item=original.getElementsByClassName('row : first').cloneNode(true)
+    item.id = "duplicater" + ++x;
+    //original.append(clone);
+    original.append(item)
 }
 
 
