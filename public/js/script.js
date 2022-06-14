@@ -6,6 +6,17 @@ for (var i = 0; i < arrow.length; i++) {
   });
 }
 
+
+let x = 0;
+let original = document.getElementById('duplicater');
+
+function duplicate() {
+    let clone = original.cloneNode(true);
+    clone.id = "duplicater" + ++x;
+    original.append(clone);
+}
+
+
 $(document).ready(function(){
 
   var quantity=0;
