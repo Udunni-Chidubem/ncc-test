@@ -375,8 +375,21 @@ module.exports = {
 
             let r = await axios.get(`${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`)
             console.log(r.data)
-            transaction.commit()
+            
+
+            // let p = {
+            //     method: 'post',
+            //     url: 'https://app.smartsmssolutions.com/io/api/client/v1/senderid/create/',
+            //     headers: { 
+            //       ...data.getHeaders()
+            //     },
+            //     data : data
+            //   };
+
+              transaction.commit()
             return otp_instance
+
+           
         }catch(e){
             transaction.rollback()
             console.log(e)
