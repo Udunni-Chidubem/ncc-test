@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-12 text-end">
-                <button type="button" id="addItem" class="btn btn-success salesButton" onclick="duplicate()">Add Item</button>
+                <button id="addItem" type="button" class="btn btn-success salesButton" onclick="duplicate()">Add Item</button>
             </div>
 
             <div class="horizontalLine"></div>
@@ -79,7 +79,6 @@
                     {{/each}}
                 </select>
             </div>
-            <div></div>
             <div class="col-md-6">
                 <label for="lga" class="form-label salesLabel">LGA<span class="asterisk">*</span></label>
                 <select class="form-select salesSelect border-bottom" data-lga="{{ company.lg_id }}" name="lg_id"

@@ -13,10 +13,10 @@ let original = document.getElementById('duplicater');
 
 function duplicate() {
     let clone = original.cloneNode(true);
-    let item=original.getElementsByClassName('row : first').cloneNode(true)
-    item.id = "duplicater" + ++x;
-    //original.append(clone);
-    original.append(item)
+   // console.log(original.innerHTML)
+    clone.id = "duplicater" + ++x;
+    
+    original.after(clone);
 }
 
 
