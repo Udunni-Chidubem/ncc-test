@@ -4,6 +4,8 @@ const utils = require('../../helpers/utils')
 const { companyValidation, validate, productValidation, settingsValidation } = require('../../helpers/formValidator');
 const companyController = require('../../controllers/company.controller');
 const { now } = require('moment');
+const db = require('../../models');
+const {States}  = db
 
 
 companyRouter.get('/dashboard', async (req, res)=>{
@@ -58,6 +60,14 @@ companyRouter.get('/update-profile', async (req, res)=>{
         company: company,
         isVerified,
     })
+});
+companyRouter.get('/getchartamount', async (req, res)=>{
+    let states = await siteController.getStates();
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    let company = await utils.getCompanyProfile(user)
+    let getchartamount = await companyController.getchartamount(req,company.id)
+    res.json({ message: getchartamount, statusCode: 200 }).status(200)
 });
 
 /*Update Profile*/
@@ -188,6 +198,30 @@ companyRouter.get('/products/:id', async (req, res)=>{
         prev_link : '/seed-company/products'
     })
 });
+
+//sales sheet begins
+
+companyRouter.get('/sales-sheet', async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user)
+
+    let states = await States.findAll({
+        attributes : ['id', 'name'],
+        raw: true
+    });
+    
+    res.render('seed_company/sales-sheet', {
+        layout : 'company-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        company,
+        states: states
+    })
+})
+
+
+// sales sheet ends
 /*Product Routes Ends*/
 
 

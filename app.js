@@ -15,6 +15,9 @@ const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec=require('./src/config/swaggerOptions')
+const morgan = require('morgan');
+const fs = require('fs')
+const proxy=require('express-http-proxy')
 
 passpportInitializer(passport)
 
@@ -24,8 +27,7 @@ const uid = () => {
 };
 
 // Usage. Example, id = khhry2hb7uip12rj2iu
-const id = uid();
-console.log('random', id)
+
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
 app.set('view engine', 'hbs')
@@ -115,56 +117,32 @@ app.use(methodOveride('_method'))
 app.use(fileUpload({
     createParentPath: true
 }));
-// Define Swagger Middleware
-const options = {
-    swaggerDefinition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'INPAY',
-            version: 'v1',
-            description: 'API Documentation for INPAY',
-            contact: {
-                name: 'Oyedele Olufemi',
-                emal: 'ooyedele@interranetworks.com'
-            },
-        },
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: 'http',
-                    scheme: 'Authorization',
-                    bearerFormat: 'JWT'
-                }
-            }
-        },
-        security: [
-            {
-                bearerAuth: [],
-            },
-        ],
-        servers: [
-            {
-                url: 'http://localhost:5200',
-                description: 'Development Server'
-            },
-            {
-                url: 'http://inpay.interranetworks.com',
-                description: 'Staging Server'
-            }
-        ]
-    },
-    apis: [`/src/routes/api/*.js`]
-};
-console.log(options)
+var logDirectory = path.join(__dirname, "logs");
+// ensure log directory exists
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+ 
+var logFile = path.join(logDirectory, Date.now()+".log");
+var accessLogStream = fs.createWriteStream(logFile, {
+  flags: "a"
+});
+//const accessLogStream=fs.createWriteStream(path.join(__dirname+"/logs", Date.now()+".log"),{flags:'a'})
+app.use(morgan("combined", { stream: accessLogStream }));
+
+app.use((err, req, res, next)=>{
+    res.locals.error=err
+    console.log(err)
+    return next()
+})
 //   let specs=swaggerJsdoc(options)
-console.log(swaggerSpec)
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, { explorer: true })
 );
+
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
+const { now } = require('moment')
 app.use('/', mainRoute)
 app.use(async function (req, res) {
     res.status(400).render('site/404', {

@@ -308,6 +308,7 @@ th td {
 }
 
 .row-height {
+  margin-left: 8px;
   height: 3rem;
   vertical-align: middle;
 }
@@ -1172,6 +1173,7 @@ color: #818E9B;
 
 .btnreport{
   margin: 5px;
+  margin-left: 5px;
 }
 
 .btnreport_search{
@@ -1184,10 +1186,28 @@ color: #818E9B;
 }
 
 .btndropdown{
+  /* margin-left: 5px; */
+  width: fit-content;
   border-radius: 3px;
-  padding: 10px 10px;
-  border: none;
+  padding: 6px 6px;
+  border-color: white;
   text-align: center;
-  background-color: #049648;
-  color: white;
+  background-color: #049648;;
+  color: rgb(255, 255, 255);
+  /* #049648; */
+}
+
+.datecycle{
+  display: grid;
+  grid-template-columns: repeat(1,auto);
+  grid-template-rows: repeat(2,auto);
+}
+
+.labelos{
+  margin: inherit;
+}
+
+.btnsearch{
+  margin-top: 15px;
+  margin-bottom: 0px;
 }

@@ -66,7 +66,7 @@ adminRouter.get('/messages', async (req, res)=>{
     let user = await req.user
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
-    //let user_role = await adminController.getUserRole(req, res)
+    let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
     console.log('getMessages')
@@ -84,7 +84,7 @@ adminRouter.get('/messages', async (req, res)=>{
         username : user.username,
         isVerified,
         roles : roles,
-        //user_role: user_role.Role.role_name,
+        user_role: user_role.Role.role_name,
         getMessages,
         getNewmessages,
     })
@@ -363,18 +363,17 @@ adminRouter.get('/user_report', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
-    let getUsers =  await adminController.getAllUsers(req, res)
-   
+    let {users, states} =  await adminController.getAllUsers(req, res)
+
     res.render('admin/user_report', {
         layout : 'admin-dashboard',
         title : 'User-Report',
-        username : user.username,
         isVerified,
-        getUsers,  
+        users,
+        states, 
         user_role: user_role.Role.role_name
     })
 
-    
     
 });
 
@@ -382,12 +381,16 @@ adminRouter.get('/transactions', async (req,res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
     let user_role = await adminController.getUserRole(req, res)
+    let {states} =  await adminController.getAllUsers(req, res)
+    let transaction = await adminController.getAllTransaction(req, res)
 
     res.render('admin/transactions', {
         layout : 'admin-dashboard',
         title : 'Transaction-Report',
         username : user.username,
-        isVerified,  
+        isVerified, 
+        states, 
+        transaction,
         user_role: user_role.Role.role_name
     })
 });

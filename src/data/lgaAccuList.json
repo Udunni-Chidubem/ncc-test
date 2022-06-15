@@ -4,47 +4,58 @@
         "value": [
             {
                 "name": "Akko",
-                "accu_name":"Kumo"
+                "accu_name":"Kumo",
+                "Key": "252907"
             },
             {
                 "name": "Balanga",
-                "accu_name": "Tula"
+                "accu_name": "Tula",
+                "Key": "295982"
             },
             {
                 "name": "Billiri",
-                "accu_name": "Biliri"
+                "accu_name": "Biliri",
+                "Key": "252903"
             },
             {
                 "name": "Dukku",
-                "accu_name":"Dukku"
+                "accu_name":"Duku",
+                "Key": "252905"
             },
             {
                 "name": "Funakaye",
-                "accu_name": "Bajoga"
+                "accu_name": "Bajoga",
+                "Key": "252910"
             },
             {
                 "name": "Gombe",
-                "accu_name": "Gombe"
+                "accu_name": "Gombe",
+                "Key": "252902"
             },
             {
                 "name": "Kaltungo",
-                "accu_name": "Kaltungo"
+                "accu_name": "Kaltungo",
+                "Key": "252906"
             },
             {
                 "name": "Kwami",
-                "accu_name": "Gombe"
+                "accu_name": "Gombe",
+                "Key": "252902"
             },
             {
                 "name": "Nafada",
-                "accu_name": "Nafada"
+                "accu_name": "Nafada",
+                "Key": "252908"
             },
             {
                 "name": "Shongom",
-                "accu_name":"Kushi"
+                "accu_name":"Kushi",
+                "Key": "252919"
             },
             {
                 "name": "Yamaltu/Deba",
-                "accu_name": "Deba Habe"
+                "accu_name": "Deba Habe",
+                "Key": "252904"
             }
         ]
     },
@@ -52,8 +63,89 @@
         "name" : "Yobe",
         "value":[
             {
-                "name": "Shongom",
-                "accu_name":"Kushi"
+                "name": "Bade",
+                "accu_name": "Gashua",
+                "Key": "256412"
+            },
+            {
+                "name": "Gujba",
+                "accu_name":"Gujba",
+                "Key": "256414"
+            },
+            {
+                "name": "Damaturu",
+                "accu_name":"Damaturu",
+                "Key": "256409"
+            },
+            {
+                "name": "Bursari",
+                "accu_name":"Bursari",
+                "Key": "940594"
+            },
+            {
+                "name": "Geidam",
+                "accu_name":"Geidam",
+                "Key": "256418"
+            },
+            {
+                "name": "Gulani",
+                "accu_name": "Gulani",
+                "Key": "936083"
+            },
+            {
+                "name": "Fika",
+                "accu_name":"Fika",
+                "Key": "256411"
+            },
+            {
+                "name": "Fune",
+                "accu_name":"Damagum",
+                "Key": "940040"
+            },
+            {
+                "name": "Jakusko",
+                "accu_name":"Jakusko",
+                "Key": "256459"
+            },
+            {
+                "name": "Karasuwa",
+                "accu_name": "Jajimaji",
+                "Key": "933417"
+            },
+            {
+                "name": "Machina",
+                "accu_name":"Matsena",
+                "Key": "929260"
+            },
+            {
+                "name": "Nangere",
+                "accu_name":"Nangere",
+                "Key": "256482"
+            },
+            {
+                "name": "Nguru",
+                "accu_name":"Nguru",
+                "Key": "256415"
+            },
+            {
+                "name": "Potiskum",
+                "accu_name":"Potiskum",
+                "Key": "256416"
+            },
+            {
+                "name": "Tarmuwa",
+                "accu_name":"",
+                "Key": ""
+            },
+            {
+                "name": "Yunusari",
+                "accu_name":"",
+                "Key": ""
+            },
+            {
+                "name": "Yusufari",
+                "accu_name":"",
+                "Key": ""
             }
         ]
     }
