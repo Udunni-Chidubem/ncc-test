@@ -210,22 +210,30 @@
             document.querySelector('#btn_update_password').setAttribute('disabled', true);
         }
         else {
-            if (document.getElementById('newpassword').value.length < 6) {
+            if (document.getElementById('newpassword').value == '') {
                 document.querySelector('#btn_update_password').removeAttribute('enabled');
                 document.querySelector('#btn_update_password').setAttribute('disabled', true);
             }
             else {
-                if (document.getElementById('newpassword').value ==
-                    document.getElementById('confirmpassword').value) {
-                    document.getElementById('message').style.color = 'green';
-                    document.getElementById('message').innerHTML = 'Password matching';
-                    document.querySelector('#btn_update_password').removeAttribute('disabled');
-                    document.querySelector('#btn_update_password').setAttribute('enabled', true);
-                } else {
+                if (document.getElementById('newpassword').value.length < 6) {
                     document.getElementById('message').style.color = 'red';
-                    document.getElementById('message').innerHTML = 'Password not matching';
+                    document.getElementById('message').innerHTML = 'Password cannot be less than 6';
                     document.querySelector('#btn_update_password').removeAttribute('enabled');
                     document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                }
+                else {
+                    if (document.getElementById('newpassword').value ==
+                        document.getElementById('confirmpassword').value) {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById('message').innerHTML = 'Password matching';
+                        document.querySelector('#btn_update_password').removeAttribute('disabled');
+                        document.querySelector('#btn_update_password').setAttribute('enabled', true);
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById('message').innerHTML = 'Password not matching';
+                        document.querySelector('#btn_update_password').removeAttribute('enabled');
+                        document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                    }
                 }
             }
         }
@@ -277,5 +285,6 @@
             showBtn.style.display = "none";
         }
     }
+
 
 </script>

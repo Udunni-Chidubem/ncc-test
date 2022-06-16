@@ -121,9 +121,21 @@
                             aria-describedby="basic-addon1" onkeyup='check();'>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" minlength="6" class="form-control" id="newpassword" name="newpassword"
-                            placeholder="New Password" aria-label="New Password" aria-describedby="basic-addon1"
-                            onkeyup='check();'>
+                        <input type="password" minlength="6" class="form-control inputs_" id="newpassword"
+                            name="newpassword" placeholder="New Password" aria-label="New Password"
+                            aria-describedby="basic-addon1" onkeyup='check();'>
+
+                        <span class="showBtn">SHOW</span>
+                        <div class="container">
+                            <form action="#">
+                                <div class="indicator">
+                                    <span class="weak"></span>
+                                    <span class="medium"></span>
+                                    <span class="strong"></span>
+                                </div>
+                                <div class="text"></div>
+                            </form>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" required minlength="6" class="form-control" id="confirmpassword"
@@ -157,6 +169,18 @@
     const btns = document.querySelectorAll(".tab_info_");
     const card = document.querySelectorAll(".content");
 
+    const indicator = document.querySelector(".indicator");
+    const inputs_ = document.querySelector('.inputs_');
+    const weak = document.querySelector(".weak");
+    const medium = document.querySelector(".medium");
+    const strong = document.querySelector(".strong");
+    const text = document.querySelector(".text");
+    const showBtn = document.querySelector(".showBtn");
+    console.log(inputs_.value)
+    let regExpWeak = /[a-z]/;
+    let regExpMedium = /\d+/;
+    let regExpStrong = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+
     function tab(obj) {
         const id = obj.getAttribute('id');
         //console.log(id)
@@ -183,18 +207,80 @@
             document.querySelector('#btn_update_password').setAttribute('disabled', true);
         }
         else {
-            if (document.getElementById('newpassword').value ==
-                document.getElementById('confirmpassword').value) {
-                document.getElementById('message').style.color = 'green';
-                document.getElementById('message').innerHTML = 'Password matching';
-                document.querySelector('#btn_update_password').removeAttribute('disabled');
-                document.querySelector('#btn_update_password').setAttribute('enabled', true);
-            } else {
-                document.getElementById('message').style.color = 'red';
-                document.getElementById('message').innerHTML = 'Password not matching';
+            if (document.getElementById('newpassword').value == '') {
                 document.querySelector('#btn_update_password').removeAttribute('enabled');
                 document.querySelector('#btn_update_password').setAttribute('disabled', true);
             }
+            else {
+                if (document.getElementById('newpassword').value.length < 6) {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'Password cannot be less than 6';
+                    document.querySelector('#btn_update_password').removeAttribute('enabled');
+                    document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                }
+                else {
+                    if (document.getElementById('newpassword').value ==
+                        document.getElementById('confirmpassword').value) {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById('message').innerHTML = 'Password matching';
+                        document.querySelector('#btn_update_password').removeAttribute('disabled');
+                        document.querySelector('#btn_update_password').setAttribute('enabled', true);
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById('message').innerHTML = 'Password not matching';
+                        document.querySelector('#btn_update_password').removeAttribute('enabled');
+                        document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                    }
+                }
+            }
+        }
+        if (inputs_.value != "") {
+            indicator.style.display = "block";
+            indicator.style.display = "flex";
+            if (inputs_.value.length <= 3 && (inputs_.value.match(regExpWeak) || inputs_.value.match(regExpMedium) || inputs_.value.match(regExpStrong))) no = 1;
+            if (inputs_.value.length >= 6 && ((inputs_.value.match(regExpWeak) && inputs_.value.match(regExpMedium)) || (inputs_.value.match(regExpMedium) && inputs_.value.match(regExpStrong)) || (inputs_.value.match(regExpWeak) && inputs_.value.match(regExpStrong)))) no = 2;
+            if (inputs_.value.length >= 6 && inputs_.value.match(regExpWeak) && inputs_.value.match(regExpMedium) && inputs_.value.match(regExpStrong)) no = 3;
+            if (no == 1) {
+                weak.classList.add("active");
+                text.style.display = "block";
+                text.textContent = "Your password is too week";
+                text.classList.add("weak");
+            }
+            if (no == 2) {
+                medium.classList.add("active");
+                text.textContent = "Your password is medium";
+                text.classList.add("medium");
+            } else {
+                medium.classList.remove("active");
+                text.classList.remove("medium");
+            }
+            if (no == 3) {
+                weak.classList.add("active");
+                medium.classList.add("active");
+                strong.classList.add("active");
+                text.textContent = "Your password is strong";
+                text.classList.add("strong");
+            } else {
+                strong.classList.remove("active");
+                text.classList.remove("strong");
+            }
+            showBtn.style.display = "block";
+            showBtn.onclick = function () {
+                if (inputs_.type == "password") {
+                    inputs_.type = "text";
+                    showBtn.textContent = "HIDE";
+                    showBtn.style.color = "#23ad5c";
+                } else {
+                    inputs_.type = "password";
+                    showBtn.textContent = "SHOW";
+                    showBtn.style.color = "#000";
+                }
+            }
+        } else {
+            indicator.style.display = "none";
+            text.style.display = "none";
+            showBtn.style.display = "none";
         }
     }
+
 </script>
