@@ -458,6 +458,29 @@ tradersRouter.get('/sales-sheet', async (req, res)=>{
     })
 })
 
+tradersRouter.post('/sales-sheet', async (req, res)=>{
+console.log(req.body)
+    //res.send(req.body);
+    let user = await req.user
+    let user_id = user.id
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
+    let sales_sheet_info = await tradersController.sales_sheet_info(req,res,user_id)
+
+    let states = await States.findAll({
+        attributes : ['id', 'name'],
+        raw: true
+    });
+    
+    res.render('seed_trader/sales_sheet', {
+        layout : 'traders-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        trader,
+        states: states
+    })
+})
+
    
 
 module.exports=tradersRouter
