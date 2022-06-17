@@ -4,6 +4,7 @@ const helpers = require('../../helpers/auth.guard')
 const passpportInitializer = require('../../helpers/passport-config')
 passpportInitializer(passport)
 const db = require('../../models/index')
+const nodeMailer = require('nodemailer');
 
 const { 
     signupValidation, 
@@ -14,6 +15,7 @@ const {
     seedTraderValidate
 }  = require('../../helpers/formValidator');
 const adminController = require('../../controllers/admin.controller');
+const { saveContact } = require('../../controllers/site.controller');
 
 const siteRouter = require('express').Router();
 
