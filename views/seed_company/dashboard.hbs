@@ -42,7 +42,7 @@
                       <div class="p-3 border text-center  border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
 
-                        <h1 class="c_d_s2_full "> {{fulfilled}} </h1>
+                        <h1 class="c_d_s2_full "> {{#if (eq fulfilled null)}}0{{else}}{{fulfilled}}{{/if}} </h1>
                         <a href="/seed-company/orders" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>
@@ -52,7 +52,7 @@
                       <div class="p-3 border text-center border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
 
-                        <h1 class=" c_d_s2_unfull"> {{unfulfilled}} </h1>
+                        <h1 class=" c_d_s2_unfull"> {{#if (eq unfulfilled null)}}0{{else}}{{unfulfilled}}{{/if}}</h1>
                         <a href="/seed-company/orders" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>
@@ -75,7 +75,7 @@
                       <span>INCOME</span>
                       <canvas id="myChart" class="canvas_stuff" width="400" height="160"
                         style="background:#fff;"></canvas>
-                      <button class="sd_chart_btn" type="button" onclick="download()">Download</button>
+                      <button class="sd_chart_btn" type="button" onclick="pdfdownload()">Download</button>
                     </div>
 
                   </div>
@@ -163,11 +163,14 @@
 
           {{/unless}}
 
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
             integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
           <script>
+
 
             let baseUrl = window.location.origin
             $(document).ready(function () {
@@ -175,6 +178,17 @@
               label_value = gechtMonth()
               let dt = []
               const ctx = document.getElementById('myChart').getContext('2d');
+              const bgColor = {
+                id: 'bgColor',
+                beforeDraw: (chart) => {
+                  const ctx = document.getElementById('myChart').getContext('2d');
+                  ctx.save();
+                  ctx.globalCompositeOperation = 'destination-over';
+                  ctx.fillStyle = 'white';
+                  ctx.fillRect(0, 0, ctx.width, ctx.height);
+                  ctx.restore();
+                }
+              }
               const myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -227,10 +241,22 @@
                           }).format(data)
                         }
                       },
-                      beginAtZero: true
+                      beginAtZero: true,
+                      title: {
+                        display: true,
+                        text: 'Monthly Income Chart'
+                      }
+                    }
+                  },
+                  plugins: {
+                    bgColor:
+                    {
+                      //backgroundColor: 'blue'
                     }
                   }
-                }
+
+                },
+                plugins: [bgColor]
               });
 
               function getMonth() {
@@ -314,5 +340,15 @@
               imageLink.download = 'income_chart.png';
               imageLink.href = canvas.toDataURL('image/png', 1);
               imageLink.click();
+            }
+
+            function pdfdownload() {
+              const canvas = document.getElementById('myChart');
+              const canvasImage = canvas.toDataURL('image/png', 1.0);
+              console.log(canvasImage)
+              let pdf = new jsPDF('landscape');
+              pdf.setFontSize(20);
+              pdf.addImage(canvasImage, 'png', 15, 15, 280, 150);
+              pdf.save('incomechart.pdf')
             }
           </script>
