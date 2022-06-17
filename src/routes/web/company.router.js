@@ -219,6 +219,26 @@ companyRouter.get('/sales-sheet', async (req, res)=>{
         states: states
     })
 })
+companyRouter.post('/sales-sheet', async (req, res)=>{
+    let user = await req.user
+    let user_id = user.id
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user)
+    let sales_sheet_info = await companyController.sales_sheet_info(req,res,user_id)
+
+    let states = await States.findAll({
+        attributes : ['id', 'name'],
+        raw: true
+    });
+    
+    res.render('seed_company/sales-sheet', {
+        layout : 'company-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        company,
+        states: states
+    })
+})
 
 
 // sales sheet ends

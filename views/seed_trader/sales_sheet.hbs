@@ -1,16 +1,16 @@
 <div class="card p-3">
     <div class="card-body">
         <h3>Sales Sheet</h3>
-        <form class="row g-3">
+        <form method="post" class="row g-3">
             <div class="col-md-6">
                 <label for="customerName" class="form-label salesLabel">Customer Name<span
                         class="asterisk">*</span></label>
-                <input type="text" class="form-control salesInput" id="customerName" name="customerName">
+                <input type="text" class="form-control salesInput" id="customer_name" name="customer_name">
             </div>
             <div class="col-md-6">
                 <label for="customerNumber" class="form-label salesLabel">Customer Number<span
                         class="asterisk">*</span></label>
-                <input type="number" class="form-control salesInput" id="customerNumber" name="customerNumber">
+                <input type="number" class="form-control salesInput" id="customer_number" name="customer_number">
             </div>
             <div class="horizontalLine"></div>
 
@@ -19,7 +19,7 @@
                     <div class="col-6">
                         <label for="productName" class="form-label salesLabel">Product Name<span
                                 class="asterisk">*</span></label>
-                        <select class="form-select salesSelect border-bottom" name="productName" id="productName"
+                        <select class="form-select salesSelect border-bottom" name="product_name" id="product_name"
                             required>
                             <option value="">Select Product Name</option>
                             <option value="Maize">Maize</option>
@@ -31,7 +31,7 @@
                     <div class="col-6 mb-3">
                         <label for="productVariant" class="form-label salesLabel">Product Variant<span
                                 class="asterisk">*</span></label>
-                        <input type="text" class="form-control salesInput" id="productVariant" name="productVariant">
+                        <input type="text" class="form-control salesInput" id="product_variant" name="product_variant">
                     </div>
 
                 </div>
@@ -46,12 +46,12 @@
                     <div class="col-4">
                         <label for="productCost" class="form-label salesLabel">Size in (kg)<span
                                 class="asterisk">*</span></label>
-                        <input type="number" class="form-control salesInput" id="productCost" name="productCost">
+                        <input type="number" class="form-control salesInput" id="size" name="size">
                     </div>
                     <div class="col-4">
                         <label for="productCost" class="form-label salesLabel">Product Cost<span
                                 class="asterisk">*</span></label>
-                        <input type="number" class="form-control salesInput" id="productCost" name="productCost">
+                        <input type="number" class="form-control salesInput" id="product_cost" name="product_cost">
                     </div>
                 </div>
                 {{!-- <button>Delete</button> --}}
@@ -67,11 +67,11 @@
 
             <div class="col-md-6">
                 <label for="saleDate" class="form-label salesLabel">Date of Sale<span class="asterisk">*</span></label>
-                <input type="date" class="form-control salesInput" id="saleDate" name="saleDate">
+                <input type="date" class="form-control salesInput" id="sale_Date" name="sale_date">
             </div>
             <div class="col-md-6">
                 <label for="state" class="form-label salesLabel">State<span class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" data-state="{{ company.state_id }}"
+                <select class="form-select salesSelect border-bottom" data-state="{{ traders.state_id }}"
                     name="state_id" id="state" required>
                     <option value="">Select State</option>
                     {{#each states}}
@@ -81,7 +81,7 @@
             </div>
             <div class="col-md-6">
                 <label for="lga" class="form-label salesLabel">LGA<span class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" data-lga="{{ company.lg_id }}" name="lg_id"
+                <select class="form-select salesSelect border-bottom" data-lga="{{ traders.lg_id }}" name="lg_id"
                     id="lgas" required>
                     <option value="">Select LGA</option>
                 </select>
