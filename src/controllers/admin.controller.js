@@ -484,7 +484,11 @@ module.exports = {
                             { model: SeedCompany },
                             { model: SeedTrader },
                             { model: Farmer },
-                            { model: UserRole },
+                            { model: UserRole,
+                                include : [
+                                    {model : Role}
+                                ]
+                                },
                         ],
                         raw: true,
                     },
@@ -525,6 +529,9 @@ module.exports = {
                             },
                             {
                                 model: UserRole,
+                                include: [
+                                    {model: Role}
+                                ]
                             },
                         ],
                         raw: true,
@@ -633,6 +640,9 @@ module.exports = {
             include: [
                 {
                     model: UserRole,
+                    include: [
+                        {model: Role}
+                    ]
                 },
             ],
         });
@@ -642,7 +652,7 @@ module.exports = {
     },
     getuserdata: async (role_id, to_userid) => {
         let messages;
-        if (role_id == 1) {
+        if (role_id == 'farmer') {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
@@ -651,7 +661,7 @@ module.exports = {
                     },
                 ],
             });
-        } else if (role_id == 2) {
+        } else if (role_id == 'seed_company') {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
@@ -660,7 +670,7 @@ module.exports = {
                     },
                 ],
             });
-        } else if (role_id == 3) {
+        } else if (role_id == 'seed_trader') {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
