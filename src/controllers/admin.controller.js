@@ -484,11 +484,7 @@ module.exports = {
                             { model: SeedCompany },
                             { model: SeedTrader },
                             { model: Farmer },
-                            { model: UserRole,
-                            include : [
-                                {model : Role}
-                            ]
-                            },
+                            { model: UserRole },
                         ],
                         raw: true,
                     },
@@ -529,9 +525,6 @@ module.exports = {
                             },
                             {
                                 model: UserRole,
-                                include: [
-                                    {model: Role}
-                                ]
                             },
                         ],
                         raw: true,
@@ -640,9 +633,6 @@ module.exports = {
             include: [
                 {
                     model: UserRole,
-                    include: [
-                        {model: Role}
-                    ]
                 },
             ],
         });
@@ -652,7 +642,7 @@ module.exports = {
     },
     getuserdata: async (role_id, to_userid) => {
         let messages;
-        if (role_id == 'farmer') {
+        if (role_id == 1) {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
@@ -661,7 +651,7 @@ module.exports = {
                     },
                 ],
             });
-        } else if (role_id == 'seed_company') {
+        } else if (role_id == 2) {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
@@ -670,7 +660,7 @@ module.exports = {
                     },
                 ],
             });
-        } else if (role_id == 'seed_trader') {
+        } else if (role_id == 3) {
             messages = await User.findOne({
                 where: { id: to_userid },
                 include: [
@@ -680,6 +670,7 @@ module.exports = {
                 ],
             });
         }
+
         messages = JSON.parse(JSON.stringify(messages));
         return { messages };
     },
