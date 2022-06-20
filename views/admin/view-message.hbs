@@ -188,12 +188,12 @@
                             else {
 
                                 if (getuserdata.messages.SeedTrader.profile_pic !== '') {
-                                    content += '<img src="/profile_pics/ ' +
+                                    content += '<img src="/profile_pics/' +
                                         getuserdata.messages.SeedTrader.profile_pic + '"' +
                                         'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
                                 }
                                 else {
-                                    content += '<img src="/profile_pics/ ' +
+                                    content += '<img src="/profile_pics/' +
                                         '/images/profile-avatar.png "' +
                                         'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
                                 }
@@ -211,9 +211,12 @@
                         }
                     })
                     document.querySelector('.messages').innerHTML = content
-
-                    //console.log(content)
-                    console.log(getuserdata.messages.SeedTrader.profile_pic)
+                    let contentt = ''
+                    contentt += '<img src="/profile_pics/' +
+                        getuserdata.messages.SeedTrader.profile_pic + '"' +
+                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                    console.log(contentt)
+                    //console.log(getuserdata.messages.SeedTrader.profile_pic)
                 })
         }
         //messages_()

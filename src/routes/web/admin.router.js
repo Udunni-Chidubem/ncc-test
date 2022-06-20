@@ -69,11 +69,6 @@ adminRouter.get('/messages', async (req, res)=>{
     let user_role = await adminController.getUserRole(req, res)
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
-    console.log('getMessages')
-    console.log(getMessages)
-    console.log('getNewmessages')
-    console.log(getNewmessages)
-    console.log('user_role')
     //console.log(user_role.Role.role_name)
     // let {messages,to_userid} = await adminController.getmessages(req, res)
 
@@ -122,9 +117,7 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
     let getuserrole = await adminController.getuserrole(req, to_userid)
     let role_id = getuserrole.messages.UserRole.Role.role_name
     let getuserdata = await adminController.getuserdata(role_id, to_userid)
-    console.log(getuserdata)
-    console.log(messages)
-    console.log(role_id)
+
 
     let user_id = user.id
     
@@ -157,7 +150,6 @@ adminRouter.post('/message', async (req, res)=>{
     let user = await req.user
     let user_id = user.id
     let response = await adminController.message(req,user_id)
-    console.log(response)
     res.json({ message: response }).status(200)
 })
 adminRouter.get('/getmessagescount', async (req, res) => {
