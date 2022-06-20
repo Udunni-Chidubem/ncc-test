@@ -15,22 +15,20 @@ companyRouter.get('/dashboard', async (req, res)=>{
     let balance = await companyController.getWallet(req, res)
     let productCount = await companyController.getProductCount(req, res)
     let totalsales = await companyController.getTotalSales(company.id)
-
     let isVerified = await utils.isVerified(user)
 
     let fulfilled=null
     let unfulfilled=null
     totalsales.forEach(totalSale=>{
-        if(totalSale.status==1){
+        if(totalSale.status<=3){
             unfulfilled =totalSale.count
-        }else if(totalSale.status==2){
+        }else if(totalSale.status==4){
             fulfilled=totalSale.count
         }
 
     })
 
     let total = fulfilled + unfulfilled
-   
 
     res.render('seed_company/dashboard', {
         layout : 'company-dashboard',
@@ -43,7 +41,6 @@ companyRouter.get('/dashboard', async (req, res)=>{
         fulfilled,
         unfulfilled,
         total
-
     })
 });
 
