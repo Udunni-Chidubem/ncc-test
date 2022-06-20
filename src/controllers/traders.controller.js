@@ -930,6 +930,30 @@ module.exports={
                 console.log(e)
                 return e
             }
+        },
+
+        saleSheets : async(user_id) => {
+            let printSheet = await Salesheets.findAll(
+                {
+                    include : [
+                        {
+                            model : States,
+                            attributes: ['name']
+                        },
+
+                        {
+                            model : LGAs,
+                            attributes: ['name']
+                        }
+                    ],
+                    where : {
+                        user_id : user_id
+                    }
+            }
+
+            )
+            return JSON.parse(JSON.stringify(printSheet))
+           
         }
 
 }

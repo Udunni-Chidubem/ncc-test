@@ -246,7 +246,8 @@ companyRouter.get('/view-sheet', async (req, res)=>{
     let user = await req.user
     let company = await utils.getCompanyProfile(user)
     let isVerified = await utils.isVerified(user)
-
+    let saleSheets= await companyController.saleSheets(user.id);
+    console.log(saleSheets)
     // let states = await States.findAll({
     //     attributes : ['id', 'name'],
     //     raw: true
@@ -257,6 +258,7 @@ companyRouter.get('/view-sheet', async (req, res)=>{
         title : 'View Sheet',
         isVerified,
         company,
+        saleSheets
         // states: states
     })
 })
