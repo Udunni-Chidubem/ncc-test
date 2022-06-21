@@ -63,20 +63,13 @@ adminRouter.get('/users/create', async (req, res)=>{
     })
 });
 adminRouter.get('/messages', async (req, res)=>{
-    let user = await req.user
+    let user = JSON.parse(JSON.stringify(await req.user))
     let roles =await adminController.getNascAdminRoles(req, res)
     let isVerified = await utils.isVerified(user)
-    let user_role = await adminController.getUserRole(req, res)
+  // let user_role = await adminController.getUserRole(req, res)
+   let user_role=user.UserRole
     let getMessages = await adminController.getMessages(req, res)
     let getNewmessages = await adminController.getNewmessages(req, res)
-    console.log('getMessages')
-    console.log(getMessages)
-    console.log('getNewmessages')
-    console.log(getNewmessages)
-    console.log('user_role')
-    //console.log(user_role.Role.role_name)
-    // let {messages,to_userid} = await adminController.getmessages(req, res)
-
 
     res.render('admin/messages', {
         layout : 'admin-dashboard',
