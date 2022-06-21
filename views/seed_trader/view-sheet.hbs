@@ -21,12 +21,13 @@
       <tbody class="t_info_body">
       {{#each saleSheets }}
         <tr>
-          <td scope="row">{{@index}}</td>
+          <td scope="row">{{increment @index}}</td>
           <td>{{customer_name}}</td>
           <td>{{customer_number}}</td>
-          {{#cancatArray product_name}}
+          <td>{{product_name}}</td>
+          {{!-- {{#cancatArray product_name}}
           <td>{{this}}</td>
-          {{/cancatArray}}
+          {{/cancatArray}} --}}
           <td>{{product_variant}}</td>
           <td>{{quantity}}</td>
           <td>{{size}}</td>
