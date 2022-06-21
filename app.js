@@ -78,6 +78,18 @@ app.engine('hbs', handlebars({
                 s=Number(s)+Number(i.total_amount)
             })
             return sum.fn(s)
+        },
+        cancatArray(array, done){
+            let res=null
+            array=JSON.parse(array)
+            array.forEach(a=>{
+                if(res!=null)
+                    res=res+','+a
+                else
+                    res=a
+            })
+            console.log(a)
+            return done.fn(res)
         }
     }
 }))

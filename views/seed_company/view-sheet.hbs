@@ -1,0 +1,42 @@
+<div class="main-content">
+  <div class=" container table-responsives table_t_info">
+
+    <table class="table t_info  table-bordered">
+      <thead class="t_info_head ">
+        <tr class="">
+          <th scope="col">S/N</th>
+          <th scope="col">Name</th>
+          <th scope="col">Phone No.</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Variant</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Size</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Date</th>
+          <th scope="col">State</th>
+          <th scope="col">LGA</th>
+          <th scope="col">Community</th>
+        </tr>
+      </thead>
+      <tbody class="t_info_body">
+      {{#each saleSheets }}
+        <tr>
+          <td scope="row">{{@index}}</td>
+          <td>{{customer_name}}</td>
+          <td>{{customer_number}}</td>
+          <td>{{product_name}}</td>
+          <td>{{product_variant}}</td>
+          <td>{{quantity}}</td>
+          <td>{{size}}</td>
+          <td>{{product_cost}}</td>
+          <td>{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}</td>
+          <td>{{State.name}}</td>
+          <td>{{LGA.name}}</td>
+          <td>{{community}}</td>
+
+        </tr>
+       {{/each}}
+        
+
+
+      </tbody>

@@ -16,7 +16,8 @@ const {
         TransactionCarts, 
         Wallet,
         Orders,
-        Message
+        Message,
+        Salesheets
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
@@ -24,6 +25,7 @@ const { Op } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const { now } = require('moment');
 const { json } = require('body-parser');
+const user = require('../models/user');
 
 module.exports={
     dashboard : async (req, res)=>{
@@ -488,7 +490,8 @@ module.exports={
     },
     initializeTransaction : async (req, res, ref, getCartItems, trader)=>{
         
-        let transaction =await db.rest.transaction()
+        
+        
         try{
             let log=await TransactionLog.create({
                 seedtrader_id : trader.id,
@@ -553,6 +556,45 @@ module.exports={
         }
         
     },
+    sales_sheet_info: async (req,res,user_id) => {
+        let transaction =await db.rest.transaction()
+        let qty = [], p_cost = [], size = [], p_name = [], p_variant = []
+        try{
+            if (!Array.isArray(req.body.product_cost)) {
+                p_cost.push(req.body.product_cost)
+                size.push(req.body.size)
+                qty.push(req.body.quantity)
+                p_variant.push(req.body.product_variant)
+                p_name.push(req.body.product_name)
+            } else {
+                p_cost = req.body.product_cost
+                size = req.body.size
+                qty = req.body.quantity
+                p_variant = req.body.product_variant
+                p_name = req.body.product_name 
+            }
+        await Salesheets.create({
+            community : req.body.community,
+            lg_id : req.body.lg_id,
+            state_id : req.body.state_id,
+            sale_date : req.body.sale_date,
+            customer_name : req.body.customer_name,
+            customer_number : req.body.customer_number,
+            product_name : p_name,
+            product_variant :p_variant,
+            size : size,
+            product_cost : p_cost,
+            quantity : qty,
+            user_id : user_id
+        },
+         {transaction : transaction});
+        await transaction.commit();
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+            return e
+        }
+            },
     updateCart:async (ids)=>{
          let transaction =await db.rest.transaction()
          try{
@@ -888,6 +930,30 @@ module.exports={
                 console.log(e)
                 return e
             }
+        },
+
+        saleSheets : async(user_id) => {
+            let printSheet = await Salesheets.findAll(
+                {
+                    include : [
+                        {
+                            model : States,
+                            attributes: ['name']
+                        },
+
+                        {
+                            model : LGAs,
+                            attributes: ['name']
+                        }
+                    ],
+                    where : {
+                        user_id : user_id
+                    }
+            }
+
+            )
+            return JSON.parse(JSON.stringify(printSheet))
+           
         }
 
 }

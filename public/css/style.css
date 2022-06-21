@@ -3216,3 +3216,10 @@ input[type="number"] {
   background-color: #FABA23 !important;
   border-color: #FABA23 !important;
 }
+.sd_chart_btn{
+  outline: black;
+background: #ccc;
+border: 1px solid black;
+text-align: center;
+padding: 2px;
+}
