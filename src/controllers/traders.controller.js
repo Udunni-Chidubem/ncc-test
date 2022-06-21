@@ -852,10 +852,11 @@ module.exports={
                         to_user: user_id
                     }
                 }
-            )
+            );
         } 
         catch(e){
-            console.log(e)       
+            console.log(e) 
+            return e;      
         }
     },
 
