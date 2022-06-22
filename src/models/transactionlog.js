@@ -32,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     created_at : DataTypes.DATE,
     currency : DataTypes.STRING,
     updated_at : DataTypes.DATE,
-    transaction_id:DataTypes.STRING
+    transaction_id:DataTypes.STRING,
+    pickup_point : DataTypes.TEXT
   }, {
     underscored : true,
     sequelize,

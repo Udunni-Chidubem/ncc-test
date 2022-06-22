@@ -68,12 +68,19 @@
 
 .nav-link {
   display: block;
-  margin-right: 0px;
+  margin-right: -110px;
   margin-left: 0px;
   padding: 10px 0px;
   color: #444;
   text-decoration: none;
 }
+/* :0.targetLanguage{
+  display:none;
+} */
+/* .goog-te-gadget .goog-te-comb{
+  margin-left: 0px;
+  margin-right: -100px;
+} */
 
 .nav-link:hover {
   text-decoration: underline;
@@ -1089,8 +1096,17 @@ body {
 }
 
 .slide-2 {
-  padding-right: 85px;
-  padding-left: 85px;
+  background-image: url("../images/seedTrader-slide.png");
+  background-position: 50% 0%;
+  background-size: cover;
+  /* padding-right: 85px;
+  padding-left: 85px; */
+}
+.slide-4 {
+  background-image: url("../images/nigsims-slide2.png");
+  background-position: 50% 0%;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
 
 .slider-wrapper-wide {
@@ -1454,9 +1470,9 @@ body {
 }
 
 .nav-menu {
-  display: -webkit-box;
+  /* display: -webkit-box;
   display: -webkit-flex;
-  display: -ms-flexbox;
+  display: -ms-flexbox; */
   display: flex;
   padding-top: 7px;
 }
@@ -1591,7 +1607,7 @@ padding-bottom: 40px;
 }
 
 .slide-3 {
-  background-image: url("../images/Artboard-1.jpg");
+  background-image: url("../images/seedCompany-slide.png");
   background-position: 0px 0px;
   background-size: cover;
 }
@@ -1742,8 +1758,8 @@ padding-bottom: 40px;
   line-height: 17px;
 }
 
-.slide-4 {
-  background-image: url("../images/medium-shot-farmers-with-smartphone.jpg");
+.slide-1 {
+  background-image: url("../images/farmer-slide.jpg");
   background-position: 50% 0%;
   background-size: cover;
 }
@@ -2059,14 +2075,46 @@ padding-bottom: 40px;
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }
-
-.about {
+.aboutUs-hero{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 40vh;
+  /* margin-top: 92px; */
+  margin-top: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-size: auto, cover;
+}
+.aboutUs-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about1 {
   width: 80%;
-  height: 200px;
+  height:230px;
   border-radius: 100px;
-  background-image: url("../images/Seeds.jpg");
+  background-image: url("../images/About-1.jpeg");
   background-position: 0px 0px;
   background-size: cover;
+  background-repeat: no-repeat;
+}
+.about2 {
+  width: 80%;
+  height: 230px;
+  border-radius: 100px;
+  background-image: url("../images/About-2.jpeg");
+  background-position: 0px 0px;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
 
 .grid {

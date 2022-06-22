@@ -18,11 +18,16 @@ const siteRouter = require('express').Router();
 
 siteRouter.get('/home', async (req, res) => {})
 siteRouter.get('/', siteController.home)
+siteRouter.post('/', (req, res)=>{
+    siteController.saveContact(req)
+    siteController.home(req, res)
+})
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/extension_worker', siteController.extension_worker)
 siteRouter.get('/about-us', siteController.aboutus)
 siteRouter.get('/farmer_signup', siteController.farmer_signup)
 siteRouter.get('/test', siteController.success_page_test)
+siteRouter.get('/faq', siteController.faq)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
@@ -98,6 +103,52 @@ siteRouter.delete('/logout', (req, res)=>{
     res.redirect('/login')
 }),
 siteRouter.get('/services', siteController.services)
+
+siteRouter.get('/knowledge-base', (req,res) => {
+    res.render('knowledge_base', {
+        layout: '',
+        title : 'Knowledge Base - Index'
+    });
+    
+    
+})
+   
+siteRouter.get('/cowpie', (req,res) => {
+res.render('knowledge_base/cowpie', {
+    layout: 'knowledge_dashboard',
+    title : 'Knowledge Base - Cowpie',
+    crop : "Cowpea"
+     });
+
+})
+
+siteRouter.get('/groundnut', (req,res) => {
+ res.render('knowledge_base/groundnut', {
+     layout: 'knowledge_dashboard',
+     title : 'Knowledge Base - GroundNut',
+    crop : "Groundnut"
+    });
+
+})
+
+siteRouter.get('/maize', (req,res) => {
+ res.render('knowledge_base/maize', {
+     layout: 'knowledge_dashboard',
+     crop : "Maize",
+     title : 'Knowledge Base - Maize'
+   
+    });
+
+})
+
+siteRouter.get('/rice', (req,res) => {
+ res.render('knowledge_base/rice', {
+     layout: 'knowledge_dashboard',
+     crop : "Rice",
+     title : 'Knowledge Base - Rice'
+    });
+
+})
 
 
 module.exports=siteRouter; 

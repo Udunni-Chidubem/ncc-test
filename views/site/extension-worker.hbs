@@ -1,3 +1,66 @@
-
+<div class="extension-worker-container">
+    <h3>kindly fill the form and submit</h3>
+    <form>
+        <div class="form-grid">
+            <input type="text" name="firstname" id="firstname" placeholder="First Name">
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name">
+            <select name="state_id" class="form-select border-0 border-bottom states" required id="state">
+                <option value="4">Select State </option>
+                {{#each state}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+            <select class="form-select border-0 border-bottom lgas" required id="lgas" name="lg_id">
+                <option>Select LGA</option>
+            </select>
+            <input type="text" name="village" id="village" placeholder="Village">
+            <input type="text" name="ward" id="ward" placeholder="Ward Community">
+        </div>
+            <div class="submitBtn-container">
+            <button type="submit" class="extension-worker-btn"> Submit </button>
+            </div>
+       
+    </form>
+</div>
 
 {{!-- Find stylesheet in style.css --}}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        let states = document.getElementById('state')
+        states.onchange = function () {
+            state_id = states.value
+            getDefaultLgas(state_id)
+        }
+
+        let lga = $('#lgas').data('lga')
+
+        const getDefaultLgas = (state_id) => {
+            let url = window.location.origin + '/api/base/lgas/' + state_id
+            console.log(url)
+            fetch(url).then(r => r.json())
+                .then(r => {
+
+                    //let Options =  '<option value="">Select LGA</option>'
+                    let selected, Options
+                    r.forEach(e => {
+                        selected = (e.id == lga ? 'selected' : null)
+                        Options += '<option value="' + e.id + '" selected="' + selected + '">' + e.name + '</option>'
+                    })
+                    console.log(Options)
+                    document.querySelector('#lgas').innerHTML = Options
+                }
+                ).catch(e => {
+                    console.log(e)
+                })
+        }
+
+
+    });
+</script>

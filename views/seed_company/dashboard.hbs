@@ -1,221 +1,290 @@
+{{#if isVerified }}
+<div class="row">
+  <div class="col-12">
+    <div class="card shadow card_home card-width pl-0 mb-2 ">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <h4>Welcome, {{ company.name_of_company }}</h4>
+          </div>
+          <div class="row">
+            <div class="col-6 profile_sub">
+              <p>Kindly set up your profile to continue using NIGSIMS</p>
+            </div>
+            <div class="col-6">
+              <div class="  float-end">
+                <a href="/seed-company/update-profile" class="btn button_update mb-1 shadow-lg">Update Profile</a>
+              </div>
+            </div>
+          </div>
 
-  {{#if isVerified }}
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow card_home card-width pl-0 mb-2 ">
-          <div class="card-body">
-             <div class="row">
-               <div class="col-12">
-                 <h4>Welcome, {{ company.name_of_company }}</h4>
-               </div>
-               <div class="row">
-                 <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
-                 <div class="col-6">
-                  <div class="  float-end">
-                    <a href="/seed-company/update-profile" class="btn button_update mb-1 shadow-lg">Update Profile</a>
+          <div class="row">
+            <div class="col-8">
+              <div class="card shadow card_home  card_seed pl-0 mb-2 ">
+                <div class="card-body">
+                  <div class="row graph">
+                    <div class="col-12">
+                      <canvas id="myChart" class="canvas_stuff" width="400" height="135"
+                        style="background:#fff;"></canvas>
+                    </div>
+
                   </div>
-                 </div>
-               </div>
-             </div>
+                </div>
+              </div>
             </div>
-          </div>
-      </div>
-    </div>
 
-    {{/if}}
+            <div class="col-4 col__4">
+              <div class="card shadow card_home card_seed card-wallet pl-0 mb-2 ">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
+                      <a href="#" class="float-end">View Wallet</a>
+                    </div>
+                    <div>
+                      {{#balance}}
+                      <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub">
+                        <p> &#8358; {{number this.amount}}</p>
+                      </div>
 
-{{#unless isVerified}}
+                      <div class="dashboard_balance">
+                        <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp; Cleared Balance: &#8358;
+                          {{this.amount}} </p>
+                        <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0 </p>
+                      </div>
+                      {{/balance}}
 
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow card_home card _seed pl-0 mb-2 ">
-          <div class="card-body">
-            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end ">
-                  <h5 class="c_d_s2 c__h">Total Sales</h5>
-                  <h1 class="c_d_s2_sales s_1 ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center  border-0 border-end  ">
-                  <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
-                  <h1 class="c_d_s2_full ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end  ">
-                  <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
-                  <h1 class=" c_d_s2_unfull">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              </div>
-
-            </div>
-          </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-8">
-        <div class="card shadow card_home  card_seed pl-0 mb-2 ">
-          <div class="card-body">
-             <div class="row graph">
-               <div class="col-12">
-                <canvas id="myChart" class="canvas_stuff" width="400" height="135" style="background:#fff;"></canvas>
-               </div>
-               
-             </div>
-            </div>
-          </div>
-      </div>
-
-      <div class="col-4 col__4">
-        <div class="card shadow card_home card_seed card-wallet pl-0 mb-2 ">
-          <div class="card-body">
-             <div class="row">
-               <div class="col-12">
-                 <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
-                 <a href="#" class="float-end">View Wallet</a>
-               </div>
-               <div>
-                {{#balance}}
-                 <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub"><p> &#8358; {{number this.amount}}</p></div>
-                
-                 <div class="dashboard_balance">
-                    <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp;  Cleared Balance: &#8358; {{this.amount}} </p>
-                   <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0 </p>
-                 </div>
-                 {{/balance}}
-                 
-                 <p></p>
-                 <div class="col-12">
-                    <button type="button " class="btn btn-theme" style="width: 100% !important;">Withdraw</button>
-                 </div>
-               </div>
-             </div>
-            </div>
-          </div>
-      </div>
-    </div>
-
-    {{!-- <div class="row">
-      <div class="col-12">
-        <div class="card shadow card_home pl-0 mb-2 ">
-          <div class="card-body">
-            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end">
-                  <h5 class="c_d_s2">Total Products</h5>
-                  <h1 class="c_d_s2_sales ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end">
-                  <h5 class="c_d_s2">Active</h5>
-                  <h1 class="c_d_s2_full s_2 ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end">
-                  <h5 class="c_d_s2">Sold Out</h5>
-                  <h1 class=" c_d_s2_unfull s_2">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              </div> --}}
-
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow card_home card_seed pl-0 mb-2 ">
-          <div class="card-body">
-            <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end ">
-                  <h5 class="c_d_s2 c__h">Total Products</h5>
-                  {{#productCount}}
-                  <h1 class="c_d_s2_sales s_1 ">{{this}}</h1>
-                  {{/productCount}}
-                  <a href="/seed-company/products" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center  border-0 border-end  ">
-                  <h5 class="c_d_s2 c__h">Active</h5>
-                  <h1 class="c_d_s2_full ">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
-                </div>
-              </div>
-              <div class="col-12 co_12">
-                <div class="p-3 border text-center border-0 border-end  ">
-                  <h5 class="c_d_s2 c__h">Sold out</h5>
-                  <h1 class=" c_d_s2_unfull">0</h1>
-                  <a href="#" class="c_d_s2_link"> <h5>See Details</h5> </a>
+                      <p></p>
+                      <div class="col-12">
+                        <button type="button " class="btn btn-theme" style="width: 100% !important;">Withdraw</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-            {{!-- </div>
-          </div>
-      </div>
+         
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card shadow card_home card_seed pl-0 mb-2 ">
+                        <div class="card-body">
+                          <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+                            <div class="col-12 co_12">
+                              <div class="p-3 border text-center border-0 border-end ">
+                                <h5 class="c_d_s2 c__h">Total Products</h5>
+                                {{#productCount}}
+                                <h1 class="c_d_s2_sales s_1 ">{{this}}</h1>
+                                {{/productCount}}
+                                <a href="/seed-company/products" class="c_d_s2_link">
+                                  <h5>See Details</h5>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="col-12 co_12">
+                              <div class="p-3 border text-center  border-0 border-end  ">
+                                <h5 class="c_d_s2 c__h">Active</h5>
+                                <h1 class="c_d_s2_full ">0</h1>
+                                <a href="#" class="c_d_s2_link">
+                                  <h5>See Details</h5>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="col-12 co_12">
+                              <div class="p-3 border text-center border-0 border-end  ">
+                                <h5 class="c_d_s2 c__h">Sold out</h5>
+                                <h1 class=" c_d_s2_unfull">0</h1>
+                                <a href="#" class="c_d_s2_link">
+                                  <h5>See Details</h5>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-      
-    </div> --}}
+              {{/if}}
 
-  {{/unless}}
+              {{#unless isVerified}}
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="card shadow card_home card _seed pl-0 mb-2 ">
+                    <div class="card-body">
+                      <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+                        <div class="col-12 co_12">
+                          <div class="p-3 border text-center border-0 border-end ">
+                            <h5 class="c_d_s2 c__h">Total Sales</h5>
+                            <h1 class="c_d_s2_sales s_1 ">0</h1>
+                            <a href="#" class="c_d_s2_link">
+                              <h5>See Details</h5>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-12 co_12">
+                          <div class="p-3 border text-center  border-0 border-end  ">
+                            <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
+                            <h1 class="c_d_s2_full ">0</h1>
+                            <a href="#" class="c_d_s2_link">
+                              <h5>See Details</h5>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-12 co_12">
+                          <div class="p-3 border text-center border-0 border-end  ">
+                            <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
+                            <h1 class=" c_d_s2_unfull">0</h1>
+                            <a href="#" class="c_d_s2_link">
+                              <h5>See Details</h5>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-8">
+                  <div class="card shadow card_home  card_seed pl-0 mb-2 ">
+                    <div class="card-body">
+                      <div class="row graph">
+                        <div class="col-12">
+                          <canvas id="myChart" class="canvas_stuff" width="400" height="160"
+                            style="background:#fff;"></canvas>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-4 col__4">
+                  <div class="card shadow card_home card_seed card-wallet pl-0 mb-2 ">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <h4 class="mb-5  c_d_s2 float-start">Wallet</h4>
+                          <a href="./wallet" class="float-end">View Wallet</a>
+                        </div>
+                        <div>
+                          {{#balance}}
+                          <div class="col-12 mb-4 text-center  c_d_s2_full profile_sub">
+                            <p> &#8358; {{number this.amount}}</p>
+                          </div>
+                          <div class="dashboard_balance">
+                            <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp; Cleared Balance: &#8358;
+                              {{number this.amount}}
+                            </p>
+                            <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0
+                            </p>
+                          </div>
+                          {{/balance}}
 
 
-<script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
-      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-<script>
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'July'],
-          datasets: [{
-               
-              label: 'Monthly',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                  '#47BA5D',
-                  '#47BA5D',
-                  '#47BA5D',
-                  '#47BA5D',
-                  '#47BA5D',
-                  '#47BA5D'
-              ],
-              borderColor: [
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-                  'white',
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          }
-      }
-  });
-  </script>
-  
+                          <p></p>
+                          <div class="col-12">
+                            <button type="button " class="btn btn-theme"
+                              style="width: 100% !important;" onclick="window.location.href='./wallet'" >Withdraw</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card shadow card_home card_seed pl-0 mb-2 ">
+                            <div class="card-body">
+                              <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+                                <div class="col-12 co_12">
+                                  <div class="p-3 border text-center border-0 border-end ">
+                                    <h5 class="c_d_s2 c__h">Total Products</h5>
+                                    {{#productCount}}
+                                    <h1 class="c_d_s2_sales s_1 ">{{this}}</h1>
+                                    {{/productCount}}
+                                    <a href="/seed-company/products" class="c_d_s2_link">
+                                      <h5>See Details</h5>
+                                    </a>
+                                  </div>
+                                </div>
+                                <div class="col-12 co_12">
+                                  <div class="p-3 border text-center  border-0 border-end  ">
+                                    <h5 class="c_d_s2 c__h">Active</h5>
+                                    <h1 class="c_d_s2_full ">0</h1>
+                                    <a href="#" class="c_d_s2_link">
+                                      <h5>See Details</h5>
+                                    </a>
+                                  </div>
+                                </div>
+                                <div class="col-12 co_12">
+                                  <div class="p-3 border text-center border-0 border-end  ">
+                                    <h5 class="c_d_s2 c__h">Sold out</h5>
+                                    <h1 class=" c_d_s2_unfull">0</h1>
+                                    <a href="#" class="c_d_s2_link">
+                                      <h5>See Details</h5>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+              {{/unless}}
+
+
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+                integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+              <script>
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'May', 'Jun', 'July'],
+                    datasets: [{
+
+                      label: 'Monthly',
+                      data: [12, 19, 3, 5, 2, 3],
+                      backgroundColor: [
+                        '#47BA5D',
+                        '#47BA5D',
+                        '#47BA5D',
+                        '#47BA5D',
+                        '#47BA5D',
+                        '#47BA5D'
+                      ],
+                      borderColor: [
+                        'white',
+                        'white',
+                        'white',
+                        'white',
+                        'white',
+                        'white',
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+              </script>

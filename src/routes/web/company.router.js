@@ -22,36 +22,46 @@ companyRouter.get('/dashboard', async (req, res)=>{
         productCount
     })
 });
+
+
 companyRouter.get('/update-profile', async (req, res)=>{
     let states = await siteController.getStates();
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
     let company = await utils.getCompanyProfile(user)
-
     res.render('seed_company/update-profile', {
         layout : 'company-dashboard',
         title : 'Profile Update',
         states : states,
         company: company,
-        isVerified
+        isVerified,
     })
 });
-companyRouter.get('/create-product', async (req, res)=>{
+/*Update Profile*/
+companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
+    let r = await companyController.updateProfile(req, res)
+
+    if(r.company) {
+        res.json({ message: 'Your profile has been “updated” successfully.', statusCode: 200 }).status(200)
+    }else{
+        res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
+    }
+    
+});
+
+/*Product Routes Begins*/
+
+/*Create Product GET request*/
+companyRouter.get('/products/create', async (req, res)=>{
 
     res.render('seed_company/create-products', {
         layout : 'company-dashboard',
         title : 'Create Product',
     })
 });
-companyRouter.get('/orders', async (req, res)=>{
-    let orders=await companyController.getOrders(req, res)
-    res.render('seed_company/order-list', {
-        layout : 'company-dashboard',
-        title : 'Order List',
-        orders
-    })
-});
-companyRouter.post('/create-product', productValidation(), validate, async (req, res)=>{
+
+/*Create Product POST request*/
+companyRouter.post('/products/create', productValidation(), validate, async (req, res)=>{
     let filename='';
     if(req.files){
         let upload=req.files.upload
@@ -65,11 +75,16 @@ companyRouter.post('/create-product', productValidation(), validate, async (req,
         res.json({statusCode:500, error :r, message : "something went wrong"}).status(500).send();
     }
 });
-companyRouter.post('/products/:id', async (req, res)=>{
+
+/*Update Product Logic*/
+companyRouter.post('/products/update/:id', async (req, res)=>{
      companyController.updateProduct(req, res)
-     res.redirect("/seed-company/products")
+     res.json({statusCode : 200, message : "Product updated successfully", body : "Product updated succeessfully"}).status(200).send()
 
 })
+
+
+/*Product List*/
 companyRouter.get('/products', async (req, res)=>{
 
     let product = await companyController.listProducts(req, res)
@@ -86,27 +101,24 @@ companyRouter.get('/products', async (req, res)=>{
         title : 'Products',
     })
 });
-companyRouter.post('/update-profile', companyValidation(), validate, async (req, res) => {
-    let r = await companyController.updateProfile(req, res)
 
-    if(r.company) {
-        res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
-    }else{
-        res.json({ message: r.errors, error: true, statusCode: 400 }).status(400)
-    }
-    
-});
-companyRouter.get('/products/:id', async (req, res)=>{
+
+
+/*Update Product Page*/
+companyRouter.get('/products/update/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 
     res.render('seed_company/update-product', {
         layout : 'company-dashboard',
         product,
-        title : 'Update Product',
+        title : 'Products',
+        sub_title: 'Update Product'
     })
 });
-companyRouter.get('/product/:id', async (req, res)=>{
+
+/*View Product*/
+companyRouter.get('/products/:id', async (req, res)=>{
 
     let product = await companyController.viewProduct(req, res)
 
@@ -117,18 +129,100 @@ companyRouter.get('/product/:id', async (req, res)=>{
         data,
         product,
         title : 'Products',
-        sub_title : 'View Product'
+        sub_title : 'View Product',
+        prev_link : '/seed-company/products'
     })
 });
-companyRouter.get('/view-order', async (req, res)=>{
+/*Product Routes Ends*/
+
+
+/*Order Routes Begins*/
+
+/*Order List*/
+companyRouter.get('/orders', async (req, res)=>{
+    let orders=null;
+    product=null
+    if(req.query.product){
+        product=req.query.product
+        orders=await companyController.getProductOrders(req, product)
+    }else{
+        orders=await companyController.getOrders(req, res)
+    }
+    res.render('seed_company/order-list', {
+        layout : 'company-dashboard',
+        title : 'Order List',
+        orders,
+    })
+});
+
+/*Order GET request*/
+companyRouter.get('/orders/:transaction_id/', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user, 'company')
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
+    res.render('seed_company/view-order', {
+        layout : 'company-dashboard',
+        title : 'Orders',
+        sub_title : 'View Order',
+        order,
+        farmer,
+        orderStatus,
+        prev_link : '/seed-company/orders',
+        transaction_id : req.params.transaction_id
+    })
+});
+
+/*Order POST request*/
+companyRouter.post('/orders/:transaction_id/', async (req, res)=>{
+    let user = await req.user
+    let data={}
+    data.status = req.body.status
+    companyController.updadeOrders(req.body.order, data)
+    let isVerified = await utils.isVerified(user, 'company')
+    let company = await utils.getCompanyProfile(user)
+    let {order, farmer, orderStatus} = await companyController.getOrder(req.params.transaction_id, user.id, company.id)
+    
     
     res.render('seed_company/view-order', {
         layout : 'company-dashboard',
-        title : 'Order Management',
-        sub_title : 'View Order'
+        title : 'Orders',
+        sub_title : 'View Order',
+        prev_link : '/admin/orders',
+        order,
+        farmer,
+        orderStatus,
+        transaction_id : req.params.transaction_id
     })
 });
+
+/*Order Count*/
+companyRouter.get("/orders/count/company", async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let count = await companyController.getOrderCount(company.id)
+    res.json({ message: count , statusCode: 200 }).status(200)
+});
+
+/*Order Routes End*/
+
+/* Wallet */
+companyRouter.get('/wallet', async (req, res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user, 'company')
+    let wallet = await companyController.getWallet(req, res)
+    res.render('seed_company/wallet', {
+        layout : 'company-dashboard',
+        title : 'Wallet',
+        wallet
+    })
+});
+
+companyRouter.get('/knowledge-base', (req,res) => {
+    res.render('knowledge_base', {
+        layout: '',
+        title : 'Knowledge Base - Index'
+    }); 
+})
 
 module.exports=companyRouter

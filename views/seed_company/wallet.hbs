@@ -1,0 +1,195 @@
+{{#if wallet}}
+<div class="d-flex justify-content-end mb-2">
+	<button class="btn btn-info export-btn"> Export </button>
+</div>
+<div class=" card account-details-section" id="account-details" >
+  	<div class="card-body">
+  		{{!-- Balance Grid - Begins --}}
+  			<div class="balance-grid">
+  				<div>
+  					<h5>Ledger Balance</h5>
+  					
+  						<h3>&#8358; {{number wallet.amount}}</h3>	
+  				
+  				</div>
+
+  				<div class="cleared-balance">
+  					<h6>Cleared Balance</h6>
+  					<h4>&#8358; 20,000</h4>
+  				</div>
+
+  				<div class="uncleared-balance">
+  					<h6>Uncleared Balance</h6>
+  				    <h4>&#8358; {{number wallet.amount}}</h4>
+  				</div>
+  			</div>
+  			<div class="d-flex justify-content-end mb-2">
+				<button class="btn btn-success" id="withdraw-btn" data-bs-toggle="modal" data-bs-target="#logoutModal"> Withdraw </button>
+			</div>
+  			<div class="transaction-div">
+					<select name="transaction-types" class="custom-select  mb-2" >
+						<option value="in_flow">In Flow</option>
+						<option value="withdrawal">Withdrawals</option>
+					</select>
+					<hr>
+					<div class="walletTable in_flow">
+						<table class="table-responsive table con t_info  table-borderless " id="in_flow_Table">
+			            <thead class="t_info_head ">
+			              <tr class="">
+			                  <th scope="col">ORDER ID</th>
+			                  <th scope="col">EARNING(&#8358;)</Nav></th>
+			                  <th scope="col">DATE</Nav></th>
+			                  <th scope="col">STATUS</th>
+			              </tr>
+			            </thead>
+			            <tbody class="t_info_body">
+			              <tr class="t_info_row1">
+			                  <th scope="row"  ><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
+			                 
+			               </tr>
+			              <tr class="t_info_row2">
+			                  <th scope="row"><a href="#">12345678</a></th>
+			                  <td>&#8358; 3000</td>
+			                  <td>12/12/3032</td>
+			                    <td>
+			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
+			                  </td>
+			                 
+			              </tr>
+			              <tr class="t_info_row1">
+			                  <th scope="row"  ><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                  <td>
+			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
+			                  </td>
+			                  
+			              </tr>
+			              <tr class="t_info_row2">
+			                  <th scope="row"><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                    <td>
+			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
+			                  </td>
+			                  
+			              </tr>
+			              <tr class="t_info_row1">
+			                  <th scope="row"  ><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
+			                 
+			               </tr>
+			              <tr class="t_info_row2">
+			                  <th scope="row"><a href="#">12345678</a></th>
+			                  <td>&#8358; 3000</td>
+			                  <td>12/12/3032</td>
+			                    <td>
+			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
+			                  </td>
+			                 
+			              </tr>
+			              <tr class="t_info_row1">
+			                  <th scope="row"  ><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                  <td>
+			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
+			                  </td>
+			                  
+			              </tr>
+			              <tr class="t_info_row2">
+			                  <th scope="row"><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>
+			                    <td>
+			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
+			                  </td>
+			                  
+			              </tr>
+			            </tbody>
+			        </table>	
+					</div>
+					
+
+			       <div class="withdrawal walletTable">
+			       		 <table class="container-fluid table con t_info  table-borderless" id="transactionTable">
+			            <thead class="t_info_head ">
+			              <tr class="">
+			                  <th scope="col">TRANSACTION ID</th>
+			                  <th scope="col">AMOUNT (&#8358;)</th>
+			                  <th scope="col">DATE</th>
+			              </tr>
+			            </thead>
+			            <tbody class="t_info_body">
+			              <tr class="t_info_row1">
+			                  <th scope="row"  ><a href="#">12345678</a></th>
+			                  <td>&#8358; 2000</td>
+			                  <td>12/12/3032</td>		                 
+			               </tr>
+			            
+			            </tbody>
+			        </table>
+			       </div>
+				</div>
+	</div>
+  	</div>
+</div>
+
+
+    <!-- Logout Modal-->
+    <div class="modal fade " id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<form action="wallet_submit" method="get" >
+                		<div class="mb-2">
+	                		<input type="number"  class="form-control" name="amount" value="" placeholder="Enter Amount to Withdraw">       		
+                		</div>
+                		<div class="mb-2">
+	                		<input type="password"  class="form-control" name="password" value="" placeholder="Password">     		
+                		</div>
+                	
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success" href="#!">Logout</button>
+                </div>
+            	</form>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+
+<script>
+$(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue){
+                $(".walletTable").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".walletTable").hide();
+            }
+        });
+    }).change();
+
+    $('#logoutModal').on('shown.bs.modal', function () {
+  $('#logoutModal').trigger('focus')
+})
+});
+
+
+</script>

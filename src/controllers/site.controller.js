@@ -1,7 +1,7 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
@@ -24,9 +24,15 @@ module.exports = {
         });
     }, 
     extension_worker: async (req,res) => {
+        let state = await States.findAll({
+            attributes : ['id','name'],
+            raw : true
+        });
+        
         res.render('site/extension-worker', {
             title: 'Find and extension worker',
-            layout: 'header'
+            layout: 'header',
+            state : state
         });
     },
     success_page_test: async (req,res) => {
@@ -39,8 +45,14 @@ module.exports = {
     },
     aboutus: async (req,res) => {
         res.render('site/about-us', {
-            layout: 'common',
+            layout: 'main',
             title : 'About Us'
+        });
+    },
+    faq: async (req,res) => {
+        res.render('site/faq', {
+            layout: 'common',
+            title : 'FAQ'
         });
     },
 
@@ -244,10 +256,12 @@ module.exports = {
             const genders = []
             const farmProduce = []
             const levelEdu = []
+            const banks = []
 
             let gender = data.gender
             let farm_Produce = data.farmProduce
             let level = data.levelEducation
+            let bank = data.banks
 
             gender.forEach((value, index, self) => {
                 genders.push(value)
@@ -261,10 +275,15 @@ module.exports = {
                 levelEdu.push(value)
             })
 
+            bank.forEach((value, index, self) => {
+                banks.push(value)
+            })
+
             res.json({statusCode: 200, error: false,  data: {
                 gender: genders, 
                 farm_produce: farmProduce,
-                eduLevel: levelEdu
+                eduLevel: levelEdu,
+                bank: banks
             } })
 
         })
@@ -275,4 +294,9 @@ module.exports = {
             title : 'Services'
         });
     },
+
+    saveContact:async (req, res)=>{
+        Contact.create(req.body)
+    }
+
 }

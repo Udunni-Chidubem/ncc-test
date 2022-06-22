@@ -81,14 +81,14 @@
 
           </li>
           <li>
-            <a href="#">
+            <a href="/knowledge-base">
               <i class='bx bx-library'></i>
               <span class="link_name">Knowledge Base</span>
             </a>
 
           </li>
           <li>
-            <a href="#">
+            <a href="/faq">
               <i class='bx bx-help-circle' ></i>
               <span class="link_name">Help</span>
             </a>
@@ -134,11 +134,7 @@
       {{{body}}}
   </div>
 
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-  }
-</script>
+
  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
@@ -343,6 +339,14 @@
           }
         })
         .catch(error => console.log(error))
+    })
+
+    $('#check-all').on('click', function(){
+      if($(this).prop('checked')==true){
+        $('.item-check-box').prop('checked', true)
+      }else{
+        $('.item-check-box').prop('checked', false)
+      }
     })
     
    })

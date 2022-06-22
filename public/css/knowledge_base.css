@@ -1,0 +1,346 @@
+/* 
+
+UNIVERSAL SETTINGS(SOME CSS IN OTHER FILES AREMESSING WITH OURS)
+
+*/
+p{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /* font-family: poppin; */
+}
+
+ul{
+    margin-bottom: 0px;
+    list-style-type: disc;
+    margin-right: 0px;
+}
+
+
+
+/* 
+
+SEARCH BAR CODE STARTS 
+
+*/
+
+.searchBar-container {
+    margin-top: 4rem;
+    /* width: ; */
+    height: 152px;
+    background: #fff;
+    box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.2);
+}
+
+.form-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4rem;
+    vertical-align: middle;
+
+}
+
+::placeholder {
+    color: #90A0B7;
+    padding: 8px;
+}
+
+.search-bar {
+    width: 460px;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.search-btn {
+    width: 158px;
+    height: 40px;
+    background: #008346;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.valueSeeds-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2.5rem;
+    place-items: center;
+    width: fit-content;
+    margin: 5rem auto;
+    padding-top: 2rem;
+}
+
+.seed-title {
+    letter-spacing: 0.01em;
+    color: #6F6F6F;
+    font-size: 18px
+}
+
+/* SIDEBAR STYLES BEGINS HERE */
+h3{
+    line-height: normal;
+    margin-top: 0px;
+}
+.sidebar_head{
+    font-size: 30px;
+    font-weight: 25px;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    margin-top: 20px;
+    margin-left: 15px;
+
+}
+
+.content-side-gap{
+    margin-bottom: 10px;
+}
+
+.a{
+    color: rgb(182, 178, 178);
+    cursor: pointer;
+}
+.mini-sidebar {
+    width: 285px;
+    height: 450px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.25);
+    padding: 20px;
+    margin-top: 15px;
+    margin-left: 20px;
+
+}
+
+.sidebar-content {
+    list-style: none;
+
+}
+
+.sidebar-content-items {
+    margin: 22px;
+}
+
+.sidebar-content-items a {
+    text-decoration: none;
+    font-size: 15px;
+    text-align: left;
+
+}
+
+.side-gap{
+    margin-bottom: 22px;
+    margin-top: 40px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+
+}
+
+.knowledgeBody-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+}
+
+.knowledge-content {
+    display: grid;
+    /* grid-template-columns: 320px 1fr; */
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1200px;
+    height: fit-content;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 
+                BODY
+                                                 */
+
+
+/*          
+                  DISCRIPTION GRID 
+                                                 */
+                                                
+.mainpage{
+   padding: 15px;
+   margin: auto; 
+}
+     
+.heading1{
+    display: grid;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 15px;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    margin-top: 0px;
+    margin-bottom: 25px;
+}
+.underline{
+    margin-top: -10px;
+    margin-bottom: 10px;
+    border-top: .5px solid rgb(224, 220, 220);
+}
+
+.description-grid{
+    display: grid;
+    grid-template-columns: repeat(5 , 234px);
+    grid-row-gap: 35px;
+    /* margin-left: 10px; */
+ 
+}
+
+.text-descp{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    /* font-family: poppin; */
+}
+
+.pic-descp{
+    grid-column-start: 5;
+    grid-column-end: 5;
+    
+}
+
+.text2-descp{
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-bottom: 50px
+}
+
+.importance{
+   display: grid;
+   grid-template-columns: repeat(1, auto);
+   margin-bottom: 50px;
+}
+
+.subheading{
+    font-family: poppin;
+    font-size: medium;
+    font-weight:700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #b5b5b5;
+}
+
+.planting{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
+ }
+
+ .main-pests{
+     display: grid;
+     grid-template-columns: repeat(5 , 234px);
+     grid-template-rows: repeat(3 , auto);
+     grid-row-gap: 45px;
+     margin-bottom: 40px;
+
+ }
+
+ .pests-text1{
+     grid-row-start: 1;
+     grid-row-end: 1;
+     grid-column-start: 1;
+     grid-column-end: 4;
+ }
+ .pic-pests1{
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .pests-text2{
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+ }
+
+ .pic-pests2{
+    grid-row-start: 2;
+    grid-row-end: 2;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .pests-text3{
+    grid-row-start: 3;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 4;
+ }
+
+ .pic-pests3{
+    grid-row-start: 3;
+    grid-row-end: 3;
+    grid-column-start: 5;
+    grid-column-end: 5;
+ }
+
+ .harvesting{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
+ }
+/* 
+ .test-harvest{
+
+ } */
+
+.economic{
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    margin-bottom: 50px;
+}
+.seed-mgt{
+    margin: 25px;
+}
+.list{
+    margin-left: 15px;
+}
+
+.mainheading{
+    color: #c4c4c4;
+}
+
+.pests-image{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+/* 
+
+TABLE 
+
+*/
+
+/* .table-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.table_content{
+    padding: 8px 4px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+} */
+
+table{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-decoration: black;
+
+}
+
+td{
+    padding: 8px 4px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    text-decoration: black;
+}

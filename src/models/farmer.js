@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
     state_id: DataTypes.INTEGER,
     lg_id: DataTypes.INTEGER,
     level_of_education: DataTypes.STRING,
+    village : DataTypes.STRING,
+    ward : DataTypes.STRING,
+    profile_pic : DataTypes.TEXT,
     user_id: {
       type :DataTypes.INTEGER,
       unique : true
