@@ -37,36 +37,29 @@
 
                              <div class="row">
                               <div class="col-sm-6">
-                                <label for="dob" class="input_form">Date of Birth </label>
+                                <label for="dob" class="input_form">Age Range </label>
                                   <div class="input-group input-group-sm mb-3">
-                                    <input
-                                        style="color:rgb(58, 56, 56);"
-                                        width="312"
-                                        type="numeric" 
-                                        class="form-control border-0 border-bottom" 
-                                        aria-label="Sizing example input" 
-                                        aria-describedby="inputGroup-sizing-sm"
-                                        name="date_of_birth"
-                                        value="{{ farmerData.date_of_birth }}"
-                                        data-date-format="dd/mm/yyyy"
-                                        id="dob"
-                                        max="2019-12-31"
-                                        data-dob="{{ farmerData.date_of_birth }}"
-                                          
-                                    />
+                                    <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ farmerData.date_of_birth }}">
+                                     <option value="">Select Age Range</option> 
+                                     <option value="15-19">15-19</option>   
+                                     <option value="20-30">20-30</option> 
+                                     <option value="31-40">31-40</option>
+                                     <option value="41-50">41-50</option>
+                                     <option value="51 and above">51 and above</option>
+                                    </select>
                                   </div>
-                                  <script>
+                                  {{!-- <script>
                                         $('#dob').datepicker({
                                             uiLibrary: 'materialdesign',
                                             format:  'mm/dd/yyyy',
                                             maxDate: '12/12/2010',
                                             value: '{{dateFormat farmerData.date_of_birth "DD/MM/YYYY"}}',
                                             keyboardNavigation: true,
-                                            // modal: true, 
-                                            // header: true, 
-                                            // footer: true
+                                            modal: true, 
+                                            header: true, 
+                                            footer: true
                                         })
-                                    </script>
+                                    </script> --}}
                               </div>
 
                               
@@ -118,9 +111,15 @@
 
                          <div class="row">
                               <div class="col-sm-6">
-                                <label for="nin" class="input_form">NIN <span class="text-black-50">( Optional )</span> </label>
+                                <label for="nin" class="input_form">Do you have your National Identity Number (NIN) <span class="text-black-50">( Optional )</span> </label>
                                 <div class="input-group input-group-sm mb-3">
-                                  <input 
+                                   <select class="form-select border-0 border-bottom" data-val="{{ farmerData.nin }}" id="nin" name="nin" required>                                    
+                                      <option value="">Select One</option>
+                                      <option value="Yes">Yes</option>
+                                      <option value="No">No</option>
+
+                                    </select>
+                                  {{!-- <input 
                                     type="password"
                                     id="nin"
                                     title="It should contain 11digits only"
@@ -129,7 +128,7 @@
                                     class="form-control border-0 border-bottom bi bi-eye-slash" 
                                     aria-label="Sizing example input" 
                                     aria-describedby="inputGroup-sizing-sm"
-                                    name="nin" value="{{ farmerData.nin }}">
+                                    name="nin" value="{{ farmerData.nin }}"> --}}
                                 </div>
                             </div>
 
@@ -206,7 +205,7 @@
                                 <label for="address_of_farm" class="input_form">Where is your farm located?</label>
                                   <div class="input-group mb-3">
 
-                                    <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" id="address_of_farm" cols="30" rows="3"> {{ farmerData.address_of_farm }}</textarea>
+                                    <textarea wrap="physical" class="form-control border-0 border-bottom" name="address_of_farm" style="align-content:left;" placeholder="Nearest landmark closest to your farm" id="address_of_farm" cols="30" rows="3"> {{ farmerData.address_of_farm }}</textarea>
                                   </div>
                               </div>
 
@@ -248,11 +247,12 @@
                                               />
                                   </div>
                                   <div class="input-group-append">
-                                     <select class="custom-select" id="inputGroupSelect01" required>
+                                     <select class="custom-select" data-val="{{ farmerData.farm_size_measurement }}" id="farm_size_measurement" name="farm_size_measurement" required>
                                         <option selected>Choose...</option>
-                                        <option value="1">Hectares</option>
-                                        <option value="2">Acres</option>
-                                        <option value="3">Sqm</option>
+                                        <option value="Hectares">Hectares</option>
+                                        <option value="Acres">Acres</option>
+                                        <option value="Sqm">Sqm</option>
+                                        <option value="Plot">Plot</option>
                                       </select>
                                   </div>
                             </div>
@@ -389,7 +389,10 @@ var profile_pic = null
 
       let lga = $('#lgas').data('lga')
       let banked = $('#bvn').data('val')
+      let nin = $('#nin').data('val')
       let type = $('#source_type').data('val')
+      let farm_size_measurement = $('#farm_size_measurement').data('val')
+      let dob = $('#date_of_birth').data('val')
 
       if(banked != null){
         $('#bvn').val(banked)
@@ -397,6 +400,18 @@ var profile_pic = null
 
       if(type != null){
         $('#source_type').val(type)
+      }
+      
+      if(nin != null){
+        $('#nin').val(nin)
+      }
+      
+      if(farm_size_measurement != null){
+        $('#farm_size_measurement').val(farm_size_measurement)
+      }
+      
+      if(dob != null){
+        $('#date_of_birth').val(dob)
       }
 
 
@@ -642,6 +657,7 @@ var profile_pic = null
         error_toastr(r.data)
       }else{
         success_toastr(r.message)
+        window.location.href='/farmer/dashboard'
       }
     })
     .catch(e=>{

@@ -17,7 +17,7 @@
       </thead>
       <tbody class="t_info_body">
 
-        
+
         {{#if orders}}
         {{#each orders}}
         <tr class="t_info_row1">
@@ -26,16 +26,18 @@
           <td>{{firstname}} {{lastname}}</td>
           <td>{{amount}}</td>
           <td><span class=" "> <span class="approved px-1"><i class="bi bi-dot"></i> Approved</span> </td>
-          <td>                      
-          {{#if (eq status "1")}}
-                    <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
-                  {{else if (eq status "2")}}
-                        <span class="shipped px-1"><i class="bi bi-dot"></i>Shipped</span>
-                  {{else if (eq status "3")}}
-                          <span class="approved px-1"><i class="bi bi-dot"></i>Fulfilled</span>
-                      {{else}}
-                          <span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
-                  {{/if}} 
+          <td>
+            {{#if (eq status "1")}}
+            <span class="pending px-1"><i class="bi bi-dot"></i>Ready to ship</span>
+            {{else if (eq status "2")}}
+            <span class="shipped px-1"><i class="bi bi-dot"></i>Shipped</span>
+            {{else if (eq status "3")}}
+            <span class="hub px-1"><i class="bi bi-dot"></i>At The Hub</span>
+            {{else if (eq status "4")}}
+            <span class="approved px-1"><i class="bi bi-dot"></i>Fulfilled</span>
+            {{else}}
+            <span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
+            {{/if}}
           </td>
           {{!-- <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> </td> --}}
           <td>
@@ -56,13 +58,13 @@
         </tr>
         {{/each}}
         {{else}}
-          <tr>
-            <td colspan="7">
-              <div class="row d-flex justify-content-center">
-                   No Order(s) available
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td colspan="7">
+            <div class="row d-flex justify-content-center">
+              No Order(s) available
+            </div>
+          </td>
+        </tr>
         {{/if}}
       </tbody>
     </table>

@@ -155,11 +155,11 @@ body {
 
 .nav-links li a {
   text-decoration: none;
-  color: #334d6e;
+  color: #192a3e;;
 }
 
 #settings {
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
   /* margin-top: 3.5rem;
   width: 259px;
   border-top: 1px solid #cccc;
@@ -179,7 +179,12 @@ body {
 }
 
 @media (max-width: 768px) {
-
+  .s_chart{
+    width: 100% !important;
+  }
+.home{
+  width: 100% !important;
+}
   /*(min-width: 500px) and*/
   .sidebar {
     width: 50%;
@@ -287,7 +292,7 @@ body {
   }
 
   .home {
-    left: 7px !important;
+    left: 0px !important;
   }
 
   .card-default {
@@ -318,7 +323,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -369,9 +374,13 @@ body {
   .table-responsives {
     overflow-x: auto;
   }
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
+  }
 
   .table_t_info {
-    width: 375px !important;
+    /* width: 375px !important; */
+    width: 100%;
   }
 
   .create_p {
@@ -379,7 +388,8 @@ body {
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -436,6 +446,12 @@ body {
 
 
 @media (max-width: 320px) {
+  .s_chart{
+    width: 100% !important;
+  }
+  .home{
+    width: calc(100%);
+  }
 
   /* (min-width: 300px) and */
   .sidebar {
@@ -572,7 +588,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -623,6 +639,9 @@ body {
   .table-responsives {
     overflow-x: auto;
   }
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
+  }
 
   .table_info {
     width: 600px !important;
@@ -637,7 +656,8 @@ body {
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -662,6 +682,7 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
+
   /* .co_12 .s_2 {
   } */
   .c_d_s2.c__h {
@@ -676,7 +697,12 @@ body {
 }
 
 @media (max-width: 299px) {
-
+  .s_chart{
+    width: 100% !important;
+  }
+  .home{
+    width: calc(100%);
+  }
   /*(min-width: 100px) and*/
   .sidebar {
     width: 50%;
@@ -811,7 +837,7 @@ body {
   }
 
   .card_home {
-    width: 600px !important;
+    width: 100% !important;
   }
 
   .ul_list_item {
@@ -860,20 +886,25 @@ body {
   }
 
   .table-responsives {
-    overflow-x: auto;
+    overflow-x: auto ;
   }
 
+  .container.table-responsives.table_t_info {
+    overflow-x: auto !important;
+  }
   .table_t_info {
-    width: 375px !important;
+    /* width: 375px !important; */
+    width: 100%;
   }
 
   .create_p {
     width: 161px;
-    border: ;
+    /* border: ; */
   }
 
   .page-header {
-    width: 375px;
+    /* width: 375px; */
+    width: 100%;
     display: flex;
   }
 
@@ -898,6 +929,7 @@ body {
     margin-bottom: 0rem;
     line-height: 3rem;
   }
+
   /* .co_12 .s_2 {
   } */
   .c_d_s2.c__h {
@@ -1577,6 +1609,7 @@ input[type="number"] {
 
   color: #47749c;
 }
+
 /* .mbar {
   margin-right: -7rem !important;
 } */
@@ -1669,6 +1702,10 @@ input[type="number"] {
 
 .seed_com_nav {
   background: #f99746;
+}
+
+.seed_trader_nav {
+  background: #008346;
 }
 
 .seed_com_side {
@@ -1786,6 +1823,9 @@ input[type="number"] {
 
 .t_info_head {
   background: #049648;
+}
+.t_info__head {
+  background: #FFB946;
 }
 
 .t_info_row1 {
@@ -1921,7 +1961,7 @@ input[type="number"] {
 } */
 
 .table_img img {
-  width: 100%;
+  /* width: 100%; */
   height: 75px;
   object-fit: cover;
 }
@@ -2073,7 +2113,7 @@ input[type="number"] {
   margin-top: -15px;
   color: #484c58;
   font-size: 13px;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
 }
 
 .card_pay_inf2 h4 {
@@ -2125,6 +2165,15 @@ input[type="number"] {
 }
 
 @media (min-width: 321px) and (max-width: 580px) {
+  .s_chart{
+    width: 100% !important;
+  }
+  .home{
+    width: calc(100%);
+  }
+  .col-4.c0l_4 {
+    width: 90.667% !important;
+  }
   .card_products {
     width: 322px;
   }
@@ -2163,7 +2212,7 @@ input[type="number"] {
   /* .card-wallet{
    
   } */
-  .card-details{
+  .card-details {
     display: grid !important;
     grid-template-columns: repeat(3, 196px);
     grid-template-rows: repeat(1, 1fr);
@@ -2253,7 +2302,7 @@ input[type="number"] {
   }
 
   .card_tab {
-    width: 600px !important;
+    width: 100% !important;
   }
 
 }
@@ -2285,6 +2334,12 @@ input[type="number"] {
 }
 
 @media (max-width: 600px) {
+  .s_chart{
+    width: 100% !important;
+  }
+  .home{
+    width: calc(100%);
+  }
   .card_products {
     width: 322px;
   }
@@ -2487,7 +2542,10 @@ input[type="number"] {
   }
 }
 
-@media only screen and (min-device-width: 769px) and (max-device-width: 1025px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .card_products {
     width: 462px;
   }
@@ -2590,11 +2648,12 @@ input[type="number"] {
   }
 
   .t_info {
-    width: 735px !important;
+  /* width: 735px !important; */
+  width: 100% !important;
   }
 
   .card_home {
-    width: 735px !important;
+    width: 100% !important;
   }
 
   .col__4 {
@@ -2650,12 +2709,13 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
+
   /* .co_12 .s_2 {
     margin-top: 2.3rem;
   } */
   .pt-5 {
-    padding-top: 0px!important;
-}
+    padding-top: 0px !important;
+  }
 
   .pt-5 {
     padding-top: 0px !important;
@@ -2707,7 +2767,10 @@ input[type="number"] {
   }
 }
 
-@media only screen and (min-device-width: 810px) and (max-device-width: 1080px) {
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1080px) {
+  .s_chart{
+    width: 100% !important;
+  }
   .card_products {
     width: 462px;
   }
@@ -2808,12 +2871,13 @@ input[type="number"] {
   .ul_list_item {
     display: block !important;
   }
+
   /* .t_info {
     width: 484px !important;
     width: 100% !important;
   } */
   .card_home {
-    width: 628px !important;
+    width: 100% !important;
   }
 
   .col__4 {
@@ -2869,6 +2933,7 @@ input[type="number"] {
   .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
+
   /* .co_12 .s_2 {
     margin-top: 2.3rem;
   } */
@@ -3136,7 +3201,50 @@ input[type="number"] {
 ._col {
   text-align: center;
 }
+
 .extension-form-container {
   margin: 4rem auto;
 
+}
+
+.container.table-responsives.table_t_info {
+  overflow-x: auto;
+}
+.row.row-cols-2.row-cols-lg-6.g-2.g-lg-2.col_rma.m-0 {
+  width: 100%;
+  justify-content: space-around;
+}
+.row.row-cols-2.row-cols-lg-6.g-2.g-lg-2.mb-2.col_rma {
+  width: 100%;
+  justify-content: space-around;
+}
+.farmer_dashboard_table.table-responsives {
+  overflow-x: auto;
+}
+.row.r_charts {
+  justify-content: left;
+}
+.table-responsives.table_t_info {
+  overflow-x: auto;
+}
+
+.settings_.active{
+  display: block !important;
+}
+.settings_{
+  display: none !important;
+}
+._settings .list-group{
+  cursor: pointer;
+}
+._settings .list-group .list-group-item.active {
+  background-color: #FABA23 !important;
+  border-color: #FABA23 !important;
+}
+.sd_chart_btn{
+  outline: black;
+background: #ccc;
+border: 1px solid black;
+text-align: center;
+padding: 2px;
 }

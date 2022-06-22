@@ -1,0 +1,197 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<form action="" method="get">
+<div class="content active" id="all">
+    <div class=" container table-responsives table_t_info">
+        <table class="table con t_info  table-borderless" id="product-table-all">
+            <thead class="t_info_head ">
+                <tr class="row-height">
+                    <th scope="col">
+                    <div class="btnreport datecycle">
+                        <label for="selectico" class="labelos">Location </label>
+                         <select class="btndropdown" aria-labelledby="" id="locationselect" name="locationselect">
+                             <option value="">Select Location</option>
+                             {{#each states}}
+                            <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                             {{/each}}
+                            {{!-- <option id="2" class="dropdown-item">Action</option>
+                            <option id="3" class="dropdown-item">Another action</option>
+                            <option id="4" class="dropdown-item">Something else here</option> --}}
+                        </select>
+                       
+                    </div>
+                    </th>
+
+                    <th scope="col">
+                    <div class="btnreport datecycle">
+                        <label for="btndropdown" class="labelos">Product</label>
+                         <select class="btndropdown" aria-labelledby="" id="productselect" name="productselect">
+                            <option value="">Select Product</option>
+                            <option id="1" class="dropdown-item">Cowpea</option>
+                            <option id="2" class="dropdown-item">Maize</option>
+                            <option id="3" class="dropdown-item">Rice</option>
+                            <option id="4" class="dropdown-item">Groundnut</option>
+                        </select>
+                       
+                    </div>
+                    </th>
+
+                    <th scope="col">
+                    <div class="btnreport datecycle">
+                        <label for="btndropdown" class="labelos">Status</label>
+                         <select class="btndropdown" aria-labelledby="" id="selectstatus" name="selectstatus">
+                            <option value="">Select Status</option>
+                            <option id="2" class="dropdown-item">Pending</option>
+                            <option id="3" class="dropdown-item">Confirmed</option>
+                        </select>
+                       
+                    </div>
+                    </th>
+                   
+                    <th scope="col">
+                    <div class="btnreport btndropdown datecycle">
+                        <label for="datepic" class="labelos">Start Date</label>
+                        <input class="btndropdown" type="date" id="enddatepic">
+                        
+                    </div>
+                    </th>
+
+                    <th scope="col">
+                     <div class="btnreport btndropdown datecycle">
+                        <label for="datepic" class="labelos">End Date</label>
+                        <input class="btndropdown" type="date" id="startdate">
+                        
+                    </div>
+                    </th>
+                    
+                     
+                    <th scope="col">
+                    <div class="btn-group btnreport_search">
+                        <button type="submit" class="btn btn-primary btnsearch" id="btnsub" name="btnsub">Search</button>
+                    </div>
+                    </th>
+                     <th scope="col">
+                    <div class="">
+                        <button onclick="exportData()" class="btn btn-width download-btn btn-outline-light btnsearch" name="export">Export</button>
+                    </div>
+                    </th>
+                     <th scope="col">
+
+                    </th>
+                </tr>
+                <tr class="row-height">
+                    <th scope="col">NAME</th>
+                    <th scope="col">STATE</th>
+                    <th scope="col">PRODUCT</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">AMOUNT</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                 {{#each transaction}}
+                <tr class="row-one row-height">
+                   {{#if Farmer.firstname}}
+                        <td scope="col"> <strong>{{Farmer.firstname}}  {{Farmer.lastname}} </strong></td>
+                    {{/if}}
+                    {{#if SeedTrader.firstname}}
+                        <td scope="col"> <strong>{{SeedTrader.firstname}}  {{SeedTrader.lastname}} </strong></td>
+                    {{/if}}
+
+
+                    {{#if Farmer.firstname}}
+                    <td scope="col"> <strong> {{Farmer.LGA.name}}, {{Farmer.State.name}}</strong></td>         
+                    {{/if}}
+                    {{#if SeedTrader.firstname}}
+                    <td scope="col"> <strong> {{SeedTrader.LGA.name}}, {{SeedTrader.State.name}}</strong></td>
+                    {{/if}}
+
+                     
+                    <td scope="col"> <strong> {{Product.product_name}} </strong></td>
+
+                    <td scope="col"> <strong>{{dateFormat this.TransactionLog.created_at 'DD/MM/YYYY'}}</strong></td>
+
+                    <td scope="col"> <strong>{{TransactionLog.amount}}</strong></td>
+                    
+                    <td scope="col">
+
+                    {{#if (eq TransactionLog.status "verified")}}
+
+                        <span class="published">Confirmed</span>
+
+                     {{else}}
+
+                        <span class="unpublished">Pending</span>
+
+                    {{/if}}
+
+                    </td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+</form>
+
+
+<script>
+    function exportData(){
+    /* Get the HTML data using Element by Id */
+    var table = document.getElementById("product-table-all");
+ 
+    /* Declaring array variable */
+    var rows =[];
+ 
+      //iterate through rows of table
+    for(var i=0,row; row = table.rows[i];i++){
+        //rows would be accessed using the "row" variable assigned in the for loop
+        //Get each cell value/column from the row
+        column1 = row.cells[0].innerText;
+        column2 = row.cells[1].innerText;
+        column3 = row.cells[2].innerText;
+        column4 = row.cells[3].innerText;
+        column5 = row.cells[4].innerText;
+ 
+    /* add a new record in the array */
+        rows.push(
+            [
+                column1,
+                column2,
+                column3,
+                column4,
+                column5
+            ]
+        );
+ 
+        }
+        csvContent = "data:text/csv;charset=utf-8,";
+        
+        rows.forEach(function(rowArray){
+            row = rowArray.join(",");
+            csvContent += row + "\r\n";
+        });
+ 
+
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Transaction-Report.csv");
+        document.body.appendChild(link);
+
+        link.click();
+        
+}
+
+</script>

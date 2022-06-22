@@ -1,5 +1,44 @@
+{{!-- product list --}}
+
+{{#activeProduct}}
+<p id="productlist_1" activeProduct="{{count}}"> </p>
+{{/activeProduct}}
+
+{{#inactiveProduct}}
+<p id="productlist_2" inactiveProduct="{{count}}"> </p>
+{{/inactiveProduct}}
+
+
+{{!-- farmer --}}
+{{#farmerinactivelist}}
+<p id="farmercount_1" farmerinactivelist="{{count}}"> </p>
+{{/farmerinactivelist}}
+
+{{#farmeractivelist}}
+<p id="farmercount_2" farmeractivelist="{{count}}"> </p>
+{{/farmeractivelist}}
+
+{{!-- seed company --}}
+{{#seedcompanyinactivelist}}
+<p id="seedcompany_1" seedcompanyinactivelist="{{count}}"> </p>
+{{/seedcompanyinactivelist}}
+
+{{#seedcompanyactivelist}}
+<p id="seedcompany_2" seedcompanyactivelist="{{count}}"> </p>
+{{/seedcompanyactivelist}}
+
+{{!-- seed trader --}}
+
+{{#seedtraderinactivelist}}
+<p id="seedtrader_1" seedtraderinactivelist="{{count}}"> </p>
+{{/seedtraderinactivelist}}
+
+{{#seedtraderactivelist}}
+<p id="seedtrader_2" seedtraderactivelist="{{count}}"> </p>
+{{/seedtraderactivelist}}
+
 <div class="admin_container mb-3">
-  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2">
+  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 ">
 
     <div class="col co_12 ">
       <div class="">
@@ -9,7 +48,7 @@
             {{#farmerCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/farmerCount}}
-            <a href="/admin/all-users" class="card-link float-end">View details</a>
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -23,19 +62,21 @@
             {{#companyCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/companyCount}}
-            <a href="/admin/all-users" class="card-link float-end">View details</a>
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col co_12">
+    <div class="col co_12 ">
       <div class="">
         <div class="card card_admin_home">
           <div class="card-body">
-            <h5 class="card-title text-center">New Seed Certifications</h5>
-            <p class="card-text text-center c_d_s2_sales s_1 ">2200</p>
-            <a href="#" class="card-link float-end">View details</a>
+            <h5 class="card-title text-center">Registered SeedTraders</h5>
+            {{#seedtraderCount}}
+            <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
+            {{/seedtraderCount}}
+            <a href="/admin/users" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -45,7 +86,7 @@
 </div>
 
 <div class="row chart_">
-  <div class="col-8">
+  <div class="col-12">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
@@ -57,7 +98,7 @@
       </div>
     </div>
   </div>
-
+  {{!--
   <div class="col-4 col__4">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
@@ -114,7 +155,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
       </div>
@@ -126,10 +167,10 @@
   <div class="col-12">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
-        <div class="row">
-          <div class="col-12">
-            <div class="row ">
-              <div class="col-lg-3 col-md-3">
+        <div class="row ">
+          <div class="col-12 ">
+            <div class="row  r_charts">
+              <div class="col-lg-3 col-md-3 " style="width:150px;">
                 <div class=" ">
                   <span class="sp_a_accout "></span>
                   <p class="a_accout pl-3"> Active Account</p>
@@ -140,17 +181,17 @@
 
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="farmer" width="500" height="500"></canvas>
+                  <canvas id="farmer" width="200" height="200"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedcompany" width="500" height="500"></canvas>
+                  <canvas id="seedcompany" width="200" height="200"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedtrader" width="500" height="500"></canvas>
+                  <canvas id="seedtrader" width="200" height="200"></canvas>
                 </div>
               </div>
             </div>
@@ -163,12 +204,23 @@
 
 </div>
 
+
+
+
 <div class="row chart_">
   <div class="col-4">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
-          <div class="col-12">
+          <div class="col-3">
+            <div class=" ">
+              <span class="sp_p_accout "></span>
+              <p class="p_accout pl-3"> Published </p>
+              <span class="sp_un_account"></span>
+              <p class="un_account  pl-3"> Unpublished</p>
+            </div>
+          </div>
+          <div class="col-9">
             <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
           </div>
 
@@ -178,13 +230,9 @@
   </div>
 
 </div>
+{{!-- <div class="stat" data-user="{{user_status}}">
 
-
-
-
-
-
-
+</div> --}}
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
@@ -192,6 +240,38 @@
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
+  /* product count*/
+  const productlist_1 = document.getElementById('productlist_1');
+  activeProduct = productlist_1.getAttribute("activeProduct")
+
+  const productlist_2 = document.getElementById('productlist_2');
+  inactiveProduct = productlist_2.getAttribute("inactiveProduct")
+
+  /* farmer count*/
+  const farmercount_1 = document.getElementById('farmercount_1');
+  farmerinactivelist = farmercount_1.getAttribute("farmerinactivelist")
+
+  const farmercount_2 = document.getElementById('farmercount_2');
+  farmeractivelist = farmercount_2.getAttribute("farmeractivelist")
+
+  /* seed company count*/
+  const seedcompany_1 = document.getElementById('seedcompany_1');
+  seedcompanyinactivelist = seedcompany_1.getAttribute("seedcompanyinactivelist")
+
+  const seedcompany_2 = document.getElementById('seedcompany_2');
+  seedcompanyactivelist = seedcompany_2.getAttribute("seedcompanyactivelist")
+
+  /* seed trader count*/
+  const seedtrader_1 = document.getElementById('seedtrader_1');
+  seedtraderinactivelist = seedtrader_1.getAttribute("seedtraderinactivelist")
+
+  const seedtrader_2 = document.getElementById('seedtrader_2');
+  seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
+
+  // let x = $('.stat').data('user')
+  // console.log(x)
+
+
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
@@ -200,7 +280,7 @@
       datasets: [{
 
         label: 'Monthly',
-        data: [7, 9, 12, 14],
+        data: [12, 64, 76, 676],
         backgroundColor: [
           '#F99746',
           '#F99746',
@@ -231,23 +311,28 @@
 
 
   var xactorValues = ["Active Account", "Inactive Account"];
-  var yfarmerValues = [55, 19];
+  var yfarmerValues = [farmeractivelist, farmerinactivelist];
+  // var yfarmerValues = [x.f_count[0].f_count, x.f_count[1].f_count];
+  //var yfarmerValues = [33,99];
   var barColors = [
-    "#FFB946",
     "#5DCD6D",
+    "#FFB946",
 
   ];
 
   new Chart("farmer", {
     type: "doughnut",
     data: {
-
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yfarmerValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Farmer"
@@ -256,18 +341,23 @@
   });
 
 
-  var yseedcompanyValues = [55, 19];
+  var yseedcompanyValues = [seedcompanyactivelist, seedcompanyinactivelist];
+  // var yseedcompanyValues = [x.sc_count[0].sc_count, x.sc_count[1].sc_count];
+  //var yseedcompanyValues = [12,33];
 
   new Chart("seedcompany", {
     type: "doughnut",
     data: {
-
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yseedcompanyValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Seed Company"
@@ -275,18 +365,23 @@
     }
   });
 
-  var yseedtraderValues = [55, 19];
+  var yseedtraderValues = [seedtraderactivelist, seedtraderinactivelist];
+  // var yseedtraderValues = [x.st_count[0].st_count, x.st_count[1].st_count];
+  //var yseedtraderValues = [54,34];
 
   new Chart("seedtrader", {
     type: "doughnut",
     data: {
-      labels: xproductValues,
+      labels: xactorValues,
       datasets: [{
         backgroundColor: barColors,
         data: yseedtraderValues
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Seed Traders"
@@ -297,7 +392,7 @@
 
 
   var xproductValues = ["published", "unpublished"];
-  var yproductValues = [55, 19];
+  var yproductValues = [activeProduct, inactiveProduct];
   var productbarColors = [
     "#FB8200",
     "#7B61FF",
@@ -314,6 +409,9 @@
       }]
     },
     options: {
+      legend: {
+        display: false
+      },
       title: {
         display: true,
         text: "Total Products"

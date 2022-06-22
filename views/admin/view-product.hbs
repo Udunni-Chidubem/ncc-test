@@ -31,7 +31,7 @@
 
 				<div>
 					<h4>Seller</h4>
-					<h5>Musa Ibrahim</h5>
+					<h5>{{product.User.SeedCompany.name_of_company}}</h5>
 				</div>
 
 				<hr class="admin-product-line">
@@ -106,6 +106,8 @@
 				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
 			</div>
 		</div>
+        {{#if (or (eq user_role "nigsims")
+                (eq user_role "admin"))}}
 		<div class="float-end">
             {{#if (or (eq product.status 0) (eq product.status 2)) }}
                 <div class="float-end m-2 mb-3">
@@ -119,6 +121,7 @@
                 </div>
             {{/if}}
 	    </div>
+        {{/if}}
 
 <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -1,0 +1,222 @@
+<div class="container">
+    <div class="card chat_card m-4">
+        {{#if messages}}
+        <div class="card-header msg_head">
+            {{#each getuserdata}}
+            <div class="d-flex bd-highlight">
+                <div class="img_cont">
+                    {{#if (eq ../role_id 'seed_trader')}}
+                    <img src="{{#if this.SeedTrader.profile_pic}} /profile_pics/{{this.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                        alt="user profile image">
+                    {{else if (eq ../role_id 'farmer')}}
+                    <img src="{{#if this.Farmer.profile_pic}} /profile_pics/{{this.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                        alt="user profile image">
+                    {{else }}
+                    <img src="{{#if this.SeedCompany.profile_pic}} /profile_pics/{{this.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                        id="output" class=" mb-2 mx-auto d-block img_round message_profile user_img"
+                        alt="user profile image">
+                    {{/if}}
+                </div>
+                <div class="user_info">
+                    <span>Chat with
+
+
+                        {{#if (eq ../role_id 'seed_trader')}}
+                        {{this.SeedTrader.firstname}}
+                        {{this.SeedTrader.lastname}}
+                        {{else if (eq ../role_id 'farmer')}}
+                        {{this.Farmer.firstname}}
+                        {{this.Farmer.lastname}}
+                        {{else }}
+                        {{this.SeedCompany.name_of_company}}
+                        {{/if}}
+                        {{#if (eq this.status "new")}}
+                        <i class="badge bg-danger" id="msg_status">{{this.status}}</i>
+                        {{/if}}
+                        {{/each}}
+                    </span>
+                    {{!-- <p>1767 Messages</p> --}}
+                </div>
+            </div>
+            <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+            <div class="action_menu">
+                <ul>
+                    <li><i class="fas fa-user-circle"></i> View profile</li>
+                    <li><i class="fas fa-users"></i> Add to close friends</li>
+                    <li><i class="fas fa-plus"></i> Add to group</li>
+                    <li><i class="fas fa-ban"></i> Block</li>
+                </ul>
+            </div>
+        </div>
+        {{/if}}
+        <div class="card-body p-0">
+            <div class="messages" style="height: 350px;">
+                {{#each messages}}
+                {{#if (eq this.from_user ../user_id)}}
+                <div class="d-flex justify-content-end mb-4">
+
+                    <div class="msg_cotainer">
+                        {{this.message}}
+                        <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+                    </div>
+                </div>
+                {{else}}
+                <div class="d-flex justify-content-start mb-4">
+                    <div class="img_cont_msg_end">
+                        {{#each ../getuserdata}}
+                        {{#if (eq ../../role_id 'seed_trader')}}
+                        <img src="{{#if this.SeedTrader.profile_pic}} /profile_pics/{{this.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class="rounded-circle user_img_msg" alt="user profile image">
+                        {{else if (eq ../../role_id 'farmer')}}
+                        <img src="{{#if this.Farmer.profile_pic}} /profile_pics/{{this.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class="rounded-circle user_img_msg" alt="user profile image">
+                        {{else }}
+                        <img src="{{#if this.SeedCompany.profile_pic}} /profile_pics/{{this.SeedCompany.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+                            id="output" class="rounded-circle user_img_msg" alt="user profile image">
+                        {{/if}}
+                        {{/each}}
+                    </div>
+                    <div class="msg_cotainer_send">
+                        {{this.message}}
+                        <span class="msg_time_send">{{dateFormat this.created_at "HH:mm, dddd" timeStamp}}</span>
+                    </div>
+                </div>
+
+                {{!-- <div class="" style="text-align: left;" class="admin-messages-div">
+                    <p style="background-color: #D3D3D3; word-wrap:break-word; 
+                display:inline-block; padding:5px; border-radius:10px; max-width:70% ">
+                        {{this.message}}
+                    </p>
+                </div> --}}
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="modal-footer msg">
+            <input type="hidden" value="{{to_userid}}" id="to_user">
+            <textarea name="message" id="message" class="form-control" placeholder="Your message.... "
+                style="height: 70px;"></textarea>
+            <button id="send" class="btn send " style="height: 70%;"><i class="bx bx-send"></i></button>
+        </div>
+    </div>
+</div>
+</div>
+<p user_id="{{to_userid}}" id="userid"></p>
+
+
+<script>
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+    $(document).ready(function () {
+
+        let base_url = window.location.origin
+        const userid = document.getElementById('userid');
+        user_id = userid.getAttribute("user_id")
+
+        function messages_() {
+            fetch(base_url + '/admin/view_messages/' + user_id)
+                .then(r => r.json())
+                .then(response => {
+                    let data = response.message
+                    let user_id = response.user_id
+                    let getuserdata = response.getuserdata
+                    let role_id = response.role_id
+                    // console.log(response)
+                    // console.log(data)
+                    //console.log(getuserdata.messages.SeedTrader.profile_pic)
+                    let content = ''
+                    let week_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                    data.forEach((value, index) => {
+                        const date_ = new Date(value.created_at)
+                        if (value.from_user == user_id) {
+                            content += ' <div class="d-flex justify-content-end mb-4">' +
+                                ' <div class="msg_cotainer">' +
+                                value.message +
+                                '<span class="msg_time_send">' +
+                                date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] +
+                                ' </span>' +
+                                '</div>' +
+                                '</div>'
+                        }
+                        else {
+                            content += ' <div class="d-flex justify-content-start mb-4">' +
+                                '<div class="img_cont_msg_end">'
+                            // getuserdata.forEach((value2, index2) => {
+                            if (role_id == 'seed_trader') {
+
+                                if (getuserdata.messages.SeedTrader.profile_pic !== null) {
+                                    content += '<img src="/profile_pics/' +
+                                        getuserdata.messages.SeedTrader.profile_pic + '"' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                else {
+                                    content += '<img src="' +
+                                        '/images/profile-avatar.png"' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                content += '</div>' +
+                                    '<div class="msg_cotainer_send">' +
+                                    value.message +
+                                    '<span class="msg_time_send">' +
+                                    date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] +
+                                    '</span>' +
+                                    '</div>' +
+                                    ' </div>'
+                            }
+                            else if (role_id == 'farmer') {
+                                if (getuserdata.messages.Farmer.profile_pic !== null) {
+                                    content += '<img src="/profile_pics/' +
+                                        getuserdata.messages.Farmer.profile_pic + '"' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                else {
+                                    content += '<img src="' +
+                                        '/images/profile-avatar.png "' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                content += '</div>' +
+                                    '<div class="msg_cotainer_send">' +
+                                    value.message +
+                                    '<span class="msg_time_send">' +
+                                    date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] +
+                                    '</span>' +
+                                    '</div>' +
+                                    ' </div>'
+                            }
+                            else {
+
+                                if (getuserdata.messages.SeedCompany.profile_pic !== null) {
+                                    content += '<img src="/profile_pics/' +
+                                        getuserdata.messages.SeedCompany.profile_pic + '"' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                else {
+                                    content += '<img src="' +
+                                        '/images/profile-avatar.png "' +
+                                        'id="output" class="rounded-circle user_img_msg" alt="user profile image"> '
+                                }
+                                content += '</div>' +
+                                    '<div class="msg_cotainer_send">' +
+                                    value.message +
+                                    '<span class="msg_time_send">' +
+                                    date_.getHours() + ':' + date_.getMinutes() + ',' + week_day[date_.getDay() - 1] +
+                                    '</span>' +
+                                    '</div>' +
+                                    ' </div>'
+                            }
+
+                            //})
+                        }
+                    })
+                    document.querySelector('.messages').innerHTML = content
+                    //console.log(getuserdata.messages.SeedTrader.profile_pic)
+                })
+        }
+        //messages_()
+
+        setInterval(messages_, 1000) //fetch the db to update the cart items without refreshing the page
+    })
+
+</script>

@@ -1,0 +1,107 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="referal_header">Referrals</h5>
+        <div class="row">
+            <div class="col-12">
+                <div class="card referal_card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">Referral Summary</div>
+                            <div class="col-6 id">
+                                <div class="row">
+                                    <ul>
+                                        <li class="trader_id">Trader ID</li>
+                                        <li><span class="code_" id="code_">{{referal_code}}</span> <span class="folder"
+                                                onclick="CopyToClipboard('code_')">
+                                                <i class="bi bi-file-earmark"></i></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="earnings">
+                                    <li class="total">Total Earnings</li>
+                                    <li class="total_num">&#8358; 0</li>
+                                </ul>
+                            </div>
+                            <div class="col-8">
+                                <ul class="earnings">
+                                    <li class="total">Total Referrals</li>
+                                    <li class="total_num">{{traderRefres_len}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-end refral_card_link">
+                                <a href="javascript:void(0)" id="withdraw-btn" data-bs-toggle="modal" data-bs-target="#withdrawalModal">Withdraw</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="main-content">
+                    <div class="   table-responsives table_t_info">
+
+                        <table class="table con t_info  table-borderless" id="referesTable">
+                            <thead class="t_info_head ">
+                                <tr class="">
+                                    <th scope="col">REG DATE</th>
+                                    <th scope="col">NAME</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="t_info_body">
+                                {{#each traderRefres}}
+                                <tr class="t_info_row1">
+                                    <td> {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                                    <td> {{this.firstname}} {{this.lastname}}</td>
+                                    <td><a href="/seed-trader/view-farmer/{{this.user_id}}">See Details</a></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="modal fade " id="withdrawalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<form action="wallet_submit" method="get" >
+                		<div class="mb-2">
+	                		<input type="number"  class="form-control" name="amount" value="" placeholder="Enter Amount to Withdraw">       		
+                		</div>
+                		<div class="mb-2">
+	                		<input type="password"  class="form-control" name="password" value="" placeholder="Password">     		
+                		</div>
+                	
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success" href="#!">Withdraw</button>
+                </div>
+            	</form>
+            </div>
+        </div>
+    </div>
+
+<script>
+     $(document).ready(function(){
+        $('#withdrawalModal').appendTo('body');
+    })
+</script>

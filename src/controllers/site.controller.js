@@ -1,13 +1,18 @@
 require('dotenv').config()
 const db = require('../models/index');
 const { sequelize } = require('../models');  
-const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact }  = db
+const {User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, Wallet, Contact, Otp }  = db
 const bcrypt = require('bcrypt');
 const uniqid = require('uniqid');
 const directoryPath = './src/data/'
 const path = require('path')
 const fs = require('fs')
+const Random = require("random-js").Random;
+const otp = require('../models/otp');
+const { default: axios } = require('axios');
+const jwt = require('jsonwebtoken')
 
+global.pass = 0;
 
 module.exports = {
     home: async (req, res) => {
@@ -80,6 +85,30 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
+    // Forgot_Password: async (req,res) => {
+    //     res.render('site/forgot_password',{
+    //         form_banner:'Group.png',
+    //         title: 'Forgot-Password',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
+    // OTP: async (req,res) => {
+    //     res.render('site/otp',{
+    //         form_banner:'Group.png',
+    //         title: 'OTP',
+    //         layout : 'form',
+    //         errors : req.flash('errors')
+    //     });
+    // },
+    NewPassword: async (req,res) => {
+        res.render('site/new_password',{
+            form_banner:'Group.png',
+            title: 'New-Password',
+            layout : 'form',
+            errors : req.flash('errors')
+        });
+    },
     seedcompanysignup: async (req,res) => {
         res.render('site/seed_company_signup',{
             form_banner:'seeds-02 1.png',
@@ -117,16 +146,26 @@ module.exports = {
                 user_id : user.id,
                 role_id : r.id
             }, {transaction : transaction})
+            let referee=null;
+            if(rq.body.referral){
+               let s=await SeedTrader.findOne(
+                    {where : {referal_code : rq.body.referral }}
+                )
+                referee=s.user_id
+            }
             const farmer = await Farmer.create({
                 firstname:rq.body.firstname,
                 lastname:rq.body.lastname,
                 phone_no:rq.body.phone_number,
-                user_id:user.id
+                user_id:user.id,
+                referee: referee
             }, {transaction : transaction} );
             await transaction.commit();
             return {user, farmer};
         }catch(e){
+            console.log(e)
             await transaction.rollback();
+            
             return e
         }
     },
@@ -198,7 +237,8 @@ module.exports = {
                 lastname:req.body.lastname,
                 phone_no:req.body.phone,
                 unique_no: unique,
-                user_id : user.id
+                user_id : user.id,
+                referal_code : Date.now().toString(36)+req.body.firstname.substr(0,1)+req.body.lastname.substr(0,1)
             }, {transaction :transaction});
             
             transaction.commit();
@@ -297,6 +337,132 @@ module.exports = {
 
     saveContact:async (req, res)=>{
         Contact.create(req.body)
+    },
+
+
+    ForgotPassword: async (req, res) =>{
+        pass =await User.findOne({
+            attributes :  ['id', 'username'],
+             where : {
+                username : req.body.username
+             },
+
+         });
+         if(!pass){
+             console.log('Wrong Number')
+         } else{
+            return pass;
+         }
+    },
+
+    
+    otp: async (phone)=>{
+        let transaction=await db.rest.transaction()
+            //Generate OTP 
+        try{
+            const random = new Random();
+            const otp_code = random.integer(1, 1000000);
+            const now = new Date();
+            const expiration_time = new Date(now.getTime() + 10*60000)
+
+            // console.log(otp_gen);
+            const otp_instance = await Otp.create({
+                otp_code: otp_code,
+                expiration_time: expiration_time,
+                phone : phone,
+                verified : false
+            }, {transaction : transaction});
+
+            let r = await axios.get(`${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`)
+            console.log(r.data)
+            
+
+            // let p = {
+            //     method: 'post',
+            //     url: 'https://app.smartsmssolutions.com/io/api/client/v1/senderid/create/',
+            //     headers: { 
+            //       ...data.getHeaders()
+            //     },
+            //     data : data
+            //   };
+
+              transaction.commit()
+            return otp_instance
+
+           
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return e
+        }
+    },
+
+    getOTPByCode : async (otp_code, phone)=>{ 
+
+        let otp=await Otp.findOne({
+            where :{ otp_code : otp_code, phone : phone}
+        })
+        otp=JSON.parse(JSON.stringify(otp))
+        console.log(otp)
+        return otp;
+    },
+    deleteOTP : async (otp, phone)=>{
+        Otp.destroy({
+            where : {otp_code : otp, phone : phone}
+        })
+    },
+
+    updatePassword : async (password, phone)=>{
+        let transaction = await db.rest.transaction()
+        try{
+            let user=await User.update({
+                password : await bcrypt.hash(password, 10)
+            }, {where : {username : phone}}, {transaction : transaction})
+            transaction.commit()
+            return true
+        }catch(e){
+            transaction.rollback()
+            console.log(e)
+            return false
+        }
+       
+    },
+
+    apiLogin : async (req)=>{
+        try{
+            const user = await User.findOne(
+                { 
+                    include : [{
+                        model : UserRole,
+                        include : [{model : Role}]
+                    }],  
+                    where: { 
+                        username: req.body.username
+                    },
+                }
+            );
+            if(user != null ){
+                if(await bcrypt.compare(req.body.password, user.password) == true){
+                    if(user.status!=2){
+                        let payload = {
+                            sub : user.id,
+                            role : user.UserRole.Role.role_name,
+                            username : user.username
+                        }
+                        let token = jwt.sign(payload, 'secret123', {expiresIn : '60m'})
+                        return {status : true, statusCode:200, body : {access_token:token, type : 'Bearer', expiresIn : '60m'}};
+                    }else{
+                        return {status: false, statusCode : 401, body : {message : "Account is not activated"}};
+                    } 
+                }
+            }
+            return {status : false, statusCode : 401, body :  {message : "You have entered Invalid credentials. Please try again!!!"}};
+        }catch(e){
+           // console.log(e.message())
+            return {status : false, statusCode : 500, body : {message : e}}
+        } 
+        
     }
+
 
 }

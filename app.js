@@ -13,7 +13,20 @@ const session = require('express-session');
 const flash = require('express-flash')
 const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec=require('./src/config/swaggerOptions')
+const morgan = require('morgan');
+const fs = require('fs')
+const proxy=require('express-http-proxy')
+
 passpportInitializer(passport)
+
+const uid = () => {
+  return Date.now().toString(36) 
+  // Math.random().toString(36).substr(2);
+};
+
+// Usage. Example, id = khhry2hb7uip12rj2iu
 
 const {seedAdminData} = require('./src/helpers/bootstrapUser')
 
@@ -71,9 +84,7 @@ app.engine('hbs', handlebars({
 
 Handlebars.registerHelper('paginate', paginate);
 Handlebars.registerHelper('dateFormat', require('handlebars-dateformat'));
- NumeralHelper.registerHelpers(Handlebars);
-
-
+NumeralHelper.registerHelpers(Handlebars);
 
 Handlebars.registerHelper({
     eq: (v1, v2) => v1 === v2,
@@ -89,7 +100,6 @@ Handlebars.registerHelper({
         return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
     }
 });
-
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -107,13 +117,34 @@ app.use(methodOveride('_method'))
 app.use(fileUpload({
     createParentPath: true
 }));
+var logDirectory = path.join(__dirname, "logs");
+// ensure log directory exists
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+ 
+var logFile = path.join(logDirectory, Date.now()+".log");
+var accessLogStream = fs.createWriteStream(logFile, {
+  flags: "a"
+});
+//const accessLogStream=fs.createWriteStream(path.join(__dirname+"/logs", Date.now()+".log"),{flags:'a'})
+app.use(morgan("combined", { stream: accessLogStream }));
+
+app.use((err, req, res, next)=>{
+    res.locals.error=err
+    console.log(err)
+    return next()
+})
+//   let specs=swaggerJsdoc(options)
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, { explorer: true })
+);
+
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
-const farmersController = require('./src/controllers/farmers.controller')
+const { now } = require('moment')
 app.use('/', mainRoute)
 app.use(async function (req, res) {
-    //const user = await req.user
-    //console.log(user);
     res.status(400).render('site/404', {
         layout: "404",
         error_msg: 'We are unable to process your request. Please try again',
@@ -124,4 +155,12 @@ const PORT = process.env.ACCESS_PORT || 5200
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })
+
+app.use('/robots.txt', function (req, res, next) {
+    res.type('text/plain')
+    res.send("User-agent: *\Disallow: /");
+});
+// const random = new Random();
+// const value = random.integer(1, 1000000);
+// console.log(value)
  seedAdminData()

@@ -6,6 +6,20 @@ for (var i = 0; i < arrow.length; i++) {
   });
 }
 
+
+let x = 0;
+let original = document.getElementById('duplicater');
+
+
+function duplicate() {
+    let clone = original.cloneNode(true);
+   // console.log(original.innerHTML)
+    clone.id = "duplicater" + ++x;
+    
+    original.after(clone);
+}
+
+
 $(document).ready(function(){
 
   var quantity=0;
@@ -64,19 +78,59 @@ $(document).ready(function(){
   var sim = $("input[type='radio']:checked").val();
   //alert(sim);
   if (sim<3) { $('.myratings').css('color','red'); $(".myratings").text(sim); }else{ $('.myratings').css('color','green'); $(".myratings").text(sim); } });
-      
+     
+  $("#uploadImage").click(function(e) {
+  $("#file").click();
+});
+
   });
   
+$(document).ready(function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      alert("Code has been copied.")
+  }
+});
+
 $(document).ready(function() {
   $('#activity-log-table').DataTable({
     "order": [[2, "desc"]]
   });
 });
 
+$(document).ready(function() {
+  $('#farmers-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
+$(document).ready(function() {
+  $('#seed-trader-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
+$(document).ready(function() {
+  $('#seed-company-table').DataTable({
+    // "order": [[1, "asc"]]
+  });
+});
 
 $(document).ready(function() {
   $('#transactionTable').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [ 10, 25, 50, 100 ],
+    "order": [[1, "desc"]]
+  });
+});
+$(document).ready(function() {
+  $('#referesTable').DataTable({
+    "aLengthMenu": [ 10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
@@ -90,21 +144,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#all-orders-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
 
 $(document).ready(function() {
   $('#active-orders-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
 
 $(document).ready(function() {
   $('#shipped-table').DataTable({
-    "aLengthMenu": [ 5, 10, 25, 50, 100 ],
+    "aLengthMenu": [ 10, 25, 50, 100 ],
     "order": [[1, "desc"]]
   });
 });
@@ -247,4 +301,12 @@ function decreaseValue() {
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({includedLanguages:'ig,en,ha,yo', pageLanguage: 'en',  layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 }
+
+
+
+
+
+/*  ==========================================
+    TIMER FOR OTP
+* ========================================== */
 

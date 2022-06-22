@@ -1,300 +1,282 @@
- <div class="container  ">
-    <div class="row">
-      <div class="col-12">
-        <div class="card shadow card_home pl-0 mb-2 ">
-          <div class="card-body">
-             <div class="row">
-               <div class="col-12">
-                 <h4>Welcome, {{ fullname }}!
-
-                 </h4>
-               </div>
-
-               {{#if isVerified }}
-                <div class="row">
-                  <div class="col-6 profile_sub"><p>Kindly set up your profile to continue using NIGSIMS</p></div>
-                  <div class="col-6">
-                    <div class="float-end">
-                      <a href="/farmer/update-profile" class="btn button_update mb-1">Update Profile</a>
-                    </div>
-                  </div>
-                </div>
-
-               {{/if}}
-
-             </div>
-            </div>
-          </div>
-      </div>
-    </div>
-
-
-{{!-- {{#unless isVerified}} --}}
-
-<div class="card card_home shadow-lg  produce mb-2 pb-0 ">
-      <div class="card-body">
-         <div class="row mb-1" >
-           <div class="col-12">
-             <span> <img src="../../images/ep_map-location.png" alt=""> </span>
-             <span>{{ lga }}, {{ state }}</span>
-           </div>
-         </div>
-
-         <div class="row f_1 row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-          <div class="col-3">
-            <div class="">
-              <p>Size of Land
-              </p>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="">
-              <p>Crops Farmed</p>
-            </div>
-          </div>
-          </div>
-
-          <div class="row f_2 row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <div class="col-3">
-              <div class="">
-                <p>{{ farmer.farm_size }}</p>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class=" ">
-                <ul class=" ul_list_item    " >
-                  {{#farmer.product_farmed}}
-                    <li class=" list_item ">{{this}}</li>
-                  {{/farmer.product_farmed}}
-            </ul>
-              </div>
-            </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="card shadow-lg card_home mb-2 weather">
+<div class="container  ">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow card_home pl-0 mb-2 ">
         <div class="card-body">
-           <div class="row">
-             <div class="col-12 head">
-               <h4>WEATHER FORECAST</h4>
-             </div>
-           </div>
+          <div class="row">
+            <div class="col-12">
+              <h4 class="welcome-message">Welcome, {{ fullname }}!
 
-           <div class="container">
-            <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-4">
-              <div class="col _col">
-                <div class="p-3 pt-1 pb-1  weather_sub">
-                  <p>22oC - 32oC</p>
-                  <p><img src="../images/Drizzle.png" alt=""></p>
-                  <p>TODAY</p>
-                  <p>23 MARCH</p>
-                </div>
-              </div>
-              <div class="col _col">
-                <div class="p-3 pt-1 pb-1  weather_sub">
-                  <p>22oC - 32oC</p>
-                  <p><img src="../images/Sunny.png" alt=""></p>
-                  <p>TODAY</p>
-                  <p>23 MARCH</p>
-                </div>
-              </div>
-              <div class="col _col">
-                <div class="p-3 pt-1 pb-1  weather_sub">
-                  <p>22oC - 32oC</p>
-                  <p><img src="images/Partly-cloudy.png" alt=""></p>
-                  <p>TODAY</p>
-                  <p>23 MARCH</p>
-                </div>
-              </div>
-              <div class="col _col">
-                <div class="p-3 pt-1 pb-1  weather_sub">
-                  <p>22oC - 32oC</p>
-                  <p><img src="../images/Drizzle.png" alt=""></p>
-                  <p>TODAY</p>
-                  <p>23 MARCH</p>
-                </div>
-              </div>
-              <div class="col _col">
-                <div class="p-3 pt-1 pb-1  weather_sub">
-                  <p>22oC - 32oC</p>
-                  <p><img src="../images/Drizzle.png" alt=""></p>
-                  <p>TODAY</p>
-                  <p>23 MARCH</p>
-                </div>
-              </div>
-              <div class="col _col">
-                <div class="  pt-1 pb-1   ">
-                  <div class=" ">
-                    <button type="button" class="btn weather_button_update mb-1">Rainy Season</button>
-                  </div>
-                </div>
-              </div>
-               
+              </h4>
             </div>
-          </div>
+
+            {{#if isVerified }}
+            <div class="row">
+              <div class="col-6 profile_sub">
+                <p>Kindly set up your profile to continue using NIGSIMS</p>
+              </div>
+              <div class="col-6">
+                <div class="float-end">
+                  <a href="/farmer/update-profile" class="btn button_update mb-1">Update Profile</a>
+                </div>
+              </div>
+            </div>
+
+            {{/if}}
+
           </div>
         </div>
-
-        <div class="row">
-              <div class="col-12">
-                <div class="card shadow card_home  pl-0 mt-3 mb-2 ">
-                  <div class="card-body card_comps">
-                    <div class="row row-cols-2  card_comp row-cols-lg-4 g-2 g-lg-2">
-                      <div class="col-lg-3 col-md-6 col-sm-6 ">
-                        <div class="p-3 border sal_bac card_dis text-center border-0 border-end">
-                          <h5 class="c_d_s2 c_d_s2_sale sales">Total Purchases </h5>
-                          <h1 class="c_d_s2_sales ">2</h1>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 col-md-6 col-sm-6 ">
-                        <div class="p-3 border text-center border-0 border-end">
-                          <h5 class="c_d_s2">Items In Cart</h5>
-                          <h1 class="c_d_s2_full ">{{cartCount}}</h1>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 col-md-6 col-sm-6 ">
-                        <div class="p-3 border text-center border-0 border-end">
-                          <h5 class="c_d_s2 orders">Orders</h5>
-                          <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
-                        </div>
-                      </div>
-  
-                      <div class="col-lg-3 col-md-6 col-sm-6 ">
-                        <div class="p-3 border text-center border-0 border-end">
-                          <h5 class="c_d_s2">Completed</h5>
-                          <h1 class=" c_d_s2_unfull">1</h1>
-                        </div>
-                      </div>
-                      </div>
-          
-                    </div>
-                  </div>
-              </div>
-   
-
-              <div class="container-fluid  ">
-                
-  
-              <div class="card card_home mb-2 summary_tran">
-                <div class="card-body">
-                   <div class="row">
-                     <div class="col-12">
-                       <h4>Transaction Summary</h4>
-                     </div>
-                   </div>
-      
-                   <div class="row">
-                    <div class="col-12 summary_sub">
-                      <p>You have not made any transaction this month</p>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-
-                <table class="table con t_info table-responsives table-borderless">
-                  <thead class="t_info_head ">
-                    <tr class="">
-                      <th scope="col">S/N</th>
-                      <th scope="col">ITEM</th>
-                      <th scope="col">STATUS</th>
-                      <th scope="col">STATUS</th>
-                    </tr>
-                  </thead>
-                  <tbody class="t_info_body">
-                    <tr class="t_info_row1">
-                      <th scope="row"  >1</th>
-                      <td>White Maize</td>
-                      <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i>  Processing</span> 
-                      <br>
-                      <span class="mt-1"> Paid on 15/APR/2020</span> 
-                      </td>
-                      <td><a href="#"> See Details</a></td>
-                    </tr>
-                    <tr class="t_info_row2">
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>
-                        <span  >  <span class="canceled px-1"><i class="bi bi-dot  "></i> Canceled</span> 
-                      <br>
-                      <span>Paid on 15/APR/2020</span> 
-                      </td>
-                      <td><a href="#"> See Details</a></td>
-                    </tr>
-
-                    <tr class="t_info_row1">
-                      <th scope="row"  >3</th>
-                      <td>White Maize</td>
-                      <td>
-                        <span  >  <span class="paid px-1"><i class="bi bi-dot"></i> Paid</span> 
-                      <br>
-                      <span>Paid on 15/APR/2020</span> 
-                      </td>
-                      <td><a href="#"> See Details</a></td>
-                    </tr>
-                    <tr class="t_info_row2">
-                      <th scope="row">4</th>
-                      <td>White Maize</td>
-                      <td>
-                        <span  > <span class="delivered px-1"><i class="bi bi-dot"></i>  Delivered</span> 
-                      <br>
-                      <span>Paid on 15/APR/2020</span> 
-                      </td>
-                      <td><a href="#"> See Details</a></td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
-              </div>
-              
-  
-
+      </div>
     </div>
+  </div>
+
+
+  {{!-- {{#unless isVerified}} --}}
+
+  <div class="card card_home shadow-lg  produce mb-2 pb-0 ">
+    <div class="card-body">
+      <div class="row mb-1">
+        <div class="col-12">
+          <span> <img src="../../images/ep_map-location.png" alt=""> </span>
+          <span>{{ lga }}, {{ state }}</span>
+        </div>
+      </div>
+
+      <div class="row f_1 row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <div class="col-3">
+          <div class="">
+            <p>Size of Land
+            </p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="">
+            <p>Crops Farmed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row f_2 row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+        <div class="col-3">
+          <div class="">
+            <p>{{ farmer.farm_size }} {{farmer.farm_size_measurement}}</p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class=" ">
+            <ul class=" ul_list_item    ">
+              {{#farmer.product_farmed}}
+              <li class=" list_item ">{{this}}</li>
+              {{/farmer.product_farmed}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- <div class="card shadow-lg card_home mb-2 weather">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 head">
+          <h4>WEATHER FORECAST</h4>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-4">
+          <div class="col _col">
+            <div class="p-3 pt-1 pb-1  weather_sub">
+              <p>22&deg;C - 32&deg;C</p>
+              <p><img src="../images/Drizzle.png" alt=""></p>
+              <p>TODAY</p>
+              <p>23 MARCH</p>
+            </div>
+          </div>
+          <div class="col _col">
+            <div class="p-3 pt-1 pb-1  weather_sub">
+              <p>22&deg;C - 32&deg;C</p>
+              <p><img src="../images/Sunny.png" alt=""></p>
+              <p>TODAY</p>
+              <p>23 MARCH</p>
+            </div>
+          </div>
+          <div class="col _col">
+            <div class="p-3 pt-1 pb-1  weather_sub">
+              <p>22&deg;C - 32&deg;C</p>
+              <p><img src="../images/Partly-cloudy.png" alt=""></p>
+              <p>TODAY</p>
+              <p>23 MARCH</p>
+            </div>
+          </div>
+          <div class="col _col">
+            <div class="p-3 pt-1 pb-1  weather_sub">
+              <p>22&deg;C - 32&deg;C</p>
+              <p><img src="../images/Drizzle.png" alt=""></p>
+              <p>TODAY</p>
+              <p>23 MARCH</p>
+            </div>
+          </div>
+          <div class="col _col">
+            <div class="p-3 pt-1 pb-1  weather_sub">
+              <p>22&deg;C - 32&deg;C</p>
+              <p><img src="../images/Drizzle.png" alt=""></p>
+              <p>TODAY</p>
+              <p>23 MARCH</p>
+            </div>
+          </div>
+          <div class="col _col">
+            <div class="  pt-1 pb-1   ">
+              <div class=" ">
+                <button type="button" class="btn weather_button_update mb-1">Rainy Season</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> --}}
+  {{>weather}}
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow card_home  pl-0 mt-3 mb-2 ">
+        <div class="card-body card_comps">
+          <div class="row row-cols-2  card_comp row-cols-lg-4 g-2 g-lg-2">
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="p-3 border sal_bac card_dis text-center border-0 border-end">
+                <h5 class="c_d_s2 c_d_s2_sale sales">Total Purchases </h5>
+                <h1 class="c_d_s2_sales ">{{transactionCount}}</h1>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 border-end">
+                <h5 class="c_d_s2">Items In Cart</h5>
+                <h1 class="c_d_s2_full ">{{cartCount}}</h1>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 border-end">
+                <h5 class="c_d_s2 orders">Orders</h5>
+                <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
+              </div>
+            </div>
+
+            {{transactions.TransactionCarts}}
+            <div class="col-lg-3 col-md-6 col-sm-6 ">
+              <div class="p-3 border text-center border-0 border-end">
+                <h5 class="c_d_s2">Completed</h5>
+                {{#if (eq transactionStatus.status "3")}}
+                <h1 class=" c_d_s2_unfull">{{transactionCount}}</h1>
+                {{else}}
+                <h1 class=" c_d_s2_unfull">0</h1>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid  ">
+
+
+  <div class="card card_home mb-2 summary_tran">
+    <div class="card-body">
+      <div class="row ">
+        <div class="col-12">
+          <h4>Transaction Summary</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class=" farmer_dashboard_table table-responsives">
+
+    <table class="table con t_info table_info card_tab table-responsives table-borderless" id="transactionTable">
+      <thead class="t_info_head ">
+        <tr class="">
+          <th scope="col">S/N</th>
+          <th scope="col">Order ID</th>
+          <th scope="col">STATUS</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="t_info_body">
+        {{#each transactions}}
+        <tr class="t_info_row1">
+          <th scope="row">{{#add @index 1}} {{this}} {{/add}}</th>
+          <td>{{this.transaction_id}}</td>
+          <td><span class=" "> <span class="process px-1"><i class="bi bi-dot"></i> {{status}}</span>
+              <br>
+              <span class="mt-1"> Paid on {{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</span>
+          </td>
+          <td><a href="/farmer/order/{{this.transaction_id}} ">See
+              Details</a></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+
+
+</div>
 
 
 {{!-- {{/unless}} --}}
 
 </div>
 
-      {{!-- 
-      <div class="col-4 c0l_4">
-        <form action="" method="post"> 
-        <div class="p-3 ">
-          <div class="card card_pay ">
-            <div class="card-body  ">
-              <h5 class="card-title">
-                <h1 class="text-center"> Order Summary </h1>
-              </h5>
-              <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-2">
-                  <div class="col card_pay_inf">
-                    <div class="p-3  ">
-                      <h1>White Maize</h1>
-                      <p>Variant</p>
-                      <p>Subtotal</p>
-                      <p>Shipping</p>
-                      <p>Total</p>
-                    </div>
-                  </div>
-                  <div class="col card_pay_inf2">
-                    <div class="p-3 pr-0  ">
-                      <p>Qty</p>
-                      <h4>2kg</h4>
-                      <h2>4,999</h2>
-                      <h2>250</h2>
-                      <h1>5,249</h1>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="p-3  text-center">
-                      <button type="submit" class="btn btn_gr2 shadow ">Pay Now</button>
-                    </div>
-                  </div>
+{{!--
+<div class="col-4 c0l_4">
+  <form action="" method="post">
+    <div class="p-3 ">
+      <div class="card card_pay ">
+        <div class="card-body  ">
+          <h5 class="card-title">
+            <h1 class="text-center"> Order Summary </h1>
+          </h5>
+          <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2 mb-2">
+            <div class="col card_pay_inf">
+              <div class="p-3  ">
+                <h1>White Maize</h1>
+                <p>Variant</p>
+                <p>Subtotal</p>
+                <p>Shipping</p>
+                <p>Total</p>
+              </div>
+            </div>
+            <div class="col card_pay_inf2">
+              <div class="p-3 pr-0  ">
+                <p>Qty</p>
+                <h4>2kg</h4>
+                <h2>4,999</h2>
+                <h2>250</h2>
+                <h1>5,249</h1>
+              </div>
+            </div>
+            <div class="col">
+              <div class="p-3  text-center">
+                <button type="submit" class="btn btn_gr2 shadow ">Pay Now</button>
               </div>
             </div>
           </div>
         </div>
-        </form>
-      </div> --}}  
+      </div>
     </div>
-  </div>
+  </form>
+</div> --}}
+</div>
+</div>
 {{!-- {{/unless}} --}}

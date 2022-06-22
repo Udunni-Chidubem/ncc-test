@@ -1,185 +1,228 @@
 <div class="bg-primary">
-   {{>breadcrumbs}}
- </div> 
-  <div class="product-mgt-container">
-        <div class="d-flex flex-row container mt-5">
-            <div class="tab-btn active" data-id="all">ALL</div>
-            <div class="tab-btn" data-id="approved">APPROVED</div>
-            <div class="tab-btn" data-id="rejected">REJECTED</div>
-        </div>
-        <div>
-    
-            <!-- single item -->
-            <div class="content active" id="all">
-                <div class=" container table-responsives table_t_info">   
-                    <table class="table con t_info  table-borderless" id="product-table-all">
-                      <thead class="t_info_head ">
-                        <tr class="row-height">
-                            <th scope="col">UPLOAD DATE</th>
-                            <th scope="col">PRODUCT NAME/VARIANT</th>
-                            <th scope="col">LOCAL NAME</th>
-                            <th scope="col">COMPANY NAME</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">
-                                <button class="btn  download-btn ">Download Report</button>
-                            </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{#each products}}
-                          <tr class="row-one row-height">
-                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
-                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col">
-                              {{#if (eq this.status 1)}}
-                                   <span class="published">Published</span>
-                                 {{else if (eq this.status 0)}}
-                                  <span class="unpublished">Unpublished</span>
-                                {{else}}
-                                  <span class="revoked_product">Revoked</span>
-                              {{/if}}
-                            </td>
-                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
-                          </tr>
-                        {{/each}}
-                      </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- end of single item -->
-    
-            <!-- single item -->
-            <div class="content" id="approved">
-                <div class=" container table-responsive table_t_info ">   
-                    <table class="table con t_info  table-borderless " id="product-table-approved">
-                      <thead class="t_info_head ">
-                        <tr class="row-height">
-                            <th scope="col">UPLOAD DATE</th>
-                            <th scope="col">PRODUCT NAME/VARIANT</th>
-                            <th scope="col">LOCAL NAME</th>
-                            <th>COMPANY NAME</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">
-                                <button class="btn download-btn ">Download Report</button>
-                            </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{#each approvedProducts}}
-                          <tr class="row-one row-height">
-                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
-                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col">
-                              {{#if this.status}}
-                                  {{#equals this.status 1}}
-                                    <span class="published">Published</span>
-                                  {{/equals}}
-                                  {{else}}
-                                  {{#equals this.status 0}}
-                                    <span class="unpublished">Unpublished</span>
-                                  {{/equals}}
-                              {{/if}}
-                            </td>
-                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
-                          </tr>
-                        {{/each}}                    
-                      </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
-            <!-- end of single item -->
-    
-            <!-- single item -->
-            <div class="content" id="rejected">
-                <div class=" container table-responsives table_t_info">   
-                    <table class="table con t_info  table-borderless" id="product-table-rejected">
-                      <thead class="t_info_head ">
-                        <tr class="row-height">
-                            <th scope="col">UPLOAD DATE</th>
-                            <th scope="col">PRODUCT NAME/VARIANT</th>
-                            <th scope="col">LOCAL NAME</th>
-                            <th>COMPANY NAME</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">
-                                <button class="btn download-btn ">Download Report</button>
-                            </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {{#each rejectedProducts}}
-                          <tr class="row-one row-height">
-                            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-                            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-                            <td scope="col"> <strong>{{this.local_name}}</strong></td>
-                            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-                            <td scope="col">
-                              {{#if this.status}}
-                                  {{#equals 1}}
-                                    <span class="published">Published</span>
-                                  {{/equals}}
-                                  {{else}}
-                                  {{#equals this.status 0}}
-                                    <span class="unpublished">Unpublished</span>
-                                  {{/equals}}
-                              {{/if}}
-                            </td>
-                            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
-                          </tr>
-                        {{/each}}                        
-                      </tbody>
-                    </table>
-                </div>
-            </div>
-            </div>
-            <!-- end of single item -->
-    <div class="paginate-wrapper">
-        <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-    </div>
-    </div>
+  {{>breadcrumbs}}
+</div>
+<div class="product-mgt-container">
+  <div class="d-flex flex-row container mt-5">
+    <div class="tab-btn active" data-id="all">ALL</div>
+    <div class="tab-btn" data-id="approved">APPROVED</div>
+    <div class="tab-btn" data-id="rejected">UNPUBLISHED</div>
+    <div class="tab-btn" data-id="revoked">REVOKED</div>
+  </div>
+  <div>
 
-    <script>
-        const about = document.querySelector(".product-mgt-container");
-const btns = document.querySelectorAll(".tab-btn");
-const tables = document.querySelectorAll(".content");
-about.addEventListener("click", function (e) {
-  const id = e.target.dataset.id;
-  if (id) {
-    // remove selected from other buttons
-    btns.forEach(function (btn) {
-      btn.classList.remove("active");
-    });
-    e.target.classList.add("active");
-    // hide other tables
-    tables.forEach(function (table) {
-      table.classList.remove("active");
-    });
-    const element = document.getElementById(id);
-    element.classList.add("active");
-  }
-});
+    <!-- single item -->
+    <div class="content active" id="all">
+      <div class=" container table-responsives table_t_info">
+        <table class="table con t_info  table-borderless" id="product-table-all">
+          <thead class="t_info_head ">
+            <tr class="row-height">
+              <th scope="col">UPLOAD DATE</th>
+              <th scope="col">PRODUCT NAME/VARIANT</th>
+              <th scope="col">LOCAL NAME</th>
+              <th scope="col">COMPANY NAME</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">
+                <button class="btn  download-btn ">Download Report</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+            <tr class="row-one row-height">
+              <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+              <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+              <td scope="col"> <strong>{{this.local_name}}</strong></td>
+              <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+              <td scope="col">
+                {{#if (eq this.status 1)}}
+                <span class="published">Published</span>
+                {{else if (eq this.status 0)}}
+                <span class="unpublished">Unpublished</span>
+                {{else}}
+                <span class="revoked_product">Revoked</span>
+                {{/if}}
+              </td>               
+              <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- end of single item -->
 
-    </script>
- 
+    <!-- single item -->
+    <div class="content" id="approved">
+      <div class=" container table-responsive table_t_info ">
+        <table class="table con t_info  table-borderless " id="product-table-approved">
+          <thead class="t_info_head ">
+            <tr class="row-height">
+              <th scope="col">UPLOAD DATE</th>
+              <th scope="col">PRODUCT NAME/VARIANT</th>
+              <th scope="col">LOCAL NAME</th>
+              <th>COMPANY NAME</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">
+                <button class="btn download-btn ">Download Report</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each approvedProducts}}
+            <tr class="row-one row-height">
+              <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+              <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+              <td scope="col"> <strong>{{this.local_name}}</strong></td>
+              <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+              <td scope="col">
+                {{#if this.status}}
+                {{#equals this.status 1}}
+                <span class="published">Published</span>
+                {{/equals}}
+                {{else}}
+                {{#equals this.status 0}}
+                <span class="unpublished">Unpublished</span>
+                {{/equals}}
+                {{/if}}
+              </td>
+              <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end of single item -->
+
+  <!-- single item -->
+  <div class="content" id="rejected">
+    <div class=" container table-responsives table_t_info">
+      <table class="table con t_info  table-borderless" id="product-table-rejected">
+        <thead class="t_info_head ">
+          <tr class="row-height">
+            <th scope="col">UPLOAD DATE</th>
+            <th scope="col">PRODUCT NAME/VARIANT</th>
+            <th scope="col">LOCAL NAME</th>
+            <th>COMPANY NAME</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">
+              <button class="btn download-btn ">Download Report</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each rejectedProducts}}
+          <tr class="row-one row-height">
+            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+            <td scope="col"> <strong>{{this.local_name}}</strong></td>
+            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+            <td scope="col">
+              {{#if this.status}}
+              {{#equals 1}}
+              <span class="published">Published</span>
+              {{/equals}}
+              {{else}}
+              {{#equals this.status 0}}
+              <span class="unpublished">Unpublished</span>
+              {{/equals}}
+              {{/if}}
+            </td>
+            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of single item -->
+
+<!-- Revoked Products -->
+  <div class="content" id="revoked">
+    <div class=" container table-responsives table_t_info">
+      <table class="table con t_info  table-borderless" id="product-table-revoked">
+        <thead class="t_info_head ">
+          <tr class="row-height">
+            <th scope="col">UPLOAD DATE</th>
+            <th scope="col">PRODUCT NAME/VARIANT</th>
+            <th scope="col">LOCAL NAME</th>
+            <th>COMPANY NAME</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">
+              <button class="btn download-btn ">Download Report</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each revokedProducts}}
+          <tr class="row-one row-height">
+            <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+            <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+            <td scope="col"> <strong>{{this.local_name}}</strong></td>
+            <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+            <td scope="col">
+             {{#if (eq this.status 1)}}
+                <span class="published">Published</span>
+                {{else if (eq this.status 0)}}
+                <span class="unpublished">Unpublished</span>
+                {{else}}
+                <span class="revoked_product">Revoked</span>
+                {{/if}}
+            </td>
+            <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of single item -->
+
+<div class="paginate-wrapper">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</div>
+
+<script>
+  const about = document.querySelector(".product-mgt-container");
+  const btns = document.querySelectorAll(".tab-btn");
+  const tables = document.querySelectorAll(".content");
+  about.addEventListener("click", function (e) {
+    const id = e.target.dataset.id;
+    if (id) {
+      // remove selected from other buttons
+      btns.forEach(function (btn) {
+        btn.classList.remove("active");
+      });
+      e.target.classList.add("active");
+      // hide other tables
+      tables.forEach(function (table) {
+        table.classList.remove("active");
+      });
+      const element = document.getElementById(id);
+      element.classList.add("active");
+    }
+  });
+
+</script>

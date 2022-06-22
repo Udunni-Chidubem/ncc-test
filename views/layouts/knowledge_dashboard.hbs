@@ -20,34 +20,72 @@
                 <h3 class="sidebar_head">Content</h3>
                 <ul class="sidebar-content">
                     <li class="sidebar-content-items side-gap">
-                        <a href="" class="content-side-gap">Description</a>
+                        <a href="#description" class="content-side-gap">Description</a>
                     </li>
+                    <div class="sidebar-line"></div>
+
                     <li class="sidebar-content-items">
-                        <a href="#important">Importance</a>
+                        <a href="#importance">Importance</a>
                     </li>
+                    <div class="sidebar-line"></div>
+
                     <li class="sidebar-content-items">
                         <a href="#planting">Planting {{crop}}</a>
                     </li>
+                    <div class="sidebar-line"></div>
+
                     <li class="sidebar-content-items">
                         <a href="#pest-diseases">Pest and Diseases</a>
+                        {{!-- <a href="#pests-diseases">Pest and Diseases</a> --}}
                     </li>
+                    <div class="sidebar-line"></div>
+
                     <li class="sidebar-content-items side-gap">
                         <a href="#harvesting">Harvesting</a>
                     </li>
+                    <div class="sidebar-line"></div>
+
                     <li class="sidebar-content-items">
                         <a href="#economic-potential">Economic Potential</a>
                     </li>
+                    <div class="sidebar-line"></div>
+
+                    <li class="sidebar-content-items">
+                        <a href="#crop-variants">Variants of {{crop}}</a>
+                    </li>
+                    <div class="sidebar-line"></div>
+                    <li class="sidebar-content-items">
+                        <a href="/knowledge-base">Back</a>
+                    </li>
                 </ul>
             </div>
+{{!-- 
+                <li class="services_dropdown w-nav-link nav-item dropdown">
+                    <a class=" " href="#">Services</a>
+                    <ul class="dropdown-content" style="width: max-content;">
+                        <li>
+                            <a href="https://seedcouncil.gov.ng/seed-company-registration/" target="_blank">Seed Company
+                                Registration</a>
+                        </li>
+                        <li>
+                            <a href="https://seedcouncil.gov.ng/application-for-seed-certification-tags/"
+                                target="_blank">Seed Company Certification</a>
+                        </li>
+                        <li>
+                            <a href="https://seedcouncil.gov.ng/seed-license-renewal/" target="_blank">Seed Licence
+                                Renewal</a>
+                        </li>
+                    </ul>
+                </li> --}}
         </aside>
 
         <div class="knowledge-content">
-                 {{{ body }}}
+            {{{ body }}}
         </div>
     </div>
 
 
-   
+
 </body>
 
-{{> footer}}
+{{!-- {{> footer}} --}}

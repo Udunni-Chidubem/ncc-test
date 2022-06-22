@@ -29,6 +29,14 @@
     ],
     "levelEducation": [
         {
+            "id": "BSC",
+            "name": "BSC"
+        },
+        {
+            "id": "NCE",
+            "name": "NCE"
+        }
+        ,{
             "id": "HND",
             "name": "HND"
         },
@@ -39,6 +47,18 @@
         {
             "id": "SSCE",
             "name": "SSCE"
+        },
+        {
+            "id": "Informal Education",
+            "name": "Informal Education"
+        },
+        {
+            "id": "Islamic Education",
+            "name": "Islamic Education"
+        },
+        {
+            "id": "Uneducated",
+            "name": "Uneducated"
         }
     ],
     "banks": [

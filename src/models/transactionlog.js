@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         TransactionLog.belongsTo(models.Farmer, {
             foreignKey : 'farmer_id'
         })
+        TransactionLog.belongsTo(models.SeedTrader, {
+            foreignKey : 'seedtrader_id'
+        })
         TransactionLog.belongsTo(models.SeedCompany,{
             foreignKey : 'company_id'
         })
@@ -33,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     currency : DataTypes.STRING,
     updated_at : DataTypes.DATE,
     transaction_id:DataTypes.STRING,
-    pickup_point : DataTypes.TEXT
+    pickup_point : DataTypes.TEXT,
+    seedtrader_id:DataTypes.INTEGER
   }, {
     underscored : true,
     sequelize,

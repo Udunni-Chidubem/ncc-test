@@ -15,7 +15,7 @@
 
   				<div class="cleared-balance">
   					<h6>Cleared Balance</h6>
-  					<h4>&#8358; 20,000</h4>
+  					<h4>&#8358; 0</h4>
   				</div>
 
   				<div class="uncleared-balance">
@@ -24,7 +24,7 @@
   				</div>
   			</div>
   			<div class="d-flex justify-content-end mb-2">
-				<button class="btn btn-success" id="withdraw-btn" data-bs-toggle="modal" data-bs-target="#logoutModal"> Withdraw </button>
+				<button class="btn btn-success" id="withdraw-btn" data-bs-toggle="modal" data-bs-target="#withdrawalModal"> Withdraw </button>
 			</div>
   			<div class="transaction-div">
 					<select name="transaction-types" class="custom-select  mb-2" >
@@ -50,67 +50,7 @@
 			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
 			                 
 			               </tr>
-			              <tr class="t_info_row2">
-			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>&#8358; 3000</td>
-			                  <td>12/12/3032</td>
-			                    <td>
-			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-			                  </td>
-			                 
-			              </tr>
-			              <tr class="t_info_row1">
-			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>&#8358; 2000</td>
-			                  <td>12/12/3032</td>
-			                  <td>
-			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-			                  </td>
-			                  
-			              </tr>
-			              <tr class="t_info_row2">
-			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>&#8358; 2000</td>
-			                  <td>12/12/3032</td>
-			                    <td>
-			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-			                  </td>
-			                  
-			              </tr>
-			              <tr class="t_info_row1">
-			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>&#8358; 2000</td>
-			                  <td>12/12/3032</td>
-			                  <td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>  Pending</span> </td>
-			                 
-			               </tr>
-			              <tr class="t_info_row2">
-			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>&#8358; 3000</td>
-			                  <td>12/12/3032</td>
-			                    <td>
-			                    <span  >  <span class="approved px-1"><i class="bi bi-dot  "></i> Approved</span> 
-			                  </td>
-			                 
-			              </tr>
-			              <tr class="t_info_row1">
-			                  <th scope="row"  ><a href="#">12345678</a></th>
-			                  <td>&#8358; 2000</td>
-			                  <td>12/12/3032</td>
-			                  <td>
-			                    <span>  <span class="pending px-1"><i class="bi bi-dot"></i> Pending</span> 
-			                  </td>
-			                  
-			              </tr>
-			              <tr class="t_info_row2">
-			                  <th scope="row"><a href="#">12345678</a></th>
-			                  <td>&#8358; 2000</td>
-			                  <td>12/12/3032</td>
-			                    <td>
-			                    <span  > <span class="approved px-1"><i class="bi bi-dot"></i>  Approved</span> 
-			                  </td>
-			                  
-			              </tr>
+			              
 			            </tbody>
 			        </table>	
 					</div>
@@ -141,8 +81,8 @@
 </div>
 
 
-    <!-- Logout Modal-->
-    <div class="modal fade " id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Withdrawal Modal-->
+    <div class="modal fade " id="withdrawalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
@@ -163,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success" href="#!">Logout</button>
+                    <button type="submit" class="btn btn-success" href="#!">Withdraw</button>
                 </div>
             	</form>
             </div>
@@ -186,8 +126,8 @@ $(document).ready(function(){
         });
     }).change();
 
-    $('#logoutModal').on('shown.bs.modal', function () {
-  $('#logoutModal').trigger('focus')
+    $('#withdrawalModal').on('shown.bs.modal', function () {
+  $('#withdrawalModal').trigger('focus')
 })
 });
 

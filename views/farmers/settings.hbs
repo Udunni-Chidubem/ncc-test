@@ -1,0 +1,288 @@
+<div class="container">
+    <div class="row _settings">
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item active tab_info_" id="password" aria-current="true" onclick="tab(this)">
+                    Password and Security
+                </li>
+                <li class="list-group-item  tab_info_" id="account" onclick="tab(this)">
+                    Deactivate Account
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-9">
+
+            {{#if password_change_status}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-success">
+                    {{password_change_status}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if messages.error}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{messages.error}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if message_}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{message_}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if errors.length}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    <ul>
+                        {{#each errors}}
+                        <li>{{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if extractedErrors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul style="padding: 5px;">
+                    {{#each extractedErrors}}
+                    <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+
+            <div class="card settings_  content account">
+                <div class="card-body">
+                    <h3 class="deactivate-intro">we hate to see you go</h3>
+                    <h3 class="deactivate-intro">{{ fullname}}</h3>
+                    <div class="m-5">
+                        <p class="deactivate-texts mt-2">This is what will happen when you deactivate your account</p>
+                        <p class="deactivate-texts mt-2">You will lose access to your dashboard</p>
+                        <p class="deactivate-texts mt-2">You cannot search for seeds or purchase seeds on NIGSIMS</p>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center m-5">
+                        <img src="../../images/deactivate-pic.png">
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <div class="text-center">
+                        <button type="button" class="btn btn-danger deactivate-btn" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenter">
+                            Click Here To Deactivate Account
+                        </button>
+                    </div>
+
+                    <div class="modal fade text-center" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                                    {{!-- <span aria-hidden="true">&times;</span> --}}
+                                </div>
+                                <div class="modal-body">
+                                    <h4 class="deactivate-texts">Please confirm that you are about to deactivate your
+                                        account</h4>
+                                    <div class="text-center m-5 modal-grid-btns">
+                                             <button type="button" class=" btn no-btn close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            Never Mind!
+                                        </button>
+
+                                        <button type="button"
+                                            onclick="window.location.href=window.location.origin+'/seed-trader/settings/deactivate/{{trader.user_id}}/2'"
+                                            class="btn btn-danger yes-btn"> Confirm</button>
+                                   
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- <div class="text-center m-5">
+                        <button type="button"
+                            onclick="window.location.href=window.location.origin+'/farmer/settings/deactivate/{{farmer.user_id}}/2'"
+                            class="btn btn-danger deactivate-btn"> Click Here To Deactivate Account</button>
+                    </div> --}}
+                </div>
+            </div>
+
+
+            <div class="card settings_ active content password">
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input type="password" required minlength="6" id="currentpassword" class="form-control"
+                            name="currentpassword" placeholder="Current Password" aria-label="Current Password"
+                            aria-describedby="basic-addon1" onkeyup='check();'>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" minlength="6" class="form-control inputs_" id="newpassword"
+                            name="newpassword" placeholder="New Password" aria-label="New Password"
+                            aria-describedby="basic-addon1" onkeyup='check();'>
+
+                        <span class="showBtn">SHOW</span>
+                        <div class="container">
+                            <form action="#">
+                                <div class="indicator">
+                                    <span class="weak"></span>
+                                    <span class="medium"></span>
+                                    <span class="strong"></span>
+                                </div>
+                                <div class="text"></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" required minlength="6" class="form-control" id="confirmpassword"
+                            name="confirmpassword" placeholder="Retype New Password" aria-label="Confirm Password"
+                            aria-describedby="basic-addon1" onkeyup='check();'>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="hidden" class="form-control" id="userphoneno" value="{{farmerData.phone_no}}"
+                            name="userphoneno" aria-label=" User Phoneno" aria-describedby="basic-addon1">
+                    </div>
+                    <span id='message'></span>
+                    <div class="col-12  ">
+                        <div class="columns mx-auto" style="width: 160px;">
+                            <button class="btn btn_update_password mb-1" disabled id="btn_update_password">
+                                Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#exampleModalCenter').appendTo('body');
+    })
+
+    //tab toggle
+    const btns = document.querySelectorAll(".tab_info_");
+    const card = document.querySelectorAll(".content");
+
+    const indicator = document.querySelector(".indicator");
+    const inputs_ = document.querySelector('.inputs_');
+    const weak = document.querySelector(".weak");
+    const medium = document.querySelector(".medium");
+    const strong = document.querySelector(".strong");
+    const text = document.querySelector(".text");
+    const showBtn = document.querySelector(".showBtn");
+    console.log(inputs_.value)
+    let regExpWeak = /[a-z]/;
+    let regExpMedium = /\d+/;
+    let regExpStrong = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+
+    function tab(obj) {
+        const id = obj.getAttribute('id');
+        //console.log(id)
+        if (id) {
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            obj.classList.add("active");
+            card.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.querySelector('.' + id);
+            element.classList.add("active");
+        }
+    }
+
+    //password retype
+    var check = function () {
+        if (document.getElementById('currentpassword').value ==
+            document.getElementById('newpassword').value) {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'Current password cant be the same with new password';
+            document.querySelector('#btn_update_password').removeAttribute('enabled');
+            document.querySelector('#btn_update_password').setAttribute('disabled', true);
+        }
+        else {
+            if (document.getElementById('newpassword').value == '') {
+                document.querySelector('#btn_update_password').removeAttribute('enabled');
+                document.querySelector('#btn_update_password').setAttribute('disabled', true);
+            }
+            else {
+                if (document.getElementById('newpassword').value.length < 6) {
+                    document.getElementById('message').style.color = 'red';
+                    document.getElementById('message').innerHTML = 'Password cannot be less than 6';
+                    document.querySelector('#btn_update_password').removeAttribute('enabled');
+                    document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                }
+                else {
+                    if (document.getElementById('newpassword').value ==
+                        document.getElementById('confirmpassword').value) {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById('message').innerHTML = 'Password matching';
+                        document.querySelector('#btn_update_password').removeAttribute('disabled');
+                        document.querySelector('#btn_update_password').setAttribute('enabled', true);
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById('message').innerHTML = 'Password not matching';
+                        document.querySelector('#btn_update_password').removeAttribute('enabled');
+                        document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                    }
+                }
+            }
+        }
+        if (inputs_.value != "") {
+            indicator.style.display = "block";
+            indicator.style.display = "flex";
+            if (inputs_.value.length <= 3 && (inputs_.value.match(regExpWeak) || inputs_.value.match(regExpMedium) || inputs_.value.match(regExpStrong))) no = 1;
+            if (inputs_.value.length >= 6 && ((inputs_.value.match(regExpWeak) && inputs_.value.match(regExpMedium)) || (inputs_.value.match(regExpMedium) && inputs_.value.match(regExpStrong)) || (inputs_.value.match(regExpWeak) && inputs_.value.match(regExpStrong)))) no = 2;
+            if (inputs_.value.length >= 6 && inputs_.value.match(regExpWeak) && inputs_.value.match(regExpMedium) && inputs_.value.match(regExpStrong)) no = 3;
+            if (no == 1) {
+                weak.classList.add("active");
+                text.style.display = "block";
+                text.textContent = "Your password is too week";
+                text.classList.add("weak");
+            }
+            if (no == 2) {
+                medium.classList.add("active");
+                text.textContent = "Your password is medium";
+                text.classList.add("medium");
+            } else {
+                medium.classList.remove("active");
+                text.classList.remove("medium");
+            }
+            if (no == 3) {
+                weak.classList.add("active");
+                medium.classList.add("active");
+                strong.classList.add("active");
+                text.textContent = "Your password is strong";
+                text.classList.add("strong");
+            } else {
+                strong.classList.remove("active");
+                text.classList.remove("strong");
+            }
+            showBtn.style.display = "block";
+            showBtn.onclick = function () {
+                if (inputs_.type == "password") {
+                    inputs_.type = "text";
+                    showBtn.textContent = "HIDE";
+                    showBtn.style.color = "#23ad5c";
+                } else {
+                    inputs_.type = "password";
+                    showBtn.textContent = "SHOW";
+                    showBtn.style.color = "#000";
+                }
+            }
+        } else {
+            indicator.style.display = "none";
+            text.style.display = "none";
+            showBtn.style.display = "none";
+        }
+    }
+
+</script>

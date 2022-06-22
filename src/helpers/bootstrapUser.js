@@ -40,6 +40,37 @@ const seedAdminData = async () => {
 			}
 		})
 	//	console.log(user)
+		let f = await Role.findOne({
+			where : {role_name : 'farmer'}
+		})
+		
+		if(!f){
+			await Role.create({
+				role_name : 'farmer'
+			}, {transaction : transaction});
+		}
+
+		let sc = await Role.findOne({
+			where : {role_name : 'seed_company'}
+		})
+		
+		if(!sc){
+			await Role.create({
+				role_name : 'seed_company'
+			}, {transaction : transaction});
+		}
+
+		let st = await Role.findOne({
+			where : {role_name : 'seed_trader'}
+		})
+		
+		if(!st){
+			await Role.create({
+				role_name : 'seed_trader'
+			}, {transaction : transaction});
+		}
+
+
 		if(user==null){
 			user = await User.create({
 				username: "admin",
@@ -65,6 +96,7 @@ const seedAdminData = async () => {
 				}
 			}
 		}
+
 		let n = await Role.findOne({
 			where : {role_name : 'nasc'}
 		})
@@ -74,12 +106,32 @@ const seedAdminData = async () => {
 				role_name : 'nasc'
 			}, {transaction : transaction});
 		}
+
+		let r = await Role.findOne({
+			where : {role_name : 'rra'}
+		})
+		
+		if(!r){
+			await Role.create({
+				role_name : 'rra'
+			}, {transaction : transaction});
+		}
+
+		let ns = await Role.findOne({
+			where : {role_name : 'nigsims'}
+		})
+		
+		if(!ns){
+			await Role.create({
+				role_name : 'nigsims'
+			}, {transaction : transaction});
+		}
 		transaction.commit();
+
 	}catch(e){
 		transaction.rollback();
 		console.log(e)
 	}
-
 
 }
 

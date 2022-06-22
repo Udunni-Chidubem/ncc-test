@@ -1,9 +1,10 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks, Salesheets } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
+const bcrypt = require('bcrypt');
 
 
 
@@ -16,18 +17,15 @@ module.exports = {
 
         try {
             const data = { name_of_company, phone_no, tin, address, licensed_no, state_id, lg_id, certification_number, email, bank_account_name, bank_account_no, bank_code }
-            console.log(data)
             await User.update({ status: true }, { where: { id: user.id } })
 
             const company = await SeedCompany.update(data, {
                 where: { user_id: user.id }
             }, { transaction: transaction })
-            console.log(company)
             transaction.commit();
             return { company }
         } catch (e) {
             transaction.rollback();
-            console.log(e)
             return e
         }
     },
@@ -193,7 +191,6 @@ module.exports = {
         });
 
         balance = singleBalance
-        console.log(balance)
         return balance;
     },
     getProductCount: async (req, res) => {
@@ -204,7 +201,6 @@ module.exports = {
         });
 
         productCount = countProducts
-        console.log(productCount)
         return productCount;
     },
     getOrders: async (req, res) => {
@@ -215,11 +211,20 @@ module.exports = {
             + "on tl.id=tc.transaction_log_id join orders o on tl.id = o.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
             + "where p.user_id = " + user.id + " and (tl.transaction_id is not null and transaction_id <> '') GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(order)
 
         let orderStatus = order.orders_status
-        console.log(orderStatus)
         return order
+    },
+    getTotalSales: async (company_id) => {
+        let sql = "SELECT COUNT(status) as count, status FROM `orders` WHERE company_id=" + company_id + " and status is not null GROUP BY status";
+
+        let totalsales = await db.rest.query(sql, {type: QueryTypes.SELECT})
+        // console.log(totalsales)
+        // console.log(sql)
+        // console.log(company_id)
+        // console.log('company_id')
+        return totalsales
+        
     },
     getProductOrders : async (req, product)=>{
         const user = await req.user
@@ -229,8 +234,13 @@ module.exports = {
             + "on tl.id=tc.transaction_log_id join product p on p.id = c.product_id join farmer f on f.user_id=c.user_id "
             + "where p.user_id = " + user.id + " and c.product_id ="+product+" GROUP by p.user_id, tl.id order by tl.created_at desc";
         let order = await db.rest.query(sql, { type: QueryTypes.SELECT })
-        console.log(order)
         return order
+    },
+    getchartamount : async (req, id)=>{
+        let sql = "SELECT t.amount as amount, o.updated_at as updated_at FROM orders as o join transaction_log as t WHERE o.transaction_log_id = t.id  and o.status = 4 and o.company_id = "+id ;
+        let chartamount = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        chartamount = JSON.parse(JSON.stringify(chartamount));
+        return chartamount
     },
     getOrder: async (transaction_id, user_id, company_id) => {
         // const user = await req.user
@@ -261,6 +271,7 @@ module.exports = {
                         include: [
                             {
                                 model: DeliveryInformation,
+                                attributes:['address'],
                                 include: [{ model: States }, { model: LGAs }]
                             }
                         ]
@@ -311,5 +322,86 @@ module.exports = {
     },
     updadeOrders:async (order_id, data)=>{
         Orders.update(data, { where : {id : order_id}})
-    }
+    },
+
+    updatePassword: async (req, res) => {
+        let user = await req.user
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message_ = "Updated Successfully"
+        try{
+            let status = await User.update({password:newpassword}, { where : {username: username}})
+            return {status,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+    },
+
+    settings: async (req, res) => {
+        const user = await req.user
+        const company = await utils.getCompanyProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        res.render('seed_company/settings', {
+            layout : 'company-dashboard',
+            title: 'Settings',
+            fullname: company.name_of_company,
+            companyData: company,
+            isVerified,
+            company
+        })
+        
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
+        })
+    },
+
+
+    sales_sheet_info: async (req,res,user_id) => {
+        let transaction =await db.rest.transaction()
+        let qty = [], p_cost = [], size = [], p_name = [], p_variant = []
+        try{
+            if (!Array.isArray(req.body.product_cost)) {
+                p_cost.push(req.body.product_cost)
+                size.push(req.body.size)
+                qty.push(req.body.quantity)
+                p_variant.push(req.body.product_variant)
+                p_name.push(req.body.product_name)
+            } else {
+                p_cost = req.body.product_cost
+                size = req.body.size
+                qty = req.body.quantity
+                p_variant = req.body.product_variant
+                p_name = req.body.product_name 
+            }
+        await Salesheets.create({
+            community : req.body.community,
+            lg_id : req.body.lg_id,
+            state_id : req.body.state_id,
+            sale_date : req.body.sale_date,
+            customer_name : req.body.customer_name,
+            customer_number : req.body.customer_number,
+            product_name : p_name,
+            product_variant :p_variant,
+            size : size,
+            product_cost : p_cost,
+            quantity : qty,
+            user_id : user_id
+        },
+         {transaction : transaction});
+        await transaction.commit();
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+            return e
+        }
+            },
 }

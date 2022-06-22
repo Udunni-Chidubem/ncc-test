@@ -2,9 +2,11 @@ const farmersRouter=require('express').Router()
 const farmerController = require('../../controllers/farmers.controller')
 const utils = require('../../helpers/utils')
 const paystack = require('../../helpers/paystack')
-const { profileUpdateValidation, cartValidation, cartSingleValidation, validate } = require('../../helpers/formValidator')
+const { profileUpdateValidation, cartValidation, cartSingleValidation, validate, settingsValidation } = require('../../helpers/formValidator')
 const companyController = require('../../controllers/company.controller')
 const { isVerified } = require('../../helpers/utils')
+const { now } = require('moment');
+const weatherController =require('../../controllers/weather.controller')
  
 farmersRouter.get('/dashboard', async (req, res)=>{
     let user = await req.user;
@@ -13,6 +15,7 @@ farmersRouter.get('/dashboard', async (req, res)=>{
     let {firstname, lastname, LGA, State }=farmer
     let cartCount = await farmerController.getFarmerCartCount(req, res)
     let transactionCount = await farmerController.getTransactionlogCount(farmer.id)
+    let transactions = await farmerController.getTransactions(farmer.id)
 
     res.render('farmers/dashboard', {
         layout : 'farmers-dashboard',
@@ -23,14 +26,16 @@ farmersRouter.get('/dashboard', async (req, res)=>{
         farmer,
         isVerified,
         cartCount,
-        transactionCount
+        transactionCount,
+        transactions
     })
 })
 
 farmersRouter.get('/update-profile', farmerController.updateProfile)
+farmersRouter.get('/settings', farmerController.settings)
 farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async(req, res) => {;
 
-    let response = await farmerController.editProfileData(req, res)
+    let response = await farmerController.editProfileData(req,res)
     if(response.farmer || response.deliveryInformation){
         res.json({ message: 'Your profile has been updated successfully and you will be redirected shortly.', statusCode: 200 }).status(200)
     }else{
@@ -38,16 +43,52 @@ farmersRouter.post('/update-profile', profileUpdateValidation(), validate, async
     }
 
 })
+farmersRouter.post('/settings', settingsValidation(), validate, async(req, res) => {;
+
+    console.log('initial password reset log', req.body)
+     let response= await farmerController.updatePassword(req, res)
+    //  {status,farmer,isVerified,message_}
+     console.log('response on password reset', response)
+     if(response.message_){
+        return res.json({ message: response.message_, statusCode: 200 }).status(200)
+    }
+    return res.json({message:response})
+    //  if(response.error_message_){
+    //     return res.json({ message: response.error_message_, statusCode: 400 }).status(400)
+    // }
+    //     if(response.status){
+    //             // res.json({ message_: message_ , statusCode: 200 }).status(200)
+    //         res.render('farmers/settings', {
+    //             layout : 'farmers-dashboard',
+    //             title: 'Settings',
+    //             fullname: response.farmer.firstname + ' ' + response.farmer.lastname,
+    //             farmerData: response.farmer,
+    //             isVerified : response.isVerified,
+    //             password_change_status : response.message_
+    //         })
+    //    }else{
+    //         req.flash('errors', r.errors)
+    //        res.redirect('back');
+    //    }
+
+
+})
 
 farmersRouter.get('/market_place', async (req, res) => {
     let resp = await farmerController.marketPlace(req, res)
+    let message = null;
     const products = resp.response
+    
+    if(req.query.Search && products.result.length <= 0){
+        message = "No product found"
+    }
     res.render('farmers/market_place', {
         layout : 'farmers-dashboard',
         title: 'Market Place',
         fullname: resp.farmer.firstname + ' ' + resp.farmer.lastname,
         farmerData: resp.farmer,
         products,
+        message,
         isVerified: resp.isVerified
     })
 })
@@ -71,20 +112,11 @@ farmersRouter.get('/products/:id', async (req, res) => {
         isVerified: resp.isVerified
     })
 })
-
-farmersRouter.post('/checkout/preview', async (req, res)=>{
-    let items = []
-    if(!Array.isArray(req.body.items))
-    {
-        items.push(req.body.items)
-    }else{
-        items=req.body.items
-    }
- 
-    //let cart=await farmerController.getCartItemsByIds(items)
-    let {getCartItems, farmer, isVerified}=await farmerController.getCartItemsByIds(req, items)
-    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
-   // console.log(deliveryInfo)
+farmersRouter.get("/checkout/preview", async (req, res)=>{
+    if(req.query.product){
+        console.log(req.query.product)
+        let {getCartItems, farmer, isVerified}= await farmerController.cartByProductId(req)
+        let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
         res.render('farmers/order_preview', {
             layout : 'farmers-dashboard',
             title: 'Order Preview',
@@ -94,6 +126,41 @@ farmersRouter.post('/checkout/preview', async (req, res)=>{
             getCartItems,
             deliveryInfo
         })
+    }else{
+        res.redirect('back')
+    }
+})
+
+farmersRouter.post('/checkout/preview', async (req, res)=>{
+    let items = []
+    let data=[];
+    
+    if(!Array.isArray(req.body.items))
+    {
+        items.push(req.body.items)
+    }else{
+        items=req.body.items
+    }
+    console.log(items)
+    //let cart=await farmerController.getCartItemsByIds(items)
+    if(!req.body.items){
+       data =await farmerController.cart(req, res)
+    }else{
+        data=await farmerController.getCartItemsByIds(req, items)
+    }
+
+    let {getCartItems, farmer, isVerified}=data
+    let deliveryInfo = await farmerController.deliveryInfo(farmer.user_id)
+   // console.log(deliveryInfo)
+    res.render('farmers/order_preview', {
+        layout : 'farmers-dashboard',
+        title: 'Order Preview',
+        fullname: farmer.firstname + ' ' + farmer.lastname,
+        farmer: farmer,
+        isVerified,
+        getCartItems,
+        deliveryInfo
+    })
 })
 
 farmersRouter.post("/cart/checkout", async (req, res)=>{
@@ -108,8 +175,9 @@ farmersRouter.post("/cart/checkout", async (req, res)=>{
         }
         let paymentType = req.body.inlineRadioOptions
         let total_sum = req.body.total_sum
+        let callback=req.get('origin')+'/farmer/checkout/callback'
         if(paymentType=='card'){   
-            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, req)
+            let initial= await paystack.initialize('tipson664@gmail.com', total_sum*100, callback, req)
             if(initial.status==true){
                 let ref = initial.data.reference
                 let {getCartItems, farmer}=await farmerController.getCartItemsByIds(req,items)
@@ -214,9 +282,6 @@ farmersRouter.get('/get-cart-count', async (req, res) => {
 })
 
 
-
-
-
 farmersRouter.get('/payment-success', async (req, res)=>{
     let user = await req.user;
     let farmer = await utils.getFarmerProfile(user)
@@ -234,12 +299,35 @@ farmersRouter.get('/transactions', async (req, res)=>{
     let farmer = await utils.getFarmerProfile(user)
     const isVerified = await utils.isVerified(user, 'farmer')
     let transactions=await farmerController.getTransactions(farmer.id)
-   // console.log('transactions', transactions)
     res.render('farmers/transaction-history', {
         layout : 'farmers-dashboard',
         title: 'Transaction History',
         isVerified,
-        transactions
+        transactions,
+        fullname: farmer.firstname + ' ' + farmer.lastname
+    })
+})
+farmersRouter.get('/order/:transaction_id', async (req, res)=>{
+    let user = await req.user;
+    let farmer = await utils.getFarmerProfile(user)
+    const isVerified = await utils.isVerified(user, 'farmer')
+    let transaction_id = req.params.transaction_id
+    let transactions=await farmerController.getOrder(req,res)
+    let orderStatus=await farmerController.orderStatus(req,res)
+    let currency_ = transactions[0].TransactionLog.currency
+    let total_amount = transactions[0].TransactionLog.amount
+    let pick_up = transactions[0].TransactionLog.pickup_point
+    res.render('farmers/view-order', {
+        layout : 'farmers-dashboard',
+        title: 'Order View',
+        isVerified,
+        transactions,
+        transaction_id,
+        currency_,
+        total_amount,
+        pick_up,
+        orderStatus,
+        fullname: farmer.firstname + ' ' + farmer.lastname
     })
 })
 farmersRouter.get("/cart/delete/:id", async (req, res)=>{
@@ -247,11 +335,30 @@ farmersRouter.get("/cart/delete/:id", async (req, res)=>{
     res.redirect("/farmer/cart")
 })
 
-farmersRouter.get('/knowledge-base', (req,res) => {
-    res.render('knowledge_base', {
-        layout: '',
-        title : 'Knowledge Base - Index'
-    }); 
+farmersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
+    let data={status : req.params.status, updated_at : now()}
+   let id = req.params.id
+   console.log(id)
+   farmerController.userUpdate(data, id)
+   req.logOut();
+   res.redirect("/login")
+})
+
+// farmersRouter.get('/knowledge-base', (req,res) => {
+//     res.render('/index', {
+//         layout: 'farmers-dashboard',
+//         title : 'Knowledge Base - Index'
+//     }); 
+// })
+farmersRouter.get('/forecast', async (req, res)=>{
+    let user = await req.user
+    let farmer = await utils.getFarmerProfile(user)
+    let forecast=await weatherController.forecast(farmer['State.name'], farmer['LGA.name'])
+    if(forecast.Headline){
+        res.send({statusCode:200, body : forecast});
+        return
+    }
+    res.send({statusCode : 404, body : forecast})
 })
 
 module.exports=farmersRouter;

@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcrypt');
 const {
         User, 
         Farmer, 
@@ -18,7 +19,7 @@ const {
     }  = db
 const utils = require('../helpers/utils');
 const { getPagination, getPagingData } = require('../helpers/pagination');
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const { QueryTypes } = require('sequelize');
 const { now } = require('moment');
 
@@ -66,6 +67,93 @@ module.exports={
             deliveryInfo
         })
     },
+    settings: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+
+        res.render('farmers/settings', {
+            layout : 'farmers-dashboard',
+            title: 'Settings',
+            fullname: farmer.firstname + ' ' + farmer.lastname,
+            farmerData: farmer,
+            isVerified,
+            farmer
+        })
+        
+    },
+    userUpdate : async (data, id)=>{
+        User.update(
+        data,
+        {
+            where : {id : id}
+        })
+    },
+    updatePassword: async (req, res) => {
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user.dataValues)
+        let newpassword = await bcrypt.hash(req.body.newpassword, 10)
+        let username = req.body.userphoneno
+        let message_ = "Updated Successfully"
+        try{
+           let data={};
+           data.password=newpassword
+        let status = await User.update({password:newpassword}, { where : {username: username}})
+         //let sql = "update user set password='"  + newpassword + "' where username = " +  username +";"
+            // let status = await db.rest.query(sql, { type: QueryTypes.UPDATE })
+            return {status,farmer,isVerified,message_}
+            
+           } 
+           catch(e){
+            console.log(e)       
+            return e
+           }
+
+            // try{
+        // let sql = "select password from user where username ="+ farmer.phone_no +";"
+        //     let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //     console.log(password_verify.password)
+        //     if(password_verify=''){
+        // let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //     let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //     return {status,farmer,isVerified,message_}}
+        //     else{
+        //         console.log(sql)
+        //         return {error_message_}
+        //     }
+            
+        //    } 
+        //    catch(e){
+        //     console.log(e)       
+        //     return e
+        //    }
+
+        // try{
+        //     let sql = "select password from user where username ="+ farmer.phone_no +"';"
+        //         let password_verify = await db.rest.query(sql, { type: QueryTypes.SELECT })
+        //         bcrypt.compare(req.body.currentpassword, password_verify.password, function(err, res) {
+        //             if(err){
+    
+        //             }
+        //             if(res == true){
+        //                 let sql2 = "update user set password='"  + newpassword + "' where username = " +  username +";"
+        //                 let status = await db.rest.query(sql2, { type: QueryTypes.UPDATE })
+        //                 return {status,farmer,isVerified,message_}
+        //             }
+        //             if(res == false){
+        //                 console.log(sql)
+        //                 return {error_message_}
+        //             }
+        //         });
+    
+                
+        //        } 
+        //        catch(e){
+        //         console.log(e)       
+        //         return e
+        //        }
+    },
     editProfileData: async (req, res) => {
         const transaction = await db.rest.transaction();
         const user = await req.user
@@ -95,6 +183,7 @@ module.exports={
                 source_type,  
                 address_of_farm,
                 farm_size,
+                farm_size_measurement,
                 village,
                 ward } = req.body
             const data = {
@@ -105,11 +194,12 @@ module.exports={
                 level_of_education, 
                 state_id, 
                 lg_id, 
-                nin, 
+                // nin, 
                 bvn,
                 source_type,
                 address_of_farm,
-                farm_size,
+                farm_size, 
+                farm_size_measurement,
                 product_farmed: farm_produce.toString(),
                 village,
                 ward,
@@ -352,6 +442,7 @@ module.exports={
 
         return cartCount
     },
+
     addToCart: async (req, res) => {
         const user = await req.user
         const {pid, price, size, quantity} = req.body
@@ -559,7 +650,6 @@ module.exports={
                     include : [
                         {
                             model : Cart,
-                            attributes : [],
                             include : [
                                { 
                                    model : Product,
@@ -575,6 +665,7 @@ module.exports={
                 farmer_id : farmer_id
             }
         });
+        console.log(JSON.parse(JSON.stringify(transactions)))
         return JSON.parse(JSON.stringify(transactions))
     },
     productItemsUpdate:async (product_id, size, quantity)=>{
@@ -655,7 +746,106 @@ module.exports={
         })
         let getCartItems = JSON.parse(JSON.stringify(items))
         return { farmer, isVerified, getCartItems }
-    }
+    },
 
+    getOrder: async (req,res) =>{
+        let transaction_id = req.params.transaction_id
+        let order = await TransactionCarts.findAll({
+            include: [
+                {
+                    model: TransactionLog,
+                    where: { transaction_id: transaction_id }
+                },
+                {
+                    model: Cart,
+                    include: [{
+                        model: Product,
+                        include: [{
+                            model: User,
+                            include: [{
+                                model: SeedCompany
+                            }]
+                        }]
+                    }]
+                }
+            ]
+        })
+        order = JSON.parse(JSON.stringify(order))
+        return order
+    },
+    cartByProductId : async (req)=>{
+       // let product_id = req.query.product
+        const user = await req.user
+        const farmer = await utils.getFarmerProfile(user)
+        const isVerified = await utils.isVerified(user)
+        let items=await Cart.findAll({
+             include : [
+                {
+                    model: Product,
+                    attributes: ['user_id', 'product_name', 'variant', 'description', 'item', 'file_name', 'status'],
+                    include : [
+                        {
+                            model: User,
+                            attributes: ['username'],
+                            include : [
+                                {
+                                    model : SeedCompany,
+                                    attributes: ['id', 'name_of_company', 'state_id'],
+                                    include : [{model : States, attributes: ['id', 'name']}]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            where : {
+            [Op.and]: [
+                {
+                    product_id: {
+                      [Op.eq]: req.query.product
+                    }
+                },
+                {
+                  status: {
+                    [Op.eq]: 0 //o means items has not been paid for, 1 means item has been purchased
+                  }
+                },
+                {
+                  user_id: {
+                    [Op.eq]: user.id //o means items has not been paid for, 1 means item has been purchased
+                  }
+                },
+                  {
+                    user_id: {
+                      [Op.eq]: user.id
+                    }
+                },
+                {
+                    size: {
+                      [Op.eq]: req.query.size
+                    }
+                },
+                {
+                    qty: {
+                      [Op.eq]: req.query.qty
+                    }
+                },
+            ]
+        }
+        })
+        let getCartItems = JSON.parse(JSON.stringify(items))
+        return { farmer, isVerified, getCartItems }
+    },
+    orderStatus : async (req,res) =>{
+        let transaction_id = req.params.transaction_id
+            let sql = "select o.id as order_id ,p.description as description, p.product_name as product_name, p.file_name as" +
+            " file_name, sc.name_of_company as name_of_company, c.size as size , c.product_id as p_id,tl.transaction_ref as transaction_ref, "
+            + " c.qty as qty, c.unit_price as price, c.total_amount as total_amount, o.status as status, o.updated_at as updated_at, tl.currency "
+            +" as currency , tl.pickup_point as pickup_point FROM (transaction_carts tc  JOIN  transaction_log tl on tc.transaction_log_id=tl.id  JOIN cart as c " +
+               "  on c.id = tc.cart_id JOIN product as p on c.product_id = p.id JOIN seedcompany as sc on sc.user_id = p.user_id )  JOIN orders as o on o.transaction_log_id "
+               + " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = "+ transaction_id + ";"
+            let status = await db.rest.query(sql, { type: QueryTypes.SELECT })
+            return status
+    }
 
 }
