@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       Salesheets.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
       }),
-      Salesheets.belongsTo(models.User)
+      Salesheets.belongsTo(models.User, {
+        foreignKey : 'user_id',
+        targetKey : 'id'
+      })
     }
   }
 

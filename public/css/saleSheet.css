@@ -31,3 +31,10 @@
     border: 1px solid #ccc;
     margin: auto;
 }
+
+/* css for view sheet */
+
+.view-sheet-body{
+    background: #fff;
+}
+

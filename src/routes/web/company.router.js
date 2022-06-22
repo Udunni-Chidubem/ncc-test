@@ -239,6 +239,32 @@ companyRouter.post('/sales-sheet', async (req, res)=>{
 
 
 // sales sheet ends
+
+//view sale sheet starts
+
+companyRouter.get('/view-sheet', async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user)
+    let saleSheets= await companyController.saleSheets(user.id);
+    console.log(saleSheets)
+    // let states = await States.findAll({
+    //     attributes : ['id', 'name'],
+    //     raw: true
+    // });
+    
+    res.render('seed_company/view-sheet', {
+        layout : 'company-dashboard',
+        title : 'View Sheet',
+        isVerified,
+        company,
+        saleSheets
+        // states: states
+    })
+})
+
+//view sale sheet ends
+
 /*Product Routes Ends*/
 
 
