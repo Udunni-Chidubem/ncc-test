@@ -323,23 +323,16 @@ module.exports = {
     },
 
     saveContact:async (req, res)=>{
-        let transporter = nodeMailer.createTransport({
-            service: 'gmail.com',
-            // secure: false, // true for 465, false for other ports
-            auth: {
-              user: 'www.daniko15@gmail.com',
-              pass: 'Dansongs@21'
-            },
-          });
-
-          let mailMessage = await transporter.sendMail({
-            from: 'www.daniko15@gmail.com',
-            to: 'fiyinfoluwaegbeleke@gmail.com',
-            subject: 'CONTACT US -NIGSIMS',
-            text: req.body.message
-
-          });
-          console.log("Message sent: %s", mailMessage.messageId);
+        let transaction=await db.rest.transaction()
+        // let transporter = nodeMailer.createTransport({
+        //     service: 'smtp.gmail.com',
+        //     secure: false, // true for 465, false for other ports
+        //     requireTLS: true,
+        //     auth: {
+        //       user: 'www.daniko15@gmail.com',
+        //       pass: 'Dansongs@21'
+        //     },
+        //   });
 
         try{
         const contact_instance = await Contact.create(
@@ -351,13 +344,45 @@ module.exports = {
                 message: req.body.message,
 
            },
-        )
-        return (contact_instance, transporter)
+
+        );
+
+        // let mailMessage = await transporter.sendMail({
+        //     // email = await Contact.findOne({
+        //     //     attributes :  ['email'],
+        //     //      where : {
+        //     //         email : req.body.email
+        //     //      },
+        //     //     }),
+        //     // message = await Contact.findOne({
+        //     //     attributes :  ['message'],
+        //     //     where : {
+        //     //         message : req.body.message
+        //     //     },
+        //     // }), 
+        //     // const email = req.body.Email,
+        //     // const message = req.body.message,
+
+          
+
+
+        //     from: 'www.daniko15@gmail.com',
+        //     to: email,
+        //     subject: 'CONTACT US -NIGSIMS',
+        //     text: message
+
+        //   })
+       
+          transaction.commit()
+          // transporter
+        return (contact_instance)
 
         } catch(e){
+            transaction.rollback()
             console.log(e)
             return e
         }
+        
         // console.log("Message sent: %s", info.messageId);
     },
 

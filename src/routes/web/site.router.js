@@ -24,6 +24,30 @@ siteRouter.get('/', siteController.home)
 siteRouter.post('/', (req, res)=>{
     siteController.saveContact(req)
     siteController.home(req, res)
+
+    let transporter = nodeMailer.createTransport({
+        service: 'smtp.gmail.com',
+        port: 587,
+        secure: true,
+        requireTLS: true,
+        auth: {
+          user: 'www.daniko15@gmail.com',
+          pass: 'Fireflies@21'
+        },
+      });
+
+         let email = req.body.Email;
+         let message = req.body.message;
+
+      let mailMessage = transporter.sendMail({
+        from: '',
+        to: email, 
+        subject: 'CONTACT US -NIGSIMS',
+        text: message
+
+      })
+    return (transporter)
+
 })
 siteRouter.get('/presignup', siteController.presignup)
 siteRouter.get('/extension_worker', siteController.extension_worker)
