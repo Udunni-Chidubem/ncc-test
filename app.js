@@ -82,13 +82,13 @@ app.engine('hbs', handlebars({
         cancatArray(array, done){
             let res=null
             array=JSON.parse(array)
-            array.forEach(a=>{
+            array.forEach(a => {
                 if(res!=null)
                     res=res+','+a
                 else
                     res=a
             })
-            console.log(a)
+            console.log(res)
             return done.fn(res)
         }
     }
