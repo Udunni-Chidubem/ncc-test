@@ -23,7 +23,7 @@ passpportInitializer(passport)
 
 const uid = () => {
   return Date.now().toString(36) 
-  // Math.random().toString(36).substr(2);
+  // Math.random().toString(36).substr(2); 
 };
 
 // Usage. Example, id = khhry2hb7uip12rj2iu
@@ -79,6 +79,7 @@ app.engine('hbs', handlebars({
             })
             return sum.fn(s)
         },
+<<<<<<< HEAD
         // cancatArray(array, done){
         //     let res=null
         //     array=JSON.parse(array)
@@ -91,6 +92,20 @@ app.engine('hbs', handlebars({
         //     console.log(a)
         //     return done.fn(res)
         // }
+=======
+        cancatArray(array, done){
+            let res=null
+            array=JSON.parse(array)
+            array.forEach(a => {
+                if(res!=null)
+                    res=res+','+a
+                else
+                    res=a
+            })
+            console.log(res)
+            return done.fn(res)
+        }
+>>>>>>> 71a24daa3b37d1686f9e797e0755197f6c5fae3b
     }
 }))
 
