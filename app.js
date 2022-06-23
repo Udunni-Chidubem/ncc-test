@@ -17,8 +17,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec=require('./src/config/swaggerOptions')
 const morgan = require('morgan');
 const fs = require('fs')
-const proxy=require('express-http-proxy')
-
+const bootstrapper=require('./src/helpers/bootstrap.service')
+bootstrapper;
 passpportInitializer(passport)
 
 const uid = () => {
