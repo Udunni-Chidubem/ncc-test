@@ -1,5 +1,5 @@
-<div class="main-content">
-  <div class=" container table-responsives table_t_info">
+<div class= "view-sheet-body">
+  <div class="table-responsives table_t_info">
 
     <table class="table t_info  table-bordered">
       <thead class="t_info_head ">
@@ -24,11 +24,27 @@
           <td scope="row">{{@index}}</td>
           <td>{{customer_name}}</td>
           <td>{{customer_number}}</td>
-          <td>{{product_name}}</td>
-          <td>{{product_variant}}</td>
-          <td>{{quantity}}</td>
-          <td>{{size}}</td>
-          <td>{{product_cost}}</td>
+
+          {{#cancatArray product_name}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray product_variant}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray quantity}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+          
+          {{#cancatArray size}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray product_cost}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+          
           <td>{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}</td>
           <td>{{State.name}}</td>
           <td>{{LGA.name}}</td>

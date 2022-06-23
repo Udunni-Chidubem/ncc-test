@@ -189,6 +189,13 @@ $(document).ready(function(){
 });
 
 
+$(document).ready(function() {
+  $('#all-sheet-table').DataTable({
+    "aLengthMenu": [5, 10, 25, 50, 100 ],
+    "orders": [[1, "asc"]]
+  });
+});
+
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");
 let sidebarBtn2 = document.querySelector(".side-bi-arrow-left-circle-fill");
