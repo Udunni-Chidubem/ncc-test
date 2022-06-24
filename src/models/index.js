@@ -32,7 +32,6 @@ let db = {};
         })
         .forEach((file) => {    
             let model = db.rest.import(path.join(__dirname, file))
-          //   console.log(model)
             db[model.name] = model;
         })
 

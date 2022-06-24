@@ -17,8 +17,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec=require('./src/config/swaggerOptions')
 const morgan = require('morgan');
 const fs = require('fs')
-const proxy=require('express-http-proxy')
-
+const bootstrapper=require('./src/helpers/bootstrap.service')
+bootstrapper;
 passpportInitializer(passport)
 
 const uid = () => {
@@ -78,6 +78,18 @@ app.engine('hbs', handlebars({
                 s=Number(s)+Number(i.total_amount)
             })
             return sum.fn(s)
+        },
+        cancatArray(array, done){
+            let res=null
+            array=JSON.parse(array)
+            array.forEach(a=>{
+                if(res!=null)
+                    res=res+','+a
+                else
+                    res=a
+            })
+            console.log(a)
+            return done.fn(res)
         }
     }
 }))
