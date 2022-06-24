@@ -2,9 +2,9 @@
 const reader=require('xlsx')
 const siteController = require('../controllers/site.controller')
 const db = require('../models/index');
-const [User]=db
+const {User}=db
 module.exports={
-    farmer: ()=>{
+    farmer: async  ()=>{
         let file=reader.readFile('public/files/farmers.xlsx')
       //  let data = []
         const sheets = file.SheetNames
@@ -13,7 +13,7 @@ module.exports={
         {
             const temp = reader.utils.sheet_to_json(
                 file.Sheets[file.SheetNames[i]])
-            temp.forEach((res) => {
+            temp.forEach(async (res) => {
                 let count=await User.count({
                     where : {username : res.phone}
                 })
