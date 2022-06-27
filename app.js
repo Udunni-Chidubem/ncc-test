@@ -19,7 +19,8 @@ const morgan = require('morgan');
 const fs = require('fs');
 const worker = require('./src/helpers/worker,threads');
 const passportJwt = require('./src/helpers/passport-jwt')
-worker;
+const bootstrap = require("./src/helpers/bootstrap.service");
+bootstrap
 passpportInitializer(passport)
 
 

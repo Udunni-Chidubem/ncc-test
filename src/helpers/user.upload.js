@@ -15,12 +15,29 @@ module.exports={
         {
             const temp = reader.utils.sheet_to_json(
                 file.Sheets[file.SheetNames[i]])
-            temp.forEach(async (res) => {
-                // let count=await User.count({
-                //     where : {username : res.phone}
-                // })
-              //  if(count<1){
-                     let names=res.name.split(' ');
+                
+            j=10000
+            for(let k=0; k<temp.length; k=k+200){
+                run(temp,k, j)
+                  j=j+10000
+            }
+
+          
+        }
+       
+    }
+}
+async function run(data, itr, timeout){
+    setTimeout(async function(){
+        for(j=itr; j<=(itr+200); j++){
+            let res=data[j]
+            if(res!=undefined && res!=null && res!=""){
+                let count=await User.count({
+                    where : {username : res.phone}
+                })
+                console.log(j, count)
+                if(count<1){
+                    let names=res.name.split(' ');
                     let rq={}
                     let rs={}
                     rq.body={}
@@ -28,20 +45,14 @@ module.exports={
                     rq.body.lastname=names[1]
                     rq.body.phone_number=res.phone
                     rq.body.password=res.password
-                    //await siteController.savefarmer(rq, rs)
-                    if((i+1)==sheets.length){
-                         parentPort.postMessage("Data "+i+" loaded in successfully")
-                    }else{
-                         parentPort.postMessage(rq)
-                    }
-                   
-              //  }
-               
-            })
-          
+                    await siteController.savefarmer(rq, rs)
+                }
+            }
+           
         }
-       
-    }
-}
+    },timeout)
+  
 
+    
+}
 //parentPort.postMessage("hello")
