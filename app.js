@@ -17,8 +17,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerSpec=require('./src/config/swaggerOptions')
 const morgan = require('morgan');
 const fs = require('fs')
-const proxy=require('express-http-proxy')
-
+const bootstrapper=require('./src/helpers/bootstrap.service')
 passpportInitializer(passport)
 
 const uid = () => {
@@ -78,6 +77,18 @@ app.engine('hbs', handlebars({
                 s=Number(s)+Number(i.total_amount)
             })
             return sum.fn(s)
+        },
+        cancatArray(array, done){
+            let res=null
+            array=JSON.parse(array)
+            array.forEach(a=>{
+                if(res!=null)
+                    res=res+','+a
+                else
+                    res=a
+            })
+            console.log(a)
+            return done.fn(res)
         }
     }
 }))
@@ -164,3 +175,4 @@ app.use('/robots.txt', function (req, res, next) {
 // const value = random.integer(1, 1000000);
 // console.log(value)
  seedAdminData()
+ bootstrapper;
