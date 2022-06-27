@@ -1,7 +1,9 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, 
+    States, Product, Wallet, TransactionLog, TransactionCarts, 
+    Cart, Farmer, Banks, Salesheets } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const bcrypt = require('bcrypt');
@@ -363,4 +365,67 @@ module.exports = {
             where : {id : id}
         })
     },
+
+
+    sales_sheet_info: async (req,res,user_id) => {
+        let transaction =await db.rest.transaction()
+        let qty = [], p_cost = [], size = [], p_name = [], p_variant = []
+        try{
+            if (!Array.isArray(req.body.product_cost)) {
+                p_cost.push(req.body.product_cost)
+                size.push(req.body.size)
+                qty.push(req.body.quantity)
+                p_variant.push(req.body.product_variant)
+                p_name.push(req.body.product_name)
+            } else {
+                p_cost = req.body.product_cost
+                size = req.body.size
+                qty = req.body.quantity
+                p_variant = req.body.product_variant
+                p_name = req.body.product_name 
+            }
+            await Salesheets.create({
+            community : req.body.community,
+            lg_id : req.body.lg_id,
+            state_id : req.body.state_id,
+            sale_date : req.body.sale_date,
+            customer_name : req.body.customer_name,
+            customer_number : req.body.customer_number,
+            product_name : p_name,
+            product_variant :p_variant,
+            size : size,
+            product_cost : p_cost,
+            quantity : qty,
+            user_id : user_id
+        },
+         {transaction : transaction});
+        await transaction.commit();
+        }catch(e){
+            console.log(e)
+            transaction.rollback()
+            return e
+        }
+    },
+
+    saleSheets : async (user_id) => {
+
+        let printSheet = await Salesheets.findAll(
+            {
+                include : [
+                    {
+                        model : States,
+                        attributes : ['name']
+                    },
+                    {
+                        model : LGAs,
+                        attributes : ['name']
+                    }
+                ],
+                where : {
+                    user_id : user_id
+                }
+            }
+        )
+        return JSON.parse(JSON.stringify(printSheet))
+    }
 }

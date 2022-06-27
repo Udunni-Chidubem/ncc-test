@@ -93,13 +93,15 @@
                                     <h4 class="deactivate-texts">Please confirm that you are about to deactivate your
                                         account</h4>
                                     <div class="text-center m-5 modal-grid-btns">
-                                        <button type="button"
-                                            onclick="window.location.href=window.location.origin+'/seed-company/settings/deactivate/{{company.user_id}}/2'"
-                                            class="btn btn-danger yes-btn"> Confirm</button>
+
                                         <button type="button" class=" btn no-btn close" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             Never Mind!
                                         </button>
+                                        <button type="button"
+                                            onclick="window.location.href=window.location.origin+'/seed-company/settings/deactivate/{{company.user_id}}/2'"
+                                            class="btn btn-danger yes-btn"> Confirm</button>
+                                      
                                     </div>
                                 </div>
 
@@ -210,22 +212,30 @@
             document.querySelector('#btn_update_password').setAttribute('disabled', true);
         }
         else {
-            if (document.getElementById('newpassword').value.length < 6) {
+            if (document.getElementById('newpassword').value == '') {
                 document.querySelector('#btn_update_password').removeAttribute('enabled');
                 document.querySelector('#btn_update_password').setAttribute('disabled', true);
             }
             else {
-                if (document.getElementById('newpassword').value ==
-                    document.getElementById('confirmpassword').value) {
-                    document.getElementById('message').style.color = 'green';
-                    document.getElementById('message').innerHTML = 'Password matching';
-                    document.querySelector('#btn_update_password').removeAttribute('disabled');
-                    document.querySelector('#btn_update_password').setAttribute('enabled', true);
-                } else {
+                if (document.getElementById('newpassword').value.length < 6) {
                     document.getElementById('message').style.color = 'red';
-                    document.getElementById('message').innerHTML = 'Password not matching';
+                    document.getElementById('message').innerHTML = 'Password cannot be less than 6';
                     document.querySelector('#btn_update_password').removeAttribute('enabled');
                     document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                }
+                else {
+                    if (document.getElementById('newpassword').value ==
+                        document.getElementById('confirmpassword').value) {
+                        document.getElementById('message').style.color = 'green';
+                        document.getElementById('message').innerHTML = 'Password matching';
+                        document.querySelector('#btn_update_password').removeAttribute('disabled');
+                        document.querySelector('#btn_update_password').setAttribute('enabled', true);
+                    } else {
+                        document.getElementById('message').style.color = 'red';
+                        document.getElementById('message').innerHTML = 'Password not matching';
+                        document.querySelector('#btn_update_password').removeAttribute('enabled');
+                        document.querySelector('#btn_update_password').setAttribute('disabled', true);
+                    }
                 }
             }
         }
@@ -277,5 +287,6 @@
             showBtn.style.display = "none";
         }
     }
+
 
 </script>
