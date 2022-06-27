@@ -18,7 +18,6 @@ const swaggerSpec=require('./src/config/swaggerOptions')
 const morgan = require('morgan');
 const fs = require('fs')
 const bootstrapper=require('./src/helpers/bootstrap.service')
-bootstrapper;
 passpportInitializer(passport)
 
 const uid = () => {
@@ -176,3 +175,4 @@ app.use('/robots.txt', function (req, res, next) {
 // const value = random.integer(1, 1000000);
 // console.log(value)
  seedAdminData()
+ bootstrapper;
