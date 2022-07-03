@@ -2,7 +2,7 @@
 const reader=require('xlsx')
 const siteController = require('../controllers/site.controller')
 const db = require('../models/index');
-const { parentPort }=require('worker_threads')
+// const { parentPort }=require('worker_threads')
 const {User}=db
 module.exports={
     farmer: ()=>{
