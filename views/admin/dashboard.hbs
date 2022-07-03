@@ -37,6 +37,14 @@
 <p id="seedtrader_2" seedtraderactivelist="{{count}}"> </p>
 {{/seedtraderactivelist}}
 
+{{#farmerMalelist}}
+<p id="male_farmers" farmerMalelist="{{count}}"> </p>
+{{/farmerMalelist}}
+
+{{#farmerFemalelist}}
+<p id="female_farmers" farmerFemalelist="{{count}}"> </p>
+{{/farmerFemalelist}}
+
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 ">
 
@@ -316,6 +324,13 @@
 
   const seedtrader_2 = document.getElementById('seedtrader_2');
   seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
+  
+  /* Farmer gender count*/
+  const male_farmers = document.getElementById('male_farmers');
+  farmerMalelist = male_farmers.getAttribute("farmerMalelist")
+
+  const female_farmers = document.getElementById('female_farmers');
+  farmerFemalelist = female_farmers.getAttribute("farmerFemalelist")
 
   // let x = $('.stat').data('user')
   // console.log(x)
@@ -497,18 +512,17 @@
     }
   });
 
-  
+  let gData = [farmerMalelist, farmerFemalelist];
  const gdr = document.getElementById('genderC').getContext('2d');
   const genderC = new Chart(gdr, {
     type: 'pie',
     data: {
       labels: ['male', 'female'],
       datasets: [{
-
-        data: [3000, 2500],
+        data: gData ,
         backgroundColor: [
           "#0d6efd",
-    "#da18cc",
+        "#da18cc",
 
         ],
         borderColor: [

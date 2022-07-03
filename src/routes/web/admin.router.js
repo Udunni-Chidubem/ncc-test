@@ -19,6 +19,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let seedtraderCount = await adminController.getSeedTraderCount(req, res)
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
+    let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
 
     console.log(user_role.Role.role_name)
 
@@ -40,7 +41,9 @@ adminRouter.get('/dashboard', async (req, res)=>{
         activeProduct,
         inactiveProduct,
         user_status: JSON.stringify(user_status),
-        user_role: user_role.Role.role_name
+        user_role: user_role.Role.role_name,
+        farmerMalelist, 
+        farmerFemalelist
     })
 });
 
