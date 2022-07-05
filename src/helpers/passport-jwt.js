@@ -1,23 +1,39 @@
-const JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
-const opts = {}
-const { User, Farmer, SeedTrader, UserRole, Role} = require('../models')
-const passport = require('passport')
+// auth.js
 
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret123';
+var passportJWT = require("passport-jwt");
+const db=require('../models/index');
+const {User}=db;
+var ExtractJwt = passportJWT.ExtractJwt;
+var Strategy = passportJWT.Strategy;
+var params = {
+  secretOrKey: process.env.secretOrKey,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken("jwt")
+};
 
-passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    console.log(jwt_payload)
-    User.findOne({ id: jwt_payload.sub }, function (err, user) {
-        if (err) {
-            return done(err, false);
-        }
-        if (user) {
-            return done(null, user);
-        } else {
-            return done(null, false);
-            // or you could create a new account
-        }
+module.exports = function(passport) {
+    var strategy = new Strategy(params, function(payload, done) {
+        if(payload.expire <= Date.now())
+            return done(new Error("TokenExpired"), null);
+
+        User.findOne({
+            where : {id : payload.sub}
+        }).then((user)=>{
+            if(user.status == 2)
+                return done(new Error("AccountNotActive"), null);
+
+            if(user.id)
+                return done(null, user);
+            
+            return done(new Error("UserNotFound"), null);
+        });
     });
-}));
+    passport.use(strategy);
+    return {
+        initialize: function() {
+        return passport.initialize();
+        },
+        authenticate: function() {
+        return passport.authenticate("jwt", {session : false});
+        }
+    };
+};

@@ -1151,12 +1151,28 @@ color: #818E9B;
    background: #FB8200;
  }
  
+ .sp_female {
+   position: absolute;
+   width: 12px;
+   height: 12px;
+   border-radius: 12px;
+   background: #da18cc;
+ }
+ 
  .sp_un_account {
    position: absolute;
    width: 12px;
    height: 12px;
    border-radius: 12px;
    background: #7B61FF;
+ }
+
+ .sp_male {
+   position: absolute;
+   width: 12px;
+   height: 12px;
+   border-radius: 12px;
+   background: #0d6efd;
  }
 
  .hub {

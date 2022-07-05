@@ -1,7 +1,9 @@
 require('dotenv').config()
 const { Op, QueryTypes } = require("sequelize");
 const db = require('../models')
-const { User, Orders, SeedCompany, DeliveryInformation, LGAs, States, Product, Wallet, TransactionLog, TransactionCarts, Cart, Farmer, Banks, Salesheets } = db
+const { User, Orders, SeedCompany, DeliveryInformation, LGAs, 
+    States, Product, Wallet, TransactionLog, TransactionCarts, 
+    Cart, Farmer, Banks, Salesheets } = db
 const utils = require('../helpers/utils');
 const { getPagingData, getPagination } = require('../helpers/pagination');
 const bcrypt = require('bcrypt');
@@ -382,7 +384,7 @@ module.exports = {
                 p_variant = req.body.product_variant
                 p_name = req.body.product_name 
             }
-        await Salesheets.create({
+            await Salesheets.create({
             community : req.body.community,
             lg_id : req.body.lg_id,
             state_id : req.body.state_id,
@@ -403,5 +405,27 @@ module.exports = {
             transaction.rollback()
             return e
         }
-            },
+    },
+
+    saleSheets : async (user_id) => {
+
+        let printSheet = await Salesheets.findAll(
+            {
+                include : [
+                    {
+                        model : States,
+                        attributes : ['name']
+                    },
+                    {
+                        model : LGAs,
+                        attributes : ['name']
+                    }
+                ],
+                where : {
+                    user_id : user_id
+                }
+            }
+        )
+        return JSON.parse(JSON.stringify(printSheet))
+    }
 }

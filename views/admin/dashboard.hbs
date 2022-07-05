@@ -205,9 +205,54 @@
 </div>
 
 
+<div class=" row chart_">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>Farmer</h5>
+      </div>
 
+      <div class="row chart_">
+          <div class="col-3">
+    <div class="card shadow card_home c_h pl-0 mb-2 ">
+      <div class="card-body">
 
-<div class="row chart_">
+          <div >
+            <canvas id="genderC" style="width:100%;max-width:600px"></canvas>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-3">
+    <div class="card shadow card_home c_h pl-0 mb-2 ">
+      <div class="card-body">
+          <div>
+            <canvas id="locationL" style="width:100%;"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card shadow card_home c_h pl-0 mb-2 ">
+      <div class="card-body">
+
+          <div>
+            <canvas id="medium" style="width:100%;"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card row chart_">
+  <div class="card-header">
+        <h5>Seed Company</h5>
+  </div>
   <div class="col-4">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
@@ -229,6 +274,12 @@
     </div>
   </div>
 
+</div>
+
+
+<div class="row chart_">
+  
+  
 </div>
 {{!-- <div class="stat" data-user="{{user_status}}">
 
@@ -416,6 +467,150 @@
         display: true,
         text: "Total Products"
       }
+    }
+  });
+
+  
+ const gdr = document.getElementById('genderC').getContext('2d');
+  const genderC = new Chart(gdr, {
+    type: 'bar',
+    data: {
+      labels: ['male', 'female'],
+      datasets: [{
+
+        data: [3000, 2500],
+        backgroundColor: [
+          '#F99746',
+          '#F99746',
+
+        ],
+        borderColor: [
+          'white',
+          'white',
+
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  
+  const lcn = document.getElementById('locationL').getContext('2d');
+  const locationL = new Chart(lcn, {
+    type: 'bar',
+    data: {
+      labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
+      datasets: [{
+
+        data: [1302, 2500,789,213],
+        backgroundColor: [
+           "#5DCD6D",
+    "#E9E9E9",
+    "#0d6efd",
+    "#da18cc",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  
+  
+  var xmediumValues = ["Call", "SMS", "SM", "Others"];
+  var ymediumValues = [109  , 120, 123, 123];
+  var mediumbarColors = [
+    "#5DCD6D",
+    "#E9E9E9",
+    "#0d6efd",
+    "#da18cc",
+
+  ];
+
+  new Chart("medium", {
+    type: "bar",
+    data: {
+      labels: xmediumValues,
+      datasets: [{
+        backgroundColor: mediumbarColors,
+        data: ymediumValues
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Medium"
+      },
+      scales: {
+        ymediumValues: {
+          beginAtZero: true
+        }
+      }
+
+    }
+  });
+  
+  var xmediumValues = ["Call", "SMS", "SM", "Others"];
+  var ymediumValues = [109  , 120, 123, 123];
+  var mediumbarColors = [
+    "#5DCD6D",
+    "#E9E9E9",
+    "#0d6efd",
+    "#da18cc",
+
+  ];
+
+  new Chart("medium", {
+    type: "bar",
+    data: {
+      labels: xmediumValues,
+      datasets: [{
+        backgroundColor: mediumbarColors,
+        data: ymediumValues
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Source"
+      },
+      scales: {
+        ymediumValues: {
+          beginAtZero: true
+        }
+      }
+
     }
   });
 </script>

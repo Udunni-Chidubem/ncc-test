@@ -481,6 +481,27 @@ console.log(req.body)
     })
 })
 
+tradersRouter.get('/view-sheet', async (req, res)=>{
+    let user = await req.user
+    let trader = await utils.getTraderPofile(user)
+    let isVerified = await utils.isVerified(user)
+    let saleSheets= await tradersController.saleSheets(user.id);
+    console.log(saleSheets)
+    // let states = await States.findAll({
+    //     attributes : ['id', 'name'],
+    //     raw: true
+    // });
+    
+    res.render('seed_trader/view-sheet', {
+        layout : 'traders-dashboard',
+        title : 'View Sheet',
+        isVerified,
+        trader,
+        saleSheets
+        // states: states
+    })
+})
+
    
 
 module.exports=tradersRouter
