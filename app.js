@@ -14,12 +14,15 @@ const flash = require('express-flash')
 const NumeralHelper = require("handlebars.numeral");
 const passpportInitializer = require('./src/helpers/passport-config')
 const swaggerUi = require("swagger-ui-express");
-const swaggerSpec=require('./src/config/swaggerOptions')
+const swaggerSpec=require('./src/config/swaggerOptions');
 const morgan = require('morgan');
-const fs = require('fs')
-const proxy=require('express-http-proxy')
-
+const fs = require('fs');
+const worker = require('./src/helpers/worker,threads');
+const passportJwt = require('./src/helpers/passport-jwt')
+const bootstrap = require("./src/helpers/bootstrap.service");
+bootstrap
 passpportInitializer(passport)
+
 
 const uid = () => {
   return Date.now().toString(36) 
@@ -129,6 +132,7 @@ app.use(methodOveride('_method'))
 app.use(fileUpload({
     createParentPath: true
 }));
+
 var logDirectory = path.join(__dirname, "logs");
 // ensure log directory exists
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -154,7 +158,7 @@ app.use(
 
 const mainRoute = require('./src/routes/main.route')
 const { reverse } = require('dns')
-const { now } = require('moment')
+
 app.use('/', mainRoute)
 app.use(async function (req, res) {
     res.status(400).render('site/404', {
