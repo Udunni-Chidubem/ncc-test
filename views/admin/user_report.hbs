@@ -163,11 +163,10 @@
 <script>
 
 function exportData(){
-    /* Get the HTML data using Element by Id */
+    /* Get the HTML data using Table Id */
     var table = document.getElementById("product-table-all");
  
-    /* Declaring array variable */
-    var rows =[];
+        var rows =[];
  
       //iterate through rows of table
     for(var i=0,row; row = table.rows[i];i++){
@@ -178,6 +177,9 @@ function exportData(){
         column3 = row.cells[2].innerText;
         column4 = row.cells[3].innerText;
         column5 = row.cells[4].innerText;
+        column6 = row.cells[5].innerText;
+        column7 = row.cells[6].innerText;
+        column8 = row.cells[7].innerText;
  
     /* add a new records in the array */
         rows.push(
@@ -186,7 +188,10 @@ function exportData(){
                 column2,
                 column3,
                 column4,
-                column5
+                column5, 
+                column6,
+                column7,
+                column8
             ]
         );
  

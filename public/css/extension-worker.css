@@ -2,6 +2,7 @@
   margin: 8rem auto 0 auto;
   width: fit-content;
   background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   /* height: 573px; */
 }
 
@@ -9,13 +10,14 @@
   text-align: center;
   margin-top: 2rem;
   padding: 2rem;
+  text-transform: capitalize;
 }
 
 .form-grid {
-    display: grid;
-    grid-template-columns: auto;
-    grid-gap: 2rem;
-    place-items: center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 2rem;
+  place-items: center;
 
 }
 
@@ -30,13 +32,16 @@ select {
   color: #a5a5a5;
   margin: 10px;
 }
+
 ::placeholder {
   color: #a5a5a5;
 }
-.submitBtn-container{
-    width: 55%;
-    margin: auto;
+
+.submitBtn-container {
+  width: 55%;
+  margin: auto;
 }
+
 .extension-worker-btn {
   background: #049648;
   height: 54px;
@@ -49,27 +54,28 @@ select {
   margin: 3rem auto;
   text-align: center;
 }
-@media screen and (min-width:712px ) {
 
-    .extension-worker-btn {
-        background: #049648;
-        height: 54px;
-        width: 365px;
-        left: 179px;
-        top: 416px;
-        border-radius: 9px;
-        padding: 18px, 168px, 18px, 168px;
-        color: white;
-        margin: 3rem auto;
-        text-align: center;
-      }
+@media screen and (min-width:712px) {
 
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(2, auto);
-        grid-gap: 2rem;
-        place-items: center;
-        width: 85%;
-    
-    }
+  .extension-worker-btn {
+    background: #049648;
+    height: 54px;
+    width: 365px;
+    left: 179px;
+    top: 416px;
+    border-radius: 9px;
+    padding: 18px, 168px, 18px, 168px;
+    color: white;
+    margin: 3rem auto;
+    text-align: center;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 2rem;
+    place-items: center;
+    width: 85%;
+
+  }
 }

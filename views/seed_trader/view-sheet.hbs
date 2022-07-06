@@ -1,44 +1,58 @@
 <div class="view-sheet-body">
-  <div class="  table-responsives table_t_info">
-
-    <table class="table t_info  table-bordered">
+  <div class="tab-pane" style="padding: 8px;"  role="tabpanel">
+    <table class=" table t_info table-bordered table-striped table-responsive table-hover" id="all-sheet-table">
       <thead class="t_info_head ">
-        <tr class="">
-          <th scope="col">S/N</th>
-          <th scope="col">Name</th>
-          <th scope="col">Phone No.</th>
-          <th scope="col">Product Name</th>
-          <th scope="col">Variant</th>
-          <th scope="col">Qty</th>
-          <th scope="col">Size</th>
-          <th scope="col">Cost</th>
-          <th scope="col">Date</th>
-          <th scope="col">State</th>
-          <th scope="col">LGA</th>
-          <th scope="col">Community</th>
+        <tr>
+          <th>S/N</th>
+          <th>NAME</th>
+          <th>PHONE NO.</th>
+          <th>PRODUCT NAME</th>
+          <th>VARIANT</th>
+          <th>QTY</th>
+          <th>SIZE</th>
+          <th>COST</th>
+          <th>DATE</th>
+          <th>STATE</th>
+          <th>LGA</th>
+          <th>COMMUNITY</th>
         </tr>
       </thead>
+
       <tbody class="t_info_body">
-      {{#each saleSheets }}
+        {{#each saleSheets}}
         <tr>
-          <td scope="row">{{@index}}</td>
-          <td>{{customer_name}}</td>
-          <td>{{customer_number}}</td>
+          <td colspan="" rowspan="" headers="">{{increment @index}}</td>
+          <td colspan="" rowspan="" headers="">{{customer_name}}</td>
+          <td colspan="" rowspan="" headers="">{{customer_number}}</td>
+
           {{#cancatArray product_name}}
           <td>{{this}}</td>
           {{/cancatArray}}
-          <td>{{product_variant}}</td>
-          <td>{{quantity}}</td>
-          <td>{{size}}</td>
-          <td>{{product_cost}}</td>
-          <td>{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}</td>
-          <td>{{State.name}}</td>
-          <td>{{LGA.name}}</td>
-          <td>{{community}}</td>
 
+          {{#cancatArray product_variant}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray quantity}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray size}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          {{#cancatArray product_cost}}
+          <td>{{this}}</td>
+          {{/cancatArray}}
+
+          <td colspan="" rowspan="" headers="">{{dateFormat this.sale_date "dddd, MMMM Do YYYY"}}</td>
+          <td colspan="" rowspan="" headers="">{{State.name}}</td>
+          <td colspan="" rowspan="" headers="">{{LGA.name}}</td>
+          <td colspan="" rowspan="" headers="">{{community}}</td>
         </tr>
-       {{/each}}
-        
-
-
+        {{/each}}
       </tbody>
+    </table>
+  </div>
+  </div>
+  

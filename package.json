@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server",
-    "start": "env NODE_ENV=production node ./app",
-    "migrate": "npx sequelize-cli db:migrate --url mysql://root@127.0.0.1:3306/nigsims_db",
+    "start": "env NODE_ENV=development nodemon app",
+    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3306/db_nigsims",
     "migration": "npx sequelize-cli migration:create --name create_salesSheet_table",
     "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
     "seeder": "npx sequelize-cli seed:create --name my-seed-file",
-    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root@127.0.0.1:3306/nigsims_db",
+    "seed_local": "npx sequelize-cli db:seed:all --url mysql://root:@127.0.0.1:3306/db_nigsims",
     "seed-single": "npx sequelize-cli db:seed --seed <name of seed file>",
     "test_local": "NODE=test yarn jest --silent=false --verbose --forceExit --runInBand",
     "test2": "NODE=test jest --forceExit --runInBand"
@@ -47,7 +47,7 @@
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "mysql2": "^2.0.2",
-    "nodemon": "^2.0.16",
+    "nodemailer": "^6.7.5",
     "otp-generator": "^4.0.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -60,11 +60,11 @@
     "swagger-ui-express": "^4.4.0",
     "translate": "^1.4.1",
     "twilio": "^3.76.1",
-    "uniqid": "^5.4.0",
-    "xlsx": "^0.18.5"
+    "uniqid": "^5.4.0"
   },
   "devDependencies": {
     "handlebars-paginate": "^0.1.0",
-    "helmet": "^5.0.2"
+    "helmet": "^5.0.2",
+    "nodemon": "^2.0.16"
   }
 }
