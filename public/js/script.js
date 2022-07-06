@@ -6,19 +6,29 @@ for (var i = 0; i < arrow.length; i++) {
   });
 }
 
-
 let x = 0;
 let original = document.getElementById('duplicater');
 
 
 function duplicate() {
-    let clone = original.cloneNode(true);
-   // console.log(original.innerHTML)
-    clone.id = "duplicater" + ++x;
-    
-    original.after(clone);
+  let clone = original.cloneNode(true);
+  clone.id = "duplicater" + ++x;
+  original.after(clone);
 }
 
+function deleteDuplicate() {
+  let original = document.getElementById('duplicater' + x);
+  let clone = original.cloneNode(true);
+  original.remove(clone);
+
+ }
+
+// function deleteItem() {
+//   console.log(clicked)
+// }
+// deleteDuplicate.addEventListener('click', function(){
+//   this.parentElement('.duplicater').remove()
+// } )
 
 $(document).ready(function(){
 
