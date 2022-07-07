@@ -6,6 +6,20 @@ for (var i = 0; i < arrow.length; i++) {
   });
 }
 
+
+let x = 0;
+let original = document.getElementById('duplicater');
+
+
+function duplicate() {
+    let clone = original.cloneNode(true);
+   // console.log(original.innerHTML)
+    clone.id = "duplicater" + ++x;
+    
+    original.after(clone);
+}
+
+
 $(document).ready(function(){
 
   var quantity=0;
@@ -174,6 +188,13 @@ $(document).ready(function(){
     });
 });
 
+
+$(document).ready(function() {
+  $('#all-sheet-table').DataTable({
+    "aLengthMenu": [5, 10, 25, 50, 100 ],
+    "orders": [[1, "asc"]]
+  });
+});
 
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bi-arrow-left-circle-fill");

@@ -1,52 +1,73 @@
 <div class="card p-3">
     <div class="card-body">
         <h3>Sales Sheet</h3>
-        <form class="row g-3">
+        <form method="post" class="row g-3">
             <div class="col-md-6">
                 <label for="customerName" class="form-label salesLabel">Customer Name<span
                         class="asterisk">*</span></label>
-                <input type="text" class="form-control salesInput" id="customerName" name="customerName">
+                <input type="text" class="form-control salesInput" id="customer_name" name="customer_name">
             </div>
             <div class="col-md-6">
                 <label for="customerNumber" class="form-label salesLabel">Customer Number<span
                         class="asterisk">*</span></label>
-                <input type="number" class="form-control salesInput" id="customerNumber" name="customerNumber">
+                <input type="number" class="form-control salesInput" id="customer_number" name="customer_number">
             </div>
             <div class="horizontalLine"></div>
 
-            <div class="col-md-6">
-                <label for="productName" class="form-label salesLabel">Product Name<span
-                        class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" name="productName" id="productName" required>
-                    <option value="">Select Product Name</option>
-                    <option value="Maize">Maize</option>
-                    <option value="Rice">Rice</option>
-                    <option value="Groundnut">Groundnut</option>
-                    <option value="Cowpea">Cowpea</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="productVariant" class="form-label salesLabel">Product Variant<span
-                        class="asterisk">*</span></label>
-                <input type="text" class="form-control salesInput" id="productVariant" name="productVariant">
-            </div>
-            <div></div>
+            <div id="duplicater" class="duplicater">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="productName" class="form-label salesLabel">Product Name<span
+                                class="asterisk">*</span></label>
+                        <select class="form-select salesSelect border-bottom" name="product_name" id="product_name"
+                            required>
+                            <option value="">Select Product Name</option>
+                            <option value="Maize">Maize</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Groundnut">Groundnut</option>
+                            <option value="Cowpea">Cowpea</option>
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label for="productVariant" class="form-label salesLabel">Product Variant<span
+                                class="asterisk">*</span></label>
+                        <input type="text" class="form-control salesInput" id="product_variant" name="product_variant">
+                    </div>
 
-            <div class="col-md-6">
-                <label for=">quantity" class="form-label salesLabel">Quantity(per kg)<span
-                        class="asterisk">*</span></label>
-                <input type="number" class="form-control salesInput" id="quantity" name="quantity">
+                </div>
+
+                <div class="row mb-5">
+
+                    <div class="col-4">
+                        <label for=">quantity" class="form-label salesLabel">Quantity<span
+                                class="asterisk">*</span></label>
+                        <input type="number" class="form-control salesInput" id="quantity" name="quantity">
+                    </div>
+                    <div class="col-4">
+                        <label for="productCost" class="form-label salesLabel">Size in (kg)<span
+                                class="asterisk">*</span></label>
+                        <input type="number" class="form-control salesInput" id="size" name="size">
+                    </div>
+                    <div class="col-4">
+                        <label for="productCost" class="form-label salesLabel">Product Cost<span
+                                class="asterisk">*</span></label>
+                        <input type="number" class="form-control salesInput" id="product_cost" name="product_cost">
+                    </div>
+                </div>
+                {{!-- <button>Delete</button> --}}
+                <hr style="border-bottom:2px solid #ccc ;"/>
+
             </div>
-            <div class="col-md-6">
-                <label for="productCost" class="form-label salesLabel">Product Cost<span
-                        class="asterisk">*</span></label>
-                <input type="number" class="form-control salesInput" id="productCost" name="productCost">
+
+            <div class="col-12 text-end">
+                <button id="addItem" type="button" class="btn btn-success salesButton" onclick="duplicate()">Add Item</button>
             </div>
+
             <div class="horizontalLine"></div>
 
             <div class="col-md-6">
                 <label for="saleDate" class="form-label salesLabel">Date of Sale<span class="asterisk">*</span></label>
-                <input type="date" class="form-control salesInput" id="saleDate" name="saleDate">
+                <input type="date" class="form-control salesInput" id="sale_Date" name="sale_date">
             </div>
             <div class="col-md-6">
                 <label for="state" class="form-label salesLabel">State<span class="asterisk">*</span></label>
@@ -58,10 +79,10 @@
                     {{/each}}
                 </select>
             </div>
-            <div></div>
             <div class="col-md-6">
                 <label for="lga" class="form-label salesLabel">LGA<span class="asterisk">*</span></label>
-                <select class="form-select salesSelect border-bottom" data-lga="{{ company.lg_id }}" name="lg_id" id="lgas" required>
+                <select class="form-select salesSelect border-bottom" data-lga="{{ company.lg_id }}" name="lg_id"
+                    id="lgas" required>
                     <option value="">Select LGA</option>
                 </select>
             </div>
@@ -79,61 +100,63 @@
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
- $(document).ready(function(){
+    $(document).ready(function () {
 
-      let lga = $('#lgas').data('lga')
-      
-
+        let lga = $('#lgas').data('lga')
 
 
-      let state = $('#state').data('state')
+
+
+        let state = $('#state').data('state')
 
         const getDefaultLgas = (state_id) => {
-            let url =  window.location.origin+'/api/base/lgas/'+ state_id
-            fetch(url).then(r=>r.json())
-            .then(r => {
-                let selected,Options
-                r.forEach(e=>{
-                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                })
-                document.querySelector('#lgas').innerHTML= Options
+            let url = window.location.origin + '/api/base/lgas/' + state_id
+            fetch(url).then(r => r.json())
+                .then(r => {
+                    let selected, Options
+                    r.forEach(e => {
+                        Options += '<option value="' + e.id + '">' + e.name + '</option>'
+                    })
+                    document.querySelector('#lgas').innerHTML = Options
 
-                $('#lgas').val(lga)
-            }
-            ).catch(e=>{
-                console.log(e)
-            })
+                    $('#lgas').val(lga)
+                }
+                ).catch(e => {
+                    console.log(e)
+                })
         }
 
 
         //Get All LGAs based on selected value of the state
-        
-        if(state != null){
-          $('#state').val(state)
 
-          getDefaultLgas(state)
+        if (state != null) {
+            $('#state').val(state)
+
+            getDefaultLgas(state)
         }
 
 
-        document.querySelector('#state').addEventListener('change', function(){
-              let url =  window.location.origin+'/api/base/lgas/'+this.value
-              fetch(url).then(r=>r.json())
-              .then(r=>{
-                  let Options =  '<option value="">Select LGA</option>'
-                  r.forEach(e=>{
-                      Options+='<option value="'+e.id+'">'+e.name+'</option>'
-                  })
-                  document.querySelector('#lgas').innerHTML=Options
-              }
-              ).catch(e=>{
-                  //console.log(e)
-              })
-          })
+        document.querySelector('#state').addEventListener('change', function () {
+            let url = window.location.origin + '/api/base/lgas/' + this.value
+            fetch(url).then(r => r.json())
+                .then(r => {
+                    let Options = '<option value="">Select LGA</option>'
+                    r.forEach(e => {
+                        Options += '<option value="' + e.id + '">' + e.name + '</option>'
+                    })
+                    document.querySelector('#lgas').innerHTML = Options
+                }
+                ).catch(e => {
+                    //console.log(e)
+                })
+        })
 
-        
+
     })
 
 </script>

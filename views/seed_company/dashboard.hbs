@@ -42,7 +42,7 @@
                       <div class="p-3 border text-center  border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Fulfilled Orders</h5>
 
-                        <h1 class="c_d_s2_full "> {{fulfilled}} </h1>
+                        <h1 class="c_d_s2_full "> {{#if (eq fulfilled null)}}0{{else}}{{fulfilled}}{{/if}} </h1>
                         <a href="/seed-company/orders" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>
@@ -52,7 +52,7 @@
                       <div class="p-3 border text-center border-0 border-end  ">
                         <h5 class="c_d_s2 c__h">Unfufilled Orders</h5>
 
-                        <h1 class=" c_d_s2_unfull"> {{unfulfilled}} </h1>
+                        <h1 class=" c_d_s2_unfull"> {{#if (eq unfulfilled null)}}0{{else}}{{unfulfilled}}{{/if}}</h1>
                         <a href="/seed-company/orders" class="c_d_s2_link">
                           <h5>See Details</h5>
                         </a>

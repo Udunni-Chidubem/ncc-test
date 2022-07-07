@@ -15,22 +15,20 @@ companyRouter.get('/dashboard', async (req, res)=>{
     let balance = await companyController.getWallet(req, res)
     let productCount = await companyController.getProductCount(req, res)
     let totalsales = await companyController.getTotalSales(company.id)
-
     let isVerified = await utils.isVerified(user)
 
     let fulfilled=null
     let unfulfilled=null
     totalsales.forEach(totalSale=>{
-        if(totalSale.status==1){
+        if(totalSale.status<=3){
             unfulfilled =totalSale.count
-        }else if(totalSale.status==2){
+        }else if(totalSale.status==4){
             fulfilled=totalSale.count
         }
 
     })
 
     let total = fulfilled + unfulfilled
-   
 
     res.render('seed_company/dashboard', {
         layout : 'company-dashboard',
@@ -43,7 +41,6 @@ companyRouter.get('/dashboard', async (req, res)=>{
         fulfilled,
         unfulfilled,
         total
-
     })
 });
 
@@ -219,9 +216,55 @@ companyRouter.get('/sales-sheet', async (req, res)=>{
         states: states
     })
 })
+companyRouter.post('/sales-sheet', async (req, res)=>{
+    let user = await req.user
+    let user_id = user.id
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user)
+    let sales_sheet_info = await companyController.sales_sheet_info(req,res,user_id)
+
+    let states = await States.findAll({
+        attributes : ['id', 'name'],
+        raw: true
+    });
+    
+    res.render('seed_company/sales-sheet', {
+        layout : 'company-dashboard',
+        title : 'Sales Sheet',
+        isVerified,
+        company,
+        states: states
+    })
+})
 
 
 // sales sheet ends
+
+//view sale sheet starts
+
+companyRouter.get('/view-sheet', async (req, res)=>{
+    let user = await req.user
+    let company = await utils.getCompanyProfile(user)
+    let isVerified = await utils.isVerified(user)
+    let saleSheets= await companyController.saleSheets(user.id);
+    console.log(saleSheets)
+    // let states = await States.findAll({
+    //     attributes : ['id', 'name'],
+    //     raw: true
+    // });
+    
+    res.render('seed_company/view-sheet', {
+        layout : 'company-dashboard',
+        title : 'View Sheet',
+        isVerified,
+        company,
+        saleSheets
+        // states: states
+    })
+})
+
+//view sale sheet ends
+
 /*Product Routes Ends*/
 
 

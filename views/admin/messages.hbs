@@ -89,11 +89,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                        {{#if (eq this.Sender.UserRole.Role.role_name 'seed_trader')}}
+                        {{#if (eq Sender.UserRole.Role.role_name 'seed_trader')}}
                         <img src="{{#if Sender.SeedTrader.profile_pic}} /profile_pics/{{Sender.SeedTrader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">
-                        {{else if (this.Sender.UserRole.Role.role_name 'farmer')}}
+                        {{else if (eq this.Sender.UserRole.Role.role_name 'farmer')}}
                         <img src="{{#if Sender.Farmer.profile_pic}} /profile_pics/{{Sender.Farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
                             id="output" class=" mb-2 mx-auto d-block img_round message_profile"
                             alt="user profile image">

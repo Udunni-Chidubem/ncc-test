@@ -1,14 +1,11 @@
 <footer class="footer">
 <div class="footerGrid">
 <div class="container-5">
+  <form action="" method="post">
     <h2>Contact Us</h2>
     {{!-- <div id="formInstructions" class="small-text"><em>Fields marked with an
         asterisk (*) are required.</em></div> --}}
     <div class="w-form">
-      <form
-        method="post"
-        action=""
-      >
         <div class="contact-form-grid">
           <div><label
               for="First-Name"
@@ -36,7 +33,7 @@
               id="Last-Name"
               required=""
             /></div>
-          {{!-- <div><label
+           <div><label
               for="Email"
               id="contact-email"
             >Email</label><input
@@ -48,7 +45,7 @@
               placeholder=""
               id="Email"
               required=""
-            /></div> --}}
+            /></div> 
           <div><label
               for="Contact-Phone-Number"
               id="contact-phone"
@@ -68,27 +65,17 @@
               id="contact-message"
             >Message</label><textarea
               data-name="Message"
-              maxlength="5000"
+              maxlength="8000"
               id="Message"
               name="message"
               placeholder=""
               class="w-input"
             ></textarea></div>
-            {{!-- <input type="submit" class="btn btn-primary" value="Submit"> --}}
-        <input
-          type="submit"
-          value="Submit"
-          data-wait="Please wait..."
-          class="footer-btn"
-        />
-      </form>
-      {{!-- <div class="w-form-done">
-        <div>Thank you! Your submission has been received!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
-      </div> --}}
+            <div>
+            <input type="submit" class="btn btn-primary footer-btn" value="Submit">
+            </div>
     </div>
+    </form>
   </div>
   <div class="secondGrid">
     <div class="footer-logo">
