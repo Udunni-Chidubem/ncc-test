@@ -5,7 +5,7 @@ module.exports={
     forecast:async (state, local)=>{
         try{
             const cor_state=states.filter(e => {
-                return e.LocalizedName==state || e.EnglishName==state
+                return e.AdministrativeArea.LocalizedName==state || e.AdministrativeArea.EnglishName==state
             })
             let url=`${process.env.wheather_base_url}/locations/v1/cities/neighbors/${cor_state[0].Key}?apikey=${process.env.wheather_api_key}`
            
@@ -17,12 +17,12 @@ module.exports={
             let lg=lgs.value.find(l=>{
                 return l.accu_name==local || l.name==local
             })
-            
-            let nb=res.data.find(l=>{
+            let ng=res.data.find(l=>{
                 return l.LocalizedName==lg.accu_name || l.LocalizedName==lg.name || l.EnglishName==lg.accu_name || l.EnglishName==lg.name
             })
             
-            let url2=`${process.env.wheather_base_url}/forecasts/v1/daily/5day/${nb.Key}?apikey=${process.env.wheather_api_key}`
+            let url2=`${process.env.wheather_base_url}/forecasts/v1/daily/5day/${lg.Key}?apikey=${process.env.wheather_api_key}`
+           console.log(url2)
             let fres=await axios.get(url2)
             return fres.data
         }catch(e){

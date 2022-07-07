@@ -139,32 +139,261 @@
             },
             {
                 "name": "Yunusari",
-                "accu_name":"",
-                "Key": ""
+                "accu_name":"bukarti",
+                "Key": "256429"
             },
             {
                 "name": "Yusufari",
-                "accu_name":"",
-                "Key": ""
+                "accu_name":"Yusufari",
+                "Key": "256495"
             }
         ]
     },{
         "name" : "Borno",
         "value":[
             {
-                "name": "",
-                "accu_name": "",
-                "Key": ""
+                "name": "Abadam",
+                "accu_name": "Abadam",
+                "Key": "1-945427_1_AL"
+            },
+            {
+                "name": "Askira/Uba",
+                "accu_name": "Askira",
+                "Key": "252272"
+            },
+            {
+                "name": "Bama",
+                "accu_name": "Bama",
+                "Key": "252274"
+            },
+            {
+                "name": "Bayo",
+                "accu_name": "Wuyo",
+                "Key": "252349"
+            },
+            {
+                "name": "Biu",
+                "accu_name": "Biu",
+                "Key": "252276"
+            },
+            {
+                "name": "Chibok",
+                "accu_name": "Chibok",
+                "Key": "940414"
+            },
+            {
+                "name": "Damboa",
+                "accu_name": "Damboa",
+                "Key": "252279"
+            },
+            {
+                "name": "Dikwa",
+                "accu_name": "Dikwa",
+                "Key": "252280"
+            },
+            {
+                "name": "Gubio",
+                "accu_name": "Gubio",
+                "Key": "252282"
+            },
+            {
+                "name": "Guzamala",
+                "accu_name": "kingarwa",
+                "Key": "931913"
+            },
+            {
+                "name": "Gwoza",
+                "accu_name": "Gwoza",
+                "Key": "252284"
+            },
+            {
+                "name": "Hawul",
+                "accu_name": "Azare",
+                "Key": "942149"
+            },
+            {
+                "name": "Jere",
+                "accu_name": "Doili",
+                "Key": "252357"
+            },
+            {
+                "name": "Kaga",
+                "accu_name": "Kaga",
+                "Key": "932728"
+            },
+            {
+                "name": "Kala/Balge",
+                "accu_name": "Kala",
+                "Key": "252285"
+            },
+            {
+                "name": "Konduga",
+                "accu_name": "Konduga",
+                "Key": "252286"
+            },
+            {
+                "name": "Kukawa",
+                "accu_name": "Kukawa",
+                "Key": "252287"
+            },
+            {
+                "name": "Kwaya Kusar",
+                "accu_name": "Kwaya",
+                "Key": "930742"
+            },
+            {
+                "name": "Mafa",
+                "accu_name": "Mafa",
+                "Key": "929962"
+            },
+            {
+                "name": "Magumeri",
+                "accu_name": "Magumeri",
+                "Key": "252289"
+            },
+            {
+                "name": "Maiduguri",
+                "accu_name": "Maiduguri",
+                "Key": "252270"
+            },
+            {
+                "name": "Marte",
+                "accu_name": "Marte",
+                "Key": "252290"
+            },
+            {
+                "name": "Mobbar",
+                "accu_name": "Damasak",
+                "Key": "252278"
+            },
+            {
+                "name": "Monguno",
+                "accu_name": "Monguno",
+                "Key": "252292"
+            },
+            {
+                "name": "Ngala",
+                "accu_name": "Ngala",
+                "Key": "252293"
+            },
+            {
+                "name": "Nganzai",
+                "accu_name": "Gajiram",
+                "Key": "252281"
+            },
+            {
+                "name": "Shani",
+                "accu_name": "Shani",
+                "Key": "252295"
             }
-            
         ]
     },{
         "name" : "Adamawa",
         "value":[
             {
-                "name": "",
-                "accu_name": "",
-                "Key": ""
+                "name": "Demsa",
+                "accu_name": "Demsa",
+                "Key": "939614"
+            },
+            {
+                "name": "Fufure",
+                "accu_name": "Fufore",
+                "Key": "251738"
+            },
+            {
+                "name": "Ganye",
+                "accu_name": "Ganye",
+                "Key": "251714"
+            },
+            {
+                "name": "Gayuk",
+                "accu_name": "Guyok",
+                "Key": "1-935931_1_AL"
+            },
+            {
+                "name": "Gombi",
+                "accu_name": "Gombi",
+                "Key": "251716"
+            },
+            {
+                "name": "Grei",
+                "accu_name": "Girei",
+                "Key": "251715"
+            },
+            {
+                "name": "Hong",
+                "accu_name": "Hong",
+                "Key": "251741"
+            },
+            {
+                "name": "Jada",
+                "accu_name": "Jada",
+                "Key": "2944910"
+            },
+            {
+                "name": "Lamurde",
+                "accu_name": "Lamurde",
+                "Key": "930457"
+            },
+            {
+                "name": "Madagali",
+                "accu_name": "Madagali",
+                "Key": "251718"
+            },
+            {
+                "name": "Maiha",
+                "accu_name": "Maiha",
+                "Key": "929821"
+            },
+            {
+                "name": "Mayo Belwa",
+                "accu_name": "Mayo-Belwa",
+                "Key": "251720"
+            },
+            {
+                "name": "Michika",
+                "accu_name": "Michika",
+                "Key": "251722"
+            },
+            {
+                "name": "Mubi North",
+                "accu_name": "Muva",
+                "Key": "3341234"
+            },
+            {
+                "name": "Mubi South",
+                "accu_name": "Dirbishi",
+                "Key": "1985249"
+            },
+            {
+                "name": "Numan",
+                "accu_name": "Numan",
+                "Key": "251724"
+            },
+            {
+                "name": "Shelleng",
+                "accu_name": "Bodwai",
+                "Key": "941017"
+            },
+            {
+                "name": "Song",
+                "accu_name": "Song",
+                "Key": "320072"
+            },
+            {
+                "name": "Toungo",
+                "accu_name": "Toungo",
+                "Key": "251727"
+            },
+            {
+                "name": "Yola North ",
+                "accu_name": " Jimeta.",
+                "Key": "251717"
+            },
+            {
+                "name": "Yola South",
+                "accu_name": "Jambutu",
+                "Key": "933361"
             }
             
         ]
