@@ -651,6 +651,10 @@ module.exports = {
         return { messages };
     },
     getuserdata: async (role_id, to_userid) => {
+        console.log('to_userid')
+        console.log(to_userid)
+        console.log('role_id')
+        console.log(role_id)
         let messages;
         if (role_id == 'farmer') {
             messages = await User.findOne({
