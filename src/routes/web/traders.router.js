@@ -40,7 +40,7 @@ tradersRouter.get('/help', async (req, res)=>{
     
     const trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user, 'trader')
-    let user_id = trader.user_id
+    let user_id = await trader.user_id
     let updateMessagestatus = await tradersController.updateMessagestatus(req, user_id)
     let getmessages = await tradersController.getmessages(req,user_id)
    
@@ -57,7 +57,7 @@ tradersRouter.get('/messages', async (req, res)=>{
     let user = await req.user
     const trader = await utils.getTraderPofile(user)
     let isVerified = await utils.isVerified(user, 'trader')
-    let user_id = trader.user_id
+    let user_id = user.id
     let getmessages = await tradersController.getmessages(req,user_id)
     await tradersController.updateMessagestatus(req, user_id)
     res.json({ message: getmessages, user_id: user_id }).status(200)

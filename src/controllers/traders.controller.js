@@ -800,14 +800,14 @@ module.exports={
     },
     updateMessagestatus: async (req,user_id) => {
         try{
-             Message.update(
+            await Message.update(
                 {
                     status:'0'
                 }, 
                 { 
                     where : 
                     {
-                        to_user: user_id
+                        to_user : user_id
                     }
                 }
             );
