@@ -1227,3 +1227,6 @@ color: #818E9B;
   margin-top: 15px;
   margin-bottom: 0px;
 }
+.nav.nav-tabs.m-5.msg_nav {
+  cursor: pointer;
+}
