@@ -94,7 +94,7 @@
 </div>
 
 <div class="row chart_">
-  <div class="col-6">
+  {{!-- <div class="col-6">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
@@ -104,7 +104,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
 
   <div class="col-6">
@@ -145,10 +145,31 @@
       </div>
     </div>
   </div>
+<div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3">
+            <div class=" ">
+              <span class="sp_p_accout "></span>
+              <p class="p_accout pl-3"> Published </p>
+              <span class="sp_un_account"></span>
+              <p class="un_account  pl-3"> Unpublished</p>
+            </div>
+          </div>
+          <div class="col-9">
+            <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
+          </div>
 
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+ 
 
+{{!-- 
 <div class=" row chart_ mb-2" >
   <div class="col-12">
     <div class="card" style="height: 300px;">
@@ -285,7 +306,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 {{!-- <div class="stat" data-user="{{user_status}}">
 
@@ -335,75 +356,7 @@
   // let x = $('.stat').data('user')
   // console.log(x)
 
-  
-
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ["Call", "SMS", "SM", "Others"],
-      datasets: [  { type: 'bar',
-            label: 'Bar Dataset',
-            data: [1302, 1500,3200,213],
-             backgroundColor: [
-          "#5DCD6D",
-          "#BC445A",
-          "#0d6efd",
-          "#da18cc",
-        ],
-        borderColor: [
-          'white',
-          'white',
-          'white',
-          'white'
-        ]
-        }, {
-            type: 'line',
-            label: 'Line Dataset',
-            data: [1302, 1500,3200,213],
-            borderColor: 'rgb(75, 192, 192)',
-        order: 1
-        },{
-         barPercentage: 0.5,
-        barThickness: 100,
-        maxBarThickness: 200,
-        minBarLength: 2,
-        
-        backgroundColor: [
-          "#5DCD6D",
-          "#BC445A",
-          "#0d6efd",
-          "#da18cc",
-        ],
-        borderColor: [
-          'white',
-          'white',
-          'white',
-          'white'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: "Source of Data"
-      },
-      scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
-        }]
-    },
-      legend: {
-        display: false
-      }
-    }
-  });
-
-
-  var xactorValues = ["Active Account", "Inactive Account"];
+   var xactorValues = ["Active Account", "Inactive Account"];
   var yfarmerValues = [farmeractivelist, farmerinactivelist];
   // var yfarmerValues = [x.f_count[0].f_count, x.f_count[1].f_count];
   //var yfarmerValues = [33,99];
@@ -511,6 +464,74 @@
       }
     }
   });
+
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ["Call", "SMS", "SM", "Others"],
+      datasets: [  { type: 'bar',
+            label: 'Bar Dataset',
+            data: [1302, 1500,3200,213],
+             backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white'
+        ]
+        }, {
+            type: 'line',
+            label: 'Line Dataset',
+            data: [1302, 1500,3200,213],
+            borderColor: 'rgb(75, 192, 192)',
+        order: 1
+        },{
+         barPercentage: 0.5,
+        barThickness: 100,
+        maxBarThickness: 200,
+        minBarLength: 2,
+        
+        backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Source of Data"
+      },
+      scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+      legend: {
+        display: false
+      }
+    }
+  });
+
+
+ 
 
   let gData = [farmerMalelist, farmerFemalelist];
  const gdr = document.getElementById('genderC').getContext('2d');
