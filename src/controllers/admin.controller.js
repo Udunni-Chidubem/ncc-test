@@ -807,5 +807,31 @@ module.exports = {
         return transaction;
     },
 
+    getFarmerGender: async (req, res) => {
+        let sql =
+            "SELECT count(id) count from farmer f where f.gender = 'Male' ";
+        let farmerMalelist = await db.rest.query(sql, {
+            type: QueryTypes.SELECT,
+        });
+
+        let sql2 =
+            "SELECT count(id) as count from farmer f  where f.gender = 'Female' ";
+        let farmerFemalelist = await db.rest.query(sql2, {
+            type: QueryTypes.SELECT,
+        });
+
+        return {
+            farmerMalelist,
+            farmerFemalelist
+        };
+    },
+    getMaleSeedTraderCount: async (req, res) => {
+        let maleSeedtraderCount = await SeedTrader.count({
+            where: {gender: "Male"}
+        });
+
+        maleSeedtraderCount = maleSeedtraderCount;
+        return maleSeedtraderCount;
+    }
     
 };

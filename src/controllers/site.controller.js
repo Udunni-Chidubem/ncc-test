@@ -11,6 +11,9 @@ const Random = require("random-js").Random;
 const otp = require('../models/otp');
 const { default: axios } = require('axios');
 const jwt = require('jsonwebtoken')
+const nodeMailer = require('nodemailer');
+const contact = require('../models/contact');
+const { message } = require('./admin.controller');
 
 global.pass = 0;
 
@@ -85,22 +88,6 @@ module.exports = {
             errors : req.flash('errors')
         });
     },
-    // Forgot_Password: async (req,res) => {
-    //     res.render('site/forgot_password',{
-    //         form_banner:'Group.png',
-    //         title: 'Forgot-Password',
-    //         layout : 'form',
-    //         errors : req.flash('errors')
-    //     });
-    // },
-    // OTP: async (req,res) => {
-    //     res.render('site/otp',{
-    //         form_banner:'Group.png',
-    //         title: 'OTP',
-    //         layout : 'form',
-    //         errors : req.flash('errors')
-    //     });
-    // },
     NewPassword: async (req,res) => {
         res.render('site/new_password',{
             form_banner:'Group.png',
@@ -336,7 +323,67 @@ module.exports = {
     },
 
     saveContact:async (req, res)=>{
-        Contact.create(req.body)
+        let transaction=await db.rest.transaction()
+        // let transporter = nodeMailer.createTransport({
+        //     service: 'smtp.gmail.com',
+        //     secure: false, // true for 465, false for other ports
+        //     requireTLS: true,
+        //     auth: {
+        //       user: 'www.daniko15@gmail.com',
+        //       pass: 'Dansongs@21'
+        //     },
+        //   });
+
+        try{
+        const contact_instance = await Contact.create(
+            {
+                firstname : req.body.Firstname,
+                lastname : req.body.Lastname,
+                email: req.body.Email,
+                phone : req.body.phone,
+                message: req.body.message,
+
+           },
+
+        );
+
+        // let mailMessage = await transporter.sendMail({
+        //     // email = await Contact.findOne({
+        //     //     attributes :  ['email'],
+        //     //      where : {
+        //     //         email : req.body.email
+        //     //      },
+        //     //     }),
+        //     // message = await Contact.findOne({
+        //     //     attributes :  ['message'],
+        //     //     where : {
+        //     //         message : req.body.message
+        //     //     },
+        //     // }), 
+        //     // const email = req.body.Email,
+        //     // const message = req.body.message,
+
+          
+
+
+        //     from: 'www.daniko15@gmail.com',
+        //     to: email,
+        //     subject: 'CONTACT US -NIGSIMS',
+        //     text: message
+
+        //   })
+       
+          transaction.commit()
+          // transporter
+        return (contact_instance)
+
+        } catch(e){
+            transaction.rollback()
+            console.log(e)
+            return e
+        }
+        
+        // console.log("Message sent: %s", info.messageId);
     },
 
 
@@ -355,6 +402,7 @@ module.exports = {
          }
     },
 
+    
     
     otp: async (phone)=>{
         let transaction=await db.rest.transaction()

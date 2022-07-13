@@ -19,6 +19,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let seedtraderCount = await adminController.getSeedTraderCount(req, res)
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
+    let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
 
     console.log(user_role.Role.role_name)
 
@@ -40,7 +41,9 @@ adminRouter.get('/dashboard', async (req, res)=>{
         activeProduct,
         inactiveProduct,
         user_status: JSON.stringify(user_status),
-        user_role: user_role.Role.role_name
+        user_role: user_role.Role.role_name,
+        farmerMalelist, 
+        farmerFemalelist
     })
 });
 
@@ -113,7 +116,7 @@ adminRouter.get('/view_message/:user_id', async (req, res)=>{
     let {messages,to_userid} = await adminController.getmessages(req, res)
     let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
     let getuserrole = await adminController.getuserrole(req, to_userid)
-    let role_id = getuserrole.messages.UserRole.role_id
+    let role_id = getuserrole.messages.UserRole.Role.role_name
     let getuserdata = await adminController.getuserdata(role_id, to_userid)
     console.log(getuserdata)
 
@@ -139,7 +142,7 @@ adminRouter.get('/view_messages/:user_id', async (req, res)=>{
     let {messages,to_userid} = await adminController.getmessages(req, res)
     //let updateMessagestatus = await adminController.updateMessagestatus(req, to_userid)
     let getuserrole = await adminController.getuserrole(req, to_userid)
-    let role_id = getuserrole.messages.UserRole.role_id
+    let role_id = getuserrole.messages.UserRole.Role.role_name
    let getuserdata = await adminController.getuserdata(role_id, to_userid)
     let user_id = user.id
     res.json({ message: messages , role_id:role_id, getuserdata: getuserdata, to_userid:to_userid, user_id:user_id  }).status(200)

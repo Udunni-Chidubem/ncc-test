@@ -353,6 +353,7 @@ farmersRouter.get("/settings/deactivate/:id/:status", async (req, res)=>{
 farmersRouter.get('/forecast', async (req, res)=>{
     let user = await req.user
     let farmer = await utils.getFarmerProfile(user)
+    console.log(farmer)
     let forecast=await weatherController.forecast(farmer['State.name'], farmer['LGA.name'])
     if(forecast.Headline){
         res.send({statusCode:200, body : forecast});

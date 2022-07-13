@@ -37,6 +37,14 @@
 <p id="seedtrader_2" seedtraderactivelist="{{count}}"> </p>
 {{/seedtraderactivelist}}
 
+{{#farmerMalelist}}
+<p id="male_farmers" farmerMalelist="{{count}}"> </p>
+{{/farmerMalelist}}
+
+{{#farmerFemalelist}}
+<p id="female_farmers" farmerFemalelist="{{count}}"> </p>
+{{/farmerFemalelist}}
+
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 ">
 
@@ -86,86 +94,22 @@
 </div>
 
 <div class="row chart_">
-  <div class="col-12">
+  <div class="col-6">
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
-          <div class="col-12">
-            <canvas id="myChart" width="400" height="90" style="background:#fff;"></canvas>
+          <div class="col-12"> 
+            <canvas id="myChart" width="100%" height="30" style="background:#fff;"></canvas>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-  {{!--
-  <div class="col-4 col__4">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
-      <div class="card-body">
-        <h5 class="card-title c__t text-center">Licence Requests</h5>
-        <div class="row lic_req0 row-cols-2 row-cols-lg-2 g-2 g-lg-2">
-          <div class="col ">
-            <div class=" ">Date</div>
-          </div>
-          <div class="col ">
-            <div class=" float-end">Company Name</div>
-          </div>
-        </div>
-
-        <div class="row lic_req py-2 row-cols-2 row-cols-lg-2 g-2 g-lg-2">
-          <div class="col ">
-            <div class=" ">01/ 04/ 2022</div>
-          </div>
-          <div class="col ">
-            <div class="float-end ">Seed company name</div>
-          </div>
-        </div>
-
-        <div class="row lic_req py-2 row-cols-2 row-cols-lg-2 g-2 g-lg-2">
-          <div class="col ">
-            <div class=" ">01/ 04/ 2022</div>
-          </div>
-          <div class="col ">
-            <div class=" float-end">Seed company name</div>
-          </div>
-        </div>
-
-        <div class="row lic_req py-2 row-cols-2 row-cols-lg-2 g-2 g-lg-2">
-          <div class="col ">
-            <div class=" ">01/ 04/ 2022</div>
-          </div>
-          <div class="col ">
-            <div class="float-end ">Seed company name</div>
-          </div>
-        </div>
-
-        <div class="row lic_req0 row-cols-2 row-cols-lg-1 g-2 g-lg-2">
-          <div class="col text-center">
-            <div class="py-2  ">
-              <a href="#"> see more</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="row lic_req0 row-cols-2 row-cols-lg-1 g-2 g-lg-2">
-          <div class="col text-center">
-            <div class="py-2  ">
-              <form action="" method="post">
-                <button type="button" class="btn  ">Download Report</button>
-              </form>
-            </div>
-          </div>
-        </div> --}}
 
 
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row chart_">
-  <div class="col-12">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
+  <div class="col-6">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="
+    height: 230px;" >
       <div class="card-body">
         <div class="row ">
           <div class="col-12 ">
@@ -181,17 +125,17 @@
 
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="farmer" width="200" height="200"></canvas>
+                  <canvas id="farmer" width="400" height="400"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedcompany" width="200" height="200"></canvas>
+                  <canvas id="seedcompany" width="400" height="400"></canvas>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class=" ">
-                  <canvas id="seedtrader" width="200" height="200"></canvas>
+                  <canvas id="seedtrader" width="400" height="400"></canvas>
                 </div>
               </div>
             </div>
@@ -205,20 +149,19 @@
 </div>
 
 
-<div class=" row chart_">
+<div class=" row chart_ mb-2" >
   <div class="col-12">
-    <div class="card">
+    <div class="card" style="height: 300px;">
       <div class="card-header">
         <h5>Farmer</h5>
       </div>
 
-      <div class="row chart_">
+      <div class="card-body row chart_" >
           <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
       <div class="card-body">
-
           <div >
-            <canvas id="genderC" style="width:100%;max-width:600px"></canvas>
+            <canvas id="genderC" style="width:100%;max-width:600px height: 100;"></canvas>
           </div>
 
       </div>
@@ -226,20 +169,20 @@
   </div>
   
   <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
       <div class="card-body">
           <div>
-            <canvas id="locationL" style="width:100%;"></canvas>
+            <canvas id="locationL" style="width:100%; height: 100;"></canvas>
           </div>
       </div>
     </div>
   </div>
-  <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
+  <div class="col-6">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
       <div class="card-body">
 
           <div>
-            <canvas id="medium" style="width:100%;"></canvas>
+            <canvas id="ageRange" style="width:100%; height: 120%;"></canvas>
           </div>
       </div>
     </div>
@@ -249,12 +192,15 @@
   </div>
 </div>
 
-<div class="card row chart_">
-  <div class="card-header">
+<div class="row chart_ mb-2">
+  <div class="col-12">
+      <div class="card" style="height: 300px;">
+          <div class="card-header">
         <h5>Seed Company</h5>
   </div>
-  <div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 ">
+  <div class="row chart_">
+    <div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
       <div class="card-body">
         <div class="row">
           <div class="col-3">
@@ -273,14 +219,74 @@
       </div>
     </div>
   </div>
-
+  <div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;" >
+      <div class="card-body">
+          <div>
+            <canvas id="locationSC" style="width:100%; height: 100%"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;" >
+      <div class="card-body">
+          <div>
+            <canvas id="salesG" style="width:100%; height: 120%;"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+      </div>
+  </div>
 </div>
 
+<div class=" row chart_ mb-2" >
+  <div class="col-12">
+    <div class="card" style="height: 300px;">
+      <div class="card-header">
+        <h5>Seed Trader</h5>
+      </div>
 
-<div class="row chart_">
+      <div class="card-body row chart_" >
+          <div class="col-3">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
+      <div class="card-body">
+          <div >
+            <canvas id="genderST" style="width:100%;max-width:600px height: 100;"></canvas>
+          </div>
+
+      </div>
+    </div>
+  </div>
   
-  
+  <div class="col-3">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+      <div class="card-body">
+          <div>
+            <canvas id="locationST" style="width:100%; height: 100;"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+      <div class="card-body">
+
+          <div>
+            <canvas id="ageRangeST" style="width:100%; height: 120%;"></canvas>
+          </div>
+      </div>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 {{!-- <div class="stat" data-user="{{user_status}}">
 
 </div> --}}
@@ -318,44 +324,80 @@
 
   const seedtrader_2 = document.getElementById('seedtrader_2');
   seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
+  
+  /* Farmer gender count*/
+  const male_farmers = document.getElementById('male_farmers');
+  farmerMalelist = male_farmers.getAttribute("farmerMalelist")
+
+  const female_farmers = document.getElementById('female_farmers');
+  farmerFemalelist = female_farmers.getAttribute("farmerFemalelist")
 
   // let x = $('.stat').data('user')
   // console.log(x)
 
+  
 
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Jan', 'Feb', 'Mar', 'May'],
-      datasets: [{
-
-        label: 'Monthly',
-        data: [12, 64, 76, 676],
-        backgroundColor: [
-          '#F99746',
-          '#F99746',
-          '#F99746',
-          '#F99746',
-          '#F99746',
-          '#F99746'
+      labels: ["Call", "SMS", "SM", "Others"],
+      datasets: [  { type: 'bar',
+            label: 'Bar Dataset',
+            data: [1302, 1500,3200,213],
+             backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
         ],
         borderColor: [
           'white',
           'white',
           'white',
+          'white'
+        ]
+        }, {
+            type: 'line',
+            label: 'Line Dataset',
+            data: [1302, 1500,3200,213],
+            borderColor: 'rgb(75, 192, 192)',
+        order: 1
+        },{
+         barPercentage: 0.5,
+        barThickness: 100,
+        maxBarThickness: 200,
+        minBarLength: 2,
+        
+        backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
+        ],
+        borderColor: [
           'white',
           'white',
           'white',
+          'white'
         ],
         borderWidth: 1
       }]
     },
     options: {
+      title: {
+        display: true,
+        text: "Source of Data"
+      },
       scales: {
-        y: {
-          beginAtZero: true
-        }
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+      legend: {
+        display: false
       }
     }
   });
@@ -470,18 +512,17 @@
     }
   });
 
-  
+  let gData = [farmerMalelist, farmerFemalelist];
  const gdr = document.getElementById('genderC').getContext('2d');
   const genderC = new Chart(gdr, {
-    type: 'bar',
+    type: 'pie',
     data: {
       labels: ['male', 'female'],
       datasets: [{
-
-        data: [3000, 2500],
+        data: gData ,
         backgroundColor: [
-          '#F99746',
-          '#F99746',
+          "#0d6efd",
+        "#da18cc",
 
         ],
         borderColor: [
@@ -494,12 +535,7 @@
     },
     options: {
       legend: {
-        display: false
-      },
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+        display: true
       }
     }
   });
@@ -514,7 +550,7 @@
         data: [1302, 2500,789,213],
         backgroundColor: [
            "#5DCD6D",
-    "#E9E9E9",
+    "#BC445A",
     "#0d6efd",
     "#da18cc",
         ],
@@ -523,8 +559,7 @@
           'white',
           'white',
           'white',
-          'white',
-          'white',
+
         ],
         borderWidth: 1
       }]
@@ -537,28 +572,225 @@
         y: {
           beginAtZero: true
         }
+      },
+    }
+  });
+  
+  
+  const arn = document.getElementById('ageRange').getContext('2d');
+  const ageRange = new Chart(arn, {
+    type: 'bar',
+    data: {
+      labels: [" 0-18", "19-25", "25-40", "41-50", "50-60", "60 and above"],
+      
+      datasets: [{
+        axis: 'y',
+        data: [600,500, 1302, 250,789, 353],
+        backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
+          "#ff9e00",
+          "#44aabb",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+      title: {
+        display: true,
+        text: "Age Range"
+      }
+    }
+  });
+  
+  const gdrst = document.getElementById('genderST').getContext('2d');
+  const genderST = new Chart(gdrst, {
+    type: 'pie',
+    data: {
+      labels: ['male', 'female'],
+      datasets: [{
+
+        data: [3000, 2500],
+        backgroundColor: [
+          "#0d6efd",
+    "#da18cc",
+
+        ],
+        borderColor: [
+          'white',
+          'white',
+
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: true
+      }
+    }
+  });
+  
+  const lcnst = document.getElementById('locationST').getContext('2d');
+  const locationST = new Chart(lcnst, {
+    type: 'bar',
+    data: {
+      labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
+      datasets: [{
+
+        data: [1302, 2500,789,213],
+        backgroundColor: [
+           "#5DCD6D",
+    "#BC445A",
+    "#0d6efd",
+    "#da18cc",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white',
+
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+    }
+  });
+  
+  
+  const arnst = document.getElementById('ageRangeST').getContext('2d');
+  const ageRangeST = new Chart(arnst, {
+    type: 'bar',
+    data: {
+      labels: [" 0-18", "19-25", "25-40", "41-50", "50-60", "60 and above"],
+      
+      datasets: [{
+        axis: 'y',
+        data: [600,500, 1302, 250,789, 353],
+        backgroundColor: [
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
+          "#ff9e00",
+          "#44aabb",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+          'white',
+
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+      title: {
+        display: true,
+        text: "Age Range"
       }
     }
   });
   
   
-  var xmediumValues = ["Call", "SMS", "SM", "Others"];
-  var ymediumValues = [109  , 120, 123, 123];
-  var mediumbarColors = [
-    "#5DCD6D",
-    "#E9E9E9",
+
+   const lcnsc = document.getElementById('locationSC').getContext('2d');
+  const locationSC = new Chart(lcnsc, {
+    type: 'bar',
+    data: {
+      labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
+      datasets: [{
+
+        data: [31, 20,36,42],
+        backgroundColor: [
+           "#5DCD6D",
+    "#BC445A",
     "#0d6efd",
     "#da18cc",
+        ],
+        borderColor: [
+          'white',
+          'white',
+          'white',
+          'white',
 
-  ];
-
-  new Chart("medium", {
-    type: "bar",
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+      title: {
+        display: true,
+        text: "Location"
+      }
+    }
+  });
+  
+  
+  const sg = document.getElementById('salesG').getContext('2d');
+  const salesG = new Chart(sg, {
+    type: 'line',
     data: {
-      labels: xmediumValues,
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
       datasets: [{
-        backgroundColor: mediumbarColors,
-        data: ymediumValues
+        data: [10000, 22432, 154400, 653400, 460000, 1503230, 1056000],
+        fill: true,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
       }]
     },
     options: {
@@ -567,50 +799,9 @@
       },
       title: {
         display: true,
-        text: "Medium"
-      },
-      scales: {
-        ymediumValues: {
-          beginAtZero: true
-        }
+        text: "Sales"
       }
-
     }
   });
   
-  var xmediumValues = ["Call", "SMS", "SM", "Others"];
-  var ymediumValues = [109  , 120, 123, 123];
-  var mediumbarColors = [
-    "#5DCD6D",
-    "#E9E9E9",
-    "#0d6efd",
-    "#da18cc",
-
-  ];
-
-  new Chart("medium", {
-    type: "bar",
-    data: {
-      labels: xmediumValues,
-      datasets: [{
-        backgroundColor: mediumbarColors,
-        data: ymediumValues
-      }]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      title: {
-        display: true,
-        text: "Source"
-      },
-      scales: {
-        ymediumValues: {
-          beginAtZero: true
-        }
-      }
-
-    }
-  });
 </script>

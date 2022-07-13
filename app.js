@@ -26,7 +26,7 @@ passpportInitializer(passport)
 
 const uid = () => {
   return Date.now().toString(36) 
-  // Math.random().toString(36).substr(2);
+  // Math.random().toString(36).substr(2); 
 };
 
 // Usage. Example, id = khhry2hb7uip12rj2iu
@@ -85,13 +85,13 @@ app.engine('hbs', handlebars({
         cancatArray(array, done){
             let res=null
             array=JSON.parse(array)
-            array.forEach(a=>{
+            array.forEach(a => {
                 if(res!=null)
                     res=res+','+a
                 else
                     res=a
             })
-            console.log(a)
+            console.log(res)
             return done.fn(res)
         }
     }
@@ -167,7 +167,7 @@ app.use(async function (req, res) {
     })
 })
 
-const PORT = process.env.ACCESS_PORT || 5200
+const PORT = process.env.ACCESS_PORT || 5800
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })

@@ -8,10 +8,10 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-     return [
-      // queryInterface.renameColumn('delivery_information', 'createdAt', 'created_at'),
-      // queryInterface.renameColumn('delivery_information', 'updatedAt', 'updated_at')
-    ];
+     await queryInterface.changeColumn('seedtrader', 'bank_account_no', {
+      type : Sequelize.STRING,
+      allowNull : true
+    });
   },
 
   async down (queryInterface, Sequelize) {
