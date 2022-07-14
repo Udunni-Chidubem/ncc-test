@@ -15,6 +15,12 @@ const seedAdminData = async () => {
 				raw : true
 			}
 		);
+		let rraUser =await User.findOne(
+			{
+				where : {username : 'isusman@mercycorps.org'},
+				raw : true
+			}
+		);
 		let s = await SeedCompany.findAll({
 			attributes : ['user_id']
 		});
@@ -71,6 +77,8 @@ const seedAdminData = async () => {
 		}
 
 
+		
+			
 		if(user==null){
 			user = await User.create({
 				username: "admin",
@@ -96,6 +104,30 @@ const seedAdminData = async () => {
 				}
 			}
 		}
+		
+		if(rraUser==null){
+			rraUser = await User.create({
+				username: "isusman@mercycorps.org",
+				password : password,
+				status : 1
+			}, {transaction : transaction})
+
+			if(rraUser){
+				let r = await Role.findOne({
+					where : {role_name : 'rra'}
+				})
+				
+				if(!r){
+					await Role.create({
+						role_name : 'rra'
+					}, {transaction : transaction});
+				}
+				if(r) {
+					const rolee = UserRole.create({user_id : user.id, role_id : r.id})
+					console.log(rolee + 121)
+				}
+			}
+		}
 
 		let n = await Role.findOne({
 			where : {role_name : 'nasc'}
@@ -107,15 +139,7 @@ const seedAdminData = async () => {
 			}, {transaction : transaction});
 		}
 
-		let r = await Role.findOne({
-			where : {role_name : 'rra'}
-		})
 		
-		if(!r){
-			await Role.create({
-				role_name : 'rra'
-			}, {transaction : transaction});
-		}
 
 		let ns = await Role.findOne({
 			where : {role_name : 'nigsims'}
