@@ -113,18 +113,18 @@ const seedAdminData = async () => {
 			}, {transaction : transaction})
 
 			if(rraUser){
-				let r = await Role.findOne({
+				let rr = await Role.findOne({
 					where : {role_name : 'rra'}
 				})
 				
-				if(!r){
+				if(!rr){
 					await Role.create({
 						role_name : 'rra'
 					}, {transaction : transaction});
 				}
-				if(r) {
-					const rolee = UserRole.create({user_id : user.id, role_id : r.id})
-					console.log(rolee + 121)
+				if(rr) {
+					const roler = UserRole.create({user_id : rraUser.id, role_id : rr.id})
+					console.log(roler + 123)
 				}
 			}
 		}
