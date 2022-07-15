@@ -205,7 +205,7 @@
 									alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 									{{#if company.User.status}}
-										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
+										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
 										{{else}}
 										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
 									{{/if}}

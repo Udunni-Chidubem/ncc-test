@@ -181,6 +181,27 @@ adminRouter.get('/users', async (req, res)=>{
     })
 });
 
+adminRouter.get('/users/deactivated', async (req, res)=>{
+    let user = await req.user
+    let farmers=await adminController.getFarmers(req, res)
+    let traders = await adminController.getTraders(req, res)
+    let companies= await adminController.getCompanies(req, res)
+    let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+
+    res.render('admin/deactivated-users', {
+        layout : 'admin-dashboard',
+        title : 'User Management',
+        sub_title : 'Deactivated Users',
+        username : user.username,
+        isVerified,
+        farmers,
+        companies,
+        traders,
+        user_role: user_role.Role.role_name
+    })
+});
+
 adminRouter.get('/products/:id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
