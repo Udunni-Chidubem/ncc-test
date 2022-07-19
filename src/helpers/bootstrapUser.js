@@ -17,7 +17,7 @@ const seedAdminData = async () => {
 		);
 		let rraUser =await User.findOne(
 			{
-				where : {username : 'isusman@mercycorps.org'},
+				where : {username : 'kalufe@mercycorps.org'},
 				raw : true
 			}
 		);
