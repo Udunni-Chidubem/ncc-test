@@ -107,7 +107,7 @@ const seedAdminData = async () => {
 		
 		if(rraUser==null){
 			rraUser = await User.create({
-				username: "isusman@mercycorps.org",
+				username: "kalufe@mercycorps.org",
 				password : password,
 				status : 1
 			}, {transaction : transaction})
