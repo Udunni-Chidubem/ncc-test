@@ -81,14 +81,14 @@
           </a>
 
         </li>
-{{!-- 
+        {{!--
         <li>
           <a href="/seed-trader/sales-sheet">
             <i class='bx bx-shield-quarter'></i>
             <span class="link_name">Sales Sheet</span>
           </a>
         </li> --}}
-           <li class="nav-item has-submenu">
+        <li class="nav-item has-submenu">
           <a class="nav-link" href="#">
             <i class='bx bx-archive'></i>
             <span class="link_name">Sales Sheet</span>
@@ -475,6 +475,18 @@
           })
           .catch(error => console.log(error))
       })
+
+      function btn_dis_ena() {
+        let _message_ = $('#message').val()
+        if (_message_ == '') {
+          $('.send').prop('disabled', true);
+        }
+        else {
+          $('.send').prop('disabled', false);
+        }
+      }
+
+      setInterval(btn_dis_ena, 100)
 
       function getmessagescount() {
         let url = baseUrl + '/seed-trader/getmessagescount'

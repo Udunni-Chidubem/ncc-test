@@ -843,7 +843,7 @@ module.exports={
     updateMessagestatus: async (req,user_id) => {
 
         try {
-            let status = Message.update(
+            let status = await Message.update(
                 { status: "0" },
                 { where: { to_user: user_id } }
             );
