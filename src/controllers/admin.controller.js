@@ -832,6 +832,28 @@ module.exports = {
 
         maleSeedtraderCount = maleSeedtraderCount;
         return maleSeedtraderCount;
+    },
+
+    company_id: async (req,res) => {
+        let company_id = await SeedCompany.findOne({
+            where: {user_id: req.params.id}
+        })
+        company_id = JSON.parse(JSON.stringify(company_id))
+        return company_id;
+    },
+
+    ledger_info: async (req, res, company_id) => {
+        let ledger_info = await Orders.findAll({
+            where: {company_id: company_id},
+            include: [
+                {
+                    model: TransactionLog
+                }
+            ]
+        })
+
+        ledger_info = JSON.parse(JSON.stringify(ledger_info))
+        return ledger_info;
     }
     
 };

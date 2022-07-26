@@ -70,16 +70,20 @@
 						aria-labelledby="personal-tab">
 						<div class="admin-view-user">
 							<div class="profile-image-section">
-								<img src="{{#if farmer.profile_pic}} /profile_pics/{{farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
-									alt="user profile image">
+								<img src="{{#if farmer.profile_pic}} /profile_pics/{{farmer.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+									class="d-block img_round" alt="user profile image">
 								{{farmer.User.username}}
 
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
-									{{#if farmer.User.status}}
-										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-										{{else}}
-										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
-									{{/if}}
+								{{#if farmer.User.status}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'"
+									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								{{else}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'"
+									class="btn btn-success activate-btn"> Activate User</button>
+								{{/if}}
 								{{/if}}
 							</div>
 							<div class="profile-info-section">
@@ -201,14 +205,18 @@
 						aria-labelledby="business-tab">
 						<div class="admin-view-user">
 							<div class="profile-image-section">
-								<img src="{{#if company.profile_pic}} /profile_pics/{{company.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
-									alt="user profile image">
+								<img src="{{#if company.profile_pic}} /profile_pics/{{company.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+									class="d-block img_round" alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
-									{{#if company.User.status}}
-										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-										{{else}}
-										<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
-									{{/if}}
+								{{#if company.User.status}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'"
+									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								{{else}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'"
+									class="btn btn-success activate-btn"> Activate User</button>
+								{{/if}}
 								{{/if}}
 							</div>
 							<div class="profile-info-section">
@@ -335,7 +343,7 @@
 								<h5>Total Wallet Balance</h5>
 								{{#balance}}
 								<h3>&#8358; {{number this.amount}}</h3>
-								
+
 							</div>
 
 							<div class="cleared-balance">
@@ -362,97 +370,19 @@
 										<tr class="">
 											<th scope="col">ORDER ID</th>
 											<th scope="col">UNIT PRICE (&#8358;)</th>
-											<th scope="col">QTY</th>
-											<th scope="col">EARNING(&#8358;)</Nav>
-											</th>
 											<th scope="col">STATUS</th>
 										</tr>
 									</thead>
 									<tbody class="t_info_body">
+										{{#each ledger_info}}
 										<tr class="t_info_row1">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
+											<th scope="row"><a href="#">{{this.TransactionLog.transaction_id}}</a></th>
+											<td>{{this.TransactionLog.amount}}</td>
 											<td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>
-														Pending</span> </td>
+														{{this.TransactionLog.status}}</span> </td>
 
 										</tr>
-										<tr class="t_info_row2">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>3000</td>
-											<td>40KG</td>
-											<td>6000</td>
-											<td>
-												<span> <span class="approved px-1"><i class="bi bi-dot  "></i>
-														Approved</span>
-											</td>
-
-										</tr>
-										<tr class="t_info_row1">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
-											<td>
-												<span> <span class="pending px-1"><i class="bi bi-dot"></i>
-														Pending</span>
-											</td>
-
-										</tr>
-										<tr class="t_info_row2">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
-											<td>
-												<span> <span class="approved px-1"><i class="bi bi-dot"></i>
-														Approved</span>
-											</td>
-
-										</tr>
-										<tr class="t_info_row1">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
-											<td><span class=" "> <span class="pending px-1"><i class="bi bi-dot"></i>
-														Pending</span> </td>
-
-										</tr>
-										<tr class="t_info_row2">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>3000</td>
-											<td>40KG</td>
-											<td>6000</td>
-											<td>
-												<span> <span class="approved px-1"><i class="bi bi-dot  "></i>
-														Approved</span>
-											</td>
-
-										</tr>
-										<tr class="t_info_row1">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
-											<td>
-												<span> <span class="pending px-1"><i class="bi bi-dot"></i>
-														Pending</span>
-											</td>
-
-										</tr>
-										<tr class="t_info_row2">
-											<th scope="row"><a href="#">12345678</a></th>
-											<td>2000</td>
-											<td>40KG</td>
-											<td>4000</td>
-											<td>
-												<span> <span class="approved px-1"><i class="bi bi-dot"></i>
-														Approved</span>
-											</td>
-
-										</tr>
+										{{/each}}
 									</tbody>
 								</table>
 							</div>
@@ -484,64 +414,68 @@
 			{{else}}
 			{{#if trader}}
 			<div>
-				
+
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="trader-details" role="tabpanel"
-							aria-labelledby="trader-details-tab">
-							<div  class="admin-view-user">
-								<div class="profile-image-section">
-									<img src="{{#if trader.profile_pic}} /profile_pics/{{trader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}" class="d-block img_round"
-													alt="user profile image">
-									{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
-										{{#if trader.User.status}}
-											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/0'" class="btn btn-danger deactivate-btn"> Deactivate User</button>
-											{{else}}
-											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/1'" class="btn btn-success activate-btn"> Activate User</button>
-										{{/if}}
-									{{/if}}
-								</div>
-								<div class="profile-info-section">
-									<div class="bio-data">
-										<div>
-											<h5>First Name</h5>
-											<p>{{trader.firstname}}</p>
-										</div>
+						aria-labelledby="trader-details-tab">
+						<div class="admin-view-user">
+							<div class="profile-image-section">
+								<img src="{{#if trader.profile_pic}} /profile_pics/{{trader.profile_pic}} {{else}} /images/profile-avatar.png {{/if}}"
+									class="d-block img_round" alt="user profile image">
+								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
+								{{#if trader.User.status}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/0'"
+									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								{{else}}
+								<button type="button"
+									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/1'"
+									class="btn btn-success activate-btn"> Activate User</button>
+								{{/if}}
+								{{/if}}
+							</div>
+							<div class="profile-info-section">
+								<div class="bio-data">
+									<div>
+										<h5>First Name</h5>
+										<p>{{trader.firstname}}</p>
+									</div>
 
-										<div>
-											<h5>Last Name</h5>
-											<p>{{trader.lastname}}</p>
-										</div>
+									<div>
+										<h5>Last Name</h5>
+										<p>{{trader.lastname}}</p>
+									</div>
 
-										<div>
-											<h5>Phone Number</h5>
-											<p>{{trader.phone_no}}</p>
-										</div>
+									<div>
+										<h5>Phone Number</h5>
+										<p>{{trader.phone_no}}</p>
+									</div>
 
-										<div>
-											<h5>Unique No.</h5>
-											<p>{{trader.unique_no}}</p>
-										</div>
+									<div>
+										<h5>Unique No.</h5>
+										<p>{{trader.unique_no}}</p>
+									</div>
 
-										<div>
-											<h5>LGA</h5>
-											<p>{{trader.LGA.name}}</p>
-										</div>
+									<div>
+										<h5>LGA</h5>
+										<p>{{trader.LGA.name}}</p>
+									</div>
 
-										<div>
-											<h5>State</h5>
-											<p>{{trader.State.name}}</p>
-										</div>
+									<div>
+										<h5>State</h5>
+										<p>{{trader.State.name}}</p>
 									</div>
 								</div>
-							</div>						
+							</div>
 						</div>
+					</div>
 
-						<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel"
-							aria-labelledby="shipping-tab">
-							<div class="shipping">
-								<h3>MAIN SHIPPING ADDRESS</h3>
-								<div class="shipping-details">
-									<div>
+					<div class="tab-pane shipping-info-section fade" id="shipping" role="tabpanel"
+						aria-labelledby="shipping-tab">
+						<div class="shipping">
+							<h3>MAIN SHIPPING ADDRESS</h3>
+							<div class="shipping-details">
+								<div>
 									<h5>State</h5>
 									<p>{{trader.User.DeliveryInformation.State.name }}</p>
 								</div>
@@ -555,36 +489,36 @@
 									<h5>Address</h5>
 									<p>{{ trader.User.DeliveryInformation.address}}</p>
 								</div>
-								</div>
 							</div>
 						</div>
-						
-						<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel"
-							aria-labelledby="referrals-tab">
-							<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Phone</th>
-										<th>Book</th>
-										<th>Address</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>data</td>
-										<td>data</td>
-										<td>data</td>
-										<td>data</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					</div>
 
-						<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel"
-							aria-labelledby="trader-account-details-tab">
-							
-						</div>
+					<div class="tab-pane shipping-info-section fade" id="referrals" role="tabpanel"
+						aria-labelledby="referrals-tab">
+						<table class="table table-responsive table-bordered table-theme" id="activity-log-table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Book</th>
+									<th>Address</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+									<td>data</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="tab-pane account-details-section fade" id="trader-account-details" role="tabpanel"
+						aria-labelledby="trader-account-details-tab">
+
+					</div>
 				</div>
 			</div>
 			{{/if}}
