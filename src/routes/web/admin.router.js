@@ -272,6 +272,13 @@ adminRouter.get('/products/approval/:id/:status', async (req, res)=>{
     res.redirect("/admin/products")
 })
 
+adminRouter.post('/products/approval', async (req, res)=>{
+    console.log(req.body)
+    let data={status : req.body.status, reason: req.body.rejectionReason, updated_at : now()}
+    let id = req.body.id
+    adminController.productUpdate(data, id)
+    res.redirect("/admin/products")
+})
 
 adminRouter.get("/users/activate/:id/:status", async (req, res)=>{
      let data={status : req.params.status, updated_at : now()}
