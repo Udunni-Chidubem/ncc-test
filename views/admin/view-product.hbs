@@ -1,143 +1,156 @@
 {{>breadcrumbs}}
 
 {{#if product}}
-	<div class="card admin-product container ">
-        <div class=" pt-2">
-            <span class="{{#if (eq product.status 1)}} published_product {{else if (eq product.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
-              {{#if (eq product.status 1)}} Published {{else}} Pending {{/if}}
-            </span> 
+<div class="card admin-product container ">
+    <div class=" pt-2">
+        <span
+            class="{{#if (eq product.status 1)}} published_product {{else if (eq product.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
+            {{#if (eq product.status 1)}} Published {{else}} Pending {{/if}}
+        </span>
+    </div>
+    <div class="card-body m-0 admin-view-product">
+        <div class="admin-product-img admin-product-img-min-hidden">
+            <img src="../../product_images/{{product.file_name}}" alt="Product Image">
         </div>
-        <div class="card-body m-0 admin-view-product">
-        	<div class="admin-product-img admin-product-img-min-hidden">
-				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
-			</div>
-			<div class="">
-				<div class="admin-name_varaint">
-					<div>
-						<h4>Product Name</h4>
-						<h5>{{product.product_name}}</h5>
-					</div>
-					<div>
-						<h4>Variant</h4>
-						<h5>{{product.variant}}</h5>
-					</div>
-				</div>
-                <hr class="admin-product-line">
-				<div class="admin-view-prod-desc">
-					<h4>Product Description</h4>
-					<p>{{product.description}}</p>
-				</div>
-				<hr class="admin-product-line">
+        <div class="">
+            <div class="admin-name_varaint">
+                <div>
+                    <h4>Product Name</h4>
+                    <h5>{{product.product_name}}</h5>
+                </div>
+                <div>
+                    <h4>Variant</h4>
+                    <h5>{{product.variant}}</h5>
+                </div>
+            </div>
+            <hr class="admin-product-line">
+            <div class="admin-view-prod-desc">
+                <h4>Product Description</h4>
+                <p>{{product.description}}</p>
+            </div>
+            <hr class="admin-product-line">
 
-				<div>
-					<h4>Seller</h4>
-					<h5>{{product.User.SeedCompany.name_of_company}}</h5>
-				</div>
+            <div>
+                <h4>Seller</h4>
+                <h5>{{product.User.SeedCompany.name_of_company}}</h5>
+            </div>
 
-				<hr class="admin-product-line">
-				<div>
-					<div class="inp_cont" id="inp_cont">
+            <hr class="admin-product-line">
+            <div>
+                <div class="inp_cont" id="inp_cont">
                     <div class="">
                         <div class="row admin-product-row">
                             <div class="col col_sma ">
                                 <div class="   ">
-                                    <h4 >Package Size <i>(kg)</i>  </h4>
+                                    <h4>Package Size <i>(kg)</i> </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 >Quantity </h4>
+                                    <h4>Quantity </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 >Min Stock </h4>
+                                    <h4>Min Stock </h4>
                                 </div>
                             </div>
                             <div class="col col_sma">
                                 <div class=" ">
-                                    <h4 >Unit Price </h4>
+                                    <h4>Unit Price </h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="row  admin-product-row"  >
+                        <div class="row  admin-product-row">
                             {{#json product.item}}
-                                <div class="col col_sma"> 
-                                    {{#each this.pkg}} 
-                                        <div class="py-1 ">
-                                            <h5>{{this}} </h5>
-                                        </div>
-                                    {{/each}}
+                            <div class="col col_sma">
+                                {{#each this.pkg}}
+                                <div class="py-1 ">
+                                    <h5>{{this}} </h5>
                                 </div>
-                                <div class="col col_sma">   
-                                    {{#each this.quantity}}
-                                        <div class="py-1 "> 
-                                            <h5>{{this}} </h5>
-                                        </div>
-                                    {{/each}}
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                {{#each this.quantity}}
+                                <div class="py-1 ">
+                                    <h5>{{this}} </h5>
                                 </div>
-                                <div class="col col_sma">
-                                    {{#each this.min}}
-                                        <div class="py-1 ">
-                                            <h5>{{this}} </h5>
-                                        </div>
-                                    {{/each}}
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                {{#each this.min}}
+                                <div class="py-1 ">
+                                    <h5>{{this}} </h5>
                                 </div>
-                                <div class="col col_sma">
-                                    {{#each this.price}}
-                                    <div class="py-1 ">
-                                        <h5> &#8358; {{this}} </h5>
-                                    </div>
-                                    {{/each}}
+                                {{/each}}
+                            </div>
+                            <div class="col col_sma">
+                                {{#each this.price}}
+                                <div class="py-1 ">
+                                    <h5> &#8358; {{this}} </h5>
                                 </div>
+                                {{/each}}
+                            </div>
                             {{/json}}
-                            <div class="col col_sma">    
-                                
+                            <div class="col col_sma">
+
                             </div>
                         </div>
-                     </div>
-                </div> 
-                				<hr class="admin-product-line">
-
-					
-				</div>
-			</div>
-			<div class="admin-product-img admin-product-img-hidden">
-				<img src="../../product_images/{{product.file_name}}" alt="Product Image">
-			</div>
-		</div>
-        {{#if (or (eq user_role "nigsims")
-                (eq user_role "admin"))}}
-		<div class="float-end">
-            {{#if (or (eq product.status 0) (eq product.status 2)) }}
-                <div class="float-end m-2 mb-3">
-                    <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/0'"><i class="fa fa-close"></i> Reject</button>  
-                    
-                    <button type="button" class="btn btn-success float-right submitBtn" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i class="fa fa-check"></i> Approve</button>                                      
+                    </div>
                 </div>
-            {{else}}
-                <div class="float-end m-2 mb-3">
-                    <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal" data-bs-target="#reject" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/2'"><i class="fa fa-close"></i> Revoke</button>                    
-                </div>
-            {{/if}}
-	    </div>
-        {{/if}}
+                <hr class="admin-product-line">
 
-<div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      	<form action="product_rejection_submit" method="get" accept-charset="utf-8">
-      		<textarea name="rejectionReason" rows="4" placeholder="Reason for rejection" class="form-control"></textarea>
-      		<br>
-        	<button type="button" class="btn btn-theme float-end">Submit</button>
-        </form>
-      </div>
 
+            </div>
+        </div>
+        <div class="admin-product-img admin-product-img-hidden">
+            <img src="../../product_images/{{product.file_name}}" alt="Product Image">
+        </div>
     </div>
-  </div>
-</div>
-{{/if}}
+    {{#if (or (eq user_role "nigsims")
+    (eq user_role "admin"))}}
+    <div class="float-end">
+        {{#if (or (eq product.status 0) (eq product.status 2)) }}
+        <div class="float-end m-2 mb-3">
+            <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal"
+                data-bs-target="#reject" class="fa fa-close"> Reject</button>
+
+            <button type="button" class="btn btn-success float-right submitBtn"
+                onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i
+                    class="fa fa-check"></i> Approve</button>
+        </div>
+        {{else}}
+        <div class="float-end m-2 mb-3">
+            <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal"
+                data-bs-target="#reject" class="fa fa-close"> Revoke</button>
+        </div>
+        {{/if}}
+    </div>
+    {{/if}}
+
+    <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="rejectLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/products/approval" method="post" accept-charset="utf-8">
+                        {{#if (or (eq product.status 0)) }}
+                        <input type="text" name="status" hidden value="0">
+                        {{/if}}
+                        {{#if (or (eq product.status 1)) }}
+                        <input type="text" name="status" hidden value="2">
+                        {{/if}}
+                        <input type="text" name="id" hidden value="{{product.id}}">
+                        <textarea name="rejectionReason" rows="4" placeholder="Reason for rejection"
+                            class="form-control"></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-theme float-end">Submit</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/if}}
