@@ -1,161 +1,169 @@
- <div class="container-fluid pt-3" id="contain">
-    <div class="page-wrapper bg-gra-02 font-poppins">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4">
-                <div class="card-body">
-                    <h1 class="title p-b-15" >Create An Account</h1>
- 
-                    <form method="POST" class="p-t-15" id="register">
-                        <div class="row">
-                            <div class="col-md-10 col-sm-12">
-                                <div class="form-group"> 
-                                    <input class="form-control" type="text" name="firstname" placeholder="Firstname" value="{{ formData.firstname}}">
-                                </div>
-                            </div>
-                        </div>
+<div class="container-fluid pt-3" id="contain">
+  <div class="page-wrapper bg-gra-02 font-poppins">
+    <div class="wrapper wrapper--w680">
+      <div class="card card-4">
+        <div class="card-body">
+          <h1 class="title p-b-15">Create An Account</h1>
 
-                        <div class="row">
-                            <div class="col-md-10 col-sm-12">
-                                <div class="form-group"> 
-                                    <input class="form-control" required type="text" name="lastname" placeholder="Lastname" value="{{ formData.lastname}}">
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="row">
-                            <div class="col-md-10 col-sm-12">
-                                <div class="form-group"> 
-                                    <div class="form-group"> 
-                                    <input 
-                                        class="form-control" 
-                                        required 
-                                        type="text" 
-                                        id="phone" 
-                                        name="phone_number"
-                                        value="{{ formData.phone_number}}"
-                                        placeholder="Phone Number e.g 0*******" 
-                                        pattern="^0[0-9]{10}$"
-                                        title="Phone Number should start with 0 and contain 11digits"
-                                        minlength="11"
-                                        maxlength="11">
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-10 col-sm-12">
-                                <div class="form-group"> 
-                                    <input class="form-control" required id="psw" type="password" minlength="6" name="password"  placeholder="Create Your Password">
-                                </div>
-                                  <div id="message">
-                                      <h5>A Strong Password should contain the following:</h5>
-                                      <p id="letter" class="invalid">A <b>Lowercase</b> letter (a,b)</p>
-                                      <p id="capital" class="invalid">A <b>Uppercase</b> letter (A,B)</p>
-                                      <p id="number" class="invalid"><b> Figures (1,2,3)</b></p>
-                                      <p id="length" class="invalid"> A Minimum of <b>6 characters</b></p>
-                                  </div>
-                            </div>    
-                            <div class=" col-md-10 col-sm-12">
-                                 <div class="form-group">
-                                    <input class="form-control" type="password" minlength="6" name="confirm_password" placeholder="Confirm Password">
-                                </div>
-                                
-                            </div>
-                             <div class=" col-md-10 col-sm-12">
-                                 <div class="form-group">
-                                    <input class="form-control" type="text" minlength="6" name="referral" placeholder="Referral Code? (Optional)">
-                                </div>
-                                
-                            </div>
-                        </div>
-                          
-                        <div class="p-t-16">
-                            <center><button class="btn primary-button w-button  btn--radius-2 btn--green" type="submit">Submit</button></center>
-                        </div>
-
-                         <div class="p-t-16">
-                            <center><p style="color:#47ba5d;"> Already Have An Account? <a href="/login" class="links">Sign In</a></p></center>
-                             
-                        </div>
-
-                    </form>
+          <form method="POST" class="p-t-15" id="register">
+            <div class="row">
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="firstname"
+                    placeholder="Firstname"
+                    value="{{formData.firstname}}"
+                  />
                 </div>
-               
+              </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    required
+                    type="text"
+                    name="lastname"
+                    placeholder="Lastname"
+                    value="{{formData.lastname}}"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      required
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      value="{{formData.phone_number}}"
+                      placeholder="Phone Number e.g 0*******"
+                      pattern="^0[0-9]{10}$"
+                      title="Phone Number should start with 0 and contain 11digits"
+                      minlength="11"
+                      maxlength="11"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    required
+                    id="psw"
+                    type="password"
+                    minlength="6"
+                    name="password"
+                    placeholder="Create Your Password"
+                  />
+                </div>
+                <div id="message">
+                  <h5>A Strong Password should contain the following:</h5>
+                  <p id="letter" class="invalid">A
+                    <b>Lowercase</b>
+                    letter (a,b)</p>
+                  <p id="capital" class="invalid">A
+                    <b>Uppercase</b>
+                    letter (A,B)</p>
+                  <p id="number" class="invalid"><b> Figures (1,2,3)</b></p>
+                  <p id="length" class="invalid">
+                    A Minimum of
+                    <b>6 characters</b></p>
+                </div>
+              </div>
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="password"
+                    minlength="6"
+                    name="confirm_password"
+                    placeholder="Confirm Password"
+                  />
+                </div>
+
+              </div>
+              <div class="col-md-10 col-sm-12">
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    minlength="6"
+                    name="referral"
+                    placeholder="Referral Code? (Optional)"
+                  />
+                </div>
+
+              </div>
+            </div>
+
+            <div class="p-t-16">
+              <center><button
+                  class="btn primary-button w-button btn--radius-2 btn--green"
+                  type="submit"
+                >Submit</button></center>
+            </div>
+
+            <div class="p-t-16">
+              <center><p style="color:#47ba5d;">
+                  Already Have An Account?
+                  <a href="/login" class="links">Sign In</a></p></center>
+
+            </div>
+
+          </form>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-2.1.1.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/toastify-js"
+></script>
 
 <script>
-var myInput = document.getElementById("psw");
-var letter = document.getElementById("letter");
-var capital = document.getElementById("capital");
-var number = document.getElementById("number");
-var length = document.getElementById("length");
-
-// When the user clicks on the password field, show the message box
-myInput.onfocus = function() {
-  document.getElementById("message").style.display = "block";
-}
-
-// When the user clicks outside of the password field, hide the message box
-myInput.onblur = function() {
-  document.getElementById("message").style.display = "none";
-}
-
-// When the user starts to type something inside the password field
-myInput.onkeyup = function() {
-  // Validate lowercase letters
-  var lowerCaseLetters = /[a-z]/g;
-  if(myInput.value.match(lowerCaseLetters)) {
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-}
-
-  // Validate capital letters
-  var upperCaseLetters = /[A-Z]/g;
+  var myInput = document.getElementById("psw"); var letter =
+  document.getElementById("letter"); var capital =
+  document.getElementById("capital"); var number =
+  document.getElementById("number"); var length =
+  document.getElementById("length"); // When the user clicks on the password
+  field, show the message box myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block"; } // When the user
+  clicks outside of the password field, hide the message box myInput.onblur =
+  function() { document.getElementById("message").style.display = "none"; } //
+  When the user starts to type something inside the password field
+  myInput.onkeyup = function() { // Validate lowercase letters var
+  lowerCaseLetters = /[a-z]/g; if(myInput.value.match(lowerCaseLetters)) {
+  letter.classList.remove("invalid"); letter.classList.add("valid"); } else {
+  letter.classList.remove("valid"); letter.classList.add("invalid"); } //
+  Validate capital letters var upperCaseLetters = /[A-Z]/g;
   if(myInput.value.match(upperCaseLetters)) {
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-
-  // Validate numbers
-  var numbers = /[0-9]/g;
-  if(myInput.value.match(numbers)) {
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-  }
-
-  // Validate length
-  if(myInput.value.length >= 6) {
-    length.classList.remove("invalid");
-    length.classList.add("valid");
-  } else {
-    length.classList.remove("valid");
-    length.classList.add("invalid");
-  }
-}
+  capital.classList.remove("invalid"); capital.classList.add("valid"); } else {
+  capital.classList.remove("valid"); capital.classList.add("invalid"); } //
+  Validate numbers var numbers = /[0-9]/g; if(myInput.value.match(numbers)) {
+  number.classList.remove("invalid"); number.classList.add("valid"); } else {
+  number.classList.remove("valid"); number.classList.add("invalid"); } //
+  Validate length if(myInput.value.length >= 6) {
+  length.classList.remove("invalid"); length.classList.add("valid"); } else {
+  length.classList.remove("valid"); length.classList.add("invalid"); } }
 </script>
-
-
-
-
-
-
-
-
