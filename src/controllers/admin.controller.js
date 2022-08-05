@@ -275,8 +275,23 @@ module.exports = {
         return seedtraderCount;
     },
     getCompanyCount: async (req, res) => {
-        let companyCount = await SeedCompany.count({
-            // where: {id: req.params.id}
+        // let companyCount = await SeedCompany.count({
+        //     // where: {id: req.params.id},
+        //     attributes:["user_"],
+        //     include:[
+        //         {
+        //             model: User,
+        //             attributes:["status"]
+        //         }
+        //     ],
+        //     raw: true
+        // });
+
+        let sql =
+        "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status != '2' ";
+    
+        let companyCount = await db.rest.query(sql, {
+            type: QueryTypes.SELECT,
         });
 
         companyCount = companyCount;
