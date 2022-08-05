@@ -22,7 +22,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
 
     console.log(user_role.Role.role_name)
-
+    console.log(companyCount)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
