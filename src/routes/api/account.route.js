@@ -21,15 +21,15 @@ accountRouter.post("/farmer-signup", async (req, res) => {
       .json({ statusCode: 400, message: "there was an error", body: r.e })
       .send();
   }
-})
-accountRouter.post("/company-signup",  (req, res) => {
- let y = await siteController.saveseedcompany(req, res)
+});
+accountRouter.post("/company-signup", async (req, res) => {
+  let y = await siteController.saveseedcompany(req, res);
   if (r.user) {
     res
       .json({
         statusCode: 200,
         message: "Account created successfully",
-        body: r.seed_company
+        body: r.seed_company,
       })
       .send();
   } else {
@@ -37,17 +37,16 @@ accountRouter.post("/company-signup",  (req, res) => {
       .json({ statusCode: 400, message: "there was an error", body: r.e })
       .send();
   }
-  }
-);
+});
 
-accountRouter.post( "/trader-signup",  (req, res) => {
- let y = await siteController.saveseedtrader(req, res)
+accountRouter.post("/trader-signup", async (req, res) => {
+  let y = await siteController.saveseedtrader(req, res);
   if (r.user) {
     res
       .json({
         statusCode: 200,
         message: "Account created successfully",
-        body: r.seed_company
+        body: r.seed_company,
       })
       .send();
   } else {
@@ -55,9 +54,6 @@ accountRouter.post( "/trader-signup",  (req, res) => {
       .json({ statusCode: 400, message: "there was an error", body: r.e })
       .send();
   }
-  }
-);
-
-
+});
 
 module.exports = accountRouter;
