@@ -209,15 +209,29 @@
 									class="d-block img_round" alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 								{{#if company.User.status}}
-								<button type="button"
+									<div class="row">
+										<div class="col-6"><button type="button"
 									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'"
-									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+									class="btn btn-danger deactivate-btn status-btn" > Deactivate User</button></div>
+										<div class="col-6">
+											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
+									class="btn btn-info activate-btn status-btn"> Remove User</button>
+										</div>
+									</div>
 								{{else}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'"
-									class="btn btn-success activate-btn"> Activate User</button>
+								<div class="row">
+									<div class="col-6">
+										<button type="button"
+										onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'"
+										class="btn btn-success activate-btn"> Activate User</button>
+									</div>
+										<div class="col-6">
+											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
+									class="btn btn-info activate-btn status-btn"> Remove User</button>
+										</div>
+									</div>
 								{{/if}}
-								{{/if}}
+							{{/if}}
 							</div>
 							<div class="profile-info-section">
 								<div class="  bio-data">

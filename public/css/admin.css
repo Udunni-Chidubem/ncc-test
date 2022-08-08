@@ -838,6 +838,7 @@ color: #818E9B;
    border-right: 1px solid gray;
    padding: 20px;
    justify-content: center;
+   justify-items: center;
 }
 
 .profile-image-section img{
@@ -1229,4 +1230,9 @@ color: #818E9B;
 }
 .nav.nav-tabs.m-5.msg_nav {
   cursor: pointer;
+}
+
+.status-btn{
+  font-size: 15px !important;
+  width: 150px;
 }
