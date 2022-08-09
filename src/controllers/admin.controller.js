@@ -275,8 +275,23 @@ module.exports = {
         return seedtraderCount;
     },
     getCompanyCount: async (req, res) => {
-        let companyCount = await SeedCompany.count({
-            // where: {id: req.params.id}
+        // let companyCount = await SeedCompany.count({
+        //     // where: {id: req.params.id},
+        //     attributes:["user_"],
+        //     include:[
+        //         {
+        //             model: User,
+        //             attributes:["status"]
+        //         }
+        //     ],
+        //     raw: true
+        // });
+
+        let sql =
+        "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status != '2' ";
+    
+        let companyCount = await db.rest.query(sql, {
+            type: QueryTypes.SELECT,
         });
 
         companyCount = companyCount;
@@ -832,6 +847,28 @@ module.exports = {
 
         maleSeedtraderCount = maleSeedtraderCount;
         return maleSeedtraderCount;
+    },
+
+    company_id: async (req,res) => {
+        let company_id = await SeedCompany.findOne({
+            where: {user_id: req.params.id}
+        })
+        company_id = JSON.parse(JSON.stringify(company_id))
+        return company_id;
+    },
+
+    ledger_info: async (req, res, company_id) => {
+        let ledger_info = await Orders.findAll({
+            where: {company_id: company_id},
+            include: [
+                {
+                    model: TransactionLog
+                }
+            ]
+        })
+
+        ledger_info = JSON.parse(JSON.stringify(ledger_info))
+        return ledger_info;
     }
     
 };

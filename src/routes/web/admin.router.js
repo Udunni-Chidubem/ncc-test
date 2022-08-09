@@ -22,7 +22,7 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
 
     console.log(user_role.Role.role_name)
-
+    console.log(companyCount)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
@@ -181,6 +181,27 @@ adminRouter.get('/users', async (req, res)=>{
     })
 });
 
+adminRouter.get('/users/deactivated', async (req, res)=>{
+    let user = await req.user
+    let farmers=await adminController.getFarmers(req, res)
+    let traders = await adminController.getTraders(req, res)
+    let companies= await adminController.getCompanies(req, res)
+    let isVerified = await utils.isVerified(user)
+    let user_role = await adminController.getUserRole(req, res)
+
+    res.render('admin/deactivated-users', {
+        layout : 'admin-dashboard',
+        title : 'User Management',
+        sub_title : 'Deactivated Users',
+        username : user.username,
+        isVerified,
+        farmers,
+        companies,
+        traders,
+        user_role: user_role.Role.role_name
+    })
+});
+
 adminRouter.get('/products/:id', async (req, res)=>{
     let user = await req.user
     let isVerified = await utils.isVerified(user);
@@ -233,12 +254,14 @@ adminRouter.get('/users/:id', async (req, res)=>{
     let type=req.query.type
     const user = await req.user
     let isVerified = await utils.isVerified(user)
-    let farmer=null, company=null, trader=null, products=null, balance=null;
+    let farmer=null, company=null, trader=null, products=null, balance=null, ledger_info=null;
     if(type=="farmer")
         farmer = await adminController.getOneFarmer(req, res);
     if(type=="company"){
         company = await adminController.getOneCompany(req, res);
         products = await adminController.getProductsByUserID(req, res);
+        company_id = await adminController.company_id(req, res);
+        ledger_info = await adminController.ledger_info(req, res, company_id.id);
     }
     if(type=="trader")
         trader = await adminController.getOneTrader(req, res);
@@ -259,6 +282,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
         trader,
         products,
         balance,
+        ledger_info,
         user_role: user_role.Role.role_name
     })
 });
@@ -269,6 +293,13 @@ adminRouter.get('/products/approval/:id/:status', async (req, res)=>{
     res.redirect("/admin/products")
 })
 
+adminRouter.post('/products/approval', async (req, res)=>{
+    console.log(req.body)
+    let data={status : req.body.status, reason: req.body.rejectionReason, updated_at : now()}
+    let id = req.body.id
+    adminController.productUpdate(data, id)
+    res.redirect("/admin/products")
+})
 
 adminRouter.get("/users/activate/:id/:status", async (req, res)=>{
      let data={status : req.params.status, updated_at : now()}
