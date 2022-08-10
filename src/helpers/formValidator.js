@@ -100,7 +100,7 @@ const signupValidation = () => {
       .withMessage("Phone Number field is required")
       .custom((value, { req }) => {
         return User.findOne({
-          where: { username: req.body.phone_number },
+          where: { username: req.body.phone },
         }).then((user) => {
           if (user) {
             return Promise.reject(
