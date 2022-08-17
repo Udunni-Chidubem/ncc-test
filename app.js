@@ -167,7 +167,7 @@ app.use(async function (req, res) {
     })
 })
 
-const PORT = process.env.ACCESS_PORT || 5200
+const PORT = process.env.ACCESS_PORT || 5800
 server.listen(PORT, function(){
     console.log(`NIGSIMS is running on PORT ${PORT}`)
 })

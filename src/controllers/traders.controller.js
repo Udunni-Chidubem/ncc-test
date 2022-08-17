@@ -841,22 +841,16 @@ module.exports={
             return messages
     },
     updateMessagestatus: async (req,user_id) => {
-        try{
-             Message.update(
-                {
-                    status:'0'
-                }, 
-                { 
-                    where : 
-                    {
-                        to_user: user_id
-                    }
-                }
+
+        try {
+            let status = await Message.update(
+                { status: "0" },
+                { where: { to_user: user_id } }
             );
-        } 
-        catch(e){
-            console.log(e) 
-            return e;      
+            return status;
+        } catch (e) {
+            console.log(e);
+            return e;
         }
     },
 
