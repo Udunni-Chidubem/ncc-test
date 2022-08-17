@@ -8,7 +8,7 @@ const verityToken = require('../../helpers/middleware');
 require('../../helpers/passport-jwt');
 //passportjwt(passport);
 const accountRouter = require("./account.route");
-const farmerRouter = require("./farmer.router");
+// const farmerRouter = require("./farmer.router");
 // const apiRouter = require("express").Router();
 const baseRouter = require("./base.router");
 const passport = require("passport");
