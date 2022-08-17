@@ -47,11 +47,7 @@
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "mysql2": "^2.0.2",
-<<<<<<< HEAD
     "nodemailer": "^6.7.5",
-=======
-    "nodemailer": "^6.7.7",
->>>>>>> d5c67fc2c558775767509df5d1f922e5d6f60225
     "otp-generator": "^4.0.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

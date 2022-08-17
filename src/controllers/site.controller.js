@@ -20,21 +20,19 @@ const directoryPath = "./src/data/";
 const path = require("path");
 const fs = require("fs");
 const Random = require("random-js").Random;
-<<<<<<< HEAD
 const otp = require('../models/otp');
 const { default: axios } = require('axios');
 const jwt = require('jsonwebtoken')
 const nodeMailer = require('nodemailer');
 const contact = require('../models/contact');
 const { message } = require('./admin.controller');
-=======
 const otp = require("../models/otp");
 const { default: axios } = require("axios");
 const jwt = require("jsonwebtoken");
 const nodeMailer = require("nodemailer");
 const contact = require("../models/contact");
 const { message } = require("./admin.controller");
->>>>>>> d5c67fc2c558775767509df5d1f922e5d6f60225
+
 
 global.pass = 0;
 
@@ -246,7 +244,6 @@ module.exports = {
         { transaction: transaction }
       );
 
-<<<<<<< HEAD
         res.render('site/farmer_signup',{
             form_banner:'Group.png',
             layout : 'form',
@@ -370,11 +367,9 @@ module.exports = {
                 user_id:user.id
             },{transaction : transaction});
             transaction.commit();
-=======
       let r = await Role.findOne({
         where: { role_name: "seed_trader" },
       });
->>>>>>> d5c67fc2c558775767509df5d1f922e5d6f60225
 
       const user_role = await UserRole.create(
         {
@@ -517,7 +512,7 @@ module.exports = {
         message: req.body.message,
       });
 
-<<<<<<< HEAD
+
     saveContact:async (req, res)=>{
         let transaction=await db.rest.transaction()
         // let transporter = nodeMailer.createTransport({
@@ -581,7 +576,7 @@ module.exports = {
         
         // console.log("Message sent: %s", info.messageId);
     },
-=======
+
       // let mailMessage = await transporter.sendMail({
       //     // email = await Contact.findOne({
       //     //     attributes :  ['email'],
@@ -597,7 +592,6 @@ module.exports = {
       //     // }),
       //     // const email = req.body.Email,
       //     // const message = req.body.message,
->>>>>>> d5c67fc2c558775767509df5d1f922e5d6f60225
 
       //     from: 'www.daniko15@gmail.com',
       //     to: email,
@@ -606,7 +600,7 @@ module.exports = {
 
       //   })
 
-<<<<<<< HEAD
+
          });
          if(!pass){
              console.log('Wrong Number')
@@ -723,7 +717,7 @@ module.exports = {
             return {status : false, statusCode : 500, body : {message : e}}
         } 
         
-=======
+
       transaction.commit();
       // transporter
       return contact_instance;
@@ -731,7 +725,6 @@ module.exports = {
       transaction.rollback();
       console.log(e);
       return e;
->>>>>>> d5c67fc2c558775767509df5d1f922e5d6f60225
     }
 
     // console.log("Message sent: %s", info.messageId);
