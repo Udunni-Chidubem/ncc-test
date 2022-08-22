@@ -58,6 +58,7 @@ siteRouter.get('/faq', siteController.faq)
 
 siteRouter.get('/new_password', siteController.NewPassword)
 siteRouter.post('/farmer_signup', signupValidation(), signUpvalidate, (req, res)=>{
+    console.log(req.body)
     let y = siteController.savefarmer(req, res)
     y.then(r=>{
         
