@@ -5,7 +5,7 @@ module.exports = {
     formData.append("usr", username);
     formData.append("pwd", password);
     let resp = axios.post(
-      "http://erpnext2.interranetworks.com/api/method/library_management.api.login",
+      "http://nigsimserp.interranetworks.com/api/method/library_management.api.login",
       formData,
       {
         headers: {
@@ -15,6 +15,6 @@ module.exports = {
       }
     );
     console.log(resp);
-    return resp;
+    return resp.data;
   },
 };
