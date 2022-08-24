@@ -5,11 +5,16 @@ const baseRouter = require("./base.router");
 const passport = require("passport");
 const passportjwt = require("../../helpers/passport-jwt");
 const verityToken = require("../../helpers/middleware");
+const erpnext = require("../../helpers/erpnext");
 require("../../helpers/passport-jwt");
 passportjwt(passport);
 //all router on api will be use here for prefixing
 apiRouter.use("/account", accountRouter);
 apiRouter.use("/farmer", verityToken, farmerRouter);
 apiRouter.use("/base", baseRouter);
+apiRouter.post("/erp/login", async (req, res) => {
+  let result = await erpnext.login(req.body.username, req.body.password);
+  res.send(result);
+});
 
 module.exports = apiRouter;

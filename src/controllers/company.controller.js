@@ -233,7 +233,6 @@ module.exports = {
     let transaction = await db.rest.transaction();
     try {
       // let transaction = db.rest.transaction()
-
       carts.forEach(async (cart) => {
         let final_cost = cart.total_amount * 0.9;
         await Wallet.increment(
