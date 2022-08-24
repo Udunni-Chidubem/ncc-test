@@ -1,20 +1,18 @@
 const axios = require("axios").default;
+const FormData = require("form-data");
 module.exports = {
   login: async (username, password) => {
-    let formData = new FormData();
-    formData.append("usr", username);
-    formData.append("pwd", password);
+    let form = new FormData();
+    form.append("usr", username);
+    form.append("pwd", password);
     let resp = await axios.post(
       "http://nigsimserp.interranetworks.com/api/method/library_management.api.login",
-      formData,
+      form,
       {
-        headers: {
-          "Content-Type":
-            "multipart/form-data; boundary=<calculated when request is sent>",
-        },
+        headers: form.getHeaders(),
       }
     );
-    console.log(resp);
+    // console.log(resp);
     return resp.data;
   },
 };
