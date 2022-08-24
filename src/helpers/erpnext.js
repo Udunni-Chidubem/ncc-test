@@ -4,7 +4,7 @@ module.exports = {
     let formData = new FormData();
     formData.append("usr", username);
     formData.append("pwd", password);
-    let resp = axios.post(
+    let resp = await axios.post(
       "http://nigsimserp.interranetworks.com/api/method/library_management.api.login",
       formData,
       {
