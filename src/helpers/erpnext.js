@@ -6,14 +6,15 @@ module.exports = {
       let form = new FormData();
       form.append("usr", username);
       form.append("pwd", password);
-      // let resp = await axios.post(
-      //   "http://nigsimserp.interranetworks.com/api/method/library_management.api.login",
-      //   form,
-      //   {
-      //     headers: form.getHeaders(),
-      //   }
-      // );
-      return "erp end point works";
+      console.log(form);
+      let resp = await axios.post(
+        "https://nigsimserp.interranetworks.com/api/method/library_management.api.login",
+        form,
+        {
+          headers: form.getHeaders(),
+        }
+      );
+      // return "erp end point works";
       // console.log(resp);
       return resp.data;
     } catch (e) {
