@@ -5,6 +5,7 @@ const passpportInitializer = require('../../helpers/passport-config')
 passpportInitializer(passport)
 const db = require('../../models/index')
 const nodeMailer = require('nodemailer');
+const escrowRouter = require("../../controllers/escrow.controller");
 
 const { 
     signupValidation, 
@@ -297,6 +298,9 @@ siteRouter.post('/otp', async(req, res)=>{
     })
 })
  
+siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
+siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
+// siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
 
 
 module.exports=siteRouter; 
