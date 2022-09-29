@@ -484,6 +484,7 @@ module.exports = {
           size: size,
           product_cost: p_cost,
           quantity: qty,
+          date_sold: date_sold,
           user_id: user_id,
         },
         { transaction: transaction }
