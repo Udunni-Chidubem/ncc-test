@@ -1,7 +1,7 @@
 const jsonwebtoken = require("jsonwebtoken");
 const db = require("../models/index");
 const { User, Farmer, SeedTrader, UserRole, Role } = require("../models");
-async function cverityToken(req, res, next) {
+async function verityToken(req, res, next) {
   try {
     // if(req.header.Authorization==null){
 
