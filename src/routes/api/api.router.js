@@ -1,4 +1,4 @@
-const userRouter = require('./user.route');
+// const userRouter = require('./user.route');
 // const farmerRouter = require('./farmer.router')
 // const apiRouter = require('express').Router();
 // const baseRouter = require('./base.router');
