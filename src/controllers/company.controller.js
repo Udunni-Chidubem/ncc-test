@@ -476,7 +476,7 @@ module.exports = {
           community: req.body.community,
           lg_id: req.body.lg_id,
           state_id: req.body.state_id,
-          sale_date: req.body.sale_date,
+          // sale_date: req.body.sale_date,
           customer_name: req.body.customer_name,
           customer_number: req.body.customer_number,
           product_name: p_name,
@@ -484,7 +484,7 @@ module.exports = {
           size: size,
           product_cost: p_cost,
           quantity: qty,
-          date_sold: date_sold,
+          sale_date: req.body.date_sold,
           user_id: user_id,
         },
         { transaction: transaction }
