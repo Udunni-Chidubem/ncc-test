@@ -16,7 +16,7 @@ farmerRouter.get("/signup", (req, res) => {
   res.send("Hello you are welcome");
 });
 
-farmersRouter.post(
+farmerRouter.post(
   "/update-profile",
   profileUpdateValidation(),
   validate,
