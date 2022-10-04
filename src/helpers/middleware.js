@@ -60,4 +60,4 @@ async function cverityToken(req, res, next) {
   return next();
 }
 
-module.exports = verityToken;
+module.exports = cverityToken;
