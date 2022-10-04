@@ -64,8 +64,8 @@ accountRouter.post("/trader-signup", async (req, res) => {
 });
 
 accountRouter.post("/request-password-reset", async (req, res) => {
-  let messages = [];
-  if (req.body.username) {
+  if (req.body.phone) {
+    req.body.username = req.body.phone;
     let passw = await siteController.ForgotPassword(req, res);
     if (!passw) {
       const response = {
@@ -98,53 +98,77 @@ accountRouter.post("/request-password-reset", async (req, res) => {
   }
 });
 accountRouter.post("/reset-password", async (req, res) => {
-  if (req.body.newpassword) {
-    if (req.body.newpassword === req.body.confirmpassword) {
-      let rst = siteController.updatePassword(
-        req.body.newpassword,
-        req.body.phone
-      );
-      if (rst) {
-        const response = {
-          status: "Success",
-          details: "Password updated Successfully",
-        };
-        res
-          .status(200)
-          .json({
-            statusCode: 200,
-            message: response.details,
-            body: response,
-          })
-          .send();
+  let otp = req.body.otp;
+  let phone = req.body.phone;
+  let otp_instance = await siteController.getOTPByCode(otp, phone);
+  if (otp_instance != null) {
+    if (req.body.newpassword) {
+      if (req.body.newpassword === req.body.confirmpassword) {
+        siteController.deleteOTP(otp, phone);
+        let rst = siteController.updatePassword(
+          req.body.newpassword,
+          req.body.phone
+        );
+        if (rst) {
+          const response = {
+            status: "Success",
+            details: "Password updated Successfully",
+          };
+          res
+            .status(200)
+            .json({
+              statusCode: 200,
+              message: response.details,
+              body: response,
+            })
+            .send();
+        } else {
+          const response = {
+            status: "Failure",
+            details: "Something went wrong",
+          };
+          res
+            .status(400)
+            .json({
+              statusCode: 400,
+              message: response.details,
+              body: rst,
+            })
+            .send();
+        }
       } else {
         const response = {
           status: "Failure",
-          details: "Something went wrong",
+          details: "Passwords do not match",
         };
         res
           .status(400)
           .json({
             statusCode: 400,
             message: response.details,
-            body: rst,
+            body: response,
           })
           .send();
       }
     } else {
-      const response = {
-        status: "Failure",
-        details: "Passwords do not match",
-      };
       res
         .status(400)
         .json({
           statusCode: 400,
-          message: response.details,
-          body: response,
+          message: "invalid Input",
+          body: "New Password field can not be null",
         })
         .send();
     }
+  } else {
+    res
+      .status(400)
+      .json({
+        statusCode: 400,
+        message: "Otp validation failed",
+        body: "invalid otp entered",
+      })
+      .send();
   }
 });
 
@@ -152,9 +176,25 @@ accountRouter.post("/validate-otp", async (req, res) => {
   let otp = req.body.otp;
   let phone = req.body.phone;
   let otp_instance = await siteController.getOTPByCode(otp, phone);
-  if (otp_instance.otp_code) {
+  if (otp_instance != null) {
     siteController.deleteOTP(otp, phone);
+    res
+      .status(200)
+      .json({
+        statusCode: 200,
+        message: "Otp validated successfully",
+        body: "Otp Validated successfully",
+      })
+      .send();
   } else {
+    res
+      .status(400)
+      .json({
+        statusCode: 400,
+        message: "Otp validation failed",
+        body: "invalid otp entered",
+      })
+      .send();
   }
 });
 

@@ -116,8 +116,8 @@
         <input
           type="date"
           class="form-control salesInput"
-          id="sale_Date"
-          name="sale_date"
+            name="date_sold"
+          id="date_sold"
         />
       </div>
       <div class="col-md-6">
@@ -162,14 +162,14 @@
           name="community"
         />
       </div>
-      <div class="col-md-6">
+      {{!-- <div class="col-md-6">
         <label for="Date sold" class="form-label salesLabel"></label>
         <input
           type="date"
           class="form-control salesInput"
           name="date_sold"
           id="date_sold"
-        />
+        /> --}}
       </div>
       <div class="horizontalLine"></div>
 
@@ -200,20 +200,42 @@
   src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
 ></script>
 <script type="text/javascript">
-  $(document).ready(function () { let lga = $('#lgas').data('lga') let state =
-  $('#state').data('state') const getDefaultLgas = (state_id) => { let url =
-  window.location.origin + '/api/base/lgas/' + state_id fetch(url).then(r =>
-  r.json()) .then(r => { let selected, Options r.forEach(e => { Options +=
-  '<option value="' + e.id + '">' + e.name + '</option>' })
-  document.querySelector('#lgas').innerHTML = Options $('#lgas').val(lga) }
-  ).catch(e => { console.log(e) }) } //Get All LGAs based on selected value of
-  the state if (state != null) { $('#state').val(state) getDefaultLgas(state) }
-  document.querySelector('#state').addEventListener('change', function () { let
-  url = window.location.origin + '/api/base/lgas/' + this.value
-  fetch(url).then(r => r.json()) .then(r => { let Options = '<option
-  value="">Select LGA</option>' r.forEach(e => { Options += '<option value="' +
-  e.id + '">' + e.name + '</option>' })
-  document.querySelector('#lgas').innerHTML = Options } ).catch(e => {
-  //console.log(e) }) }) })
-
+  $(document).ready(function () { 
+    let lga = $('#lgas').data('lga'); 
+    let state =$('#state').data('state'); 
+    const getDefaultLgas = (state_id) => { 
+        let url =window.location.origin + '/api/base/lgas/' + state_id 
+        fetch(url).then(r =>  r.json()) .then(
+            r => { 
+                let selected, Options 
+                r.forEach(e => { 
+                    Options +='<option value="' + e.id + '">' + e.name + '</option>' 
+                })
+                document.querySelector('#lgas').innerHTML = Options 
+                $('#lgas').val(lga) 
+            }
+            ).catch(
+                e => { console.log(e) 
+            }) 
+    } //Get All LGAs based on selected value ofthe state 
+    if (state != null) { 
+        $('#state').val(state) 
+        getDefaultLgas(state) 
+    }
+    document.querySelector('#state').addEventListener('change', function () { 
+        let url = window.location.origin + '/api/base/lgas/' + this.value
+        fetch(url)
+        .then(r => r.json())
+        .then(r => { 
+            let Options = '<option  value="">Select LGA</option>' 
+            r.forEach(e => { 
+                Options += '<option value="' + e.id + '">' + e.name + '</option>' 
+            })
+            document.querySelector('#lgas').innerHTML = Options 
+        })
+        .catch(e => {
+            console.log(e) 
+        }) 
+    }) 
+})
 </script>

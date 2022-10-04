@@ -17,7 +17,7 @@ farmerRouter.get("/signup", (req, res) => {
 });
 
 farmerRouter.post(
-  "/update-profile",
+  "/profile",
   profileUpdateValidation(),
   validate,
   async (req, res) => {

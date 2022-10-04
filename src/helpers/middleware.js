@@ -1,7 +1,7 @@
 const jsonwebtoken = require("jsonwebtoken");
 const db = require("../models/index");
 const { User, Farmer, SeedTrader, UserRole, Role } = require("../models");
-async function cverityToken(req, res, next) {
+async function verityToken(req, res, next) {
   try {
     // if(req.header.Authorization==null){
 
@@ -37,7 +37,7 @@ async function cverityToken(req, res, next) {
             },
           ],
           where: {
-            id: id,
+            id: payload.sub,
           },
           attributes: [
             "id",
@@ -48,7 +48,8 @@ async function cverityToken(req, res, next) {
             "updated_at",
           ],
         });
-        req.user = user;
+        req.user = JSON.parse(JSON.stringify(user));
+        console.log(req.user);
         res.locals.user = payload;
       }
     } else {
