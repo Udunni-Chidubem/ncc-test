@@ -37,7 +37,7 @@ async function verityToken(req, res, next) {
             },
           ],
           where: {
-            id: id,
+            id: payload.sub,
           },
           attributes: [
             "id",
@@ -48,7 +48,8 @@ async function verityToken(req, res, next) {
             "updated_at",
           ],
         });
-        req.user = user;
+        req.user = JSON.parse(JSON.stringify(user));
+        console.log(req.user);
         res.locals.user = payload;
       }
     } else {
