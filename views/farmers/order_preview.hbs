@@ -1,106 +1,139 @@
- <section class="parent-container">
-      <div class="container1">
-        <h1 class="h1">Order Summary</h1>
-        <div class="horizontalLine"></div>
-        <div class="orderContainer">
-          <div class="orderGrid">
-            {{#if getCartItems}}
-              {{#each getCartItems}}
-                <div>
-                  <p>{{Product.product_name}}</p>
-                </div>
-                <div>
-                  <p>{{size}}kg</p> 
-                </div>
-              {{/each}}
-            {{/if}}
+<section class="parent-container">
+  <div class="container1">
+    <h1 class="h1">Order Summary</h1>
+    <div class="horizontalLine"></div>
+    <div class="orderContainer">
+      <div class="orderGrid">
+        {{#if getCartItems}}
+          {{#each getCartItems}}
+            <div>
+              <p>{{Product.product_name}}</p>
+            </div>
+            <div>
+              <p>{{size}}kg</p>
+            </div>
+          {{/each}}
+        {{/if}}
+      </div>
+
+      <hr />
+      <div class="costGrid">
+        <div>
+          <h6>Sub-Total</h6>
+        </div>
+        <div>
+          <p>&#8358; 0</p>
+        </div>
+        <div>
+          <h6>Shipping</h6>
+        </div>
+        <div>
+          <p>&#8358; 0</p>
+        </div>
+        <div>
+          <h6>Processing</h6>
+        </div>
+        <div>
+          <p>&#8358; 700</p>
+        </div>
+      </div>
+      <hr />
+      <div class="costGrid">
+        {{#itemSum getCartItems}}
+          <div class="total">
+            <p>Total</p>
           </div>
 
-          <hr>
-          <div class="costGrid">
-            <div>
-              <h6>Sub-Total</h6>  
-            </div>
-            <div>
-              <p>&#8358; 0</p>
-            </div>
-            <div>
-              <h6>Shipping</h6>  
-            </div>
-            <div>
-              <p>&#8358; 0</p>
-            </div>
-          </div>
-        <hr>
-          <div class="costGrid ">  
-            {{#itemSum getCartItems}}     
-            <div class="total">
-              <p>Total</p>  
-            </div>
-
-            <div class="totalCost">
+          <div class="totalCost">
+            {{#add this 700}}
               <p>&#8358;{{this}} </p>
-            </div>
-            {{/itemSum}}
+            {{/add}}
           </div>
-        </div>
+        {{/itemSum}}
       </div>
-<form class="form-container" action="/farmer/cart/checkout" method="post">
-      <div class="container2">
-        <h1 class="h1">Delivery information</h1>
-        <div class="horizontalLine"></div>
+    </div>
+  </div>
+  <form class="form-container" action="/farmer/cart/checkout" method="post">
+    <div class="container2">
+      <h1 class="h1">Delivery information</h1>
+      <div class="horizontalLine"></div>
       {{#each getCartItems}}
-        <input type="hidden" name="items" id="{{id}}" value="{{id}}">
+        <input type="hidden" name="items" id="{{id}}" value="{{id}}" />
       {{/each}}
-        <div class="shippingGrid">
-          <div class="shippingAddress">
-            <h4>{{farmer.firstname}} {{farmer.lastname}}, {{farmer.phone_no}}</h4>
-            <p>Address:{{farmer.address}}  {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</p>
-            <p>Pick up point: <textarea name="pickup" id="pickup" style="width: 400px;">{{deliveryInfo.address}}, {{deliveryInfo.LGA.name}}, {{deliveryInfo.State.name}}</textarea></p>
-          </div>
+      <div class="shippingGrid">
+        <div class="shippingAddress">
+          <h4>{{farmer.firstname}} {{farmer.lastname}}, {{farmer.phone_no}}</h4>
+          <p>Address:{{farmer.address}}
+            {{deliveryInfo.LGA.name}},
+            {{deliveryInfo.State.name}}</p>
+          <p>Pick up point:
+            <textarea
+              name="pickup"
+              id="pickup"
+              style="width: 400px;"
+            >{{deliveryInfo.address}},
+              {{deliveryInfo.LGA.name}},
+              {{deliveryInfo.State.name}}</textarea></p>
         </div>
       </div>
+    </div>
 
-      <div class="container3">
-        <h1 class="h1">payment</h1>
-        <div class="horizontalLine"></div>
+    <div class="container3">
+      <h1 class="h1">payment</h1>
+      <div class="horizontalLine"></div>
 
-        <div class="pre_pay">
-          <p><em>Select your preferred mode of payment</em></p>
-          
-             {{#itemSum getCartItems}}     
-              <input type="hidden" name="total_sum" id="total_sum" value="{{this}}">
-            {{/itemSum}}
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="card" value="card" >
-              <label class="form-check-label" for="card">Card</label>
-            </div>
-            {{!-- <div class="form-check form-check-inline">
+      <div class="pre_pay">
+        <p><em>Select your preferred mode of payment</em></p>
+
+        {{#itemSum getCartItems}}
+            <input
+              type="hidden"
+              name="total_sum"
+              id="total_sum"
+              value="{{#add this 700}}{{this}}  {{/add}}"
+            />
+        {{/itemSum}}
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            required="true"
+            type="radio"
+            name="inlineRadioOptions"
+            id="card"
+            value="card"
+          />
+          <label class="form-check-label" for="card">Card</label>
+        </div>
+        {{! <div class="form-check form-check-inline">
               <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="ussd" value="ussd">
               <label class="form-check-label" for="ussd">USSD</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="pos" value="pos">
               <label class="form-check-label" for="pos">POS</label>
-            </div> --}}
-            {{!-- <div class="form-check form-check-inline">
+            </div> }}
+        {{! <div class="form-check form-check-inline">
               <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="payOnDelivery" value="payOnDelivery">
               <label class="form-check-label" for="payOnDelivery">Pay On Delivery</label>
-            </div> --}}
-{{!-- 
+            </div> }}
+        {{! 
             <input type="radio" name="ussd" value="ussd" />
             <label for="ussd">USSD</label>
             <input type="radio" name="ussd" class="pos" value="pos" />
             <label for="ussd">POS</label>
- --}}
-            <hr>
-            
-            <button type="submit" class="btn btn-theme " style="float: right;">Pay</button>
-         
-        </div>
+ }}
+        <hr />
+
+        <button
+          type="submit"
+          class="btn btn-theme"
+          style="float: right;"
+        >Pay</button>
+
       </div>
-       </form>
-      {{!-- <div class="container4">
+    </div>
+  </form>
+  {{! <div class="container4">
         <h1>order summary</h1>
         <div class="horizontalLine"></div>
         <div class="firstSummary">
@@ -130,5 +163,5 @@
           <button type="button" class="summaryBtn">Pay</button>
           <!-- <button type="button" class="summaryBtn">Save</button> -->
         </div>
-      </div> --}}
-    </section>
+      </div> }}
+</section>

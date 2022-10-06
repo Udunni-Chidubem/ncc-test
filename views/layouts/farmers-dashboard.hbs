@@ -189,10 +189,11 @@
 
       let itemTotalsum = $('.item-sum').html()
       let shippingCost = $('.shipping-cost').html()
+      let processingCost=$('.processing-cost').html()
 
       if (shippingCost != null) {
         shippingCost = shippingCost.replace(',', '');
-        $(".t_price").html(Number(shippingCost) + Number(itemTotalsum))
+        $(".t_price").html(Number(shippingCost) + Number(itemTotalsum)+Number(processingCost))
       }
 
       $('.size').on('change', function () {
