@@ -52,6 +52,7 @@ farmerRouter.post(
   settingsValidation(),
   validate,
   async (req, res) => {
+    req.body.userphoneno = user.username;
     let response = await farmersController.updatePassword(req, res);
     //  {status,farmer,isVerified,message_}
     if (response.message_) {
@@ -78,5 +79,6 @@ farmerRouter.get("/cart", async (req, res) => {
 });
 farmerRouter.post("/cart", cartValidation(), validate, async (req, res) => {
   let response = await farmersController.addToCart(req, res);
+  res.status(200).json({ response });
 });
 module.exports = farmerRouter;
