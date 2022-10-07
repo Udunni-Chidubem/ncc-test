@@ -1,0 +1,69 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+
+<div class="view-sheet-body p-3">
+    <div class="table-responsives table_t_info">
+
+        <table class="table t_info  table-bordered" id="offlineSales">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No.</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Variant</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">State</th>
+                    <th scope="col">LGA</th>
+                    <th scope="col">Community</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#salesSheet }}
+                <tr>
+                    <td scope="row">{{increment @index}}</td>
+                    <td>{{customer_name}}</td>
+                    <td>{{customer_number}}</td>
+
+                    {{#cancatArray product_name}}
+                    <td>{{this}}</td>
+                    {{/cancatArray}}
+
+                    {{#cancatArray product_variant}}
+                    <td>{{this}}</td>
+                    {{/cancatArray}}
+
+                    {{#cancatArray quantity}}
+                    <td>{{this}}</td>
+                    {{/cancatArray}}
+
+                    {{#cancatArray size}}
+                    <td>{{this}}</td>
+                    {{/cancatArray}}
+
+                    {{#cancatArray product_cost}}
+                    <td>{{this}}</td>
+                    {{/cancatArray}}
+
+                    <td>{{dateFormat sale_date 'dddd, MMMM Do YYYY'}}</td>
+                    <td>{{State.name}}</td>
+                    <td>{{LGA.name}}</td>
+                    <td>{{community}}</td>
+
+                </tr>
+                {{/salesSheet}}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+</script>

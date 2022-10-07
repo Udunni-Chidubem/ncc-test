@@ -46,7 +46,7 @@ module.exports = {
   updateProfile: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
 
     let states = await States.findAll({
       attributes: ["id", "name"],
@@ -58,30 +58,14 @@ module.exports = {
       attributes: ["state_id", "lg_id", "address"],
       raw: true,
     });
-
-    res.render("farmers/update-profile", {
-      layout: "farmers-dashboard",
-      title: "Update Profile",
-      fullname: farmer.firstname + " " + farmer.lastname,
-      farmerData: farmer,
-      states: states,
-      isVerified,
-      deliveryInfo,
-    });
+    return { farmer, isVerified, states, deliveryInfo };
   },
   settings: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
 
-    res.render("farmers/settings", {
-      layout: "farmers-dashboard",
-      title: "Settings",
-      fullname: farmer.firstname + " " + farmer.lastname,
-      farmerData: farmer,
-      isVerified,
-      farmer,
-    });
+    return { farmer, isVerified };
   },
   userUpdate: async (data, id) => {
     User.update(data, {
@@ -91,7 +75,7 @@ module.exports = {
   updatePassword: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
     let newpassword = await bcrypt.hash(req.body.newpassword, 10);
     let username = req.body.userphoneno;
     let message_ = "Updated Successfully";
@@ -315,6 +299,34 @@ module.exports = {
             },
           ],
         },
+        order: [["id", "DESC"]],
+        attributes: [
+          "id",
+          "product_name",
+          "variant",
+          "description",
+          "item",
+          "file_name",
+        ],
+        raw: true,
+        limit,
+        offset,
+      });
+    } else {
+      product = await Product.findAndCountAll({
+        include: [
+          {
+            model: User,
+            attributes: ["username"],
+            include: [
+              {
+                model: SeedCompany,
+                attributes: ["id", "name_of_company", "state_id"],
+                include: [{ model: States, attributes: ["id", "name"] }],
+              },
+            ],
+          },
+        ],
         order: [["id", "DESC"]],
         attributes: [
           "id",

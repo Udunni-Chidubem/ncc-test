@@ -8,12 +8,18 @@ const {
   validate,
   settingsValidation,
 } = require("../../helpers/formValidator");
-farmerRouter.post("/signup", async (req, res) => {
-  let y = await siteController.savefarmer(req, res);
-  res.send(y);
-});
-farmerRouter.get("/signup", (req, res) => {
-  res.send("Hello you are welcome");
+
+farmerRouter.get("/profile", async (req, res) => {
+  let { farmer, isVerified, states, deliveryInfo } =
+    await farmersController.updateProfile(req, res);
+  res
+    .json({
+      farmer,
+      isVerified,
+      states,
+      deliveryInfo,
+    })
+    .status(200);
 });
 
 farmerRouter.post(
@@ -37,5 +43,42 @@ farmerRouter.post(
     }
   }
 );
-
+farmerRouter.get("/settings", async (req, res) => {
+  let { farmer, isVerified } = await farmersController.settings(req, res);
+  res.status(200).json({ farmer, isVerified });
+});
+farmerRouter.post(
+  "/settings",
+  settingsValidation(),
+  validate,
+  async (req, res) => {
+    req.body.userphoneno = user.username;
+    let response = await farmersController.updatePassword(req, res);
+    //  {status,farmer,isVerified,message_}
+    if (response.message_) {
+      return res
+        .json({ message: response.message_, statusCode: 200 })
+        .status(200);
+    }
+    return res.json({ message: response });
+  }
+);
+farmerRouter.get("/market", async (req, res) => {
+  let { farmer, isVerified, response } = await farmersController.marketPlace(
+    req,
+    res
+  );
+  res.status(200).json({ farmer, isVerified, response });
+});
+farmerRouter.get("/cart", async (req, res) => {
+  let { farmer, isVerified, getCartItems } = await farmersController.cart(
+    req,
+    res
+  );
+  res.status(200).json({ farmer, isVerified, getCartItems });
+});
+farmerRouter.post("/cart", cartValidation(), validate, async (req, res) => {
+  let response = await farmersController.addToCart(req, res);
+  res.status(200).json({ response });
+});
 module.exports = farmerRouter;
