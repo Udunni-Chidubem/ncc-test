@@ -421,5 +421,22 @@ adminRouter.get('/transactions', async (req,res)=>{
         user_role: user_role.Role.role_name
     })
 });
+adminRouter.get('/offline-transactions', async (req,res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+    let {states} =  await adminController.getAllUsers(req, res)
+    let salesSheet = await adminController.getAllSaleSheets(req, res)
+
+    res.render('admin/offline-transactions', {
+        layout : 'admin-dashboard',
+        title : 'Offline Transaction-Report',
+        username : user.username,
+        isVerified, 
+        states, 
+        salesSheet,
+        user_role: user_role.Role.role_name
+    })
+});
 
 module.exports = adminRouter
