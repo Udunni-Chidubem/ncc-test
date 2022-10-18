@@ -20,9 +20,11 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
     let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
+    let offlineCount = await adminController.getOfflineTransactionCount(req, res)
+    let onlineCount = await adminController.getOnlineTransactionCount(req, res)
 
     console.log(user_role.Role.role_name)
-    console.log(companyCount)
+    console.log(onlineCount[0].count)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
@@ -43,7 +45,10 @@ adminRouter.get('/dashboard', async (req, res)=>{
         user_status: JSON.stringify(user_status),
         user_role: user_role.Role.role_name,
         farmerMalelist, 
-        farmerFemalelist
+        farmerFemalelist,
+        offlineCount,
+        onlineCount,
+        totalSales: onlineCount[0].count + offlineCount[0].count
     })
 });
 

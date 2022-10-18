@@ -823,6 +823,24 @@ module.exports = {
         return transaction;
     },
 
+    getOfflineTransactionCount: async (req, res) =>{
+
+        let sql =
+        "SELECT count(id) as count from salesheets";
+    let offlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
+
+        console.log(offlineCount);
+        return offlineCount;
+    },
+    
+    getOnlineTransactionCount: async (req, res) =>{
+        let sql =
+        "SELECT count(id) as count from transaction_log";
+    let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
+        console.log(onlineCount);
+        return onlineCount;
+    },
+
     getFarmerGender: async (req, res) => {
         let sql =
             "SELECT count(id) count from farmer f where f.gender = 'Male' ";
