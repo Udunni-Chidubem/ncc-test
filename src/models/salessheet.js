@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       lg_id: DataTypes.INTEGER,
       community: DataTypes.STRING(55),
       user_id: DataTypes.INTEGER,
-      date_sold: DataTypes.DATE,
+      // date_sold: DataTypes.DATE,
     },
     {
       underscored: true,

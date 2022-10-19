@@ -19,6 +19,7 @@ const {
     Orders,
     TransactionLog,
     Message,
+    Salesheets
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -869,6 +870,22 @@ module.exports = {
 
         ledger_info = JSON.parse(JSON.stringify(ledger_info))
         return ledger_info;
-    }
-    
+    },
+    getAllSaleSheets: async (res, req) => {
+        let salesSheet = await Salesheets.findAll({
+          include: [
+            {
+              model: States,
+              attributes: ["name"],
+            },
+            {
+              model: LGAs,
+              attributes: ["name"],
+            },
+          ]
+        });
+        sales = JSON.parse(JSON.stringify(salesSheet));
+        console.log(sales)
+        return sales;
+      }
 };
