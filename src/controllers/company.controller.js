@@ -233,7 +233,6 @@ module.exports = {
     let transaction = await db.rest.transaction();
     try {
       // let transaction = db.rest.transaction()
-
       carts.forEach(async (cart) => {
         let final_cost = cart.total_amount * 0.89;
         await Wallet.increment(
@@ -415,7 +414,7 @@ module.exports = {
 
   updatePassword: async (req, res) => {
     let user = await req.user;
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
     let newpassword = await bcrypt.hash(req.body.newpassword, 10);
     let username = req.body.userphoneno;
     let message_ = "Updated Successfully";
@@ -434,7 +433,7 @@ module.exports = {
   settings: async (req, res) => {
     const user = await req.user;
     const company = await utils.getCompanyProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
 
     res.render("seed_company/settings", {
       layout: "company-dashboard",
@@ -485,6 +484,7 @@ module.exports = {
           size: size,
           product_cost: p_cost,
           quantity: qty,
+          // date_sold: req.body.date_sold,
           user_id: user_id,
         },
         { transaction: transaction }

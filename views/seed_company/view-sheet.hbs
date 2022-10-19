@@ -21,7 +21,7 @@
       <tbody class="t_info_body">
       {{#each saleSheets }}
         <tr>
-          <td scope="row">{{@index}}</td>
+          <td scope="row">{{increment @index}}</td>
           <td>{{customer_name}}</td>
           <td>{{customer_number}}</td>
 
@@ -45,7 +45,7 @@
           <td>{{this}}</td>
           {{/cancatArray}}
           
-          <td>{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}</td>
+          <td>{{dateFormat  this.sale_date 'dddd, MMMM Do YYYY'}}</td>
           <td>{{State.name}}</td>
           <td>{{LGA.name}}</td>
           <td>{{community}}</td>

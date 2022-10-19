@@ -57,7 +57,12 @@
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
-                  <a href="/admin/transactions">Transaction Report</a>
+                  <a href="/admin/transactions">Online Transaction</a>
+                </li>
+                {{/if}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                <li>
+                  <a href="/admin/offline-transactions">Offline Transaction</a>
                 </li>
                 {{/if}}
 

@@ -1,28 +1,67 @@
-const jsonwebtoken=require('jsonwebtoken');
-const db = require('../models/index');
-function verityToken(req, res, next){
-    try{
-      if(req.header.Authorization==null){
+const jsonwebtoken = require("jsonwebtoken");
+const db = require("../models/index");
+const { User, Farmer, SeedTrader, UserRole, Role } = require("../models");
+async function verityToken(req, res, next) {
+  try {
+    // if(req.header.Authorization==null){
 
-      }
-      if(req.get('Authorization')==null){
-        res.send()
-      }
-      let token=req.get('Authorization').split(' ')[1]
-        if(jsonwebtoken.verify(token, 'secret123')){
-          let payload=jsonwebtoken.decode(token)
-          if(payload.exp>=Date.now()){
-            res.status(401).json({statusCode : 401, title : 'unauthorized', body : "Token has expired"}).send()
-          }else{
-            res.locals.user = payload
-          }
-        }else{
-          res.status(401).json({statusCode : 401, error : e.message}).send()
-        }
-    }catch(e){
-      res.status(401).json({statusCode : 401, error : e.message}).send()
+    // }
+    if (req.get("Authorization") == null) {
+      res
+        .status(401)
+        .json({
+          statusCode: 401,
+          title: "unauthorized",
+          body: "No Token found",
+        })
+        .send();
     }
-    return next()
+    let token = req.get("Authorization").split(" ")[1];
+    if (jsonwebtoken.verify(token, "secret123")) {
+      let payload = jsonwebtoken.decode(token);
+      if (payload.exp >= Date.now()) {
+        res
+          .status(401)
+          .json({
+            statusCode: 401,
+            title: "unauthorized",
+            body: "Token has expired",
+          })
+          .send();
+      } else {
+        let user = await User.findOne({
+          include: [
+            {
+              model: UserRole,
+              include: [{ model: Role }],
+            },
+          ],
+          where: {
+            id: payload.sub,
+          },
+          attributes: [
+            "id",
+            "username",
+            "status",
+            "token",
+            "created_at",
+            "updated_at",
+          ],
+        });
+        req.user = JSON.parse(JSON.stringify(user));
+        console.log(req.user);
+        res.locals.user = payload;
+      }
+    } else {
+      res
+        .status(401)
+        .json({ statusCode: 401, error: "not a valid token" })
+        .send();
+    }
+  } catch (e) {
+    res.status(401).json({ statusCode: 401, error: e.message }).send();
+  }
+  return next();
 }
 
-module.exports=verityToken
+module.exports = verityToken;
