@@ -501,7 +501,12 @@ module.exports = {
             return {
               status: true,
               statusCode: 200,
-              body: { access_token: token, type: "Bearer", expiresIn: "60m" },
+              body: {
+                access_token: token,
+                type: "Bearer",
+                expiresIn: "60m",
+                user_type: user.UserRole.Role.role_name,
+              },
             };
           } else {
             return {
