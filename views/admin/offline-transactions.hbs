@@ -10,6 +10,8 @@
             <thead class="t_info_head ">
                 <tr class="">
                     <th scope="col">S/N</th>
+                     <th scope="col">Company Name</th>
+                    {{!-- <th scope="col">Phone No.</th> --}}
                     <th scope="col">Name</th>
                     <th scope="col">Phone No.</th>
                     <th scope="col">Product Name</th>
@@ -27,6 +29,7 @@
                 {{#salesSheet }}
                 <tr>
                     <td scope="row">{{increment @index}}</td>
+                    <td>{{User.SeedCompany.name_of_company}}</td>
                     <td>{{customer_name}}</td>
                     <td>{{customer_number}}</td>
 

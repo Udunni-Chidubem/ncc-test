@@ -46,7 +46,7 @@ module.exports = {
   updateProfile: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
 
     let states = await States.findAll({
       attributes: ["id", "name"],
@@ -63,7 +63,7 @@ module.exports = {
   settings: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
 
     return { farmer, isVerified };
   },
@@ -75,7 +75,7 @@ module.exports = {
   updatePassword: async (req, res) => {
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
-    const isVerified = await utils.isVerified(user.dataValues);
+    const isVerified = await utils.isVerified(user);
     let newpassword = await bcrypt.hash(req.body.newpassword, 10);
     let username = req.body.userphoneno;
     let message_ = "Updated Successfully";

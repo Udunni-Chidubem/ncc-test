@@ -69,7 +69,7 @@ siteRouter.post(
             form_banner: "Group.png",
             title: "Successful Page",
             layout: "success-header",
-            errors: req.flash("errors"),
+            errors: req.flash("errors") ? req.flash("errors"): "" ,
           });
         } else {
           //res.send(r.errors)
@@ -226,15 +226,12 @@ siteRouter.post("/forgot_password", async (req, res) => {
         messages,
       });
     } else {
-      let otp_instance = await siteController.otp(passw.username);
-      // req.flash('phone', passw.username)
-      //req.flash('otp', otp_instance.otp_code)
+      siteController.otp(passw.username);
       res.render("site/otp", {
         form_banner: "Group.png",
         title: "OTP",
         layout: "form",
         phone: passw.username,
-        // phone
       });
     }
   }
@@ -242,8 +239,6 @@ siteRouter.post("/forgot_password", async (req, res) => {
   if (req.body.otp) {
     let otp = req.body.otp;
     let phone = req.body.phone;
-    // res.send({'phone': phone, 'otp':otp})
-    // return
     let otp_instance = await siteController.getOTPByCode(otp, phone);
     if (otp_instance.otp_code) {
       siteController.deleteOTP(otp, phone);
@@ -287,8 +282,6 @@ siteRouter.post("/forgot_password", async (req, res) => {
 });
 
 siteRouter.get("/otp", async (req, res) => {
-  //  let otp=req.flash('otp')
-
   res.render("site/otp", {
     form_banner: "Group.png",
     title: "OTP",
@@ -300,7 +293,7 @@ siteRouter.get("/otp", async (req, res) => {
 siteRouter.post("/otp", async (req, res) => {
   let otp = req.body.otp;
   let phone = req.flash("phone");
-  let otp_instance = siteController.getOTPByCode(otp, phone);
+  siteController.getOTPByCode(otp, phone);
   res.render("otp", {
     form_banner: "Group.png",
     title: "OTP",

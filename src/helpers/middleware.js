@@ -53,7 +53,10 @@ async function verityToken(req, res, next) {
         res.locals.user = payload;
       }
     } else {
-      res.status(401).json({ statusCode: 401, error: e.message }).send();
+      res
+        .status(401)
+        .json({ statusCode: 401, error: "not a valid token" })
+        .send();
     }
   } catch (e) {
     res.status(401).json({ statusCode: 401, error: e.message }).send();
