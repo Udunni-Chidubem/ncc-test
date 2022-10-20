@@ -176,7 +176,7 @@ module.exports = {
           {
             firstname: rq.body.firstname,
             lastname: rq.body.lastname,
-            phone_no: rq.body.phone_number,
+            phone_no: rq.body.phone,
             user_id: user.id,
             referee: referee,
           },
