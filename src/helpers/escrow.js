@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 
 const axios = require("axios").default;
-
+require('dotenv').config()
 module.exports = {
     
   generateToken: async(req, res) => {

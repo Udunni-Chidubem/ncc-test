@@ -1,7 +1,8 @@
 const { body } = require("express-validator");
-
+const uniqid=require('uniqid');
 const escrow = require("../helpers/escrow");
 const axios = require("axios").default;
+require('dotenv').config()
 
 module.exports = {
 
@@ -28,10 +29,10 @@ module.exports = {
         let transferData = {
             amount: req.body.amount, 
             bankName: req.body.bankName,
-            crAccount: process.env.escrow_acct,
-            description: req.body, 
-            drAccount: req.body.account,
-            transactionRef: req.body.transactionReference
+            crAccount: req.body.crAccount,
+            description: req.body.description, 
+            drAccount: process.env.escrow_acct,
+            transactionReference: uniqid()
         }
         try {
             let token=await escrow.generateToken();
@@ -52,17 +53,18 @@ module.exports = {
 
     transferToOtherBank: async (req, res) => {
         let transferData = {
-            amount: req.body.amount, 
+            amount: req.body.amount,
+            bankCode: req.body.bankCode, 
             bankName: req.body.bankName,
-            crAccount: req.body.account,
+            crAccount: req.body.crAccount,
             description: req.body.description, 
             drAccount: process.env.escrow_acct,
-            transactionRef: req.body.transactionReference
+            transactionReference: uniqid()
         }
         try {
             let token=await escrow.generateToken();
             if(token.responseCode=='00'){
-                let transfer= await escrow.transferZenith(transferData, token.tokenDetail.token)
+                let transfer= await escrow.transferOther(transferData, token.tokenDetail.token)
                 console.log(transfer)
                 res.send(transfer);
             }else{

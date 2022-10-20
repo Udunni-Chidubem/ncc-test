@@ -220,10 +220,11 @@ siteRouter.post('/forgot_password', async (req, res)=>{
                 form_banner:'Group.png',
                 title: 'OTP',
                 layout : 'form',
-                phone : passw.username
+                phone : passw.username,
+                expiration_time : otp_instance.expiration_time
             // phone
             })
-            
+            // console.log(otp_instance.expiration_time)
         }
     }
 
@@ -297,7 +298,20 @@ siteRouter.post('/otp', async(req, res)=>{
         phone
     })
 })
- 
+
+
+siteRouter.get('/otp-resend/:phone', async(req, res)=>{
+    let phone = req.params.phone
+    console.log(phone)
+    let otp_instance = siteController.otp(phone)
+    res.render('site/otp',{
+    form_banner:'Group.png',
+    title: 'OTP',
+    layout : 'form',
+    phone
+    })
+})
+
 siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
 siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
 // siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
