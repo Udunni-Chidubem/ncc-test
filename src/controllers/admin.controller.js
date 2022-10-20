@@ -102,93 +102,11 @@ module.exports = {
     return JSON.parse(traders);
   },
 
-<<<<<<< HEAD
-          let transaction = await db.rest.query(sql, {
-            nest: true,
-            type: QueryTypes.SELECT,
-        }); 
-
-        transaction = JSON.parse(JSON.stringify(transaction));
-
-        console.log(transaction);
-        return transaction;
-    },
-
-    getOfflineTransactionCount: async (req, res) =>{
-
-        let sql =
-        "SELECT count(id) as count from salesheets";
-    let offlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
-
-        console.log(offlineCount);
-        return offlineCount;
-    },
-    
-    getOnlineTransactionCount: async (req, res) =>{
-        let sql =
-        "SELECT count(id) as count from transaction_log";
-    let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
-        console.log(onlineCount);
-        return onlineCount;
-    },
-
-    getFarmerGender: async (req, res) => {
-        let sql =
-            "SELECT count(id) count from farmer f where f.gender = 'Male' ";
-        let farmerMalelist = await db.rest.query(sql, {
-            type: QueryTypes.SELECT,
-        });
-
-        let sql2 =
-            "SELECT count(id) as count from farmer f  where f.gender = 'Female' ";
-        let farmerFemalelist = await db.rest.query(sql2, {
-            type: QueryTypes.SELECT,
-        });
-
-        return {
-            farmerMalelist,
-            farmerFemalelist
-        };
-    },
-    getMaleSeedTraderCount: async (req, res) => {
-        let maleSeedtraderCount = await SeedTrader.count({
-            where: {gender: "Male"}
-        });
-
-        maleSeedtraderCount = maleSeedtraderCount;
-        return maleSeedtraderCount;
-    },
-
-    company_id: async (req,res) => {
-        let company_id = await SeedCompany.findOne({
-            where: {user_id: req.params.id}
-        })
-        company_id = JSON.parse(JSON.stringify(company_id))
-        return company_id;
-    },
-
-    ledger_info: async (req, res, company_id) => {
-        let ledger_info = await Orders.findAll({
-            where: {company_id: company_id},
-            include: [
-                {
-                    model: TransactionLog
-                }
-            ]
-        })
-
-        ledger_info = JSON.parse(JSON.stringify(ledger_info))
-        return ledger_info;
-    },
-    getAllSaleSheets: async (res, req) => {
-        let salesSheet = await Salesheets.findAll({
-=======
   getProducts: async (req, res) => {
     let products = await Product.findAll({
       include: [
         {
           model: User,
->>>>>>> 1baef6205490cdd48a67f94cbc632be7468a20b7
           include: [
             {
               model: SeedCompany,
