@@ -176,7 +176,7 @@ module.exports = {
           {
             firstname: rq.body.firstname,
             lastname: rq.body.lastname,
-            phone_no: rq.body.phone_number,
+            phone_no: rq.body.phone,
             user_id: user.id,
             referee: referee,
           },
@@ -501,7 +501,12 @@ module.exports = {
             return {
               status: true,
               statusCode: 200,
-              body: { access_token: token, type: "Bearer", expiresIn: "60m" },
+              body: {
+                access_token: token,
+                type: "Bearer",
+                expiresIn: "60m",
+                user_type: user.UserRole.Role.role_name,
+              },
             };
           } else {
             return {
