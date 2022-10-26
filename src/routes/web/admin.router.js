@@ -444,4 +444,18 @@ adminRouter.get('/offline-transactions', async (req,res)=>{
     })
 });
 
+adminRouter.get('/analytics', async (req, res) => {
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+    
+    res.render('admin/analytics', {
+        layout : 'admin-dashboard',
+        title : 'Analytics',
+        username : user.username,
+        isVerified,
+        user_role: user_role.Role.role_name
+    })
+})
+
 module.exports = adminRouter
