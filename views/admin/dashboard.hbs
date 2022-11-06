@@ -9,6 +9,20 @@
 {{/inactiveProduct}}
 
 
+{{!-- Transaction List --}}
+
+{{#offlineCount}}
+<p id="offline-transaction" offlineCount="{{count}}" ></p>
+{{/offlineCount}}
+
+
+{{#onlineCount}}
+<p id="online-transaction" onlineCount="{{count}}" ></p>
+{{/onlineCount}}
+
+
+
+
 {{!-- farmer --}}
 {{#farmerinactivelist}}
 <p id="farmercount_1" farmerinactivelist="{{count}}"> </p>
@@ -45,6 +59,8 @@
 <p id="female_farmers" farmerFemalelist="{{count}}"> </p>
 {{/farmerFemalelist}}
 
+
+
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 ">
 
@@ -56,7 +72,7 @@
             {{#farmerCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/farmerCount}}
-            <a href="/admin/users" class="card-link float-end">View details</a>
+            <a href="/admin/users#farmers-tab" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -70,7 +86,7 @@
             {{#companyCount}}
                 <p class="card-text text-center c_d_s2_sales s_1 ">{{count}}</p>
             {{/companyCount}}
-            <a href="/admin/users" class="card-link float-end">View details</a>
+            <a href="/admin/users#seed-company-tab" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
@@ -84,14 +100,28 @@
             {{#seedtraderCount}}
             <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
             {{/seedtraderCount}}
-            <a href="/admin/users" class="card-link float-end">View details</a>
+            <a href="/admin/users#seed-traders-tab" class="card-link float-end">View details</a>
           </div>
         </div>
       </div>
     </div>
+    
+    {{!-- <div class="col co_12 ">
+      <div class="">
+        <div class="card card_admin_home">
+          <div class="card-body">
+            <h5 class="card-title text-center">Total Sales</h5>
+            {{#totalSales}}
+            <p class="card-text text-center c_d_s2_sales s_1 ">{{this}}</p>
+            {{/totalSales}}
+            {{!-- <a href="/admin/users" class="card-link float-end">View details</a> --}}
+          </div>
+        </div>
+      </div>
+    </div> 
 
   </div>
-</div>
+</div>--}}
 
 <div class="row chart_">
   {{!-- <div class="col-6">
@@ -159,6 +189,27 @@
           </div>
           <div class="col-9">
             <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3">
+            <div class=" ">
+              <span class="sp_p_accout "></span>
+              <p class="p_accout pl-3"> Online</p>
+              <span class="sp_un_account"></span>
+              <p class="un_account  pl-3"> Offline</p>
+            </div>
+          </div>
+          <div class="col-9">
+            <canvas id="totaltransactions" style="width:100%;max-width:600px"></canvas>
           </div>
 
         </div>
@@ -325,6 +376,7 @@
   const productlist_2 = document.getElementById('productlist_2');
   inactiveProduct = productlist_2.getAttribute("inactiveProduct")
 
+
   /* farmer count*/
   const farmercount_1 = document.getElementById('farmercount_1');
   farmerinactivelist = farmercount_1.getAttribute("farmerinactivelist")
@@ -352,6 +404,16 @@
 
   const female_farmers = document.getElementById('female_farmers');
   farmerFemalelist = female_farmers.getAttribute("farmerFemalelist")
+
+/*  Transaction count*/
+
+  const offlineTransaction = document.getElementById('offline-transaction');
+  offlineCount = offlineTransaction.getAttribute("offlineCount")
+
+  const onlineTransaction = document.getElementById('online-transaction');
+  onlineCount = onlineTransaction.getAttribute("onlineCount")
+
+
 
   // let x = $('.stat').data('user')
   // console.log(x)
@@ -439,6 +501,7 @@
 
   var xproductValues = ["published", "unpublished"];
   var yproductValues = [activeProduct, inactiveProduct];
+  
   var productbarColors = [
     "#FB8200",
     "#7B61FF",
@@ -461,6 +524,38 @@
       title: {
         display: true,
         text: "Total Products"
+      }
+    }
+  });
+
+
+
+
+  var xtransactionValues = ["online transactions", "offline transactions"];
+  var ytransactionValues = [onlineCount, offlineCount];
+
+    var transactionBarColors = [
+    "#FB8200",
+    "#7B61FF",
+
+  ];
+
+  new Chart("totaltransactions", {
+    type: "doughnut",
+    data: {
+      labels: xtransactionValues,
+      datasets: [{
+        backgroundColor: transactionBarColors,
+        data: ytransactionValues
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Total Transactions"
       }
     }
   });
