@@ -81,4 +81,10 @@ farmerRouter.post("/cart", cartValidation(), validate, async (req, res) => {
   let response = await farmersController.addToCart(req, res);
   res.status(200).json({ response });
 });
+farmerRouter.get("/transactions", async (req, res) => {
+  const user = await req.user;
+  let farmer = await utils.getFarmerProfile(user);
+  let transactions = await farmersController.getTransactions(farmer.id);
+  res.status(200).json({ transactions });
+});
 module.exports = farmerRouter;
