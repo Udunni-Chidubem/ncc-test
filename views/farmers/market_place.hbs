@@ -52,7 +52,7 @@
 
   </div>
 
-  {{#ifNotEquals products.status 1}}
+  {{#if (eq products.status 1)}}
 
     <section class="products">
       {{#each products.result}}
