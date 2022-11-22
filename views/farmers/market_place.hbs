@@ -52,7 +52,7 @@
 
   </div>
 
-  {{#if (eq products.status 1)}}
+  {{#ifNotEquals products.status 1}}
 
     <section class="products">
       {{#each products.result}}
@@ -157,7 +157,7 @@
     >
       What are you looking for ?
     </div>
-  {{/if}}
+  {{/ifNotEquals}}
 
 </div>
 
