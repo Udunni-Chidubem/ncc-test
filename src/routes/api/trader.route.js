@@ -40,7 +40,7 @@ traderRoute.get("/transactions", async (req, res) => {
   let transactions = await tradersController.getTransactions(trader.id);
   res.status(200).json(transactions);
 });
-farmerRouter.get("/transactions/:transaction_id", async (req, res) => {
+traderRoute.get("/transactions/:transaction_id", async (req, res) => {
   let transaction = await tradersController.getOrder(req, res);
   res.status(200).json({ message: transaction, statusCode: 200 });
 });
