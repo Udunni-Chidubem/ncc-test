@@ -33,12 +33,16 @@ traderRoute.get("/referals", async (req, res) => {
   let traderRefres = await tradersController.traderRefres(req, referal_id);
   res.status(200).json({ message: traderRefres, statusCode: 200 });
 });
-traderRoute.get("/orders", async (req, res) => {
+traderRoute.get("/transactions", async (req, res) => {
   let user = await req.user;
   const trader = await utils.getTraderPofile(user);
   //   let isVerified = await utils.isVerified(user, "trader");
   let transactions = await tradersController.getTransactions(trader.id);
   res.status(200).json(transactions);
+});
+farmerRouter.get("/transactions/:transaction_id", async (req, res) => {
+  let transaction = await tradersController.getOrder(req, res);
+  res.status(200).json({ message: transaction, statusCode: 200 });
 });
 traderRoute.get("/market", async (req, res) => {
   let response = await tradersController.marketPlace(req, res);
