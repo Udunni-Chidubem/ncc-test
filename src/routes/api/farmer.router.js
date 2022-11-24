@@ -1,5 +1,4 @@
 const farmerRouter = require("express").Router();
-const { Utils } = require("sequelize/types");
 const farmersController = require("../../controllers/farmers.controller");
 const siteController = require("../../controllers/site.controller");
 const {
@@ -9,6 +8,7 @@ const {
   validate,
   settingsValidation,
 } = require("../../helpers/formValidator");
+const utils = require("../../helpers/utils");
 
 farmerRouter.get("/profile", async (req, res) => {
   let { farmer, isVerified, states, deliveryInfo } =
