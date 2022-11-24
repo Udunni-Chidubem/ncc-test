@@ -120,6 +120,7 @@ farmersRouter.get("/market_place", async (req, res) => {
 });
 
 farmersRouter.get("/product", farmerController.product);
+
 farmersRouter.get("/products/:id", async (req, res) => {
   const resp = await farmerController.viewProduct(req, res);
   const seedCompany = resp.singleProduct["User.SeedCompany.name_of_company"];
@@ -137,6 +138,7 @@ farmersRouter.get("/products/:id", async (req, res) => {
     isVerified: resp.isVerified,
   });
 });
+
 farmersRouter.get("/checkout/preview", async (req, res) => {
   if (req.query.product) {
     console.log(req.query.product);

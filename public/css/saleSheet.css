@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 .horizontalLine{
     border-bottom: 1px solid #ccc;
-    padding: 1.5rem;
+    padding: 10px;
 }
 
 .asterisk{

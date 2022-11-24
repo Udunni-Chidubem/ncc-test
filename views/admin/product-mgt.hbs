@@ -28,22 +28,24 @@
           </thead>
           <tbody>
             {{#each products}}
-            <tr class="row-one row-height">
-              <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-              <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-              <td scope="col"> <strong>{{this.local_name}}</strong></td>
-              <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
-              <td scope="col">
-                {{#if (eq this.status 1)}}
-                <span class="published">Published</span>
-                {{else if (eq this.status 0)}}
-                <span class="unpublished">Unpublished</span>
-                {{else}}
-                <span class="revoked_product">Revoked</span>
-                {{/if}}
-              </td>
-              <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
-            </tr>
+              {{#if (ne this.status 2)}}
+                <tr class="row-one row-height">
+                  <td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
+                  <td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
+                  <td scope="col"> <strong>{{this.local_name}}</strong></td>
+                  <td scope="col"> <strong>{{this.User.SeedCompany.name_of_company}}</strong></td>
+                  <td scope="col">
+                    {{#if (eq this.status 1)}}
+                    <span class="published">Published</span>
+                    {{else if (eq this.status 0)}}
+                    <span class="unpublished">Unpublished</span>
+                    {{else}}
+                    <span class="revoked_product">Revoked</span>
+                    {{/if}}
+                  </td>               
+                  <td scope="col"><a href="/admin/products/{{this.id}}">Details</a></td>
+                </tr>
+              {{/if}}
             {{/each}}
           </tbody>
         </table>

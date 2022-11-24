@@ -547,6 +547,7 @@ module.exports = {
     return { cartItems, isItemAlreadyAdded, product };
   },
   initializeTransaction: async (req, res, ref, getCartItems, trader) => {
+    let transaction = await db.rest.transaction();
     try {
       let log = await TransactionLog.create(
         {

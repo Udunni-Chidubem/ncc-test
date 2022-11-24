@@ -46,7 +46,7 @@
 							{{#each farmers}}
 								
 									<tr class="table-theme-secondary">
-										<td>{{this.id}}</td>
+										<td>{{increment 1}}</td>
 										<td colspan="" rowspan="" headers="">{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}
 										</td>
 										<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
@@ -78,7 +78,7 @@
 							{{#each companies}}
 								{{#if (ne this.User.status 2)}}
 								<tr class="table-theme-secondary">
-									<td>{{this.id}}</td>
+									<td>{{increment 1}}</td>
 									<td colspan="" rowspan="" headers="">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}
 									</td>
 									<td colspan="" rowspan="" headers="">{{this.name_of_company}}</td>
@@ -102,6 +102,7 @@
 								<th>S/N</th>
 								<th>Reg. Date</th>
 								<th>Name</th>
+								<th>Phone No.</th>
 								<th>Location</th>
 								<th></th>
 							</tr>
@@ -109,10 +110,11 @@
 						<tbody>
 							{{#each traders}}
 							<tr class="table-theme-secondary">
-								<td>{{this.id}}</td>
+								<td>{{increment 1}}</td>
 								<td colspan="" rowspan="" headers="">{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}
 								</td>
 								<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
+								<td colspan="" rowspan="" headers="">{{this.phone_no}}</td>
 								<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} ,
 									{{this.State.name}}</td>
 								<td colspan="" rowspan="" headers="">

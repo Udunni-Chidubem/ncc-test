@@ -110,8 +110,10 @@
     {{#if (or (eq user_role "nigsims")
     (eq user_role "admin"))}}
     <div class="float-end">
-        {{#if (or (eq product.status 0) (eq product.status 2)) }}
+        {{#if (eq product.status 0) }}
         <div class="float-end m-2 mb-3">
+            <button type="button" class="btn btn-danger float-right submitBtn" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/2'" class="fa fa-close"> Revoke</button>
+
             <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal"
                 data-bs-target="#reject" class="fa fa-close"> Reject</button>
 
@@ -119,10 +121,19 @@
                 onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i
                     class="fa fa-check"></i> Approve</button>
         </div>
-        {{else}}
+        {{else if (eq product.status 1)}}
         <div class="float-end m-2 mb-3">
-            <button type="button" class="btn btn-danger float-right submitBtn" data-bs-toggle="modal"
-                data-bs-target="#reject" class="fa fa-close"> Revoke</button>
+            <button type="button" class="btn btn-danger float-right submitBtn" onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/2'" class="fa fa-close"> Revoke</button>
+            
+            <button type="button" class="btn btn-success float-right submitBtn"
+                onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i
+                    class="fa fa-check"></i> Approve</button>
+        </div>
+        {{else}}
+        <div class="float-end m-2 mb-3">          
+            <button type="button" class="btn btn-success float-right submitBtn"
+                onclick="window.location.href=window.location.origin+'/admin/products/approval/{{product.id}}/1'"><i
+                    class="fa fa-check"></i> Approve</button>
         </div>
         {{/if}}
     </div>

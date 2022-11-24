@@ -327,6 +327,15 @@ module.exports = {
             ],
           },
         ],
+        where: {
+          [Op.and]: [
+            {
+              status: {
+                [Op.eq]: 1,
+              },
+            },
+          ],
+        },
         order: [["id", "DESC"]],
         attributes: [
           "id",
