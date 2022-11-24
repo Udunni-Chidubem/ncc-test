@@ -1,4 +1,5 @@
 const farmerRouter = require("express").Router();
+const { Utils } = require("sequelize/types");
 const farmersController = require("../../controllers/farmers.controller");
 const siteController = require("../../controllers/site.controller");
 const {
@@ -81,7 +82,7 @@ farmerRouter.get("/transactions/:transaction_id", async (req, res) => {
   res.status(200).json({ message: transaction, statusCode: 200 });
 });
 farmerRouter.get("/product/:id", async (req, res) => {
-  const resp = await farmerController.viewProduct(req, res);
+  const resp = await farmersController.viewProduct(req, res);
   res.status(200).json({
     message: resp,
     statusCode: 200,
