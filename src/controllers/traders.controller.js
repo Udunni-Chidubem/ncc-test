@@ -841,6 +841,37 @@ module.exports = {
     order = JSON.parse(JSON.stringify(order));
     return order;
   },
+  getOrderById: async (req, res) => {
+    let id = req.params.id;
+    let order = await TransactionCarts.findAll({
+      include: [
+        {
+          model: TransactionLog,
+          where: { id: id },
+        },
+        {
+          model: Cart,
+          include: [
+            {
+              model: Product,
+              include: [
+                {
+                  model: User,
+                  include: [
+                    {
+                      model: SeedCompany,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    order = JSON.parse(JSON.stringify(order));
+    return order;
+  },
   cartByProductId: async (req) => {
     // let product_id = req.query.product
     const user = await req.user;

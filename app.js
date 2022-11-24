@@ -181,4 +181,4 @@ app.use("/robots.txt", function (req, res, next) {
 // const random = new Random();
 // const value = random.integer(1, 1000000);
 // console.log(value)
-seedAdminData();
+// seedAdminData();
