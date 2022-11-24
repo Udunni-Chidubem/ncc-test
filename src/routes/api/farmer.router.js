@@ -54,18 +54,12 @@ farmerRouter.post("/settings", async (req, res) => {
   return res.json({ message: response });
 });
 farmerRouter.get("/market", async (req, res) => {
-  let { farmer, isVerified, response } = await farmersController.marketPlace(
-    req,
-    res
-  );
-  res.status(200).json({ farmer, isVerified, response });
+  let { response } = await farmersController.marketPlace(req, res);
+  res.status(200).json({ response });
 });
 farmerRouter.get("/cart", async (req, res) => {
-  let { farmer, isVerified, getCartItems } = await farmersController.cart(
-    req,
-    res
-  );
-  res.status(200).json({ farmer, isVerified, getCartItems });
+  let { getCartItems } = await farmersController.cart(req, res);
+  res.status(200).json({ getCartItems });
 });
 farmerRouter.post("/cart", async (req, res) => {
   let response = await farmersController.addToCart(req, res);

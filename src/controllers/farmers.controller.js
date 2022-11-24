@@ -745,6 +745,7 @@ module.exports = {
       attributes: ["transaction_id", "transaction_ref", "status", "created_at"],
       where: {
         farmer_id: farmer_id,
+        transaction_id : {}
       },
     });
     console.log(JSON.parse(JSON.stringify(transactions)));
