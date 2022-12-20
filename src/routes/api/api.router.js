@@ -19,7 +19,12 @@ apiRouter.use(
   authGuard.hasRole("farmer"),
   farmerRouter
 );
-apiRouter.use("/company", verityToken, companyRoute);
+apiRouter.use(
+  "/company",
+  verityToken,
+  authGuard.hasRole("seed_company"),
+  companyRoute
+);
 apiRouter.use(
   "/trader",
   verityToken,
