@@ -558,6 +558,12 @@ module.exports = {
 
     return { cartItems, isItemAlreadyAdded };
   },
+  deleteCart: async (req, res) => {
+    let user = await req.user;
+    return await Cart.destroy({
+      where: { id: req.params.id, user_id: user.id },
+    });
+  },
   singleCartItem: async (req, res) => {
     const user = await req.user;
     const { price, size, quantity } = req.body;

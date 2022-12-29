@@ -1,4 +1,5 @@
 const farmerRouter = require("express").Router();
+const companyController = require("../../controllers/company.controller");
 const farmersController = require("../../controllers/farmers.controller");
 const siteController = require("../../controllers/site.controller");
 const {
@@ -8,6 +9,7 @@ const {
   validate,
   settingsValidation,
 } = require("../../helpers/formValidator");
+const paystack = require("../../helpers/paystack");
 const utils = require("../../helpers/utils");
 
 farmerRouter.get("/profile", async (req, res) => {
@@ -83,5 +85,75 @@ farmerRouter.get("/product/:id", async (req, res) => {
     data: resp.singleProduct,
     statusCode: 200,
   });
+});
+farmerRouter.delete("/cart/:id", async (req, res) => {
+  let count = await farmersController.deleteCart(req, res);
+  if (count > 0) {
+    res.status(200).json({
+      data: "product deleted from cart successfully",
+      statusCode: 200,
+    });
+  } else {
+    res.status(400).json({
+      data: "failed to delete product",
+      statusCode: 400,
+    });
+  }
+});
+farmerRouter.post("/transactions", async (req, res) => {
+  try {
+    let ref = req.body.reference;
+    let ids = [];
+    let carts = req.body.carts;
+    carts.forEach((e) => {
+      ids.push(e.id);
+    });
+    let { getCartItems, farmer } = await farmerController.getCartItemsByIds(
+      req,
+      ids
+    );
+    let log = await farmersController.initializeTransaction(
+      req,
+      res,
+      ref,
+      getCartItems,
+      farmer
+    );
+    let paystackPayload = await paystack.callBackMob(ref);
+    if (paystackPayload.status == true) {
+      let check = await farmerController.checkTransaction(ref);
+      data.status = "verified";
+      (data.currency = paystackPayload.data.currency),
+        (data.amount = paystackPayload.data.amount / 100);
+      data.transaction_id = paystackPayload.data.id;
+      data.description = "payment for a seed purchase via card";
+      farmersController.updateTransactionLog(data, ref);
+      let { farmer, isVerified, getCartItems } =
+        await farmerController.getCartItemsByIds(req, ids);
+      farmersController.createOrder(ids, log.id);
+      farmersController.updateCart(ids);
+      getCartItems.forEach((item) => {
+        farmerController.productItemsUpdate(
+          item.product_id,
+          item.size,
+          item.qty
+        );
+      });
+      companyController.creditWallet(getCartItems);
+      res
+        .status(200)
+        .json({ data: "Order completed successfully", statusCode: 200 });
+    } else {
+      res.status(404).json({
+        data: "invalid transaction reference",
+        statusCode: 404,
+      });
+    }
+  } catch (e) {
+    res.status(500).json({
+      data: e.message,
+      statusCode: 500,
+    });
+  }
 });
 module.exports = farmerRouter;
