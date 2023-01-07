@@ -156,4 +156,26 @@ farmerRouter.post("/transactions", async (req, res) => {
     });
   }
 });
+farmerRouter.post("/order/preview", async (req, res) => {
+  let items = [];
+  let data = [];
+  let carts = req.body.carts;
+  carts.forEach((e) => {
+    items.push(e.id);
+  });
+  //let cart=await farmerController.getCartItemsByIds(items)
+  if (!req.body.carts) {
+    data = await farmersController.cart(req, res);
+  } else {
+    data = await farmersController.getCartItemsByIds(req, items);
+  }
+
+  let { getCartItems, farmer, isVerified } = data;
+  let deliveryInfo = await farmersController.deliveryInfo(farmer.user_id);
+
+  res.status(200).json({
+    statusCode: 200,
+    data: { deliveryInfo: deliveryInfo, farmer: farmer, items: getCartItems },
+  });
+});
 module.exports = farmerRouter;
