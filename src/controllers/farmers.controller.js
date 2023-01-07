@@ -558,6 +558,12 @@ module.exports = {
 
     return { cartItems, isItemAlreadyAdded };
   },
+  deleteCart: async (req, res) => {
+    let user = await req.user;
+    return await Cart.destroy({
+      where: { id: req.params.id, user_id: user.id },
+    });
+  },
   singleCartItem: async (req, res) => {
     const user = await req.user;
     const { price, size, quantity } = req.body;
@@ -745,7 +751,6 @@ module.exports = {
       attributes: ["transaction_id", "transaction_ref", "status", "created_at"],
       where: {
         farmer_id: farmer_id,
-        transaction_id : {}
       },
     });
     console.log(JSON.parse(JSON.stringify(transactions)));
@@ -850,6 +855,37 @@ module.exports = {
         {
           model: TransactionLog,
           where: { transaction_id: transaction_id },
+        },
+        {
+          model: Cart,
+          include: [
+            {
+              model: Product,
+              include: [
+                {
+                  model: User,
+                  include: [
+                    {
+                      model: SeedCompany,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    order = JSON.parse(JSON.stringify(order));
+    return order;
+  },
+  getOrderById: async (req, res) => {
+    let id = req.params.id;
+    let order = await TransactionCarts.findAll({
+      include: [
+        {
+          model: TransactionLog,
+          where: { id: id },
         },
         {
           model: Cart,
