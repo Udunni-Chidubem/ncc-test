@@ -561,7 +561,7 @@ module.exports = {
   deleteCart: async (req, res) => {
     let user = await req.user;
     return await Cart.destroy({
-      where: { id: req.params.id, user_id: user.id },
+      where: { id: req.params.id, user_id: user.id, status: 0 },
     });
   },
   singleCartItem: async (req, res) => {
@@ -842,6 +842,8 @@ module.exports = {
       ],
       where: {
         id: { [Op.in]: ids },
+        user_id: user.id,
+        status: false,
       },
     });
     let getCartItems = JSON.parse(JSON.stringify(items));
