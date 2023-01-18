@@ -109,7 +109,7 @@ farmerRouter.post("/transactions", async (req, res) => {
     carts.forEach((e) => {
       ids.push(e.id);
     });
-    let { getCartItems, farmer } = await farmerController.getCartItemsByIds(
+    let { getCartItems, farmer } = await farmersController.getCartItemsByIds(
       req,
       ids
     );
@@ -122,7 +122,7 @@ farmerRouter.post("/transactions", async (req, res) => {
     );
     let paystackPayload = await paystack.callBackMob(ref);
     if (paystackPayload.status == true) {
-      let check = await farmerController.checkTransaction(ref);
+      let check = await farmersController.checkTransaction(ref);
       data.status = "verified";
       (data.currency = paystackPayload.data.currency),
         (data.amount = paystackPayload.data.amount / 100);
@@ -130,11 +130,11 @@ farmerRouter.post("/transactions", async (req, res) => {
       data.description = "payment for a seed purchase via card";
       farmersController.updateTransactionLog(data, ref);
       let { farmer, isVerified, getCartItems } =
-        await farmerController.getCartItemsByIds(req, ids);
+        await farmersController.getCartItemsByIds(req, ids);
       farmersController.createOrder(ids, log.id);
       farmersController.updateCart(ids);
       getCartItems.forEach((item) => {
-        farmerController.productItemsUpdate(
+        farmersController.productItemsUpdate(
           item.product_id,
           item.size,
           item.qty
