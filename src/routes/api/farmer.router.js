@@ -105,23 +105,23 @@ farmerRouter.post("/transactions", async (req, res) => {
   try {
     let ref = req.body.reference;
     let ids = [];
-    let carts = req.body.carts;
-    carts.forEach((e) => {
-      ids.push(e.id);
-    });
-    let { getCartItems, farmer } = await farmersController.getCartItemsByIds(
-      req,
-      ids
-    );
-    let log = await farmersController.initializeTransaction(
-      req,
-      res,
-      ref,
-      getCartItems,
-      farmer
-    );
     let paystackPayload = await paystack.callBackMob(ref);
     if (paystackPayload.status == true) {
+      let carts = req.body.carts;
+      carts.forEach((e) => {
+        ids.push(e.id);
+      });
+      let { getCartItems, farmer } = await farmersController.getCartItemsByIds(
+        req,
+        ids
+      );
+      let log = await farmersController.initializeTransaction(
+        req,
+        res,
+        ref,
+        getCartItems,
+        farmer
+      );
       let check = await farmersController.checkTransaction(ref);
       data.status = "verified";
       (data.currency = paystackPayload.data.currency),
@@ -129,8 +129,10 @@ farmerRouter.post("/transactions", async (req, res) => {
       data.transaction_id = paystackPayload.data.id;
       data.description = "payment for a seed purchase via card";
       farmersController.updateTransactionLog(data, ref);
-      let { farmer, isVerified, getCartItems } =
-        await farmersController.getCartItemsByIds(req, ids);
+      // var { farmer, getCartItems } = await farmersController.getCartItemsByIds(
+      //   req,
+      //   ids
+      // );
       farmersController.createOrder(ids, log.id);
       farmersController.updateCart(ids);
       getCartItems.forEach((item) => {
@@ -152,7 +154,7 @@ farmerRouter.post("/transactions", async (req, res) => {
     }
   } catch (e) {
     res.status(500).json({
-      data: e.message,
+      data: e,
       statusCode: 500,
     });
   }
