@@ -7,6 +7,8 @@ const db = require('../../models/index')
 const nodeMailer = require('nodemailer');
 const escrowRouter = require("../../controllers/escrow.controller");
 
+const psbRouter = require("../../payments/9psb.payment")
+
 const { 
     signupValidation, 
     signUpvalidate, 
@@ -316,5 +318,12 @@ siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
 siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
 // siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
 
+siteRouter.post("/payment/9psbAuth", psbRouter.generateToken)
+siteRouter.post("/payment/9psbValidate", psbRouter.psbCustomerValidate)
+siteRouter.post("/payment/otherValidate", psbRouter.otherCustomerValidate)
+siteRouter.get("/payment/getBanks", psbRouter.getBanks)
+siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout)
+siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout)
+siteRouter.post("/payment/payoutStatus/:ref", psbRouter.payoutStatus)
 
 module.exports=siteRouter; 

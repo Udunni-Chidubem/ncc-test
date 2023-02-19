@@ -178,21 +178,21 @@ app.use('/robots.txt', function (req, res, next) {
     res.send("User-agent: *\Disallow: /");
 });
 
-// axios.interceptors.request.use(
-//     (request) => {
-//       request.headers.ContentType = "application/json";
-//       request.headers.Accept = "application/json";
-//       return request;
-//     },
-//     (error) => {
-//       console.log(error);
-//       return Promise.reject(error);
-//     }
-//   );
+axios.interceptors.request.use(
+    (request) => {
+      request.headers.ContentType = "application/json";
+      request.headers.Accept = "application/json";
+      return request;
+    },
+    (error) => {
+      console.log(error);
+      return Promise.reject(error);
+    }
+  );
 
-//   axios.interceptors.response.use((response) => {
-//     return response.data;
-//   });
+  axios.interceptors.response.use((response) => {
+    return response.data;
+  });
 
 
 // const random = new Random();
