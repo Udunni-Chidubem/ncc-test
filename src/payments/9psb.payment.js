@@ -30,7 +30,7 @@ module.exports = {
         try {
         let token = await psb.generateToken()
         if(token.code="00"){
-            console.log(customerData)
+            // console.log('customer data', customerData)
             let validation = await psb.validateCustomer(customerData, token.access_token)
             console.log(validation)
                 res.send(validation);
@@ -79,40 +79,8 @@ module.exports = {
         let token = await psb.generateToken()
         if(token.code="00"){
             let banks = await psb.getAllBanks(token.access_token)
-            console.log(banks)
+            // console.log(banks)
                 res.send(banks);
-        }else{
-            res.send(token)
-        }
-        } catch (e) {
-            console.log(e)
-        }
-
-    },
-    psbCustomerValidate: async (req, res) => {
-        let r = req.body
-
-        data = {
-                publickey: process.env.psb_public_key,
-                source: {
-                operation: "account_enquiry",
-                recipient: {
-                accountnumber: r.account_number,
-                bankcode: r.bank_code
-                
-                }
-                },
-                order: {
-                country: "NG"
-                }
-               
-        }
-        try {
-        let token = await psb.generateToken()
-        if(token.code="00"){
-            let validation = await psb.validateCustomer(data, token.access_token)
-            console.log(validation)
-                res.send(validation);
         }else{
             res.send(token)
         }
@@ -220,17 +188,6 @@ module.exports = {
         try {
             console.log("payload", data)
         let token = await psb.generateToken()
-        //Get recipient bank code using their bank name 
-        // let allBankCode = await psb.getAllBanks(token.access_token)
-        // let b = allBankCode.banks
-        // let bank = await b.filter(e => {
-        //     return e.bankname==r.recipient_bank
-        // })
-        // console.log("recipient bank data", bank[0])
-
-        // bank_code = bank[0].bankcode
-        // console.log("recipient bank code", bank_code)
-        // data.recipient.bankcode = bank_code
         if(token.code="00"){
             let payout = await psb.otherPayout(data, token.access_token)
             console.log(payout)

@@ -324,6 +324,6 @@ siteRouter.post("/payment/otherValidate", psbRouter.otherCustomerValidate)
 siteRouter.get("/payment/getBanks", psbRouter.getBanks)
 siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout)
 siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout)
-siteRouter.post("/payment/payoutStatus/:ref", psbRouter.payoutStatus)
+siteRouter.get("/payment/payoutStatus/:ref", psbRouter.payoutStatus)
 
 module.exports=siteRouter; 

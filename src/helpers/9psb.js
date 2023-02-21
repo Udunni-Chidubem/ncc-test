@@ -98,7 +98,7 @@ module.exports = {
           return resp
       },
       payoutStatus: async (reference, token) => {
-        let resp = await axios.post(
+        let resp = await axios.get(
             `${process.env.psb_base_url}disbursement-api/api/v1/payouts?reference=`+reference, 
             
             {
