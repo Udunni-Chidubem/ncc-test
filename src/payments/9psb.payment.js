@@ -6,7 +6,7 @@ const axios = require("axios").default;
 require('dotenv').config()
 
 module.exports = {
-    generateToken: async (req, res) => {
+    generateToken: async () => {
         let token = await psb.generateToken()
         // console.log(token.data)
         return token
