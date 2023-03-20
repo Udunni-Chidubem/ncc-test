@@ -1236,3 +1236,54 @@ color: #818E9B;
   font-size: 15px !important;
   width: 150px;
 }
+
+
+
+.admin-user-product{
+  display: grid;
+
+}
+
+.admin-user-product h4{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+
+/* identical to box height */
+letter-spacing: 0.01em;
+
+/* text_help_gray */
+color: #818E9B;
+
+}
+
+.admin-user-product h5{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #757575;
+}
+
+.admin-user-product p{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+
+  /* identical to box height */
+  letter-spacing: 0.01em;
+
+  color: #000000;
+}
+
+.admin-user-name_varaint{
+  display: grid;
+  grid-template-columns: auto auto;
+}
