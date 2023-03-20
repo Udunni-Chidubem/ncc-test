@@ -360,16 +360,11 @@
 										{{/if}}
 									</td>
 									<td>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#sc_product"
+										<a href="#" data-bs-toggle="modal" data-bs-target="#sc_product_{{this.id}}"
 											data-item="{{this.id}}"><i class="fa fa-eye"></i></a>
 									</td>
 								</tr>
-
-								
-								{{/each}}
-							</tbody>
-						</table>
-						<div class="modal fade" id="sc_product" tabindex="-1" aria-labelledby="sc_productLabel"
+								<div class="modal fade" id="sc_product_{{this.id}}" tabindex="-1" aria-labelledby="sc_productLabel"
 									aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -475,7 +470,12 @@
 											</div>
 										</div>
 									</div>
-								</div>
+						</div>
+								
+								{{/each}}
+							</tbody>
+						</table>
+
 					</div>
 					{{!-- Products - Ends --}}
 
