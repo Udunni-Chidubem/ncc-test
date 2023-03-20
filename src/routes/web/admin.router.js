@@ -265,6 +265,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
     if(type=="company"){
         company = await adminController.getOneCompany(req, res);
         products = await adminController.getProductsByUserID(req, res);
+        product = await adminController.viewProduct(req, res)
         company_id = await adminController.company_id(req, res);
         ledger_info = await adminController.ledger_info(req, res, company_id.id);
     }
@@ -286,6 +287,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
         company,
         trader,
         products,
+        product,
         balance,
         ledger_info,
         user_role: user_role.Role.role_name
