@@ -375,8 +375,8 @@
 											<div class="modal-body">
 												<div class=" pt-2">
 													<span
-														class="{{#if (eq product.status 1)}} published_product {{else if (eq product.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
-														{{#if (eq product.status 1)}} Published {{else}} Pending {{/if}}
+														class="{{#if (eq this.status 1)}} published_product {{else if (eq this.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
+														{{#if (eq this.status 1)}} Published {{else}} Pending {{/if}}
 													</span>
 												</div>
 												<div class="card-body m-0 admin-user-product">
@@ -384,17 +384,17 @@
 														<div class="admin-user-name_varaint">
 															<div>
 																<h4>Product Name</h4>
-																<h5>{{product.product_name}}</h5>
+																<h5>{{this.product_name}}</h5>
 															</div>
 															<div>
 																<h4>Variety</h4>
-																<h5>{{product.variant}}</h5>
+																<h5>{{this.variant}}</h5>
 															</div>
 														</div>
 														<hr class="admin-product-line">
 														<div class="admin-view-prod-desc">
 															<h4>Product Description</h4>
-															<p>{{product.description}}</p>
+															<p>{{this.description}}</p>
 														</div>
 														<hr class="admin-product-line">
 
@@ -425,7 +425,7 @@
 																		</div>
 																	</div>
 																	<div class="row  admin-product-row">
-																		{{#json product.item}}
+																		{{#json this.item}}
 																		<div class="col col_sma">
 																			{{#each pkg}}
 																			<div class="py-1 ">
