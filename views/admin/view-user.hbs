@@ -538,7 +538,8 @@
 						<div class="account-details-grid">
 							<div>
 								<h6>Bank Name</h6>
-								<p>{{company.bank_code}}</p>
+                                 <select name="bank_code" class="form-control border-0 p-0" style="background-color: transparent !important;" data-bank="{{company.bank_code}}" id="bank" disabled>
+                                 </select>
 							</div>
 
 							<div>
@@ -692,3 +693,38 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	    let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let banks, len, i
+
+                banks = response.data.bank
+
+                len = banks.length
+                var ele = document.getElementById('bank');
+
+                
+                for(i=0; i < len; i++){
+                   selected = (banks[i].code == bank ? 'selected' : null)
+                    ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="'+selected+'">' + banks[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let bank = $('#bank').data('bank')
+                    if(bank != null){
+                        $('#bank').val(bank)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
+</script>
