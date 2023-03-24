@@ -46,7 +46,7 @@
 							{{#each farmers}}
 								
 									<tr class="table-theme-secondary">
-										<td>{{increment 1}}</td>
+										<td>{{increment @index}}</td>
 										<td colspan="" rowspan="" headers="">{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}
 										</td>
 										<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
@@ -78,7 +78,7 @@
 							{{#each companies}}
 								{{#if (ne this.User.status 2)}}
 								<tr class="table-theme-secondary">
-									<td>{{increment 1}}</td>
+									<td>{{increment  @index}}</td>
 									<td colspan="" rowspan="" headers="">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}
 									</td>
 									<td colspan="" rowspan="" headers="">{{this.name_of_company}}</td>
@@ -110,7 +110,7 @@
 						<tbody>
 							{{#each traders}}
 							<tr class="table-theme-secondary">
-								<td>{{increment 1}}</td>
+								<td>{{increment @index}}</td>
 								<td colspan="" rowspan="" headers="">{{dateFormat this.createdAt "dddd, MMMM Do YYYY"}}
 								</td>
 								<td colspan="" rowspan="" headers="">{{this.firstname}} {{this.lastname}}</td>
