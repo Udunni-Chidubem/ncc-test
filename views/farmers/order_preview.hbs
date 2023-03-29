@@ -18,11 +18,12 @@
 
       <hr />
       <div class="costGrid">
+        {{#itemSum getCartItems}}
         <div>
           <h6>Sub-Total</h6>
         </div>
         <div>
-          <p>&#8358; 0</p>
+          <p>&#8358; {{this}}</p>
         </div>
         <div>
           <h6>Shipping</h6>
@@ -39,7 +40,7 @@
       </div>
       <hr />
       <div class="costGrid">
-        {{#itemSum getCartItems}}
+       
         <div class="total">
           <p>Total</p>
         </div>
