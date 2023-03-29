@@ -22,6 +22,9 @@
             {{!-- <li class="nav-item">
               <a class="nav-link" href="#"><i class='bx bx-library'></i> Knowledge Base</a>
             </li> --}}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/analytics"><i class='bx bx-bar-chart-square'></i>Analytics</a>
+            </li>
 
             <li class="nav-item dropdown">
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
@@ -57,7 +60,12 @@
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
-                  <a href="/admin/transactions">Transaction Report</a>
+                  <a href="/admin/transactions">Online Transaction</a>
+                </li>
+                {{/if}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                <li>
+                  <a href="/admin/offline-transactions">Offline Transaction</a>
                 </li>
                 {{/if}}
 

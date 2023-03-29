@@ -76,13 +76,29 @@
 
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 								{{#if farmer.User.status}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'"
-									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								<div class="row">
+									<div class="col-6"><button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/0'"
+											class="btn btn-danger deactivate-btn status-btn"> Deactivate User</button>
+									</div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
+									</div>
+								</div>
 								{{else}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'"
-									class="btn btn-success activate-btn"> Activate User</button>
+								<div class="row">
+									<div class="col-6"><button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/1'"
+											class="btn btn-success activate-btn"> Activate User</button></div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{farmer.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
+									</div>
+								</div>
+
 								{{/if}}
 								{{/if}}
 							</div>
@@ -209,29 +225,32 @@
 									class="d-block img_round" alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 								{{#if company.User.status}}
-									<div class="row">
-										<div class="col-6"><button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'"
-									class="btn btn-danger deactivate-btn status-btn" > Deactivate User</button></div>
-										<div class="col-6">
-											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
-									class="btn btn-info activate-btn status-btn"> Remove User</button>
-										</div>
+								<div class="row">
+									<div class="col-6"><button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/0'"
+											class="btn btn-danger deactivate-btn status-btn"> Deactivate User</button>
 									</div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
+									</div>
+								</div>
 								{{else}}
 								<div class="row">
 									<div class="col-6">
 										<button type="button"
-										onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'"
-										class="btn btn-success activate-btn"> Activate User</button>
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/1'"
+											class="btn btn-success activate-btn"> Activate User</button>
 									</div>
-										<div class="col-6">
-											<button type="button" onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
-									class="btn btn-info activate-btn status-btn"> Remove User</button>
-										</div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{company.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
 									</div>
+								</div>
 								{{/if}}
-							{{/if}}
+								{{/if}}
 							</div>
 							<div class="profile-info-section">
 								<div class="  bio-data">
@@ -320,8 +339,8 @@
 								<tr>
 									<th>Date</th>
 									<th>Product Name</th>
-									<th>Amount</th>
 									<th>Status</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -329,7 +348,6 @@
 								<tr class="row-one row-height">
 									<td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
 									<td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-									<td scope="col"> <strong>1OOO</strong></td>
 									<td scope="col">
 										{{#if this.status}}
 										{{#equals this.status 1}}
@@ -341,10 +359,123 @@
 										{{/equals}}
 										{{/if}}
 									</td>
+									<td>
+										<a href="#" data-bs-toggle="modal" data-bs-target="#sc_product_{{this.id}}"
+											data-item="{{this.id}}"><i class="fa fa-eye"></i></a>
+									</td>
 								</tr>
+								<div class="modal fade" id="sc_product_{{this.id}}" tabindex="-1" aria-labelledby="sc_productLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class=" pt-2">
+													<span
+														class="{{#if (eq this.status 1)}} published_product {{else if (eq this.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
+														{{#if (eq this.status 1)}} Published {{else}} Pending {{/if}}
+													</span>
+												</div>
+												<div class="card-body m-0 admin-user-product">
+													<div class="">
+														<div class="admin-user-name_varaint">
+															<div>
+																<h4>Product Name</h4>
+																<h5>{{this.product_name}}</h5>
+															</div>
+															<div>
+																<h4>Variety</h4>
+																<h5>{{this.variant}}</h5>
+															</div>
+														</div>
+														<hr class="admin-product-line">
+														<div class="admin-view-prod-desc">
+															<h4>Product Description</h4>
+															<p>{{this.description}}</p>
+														</div>
+														<hr class="admin-product-line">
+
+														<hr class="admin-product-line">
+														<div>
+															<div class="inp_cont" id="inp_cont">
+																<div class="">
+																	<div class="row admin-product-row">
+																		<div class="col col_sma ">
+																			<div class="   ">
+																				<h4>Package Size <i>(kg)</i> </h4>
+																			</div>
+																		</div>
+																		<div class="col col_sma">
+																			<div class=" ">
+																				<h4>Quantity </h4>
+																			</div>
+																		</div>
+																		<div class="col col_sma">
+																			<div class=" ">
+																				<h4>Min Stock </h4>
+																			</div>
+																		</div>
+																		<div class="col col_sma">
+																			<div class=" ">
+																				<h4>Unit Price </h4>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row  admin-product-row">
+																		{{#json this.item}}
+																		<div class="col col_sma">
+																			{{#each pkg}}
+																			<div class="py-1 ">
+																				<h5>{{this}} </h5>
+																			</div>
+																			{{/each}}
+																		</div>
+																		<div class="col col_sma">
+																			{{#each quantity}}
+																			<div class="py-1 ">
+																				<h5>{{this}} </h5>
+																			</div>
+																			{{/each}}
+																		</div>
+																		<div class="col col_sma">
+																			{{#each min}}
+																			<div class="py-1 ">
+																				<h5>{{this}} </h5>
+																			</div>
+																			{{/each}}
+																		</div>
+																		<div class="col col_sma">
+																			{{#each price}}
+																			<div class="py-1 ">
+																				<h5> &#8358; {{this}} </h5>
+																			</div>
+																			{{/each}}
+																		</div>
+																		{{/json}}
+																		<div class="col col_sma">
+
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<hr class="admin-product-line">
+
+
+														</div>
+													</div>
+													</div>
+											</div>
+										</div>
+									</div>
+						</div>
+								
 								{{/each}}
 							</tbody>
 						</table>
+
 					</div>
 					{{!-- Products - Ends --}}
 
@@ -407,7 +538,8 @@
 						<div class="account-details-grid">
 							<div>
 								<h6>Bank Name</h6>
-								<p>{{company.bank_code}}</p>
+                                 <select name="bank_code" class="form-control border-0 p-0" style="background-color: transparent !important;" data-bank="{{company.bank_code}}" id="bank" disabled>
+                                 </select>
 							</div>
 
 							<div>
@@ -424,6 +556,8 @@
 					{{!-- Account Details - Ends --}}
 				</div>
 			</div>
+
+
 			{{/if}}
 			{{else}}
 			{{#if trader}}
@@ -438,13 +572,32 @@
 									class="d-block img_round" alt="user profile image">
 								{{#if (or (eq user_role "nigsims") (eq user_role "admin"))}}
 								{{#if trader.User.status}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/0'"
-									class="btn btn-danger deactivate-btn"> Deactivate User</button>
+								<div class="row">
+									<div class="col-6"><button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/0'"
+											class="btn btn-danger deactivate-btn status-btn"> Deactivate
+											User</button>
+									</div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
+									</div>
+								</div>
 								{{else}}
-								<button type="button"
-									onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/1'"
-									class="btn btn-success activate-btn"> Activate User</button>
+								<div class="row">
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/1'"
+											class="btn btn-success activate-btn"> Activate User</button>
+									</div>
+									<div class="col-6">
+										<button type="button"
+											onclick="window.location.href=window.location.origin+'/admin/users/activate/{{trader.user_id}}/2'"
+											class="btn btn-info activate-btn status-btn"> Remove User</button>
+									</div>
+								</div>
+
 								{{/if}}
 								{{/if}}
 							</div>
@@ -540,3 +693,38 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	    let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let banks, len, i
+
+                banks = response.data.bank
+
+                len = banks.length
+                var ele = document.getElementById('bank');
+
+                
+                for(i=0; i < len; i++){
+                   selected = (banks[i].code == bank ? 'selected' : null)
+                    ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="'+selected+'">' + banks[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let bank = $('#bank').data('bank')
+                    if(bank != null){
+                        $('#bank').val(bank)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
+</script>

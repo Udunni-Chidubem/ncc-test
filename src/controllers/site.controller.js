@@ -23,9 +23,6 @@ const Random = require("random-js").Random;
 const otp = require("../models/otp");
 const { default: axios } = require("axios");
 const jwt = require("jsonwebtoken");
-const nodeMailer = require("nodemailer");
-const contact = require("../models/contact");
-const { message } = require("./admin.controller");
 
 global.pass = 0;
 
@@ -99,6 +96,22 @@ module.exports = {
       errors: req.flash("errors"),
     });
   },
+  // Forgot_Password: async (req,res) => {
+  //     res.render('site/forgot_password',{
+  //         form_banner:'Group.png',
+  //         title: 'Forgot-Password',
+  //         layout : 'form',
+  //         errors : req.flash('errors')
+  //     });
+  // },
+  // OTP: async (req,res) => {
+  //     res.render('site/otp',{
+  //         form_banner:'Group.png',
+  //         title: 'OTP',
+  //         layout : 'form',
+  //         errors : req.flash('errors')
+  //     });
+  // },
   NewPassword: async (req, res) => {
     res.render("site/new_password", {
       form_banner: "Group.png",
@@ -128,48 +141,56 @@ module.exports = {
   savefarmer: async (rq, rs) => {
     const transaction = await db.rest.transaction();
     try {
-      const password = await bcrypt.hash(rq.body.password, 10);
-      const user = await User.create(
-        {
-          username: rq.body.phone,
-          password: password,
-          status: false,
-          token: "",
-        },
-        { transaction: transaction }
-      );
-      let r = await Role.findOne({
-        where: { role_name: "farmer" },
+      let usrExist = await User.count({
+        where: { username: rq.body.phone },
       });
-      UserRole.create(
-        {
-          user_id: user.id,
-          role_id: r.id,
-        },
-        { transaction: transaction }
-      );
-      let referee = null;
-      if (rq.body.referral) {
-        let s = await SeedTrader.findOne({
-          where: { referal_code: rq.body.referral },
+      if (!usrExist) {
+        const password = await bcrypt.hash(rq.body.password, 10);
+        const user = await User.create(
+          {
+            username: rq.body.phone,
+            password: password,
+            status: false,
+            token: "",
+          },
+          { transaction: transaction }
+        );
+        let r = await Role.findOne({
+          where: { role_name: "farmer" },
         });
-        referee = s.user_id;
+        UserRole.create(
+          {
+            user_id: user.id,
+            role_id: r.id,
+          },
+          { transaction: transaction }
+        );
+        let referee = null;
+        if (rq.body.referral) {
+          let s = await SeedTrader.findOne({
+            where: { referal_code: rq.body.referral },
+          });
+          referee = s.user_id;
+        }
+        const farmer = await Farmer.create(
+          {
+            firstname: rq.body.firstname,
+            lastname: rq.body.lastname,
+            phone_no: rq.body.phone,
+            user_id: user.id,
+            referee: referee,
+          },
+          { transaction: transaction }
+        );
+        await transaction.commit();
+        return { user, farmer };
+      } else {
+        return { error: true, message: "Account already exist" };
       }
-      const farmer = await Farmer.create(
-        {
-          firstname: rq.body.firstname,
-          lastname: rq.body.lastname,
-          phone_no: rq.body.phone,
-          user_id: user.id,
-          referee: referee,
-        },
-        { transaction: transaction }
-      );
-      await transaction.commit();
-      return { user, farmer };
     } catch (e) {
       console.log(e);
       await transaction.rollback();
+
       return e;
     }
   },
@@ -362,59 +383,7 @@ module.exports = {
   },
 
   saveContact: async (req, res) => {
-    let transaction = await db.rest.transaction();
-    // let transporter = nodeMailer.createTransport({
-    //     service: 'smtp.gmail.com',
-    //     secure: false, // true for 465, false for other ports
-    //     requireTLS: true,
-    //     auth: {
-    //       user: 'www.daniko15@gmail.com',
-    //       pass: 'Dansongs@21'
-    //     },
-    //   });
-
-    try {
-      const contact_instance = await Contact.create({
-        firstname: req.body.Firstname,
-        lastname: req.body.Lastname,
-        email: req.body.Email,
-        phone: req.body.phone,
-        message: req.body.message,
-      });
-
-      // let mailMessage = await transporter.sendMail({
-      //     // email = await Contact.findOne({
-      //     //     attributes :  ['email'],
-      //     //      where : {
-      //     //         email : req.body.email
-      //     //      },
-      //     //     }),
-      //     // message = await Contact.findOne({
-      //     //     attributes :  ['message'],
-      //     //     where : {
-      //     //         message : req.body.message
-      //     //     },
-      //     // }),
-      //     // const email = req.body.Email,
-      //     // const message = req.body.message,
-
-      //     from: 'www.daniko15@gmail.com',
-      //     to: email,
-      //     subject: 'CONTACT US -NIGSIMS',
-      //     text: message
-
-      //   })
-
-      transaction.commit();
-      // transporter
-      return contact_instance;
-    } catch (e) {
-      transaction.rollback();
-      console.log(e);
-      return e;
-    }
-
-    // console.log("Message sent: %s", info.messageId);
+    Contact.create(req.body);
   },
 
   ForgotPassword: async (req, res) => {
@@ -452,9 +421,9 @@ module.exports = {
       );
 
       let r = await axios.get(
-        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`
+        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=Your OTP is ${otp_code}&type=0&routing=3`
       );
-      console.log(r.data);
+      console.log(r);
 
       // let p = {
       //     method: 'post',
@@ -532,7 +501,12 @@ module.exports = {
             return {
               status: true,
               statusCode: 200,
-              body: { access_token: token, type: "Bearer", expiresIn: "60m" },
+              body: {
+                access_token: token,
+                type: "Bearer",
+                expiresIn: "60m",
+                user_type: user.UserRole.Role.role_name,
+              },
             };
           } else {
             return {

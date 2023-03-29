@@ -130,8 +130,9 @@
                               <div class="input-group input-group-sm mb-3">
                                  <label for="lga" class="input_form">LGA <span class="profile_sub">*</span></label>
                                  <div class="input-group mb-3">
-                                    <select class="form-select border-0 border-bottom lgas" required id="lgas" name="lg_id" data-lga="{{company.lg_id}}">
-                                    </select>
+                                    <select required class="form-select border-0 border-bottom" id="lgas" data-lga="{{ compapny.lg_id }}" name="lg_id">
+                                     <option value=""></option>
+                                  </select>
                                  </div>
                               </div>
                            </div>
@@ -219,19 +220,19 @@
 <script type="text/javascript">
     $(document).ready(function(){ 
 
-        let lga = $('#lgas').data('lga')
-          let bank = $('#bank').data('bank')
+       let state = $('#state').data('state')
+
         const getDefaultLgas = (state_id) => {
             let url =  window.location.origin+'/api/base/lgas/'+ state_id
             fetch(url).then(r=>r.json())
-            .then(r => { 
-                //let Options =  '<option value="">Select LGA</option>'
+            .then(r => {
                 let selected,Options
                 r.forEach(e=>{
-                    selected = (e.id == lga ? 'selected' : null)
-                    Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
+                    Options+='<option value="'+e.id+'">'+e.name+'</option>'
                 })
                 document.querySelector('#lgas').innerHTML= Options
+
+                $('#lgas').val(lga)
             }
             ).catch(e=>{
                 console.log(e)
@@ -239,28 +240,28 @@
         }
 
 
-        let state = $('#state').data('state')
-        if(state != null || lga != null ){
-            $('#state').val(state)
+        //Get All LGAs based on selected value of the state
+        
+        if(state != null){
+          $('#state').val(state)
 
-            getDefaultLgas(state)
-
-            setTimeout(function(){
-                let url =  window.location.origin+'/api/base/lgas/'+ state
-                fetch(url).then(r=>r.json())
-                .then(r => { 
-                    let selected,Options
-                    r.forEach(e=>{
-                        selected = (e.id == lga ? 'selected' : null)
-                        Options+='<option value="'+e.id+'" selected="'+selected+'">'+e.name+'</option>'
-                    })
-                    document.querySelector('#lgas').innerHTML= Options
-                }
-                ).catch(e=>{
-                    console.log(e)
-                })
-            }, 1000)
+          getDefaultLgas(state)
         }
+
+        document.querySelector('#state').addEventListener('change', function(){
+              let url =  window.location.origin+'/api/base/lgas/'+this.value
+              fetch(url).then(r=>r.json())
+              .then(r=>{
+                  let Options =  '<option value="">Select LGA</option>'
+                  r.forEach(e=>{
+                      Options+='<option value="'+e.id+'">'+e.name+'</option>'
+                  })
+                  document.querySelector('#lgas').innerHTML=Options
+              }
+              ).catch(e=>{
+                  //console.log(e)
+              })
+          })
 
 
         let url =  window.location.origin+'/api/base/get-droplist'

@@ -20,9 +20,11 @@ adminRouter.get('/dashboard', async (req, res)=>{
     let user_status = await adminController.getUserStatus(req, res)
     let user_role = await adminController.getUserRole(req, res)
     let {farmerMalelist, farmerFemalelist} = await adminController.getFarmerGender(req, res)
+    let offlineCount = await adminController.getOfflineTransactionCount(req, res)
+    let onlineCount = await adminController.getOnlineTransactionCount(req, res)
 
     console.log(user_role.Role.role_name)
-    console.log(companyCount)
+    console.log(onlineCount[0].count)
 
     res.render('admin/dashboard', {
         layout : 'admin-dashboard',
@@ -43,7 +45,10 @@ adminRouter.get('/dashboard', async (req, res)=>{
         user_status: JSON.stringify(user_status),
         user_role: user_role.Role.role_name,
         farmerMalelist, 
-        farmerFemalelist
+        farmerFemalelist,
+        offlineCount,
+        onlineCount,
+        totalSales: onlineCount[0].count + offlineCount[0].count
     })
 });
 
@@ -260,6 +265,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
     if(type=="company"){
         company = await adminController.getOneCompany(req, res);
         products = await adminController.getProductsByUserID(req, res);
+        product = await adminController.viewProduct(req, res)
         company_id = await adminController.company_id(req, res);
         ledger_info = await adminController.ledger_info(req, res, company_id.id);
     }
@@ -281,6 +287,7 @@ adminRouter.get('/users/:id', async (req, res)=>{
         company,
         trader,
         products,
+        product,
         balance,
         ledger_info,
         user_role: user_role.Role.role_name
@@ -421,5 +428,36 @@ adminRouter.get('/transactions', async (req,res)=>{
         user_role: user_role.Role.role_name
     })
 });
+adminRouter.get('/offline-transactions', async (req,res)=>{
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+    let {states} =  await adminController.getAllUsers(req, res)
+    let salesSheet = await adminController.getAllSaleSheets(req, res)
+
+    res.render('admin/offline-transactions', {
+        layout : 'admin-dashboard',
+        title : 'Offline Transaction-Report',
+        username : user.username,
+        isVerified, 
+        states, 
+        salesSheet,
+        user_role: user_role.Role.role_name
+    })
+});
+
+adminRouter.get('/analytics', async (req, res) => {
+    let user = await req.user
+    let isVerified = await utils.isVerified(user);
+    let user_role = await adminController.getUserRole(req, res)
+    
+    res.render('admin/analytics', {
+        layout : 'admin-dashboard',
+        title : 'Analytics',
+        username : user.username,
+        isVerified,
+        user_role: user_role.Role.role_name
+    })
+})
 
 module.exports = adminRouter
