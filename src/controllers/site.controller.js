@@ -421,9 +421,9 @@ module.exports = {
       );
 
       let r = await axios.get(
-        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=${otp_code}&type=0&routing=3`
+        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=Your OTP is ${otp_code}&type=0&routing=3`
       );
-      console.log(r.data);
+      console.log(r);
 
       // let p = {
       //     method: 'post',
