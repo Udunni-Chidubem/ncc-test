@@ -355,7 +355,7 @@ module.exports = {
       response = getPagingData(product, page, limit);
     }
 
-    return { farmer, isVerified, response };
+    return { farmer, isVerified, response, size };
   },
   product: async (req, res) => {
     const user = await req.user;

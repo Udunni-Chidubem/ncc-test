@@ -109,12 +109,15 @@ farmersRouter.get("/market_place", async (req, res) => {
   if (req.query.Search && products.result.length <= 0) {
     message = "No product found";
   }
+  // res.json(products).send();
+  // return;
   res.render("farmers/market_place", {
     layout: "farmers-dashboard",
     title: "Market Place",
     fullname: resp.farmer.firstname + " " + resp.farmer.lastname,
     farmerData: resp.farmer,
     products,
+    size: resp.size,
     message,
     isVerified: resp.isVerified,
   });

@@ -92,6 +92,17 @@ app.engine(
         console.log(res);
         return done.fn(res);
       },
+      eval(currentPage, length, done) {
+        let res = (Number(currentPage) - 1) * Number(length) + 1;
+        return done.fn(res);
+      },
+      numToArray(num, done) {
+        let arr = [];
+        for (let i = 0; i < num; i++) {
+          arr.push(i + 1);
+        }
+        return done.fn(arr);
+      },
     },
   })
 );
