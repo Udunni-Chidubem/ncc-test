@@ -748,7 +748,13 @@ module.exports = {
           ],
         },
       ],
-      attributes: ["transaction_id", "transaction_ref", "status", "created_at"],
+      attributes: [
+        "transaction_id",
+        "transaction_ref",
+        "status",
+        "created_at",
+        "id",
+      ],
       where: {
         farmer_id: farmer_id,
       },
@@ -884,10 +890,10 @@ module.exports = {
   getOrderById: async (req, res) => {
     let id = req.params.id;
     let order = await TransactionCarts.findAll({
+      where: { transaction_log_id: id },
       include: [
         {
           model: TransactionLog,
-          where: { id: id },
         },
         {
           model: Cart,
