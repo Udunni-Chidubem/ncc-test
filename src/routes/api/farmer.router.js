@@ -17,13 +17,13 @@ farmerRouter.get("/profile", async (req, res) => {
     await farmersController.updateProfile(req, res);
   res
     .json({
-      data: {
+      body: {
         farmer,
         isVerified,
-        states,
         deliveryInfo,
       },
       statusCode: 200,
+      message: "pulled successfully",
     })
     .status(200);
 });
@@ -32,58 +32,69 @@ farmerRouter.post("/profile", async (req, res) => {
   if (response.farmer || response.deliveryInformation) {
     res
       .json({
-        data: "Your profile has been updated successfully and you will be redirected shortly.",
+        body: "Your profile has been updated successfully and you will be redirected shortly.",
         statusCode: 200,
       })
       .status(200);
   } else {
     res
-      .json({ data: response.errors, error: true, statusCode: 400 })
+      .json({ body: response.errors, error: true, statusCode: 400 })
       .status(400);
   }
 });
 farmerRouter.get("/settings", async (req, res) => {
   let { farmer, isVerified } = await farmersController.settings(req, res);
-  res.status(200).json({ data: { farmer, isVerified }, statusCode: 200 });
+  res.status(200).json({ body: { farmer, isVerified }, statusCode: 200 });
 });
 farmerRouter.post("/settings", async (req, res) => {
   req.body.userphoneno = user.username;
   let response = await farmersController.updatePassword(req, res);
   //  {status,farmer,isVerified,message_}
   if (response.message_) {
-    return res.json({ data: response.message_, statusCode: 200 }).status(200);
+    return res.json({ body: response.message_, statusCode: 200 }).status(200);
   }
-  return res.json({ data: response });
+  return res.json({ body: response });
 });
 farmerRouter.get("/market", async (req, res) => {
   let { response } = await farmersController.marketPlace(req, res);
-  res.status(200).json({ data: response, statusCode: 200 });
+  res.status(200).json({ body: response, statusCode: 200 });
 });
 farmerRouter.get("/cart", async (req, res) => {
   let { getCartItems } = await farmersController.cart(req, res);
   let items = getCartItems;
-  res.status(200).json({ data: items, statusCode: 200 });
+  res.status(200).json({ body: items, statusCode: 200 });
 });
 farmerRouter.post("/cart", async (req, res) => {
   let response = await farmersController.addToCart(req, res);
-  res.status(200).json({ data: response, statusCode: 200 });
+  res
+    .status(200)
+    .json({ body: response, statusCode: 200, message: "processed" });
 });
 farmerRouter.get("/transactions", async (req, res) => {
   const user = await req.user;
   let farmer = await utils.getFarmerProfile(user);
   let transactions = await farmersController.getTransactions(farmer.id);
-  res.status(200).json({ data: transactions, statusCode: 200 });
+  res.status(200).json({
+    body: transactions,
+    statusCode: 200,
+    message: "pulled successfully",
+  });
 });
 farmerRouter.get("/transactions/:id", async (req, res) => {
   let transaction = await farmersController.getOrderById(req, res);
-  res.status(200).json({ data: transaction, statusCode: 200 });
+  res.status(200).json({
+    body: transaction,
+    statusCode: 200,
+    message: "pulled successfully",
+  });
   return;
 });
 farmerRouter.get("/product/:id", async (req, res) => {
   const resp = await farmersController.viewProduct(req, res);
   res.status(200).json({
-    data: resp.singleProduct,
+    body: resp.singleProduct,
     statusCode: 200,
+    message: "pulled successfully",
   });
 });
 farmerRouter.delete("/cart/:id", async (req, res) => {

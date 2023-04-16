@@ -528,7 +528,6 @@ module.exports = {
         },
       };
     } catch (e) {
-      // console.log(e.message())
       return {
         status: false,
         statusCode: 500,
