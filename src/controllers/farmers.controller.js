@@ -269,6 +269,15 @@ module.exports = {
                 model: SeedCompany,
                 attributes: ["id", "name_of_company", "state_id"],
                 include: [{ model: States, attributes: ["id", "name"] }],
+                // where: {
+                //   [Op.or]: [
+                //     {
+                //       name_of_company: {
+                //         [Op.like]: `%${Search}%`,
+                //       },
+                //     },
+                //   ],
+                // },
               },
             ],
           },
@@ -280,16 +289,11 @@ module.exports = {
                 [Op.like]: `%${Search}%`,
               },
             },
-            // {
-            //   variant: {
-            //     [Op.like]: `%${Search}%`
-            //   }
-            // },
-            // {
-            //     description: {
-            //         [Op.like]: `%${Search}%`
-            //     }
-            // }
+            {
+              "$User.SeedCompany.name_of_company$": {
+                [Op.like]: `%${Search}%`,
+              },
+            },
           ],
           [Op.and]: [
             {
@@ -748,7 +752,13 @@ module.exports = {
           ],
         },
       ],
-      attributes: ["transaction_id", "transaction_ref", "status", "created_at"],
+      attributes: [
+        "transaction_id",
+        "transaction_ref",
+        "status",
+        "created_at",
+        "id",
+      ],
       where: {
         farmer_id: farmer_id,
       },
@@ -884,10 +894,10 @@ module.exports = {
   getOrderById: async (req, res) => {
     let id = req.params.id;
     let order = await TransactionCarts.findAll({
+      where: { transaction_log_id: id },
       include: [
         {
           model: TransactionLog,
-          where: { id: id },
         },
         {
           model: Cart,
