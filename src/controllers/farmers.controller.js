@@ -269,6 +269,15 @@ module.exports = {
                 model: SeedCompany,
                 attributes: ["id", "name_of_company", "state_id"],
                 include: [{ model: States, attributes: ["id", "name"] }],
+                // where: {
+                //   [Op.or]: [
+                //     {
+                //       name_of_company: {
+                //         [Op.like]: `%${Search}%`,
+                //       },
+                //     },
+                //   ],
+                // },
               },
             ],
           },
@@ -280,16 +289,11 @@ module.exports = {
                 [Op.like]: `%${Search}%`,
               },
             },
-            // {
-            //   variant: {
-            //     [Op.like]: `%${Search}%`
-            //   }
-            // },
-            // {
-            //     description: {
-            //         [Op.like]: `%${Search}%`
-            //     }
-            // }
+            {
+              "$User.SeedCompany.name_of_company$": {
+                [Op.like]: `%${Search}%`,
+              },
+            },
           ],
           [Op.and]: [
             {
