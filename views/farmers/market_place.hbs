@@ -205,7 +205,9 @@
                   tabindex="0"
                   class="page-link"
                 >
+                {{#add this 1}}
                   {{ this }}
+                {{/add}}
                 </button>
                 </li>
                {{/each}}
@@ -239,7 +241,9 @@
             {{#numToArray products.totalPages}}
               {{#each this}}
                   <option value="{{this}}">
-                    {{this}}
+                     {{#add this 1}}
+                  {{ this }}
+                {{/add}}
                   </option>
                 {{/each}}
             {{/numToArray}}
@@ -268,34 +272,23 @@
 
 <script>
   function previousPage(currentPage){ 
-    let url=window.location.toString()
     if(currentPage>1){
-
-    if(url.includes("?")){
-      window.location=url+'page='+(currentPage-1); 
-    } else{
-      window.location=url+'?page='+(currentPage-1); 
-    } 
-    }
- 
-  } 
-  function goTo(event){
-    let url=window.location.toString()
-    if(url.includes("?")){
-      window.location=url+'page='+event; 
-    } else{
-      window.location=url+'?page='+event; 
-    } 
-  }
-  function nextPage(currentPage, totalPages){
-     let url=window.location.toString()
-    if(currentPage<totalPages){
-    if(url.includes("?")){
-      window.location=url+'page='+(currentPage+1); 
-    } else{
-      window.location=url+'?page='+(currentPage+1); 
-    } 
+       let params = (new URL(document.location));
+      params.searchParams.set('page', currentPage-1)
+      window.location=params 
     }
    
+  } 
+  function goTo(event){
+    let params = (new URL(document.location));
+    params.searchParams.set('page', event)
+    window.location=params 
+  }
+  function nextPage(currentPage, totalPages){
+    if(currentPage<totalPages){
+      let params = (new URL(document.location));
+      params.searchParams.set('page', currentPage+1)
+      window.location=params 
+    }
   }
 </script>

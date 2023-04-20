@@ -35,6 +35,7 @@ module.exports = {
       return resp.data;
     } catch (e) {
       console.log(e);
+      return { status: false, message: e.message };
     }
   },
   initializeTrader: async (email, amount, req) => {

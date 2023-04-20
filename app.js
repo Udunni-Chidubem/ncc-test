@@ -89,7 +89,6 @@ app.engine(
           if (res != null) res = res + "," + a;
           else res = a;
         });
-        console.log(res);
         return done.fn(res);
       },
       eval(currentPage, length, done) {
@@ -99,7 +98,7 @@ app.engine(
       numToArray(num, done) {
         let arr = [];
         for (let i = 0; i < num; i++) {
-          arr.push(i + 1);
+          arr.push(i);
         }
         return done.fn(arr);
       },
