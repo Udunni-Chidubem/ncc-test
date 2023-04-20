@@ -196,6 +196,7 @@ farmersRouter.post("/checkout/preview", async (req, res) => {
 
 farmersRouter.post("/cart/checkout", async (req, res) => {
   try {
+    let user = await req.user;
     let items = [];
     if (!Array.isArray(req.body.items)) {
       items.push(req.body.items);
@@ -207,7 +208,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
     let callback = req.get("origin") + "/farmer/checkout/callback";
     if (paymentType == "card") {
       let initial = await paystack.initialize(
-        "tipson664@gmail.com",
+        user.username + "@nigsims.com",
         total_sum * 100,
         callback,
         req
@@ -227,6 +228,8 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
           farmer
         );
         res.redirect(initial.data.authorization_url);
+      } else {
+        res.redirect("back");
       }
     }
   } catch (e) {
