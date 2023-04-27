@@ -213,7 +213,6 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
         callback,
         req
       );
-      console.log(initial);
       if (initial.status == true) {
         let ref = initial.data.reference;
         let { getCartItems, farmer } = await farmerController.getCartItemsByIds(
