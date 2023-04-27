@@ -959,24 +959,12 @@ module.exports = {
           },
           { transaction: transaction }
         );
-
-        // const farmer = await Farmer.create(
-        //   {
-        //     firstname: req.body.firstname,
-        //     lastname: req.body.lastname,
-        //     phone_no: req.body.phone,
-        //     user_id: user.id,
-        //     referee: referee,
-        //   },
-        //   { transaction: transaction }
-        // );
         await transaction.commit();
         return user;
       } else {
         return { error: true, message: "Account already exist" };
       }
     } catch (e) {
-      console.log(e);
       await transaction.rollback();
 
       return { error: true, message: e.message };
