@@ -2,6 +2,7 @@ require("dotenv").config();
 const { QueryTypes } = require("sequelize");
 const db = require("../models");
 const utils = require("../helpers/utils");
+const bcrypt = require("bcrypt");
 const {
   User,
   UserRole,
@@ -842,23 +843,20 @@ module.exports = {
     return transaction;
   },
 
-  getOfflineTransactionCount: async (req, res) =>{
-
-    let sql =
-    "SELECT count(id) as count from salesheets";
-let offlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
+  getOfflineTransactionCount: async (req, res) => {
+    let sql = "SELECT count(id) as count from salesheets";
+    let offlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
 
     console.log(offlineCount);
     return offlineCount;
-},
+  },
 
-getOnlineTransactionCount: async (req, res) =>{
-    let sql =
-    "SELECT count(id) as count from transaction_log";
-let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
+  getOnlineTransactionCount: async (req, res) => {
+    let sql = "SELECT count(id) as count from transaction_log";
+    let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
     console.log(onlineCount);
     return onlineCount;
-},
+  },
 
   getFarmerGender: async (req, res) => {
     let sql = "SELECT count(id) count from farmer f where f.gender = 'Male' ";
@@ -934,5 +932,42 @@ let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
     sales = JSON.parse(JSON.stringify(salesSheet));
     console.log(sales);
     return sales;
+  },
+
+  createUser: async (req, res) => {
+    const transaction = await db.rest.transaction();
+    try {
+      let usrExist = await User.count({
+        where: { username: req.body.email },
+      });
+      if (!usrExist) {
+        const password = await bcrypt.hash(req.body.password, 10);
+        const user = await User.create(
+          {
+            username: req.body.email,
+            password: password,
+            status: true,
+            token: "",
+          },
+          { transaction: transaction }
+        );
+
+        await UserRole.create(
+          {
+            user_id: user.id,
+            role_id: req.body.roles,
+          },
+          { transaction: transaction }
+        );
+        await transaction.commit();
+        return user;
+      } else {
+        return { error: true, message: "Account already exist" };
+      }
+    } catch (e) {
+      await transaction.rollback();
+
+      return { error: true, message: e.message };
+    }
   },
 };
