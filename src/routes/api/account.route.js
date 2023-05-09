@@ -132,7 +132,7 @@ accountRouter.post("/reset-password", async (req, res) => {
             .json({
               statusCode: 400,
               message: response.details,
-              body: rst,
+              body: response,
             })
             .send();
         }

@@ -501,6 +501,7 @@ module.exports = {
             return {
               status: true,
               statusCode: 200,
+              message: "Login Successful",
               body: {
                 access_token: token,
                 type: "Bearer",
@@ -512,6 +513,7 @@ module.exports = {
             return {
               status: false,
               statusCode: 401,
+              message: "InActive Account",
               body: { message: "Account is not activated" },
             };
           }
@@ -520,13 +522,18 @@ module.exports = {
       return {
         status: false,
         statusCode: 401,
+        message: "Invalid credentials",
         body: {
           message: "You have entered Invalid credentials. Please try again!!!",
         },
       };
     } catch (e) {
-      // console.log(e.message())
-      return { status: false, statusCode: 500, body: { message: e } };
+      return {
+        status: false,
+        statusCode: 500,
+        message: e.message,
+        body: { message: e.message },
+      };
     }
   },
 };

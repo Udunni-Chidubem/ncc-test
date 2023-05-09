@@ -1,20 +1,20 @@
 <div class="container-fluid pt=5">
   <div class="card card-4">
     <div class="card-body">
-             {{#if message}}
-          <div
-            class="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            {{message}}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        {{/if}}
+      {{#if message}}
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      {{/if}}
       <form method="get" class="ml-5 mr-4 search-form">
         <div class="input-group">
           <input
@@ -29,7 +29,7 @@
                 class="fa fa-search"
               ></i></button>
           </div>
-          <button 
+          <button
             class="btns btn--radius-2 btn--blue ml-2 pri-search-btn"
             type="submit"
           >Search</button>
@@ -140,7 +140,116 @@
         </div>
 
       {{/each}}
-
+      <div class="row m-5">
+        <div class="col-sm-12 col-md-4 d-flex justify-content-start">
+          <div
+            class="dataTables_info"
+            id="contactList_info"
+            role="status"
+            aria-live="polite"
+          >
+            Showing
+            {{#eval products.currentPage size}}
+              {{this}}
+            {{/eval}}
+            to
+            {{products.result.length}}
+            of
+            {{products.totalItems}}
+            entries
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-8 d-flex justify-content-end">
+          {{! <span style="margin: 5px">Size</span>
+          <select
+            style="width: 100px; margin: 5px"
+            name=""
+            id=""
+            class="form-control"
+          ></select> }}
+          <div
+            class="dataTables_paginate paging_simple_numbers"
+            id="contactList_paginate"
+          >
+            <ul class="pagination">
+              <li
+                :class="[
+              selectedPage == 0
+                ? 'disabled paginate_button page-item previous'
+                : 'paginate_button page-item previous',
+            ]"
+                id="contactList_previous"
+              >
+               
+                  <button
+                    onclick="previousPage({{products.currentPage}})"
+                    aria-controls="contactList"
+                    data-dt-idx="0"
+                    tabindex="0"
+                    class="page-link"
+                  >
+                    Previous
+                  </button>
+              
+              </li>
+            
+              {{#numToArray products.totalPages}}
+                {{#each this}}
+                  <li
+                class="'paginate_button page-item active"
+              >
+                <button
+                  onclick="goTo({{this}})"
+                  aria-controls="contactList"
+                  data-dt-idx="1"
+                  tabindex="0"
+                  class="page-link"
+                >
+                {{#add this 1}}
+                  {{ this }}
+                {{/add}}
+                </button>
+                </li>
+               {{/each}}
+              {{/numToArray}}
+              
+              {{!-- <li
+                class="disabled paginate_button page-item next"
+                id="contactList_next"
+              > --}}
+           
+                <button
+                 onclick="nextPage({{products.currentPage}}, {{products.totalPages}})"
+                  aria-controls="contactList"
+                  data-dt-idx="2"
+                  tabindex="0"
+                  class="page-link"
+                >
+                  Next
+                </button>
+             
+              </li>
+            </ul>
+          </div>
+          <span style="margin: 5px">Go To</span>
+          <select
+            style="width: 100px"
+            name=""
+            id=""
+            class="form-control"
+            onchange="goTo(event.target.value)">
+            {{#numToArray products.totalPages}}
+              {{#each this}}
+                  <option value="{{this}}">
+                     {{#add this 1}}
+                  {{ this }}
+                {{/add}}
+                  </option>
+                {{/each}}
+            {{/numToArray}}
+          </select>
+        </div>
+      </div>
     </section>
 
   {{else}}
@@ -162,5 +271,24 @@
 </div>
 
 <script>
-
+  function previousPage(currentPage){ 
+    if(currentPage>1){
+       let params = (new URL(document.location));
+      params.searchParams.set('page', currentPage-1)
+      window.location=params 
+    }
+   
+  } 
+  function goTo(event){
+    let params = (new URL(document.location));
+    params.searchParams.set('page', event)
+    window.location=params 
+  }
+  function nextPage(currentPage, totalPages){
+    if(currentPage<totalPages){
+      let params = (new URL(document.location));
+      params.searchParams.set('page', currentPage+1)
+      window.location=params 
+    }
+  }
 </script>

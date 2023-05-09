@@ -72,7 +72,7 @@ siteRouter.post(
             form_banner: "Group.png",
             title: "Successful Page",
             layout: "success-header",
-            errors: req.flash("errors") ? req.flash("errors"): "" ,
+            errors: req.flash("errors") ? req.flash("errors") : "",
           });
         } else {
           //res.send(r.errors)
@@ -94,6 +94,7 @@ siteRouter.post(
     failureFlash: true,
   }),
   (req, res) => {
+    console.log(req.user);
     helpers.redirect(req, res, req.user.UserRole.Role.role_name);
   }
 );
