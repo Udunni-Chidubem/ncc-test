@@ -664,6 +664,28 @@ module.exports = {
       return e;
     }
   },
+  payonDeliveryTransaction: async (data, getCartItems) => {
+    let transaction = await db.rest.transaction();
+    try {
+      let log = await TransactionLog.create(data, { transaction: transaction });
+      for (let i = 0; i < getCartItems.length; i++) {
+        await TransactionCarts.create(
+          {
+            transaction_log_id: log.id,
+            cart_id: getCartItems[i].id,
+            created_at: await now(),
+          },
+          { transaction: transaction }
+        );
+      }
+      transaction.commit();
+      return log;
+    } catch (e) {
+      console.log(e);
+      transaction.rollback();
+      return e;
+    }
+  },
   checkTransaction: async (ref) => {
     let t = await TransactionLog.findOne({
       include: [
@@ -762,6 +784,7 @@ module.exports = {
       where: {
         farmer_id: farmer_id,
       },
+      order: [["id", "DESC"]],
     });
     console.log(JSON.parse(JSON.stringify(transactions)));
     return JSON.parse(JSON.stringify(transactions));
@@ -888,7 +911,9 @@ module.exports = {
         },
       ],
     });
+
     order = JSON.parse(JSON.stringify(order));
+    console.log(order);
     return order;
   },
   getOrderById: async (req, res) => {
@@ -1001,9 +1026,9 @@ module.exports = {
       " c.qty as qty, c.unit_price as price, c.total_amount as total_amount, o.status as status, o.updated_at as updated_at, tl.currency " +
       " as currency , tl.pickup_point as pickup_point FROM (transaction_carts tc  JOIN  transaction_log tl on tc.transaction_log_id=tl.id  JOIN cart as c " +
       "  on c.id = tc.cart_id JOIN product as p on c.product_id = p.id JOIN seedcompany as sc on sc.user_id = p.user_id )  JOIN orders as o on o.transaction_log_id " +
-      " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = " +
+      " = tl.id and o.company_id=sc.id WHERE tl.transaction_id = '" +
       transaction_id +
-      ";";
+      "'";
     let status = await db.rest.query(sql, { type: QueryTypes.SELECT });
     return status;
   },
