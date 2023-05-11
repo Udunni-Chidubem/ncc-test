@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="container3">
+    <div class="card ml-4 p-4" style="width:75%;">
       <h1 class="h1">payment</h1>
       <div class="horizontalLine"></div>
 
@@ -86,34 +86,36 @@
         {{#itemSum getCartItems}}
         <input type="hidden" name="total_sum" id="total_sum" value="{{#add this 70}}{{this}}  {{/add}}" />
         {{/itemSum}}
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="card"
-            value="card" />
-          <label class="form-check-label" for="card">Card</label>
+        <div class="row">
+           <div class="form-check form-check-inline col-xl-3 col-md-3 col-sm-12">
+            <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="card"
+              value="card" />
+            <label class="form-check-label" for="card">Card</label>
+          </div>
+          <div class="form-check form-check-inline col-xl-3 col-md-3 col-sm-12">
+            <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="payOnDelivery"
+              value="payOnDelivery">
+            <label class="form-check-label" for="payOnDelivery">Pay On Delivery</label>
+          </div>
+        </div>     
+        <div id="gateway-option-block" style="display:none">
+            <h5  class="pt-3" >
+              Choose Gateway
+            </h5> 
+          
+            <div class="row">
+              <div class="form-check form-check-inline col-xl-3 col-md-3 col-sm-12">
+                <input class="form-check-input"  type="radio" name="gatewayOptions" id="ussd" value="paystack">
+                <label class="form-check-label" for="ussd">Paystack</label>
+              </div>
+              <div class="form-check form-check-inline col-xl-3 col-md-3 col-sm-12">
+                <input class="form-check-input" type="radio" name="gatewayOptions" id="pos" value="9PSB">
+                <label class="form-check-label" for="pos">9PSB</label>
+              </div>
+            </div>
         </div>
-        {{! <div class="form-check form-check-inline">
-          <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="ussd" value="ussd">
-          <label class="form-check-label" for="ussd">USSD</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="pos" value="pos">
-          <label class="form-check-label" for="pos">POS</label>
-        </div> }}
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" required="true" type="radio" name="inlineRadioOptions" id="payOnDelivery"
-            value="payOnDelivery">
-          <label class="form-check-label" for="payOnDelivery">Pay On Delivery</label>
-        </div>
-        {{!
-        <input type="radio" name="ussd" value="ussd" />
-        <label for="ussd">USSD</label>
-        <input type="radio" name="ussd" class="pos" value="pos" />
-        <label for="ussd">POS</label>
-        }}
         <hr class="mb-2"/>
-
         <button type="submit" class="btn btn-theme" style="float: right;">Pay</button>
-
       </div>
     </div>
   </form>
@@ -149,3 +151,16 @@
     </div>
   </div> }}
 </section>
+<script>
+  document.onreadystatechange=function(){
+    if(document.readyState=='complete'){
+      $('#card, #payOnDelivery').on('click', function(){
+        if(this.value=='card'){
+          $("#gateway-option-block").css('display', 'block')
+        }else{
+          $("#gateway-option-block").css('display', 'none')
+        }
+      })
+    }
+  }
+</script>

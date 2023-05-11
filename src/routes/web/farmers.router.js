@@ -14,6 +14,7 @@ const { isVerified } = require("../../helpers/utils");
 const { now } = require("moment");
 const weatherController = require("../../controllers/weather.controller");
 const { default: axios } = require("axios");
+const uniqid = require("uniqid");
 
 farmersRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -205,31 +206,77 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
     }
     let paymentType = req.body.inlineRadioOptions;
     let total_sum = req.body.total_sum;
-    let callback = req.get("origin") + "/farmer/checkout/callback";
+
     if (paymentType == "card") {
-      let initial = await paystack.initialize(
-        user.username + "@nigsims.com",
-        total_sum * 100,
-        callback,
-        req
-      );
-      if (initial.status == true) {
-        let ref = initial.data.reference;
-        let { getCartItems, farmer } = await farmerController.getCartItemsByIds(
-          req,
-          items
+      let gateway = req.body.gatewayOptions;
+      if (gateway == "paystack") {
+        let callback = req.get("origin") + "/farmer/checkout/callback";
+        let initial = await paystack.initialize(
+          user.username + "@nigsims.com",
+          total_sum * 100,
+          callback,
+          req
         );
-        await farmerController.initializeTransaction(
-          req,
-          res,
-          ref,
-          getCartItems,
-          farmer
-        );
-        res.redirect(initial.data.authorization_url);
-      } else {
-        res.redirect("back");
+        if (initial.status == true) {
+          let ref = initial.data.reference;
+          let { getCartItems, farmer } =
+            await farmerController.getCartItemsByIds(req, items);
+          await farmerController.initializeTransaction(
+            req,
+            res,
+            ref,
+            getCartItems,
+            farmer
+          );
+          res.redirect(initial.data.authorization_url);
+        } else {
+          res.redirect("back");
+        }
       }
+
+      if (gateway == "9PSB") {
+        //9psb implementation goes here now
+      }
+    }
+
+    if (paymentType == "payOnDelivery") {
+      let ref = uniqid();
+      let date = new Date().toISOString().split(":").join("");
+      date = date.split("-").join("");
+      date = date.split(".").join("");
+      date = date.substring(0, 10);
+      let { farmer, isVerified, getCartItems } =
+        await farmerController.getCartItemsByIds(req, items);
+      let transaction_id = date + String(farmer.id).padStart(7, "0");
+
+      let data = {
+        farmer_id: farmer.id,
+        transaction_ref: ref,
+        status: "pending",
+        pickup_point: req.body.pickup,
+        created_at: await now(),
+        currency: "NGN",
+        description: "payment for a seed purchase via card",
+        transaction_id: transaction_id,
+        amount: total_sum,
+      };
+      let log = await farmerController.payonDeliveryTransaction(
+        data,
+        getCartItems
+      );
+      farmerController.createOrder(items, log.id);
+      farmerController.updateCart(items);
+      res.render("farmers/payment-started", {
+        layout: "farmers-dashboard",
+        title: "Success Page",
+        isVerified,
+        transaction_id: transaction_id,
+        data,
+      });
+      $msg = `Your order is initiated and your no is ${data.transaction_id}. Thank you for shopping on NIGSIMS!`;
+      let r = await axios.get(
+        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${farmer.phone_no}&message=${$msg}&type=0&routing=3`
+      );
     }
   } catch (e) {
     console.log(e);
