@@ -47,9 +47,9 @@ farmerRouter.get("/settings", async (req, res) => {
   res.status(200).json({ body: { farmer, isVerified }, statusCode: 200 });
 });
 farmerRouter.post("/settings", async (req, res) => {
+  let user = await req.user;
   req.body.userphoneno = user.username;
   let response = await farmersController.updatePassword(req, res);
-  //  {status,farmer,isVerified,message_}
   if (response.message_) {
     return res.json({ body: response.message_, statusCode: 200 }).status(200);
   }
@@ -72,13 +72,11 @@ farmerRouter.post("/cart", async (req, res) => {
       .json({ body: response, statusCode: 200, message: "Added succssfully" });
     return;
   }
-  res
-    .status(200)
-    .json({
-      body: response,
-      statusCode: 400,
-      message: "item of this package and quantity already on the cart",
-    });
+  res.status(200).json({
+    body: response,
+    statusCode: 400,
+    message: "item of this package and quantity already on the cart",
+  });
   return;
 });
 farmerRouter.get("/transactions", async (req, res) => {

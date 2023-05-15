@@ -252,7 +252,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
       let data = {
         farmer_id: farmer.id,
         transaction_ref: ref,
-        status: "pending",
+        status: "payOnDelivery",
         pickup_point: req.body.pickup,
         created_at: await now(),
         currency: "NGN",
