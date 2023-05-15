@@ -66,9 +66,20 @@ farmerRouter.get("/cart", async (req, res) => {
 });
 farmerRouter.post("/cart", async (req, res) => {
   let response = await farmersController.addToCart(req, res);
+  if (response.isItemAlreadyAdded == null) {
+    res
+      .status(200)
+      .json({ body: response, statusCode: 200, message: "Added succssfully" });
+    return;
+  }
   res
     .status(200)
-    .json({ body: response, statusCode: 200, message: "processed" });
+    .json({
+      body: response,
+      statusCode: 400,
+      message: "item of this package and quantity already on the cart",
+    });
+  return;
 });
 farmerRouter.get("/transactions", async (req, res) => {
   const user = await req.user;
