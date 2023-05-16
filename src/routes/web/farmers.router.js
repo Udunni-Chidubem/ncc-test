@@ -264,6 +264,13 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
         data,
         getCartItems
       );
+      getCartItems.forEach((item) => {
+        farmerController.productItemsUpdate(
+          item.product_id,
+          item.size,
+          item.qty
+        );
+      });
       farmerController.createOrder(items, log.id);
       farmerController.updateCart(items);
       res.render("farmers/payment-started", {
