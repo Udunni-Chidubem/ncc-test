@@ -252,7 +252,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
       let data = {
         farmer_id: farmer.id,
         transaction_ref: ref,
-        status: "pending",
+        status: "payOnDelivery",
         pickup_point: req.body.pickup,
         created_at: await now(),
         currency: "NGN",
@@ -264,6 +264,13 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
         data,
         getCartItems
       );
+      getCartItems.forEach((item) => {
+        farmerController.productItemsUpdate(
+          item.product_id,
+          item.size,
+          item.qty
+        );
+      });
       farmerController.createOrder(items, log.id);
       farmerController.updateCart(items);
       res.render("farmers/payment-started", {
