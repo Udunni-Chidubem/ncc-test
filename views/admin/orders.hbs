@@ -23,7 +23,7 @@
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="draft-tab" data-bs-toggle="tab" data-bs-target="#draft" type="button"
-						role="tab" aria-controls="draft" aria-selected="false">DRAFT ORDERS</button>
+						role="tab" aria-controls="draft" aria-selected="false">PAY ON DELIVERY</button>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -45,7 +45,6 @@
 
 						<tbody>
 							{{#each orders}}
-							{{#if (eq TransactionLog.status "verified")}}
 							<tr class="table-theme-secondary">
 								<td colspan="" rowspan="" headers=""><a
 										href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}">{{TransactionLog.transaction_id}}</a>
@@ -59,6 +58,8 @@
 								<td colspan="" rowspan="" headers="" class="text-uppercase">
 									{{#if (eq TransactionLog.status "verified")}}
 									<span class="approved px-1"><i class="bi bi-dot"></i>Confirmed</span>
+									{{else if (eq TransactionLog.status "payOnDelivery")}}
+									<span class="shipped px-1"><i class="bi bi-dot"></i>Pay On Delivery</span>
 									{{else}}
 									<span class="pending px-1"><i class="bi bi-dot"></i>Pending</span>
 									{{/if}}
@@ -83,7 +84,6 @@
 									</a>
 								</td>
 							</tr>
-							{{/if}}
 							{{/each}}
 						</tbody>
 					</table>
@@ -216,11 +216,12 @@
 								<th>CUSTOMER NAME</th>
 								<th>SELLER</th>
 								<th>AMOUNT</th>
-								<th>PAYMENT STATUS</th>
+								<th>ACTIONS</th>
 							</tr>
 						</thead>
 						<tbody>
-							{{#each draftOrders}}
+							{{#each orders}}
+							{{#if (eq TransactionLog.status "payOnDelivery")}}
 							<tr class="table-theme-secondary">
 								<td colspan="" rowspan="" headers="">{{TransactionLog.transaction_id}}</td>
 								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at
@@ -229,9 +230,24 @@
 									{{TransactionLog.Farmer.lastname}}</td>
 								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>
 								<td colspan="" rowspan="" headers="">{{TransactionLog.amount}}</td>
-								<td colspan="" rowspan="" headers="" class="text-uppercase">{{TransactionLog.status}}
-								</td>
+								<td><a href="#">
+										<div class="dropdown d_t">
+											<a class="btn   dropdown-toggle action_btn" href="#" role="button"
+												id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+												Actions
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+												<li><a class="dropdown-item border-0 border-bottom"
+														href="/seed-company/products/{{this.id}}">Update
+														Payment Status</a></li>
+												<li><a class="dropdown-item border-0 border-bottom"
+														href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}">Update
+														Order Status</a></li>
+											</ul>
+										</div>
+									</a></td>
 							</tr>
+							{{/if}}
 							{{else}}
 							<tr class="table-light table-striped">
 								<td colspan="6">

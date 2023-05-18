@@ -140,7 +140,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('#transactionTable').DataTable({
     "aLengthMenu": [ 10, 25, 50, 100 ],
-    // "order": [[]
+    "order": [[1, "desc"]]
   });
 });
 $(document).ready(function() {
