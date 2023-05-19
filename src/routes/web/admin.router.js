@@ -416,6 +416,32 @@ adminRouter.get("/orders/:id/:transaction_id/:company_id", async (req, res) => {
   });
 });
 
+adminRouter.get("/payment/:id/:transaction_id/:company_id", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  // company_name = req.params.company_name;
+  // let company = await utils.getCompanyProfile(user)
+  transaction_id = req.params.transaction_id;
+  let user_role = await adminController.getUserRole(req, res);
+
+  let { order, farmer, orderStatus } = await adminController.getOrder(
+    req.params.transaction_id,
+    req.params.id,
+    req.params.company_id
+  );
+  res.render("admin/payment-view", {
+    layout: "admin-dashboard",
+    title: "Payment View",
+    order,
+    farmer,
+    orderStatus,
+    username: user.username,
+    isVerified,
+    transaction_id: transaction_id,
+    user_role: user_role.Role.role_name,
+  });
+});
+
 /*Order POST request*/
 adminRouter.post(
   "/orders/:id/:transaction_id/:company_id",
