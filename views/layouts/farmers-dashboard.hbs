@@ -189,11 +189,11 @@
 
       let itemTotalsum = $('.item-sum').html()
       let shippingCost = $('.shipping-cost').html()
-      let processingCost=$('.processing-cost').html()
+      let processingCost = $('.processing-cost').html()
 
       if (shippingCost != null) {
         shippingCost = shippingCost.replace(',', '');
-        $(".t_price").html(Number(shippingCost) + Number(itemTotalsum)+Number(processingCost))
+        $(".t_price").html(Number(shippingCost) + Number(itemTotalsum) + Number(processingCost))
       }
 
       $('.size').on('change', function () {
@@ -410,36 +410,36 @@
           .catch(error => console.log(error))
       })
 
-      let forecasturl=baseUrl+'/farmer/forecast'
+      let forecasturl = baseUrl + '/farmer/forecast'
       fetch(forecasturl, {
         method: 'GET',
         headers: { "Content-type": "application/json; charset=UTF-8" }
       })
-      .then(r=>r.json())
-      .then(r=>{
-        if(r.statusCode==200){
-          let dailyForecast=r.body.DailyForecasts
-          let count = 0
-          const weekday = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
-          const month = ["Jan.","Feb.","March","April","May","June","July","August","Sept.","Oct.","Nov.","Dec."];
-          dailyForecast.forEach(d=>{
-            let max=d.Temperature.Maximum.Value
-            let min=d.Temperature.Minimum.Value
-            max = Math.round((max-32)*(5/9))
-            min=Math.round((min-32)*(5/9))
-            $('#min'+count).html(min)
-            $('#max'+count).html(max)
-            let date=new Date(d.Date)
-            if(count>1)
-              $('#day'+count).html(weekday[date.getDay()])
-            
-            $('#date'+count).html(date.getDate()+' '+ month[date.getMonth()])
-            $('#dayimg'+count).attr('src', "../weather-icon/"+d.Day.Icon+'.png')
-            $('#nightimg'+count).attr('src', "../weather-icon/"+d.Night.Icon+'.png')
-            count=count+1
-          })
-        }
-      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.statusCode == 200) {
+            let dailyForecast = r.body.DailyForecasts
+            let count = 0
+            const weekday = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+            const month = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "August", "Sept.", "Oct.", "Nov.", "Dec."];
+            dailyForecast.forEach(d => {
+              let max = d.Temperature.Maximum.Value
+              let min = d.Temperature.Minimum.Value
+              max = Math.round((max - 32) * (5 / 9))
+              min = Math.round((min - 32) * (5 / 9))
+              $('#min' + count).html(min)
+              $('#max' + count).html(max)
+              let date = new Date(d.Date)
+              if (count > 1)
+                $('#day' + count).html(weekday[date.getDay()])
+
+              $('#date' + count).html(date.getDate() + ' ' + month[date.getMonth()])
+              $('#dayimg' + count).attr('src', "../weather-icon/" + d.Day.Icon + '.png')
+              $('#nightimg' + count).attr('src', "../weather-icon/" + d.Night.Icon + '.png')
+              count = count + 1
+            })
+          }
+        })
 
     })
 
@@ -447,7 +447,19 @@
 
 
   </script>
-
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/646bd786ad80445890ee769c/1h12k3rf2';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
 
 </html>
