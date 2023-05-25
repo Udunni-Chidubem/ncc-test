@@ -39,7 +39,7 @@
                                 <div class="col p_in">
                                   <div class="  ">
                                     <h1>{{Product.product_name}} </h1>
-                                    <p>Variant: {{Product.variant}}</p>
+                                    <p>Variety: {{Product.variant}}</p>
                                     <p>Seller: {{Product.User.SeedCompany.name_of_company}}</p>
                                     <p>Location: {{Product.User.SeedCompany.State.name}}</p>
                                   </div>
@@ -48,6 +48,9 @@
                                   <div class="px-3 px_3">
                                     <p>Price</p>
                                     <h1>&#8358; {{'total_amount'}}</h1>
+                                    
+                                    <p>Qty</p>
+                                    <h1> {{'qty'}}</h1>
 
                                   </div>
                                 </div>
@@ -141,8 +144,17 @@
                           <div class="float-end shipping-cost">0</div>
                         </div>
                       </div>  
+                       <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                        <div class="col">
+                          <div class=" ">Processing</div>
+                        </div>
+                        <div class="col">
+                          <div class="float-end processing-cost">70</div>
+                        </div>
+                      </div>  
                     </div>
-
+                    
+                    {{!-- </div> --}}
                     <div class="total_">
                        <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
                           <div class="col">

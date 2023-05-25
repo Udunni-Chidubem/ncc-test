@@ -45,9 +45,11 @@
 
 						<tbody>
 							{{#each orders}}
+							{{#if (eq TransactionLog.status "verified")}}
 							<tr class="table-theme-secondary">
 								<td colspan="" rowspan="" headers=""><a
-										href="{{this.id}}">{{TransactionLog.transaction_id}}</a></td>
+										href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}">{{TransactionLog.transaction_id}}</a>
+								</td>
 								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at
 									'DD/MM/YYYY'}}</td>
 								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}}
@@ -74,10 +76,14 @@
 									<span class="processing px-1"><i class="bi bi-dot"></i>Processing</span>
 									{{/if}}
 								</td>
-								<td><a
-										href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}"><i
-											class="bi bi-eye-fill"></i></a></td>
+								<td>
+									<a
+										href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}">
+										<i class="bi bi-eye-fill"></i>
+									</a>
+								</td>
 							</tr>
+							{{/if}}
 							{{/each}}
 						</tbody>
 					</table>

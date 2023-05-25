@@ -320,9 +320,9 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: auto;
   }
   .shippingAddress {
-    width: 58%;
+    width: 96%;
     color: #79818c;
-    /* margin: auto; */
+    margin: auto;
   }
   .qtyWrapper {
     display: flex;
@@ -388,7 +388,7 @@ input[type="number"]::-webkit-outer-spin-button {
     height: auto !important;
   }
   .container3 {
-    height: fit-content; !important;
+    height: fit-content !important;
   }
 }
 
