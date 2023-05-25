@@ -13,6 +13,7 @@ const companyController = require("../../controllers/company.controller");
 const { isVerified } = require("../../helpers/utils");
 const { now } = require("moment");
 const weatherController = require("../../controllers/weather.controller");
+const { default: axios } = require("axios");
 
 farmersRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -108,12 +109,15 @@ farmersRouter.get("/market_place", async (req, res) => {
   if (req.query.Search && products.result.length <= 0) {
     message = "No product found";
   }
+  // res.json(products).send();
+  // return;
   res.render("farmers/market_place", {
     layout: "farmers-dashboard",
     title: "Market Place",
     fullname: resp.farmer.firstname + " " + resp.farmer.lastname,
     farmerData: resp.farmer,
     products,
+    size: resp.size,
     message,
     isVerified: resp.isVerified,
   });
@@ -192,6 +196,7 @@ farmersRouter.post("/checkout/preview", async (req, res) => {
 
 farmersRouter.post("/cart/checkout", async (req, res) => {
   try {
+    let user = await req.user;
     let items = [];
     if (!Array.isArray(req.body.items)) {
       items.push(req.body.items);
@@ -203,12 +208,11 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
     let callback = req.get("origin") + "/farmer/checkout/callback";
     if (paymentType == "card") {
       let initial = await paystack.initialize(
-        "tipson664@gmail.com",
+        user.username + "@nigsims.com",
         total_sum * 100,
         callback,
         req
       );
-      console.log(initial);
       if (initial.status == true) {
         let ref = initial.data.reference;
         let { getCartItems, farmer } = await farmerController.getCartItemsByIds(
@@ -223,6 +227,8 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
           farmer
         );
         res.redirect(initial.data.authorization_url);
+      } else {
+        res.redirect("back");
       }
     }
   } catch (e) {
@@ -262,6 +268,7 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
         );
       });
       companyController.creditWallet(getCartItems);
+
       res.render("farmers/payment-success", {
         layout: "farmers-dashboard",
         title: "Success Page",
@@ -269,6 +276,10 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
         paystackPayload,
         data,
       });
+      $msg = `Your order is confirmed and your no is ${data.transaction_id}. Thank you for shopping on NIGSIMS!`;
+      let r = await axios.get(
+        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${farmer.phone_no}&message=${$msg}&type=0&routing=3`
+      );
       return;
     }
   }

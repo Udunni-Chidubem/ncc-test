@@ -91,8 +91,18 @@ app.engine(
           if (res != null) res = res + "," + a;
           else res = a;
         });
-        console.log(res);
         return done.fn(res);
+      },
+      eval(currentPage, length, done) {
+        let res = (Number(currentPage) - 1) * Number(length) + 1;
+        return done.fn(res);
+      },
+      numToArray(num, done) {
+        let arr = [];
+        for (let i = 0; i < num; i++) {
+          arr.push(i);
+        }
+        return done.fn(arr);
       },
     },
   })

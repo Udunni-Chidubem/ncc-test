@@ -72,7 +72,7 @@ siteRouter.post(
             form_banner: "Group.png",
             title: "Successful Page",
             layout: "success-header",
-            errors: req.flash("errors") ? req.flash("errors"): "" ,
+            errors: req.flash("errors") ? req.flash("errors") : "",
           });
         } else {
           //res.send(r.errors)
@@ -94,6 +94,7 @@ siteRouter.post(
     failureFlash: true,
   }),
   (req, res) => {
+    console.log(req.user);
     helpers.redirect(req, res, req.user.UserRole.Role.role_name);
   }
 );
@@ -328,5 +329,30 @@ siteRouter.get("/payment/getBanks", psbRouter.getBanks)
 siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout)
 siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout)
 siteRouter.get("/payment/payoutStatus/:ref", psbRouter.payoutStatus)
+siteRouter.get("/payment/gatewayAuth", psbRouter.authentication)
+
+siteRouter.post("/payment/checkout",
+async (req, res) => {
+  let user = await req.user
+    // let userid = user.id;
+try {
+  // let total_sum = req.body.amount;
+  let total_sum = "1000";
+  total_sum = total_sum.replaceAll(",", "");
+  total_sum = parseInt(total_sum);
+  let callback_ = req.get("origin") + "/psb/callback";
+  let callback = callback_.toString()
+  let initial = await psbRouter.initializeTransaction("anonymously@gmail.com", total_sum, callback, req)
+  // let ref = initial.data.payments.redirectLink.query.paymentReference
+  res.redirect(initial.data.payments.redirectLink);
+  
+} catch (e) {
+  console.log(e)
+}
+});
+
+siteRouter.get("/psb/callback", async (req, res) => {
+
+})
 
 module.exports = siteRouter;
