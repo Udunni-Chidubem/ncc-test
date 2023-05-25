@@ -216,4 +216,16 @@ module.exports = {
         }
 
     },
+
+    //PAYMENT GATEWAY 
+    authentication: async (req, res) => {
+        let token = await psb.gatewayTokenGeneration()
+        res.send(token)
+        return token
+    },
+
+    initializeTransaction: async(email, amount, callback, req) => {
+        let token = await psb.gatewayTokenGeneration()
+        let initial = psb.initialize(email, amount, callback, token, req)
+    }
 }
