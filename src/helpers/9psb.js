@@ -130,22 +130,23 @@ module.exports = {
           }
       );
       console.log(resp)
-      return resp
+      return resp.data.EncryptedSecKey.encryptedKey
       },
 
       initialize: async(email, amount, callback, token, req) => {
         try {
           let ref = uniqid()
+          // console.log('token', token)
           let resp = await axios.post(
-            process.env.psb_initialize,
-            console.log(callback),
+            `${process.env.psb_payment_gateway_base_url}payments`,
             {
-              email: email,
+              publicKey: process.env.psb_merchant_publicKey,
               amount: amount,
-              callback_url: "www.invas.ng",
-              key: process.env.psb_merchant_publicKey,
+              currency: "NGN",
+              country: "NG",
               paymentReference: ref,
-              country: "NG"
+              email: email,
+              callbackUrl: callback
             },
             {
               headers: {
@@ -153,6 +154,7 @@ module.exports = {
               },
             }
           )
+          console.log("resppp",resp)
           return resp
         } catch (e) {
           console.log(e)

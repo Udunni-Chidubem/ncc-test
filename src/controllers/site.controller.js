@@ -67,7 +67,7 @@ module.exports = {
     });
   },
   faq: async (req, res) => {
-    res.render("site/test_payment", {
+    res.render("site/faq", {
       layout: "common",
       title: "FAQ",
     });
