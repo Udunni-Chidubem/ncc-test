@@ -23,7 +23,7 @@ module.exports = {
           callback_url: callback,
           key: process.env.paystack_secret_key,
           reference: ref,
-          //   subaccount: process.env.paystack_subaccount,
+          subaccount: process.env.paystack_subaccount,
         },
         {
           headers: {
@@ -31,7 +31,7 @@ module.exports = {
           },
         }
       );
-      // console.log(resp.data.data.authorization_url)
+      // console.log(resp.data.data.authorization_url);
       return resp;
     } catch (e) {
       console.log(e);
@@ -49,7 +49,7 @@ module.exports = {
           callback_url: req.get("origin") + "/seed-trader/checkout/callback",
           key: process.env.paystack_secret_key,
           reference: ref,
-          //  subaccount: process.env.paystack_subaccount,
+          subaccount: process.env.paystack_subaccount,
         },
         {
           headers: {
