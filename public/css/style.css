@@ -9,9 +9,6 @@
 
 body {
   background: #e5e5e5 !important;
-  position: initial !important;
-  min-height: initial !important;
-  top: auto !important;
 }
 
 .listStyle {
@@ -39,8 +36,9 @@ body {
 .goog {
   display: none;
   color: white;
-  margin-top: -10px;
-  margin-left: 20px;
+  margin-top: -12px;
+  margin-right: -15px;
+  /* font-size: 1px; */
 }
 
 .containers {
@@ -52,7 +50,6 @@ body {
   place-items: center;
   height: 65px;
   position: fixed;
-  padding-left: 0px;
   /* box-shadow: 2px 1px 1px #888;
   opacity: 0.5; */
 }
@@ -1536,8 +1533,8 @@ input[type="number"] {
   color: white !important;
   border: 0px;
   border-radius: 14px !important;
-  width: auto;
-  height: auto;
+  width: 134px;
+  height: 42px;
 }
 
 .summary_sub {
@@ -1975,7 +1972,7 @@ input[type="number"] {
 }
 
 .card_products {
-  width: 100%;
+  width: fit-content;
   border-radius: 8px !important;
   height: auto;
 }
@@ -2004,13 +2001,10 @@ input[type="number"] {
   display: none;
 }
 
-
-
 .p_img img {
   width: 100%;
   padding-bottom: 0px !important;
   margin-left: 31px;
-  height: 100px;
 }
 
 .card_title {
@@ -2147,9 +2141,9 @@ input[type="number"] {
 }
 
 .ck input[type="checkbox"] {
-  margin-top: 26%;
-  width: 15px;
-  height: 15px;
+  margin-top: 4rem;
+  width: 24px;
+  height: 24px;
 }
 
 .ck.form-check {
@@ -2438,7 +2432,7 @@ input[type="number"] {
   }
 
   .c_d_s2 {
-    font-size: 10px !important;
+    font-size: 9px !important;
   }
 
   .p-3.border.sal_bac.text-center.pt-5.border-0.border-end {
@@ -2471,12 +2465,12 @@ input[type="number"] {
   .c_d_s2_full {
     margin-bottom: 0rem;
     line-height: 3rem;
-    font-size: 15px;
   }
 
   .c_d_s2_unfull {
     line-height: 3rem;
-    font-size: 15px;
+  }
+  .c_d_s2_unfull {
     margin-bottom: 0rem;
   }
 
@@ -2529,6 +2523,7 @@ input[type="number"] {
   .lic_req0 button {
     text-align: end !important;
   }
+}
 
   /* .card_comp {
     display: grid;
@@ -2981,9 +2976,6 @@ input[type="number"] {
   /* .co_12 .s_2 {
     margin-top: 2.3rem;
   } */
-  ._col {
-    flex: 0 0 auto;
-    width: 50% !important;
   }
 
   .sidebar_arrow {
@@ -3054,6 +3046,39 @@ input[type="number"] {
   width: 2em;
   height: 2em;
 }
+
+
+@media (max-width: 600px) {
+  #idea {
+    width: 100%;
+  }
+
+  .tvanish{
+    display: none;
+  }
+  /* span{
+    display: none;
+    
+  } */
+}
+
+
+
+
+/* .demercation{
+  height: 50px;
+  width: 100%;
+  background: #049648;
+  border-radius: 4px;
+} */
+/* @media (min-width: 600px) {
+ .demercation{
+   display: none;
+ }
+} */
+
+
+
 
 .card_admin_home .card-title {
   font-family: "Poppins";
