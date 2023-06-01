@@ -15,6 +15,7 @@ const { now } = require("moment");
 const weatherController = require("../../controllers/weather.controller");
 const { default: axios } = require("axios");
 const uniqid = require("uniqid");
+const ninePSB = require("../../helpers/ninePSB");
 
 farmersRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -236,6 +237,8 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
 
       if (gateway == "9PSB") {
         //9psb implementation goes here now
+        let token = await ninePSB.gatewayTokenGeneration();
+        console.log(token);
       }
     }
 

@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 const uniqid=require('uniqid');
 const escrow = require("../helpers/escrow");
-const psb = require("../helpers/9psb")
+const psb = require("../helpers/ninePSB")
 const axios = require("axios").default;
 require('dotenv').config()
 
