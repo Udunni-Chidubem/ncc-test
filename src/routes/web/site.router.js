@@ -343,7 +343,7 @@ try {
   let callback_ = req.get("origin") + "/psb/callback";
   let callback = callback_.toString()
   let initial = await psbRouter.initializeTransaction("anonymously@gmail.com", total_sum, callback, req)
-  // let ref = initial.data.payments.redirectLink.query.paymentReference
+  console.log("paraventure", initial)
   res.redirect(initial.data.payments.redirectLink);
   
 } catch (e) {
@@ -352,7 +352,9 @@ try {
 });
 
 siteRouter.get("/psb/callback", async (req, res) => {
-
+  console.log("testt")
+  let user = await req.user
+    let userid = user.id;
 })
 
 module.exports = siteRouter;

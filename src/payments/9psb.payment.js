@@ -226,6 +226,7 @@ module.exports = {
 
     initializeTransaction: async(email, amount, callback, req) => {
         let token = await psb.gatewayTokenGeneration()
-        let initial = psb.initialize(email, amount, callback, token, req)
+        let initial = await psb.initialize(email, amount, callback, token, req)
+        return initial
     }
 }

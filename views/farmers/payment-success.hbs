@@ -1,27 +1,33 @@
 <div class="payment-notifaction-page">
-    <div class="card payment-card">
-       <div class="card-body">
-         <div class="message-type">
-          <div style="border-radius:200px; height:100px; width:100px; background: #c2ecd8; margin:0 auto;">
-            <i class="fa fa-check"></i>
-          </div>
-           
-           <h4>Transaction Successful</h4>
-           <p>Transaction Id: {{paystackPayload.data.id}}</p>
-         </div>
-         <hr class="payment-line">
-         <div class="amount">
-            <div>
-              <h6>Amount Paid:</h6>
-            </div>
-            <div>
-              <h6>&#8358; {{number data.amount}}</h6>
-            </div>
-         </div>
-       </div>
-       <button type="submit" class="btn btn-theme return-btn"  onclick="window.location.href='/farmer/dashboard'">Back to Dashboard</button>
-    </div>    
-    <div>
-       
-    </div> 
+  <div class="card payment-card">
+    <div class="card-body">
+      <div class="message-type">
+        <div
+          style="border-radius:200px; height:100px; width:100px; background: #c2ecd8; margin:0 auto;"
+        >
+          <i class="fa fa-check"></i>
+        </div>
+
+        <h4>Transaction Successful</h4>
+        <p>Transaction Id: {{data.transaction_id}}</p>
+      </div>
+      <hr class="payment-line" />
+      <div class="amount">
+        <div>
+          <h6>Amount Paid:</h6>
+        </div>
+        <div>
+          <h6>&#8358; {{number data.amount}}</h6>
+        </div>
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-theme return-btn"
+      onclick="window.location.href='/farmer/dashboard'"
+    >Back to Dashboard</button>
+  </div>
+  <div>
+
+  </div>
 </div>

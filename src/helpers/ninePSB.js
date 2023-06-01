@@ -114,40 +114,44 @@ module.exports = {
 
   // PAYMENT GATEWAY
   gatewayTokenGeneration: async () => {
-    let tokenData = {
-      key:
-        process.env.psb_merchant_privateKey +
-        "." +
-        process.env.psb_merchant_publicKey,
-    };
-    let resp = await axios.post(
-      `${process.env.psb_payment_gateway_base_url}encrypt/keys`,
-      tokenData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          // 'Authorization' : "Bearer "+"1234"
-        },
-      }
-    );
-    console.log(resp);
-    return resp;
+    try {
+      let tokenData = {
+        key:
+          process.env.psb_merchant_privateKey +
+          "." +
+          process.env.psb_merchant_publicKey,
+      };
+      let resp = await axios.post(
+        `${process.env.psb_payment_gateway_base_url}encrypt/keys`,
+        tokenData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            // 'Authorization' : "Bearer "+"1234"
+          },
+        }
+      );
+      return resp.data.EncryptedSecKey.encryptedKey;
+    } catch (e) {
+      return e.message;
+    }
   },
 
   initialize: async (email, amount, callback, token, req) => {
     try {
       let ref = uniqid();
+      // console.log('token', token)
       let resp = await axios.post(
-        process.env.psb_initialize,
-        console.log(callback),
+        `${process.env.psb_payment_gateway_base_url}payments`,
         {
-          email: email,
+          publicKey: process.env.psb_merchant_publicKey,
           amount: amount,
-          callback_url: "www.invas.ng",
-          key: process.env.psb_merchant_publicKey,
-          paymentReference: ref,
+          currency: "NGN",
           country: "NG",
+          paymentReference: ref,
+          email: email,
+          callbackUrl: callback,
         },
         {
           headers: {
@@ -155,9 +159,24 @@ module.exports = {
           },
         }
       );
+      console.log("resppp", resp);
       return resp;
     } catch (e) {
       console.log(e);
+    }
+  },
+  verifyPayment: async (ref, token) => {
+    try {
+      let url = `${process.env.psb_payment_gateway_base_url}payments/query/${ref}`;
+
+      let resp = await axios.get(url, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      return resp;
+    } catch (e) {
+      return e.message;
     }
   },
 };
