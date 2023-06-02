@@ -141,7 +141,6 @@ module.exports = {
   initialize: async (email, amount, callback, token, req) => {
     try {
       let ref = uniqid();
-      // console.log('token', token)
       let resp = await axios.post(
         `${process.env.psb_payment_gateway_base_url}payments`,
         {
