@@ -1,10 +1,13 @@
-const passport = require("passport");
-const siteController = require("../../controllers/site.controller");
-const helpers = require("../../helpers/auth.guard");
-const passpportInitializer = require("../../helpers/passport-config");
-passpportInitializer(passport);
-const db = require("../../models/index");
-const nodeMailer = require("nodemailer");
+const passport = require('passport');
+const siteController = require('../../controllers/site.controller');
+const helpers = require('../../helpers/auth.guard')
+const passpportInitializer = require('../../helpers/passport-config')
+passpportInitializer(passport)
+const db = require('../../models/index')
+const nodeMailer = require('nodemailer');
+const escrowRouter = require("../../controllers/escrow.controller");
+
+const psbRouter = require("../../payments/9psb.payment")
 
 const {
   signupValidation,
@@ -302,5 +305,56 @@ siteRouter.post("/otp", async (req, res) => {
     phone,
   });
 });
+
+siteRouter.get('/otp-resend/:phone', async(req, res)=>{
+    let phone = req.params.phone
+    console.log(phone)
+    let otp_instance = siteController.otp(phone)
+    res.render('site/otp',{
+    form_banner:'Group.png',
+    title: 'OTP',
+    layout : 'form',
+    phone
+    })
+})
+
+siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
+siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
+// siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
+
+siteRouter.post("/payment/9psbAuth", psbRouter.generateToken)
+siteRouter.post("/payment/9psbValidate", psbRouter.psbCustomerValidate)
+siteRouter.post("/payment/otherValidate", psbRouter.otherCustomerValidate)
+siteRouter.get("/payment/getBanks", psbRouter.getBanks)
+siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout)
+siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout)
+siteRouter.get("/payment/payoutStatus/:ref", psbRouter.payoutStatus)
+siteRouter.get("/payment/gatewayAuth", psbRouter.authentication)
+
+siteRouter.post("/payment/checkout",
+async (req, res) => {
+  let user = await req.user
+    // let userid = user.id;
+try {
+  // let total_sum = req.body.amount;
+  let total_sum = "1000";
+  total_sum = total_sum.replaceAll(",", "");
+  total_sum = parseInt(total_sum);
+  let callback_ = req.get("origin") + "/psb/callback";
+  let callback = callback_.toString()
+  let initial = await psbRouter.initializeTransaction("anonymously@gmail.com", total_sum, callback, req)
+  console.log("paraventure", initial)
+  res.redirect(initial.data.payments.redirectLink);
+  
+} catch (e) {
+  console.log(e)
+}
+});
+
+siteRouter.get("/psb/callback", async (req, res) => {
+  console.log("testt")
+  let user = await req.user
+    let userid = user.id;
+})
 
 module.exports = siteRouter;
