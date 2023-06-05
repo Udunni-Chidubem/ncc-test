@@ -525,4 +525,18 @@ adminRouter.get("/analytics", async (req, res) => {
   });
 });
 
+adminRouter.get("/knowledge-base", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/knowledge-base", {
+    layout: "admin-dashboard",
+    title: "Knowledge Base",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+  });
+});
+
 module.exports = adminRouter;
