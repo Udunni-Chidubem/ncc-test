@@ -14,8 +14,21 @@
                         placeholder="File Name">
                 </div>
                 <div class="form-group">
-                    <input type="file" class="form-control" name="file" id="file">
+                    <textarea name="descriptioin" id="description" class="form-control" cols="5" rows="5"
+                        placeholder="Description"></textarea>
                 </div>
+                <div class="row mt-3">
+                    <div class="col form-group">
+                        <label for="displayImage">Set Display Image</label>
+                        <input type="file" class="form-control" name="displayImage" id="displayImage">
+                    </div>
+
+                    <div class="col form-group">
+                        <label for="file">Select File</label>
+                        <input type="file" class="form-control" name="file" id="file">
+                    </div>
+                </div>
+
                 <hr>
                 <div class=" " style="float: right">
                     <button type="submit" class="btn btn-theme">Submit</button>
@@ -42,7 +55,7 @@
                     <td>05/06/2023</td>
                     <td>05/06/2023</td>
                     <td>
-                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                        {{!-- <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button> --}}
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#fileUpdateModal"><i class="far fa-edit"></i></button>
                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>

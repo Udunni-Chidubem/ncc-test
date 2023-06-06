@@ -163,8 +163,8 @@ siteRouter.delete("/logout", (req, res) => {
   siteRouter.get("/services", siteController.services);
 
 siteRouter.get("/knowledge-base", (req, res) => {
-  res.render("knowledge_base", {
-    layout: "",
+  res.render("knowledge_base/index-main", {
+    layout: "knowledge_dashboard",
     title: "Knowledge Base - Index",
   });
 });
