@@ -3,19 +3,19 @@
 <body class="body">
 
     <div class="knowledge-content-card p-3">
-        <a href="#" target="_blank">
+        {{#each knowledgeBases }}
+        <a href="/knowledge-base/{{this.name}}" target="_blank">
             <div class="card">
-                <img class="knowB card-img-top" src="/images/groundnut.png" alt="Card image cap">
+                <img class="knowB card-img-top" src="/knowledge_base/images/{{this.image_path}}" alt="Card image cap">
                 <div class="knowB card-body">
-                    <h5 class="card-title">Groundnut</h5>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, nihil!
-                        Accusamus id quis esse et soluta, provident porro sint eius, ut, cupiditate quam magnam facere
-                        fuga temporibus at rerum impedit?</p>
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.description}}</p>
                     <p class="card-text"><small class="text-muted"></small></p>
                 </div>
             </div>
         </a>
-        <a href="#" target="_blank">
+        {{/each}}
+        {{!-- <a href="#" target="_blank">
             <div class="card">
                 <img class="knowB card-img-top" src="/images/cowpea.png" alt="Card image cap">
                 <div class="knowB card-body">
@@ -52,7 +52,7 @@
                     <p class="card-text"><small class="text-muted"></small></p>
                 </div>
             </div>
-        </a>
+        </a> --}}
 
     </div>
 </body>
