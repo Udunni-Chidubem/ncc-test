@@ -218,7 +218,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
           callback,
           req
         );
-        console.log(initial);
+
         if (initial.status == true) {
           let ref = initial.data.reference;
           let { getCartItems, farmer } =
@@ -335,8 +335,7 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
         if (confirm.data.message == "Successful") {
           let payment = confirm.data.payments;
           data.status = "verified";
-          (data.currency = payment.currency),
-            (data.amount = payment.amount + payment.fee);
+          (data.currency = payment.currency), (data.amount = payment.amount);
           data.transaction_id = payment.gatewayref;
           data.description = "payment for a seed purchase via card (9PSB)";
         }
@@ -348,7 +347,6 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
       data.status = "pending";
       farmerController.updateTransactionLog(data, ref);
       let paystackPayload = await paystack.callback(req, res);
-      console.log(paystackPayload);
       if (paystackPayload.status == true) {
         data.status = "verified";
         (data.currency = paystackPayload.data.currency),
