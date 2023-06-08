@@ -1,0 +1,74 @@
+{{!-- <div class="container">
+    <div class="row main_head">
+        <div class="col-12 fonting mt-4 d-flex justify-content-center text-center">
+            <h6>Add money to your wallet through paystack</h6>
+        </div>
+    </div>
+
+    <div class="row error_row justify-content-center">
+        <div class="col-6 ">
+            {{#if messages.error}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    {{messages.error}}
+                </div>
+            </div>
+            {{/if}}
+            {{#if errors.length}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 alert alert-danger">
+                    <ul>
+                        {{#each errors}}
+                        <li>{{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if extractedErrors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul style="padding: 5px;">
+                    {{#each extractedErrors}}
+                    <li>{{msg}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+    </div> --}}
+
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-7 fund-content">
+            <div class="text-center">
+                    <h2>Fund Wallet</h2>
+            </div>
+            <form action="/payment/checkout" method="post">
+                <div class="">
+                    <div class="card-body">
+                        <div class=" mb-3">
+                        <label class="form-label input_label">Amount</label>
+                            <input type="text" name="amount" class="amount form-control" value="{{formData.amount}}"
+                                placeholder="Enter Amount" required>
+                        </div>
+                        {{!-- <div class="mb-3">
+                        <label class="form-label input_label">User Pin</label>
+                            <input type="password" name="pin" class="form-control" required placeholder="Enter Pin" minlength="4" maxlength="4">
+                        </div> --}}
+                        <input type="text" class="hidden" value="Credit" name="type" hidden>
+                        <input type="text" class="hidden" value="{{userid}}" name="id">
+                            <div class="text-center" >
+                                <button type="submit" class="btn" id="" style="color:black">
+                                    GO TO PAYMENT
+                                </button>
+                            </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+</div>
+

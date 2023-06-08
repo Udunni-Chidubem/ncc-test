@@ -192,6 +192,13 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#filesTable').DataTable({
+    "aLengthMenu": [ 10, 25, 50, 100 ],
+    "order": [[2, "desc"]]
+  });
+});
+
 $(document).ready(function(){
     $(".view-btn").click(function(){
         $(this).text($(this).text() == 'Show Ledger' ? 'Hide Ledger' : 'Show Ledger');

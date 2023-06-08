@@ -13,6 +13,7 @@ const {
   Wallet,
   Contact,
   Otp,
+  KnowledgeBase,
 } = db;
 const bcrypt = require("bcrypt");
 const uniqid = require("uniqid");
@@ -535,5 +536,16 @@ module.exports = {
         body: { message: e.message },
       };
     }
+  },
+  allKnowledgeBase: async (req, res) => {
+    let knowledgeBases = await KnowledgeBase.findAll();
+    return JSON.parse(JSON.stringify(knowledgeBases));
+  },
+
+  KnowledgeBase: async (req, res) => {
+    let knowledgeBase = await KnowledgeBase.findOne({
+      where: { name: req.params.name },
+    });
+    return JSON.parse(JSON.stringify(knowledgeBase));
   },
 };

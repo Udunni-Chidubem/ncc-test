@@ -20,6 +20,7 @@ const fs = require("fs");
 const worker = require("./src/helpers/worker,threads");
 const passportJwt = require("./src/helpers/passport-jwt");
 const bootstrap = require("./src/helpers/bootstrap.service");
+const axios = require("axios").default;
 bootstrap;
 passpportInitializer(passport);
 
@@ -101,6 +102,9 @@ app.engine(
           arr.push(i);
         }
         return done.fn(arr);
+      },
+      formatCurrency(value) {
+        return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
       },
     },
   })
@@ -188,6 +192,23 @@ app.use("/robots.txt", function (req, res, next) {
   res.type("text/plain");
   res.send("User-agent: *Disallow: /");
 });
+
+axios.interceptors.request.use(
+  (request) => {
+    request.headers.ContentType = "application/json";
+    request.headers.Accept = "application/json";
+    return request;
+  },
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use((response) => {
+  return response.data;
+});
+
 // const random = new Random();
 // const value = random.integer(1, 1000000);
 // console.log(value)
