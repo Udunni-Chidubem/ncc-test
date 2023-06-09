@@ -542,6 +542,20 @@ adminRouter.get("/knowledge-base", async (req, res) => {
   });
 });
 
+adminRouter.get("/transaction-resolution", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/transaction-resolution", {
+    layout: "admin-dashboard",
+    title: "Transaction Resolution",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+  });
+});
+
 adminRouter.post("/knowledge-base", async (req, res) => {
   adminController.createKnowledgeBase(req, res);
   res.redirect("back");
