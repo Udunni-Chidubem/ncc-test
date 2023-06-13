@@ -1,0 +1,99 @@
+{{>breadcrumbs}}
+
+<div id="page-content-wrapper">
+    <div class="card create-user-card">
+        <div class="card-header border-bottom">
+            Resolve Transaction
+        </div>
+        <div class="card-body create-user-form mt-3">
+            <form action="" method="post" class="" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <input type="text" name="transactionId" id="transactionId" class="form-control" value="" placeholder="Transaction Ref">
+                </div>
+                <hr>
+                <div class=" " style="float: right">
+                    <button type="submit" class="btn btn-txn">Verify Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="create-user-card transactionDetails card mt-2 mb-3 p-2">
+         <div class="card-header border-bottom">
+            Transaction Details
+        </div>
+      <div class="card-body pt-0 pb-0 mt-2">
+            <div class="row ">
+                <div class="col">
+                    <p class="m-0 p-0">Username</p>
+                    <span class="user_name">Jon Doe</span>
+                </div>
+                <div class="col">
+                    <p class="m-0 p-0">Transaction ID</p>
+                    <span class="user_transId">M43439jn98uin</span>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <p class="m-0 p-0">Description</p>
+                <span class="transaction_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
+                    minima, quae perspiciatis tempore fugit accusantium quidem dolorem, commodi soluta cupiditate sed?
+                    In laudantium iste necessitatibus numquam? Nulla ipsam hic quasi!</span>
+            </div>
+
+            <div class="row mt-3 ">
+                <div class="col">
+                    <p class="m-0 p-0">Amount In Dispute</p>
+                    <span class="">&#8358; <span class="trans_amount"> 2,000</span></span>
+                </div>
+                <div class="col">
+                    <p class="m-0 p-0">Status</p>
+                    <span class="failed-txn trans_status">Failed</span>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row-reverse mt-3">
+                    <button class="btn btn-txn" type="button" data-bs-toggle="modal" data-bs-target="#transactionModal" onclick="modalLoad()" >
+                        Resolve dispute
+                    </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="transactionModal" tabindex="-1" aria-labelledby="transactionModalLabel" aria-hidden="true">
+  <div class="modal-dialog dialog">
+    <div class="modal-content content">
+      <div class="modal-body vasadModal">
+        <h4>Please Confirm the details below:</h4>
+        <div class="card txn-modal-content">
+            <div class="labels">
+                <h5>Username</h5>
+            </div>
+            <div class="pb-1 modal_username">
+               <p>09099932323</p>
+            </div>
+            <div class="labels">
+                <h5>Transaction id</h5>
+            </div>
+            <div class="pb-1 modal_transaction_id">
+               <p>SEERMZI4G85GAWHI7DW</p>
+            </div>
+            <div class="labels">
+                <h5>Amount</h5>
+            </div>
+            <div class="pb-1">
+               <p> &#8358;<span class="modal_transaction_amount">21,000</span></p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-txn fund_btn" onclick="fundWallet()">Resolve</button>
+      </div>
+    </div>
+  </div>
+</div>

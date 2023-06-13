@@ -1287,3 +1287,71 @@ color: #818E9B;
   display: grid;
   grid-template-columns: auto auto;
 }
+
+.transactionDetails p{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-txn {
+  width: fit-content !important;
+  height: 50px;
+  color: #fff !important;
+  background-color:  #39aa6e !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
+}
+.btn-txn:hover {
+  color: #fff;
+  background: #39aa6e;
+  border-color: #155432;
+}
+.btn-txn.focus,
+.btn-txn:focus {
+  box-shadow: 0 0 0 0.2rem rgb(0, 159.38, 38.848, 0.5
+  );
+}
+.btn-txn.disabled,
+.btn-txn:disabled {
+  color: #fff;
+  background: #868889;
+  border-color: #868889;
+}
+
+
+.failed-txn{
+  background-color: #8c0404;
+  border-radius: 4px;
+  padding: 4px;
+  color: #ffffff !important;
+}
+
+.successful-txn{
+  background-color: #008a00;
+  border-radius: 4px;
+  padding: 4px;
+  color: #ffffff !important;
+}
+
+.txn-modal-content {
+  background: #ebebee;
+  border-radius: 7.91px;
+  padding: 20px 21px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.txn-modal-content h5 {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 125%;
+  color: #3d348b;
+}
+
+.txn-modal-content p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 125%;
+  color: #3d348b;
+}
