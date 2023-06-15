@@ -218,7 +218,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
           callback,
           req
         );
-        console.log(initial);
+
         if (initial.status == true) {
           let ref = initial.data.reference;
           let { getCartItems, farmer } =
@@ -321,67 +321,74 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
 });
 
 farmersRouter.get("/checkout/callback", async (req, res) => {
-  let items = [];
-  let data = {};
-  let ref = req.query.reference;
-  let check = await farmerController.checkTransaction(ref);
-  if (req.query.code) {
-    if (check) {
-      data.status = "pending";
-      farmerController.updateTransactionLog(data, ref);
-      let token = await ninePSB.gatewayTokenGeneration();
-      let confirm = await ninePSB.verifyPayment(ref, token);
-      if (confirm.status == "SUCCESS") {
-        if (confirm.data.message == "Successful") {
-          let payment = confirm.data.payments;
-          data.status = "verified";
-          (data.currency = payment.currency),
-            (data.amount = payment.amount + payment.fee);
-          data.transaction_id = payment.gatewayref;
-          data.description = "payment for a seed purchase via card (9PSB)";
+  try {
+    let items = [];
+    let data = {};
+    let ref = req.query.reference;
+    let check = await farmerController.checkTransaction(ref);
+    if (req.query.code) {
+      if (check) {
+        data.status = "pending";
+        farmerController.updateTransactionLog(data, ref);
+        let token = await ninePSB.gatewayTokenGeneration();
+        let confirm = await ninePSB.verifyPayment(ref, token);
+        if (confirm.status == "SUCCESS") {
+          if (confirm.data.message == "Successful") {
+            let payment = confirm.data.payments;
+            data.status = "verified";
+            (data.currency = payment.currency), (data.amount = payment.amount);
+            data.transaction_id = payment.gatewayref;
+            data.description = "payment for a seed purchase via card (9PSB)";
+          }
         }
       }
     }
-  }
-  if (req.query.trxref) {
-    if (check) {
-      data.status = "pending";
-      farmerController.updateTransactionLog(data, ref);
-      let paystackPayload = await paystack.callback(req, res);
-      console.log(paystackPayload);
-      if (paystackPayload.status == true) {
-        data.status = "verified";
-        (data.currency = paystackPayload.data.currency),
-          (data.amount = paystackPayload.data.amount / 100);
-        data.transaction_id = paystackPayload.data.id;
-        data.description = "payment for a seed purchase via card (Paystack)";
+    if (req.query.trxref) {
+      if (check) {
+        data.status = "pending";
+        farmerController.updateTransactionLog(data, ref);
+        let paystackPayload = await paystack.callback(req, res);
+        if (paystackPayload.status == true) {
+          data.status = "verified";
+          (data.currency = paystackPayload.data.currency),
+            (data.amount = paystackPayload.data.amount / 100);
+          data.transaction_id = paystackPayload.data.id;
+          data.description = "payment for a seed purchase via card (Paystack)";
+        }
       }
     }
-  }
-  if (data.status == "verified") {
-    farmerController.updateTransactionLog(data, ref);
-    check.TransactionCarts.forEach((t) => {
-      items.push(t.cart_id);
-    });
-    let { farmer, isVerified, getCartItems } =
-      await farmerController.getCartItemsByIds(req, items);
-    farmerController.createOrder(items, check.id);
-    farmerController.updateCart(items);
-    getCartItems.forEach((item) => {
-      farmerController.productItemsUpdate(item.product_id, item.size, item.qty);
-    });
-    companyController.creditWallet(getCartItems);
-    res.render("farmers/payment-success", {
-      layout: "farmers-dashboard",
-      title: "Success Page",
-      isVerified,
-      data,
-    });
-    $msg = `Your order is confirmed and your no is ${data.transaction_id}. Thank you for shopping on NIGSIMS!`;
-    let r = await axios.get(
-      `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${farmer.phone_no}&message=${$msg}&type=0&routing=3`
-    );
-    return;
+    console.log(data);
+    if (data.status == "verified") {
+      farmerController.updateTransactionLog(data, ref);
+      check.TransactionCarts.forEach((t) => {
+        items.push(t.cart_id);
+      });
+      let { farmer, isVerified, getCartItems } =
+        await farmerController.getCartItemsByIds(req, items);
+      farmerController.createOrder(items, check.id);
+      farmerController.updateCart(items);
+      getCartItems.forEach((item) => {
+        farmerController.productItemsUpdate(
+          item.product_id,
+          item.size,
+          item.qty
+        );
+      });
+      companyController.creditWallet(getCartItems);
+      res.render("farmers/payment-success", {
+        layout: "farmers-dashboard",
+        title: "Success Page",
+        isVerified,
+        data,
+      });
+      $msg = `Your order is confirmed and your no is ${data.transaction_id}. Thank you for shopping on NIGSIMS!`;
+      let r = await axios.get(
+        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${farmer.phone_no}&message=${$msg}&type=0&routing=3`
+      );
+      return;
+    }
+  } catch (e) {
+    console.log(e);
   }
 
   res.send(
