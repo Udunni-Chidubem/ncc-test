@@ -1006,4 +1006,12 @@ module.exports = {
       return e;
     }
   },
+
+  getStates: async (req, res) => {
+    let states = await States.findAll({
+      attributes: ["id", "name"],
+      raw: true,
+    });
+    return states;
+  }
 };

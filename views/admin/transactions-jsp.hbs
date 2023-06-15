@@ -1,0 +1,69 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<div class="card m-3 mt-0 p-2">
+    <form action="" method="get">
+
+        <div class="row">
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Location </label>
+                <select class="form-control" aria-labelledby="" id="Location" name="Location">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="ALL">ALL</option>
+                    {{#each states}}
+                    <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+            <div class=" col form-group ">
+                <label for="btndropdown" class="labelos">Product</label>
+                <select class="form-control" aria-labelledby="" id="Product" name="Product">
+                    <option value="" disabled selected>Select Product</option>
+                    <option value="ALL">ALL</option>
+                    <option id="Cowpea" class="dropdown-item">Cowpea</option>
+                    <option id="Maize" class="dropdown-item">Maize</option>
+                    <option id="Rice" class="dropdown-item">Rice</option>
+                    <option id="Groundnut" class="dropdown-item">Groundnut</option>
+                </select>
+            </div>
+
+            <div class="col form-group ">
+                <label for="btndropdown" class="labelos">Status</label>
+                <select class="form-control" aria-labelledby="" id="Status" name="Status">
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="ALL">ALL</option>
+                    <option id="verified" class="dropdown-item">Pending</option>
+                    <option id="initiated" class="dropdown-item">Confirmed</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col form-group">
+                <label for="datepic" class="labelos">Start Date</label>
+                <input class="form-control" type="date" id="from" name="from">
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">End Date</label>
+                <input class="form-control" type="date" id="to" name="to">
+            </div>
+        </div>
+
+        <div class="btn-group btnreport_search">
+            <button type="submit" class="btn btn-primary btnsearch">Generate</button>
+        </div>
+    </form>
+</div>
+<div class="card mt-3 m-3">
+    {{{result.body}}}
+</div>
+
+<script>
+
+</script>
