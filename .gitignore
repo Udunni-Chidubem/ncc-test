@@ -4,3 +4,4 @@ logs
 .sequelizerc
 public/product_images
 public/profile_pics
+public/knowledge_base

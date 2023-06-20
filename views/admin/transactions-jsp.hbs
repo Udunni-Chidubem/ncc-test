@@ -1,0 +1,93 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<div class="card m-3 mt-0 p-2">
+    <form action="" method="get">
+
+        <div class="row">
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Location </label>
+                <select class="form-control" aria-labelledby="" id="Location" name="Location">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="ALL">ALL</option>
+                    {{#each states}}
+                    <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+            <div class=" col form-group ">
+                <label for="btndropdown" class="labelos">Product</label>
+                <select class="form-control" aria-labelledby="" id="Product" name="Product">
+                    <option value="" disabled selected>Select Product</option>
+                    <option value="ALL">ALL</option>
+                    <option id="Cowpea" class="dropdown-item">Cowpea</option>
+                    <option id="Maize" class="dropdown-item">Maize</option>
+                    <option id="Rice" class="dropdown-item">Rice</option>
+                    <option id="Groundnut" class="dropdown-item">Groundnut</option>
+                </select>
+            </div>
+
+            <div class="col form-group ">
+                <label for="btndropdown" class="labelos">Status</label>
+                <select class="form-control" aria-labelledby="" id="Status" name="Status">
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="ALL">ALL</option>
+                    <option id="verified" class="dropdown-item">Pending</option>
+                    <option id="initiated" class="dropdown-item">Confirmed</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col form-group">
+                <label for="datepic" class="labelos">Start Date</label>
+                <input class="form-control" type="date" id="from" name="from">
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">End Date</label>
+                <input class="form-control" type="date" id="to" name="to">
+            </div>
+        </div>
+
+        <div class="btn-group btnreport_search">
+            <div class="dropdown mr-2">
+                <button id="downnload-btn" class="btn complaint-btn-secondary dropdown-toggle" type="button"
+                    data-toggle="dropdown" aria-expanded="false" disabled>
+                    Download Report
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${{this.Location}}&Product=${{this.Product}}&Status=${{this.Status}}&from=${{this.from}}&to=${{this.to}}&j_username=jasperadmin&j_password=jasperadmin"
+                            class="dropdown-item" target="_blank">
+                            PDF
+                        </a>
+                    </li>
+                    <li>
+                        <a href="`http://nccccms.interranetworks.com:8080/jasperserver/rest_v2/reports/reports/Complaints_by_Category.xlsx?category=${category}&sub_category=${sub_category}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`"
+                            class="dropdown-item" target="_blank">
+                            EXCEL
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a href="http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${{this.Location}}&Product=${{this.Product}}&Status=${{this.Status}}&from=${{this.from}}&to=${{this.to}}&j_username=jasperadmin&j_password=jasperadmin"
+                            class="dropdown-item" >
+                            PDF
+                        </a>
+            <button type="submit" class="btn btn-primary btnsearch">Generate</button>
+        </div>
+    </form>
+</div>
+<div class="card mt-3 m-3">
+    {{{result.body}}}
+</div>
+
+<script>
+
+</script>

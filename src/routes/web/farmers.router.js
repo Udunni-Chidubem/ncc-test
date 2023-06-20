@@ -15,6 +15,7 @@ const { now } = require("moment");
 const weatherController = require("../../controllers/weather.controller");
 const { default: axios } = require("axios");
 const uniqid = require("uniqid");
+const ninePSB = require("../../helpers/ninePSB");
 
 farmersRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -217,6 +218,7 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
           callback,
           req
         );
+
         if (initial.status == true) {
           let ref = initial.data.reference;
           let { getCartItems, farmer } =
@@ -232,10 +234,37 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
         } else {
           res.redirect("back");
         }
+        return;
       }
 
       if (gateway == "9PSB") {
-        //9psb implementation goes here now
+        let callback = req.get("origin") + "/farmer/checkout/callback";
+        let token = await ninePSB.gatewayTokenGeneration();
+        let payment = await ninePSB.initialize(
+          user.username + "@nigsims.com",
+          total_sum,
+          callback,
+          token,
+          req
+        );
+        if (payment.status == "SUCCESS") {
+          let redirectLink = payment.data.payments.redirectLink;
+          let params = new URL(redirectLink);
+          let ref = params.searchParams.get("paymentReference");
+          let { getCartItems, farmer } =
+            await farmerController.getCartItemsByIds(req, items);
+          await farmerController.initializeTransaction(
+            req,
+            res,
+            ref,
+            getCartItems,
+            farmer
+          );
+          res.redirect(redirectLink);
+        }
+
+        // res.send(payment);
+        return;
       }
     }
 
@@ -292,20 +321,44 @@ farmersRouter.post("/cart/checkout", async (req, res) => {
 });
 
 farmersRouter.get("/checkout/callback", async (req, res) => {
-  let ref = req.query.reference;
-  let check = await farmerController.checkTransaction(ref);
-  if (check) {
-    let data = {};
+  try {
     let items = [];
-    data.status = "pending";
-    farmerController.updateTransactionLog(data, ref);
-    let paystackPayload = await paystack.callback(req, res);
-    if (paystackPayload.status == true) {
-      data.status = "verified";
-      (data.currency = paystackPayload.data.currency),
-        (data.amount = paystackPayload.data.amount / 100);
-      data.transaction_id = paystackPayload.data.id;
-      data.description = "payment for a seed purchase via card";
+    let data = {};
+    let ref = req.query.reference;
+    let check = await farmerController.checkTransaction(ref);
+    if (req.query.code) {
+      if (check) {
+        data.status = "pending";
+        farmerController.updateTransactionLog(data, ref);
+        let token = await ninePSB.gatewayTokenGeneration();
+        let confirm = await ninePSB.verifyPayment(ref, token);
+        if (confirm.status == "SUCCESS") {
+          if (confirm.data.message == "Successful") {
+            let payment = confirm.data.payments;
+            data.status = "verified";
+            (data.currency = payment.currency), (data.amount = payment.amount);
+            data.transaction_id = payment.gatewayref;
+            data.description = "payment for a seed purchase via card (9PSB)";
+          }
+        }
+      }
+    }
+    if (req.query.trxref) {
+      if (check) {
+        data.status = "pending";
+        farmerController.updateTransactionLog(data, ref);
+        let paystackPayload = await paystack.callback(req, res);
+        if (paystackPayload.status == true) {
+          data.status = "verified";
+          (data.currency = paystackPayload.data.currency),
+            (data.amount = paystackPayload.data.amount / 100);
+          data.transaction_id = paystackPayload.data.id;
+          data.description = "payment for a seed purchase via card (Paystack)";
+        }
+      }
+    }
+    console.log(data);
+    if (data.status == "verified") {
       farmerController.updateTransactionLog(data, ref);
       check.TransactionCarts.forEach((t) => {
         items.push(t.cart_id);
@@ -322,12 +375,10 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
         );
       });
       companyController.creditWallet(getCartItems);
-
       res.render("farmers/payment-success", {
         layout: "farmers-dashboard",
         title: "Success Page",
         isVerified,
-        paystackPayload,
         data,
       });
       $msg = `Your order is confirmed and your no is ${data.transaction_id}. Thank you for shopping on NIGSIMS!`;
@@ -336,7 +387,10 @@ farmersRouter.get("/checkout/callback", async (req, res) => {
       );
       return;
     }
+  } catch (e) {
+    console.log(e);
   }
+
   res.send(
     "this is not a valid transaction reference, pls contact admin if this is a error"
   );

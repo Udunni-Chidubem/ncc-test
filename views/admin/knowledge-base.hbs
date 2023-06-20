@@ -1,0 +1,98 @@
+{{>breadcrumbs}}
+
+<div id="page-content-wrapper">
+    <div class="card create-user-card">
+        <div class="card-header border-bottom">
+            Upload Knowledge Base
+        </div>
+        <div class="card-body create-user-form mt-3">
+            <form action="" method="post" class="" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    {{!-- <label for="fileName">File Name</label> --}}
+                    <input type="text" name="fileName" id="fileName" class="form-control" value=""
+                        placeholder="File Name">
+                </div>
+                <div class="form-group">
+                    <textarea name="descriptioin" id="description" class="form-control" cols="5" rows="5"
+                        placeholder="Description"></textarea>
+                </div>
+                <div class="row mt-3">
+                    <div class="col form-group">
+                        <label for="displayImage">Set Display Image</label>
+                        <input type="file" class="form-control" name="displayImage" id="displayImage">
+                    </div>
+
+                    <div class="col form-group">
+                        <label for="file">Select File</label>
+                        <input type="file" class="form-control" name="pdfFile" id="pdfFile">
+                    </div>
+                </div>
+
+                <hr>
+                <div class=" " style="float: right">
+                    <button type="submit" class="btn btn-theme">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="create-user-card  card mt-2 mb-3 p-2">
+        <table class="table table-responsive" id="filesTable">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>File</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rice Seed</td>
+                    <td><a href="#" target="_blank">rice.pdf</a></td>
+                    <td>05/06/2023</td>
+                    <td>05/06/2023</td>
+                    <td>
+                        {{!-- <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button> --}}
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#fileUpdateModal"><i class="far fa-edit"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="fileUpdateModal" tabindex="-1" role="dialog" aria-labelledby="fileUpdate"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileUpdate">Update File</h5>
+                {{!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> --}}
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" class="">
+
+                    <div class="form-group">
+                        {{!-- <label for="fileName">File Name</label> --}}
+                        <input type="text" name="fileName" id="fileName" class="form-control" value=""
+                            placeholder="File Name">
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="file" class="form-control" name="file" id="file">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-theme">Update</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

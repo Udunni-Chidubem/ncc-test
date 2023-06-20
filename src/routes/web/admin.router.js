@@ -416,31 +416,34 @@ adminRouter.get("/orders/:id/:transaction_id/:company_id", async (req, res) => {
   });
 });
 
-adminRouter.get("/payment/:id/:transaction_id/:company_id", async (req, res) => {
-  let user = await req.user;
-  let isVerified = await utils.isVerified(user);
-  // company_name = req.params.company_name;
-  // let company = await utils.getCompanyProfile(user)
-  transaction_id = req.params.transaction_id;
-  let user_role = await adminController.getUserRole(req, res);
+adminRouter.get(
+  "/payment/:id/:transaction_id/:company_id",
+  async (req, res) => {
+    let user = await req.user;
+    let isVerified = await utils.isVerified(user);
+    // company_name = req.params.company_name;
+    // let company = await utils.getCompanyProfile(user)
+    transaction_id = req.params.transaction_id;
+    let user_role = await adminController.getUserRole(req, res);
 
-  let { order, farmer, orderStatus } = await adminController.getOrder(
-    req.params.transaction_id,
-    req.params.id,
-    req.params.company_id
-  );
-  res.render("admin/payment-view", {
-    layout: "admin-dashboard",
-    title: "Payment View",
-    order,
-    farmer,
-    orderStatus,
-    username: user.username,
-    isVerified,
-    transaction_id: transaction_id,
-    user_role: user_role.Role.role_name,
-  });
-});
+    let { order, farmer, orderStatus } = await adminController.getOrder(
+      req.params.transaction_id,
+      req.params.id,
+      req.params.company_id
+    );
+    res.render("admin/payment-view", {
+      layout: "admin-dashboard",
+      title: "Payment View",
+      order,
+      farmer,
+      orderStatus,
+      username: user.username,
+      isVerified,
+      transaction_id: transaction_id,
+      user_role: user_role.Role.role_name,
+    });
+  }
+);
 
 /*Order POST request*/
 adminRouter.post(
@@ -523,6 +526,39 @@ adminRouter.get("/analytics", async (req, res) => {
     isVerified,
     user_role: user_role.Role.role_name,
   });
+});
+
+adminRouter.get("/knowledge-base", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/knowledge-base", {
+    layout: "admin-dashboard",
+    title: "Knowledge Base",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+  });
+});
+
+adminRouter.get("/transaction-resolution", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/transaction-resolution", {
+    layout: "admin-dashboard",
+    title: "Transaction Resolution",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+  });
+});
+
+adminRouter.post("/knowledge-base", async (req, res) => {
+  adminController.createKnowledgeBase(req, res);
+  res.redirect("back");
 });
 
 module.exports = adminRouter;

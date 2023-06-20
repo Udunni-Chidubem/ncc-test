@@ -38,7 +38,7 @@ farmerRouter.post("/profile", async (req, res) => {
       .status(200);
   } else {
     res
-      .json({ body: response.errors, error: true, statusCode: 400 })
+      .json({ message: response.message, error: true, statusCode: 400 })
       .status(400);
   }
 });

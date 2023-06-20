@@ -21,6 +21,7 @@ const {
   TransactionLog,
   Message,
   Salesheets,
+  KnowledgeBase,
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -970,4 +971,47 @@ module.exports = {
       return { error: true, message: e.message };
     }
   },
+
+  createKnowledgeBase: async (req, res) => {
+    try {
+      console.log(req.body);
+      let knowledgeBase = await KnowledgeBase.create({
+        name: req.body.fileName,
+        description: req.body.description,
+      });
+      let displayImage = req.files.displayImage;
+      let displayImageName = displayImage.name.split(".");
+      console.log(displayImageName);
+      let displayImageFileName =
+        req.body.fileName +
+        knowledgeBase.id +
+        "." +
+        displayImageName[displayImageName.length - 1];
+      displayImage.mv("./public/knowledge_base/images/" + displayImageFileName);
+      let pdfFile = req.files.pdfFile;
+      pdfFileName = pdfFile.name.split(".");
+      console.log(pdfFileName);
+      let pdfFileFileName =
+        req.body.fileName +
+        knowledgeBase.id +
+        "." +
+        pdfFileName[pdfFileName.length - 1];
+      pdfFile.mv("./public/knowledge_base/file/" + pdfFileFileName);
+      knowledgeBase.image_path = displayImageFileName;
+      knowledgeBase.file_path = pdfFileFileName;
+      knowledgeBase.save();
+      return knowledgeBase;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+
+  getStates: async (req, res) => {
+    let states = await States.findAll({
+      attributes: ["id", "name"],
+      raw: true,
+    });
+    return states;
+  }
 };

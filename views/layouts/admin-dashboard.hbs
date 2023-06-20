@@ -19,9 +19,9 @@
               <a class="nav-link" href="/admin/dashboard"><i class='bx bx-grid-alt'></i> Dashboard</a>
             </li>
 
-            {{!-- <li class="nav-item">
-              <a class="nav-link" href="#"><i class='bx bx-library'></i> Knowledge Base</a>
-            </li> --}}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/knowledge-base"><i class='bx bx-library'></i> Knowledge Base</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/admin/analytics"><i class='bx bx-bar-chart-square'></i>Analytics</a>
             </li>
@@ -37,6 +37,7 @@
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="./orders">Order Management</a>
+                  <a href="./transaction-resolution">Transaction Resolution</a>
                 </li>
                 {{/if}}
 
@@ -60,7 +61,7 @@
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
-                  <a href="/admin/transactions">Online Transaction</a>
+                  <a href="/admin/report/transactions-jsp">Online Transaction</a>
                 </li>
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}

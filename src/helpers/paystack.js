@@ -10,7 +10,7 @@ module.exports = {
         },
       }
     );
-    return resp.data;
+    return resp;
   },
   initialize: async (email, amount, callback, req) => {
     try {
@@ -31,8 +31,8 @@ module.exports = {
           },
         }
       );
-      // console.log(resp.data.data.authorization_url)
-      return resp.data;
+      // console.log(resp.data.data.authorization_url);
+      return resp;
     } catch (e) {
       console.log(e);
       return { status: false, message: e.message };
@@ -58,7 +58,7 @@ module.exports = {
         }
       );
       // console.log(resp.data.data.authorization_url)
-      return resp.data;
+      return resp;
     } catch (e) {
       console.log(e);
     }
@@ -69,6 +69,6 @@ module.exports = {
         Authorization: "Bearer " + process.env.paystack_secret_key,
       },
     });
-    return resp.data;
+    return resp;
   },
 };
