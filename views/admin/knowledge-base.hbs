@@ -25,7 +25,7 @@
 
                     <div class="col form-group">
                         <label for="file">Select File</label>
-                        <input type="file" class="form-control" name="pdfFile" id="pdfFile">
+                        <input type="file" class="form-control" name="pdfFile" id="pdfFile" accept=".pdf">
                     </div>
                 </div>
 
@@ -49,11 +49,12 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each knowledgeBases }}
                 <tr>
-                    <td>Rice Seed</td>
-                    <td><a href="#" target="_blank">rice.pdf</a></td>
-                    <td>05/06/2023</td>
-                    <td>05/06/2023</td>
+                    <td>{{this.name}}</td>
+                    <td><a href="/knowledge_base/file/{{this.file_path}}" target="_blank">{{this.file_path}}</a></td>
+                    <td>{{dateFormat this.created_at "dddd, MMMM Do YYYY HH:MM" }}</td>
+                    <td>{{dateFormat this.updated_at "dddd, MMMM Do YYYY HH:MM" }}</td>
                     <td>
                         {{!-- <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button> --}}
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
@@ -61,6 +62,7 @@
                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
