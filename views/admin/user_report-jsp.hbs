@@ -20,30 +20,7 @@
                 </select>
 
             </div>
-            <div class=" col form-group ">
-                <label for="btndropdown" class="labelos">Product</label>
-                <select class="form-control" aria-labelledby="" id="Product" name="Product">
-                    <option value="" disabled selected>Select Product</option>
-                    <option value="ALL">ALL</option>
-                    <option id="Cowpea" class="dropdown-item">Cowpea</option>
-                    <option id="Maize" class="dropdown-item">Maize</option>
-                    <option id="Rice" class="dropdown-item">Rice</option>
-                    <option id="Groundnut" class="dropdown-item">Groundnut</option>
-                </select>
-            </div>
 
-            <div class="col form-group ">
-                <label for="btndropdown" class="labelos">Status</label>
-                <select class="form-control" aria-labelledby="" id="Status" name="Status">
-                    <option value="" disabled selected>Select Status</option>
-                    <option value="ALL">ALL</option>
-                    <option id="verified" class="dropdown-item">Pending</option>
-                    <option id="initiated" class="dropdown-item">Confirmed</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row mt-2">
             <div class="col form-group">
                 <label for="datepic" class="labelos">Start Date</label>
                 <input class="form-control" type="date" id="from" name="from">
@@ -55,20 +32,22 @@
             </div>
         </div>
 
-            <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+        <div class="d-flex flex-row justify-content-end">
+            <div class="dropdown show ">
+                <a class="btn btn-primary btnsearch dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Download Report
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
                     <a href="#" id="pdf-link" class="dropdown-item" target="_blank">PDF</a>
                     <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btnsearch">Generate</button>
+            <button type="submit" class="btn btn-success btnsearch" style="margin-left: 4px;">Generate</button>
         </div>
-    </form>
+</div>
+</form>
 </div>
 <div class="card mt-3 m-3">
     {{{result.body}}}

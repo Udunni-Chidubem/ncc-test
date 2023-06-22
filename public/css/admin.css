@@ -1355,3 +1355,7 @@ color: #818E9B;
   line-height: 125%;
   color: #3d348b;
 }
+
+.download a{
+ color: #000 !important
+}

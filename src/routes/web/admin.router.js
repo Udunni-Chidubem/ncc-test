@@ -532,6 +532,7 @@ adminRouter.get("/knowledge-base", async (req, res) => {
   let user = await req.user;
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
+  let knowledgeBases = await siteController.allKnowledgeBase(req, res);
 
   res.render("admin/knowledge-base", {
     layout: "admin-dashboard",
@@ -539,6 +540,7 @@ adminRouter.get("/knowledge-base", async (req, res) => {
     username: user.username,
     isVerified,
     user_role: user_role.Role.role_name,
+    knowledgeBases: knowledgeBases,
   });
 });
 

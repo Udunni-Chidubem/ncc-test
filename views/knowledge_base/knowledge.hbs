@@ -1,0 +1,18 @@
+<div class="knowledge-grid">
+  <div>
+    <div class="knowledge-img">
+      <img src="/knowledge_base/images/{{knowledgeBase.image_path}}" />
+    </div>
+    <div class="knowledge-details">
+      <h5>{{knowledgeBase.name}}</h5>
+      <p>{{knowledgeBase.description}}</p>
+    </div>
+  </div>
+  <div>
+    <object data="/knowledge_base/file/{{knowledgeBase.file_path}}" width="100%" height="1000px">
+      <p>Alternative text - include a link
+        <a href="/knowledge_base/file/{{knowledgeBase.file_path}}">to the PDF!</a>
+      </p>
+    </object>
+  </div>
+</div>
