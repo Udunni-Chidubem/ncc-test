@@ -1378,7 +1378,7 @@ MEDIA QUERIES
   border: 1px solid #a29797;
   border-radius: 5px;
   height: 230px;
-  width: fit-content;
+  width: 98%;
 }
 
 .knowledge-img img{
