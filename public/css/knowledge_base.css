@@ -1358,6 +1358,8 @@ MEDIA QUERIES
   display: grid;
   grid-template-columns: 25% 75%;
   margin-top: 7px;
+  position: fixed;
+  width: 100%;
 }
 
 .knowledge-container{

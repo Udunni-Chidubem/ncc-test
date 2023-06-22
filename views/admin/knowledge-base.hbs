@@ -53,8 +53,9 @@
                 <tr>
                     <td>{{this.name}}</td>
                     <td><a href="/knowledge_base/file/{{this.file_path}}" target="_blank">{{this.file_path}}</a></td>
-                    <td>{{dateFormat this.created_at "dddd, MMMM Do YYYY HH:MM" }}</td>
-                    <td>{{dateFormat this.updated_at "dddd, MMMM Do YYYY HH:MM" }}</td>
+                    <td>{{dateFormat this.created_at "dddd, MMMM Do YYYY " timeZone="local" }}</td>
+                    <td>{{ dateFormat this.updated_at "dddd, MMMM Do YYYY" timeZone="local"}}</td>
+                    
                     <td>
                         {{!-- <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button> --}}
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
