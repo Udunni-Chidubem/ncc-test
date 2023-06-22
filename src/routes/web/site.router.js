@@ -22,7 +22,7 @@ const { saveContact } = require("../../controllers/site.controller");
 
 const siteRouter = require("express").Router();
 
-siteRouter.get("/home", async (req, res) => {});
+siteRouter.get("/home", async (req, res) => { });
 siteRouter.get("/", siteController.home);
 siteRouter.post("/", (req, res) => {
   siteController.saveContact(req);
@@ -80,7 +80,7 @@ siteRouter.post(
           res.redirect("back");
         }
       },
-      (e) => {}
+      (e) => { }
     );
   }
 );
@@ -120,7 +120,7 @@ siteRouter.post(
           res.redirect("back");
         }
       },
-      (e) => {}
+      (e) => { }
     );
   }
 );
@@ -161,24 +161,25 @@ siteRouter.delete("/logout", (req, res) => {
   res.redirect("/login");
 }),
   siteRouter.get("/services", siteController.services);
-siteRouter.get("/knowledge-base/:name", async (req, res) => {
-  let knowledgeBase = await siteController.KnowledgeBase(req, res);
 
-  console.log(knowledgeBase);
-  res.render("knowledge_base/cowpie", {
-    layout: "knowledge_dashboard",
-    title: "Knowledge Base - Cowpie",
-    crop: "Cowpea",
-    knowledgeBase: knowledgeBase,
-  });
-});
+
+
 siteRouter.get("/knowledge-base", async (req, res) => {
   let knowledgeBases = await siteController.allKnowledgeBase(req, res);
-  console.log(knowledgeBases);
   res.render("knowledge_base/index-main", {
     layout: "knowledge_dashboard",
     title: "Knowledge Base - Index",
     knowledgeBases: knowledgeBases,
+  });
+});
+
+siteRouter.get("/:name", async (req, res) => {
+  let knowledgeBase = await siteController.KnowledgeBase(req, res);
+
+  res.render("knowledge_base/knowledge", {
+    layout: "knowledge_dashboard",
+    title: "Know" ,
+    knowledgeBase: knowledgeBase,
   });
 });
 

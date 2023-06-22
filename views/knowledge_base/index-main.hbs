@@ -1,10 +1,12 @@
-{{> header}}
+<div class="knowledge-header">
+    <h1 class="text-center m-0">Knowledge Base</h1>
+</div>
 
 <body class="body">
 
     <div class="knowledge-content-card p-3">
         {{#each knowledgeBases }}
-        <a href="/knowledge-base/{{this.name}}" target="_blank">
+        <a href="/{{this.name}}">
             <div class="card">
                 <img class="knowB card-img-top" src="/knowledge_base/images/{{this.image_path}}" alt="Card image cap">
                 <div class="knowB card-body">
@@ -15,45 +17,6 @@
             </div>
         </a>
         {{/each}}
-        {{!-- <a href="#" target="_blank">
-            <div class="card">
-                <img class="knowB card-img-top" src="/images/cowpea.png" alt="Card image cap">
-                <div class="knowB card-body">
-                    <h5 class="card-title">Cowpea</h5>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, nihil!
-                        Accusamus id quis esse et soluta, provident porro sint eius, ut, cupiditate quam magnam facere
-                        fuga temporibus at rerum impedit?</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-        </a>
-
-        <a href="#" target="_blank">
-            <div class="card">
-                <img class="knowB card-img-top" src="/images/rice.png" alt="Card image cap">
-                <div class="knowB card-body">
-                    <h5 class="card-title">Rice</h5>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, nihil!
-                        Accusamus id quis esse et soluta, provident porro sint eius, ut, cupiditate quam magnam facere
-                        fuga temporibus at rerum impedit?</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-        </a>
-
-        <a href="#" target="_blank">
-            <div class="card">
-                <img class="knowB card-img-top" src="/images/maize.png" alt="Card image cap">
-                <div class="knowB card-body">
-                    <h5 class="card-title">Maize</h5>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, nihil!
-                        Accusamus id quis esse et soluta, provident porro sint eius, ut, cupiditate quam magnam facere
-                        fuga temporibus at rerum impedit?</p>
-                    <p class="card-text"><small class="text-muted"></small></p>
-                </div>
-            </div>
-        </a> --}}
-
     </div>
 </body>
 
