@@ -1358,18 +1358,21 @@ MEDIA QUERIES
   display: grid;
   grid-template-columns: 25% 75%;
   margin-top: 7px;
+  position: fixed;
+  width: 100%;
 }
 
 .knowledge-container{
   margin-top: 60px; 
   width: -webkit-fill-available; 
-  position: fixed;
+  
 }
 
 .knowledge-header{
   height: 150px;
   background: #fff;
   box-shadow: 0px 2px 5px rgba(71, 116, 156, 0.2);
+  /* position: fixed; */
 }
 
 .knowledge-img{
