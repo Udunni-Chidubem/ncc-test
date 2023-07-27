@@ -295,10 +295,6 @@ module.exports = {
       " and status is not null GROUP BY status";
 
     let totalsales = await db.rest.query(sql, { type: QueryTypes.SELECT });
-    // console.log(totalsales)
-    // console.log(sql)
-    // console.log(company_id)
-    // console.log('company_id')
     return totalsales;
   },
   getProductOrders: async (req, product) => {
