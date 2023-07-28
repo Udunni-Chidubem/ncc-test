@@ -54,13 +54,53 @@
 </div>
 
 <script>
+     document.getElementById("pdfbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+         const Location = document.getElementById('Location').value;
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.pdf?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+
+    document.getElementById("xlsxbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+        const Location = document.getElementById('Location').value;
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.xlsx?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+    
+    document.getElementById("csvbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+         const location = document.getElementById('Location').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.csv?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+
     document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form submission
 
         // Get the selected values
         const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
         const fromDate = document.getElementById('from').value;
         const toDate = document.getElementById('to').value;
 
