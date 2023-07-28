@@ -56,28 +56,82 @@
                 <input class="form-control" type="date" id="to" name="to">
             </div>
         </div>
-
-            <div class="dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+        <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
+            <a href="#" id="pdf-link" class="dropdown-item">PDF</a>
+            <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+            <div class="dropdown show ">
+                <a class="btn btn-primary btnsearch dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Download Report
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a href="#" id="pdf-link" class="dropdown-item" target="_blank">PDF</a>
-                    <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
+                <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
+                    <button href="#" id="pdfbtn" class="dropdown-item btn">PDF</button>
+                    <button href="#" id="xlsxbtn" class="dropdown-item btn">EXCEL</button>
+                    <button href="#" id="csvbtn" class="dropdown-item btn">CSV</button>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btnsearch">Generate</button>
         </div>
-    </form>
+</div>
+</form>
 </div>
 <div class="card mt-3 m-3">
     {{{result.body}}}
 </div>
 
 <script>
-    document.querySelector('form').addEventListener('submit', function (event) {
+    document.getElementById("pdfbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+         const location = document.getElementById('Location').value;
+        const product = document.getElementById('Product').value;
+        const status = document.getElementById('Status').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+
+    document.getElementById("xlsxbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+         const location = document.getElementById('Location').value;
+        const product = document.getElementById('Product').value;
+        const status = document.getElementById('Status').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+    
+    document.getElementById("csvbtn").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+         const location = document.getElementById('Location').value;
+        const product = document.getElementById('Product').value;
+        const status = document.getElementById('Status').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.csv?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+         window.open(url, '_blank')
+
+    });
+
+    document.querySelector('form').addEventListener('submit', function () {
         event.preventDefault(); // Prevent form submission
 
         // Get the selected values
@@ -86,7 +140,6 @@
         const status = document.getElementById('Status').value;
         const fromDate = document.getElementById('from').value;
         const toDate = document.getElementById('to').value;
-
         // Update the PDF link with the selected values
         const pdfLink = document.getElementById('pdf-link');
         pdfLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
