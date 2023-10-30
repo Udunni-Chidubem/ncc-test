@@ -1,0 +1,82 @@
+<!-- Content Wrapper START -->
+<div class="main-content">
+    <div class="container">
+        <div class="row  ">
+            <div class="col-12   ">
+                <a href="./create-seed-producer" class="btn create_p mb-2  float_end ">
+                    <span><i class=" fa fa-solid fa-plus"></i></span> Create Seed Producer
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class=" container table-responsives table_t_info">
+        <table class="table con t_info  table-borderless">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Name</th>
+                    <th>Seed Produced</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+
+            <tbody class="t_info_body products-list-table">
+                {{#if seedProducer}}
+                {{#each seedProducer.result}}
+                <tr class="t_info_row1">
+                    <th scope="row">{{increment @index}}</th>
+                    <td> {{full_name}}</td>
+                    <td >{{name_of_seed}}</td>
+                    <td>{{variety_of_seed}}</td>
+                    <td>{{volume_of_seed}}</td>
+                    <td>{{lg_id}}, {{state_id}}</td>
+                    <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                    <td><a href="#">
+                            <div class="dropdown d_t">
+                                <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item border-0 border-bottom"
+                                            href="/seed-company/seed-producer/{{id}}">View</a></li>
+                                    <li><a class="dropdown-item border-0 border-bottom"
+                                            href="/seed-company/deactivate-seed-producer">Deactivate</a></li>
+                                </ul>
+                            </div>
+                        </a></td>
+                </tr>
+                {{/each}}
+                {{/if}}
+            </tbody>
+        </table>
+
+        <div class="d-flex align-items-end flex-column">
+            <nav aria-label="...">
+                <ul class="pagination ml-auto p-2">
+                    <li class="page-item {{#equals pagination.page 1}} disabled {{/equals}}">
+                        <a class="page-link" href="?page={{#sub pagination.page 2}} {{this}} {{/sub}}"
+                            tabindex="-1">Previous</a>
+                    </li>
+                    {{#for 1 pagination.pageCount 1}}
+                    <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a>
+                    </li>
+                    {{/for}}
+                    <li class="{{#equals pagination.page pagination.pageCount }} disabled {{/equals}} page-item">
+                        <a class="page-link" href="?page={{pagination.page}}">Next</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </div>
+</div>

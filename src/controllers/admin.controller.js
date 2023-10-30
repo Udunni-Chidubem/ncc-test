@@ -1013,5 +1013,40 @@ module.exports = {
       raw: true,
     });
     return states;
-  }
+  },
+
+  listSeedProducers: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seedProducer = await SeedProducer.findAndCountAll({
+      order: [["id", "DESC"]],
+      raw: true,
+      limit,
+      offset,
+    });
+
+    if (seedProducer) {
+      response = getPagingData(seedProducer, page, limit);
+    }
+    return response;
+  },
+  viewSeedProducer: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const seedProducer = await SeedProducer.findOne({
+      where: { id: req.params.id },
+      raw: true,
+    });
+
+    if (seedProducer) {
+      response = seedProducer;
+    }
+
+    return response;
+  },
 };

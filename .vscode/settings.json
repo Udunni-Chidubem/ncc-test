@@ -1,3 +1,4 @@
 {
-    "polacode.transparentBackground": true
+    "polacode.transparentBackground": true,
+    "nuxt.isNuxtApp": false
 }
