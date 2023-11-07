@@ -15,6 +15,43 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="col-sm-4">
+                        <label for="dob" class="input_form">Age Range </label>
+                        <div class="input-group input-group-sm mb-3">
+                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom">
+                                <option value="">Select Age Range</option>
+                                <option value="15-19">15-19</option>
+                                <option value="20-30">20-30</option>
+                                <option value="31-40">31-40</option>
+                                <option value="41-50">41-50</option>
+                                <option value="51 and above">51 and above</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" class="input_form">
+                        <label for="gender" class="input_form"> Gender <span class="profile_sub">*</span></label>
+                        <div class="input-group input-group-sm mb-3">
+                            <select name="gender" required class="form-select border-0 border-bottom gender" id="gender"
+                                data-gender="{{ farmerData.gender }}">
+                                <option value="">Select One</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="living_stattus" class="input_form">Current Living Status</label>
+                        <div class="input-group input-group-sm mb-3">
+
+                            <select class="form-select border-0 border-bottom" 
+                                id="living_stattus" name="living_stattus" required>
+                                <option value="">Select One</option>
+                                <option value="IDP">Internally Displaced Person </option>
+                                <option value="Host">Indigene of the State</option>
+                                <option value="Returnee">Returnee</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="certified">Certified Seed Producer <span class="required-feilds">*</span></label>
                         <select name="certified" id="certified" class="form-select border-bottom ">
@@ -24,7 +61,8 @@
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="state_id" class="input_form">Seed Producer State <span class="profile_sub">*</span></label>
+                        <label for="state_id" class="input_form">Seed Producer State <span
+                                class="profile_sub">*</span></label>
                         <div class="input-group">
                             <select name="state_id" class="form-select  border-bottom states " required id="state_id">
                                 <option value="">Select State </option>
@@ -35,27 +73,32 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="lg_id" class="input_form">Seed Producer LGA <span class="profile_sub">*</span></label>
-                            <div class="input-group">
-                                <select required class="form-select border-bottom" id="lg_id"
-                                    name="lg_id">
-                                    <option value=""></option>
-                                </select>
-                            </div>
+                        <label for="lg_id" class="input_form">Seed Producer LGA <span
+                                class="profile_sub">*</span></label>
+                        <div class="input-group">
+                            <select required class="form-select border-bottom" id="lg_id" name="lg_id">
+                                <option value=""></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="nameOfSeed">Name of Seed Produced <span class="required-feilds">*</span></label>
-                        <input type="text" class="form-control" name="nameOfSeed" id="nameOfSeed" placeholder="Enter name of Seed">
+                        <input type="text" class="form-control" name="nameOfSeed" id="nameOfSeed"
+                            placeholder="Enter name of Seed">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="varietyOfSeed" class="input_form">Variety of seed produced <span class="profile_sub">*</span></label>
-                        <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed" placeholder="Enter Variety of Seed">
+                        <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
+                                class="profile_sub">*</span></label>
+                        <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed"
+                            placeholder="Enter Variety of Seed">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="volumeOfSeed" class="input_form">Volume of seed produced <span class="profile_sub">*</span></label>
-                        <input type="number" class="form-control" name="volumeOfSeed" id="volumeOfSeed" placeholder="e.g: 100">
+                        <label for="volumeOfSeed" class="input_form">Volume of seed produced (KG)<span
+                                class="profile_sub">*</span></label>
+                        <input type="number" class="form-control" name="volumeOfSeed" id="volumeOfSeed"
+                            placeholder="e.g: 100">
                     </div>
                 </div>
         </div>
@@ -114,5 +157,43 @@
                         //console.log(e)
                     })
             })
+
+            let gender = $('#gender').data('gender')
+            $('.gender').val(gender)
+
+            if (gender != null) {
+                $('.gender').val(gender)
+            }
+
+            let url = window.location.origin + '/api/base/get-droplist'
+
+            fetch(url, {})
+                .then(response => response.json())
+                .then(response => {
+                    if (response.statusCode === 200) {
+
+                        let gender, len, i, farm_produce, level
+                        gender = response.data.gender
+
+                        len = gender.length
+                        var ele = document.getElementById('gender');
+
+
+                        for (i = 0; i < len; i++) {
+                            ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
+                        }
+
+                        setTimeout(function () {
+
+                            let gender = $('#gender').data('gender')
+                            if (gender != null) {
+                                $('#gender').val(gender)
+                            }
+                        }, 1000)
+
+                    }
+                }).catch(e => {
+                    console.log(e)
+                })
         })
     </script>

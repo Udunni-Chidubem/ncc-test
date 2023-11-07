@@ -22,6 +22,7 @@ const {
   Message,
   Salesheets,
   KnowledgeBase,
+  SeedProducer
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -1023,8 +1024,28 @@ module.exports = {
     const { limit, offset } = getPagination(page, size);
 
     const seedProducer = await SeedProducer.findAndCountAll({
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          include:[
+            {
+              model: SeedCompany,
+              attributes: ["name_of_company"],
+            }
+          ],
+          raw: true,
+        },
+      ],
       order: [["id", "DESC"]],
-      raw: true,
+      // raw: true,
       limit,
       offset,
     });
@@ -1032,6 +1053,7 @@ module.exports = {
     if (seedProducer) {
       response = getPagingData(seedProducer, page, limit);
     }
+    response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
   viewSeedProducer: async (req, res) => {
