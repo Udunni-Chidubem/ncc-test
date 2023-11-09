@@ -1,0 +1,102 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<div class="card m-3 mt-0 p-2">
+    <form action="" method="get">
+
+        <div class="row">
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Location </label>
+                <select class="form-control" aria-labelledby="" id="Location" name="Location">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="ALL">ALL</option>
+                    {{#each states}}
+                    <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+            <div class=" col form-group ">
+                <label for="btndropdown" class="labelos">Product</label>
+                <select class="form-control" aria-labelledby="" id="Product" name="Product">
+                    <option value="" disabled selected>Select Product</option>
+                    <option value="ALL">ALL</option>
+                    <option id="Cowpea" class="dropdown-item">Cowpea</option>
+                    <option id="Maize" class="dropdown-item">Maize</option>
+                    <option id="Rice" class="dropdown-item">Rice</option>
+                    <option id="Groundnut" class="dropdown-item">Groundnut</option>
+                </select>
+            </div>
+
+            <div class="col form-group ">
+                <label for="btndropdown" class="labelos">Status</label>
+                <select class="form-control" aria-labelledby="" id="Status" name="Status">
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="ALL">ALL</option>
+                    <option value="pending" class="dropdown-item">Pending</option>
+                    <option value="initiated" class="dropdown-item">Initiated</option>
+                    <option value="payOnDelivery" class="dropdown-item">Pay On Delivery</option>
+                    <option value="verified" class="dropdown-item">Verified</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col form-group">
+                <label for="datepic" class="labelos">Start Date</label>
+                <input class="form-control" type="date" id="from" name="from">
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">End Date</label>
+                <input class="form-control" type="date" id="to" name="to">
+            </div>
+        </div>
+
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Download Report
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a href="#" id="pdf-link" class="dropdown-item" target="_blank">PDF</a>
+                    <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btnsearch">Generate</button>
+        </div>
+    </form>
+</div>
+<div class="card mt-3 m-3">
+    {{{result.body}}}
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get the selected values
+        const location = document.getElementById('Location').value;
+        const product = document.getElementById('Product').value;
+        const status = document.getElementById('Status').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+        // Update the PDF link with the selected values
+        const pdfLink = document.getElementById('pdf-link');
+        pdfLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        // Update the EXCEL link with the selected values
+        const excelLink = document.getElementById('excel-link');
+        excelLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        // Trigger the download button
+        document.getElementById('downnload-btn').disabled = false;
+        document.getElementById('downnload-btn').click();
+    });
+</script>

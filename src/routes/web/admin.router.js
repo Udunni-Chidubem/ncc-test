@@ -532,6 +532,7 @@ adminRouter.get("/knowledge-base", async (req, res) => {
   let user = await req.user;
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
+  let knowledgeBases = await siteController.allKnowledgeBase(req, res);
 
   res.render("admin/knowledge-base", {
     layout: "admin-dashboard",
@@ -539,6 +540,7 @@ adminRouter.get("/knowledge-base", async (req, res) => {
     username: user.username,
     isVerified,
     user_role: user_role.Role.role_name,
+    knowledgeBases: knowledgeBases,
   });
 });
 
@@ -559,6 +561,28 @@ adminRouter.get("/transaction-resolution", async (req, res) => {
 adminRouter.post("/knowledge-base", async (req, res) => {
   adminController.createKnowledgeBase(req, res);
   res.redirect("back");
+});
+
+adminRouter.get("/seed-producers", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  let seedProducer = await adminController.listSeedProducers(req, res);
+  console.log(seedProducer)
+  let paginate;
+  if (seedProducer) {
+    paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
+  }
+  res.render("admin/seed-producer-list", {
+    layout: "admin-dashboard",
+    seedProducer,
+    pagination: paginate,
+    title: "Seed Producers",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name
+  });
 });
 
 module.exports = adminRouter;

@@ -16,6 +16,7 @@ const {
   Farmer,
   Banks,
   Salesheets,
+  SeedProducer
 } = db;
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
@@ -510,5 +511,72 @@ module.exports = {
       },
     });
     return JSON.parse(JSON.stringify(printSheet));
+  },
+
+  createSeedProducer: async (req, res) => {
+    const transaction = await db.rest.transaction();
+    const user = await req.user;
+    try {
+      let seedProducer = await SeedProducer.create(
+        {
+          full_name: req.body.fullName,
+          phone_no: req.body.phone,
+          certified: req.body.certified,
+          name_of_seed: req.body.nameOfSeed,
+          variety_of_seed: req.body.varietyOfSeed,
+          volume_of_seed: req.body.volumeOfSeed,
+          gender: req.body.gender,
+          age_range: req.body.age_range,
+          living_status: req.body.living_status,
+          user_id: user.id,
+          state_id: req.body.state_id,
+          lg_id: req.body.lg_id,
+          status: 1,
+        },
+        { transaction: transaction }
+      );
+      transaction.commit();
+      console.log(seedProducer);
+      return seedProducer;
+    } catch (e) {
+      transaction.rollback();
+      return e;
+    }
+  },
+
+  listSeedProducers: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seedProducer = await SeedProducer.findAndCountAll({
+      where: { user_id: user.id },
+      order: [["id", "DESC"]],
+      raw: true,
+      limit,
+      offset,
+    });
+
+    if (seedProducer) {
+      response = getPagingData(seedProducer, page, limit);
+    }
+    return response;
+  },
+  viewSeedProducer: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const seedProducer = await SeedProducer.findOne({
+      where: { user_id: user.id, id: req.params.id },
+      raw: true,
+    });
+
+    if (seedProducer) {
+      response = seedProducer;
+    }
+
+    return response;
   },
 };

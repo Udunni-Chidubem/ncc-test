@@ -26,6 +26,7 @@
               <a class="nav-link" href="/admin/analytics"><i class='bx bx-bar-chart-square'></i>Analytics</a>
             </li>
 
+
             <li class="nav-item dropdown">
               <a class=" dropbtn" href="#"><i class='bx bx-archive'></i> Inventory Management</a>
               <ul class="dropdown-content arrow-top">
@@ -43,7 +44,10 @@
 
               </ul>
             </li>
-
+           
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/seed-producers"><i class='bx bx-bar-chart-square'></i>Seed Producer</a>
+            </li>
             {{#if (or (eq user_role "admin") (eq user_role "rra") )}}
             <li class="nav-item">
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
@@ -56,12 +60,12 @@
               <ul class="dropdown-content arrow-top">
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims"))}}
                 <li>
-                  <a href="/admin/user_report">User Report</a>
+                  <a href="/admin/report/user-report-jsp">User Report</a>
                 </li>
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
-                  <a href="/admin/transactions">Online Transaction</a>
+                  <a href="/admin/report/transactions-jsp">Online Transaction</a>
                 </li>
                 {{/if}}
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}

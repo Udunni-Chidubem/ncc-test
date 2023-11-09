@@ -1,0 +1,209 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+<div class="product-mgt-container">
+    <div class="d-flex flex-row container mt-5">
+        <div class="tab-btn active" data-id="all">ALL</div>
+        <div class="tab-btn" data-id="active">ACTIVE</div>
+        <div class="tab-btn" data-id="deactivated">DEACTIVATED</div>
+    </div>
+    <div>
+
+        <!-- single item -->
+        <div class="content active" id="all">
+            <div class=" container table-responsives table_t_info">
+                <table class="table con t_info  table-borderless" id="product-table-all">
+                    <thead class="t_info_head ">
+                        <tr class="row-height">
+                            <th scope="col">Name</th>
+                            <th scope="col">Seed Produced</th>
+                            <th scope="col">Variety</th>
+                            <th scope="col">Volume</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each seedProducer.rows}}
+                        <tr class="t_info_row1">
+                            <td> {{this.full_name}}</td>
+                            <td>{{this.name_of_seed}}</td>
+                            <td>{{variety_of_seed}}</td>
+                            <td>{{volume_of_seed}}</td>
+                            <td>{{User.SeedCompany.name_of_company}}</td>
+                            <td>{{LGA.name}}, {{State.name}}</td>
+                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                            <td><a href="#">
+                                    <div class="dropdown d_t">
+                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/seed-producer/{{id}}">View</a></li>
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </a></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end of single item -->
+
+        <!-- single item -->
+        <div class="content" id="active">
+            <div class=" container table-responsive table_t_info ">
+                <table class="table con t_info  table-borderless " id="product-table-approved">
+                    <thead class="t_info_head ">
+                        <tr class="row-height">
+                            <th scope="col">Name</th>
+                            <th scope="col">Seed Produced</th>
+                            <th scope="col">Variety</th>
+                            <th scope="col">Volume</th>
+                            <th scope="col">Seed Company</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each seedProducer.rows}}
+                        {{#if (ne status 0)}}
+                        <tr class="t_info_row1">
+                            <td> {{full_name}}</td>
+                            <td>{{name_of_seed}}</td>
+                            <td>{{variety_of_seed}}</td>
+                            <td>{{volume_of_seed}}</td>
+                            <td>{{User.SeedCompany.name_of_company}}</td>
+                            <td>{{LGA.name}}, {{State.name}}</td>
+                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                            <td><a href="#">
+                                    <div class="dropdown d_t">
+                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/seed-producer/{{id}}">View</a></li>
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </a></td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end of single item -->
+
+    <!-- single item -->
+    <div class="content" id="deactivated">
+        <div class=" container table-responsives table_t_info">
+            <table class="table con t_info  table-borderless" id="product-table-rejected">
+                <thead class="t_info_head ">
+                    <tr class="row-height">
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Seed Produced</th>
+                        <th scope="col">Variety</th>
+                        <th scope="col">Volume</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each seedProducer.rows}}
+                    {{#if (ne status 1)}}
+                    <tr class="t_info_row1">
+                        <th scope="row">{{increment @index}}</th>
+                        <td> {{full_name}}</td>
+                        <td>{{name_of_seed}}</td>
+                        <td>{{variety_of_seed}}</td>
+                        <td>{{volume_of_seed}}</td>
+                        <td>{{User.SeedCompany.name_of_company}}</td>
+                        <td>{{LGA.name}}, {{State.name}}</td>
+                        <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                        <td><a href="#">
+                                <div class="dropdown d_t">
+                                    <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item border-0 border-bottom"
+                                                href="/admin/seed-producer/{{id}}">View</a></li>
+                                        <li><a class="dropdown-item border-0 border-bottom"
+                                                href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                    </ul>
+                                </div>
+                            </a></td>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end of single item -->
+
+
+<div class="d-flex align-items-end flex-column">
+    <nav aria-label="...">
+        <ul class="pagination ml-auto p-2">
+            <li class="page-item {{#equals pagination.page 1}} disabled {{/equals}}">
+                <a class="page-link" href="?page={{#sub pagination.page 2}} {{this}} {{/sub}}"
+                    tabindex="-1">Previous</a>
+            </li>
+            {{#for 1 pagination.pageCount 1}}
+            <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a>
+            </li>
+            {{/for}}
+            <li class="{{#equals pagination.page pagination.pageCount }} disabled {{/equals}} page-item">
+                <a class="page-link" href="?page={{pagination.page}}">Next</a>
+            </li>
+
+        </ul>
+    </nav>
+</div>
+</div>
+
+<script>
+    const about = document.querySelector(".product-mgt-container");
+    const btns = document.querySelectorAll(".tab-btn");
+    const tables = document.querySelectorAll(".content");
+    about.addEventListener("click", function (e) {
+        const id = e.target.dataset.id;
+        if (id) {
+            // remove selected from other buttons
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            e.target.classList.add("active");
+            // hide other tables
+            tables.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.getElementById(id);
+            element.classList.add("active");
+        }
+    });
+
+</script>

@@ -88,7 +88,7 @@
       {{> sidebar_image}}
 
 
-      <ul class="nav-links" id="nav_accordion">
+      <ul class="nav-links ml-0" id="nav_accordion">
         {{!-- <h4 class="nav-links">Adamu Garba </h4> --}}
         <li>
           <a href="/seed-company/dashboard">
@@ -151,6 +151,27 @@
             </li>
             <li>
               <a class="nav-link" href="/seed-company/view-sheet">View Sheet</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-submenu">
+          <a class="nav-link" href="#">
+            <i class='bx bx-group'></i>
+            <span class="link_name">Seed Producers</span>
+
+            <span class="arrow">
+              <i class='fa fa-angle-down'></i>
+            </span>
+          </a>
+          <ul class="submenu collapse">
+            <li>
+              <a class="nav-link" href="/seed-company/seed-producers/create">Create Seed Producer </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/seed-company/seed-producers">Seed Producers</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/seed-company/view-sheet">Deactivated Seed Producers</a>
             </li>
           </ul>
         </li>
@@ -361,6 +382,21 @@
         productPosting(url, form)
       })
       //alert("my alert")
+
+      $('#form-producer').on('submit', function () {
+        event.preventDefault();
+        $('.submitBtn').html('Please Wait...')
+        const form = new FormData()
+        let data = $('#form-producer').serializeArray()
+        data.forEach(e => {
+          if (e.value != null && e.value != "") {
+            form.append(e.name, e.value)
+          }
+        })
+        let url = window.location.origin + "/seed-company/seed-producers/create";
+        producerPosting(url, form)
+      })
+
       getCartCount()
 
     })
@@ -413,6 +449,35 @@
 
             setTimeout(function () {
               window.location = '/seed-company/products'
+            }, 2000)
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        });
+    }
+
+    const producerPosting = (url, form) => {
+      fetch(url, {
+        method: 'POST',
+        body: form
+      }).then(r => r.json())
+        .then(r => {
+          $('.submitBtn').html('Submit')
+          if (r.statusCode === 402) {
+            let msg = ''
+            let errors = r.data
+            errors.forEach((value, index) => {
+              msg += (index + 1) + '.' + value.msg + ' \n'
+            })
+            error_toastr(msg)
+          } else if (r.statusCode == 500 || r.statusCode == 400) {
+            error_toastr(r.data)
+          } else {
+            success_toastr(r.message)
+
+            setTimeout(function () {
+              window.location = '/seed-company/seed-producers'
             }, 2000)
           }
         })

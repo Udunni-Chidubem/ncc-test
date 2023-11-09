@@ -1,0 +1,79 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<div class="card m-3 mt-0 p-2">
+    <form action="" method="get">
+
+        <div class="row">
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Location </label>
+                <select class="form-control" aria-labelledby="" id="Location" name="Location">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="ALL">ALL</option>
+                    {{#each states}}
+                    <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">Start Date</label>
+                <input class="form-control" type="date" id="from" name="from">
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">End Date</label>
+                <input class="form-control" type="date" id="to" name="to">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-end">
+            <div class="dropdown show ">
+                <a class="btn btn-primary btnsearch dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Download Report
+                </a>
+
+                <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
+                    <a href="#" id="pdf-link" class="dropdown-item" target="_blank">PDF</a>
+                    <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btnsearch" style="margin-left: 4px;">Generate</button>
+        </div>
+</div>
+</form>
+</div>
+<div class="card mt-3 m-3">
+    {{{result.body}}}
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get the selected values
+        const location = document.getElementById('Location').value;
+        const product = document.getElementById('Product').value;
+        const status = document.getElementById('Status').value;
+        const fromDate = document.getElementById('from').value;
+        const toDate = document.getElementById('to').value;
+
+        // Update the PDF link with the selected values
+        const pdfLink = document.getElementById('pdf-link');
+        pdfLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        // Update the EXCEL link with the selected values
+        const excelLink = document.getElementById('excel-link');
+        excelLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        // Trigger the download button
+        document.getElementById('downnload-btn').disabled = false;
+        document.getElementById('downnload-btn').click();
+    });
+</script>
