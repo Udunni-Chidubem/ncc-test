@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       SeedProducer.belongsTo(models.LGAs, {
         foreignKey : 'lg_id'
       })
+      SeedProducer.hasMany(models.SeedProducerSeed, {
+        foreignKey : 'producer_id',
+        sourceKey:'id'
+      })
     }
   }
   SeedProducer.init({
@@ -31,18 +35,18 @@ module.exports = (sequelize, DataTypes) => {
         unique: true
       },
     certified: DataTypes.STRING,
-    name_of_seed: DataTypes.STRING,
-    variety_of_seed: DataTypes.STRING,
-    volume_of_seed: DataTypes.INTEGER,
-    state_id: DataTypes.INTEGER,
-    lg_id: DataTypes.INTEGER,
+    // name_of_seed: DataTypes.STRING,
+    // variety_of_seed: DataTypes.STRING,
+    // volume_of_seed: DataTypes.INTEGER,
+    // state_id: DataTypes.INTEGER,
+    // lg_id: DataTypes.INTEGER,
     status: {
       type: DataTypes.INTEGER,
       defaultValue: 1
     },
-    gender: DataTypes.STRING,
-    age_range: DataTypes.STRING,
-    living_status: DataTypes.STRING,
+    // gender: DataTypes.STRING,
+    // age_range: DataTypes.STRING,
+    // living_status: DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
       defaultValue: new Date()

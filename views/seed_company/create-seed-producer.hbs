@@ -14,8 +14,8 @@
                             required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="col-sm-4">
+                {{!-- <div class="form-row"> --}}
+                    {{!-- <div class="col-sm-4">
                         <label for="dob" class="input_form">Age Range </label>
                         <div class="input-group input-group-sm mb-3">
                             <select name="age_range" id="age_range" class="form-select border-0 border-bottom">
@@ -27,8 +27,8 @@
                                 <option value="51 and above">51 and above</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-sm-4" class="input_form">
+                    </div> --}}
+                    {{!-- <div class="col-sm-4" class="input_form">
                         <label for="gender" class="input_form"> Gender <span class="profile_sub">*</span></label>
                         <div class="input-group input-group-sm mb-3">
                             <select name="gender" required class="form-select border-0 border-bottom gender" id="gender"
@@ -36,21 +36,21 @@
                                 <option value="">Select One</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
+                    </div> --}}
+                    {{!-- <div class="col-sm-4">
                         <label for="living_stattus" class="input_form">Current Living Status</label>
                         <div class="input-group input-group-sm mb-3">
 
-                            <select class="form-select border-0 border-bottom" 
-                                id="living_stattus" name="living_stattus" required>
+                            <select class="form-select border-0 border-bottom" id="living_stattus" name="living_stattus"
+                                required>
                                 <option value="">Select One</option>
                                 <option value="IDP">Internally Displaced Person </option>
                                 <option value="Host">Indigene of the State</option>
                                 <option value="Returnee">Returnee</option>
                             </select>
                         </div>
-                    </div>
-                </div>
+                    </div> --}}
+                    {{!-- </div> --}}
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="certified">Certified Seed Producer <span class="required-feilds">*</span></label>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row seeds">
                     <div class="form-group col-md-4">
                         <label for="nameOfSeed">Name of Seed Produced <span class="required-feilds">*</span></label>
                         <input type="text" class="form-control" name="nameOfSeed" id="nameOfSeed"
@@ -94,13 +94,27 @@
                         <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed"
                             placeholder="Enter Variety of Seed">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="volumeOfSeed" class="input_form">Volume of seed produced (KG)<span
                                 class="profile_sub">*</span></label>
                         <input type="number" class="form-control" name="volumeOfSeed" id="volumeOfSeed"
                             placeholder="e.g: 100">
                     </div>
+                    <div class="form-group col-md-1">
+                        <div class="col col_sma add_class">
+                            <div class="p-3  ">
+                                <span class="add " style="cursor: pointer;" id="_add"><i
+                                        class=" fa fa-solid fa-plus"></i></span>
+                            </div>
+                        </div>
+                        <div class="col trash_class" style="display: none;">
+                            <div class="p-3 ">
+                                <span id="_trash" style="cursor: pointer;" class="_trash"><i class="fa fa-solid fa-trash-can _trash p_red"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
         </div>
         <hr>
 
@@ -158,42 +172,15 @@
                     })
             })
 
-            let gender = $('#gender').data('gender')
-            $('.gender').val(gender)
 
-            if (gender != null) {
-                $('.gender').val(gender)
-            }
-
-            let url = window.location.origin + '/api/base/get-droplist'
-
-            fetch(url, {})
-                .then(response => response.json())
-                .then(response => {
-                    if (response.statusCode === 200) {
-
-                        let gender, len, i, farm_produce, level
-                        gender = response.data.gender
-
-                        len = gender.length
-                        var ele = document.getElementById('gender');
-
-
-                        for (i = 0; i < len; i++) {
-                            ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
-                        }
-
-                        setTimeout(function () {
-
-                            let gender = $('#gender').data('gender')
-                            if (gender != null) {
-                                $('#gender').val(gender)
-                            }
-                        }, 1000)
-
-                    }
-                }).catch(e => {
-                    console.log(e)
-                })
+            $('#_add').click(function () {
+                let ele=  $(this).closest(".form-row").clone(true)
+                ele.insertAfter(".seeds:last")
+                ele.find(".add_class").css("display", 'none')
+                ele.find(".trash_class").css("display","block")
+            })
+            $('._trash').click(function () {
+                $(this).closest(".form-row").remove()
+            })
         })
     </script>

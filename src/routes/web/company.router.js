@@ -418,6 +418,25 @@ companyRouter.get("/seed-producers/create", async (req, res) => {
 companyRouter.post(
   "/seed-producers/create",
   async (req, res) => {
+    let seeds=[];
+    if(Array.isArray(req.body.nameOfSeed)){
+      req.body.nameOfSeed.forEach((e, index)=>{
+        seeds.push(
+          {
+            name_of_seed:e,
+            variety_of_seed:req.body.varietyOfSeed[index],
+            volume_of_seed:req.body.volumeOfSeed[index]
+          }
+        )
+      })
+    }else{
+      seeds.push({
+        name_of_seed:req.body.nameOfSeed,
+        variety_of_seed:req.body.varietyOfSeed,
+        volume_of_seed:req.body.volumeOfSeed
+      })
+    }
+    req.body.seeds=seeds
     let r = await companyController.createSeedProducer(req, res);
     if (r.id) {
       res
@@ -441,7 +460,6 @@ companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
   let seedProducer = await companyController.listSeedProducers(req, res);
-  console.log(seedProducer)
   let paginate;
   if (seedProducer) {
     paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };

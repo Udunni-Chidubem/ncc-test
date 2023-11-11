@@ -14,7 +14,7 @@ const {
   TransactionCarts,
   Cart,
   Farmer,
-  Banks,
+  SeedProducerSeed,
   Salesheets,
   SeedProducer
 } = db;
@@ -522,12 +522,12 @@ module.exports = {
           full_name: req.body.fullName,
           phone_no: req.body.phone,
           certified: req.body.certified,
-          name_of_seed: req.body.nameOfSeed,
-          variety_of_seed: req.body.varietyOfSeed,
-          volume_of_seed: req.body.volumeOfSeed,
-          gender: req.body.gender,
-          age_range: req.body.age_range,
-          living_status: req.body.living_status,
+          // name_of_seed: req.body.nameOfSeed,
+          // variety_of_seed: req.body.varietyOfSeed,
+          // volume_of_seed: req.body.volumeOfSeed,
+          // gender: req.body.gender,
+          // age_range: req.body.age_range,
+          // living_status: req.body.living_status,
           user_id: user.id,
           state_id: req.body.state_id,
           lg_id: req.body.lg_id,
@@ -535,11 +535,18 @@ module.exports = {
         },
         { transaction: transaction }
       );
+
+      await Promise.all(req.body.seeds.map(e=>{
+        return SeedProducerSeed.create(
+          {...e, producer_id:seedProducer.id},   
+          { transaction: transaction }
+        )}))
+      // await SeedProducerSeed.bulkCreate(req.body.seeds);
       transaction.commit();
-      console.log(seedProducer);
       return seedProducer;
     } catch (e) {
       transaction.rollback();
+      console.log(e);
       return e;
     }
   },
