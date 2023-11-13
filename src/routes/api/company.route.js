@@ -2,6 +2,7 @@ const companyRoute = require("express").Router();
 const reader = require("xlsx");
 const companyController = require("../../controllers/company.controller");
 const utils = require("../../helpers/utils");
+const seedcompanyService = require("../../services/seedcompany.service");
 companyRoute.get("/profile", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
@@ -45,7 +46,7 @@ companyRoute.post("/products", async (req, res) => {
   }
 });
 companyRoute.put("/products/:id", async (req, res) => {
-  companyController.updateProduct(req, res);
+  await companyController.updateProduct(req, res);
   res
     .json({
       statusCode: 200,
@@ -72,21 +73,32 @@ companyRoute.get("/products", async (req, res) => {
     res.json({ message: r.errors, error: true, statusCode: 400 }).status(400);
   }
 });
+companyRoute.get("/products/count", async (req, res) => {
+  let user = await req.user;
+  let productCount = await seedcompanyService.productCount(user.id);
+  res
+    .json({
+      message: "record pulled successfully",
+      statusCode: 200,
+      data: productCount,
+    })
+    .status(200);
+});
 companyRoute.get("/products/:id", async (req, res) => {
   let product = await companyController.viewProduct(req, res);
-
-  const data = JSON.stringify(JSON.parse(product.item));
-  if (data) {
+  if (product) {
     res
       .json({
-        message: data,
+        message: "data pulled successfully",
         statusCode: 200,
+        data: product,
       })
       .status(200);
   } else {
     res.json({ message: r.errors, error: true, statusCode: 400 }).status(400);
   }
 });
+
 companyRoute.get("/orders", async (req, res) => {
   let orders = null;
   product = null;
@@ -106,8 +118,14 @@ companyRoute.get("/orders", async (req, res) => {
 companyRoute.get("/orders/count", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
-  let count = await companyController.getOrderCount(company.id);
-  res.json({ message: count, statusCode: 200 }).status(200);
+  let orders = await seedcompanyService.orderCount(company.id);
+  res
+    .json({
+      message: "record pulled successfully",
+      statusCode: 200,
+      data: orders,
+    })
+    .status(200);
 });
 companyRoute.get("/orders/:transaction_id/", async (req, res) => {
   let user = await req.user;
@@ -138,8 +156,9 @@ companyRoute.put("/orders/:transaction_id", async (req, res) => {
 companyRoute.get("/wallet", async (req, res) => {
   let wallet = await companyController.getWallet(req, res);
   res.status(200).json({
-    message: wallet,
+    message: "Successful",
     statusCode: 200,
+    data: wallet,
   });
 });
 

@@ -394,4 +394,101 @@ companyRouter.get("/wallet", async (req, res) => {
 //     });
 // })
 
+//seed producer begins
+
+companyRouter.get("/seed-producers/create", async (req, res) => {
+  let user = await req.user;
+  let company = await utils.getCompanyProfile(user);
+  let isVerified = await utils.isVerified(user);
+
+  let states = await States.findAll({
+    attributes: ["id", "name"],
+    raw: true,
+  });
+
+  res.render("seed_company/create-seed-producer", {
+    layout: "company-dashboard",
+    title: "Seed Producer",
+    isVerified,
+    company,
+    states: states,
+  });
+});
+
+companyRouter.post(
+  "/seed-producers/create",
+  async (req, res) => {
+    let seeds=[];
+    if(Array.isArray(req.body.nameOfSeed)){
+      req.body.nameOfSeed.forEach((e, index)=>{
+        seeds.push(
+          {
+            name_of_seed:e,
+            variety_of_seed:req.body.varietyOfSeed[index],
+            volume_of_seed:req.body.volumeOfSeed[index]
+          }
+        )
+      })
+    }else{
+      seeds.push({
+        name_of_seed:req.body.nameOfSeed,
+        variety_of_seed:req.body.varietyOfSeed,
+        volume_of_seed:req.body.volumeOfSeed
+      })
+    }
+    req.body.seeds=seeds
+    let r = await companyController.createSeedProducer(req, res);
+    if (r.id) {
+      res
+        .json({
+          statusCode: 200,
+          message: "Seed Producer has been created successfully",
+          body: "Seed Producer has been created successfully",
+        })
+        .status(200)
+        .send();
+    } else {
+      res
+        .json({ statusCode: 500, error: r, message: "something went wrong" })
+        .status(500)
+        .send();
+    }
+  }
+);
+
+companyRouter.get("/seed-producers", async (req, res) => {
+  let user = await req.user;
+  let company = await utils.getCompanyProfile(user);
+  let seedProducer = await companyController.listSeedProducers(req, res);
+  let paginate;
+  if (seedProducer) {
+    paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
+  }
+  res.render("seed_company/seed-producer-list", {
+    layout: "company-dashboard",
+    seedProducer,
+    pagination: paginate,
+    title: "Seed Producers",
+    company: company,
+  });
+});
+
+
+
+companyRouter.get("/seed-producer/:id", async (req, res) => {
+  let seedProducer = await companyController.viewSeedProducer(req, res);
+  let states = await siteController.getStates();
+
+
+  res.render("seed_company/view-seed-producer", {
+    layout: "company-dashboard",
+    title: "Seed Producers",
+    sub_title: "Seed Producer",
+    prev_link: "/seed-company/seed-producers",
+    seedProducer,
+    states: states
+  });
+});
+
+
 module.exports = companyRouter;

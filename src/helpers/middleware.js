@@ -15,6 +15,7 @@ async function verityToken(req, res, next) {
           body: "No Token found",
         })
         .send();
+      return;
     }
     let token = req.get("Authorization").split(" ")[1];
     if (jsonwebtoken.verify(token, "secret123")) {

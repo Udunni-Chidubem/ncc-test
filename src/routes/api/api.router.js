@@ -9,6 +9,7 @@ const companyRoute = require("./company.route");
 const traderRoute = require("./trader.route");
 const { helpers } = require("handlebars");
 const authGuard = require("../../helpers/auth.guard");
+const fileRoute = require("./file.routes");
 require("../../helpers/passport-jwt");
 passportjwt(passport);
 //all router on api will be use here for prefixing
@@ -31,6 +32,7 @@ apiRouter.use(
   authGuard.hasRole("seed_trader"),
   traderRoute
 );
+apiRouter.use("/file", fileRoute);
 apiRouter.use("/base", baseRouter);
 
 module.exports = apiRouter;
