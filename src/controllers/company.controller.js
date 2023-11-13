@@ -561,7 +561,17 @@ module.exports = {
     const seedProducer = await SeedProducer.findAndCountAll({
       where: { user_id: user.id },
       order: [["id", "DESC"]],
-      raw: true,
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        }
+      ],
+      // raw: true,
       limit,
       offset,
     });
@@ -569,6 +579,7 @@ module.exports = {
     if (seedProducer) {
       response = getPagingData(seedProducer, page, limit);
     }
+    response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
   viewSeedProducer: async (req, res) => {
