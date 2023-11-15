@@ -56,8 +56,8 @@
                         <label for="gender">Gender <span class="required-feilds">*</span></label>
                         <select name="gender" id="gender" class="form-select border-bottom ">
                             <option value="">Select an Option</option>
-                            <option value="Yes">YES</option>
-                            <option value="No">NO</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
@@ -130,11 +130,22 @@
                         <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed"
                             placeholder="Enter Variety of Seed">
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-2">
                         <label for="volumeOfSeed" class="input_form">Volume of seed produced (KG)<span
                                 class="profile_sub">*</span></label>
                         <input type="number" class="form-control" name="volumeOfSeed" id="volumeOfSeed"
                             placeholder="e.g: 100">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="unit" class="input_form">unit of measure<span
+                                class="profile_sub">*</span></label>
+                        <div class="input-group">
+                            <select required class="form-select border-bottom" id="unit" name="unit">
+                                <option value="kg">kg</option>
+                                <option value="Metric Ton">Metric Ton</option>
+                            </select>
+                        </div>
+                        
                     </div>
                     <div class="form-group col-md-1">
                         <div class="col col_sma add_class">

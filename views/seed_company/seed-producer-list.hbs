@@ -30,9 +30,9 @@
                 <tr class="t_info_row1">
                     <th scope="row">{{increment @index}}</th>
                     <td> {{full_name}}</td>
-                    <td >{{name_of_seed}}</td>
-                    <td>{{variety_of_seed}}</td>
-                    <td>{{volume_of_seed}}</td>
+                    <td >{{SeedProducerSeeds.[0].name_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].volume_of_seed}}</td>
                     <td>{{LGA.name}}, {{State.name}}</td>
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
                     <td><a href="#">
