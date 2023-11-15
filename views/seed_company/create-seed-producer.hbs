@@ -53,6 +53,38 @@
                     {{!-- </div> --}}
                 <div class="form-row">
                     <div class="form-group col-md-4">
+                        <label for="certified">Gender <span class="required-feilds">*</span></label>
+                        <select name="certified" id="certified" class="form-select border-bottom ">
+                            <option value="">Select an Option</option>
+                            <option value="Yes">YES</option>
+                            <option value="No">NO</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="dob" class="input_form">Age Range </label>
+                                  <div class="input-group input-group-sm mb-3">
+                                    <select name="date_of_birth" id="date_of_birth" class="form-select border-0 border-bottom"  data-val="{{ farmerData.date_of_birth }}">
+                                     <option value="">Select Age Range</option> 
+                                     <option value="15-19">15-19</option>   
+                                     <option value="20-30">20-30</option> 
+                                     <option value="31-40">31-40</option>
+                                     <option value="41-50">41-50</option>
+                                     <option value="51 and above">51 and above</option>
+                                    </select>
+                                  </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="lg_id" class="input_form">Seed Producer LGA <span
+                                class="profile_sub">*</span></label>
+                        <div class="input-group">
+                            <select required class="form-select border-bottom" id="lg_id" name="lg_id">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label for="certified">Certified Seed Producer <span class="required-feilds">*</span></label>
                         <select name="certified" id="certified" class="form-select border-bottom ">
                             <option value="">Select an Option</option>
