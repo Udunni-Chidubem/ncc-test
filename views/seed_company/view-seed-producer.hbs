@@ -71,8 +71,8 @@
     </div>
 
 
-    <div class="card table-responsives table_t_info mt-2">
-        <table class="table con t_info  table-borderless">
+    <div class="card table-responsives table_t_info mt-2 p-3">
+        <table class="table con t_info  table-borderless" id="seedProduced">
             <thead class="t_info_head ">
                 <tr class="">
                     <th scope="col">S/N</th>
@@ -96,28 +96,6 @@
                 {{/each}}
             </tbody>
         </table>
-
-        <div class="d-flex align-items-end flex-column">
-            <nav aria-label="...">
-                <ul class="pagination ml-auto p-2">
-                    <li class="page-item {{#equals pagination.page 1}} disabled {{/equals}}">
-                        <a class="page-link" href="?page={{#sub pagination.page 2}} {{this}} {{/sub}}"
-                            tabindex="-1">Previous</a>
-                    </li>
-                    {{#for 1 pagination.pageCount 1}}
-                    <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a>
-                    </li>
-                    {{/for}}
-                    <li class="{{#equals pagination.page pagination.pageCount }} disabled {{/equals}} page-item">
-                        <a class="page-link" href="?page={{pagination.page}}">Next</a>
-                    </li>
-
-                </ul>
-            </nav>
-
-        </div>
-
-
     </div>
 
     <div class="modal fade" id="newSeed" tabindex="-1" role="dialog" aria-labelledby="newSeedTitle" aria-hidden="true">
@@ -230,5 +208,9 @@
 
         $(document).ready(function () {
             $('#newSeed').appendTo('body');
+
+            $('#seedProduced').DataTable({
+                "order": [[2, "desc"]]
+            });
         })
     </script>
