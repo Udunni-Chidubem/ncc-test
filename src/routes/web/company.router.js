@@ -418,6 +418,8 @@ companyRouter.get("/seed-producers/create", async (req, res) => {
 companyRouter.post(
   "/seed-producers/create",
   async (req, res) => {
+    console.log("bosdy", req.body)
+
     let seeds=[];
     if(Array.isArray(req.body.nameOfSeed)){
       req.body.nameOfSeed.forEach((e, index)=>{
@@ -425,7 +427,8 @@ companyRouter.post(
           {
             name_of_seed:e,
             variety_of_seed:req.body.varietyOfSeed[index],
-            volume_of_seed:req.body.volumeOfSeed[index]
+            volume_of_seed:req.body.volumeOfSeed[index],
+            unit:req.body.unit[index],
           }
         )
       })
@@ -433,7 +436,8 @@ companyRouter.post(
       seeds.push({
         name_of_seed:req.body.nameOfSeed,
         variety_of_seed:req.body.varietyOfSeed,
-        volume_of_seed:req.body.volumeOfSeed
+        volume_of_seed:req.body.volumeOfSeed,
+        unit:req.body.unit
       })
     }
     req.body.seeds=seeds
@@ -460,6 +464,7 @@ companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
   let seedProducer = await companyController.listSeedProducers(req, res);
+  // console.log("producerrr  ", seedProducer.rows);
   let paginate;
   if (seedProducer) {
     paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
@@ -477,8 +482,9 @@ companyRouter.get("/seed-producers", async (req, res) => {
 
 companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
+  let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
-
+  console.log("Yello", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
@@ -486,7 +492,8 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
     sub_title: "Seed Producer",
     prev_link: "/seed-company/seed-producers",
     seedProducer,
-    states: states
+    states: states,
+    seedsProduced
   });
 });
 

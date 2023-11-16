@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row  ">
             <div class="col-12   ">
-                <a href="./create-seed-producer" class="btn create_p mb-2  float_end ">
+                <a href="./create" class="btn create_p mb-2  float_end ">
                     <span><i class=" fa fa-solid fa-plus"></i></span> Create Seed Producer
                 </a>
             </div>
@@ -26,15 +26,14 @@
 
 
             <tbody class="t_info_body products-list-table">
-                {{#if seedProducer}}
-                {{#each seedProducer.result}}
+                {{#each seedProducer.rows}}
                 <tr class="t_info_row1">
                     <th scope="row">{{increment @index}}</th>
                     <td> {{full_name}}</td>
-                    <td >{{name_of_seed}}</td>
-                    <td>{{variety_of_seed}}</td>
-                    <td>{{volume_of_seed}}</td>
-                    <td>{{lg_id}}, {{state_id}}</td>
+                    <td >{{SeedProducerSeeds.[0].name_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].volume_of_seed}}</td>
+                    <td>{{LGA.name}}, {{State.name}}</td>
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
                     <td><a href="#">
                             <div class="dropdown d_t">
@@ -53,7 +52,6 @@
                         </a></td>
                 </tr>
                 {{/each}}
-                {{/if}}
             </tbody>
         </table>
 

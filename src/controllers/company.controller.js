@@ -525,9 +525,9 @@ module.exports = {
           // name_of_seed: req.body.nameOfSeed,
           // variety_of_seed: req.body.varietyOfSeed,
           // volume_of_seed: req.body.volumeOfSeed,
-          // gender: req.body.gender,
-          // age_range: req.body.age_range,
-          // living_status: req.body.living_status,
+          gender: req.body.gender,
+          age_range: req.body.age_range,
+          living_status: req.body.living_status,
           user_id: user.id,
           state_id: req.body.state_id,
           lg_id: req.body.lg_id,
@@ -561,7 +561,20 @@ module.exports = {
     const seedProducer = await SeedProducer.findAndCountAll({
       where: { user_id: user.id },
       order: [["id", "DESC"]],
-      raw: true,
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: SeedProducerSeed,
+        }
+      ],
+      // raw: true,
       limit,
       offset,
     });
@@ -569,6 +582,7 @@ module.exports = {
     if (seedProducer) {
       response = getPagingData(seedProducer, page, limit);
     }
+    response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
   viewSeedProducer: async (req, res) => {
@@ -584,6 +598,28 @@ module.exports = {
       response = seedProducer;
     }
 
+    return response;
+  },
+
+  getSeedProduced: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seeds = await SeedProducerSeed.findAndCountAll({
+      where: { producer_id: req.params.id },
+      order: [["id", "DESC"]],
+      // raw: true,
+      limit,
+      offset,
+    });
+
+    if (seeds) {
+      response = getPagingData(seeds, page, limit);
+    }
+    response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
 };

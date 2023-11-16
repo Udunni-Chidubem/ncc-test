@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     // gender: DataTypes.STRING,
     // age_range: DataTypes.STRING,
     // living_status: DataTypes.STRING,
+    unit: DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
       defaultValue: new Date()
