@@ -79,6 +79,56 @@
         </div>
     </div>
     {{/if}}
+
+    <div class="card table-responsives table_t_info mt-4">
+        <table class="table con t_info  table-borderless">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Seed Produced</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Date Created</th>
+                </tr>
+            </thead>
+
+
+            <tbody class="t_info_body products-list-table">
+                {{#each seedsProduced.rows}}
+                <tr class="t_info_row1">
+                    <th scope="row">{{increment @index}}</th>
+                    <td >{{name_of_seed}}</td>
+                    <td>{{variety_of_seed}}</td>
+                    <td>{{volume_of_seed}} {{unit}}</td>
+                    <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <div class="d-flex align-items-end flex-column">
+            <nav aria-label="...">
+                <ul class="pagination ml-auto p-2">
+                    <li class="page-item {{#equals pagination.page 1}} disabled {{/equals}}">
+                        <a class="page-link" href="?page={{#sub pagination.page 2}} {{this}} {{/sub}}"
+                            tabindex="-1">Previous</a>
+                    </li>
+                    {{#for 1 pagination.pageCount 1}}
+                    <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a>
+                    </li>
+                    {{/for}}
+                    <li class="{{#equals pagination.page pagination.pageCount }} disabled {{/equals}} page-item">
+                        <a class="page-link" href="?page={{pagination.page}}">Next</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+
+    </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
             let certified = $('#certified').data('certified')

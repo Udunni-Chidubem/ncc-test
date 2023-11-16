@@ -482,8 +482,9 @@ companyRouter.get("/seed-producers", async (req, res) => {
 
 companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
+  let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
-
+  console.log("Yello", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
@@ -491,7 +492,8 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
     sub_title: "Seed Producer",
     prev_link: "/seed-company/seed-producers",
     seedProducer,
-    states: states
+    states: states,
+    seedsProduced
   });
 });
 
