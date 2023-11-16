@@ -585,4 +585,27 @@ adminRouter.get("/seed-producers", async (req, res) => {
   });
 });
 
+adminRouter.get("/seed-producer/:id", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+  let seedProducer = await adminController.viewSeedProducer(req, res);
+  let seedsProduced = await adminController.getSeedProduced(req, res)
+  let states = await siteController.getStates();
+  console.log("Yello", seedsProduced)
+
+  res.render("admin/view-seed-producer", {
+    layout: "admin-dashboard",
+    title: "Seed Producers",
+    sub_title: "Seed Producer",
+    prev_link: "/admin/seed-producer-list",
+    seedProducer,
+    states: states,
+    seedsProduced,
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name
+  });
+});
+
 module.exports = adminRouter;

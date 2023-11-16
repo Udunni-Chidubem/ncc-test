@@ -9,8 +9,8 @@
             </div>
         </div>
     </div>
-    <div class=" container table-responsives table_t_info">
-        <table class="table con t_info  table-borderless">
+    <div class="card table-responsives table_t_info p-3">
+        <table class="table con t_info  table-borderless" id="seedProducers">
             <thead class="t_info_head ">
                 <tr class="">
                     <th scope="col">S/N</th>
@@ -30,7 +30,7 @@
                 <tr class="t_info_row1">
                     <th scope="row">{{increment @index}}</th>
                     <td> {{full_name}}</td>
-                    <td >{{SeedProducerSeeds.[0].name_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].name_of_seed}}</td>
                     <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
                     <td>{{SeedProducerSeeds.[0].volume_of_seed}} {{SeedProducerSeeds.[0].unit}}</td>
                     <td>{{LGA.name}}, {{State.name}}</td>
@@ -54,27 +54,13 @@
                 {{/each}}
             </tbody>
         </table>
-
-        <div class="d-flex align-items-end flex-column">
-            <nav aria-label="...">
-                <ul class="pagination ml-auto p-2">
-                    <li class="page-item {{#equals pagination.page 1}} disabled {{/equals}}">
-                        <a class="page-link" href="?page={{#sub pagination.page 2}} {{this}} {{/sub}}"
-                            tabindex="-1">Previous</a>
-                    </li>
-                    {{#for 1 pagination.pageCount 1}}
-                    <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a>
-                    </li>
-                    {{/for}}
-                    <li class="{{#equals pagination.page pagination.pageCount }} disabled {{/equals}} page-item">
-                        <a class="page-link" href="?page={{pagination.page}}">Next</a>
-                    </li>
-
-                </ul>
-            </nav>
-
-        </div>
-
-
     </div>
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#seedProducers').DataTable({
+        });
+    })
+</script>
