@@ -45,9 +45,9 @@
               </ul>
             </li>
            
-            <li class="nav-item">
+            {{!-- <li class="nav-item">
               <a class="nav-link" href="/admin/seed-producers"><i class='bx bx-bar-chart-square'></i>Seed Producer</a>
-            </li>
+            </li> --}}
             {{#if (or (eq user_role "admin") (eq user_role "rra") )}}
             <li class="nav-item">
               <a class="nav-link" href="/admin/users"><i class='bx bx-group'></i> User Management</a>
@@ -71,6 +71,11 @@
                 {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
                 <li>
                   <a href="/admin/offline-transactions">Offline Transaction</a>
+                </li>
+                {{/if}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                <li>
+                   <a href="/admin/seed-producers">Seed Producer</a>
                 </li>
                 {{/if}}
 
