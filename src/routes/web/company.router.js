@@ -460,6 +460,39 @@ companyRouter.post(
   }
 );
 
+companyRouter.post(
+  "/view-seed-producer/create",
+  async (req, res) => {
+    // console.log("bosdy", req.body)
+    
+
+    let seeds= {
+        userid:  req.body.user_id,
+        name_of_seed:req.body.nameOfSeed,
+        variety_of_seed:req.body.varietyOfSeed,
+        volume_of_seed:req.body.volumeOfSeed,
+        unit:req.body.unit
+      }
+        
+    let r = await companyController.createSeedProducerSeed(seeds);
+    if (r.id) {
+      res
+        .json({
+          statusCode: 200,
+          message: "Seed has been created successfully",
+          body: "Seed has been created successfully",
+        })
+        .status(200)
+        .send();
+    } else {
+      res
+        .json({ statusCode: 500, error: r, message: "something went wrong" })
+        .status(500)
+        .send();
+    }
+  }
+);
+
 companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
