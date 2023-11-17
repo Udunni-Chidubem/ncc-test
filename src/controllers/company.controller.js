@@ -622,4 +622,20 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
+
+  createSeedProducerSeed: async(data) => {
+    try {
+      console.log("seeds", data)
+      let seed = await SeedProducerSeed.create({
+        producer_id: data.producer_id,
+        name_of_seed: data.name_of_seed,
+        variety_of_seed: data.variety_of_seed,
+        volume_of_seed: data.volume_of_seed,
+        unit: data.unit
+      });
+      return JSON.parse(JSON.stringify(seed));
+    } catch (e) {
+      console.log(e)
+    }
+  }
 };

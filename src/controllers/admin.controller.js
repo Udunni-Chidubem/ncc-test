@@ -878,6 +878,7 @@ module.exports = {
       farmerFemalelist,
     };
   },
+  
   getMaleSeedTraderCount: async (req, res) => {
     let maleSeedtraderCount = await SeedTrader.count({
       where: { gender: "Male" },
@@ -908,6 +909,7 @@ module.exports = {
     ledger_info = JSON.parse(JSON.stringify(ledger_info));
     return ledger_info;
   },
+
   getAllSaleSheets: async (res, req) => {
     let salesSheet = await Salesheets.findAll({
       include: [
@@ -1044,6 +1046,10 @@ module.exports = {
           ],
           raw: true,
         },
+        {
+          model: SeedProducerSeed,
+          raw: true
+        },
       ],
       order: [["id", "DESC"]],
       // raw: true,
@@ -1057,6 +1063,7 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
+
   viewSeedProducer: async (req, res) => {
     const user = await req.user;
     let response = null;
@@ -1072,6 +1079,7 @@ module.exports = {
 
     return response;
   },
+
   getSeedProduced: async (req, res) => {
     const user = await req.user;
     let response = null;

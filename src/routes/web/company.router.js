@@ -460,6 +460,39 @@ companyRouter.post(
   }
 );
 
+companyRouter.post(
+  "/seed-producer-seed/create",
+  async (req, res) => {
+    console.log("entryy", req.body)
+    
+    let seeds= {
+        producer_id:  req.body.prod_id,
+        name_of_seed:req.body.seed,
+        variety_of_seed:req.body.variety,
+        volume_of_seed:req.body.volumn,
+        unit:req.body.unit
+      }
+        
+    let r = await companyController.createSeedProducerSeed(seeds);
+    console.log("seedeeed",  r)
+    if (r.id) {
+      res
+        .json({
+          statusCode: 200,
+          message: "Seed has been created successfully",
+          body: "Seed has been created successfully",
+        })
+        .status(200)
+        .send();
+    } else {
+      res
+        .json({ statusCode: 500, error: r, message: "something went wrong" })
+        .status(500)
+        .send();
+    }
+  }
+);
+
 companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
@@ -484,6 +517,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
   let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
+  let prod_id = await req.params.id ;
   console.log("Yello", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
@@ -493,7 +527,8 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
     prev_link: "/seed-company/seed-producers",
     seedProducer,
     states: states,
-    seedsProduced
+    seedsProduced,
+    prod_id
   });
 });
 
