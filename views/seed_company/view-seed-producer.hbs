@@ -17,6 +17,42 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
+                        <label for="gender">Gender</label>
+                        <select name="gender" required class="form-select border-0 border-bottom gender" id="gender"
+                            data-gender="{{ seedProducer.gender }}" disabled>
+                            <option value="">Select Option</option>
+                            {{seedProducer.gender}}
+                        </select>
+                    </div>
+                     <div class="form-group col-md-4">
+                        <label for="age_range" class="input_form">Age Range </label>
+                        <div class="input-group input-group-sm mb-3">
+                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom" data-val="{{ seedProducer.age_range }}" disabled>
+                                <option value="">Select Age Range</option>
+                                <option value="15-19">15-19</option>
+                                <option value="20-30">20-30</option>
+                                <option value="31-40">31-40</option>
+                                <option value="41-50">41-50</option>
+                                <option value="51 and above">51 and above</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="living_status" class="input_form">Current Living Status</label>
+                        <div class="input-group input-group-sm mb-3">
+
+                            <select class="form-select border-0 border-bottom"
+                                id="living_status" name="living_status" data-val="{{ seedProducer.living_status }}" disabled>
+                                <option value="">Select One</option>
+                                <option value="IDP">Internally Displaced Person </option>
+                                <option value="Host">Indigene of the State</option>
+                                <option value="Returnee">Returnee</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
                         <label for="certified">Certified Seed Producer</label>
                         <select name="certified" id="certified" class="form-select border-bottom "
                             data-certified="{{seedProducer.certified}}" disabled>
@@ -119,8 +155,8 @@
                                         class="profile_sub">*</span></label>
                                 <input type="text" class="form-control variety" name="varietyOfSeed" id="varietyOfSeed"
                                     placeholder="Enter Variety of Seed">
-                                <input type="number" class="form-control prod_id hidden" value="{{prod_id}}" id="varietyOfSeed"
-                                    placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
+                                    id="varietyOfSeed" placeholder="Enter Variety of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
@@ -155,9 +191,19 @@
         $(document).ready(function () {
             let certified = $('#certified').data('certified')
             let state = $('#state').data('state')
+            let age = $('#age_range').data('val')
+            let livingStatus = $('#living_status').data('val')
+
 
             if (certified != null) {
                 $('#certified').val(certified)
+            }
+            
+            if (age != null) {
+                $('#age_range').val(age)
+            }
+            if (livingStatus != null) {
+                $('#living_status').val(livingStatus)
             }
 
             const getDefaultLgas = (state_id) => {
@@ -183,6 +229,13 @@
                 $('#state').val(state)
 
                 getDefaultLgas(state)
+            }
+
+            let gender = $('#gender').data('gender')
+            $('.gender').val(gender)
+
+            if (gender != null) {
+                $('.gender').val(gender)
             }
 
             document.querySelector('#state').addEventListener('change', function () {
@@ -216,34 +269,66 @@
             });
         })
 
-        function saveSeed (){
-        let seed = document.querySelector('.seed_name').value
-        let variety = document.querySelector('.variety').value
-        let volumn = document.querySelector('.volumn').value
-        let unit = document.querySelector('.unit').value
-        let prod_id = document.querySelector('.prod_id').value
+        function saveSeed() {
+            let seed = document.querySelector('.seed_name').value
+            let variety = document.querySelector('.variety').value
+            let volumn = document.querySelector('.volumn').value
+            let unit = document.querySelector('.unit').value
+            let prod_id = document.querySelector('.prod_id').value
 
-        let url = window.location.origin + '/seed-company/seed-producer-seed/create'
+            let url = window.location.origin + '/seed-company/seed-producer-seed/create'
 
 
-        console.log("data  ", seed, variety, volumn, unit)
-        console.log("idd", prod_id)
+            console.log("data  ", seed, variety, volumn, unit)
+            console.log("idd", prod_id)
+
+            let form = new FormData()
+            form.append('seed', seed)
+            form.append('variety', variety)
+            form.append('volumn', volumn)
+            form.append('unit', unit)
+            form.append('prod_id', prod_id)
+
+            fetch(url, {
+                method: 'POST',
+                body: form
+            }).then(r => r.json())
+                .then(r => {
+                    console.log("response", r)
+                    alert(r.message)
+                    window.location.reload()
+                })
+        }
+
+        let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let gender, len, i, farm_produce, level
+                gender = response.data.gender
+
+                len = gender.length
+                var ele = document.getElementById('gender');
+
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let gender = $('#gender').data('gender')
+                    if(gender != null){
+                        $('#gender').val(gender)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
         
-        let form = new FormData()
-        form.append('seed', seed)
-        form.append('variety', variety)
-        form.append('volumn', volumn)
-        form.append('unit', unit)
-        form.append('prod_id', prod_id)
-
-        fetch(url, {
-            method: 'POST',
-            body: form
-        }).then(r => r.json())
-            .then(r => {
-                console.log("response", r)
-                alert(r.message)
-                window.location.reload()
-            })
-    }
     </script>
