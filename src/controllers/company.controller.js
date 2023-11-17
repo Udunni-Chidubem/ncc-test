@@ -627,7 +627,7 @@ module.exports = {
     try {
       console.log("seeds", data)
       let seed = await SeedProducerSeed.create({
-        product_id: data.product_id,
+        producer_id: data.producer_id,
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
