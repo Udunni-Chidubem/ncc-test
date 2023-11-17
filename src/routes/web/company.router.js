@@ -518,7 +518,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
   let prod_id = await req.params.id ;
-  console.log("Yello", seedsProduced)
+  console.log("Yello", seedProducer)
 
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
