@@ -625,14 +625,15 @@ module.exports = {
 
   createSeedProducerSeed: async(data) => {
     try {
-      let seedProducerSeed = await SeedProducerSeed.create({
-        product_id: data.userid,
-        name_of_seed: data.seed,
-        variety_of_seed: data.variety,
-        volume: data.volume,
+      console.log("seeds", data)
+      let seed = await SeedProducerSeed.create({
+        product_id: data.product_id,
+        name_of_seed: data.name_of_seed,
+        variety_of_seed: data.variety_of_seed,
+        volume_of_seed: data.volume_of_seed,
         unit: data.unit
       });
-      return JSON.parse(JSON.stringify(seedProducerSeed));
+      return JSON.parse(JSON.stringify(seed));
     } catch (e) {
       console.log(e)
     }

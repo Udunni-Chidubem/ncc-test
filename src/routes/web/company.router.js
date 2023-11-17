@@ -461,20 +461,20 @@ companyRouter.post(
 );
 
 companyRouter.post(
-  "/view-seed-producer/create",
+  "/seed-producer-seed/create",
   async (req, res) => {
-    // console.log("bosdy", req.body)
+    console.log("entryy", req.body)
     
-
     let seeds= {
-        userid:  req.body.user_id,
-        name_of_seed:req.body.nameOfSeed,
-        variety_of_seed:req.body.varietyOfSeed,
-        volume_of_seed:req.body.volumeOfSeed,
+        producer_id:  req.body.prod_id,
+        name_of_seed:req.body.seed,
+        variety_of_seed:req.body.variety,
+        volume_of_seed:req.body.volumn,
         unit:req.body.unit
       }
         
     let r = await companyController.createSeedProducerSeed(seeds);
+    console.log("seedeeed",  r)
     if (r.id) {
       res
         .json({
@@ -517,6 +517,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
   let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
+  let prod_id = await req.params.id ;
   console.log("Yello", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
@@ -526,7 +527,8 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
     prev_link: "/seed-company/seed-producers",
     seedProducer,
     states: states,
-    seedsProduced
+    seedsProduced,
+    prod_id
   });
 });
 

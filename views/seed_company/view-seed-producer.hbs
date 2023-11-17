@@ -111,13 +111,15 @@
                             <div class="form-group">
                                 <label for="nameOfSeed">Name of Seed Produced <span
                                         class="required-feilds">*</span></label>
-                                <input type="text" class="form-control" name="nameOfSeed" id="nameOfSeed"
+                                <input type="text" class="form-control seed_name" name="nameOfSeed" id="nameOfSeed"
                                     placeholder="Enter name of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                         class="profile_sub">*</span></label>
-                                <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed"
+                                <input type="text" class="form-control variety" name="varietyOfSeed" id="varietyOfSeed"
+                                    placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" value="{{prod_id}}" id="varietyOfSeed"
                                     placeholder="Enter Variety of Seed">
                             </div>
                             <div class="form-group">
@@ -126,11 +128,11 @@
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
                                         <input type="text" required id="volumeOfSeed" name="volumeOfSeed"
-                                            class="form-control" aria-label="Sizing example input"
+                                            class="form-control volumn" aria-label="Sizing example input"
                                             aria-describedby="inputGroup-sizing-sm" />
                                     </div>
                                     <div class="input-group-append">
-                                        <select class="form-select" id="unit" name="unit" required>
+                                        <select class="form-select unit" id="unit" name="unit" required>
                                             <option selected>Choose...</option>
                                             <option value="kg">Kg</option>
                                             <option value="Metric Ton">Metric Ton</option>
@@ -139,7 +141,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-theme float-end submitBtn">
+                        <button type="button" class="btn btn-theme float-end submitBtn" onclick="saveSeed()">
                             Submit</button>
                     </form>
                 </div>
@@ -213,4 +215,35 @@
                 "order": [[2, "desc"]]
             });
         })
+
+        function saveSeed (){
+        let seed = document.querySelector('.seed_name').value
+        let variety = document.querySelector('.variety').value
+        let volumn = document.querySelector('.volumn').value
+        let unit = document.querySelector('.unit').value
+        let prod_id = document.querySelector('.prod_id').value
+
+        let url = window.location.origin + '/seed-company/seed-producer-seed/create'
+
+
+        console.log("data  ", seed, variety, volumn, unit)
+        console.log("idd", prod_id)
+        
+        let form = new FormData()
+        form.append('seed', seed)
+        form.append('variety', variety)
+        form.append('volumn', volumn)
+        form.append('unit', unit)
+        form.append('prod_id', prod_id)
+
+        fetch(url, {
+            method: 'POST',
+            body: form
+        }).then(r => r.json())
+            .then(r => {
+                console.log("response", r)
+                alert(r.message)
+                window.location.reload()
+            })
+    }
     </script>
