@@ -11,7 +11,7 @@
                     <div class="form-group col-md-6">
                         <label for="phone">Phone Number <span class="required-feilds">*</span></label>
                         <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Phone Number "
-                            required>
+                            required pattern="^0[0-9]{10}$" minlength="11" maxlength="11" >
                     </div>
                 </div>
                 {{!-- <div class="form-row"> --}}
