@@ -1,0 +1,183 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+<div class="product-mgt-container">
+    <div class="d-flex flex-row container mt-5">
+        <div class="tab-btn active" data-id="all">ALL</div>
+        <div class="tab-btn" data-id="active">ACTIVE</div>
+        <div class="tab-btn" data-id="deactivated">DEACTIVATED</div>
+    </div>
+    <div>
+
+        <!-- single item -->
+        <div class="content active" id="all">
+            <div class=" container table-responsives table_t_info card p-3">
+                <table class="table con t_info  table-borderless" id="seedProducers">
+                    <thead class="t_info_head ">
+                        <tr class="row-height">
+                            <th scope="col">Name</th>
+                            <th scope="col">Number of seeds produced</th>
+                            <th scope="col">Seed Company</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each seedProducer.rows}}
+                        <tr class="t_info_row1">
+                            <td> {{this.full_name}}</td>
+                            <td> {{this.SeedProducerSeeds.length}}</td>
+                            <td>{{User.SeedCompany.name_of_company}}</td>
+                            <td>{{LGA.name}}, {{State.name}}</td>
+                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                            <td><a href="#">
+                                    <div class="dropdown d_t">
+                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/seed-producer/{{id}}">View</a></li>
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </a></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- end of single item -->
+
+        <!-- single item -->
+        <div class="content" id="active">
+            <div class=" container table-responsive table_t_info card p-3">
+                <table class="table con t_info  table-borderless " id="seedProducers-active">
+                    <thead class="t_info_head ">
+                        <tr class="row-height">
+                            <th scope="col">Name</th>
+                            <th scope="col">Number of seeds produced</th>
+                            <th scope="col">Seed Company</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each seedProducer.rows}}
+                        {{#if (ne status 0)}}
+                        <tr class="t_info_row1">
+                            <td> {{this.full_name}}</td>
+                            <td> {{this.SeedProducerSeeds.length}}</td>
+                            <td>{{User.SeedCompany.name_of_company}}</td>
+                            <td>{{LGA.name}}, {{State.name}}</td>
+                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                            <td><a href="#">
+                                    <div class="dropdown d_t">
+                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </a>
+
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/seed-producer/{{id}}">View</a></li>
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                        </ul>
+                                    </div>
+                                </a></td>
+                        </tr>
+                        {{/if}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end of single item -->
+
+    <!-- single item -->
+    <div class="content" id="deactivated">
+        <div class=" container table-responsives table_t_info card p-3">
+            <table class="table con t_info  table-borderless" id="seedProducers-inactive">
+                <thead class="t_info_head ">
+                    <tr class="row-height">
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of seeds produced</th>
+                        <th scope="col">Seed Company</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each seedProducer.rows}}
+                    {{#if (ne status 1)}}
+                    <tr class="t_info_row1">
+                        <td> {{this.full_name}}</td>
+                        <td> {{this.SeedProducerSeeds.length}}</td>
+                        <td>{{User.SeedCompany.name_of_company}}</td>
+                        <td>{{LGA.name}}, {{State.name}}</td>
+                        <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                        <td><a href="#">
+                                <div class="dropdown d_t">
+                                    <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item border-0 border-bottom"
+                                                href="/admin/seed-producer/{{id}}">View</a></li>
+                                        <li><a class="dropdown-item border-0 border-bottom"
+                                                href="/admin/deactivate-seed-producer">Deactivate</a></li>
+                                    </ul>
+                                </div>
+                            </a></td>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end of single item -->
+</div>
+
+<script>
+    const about = document.querySelector(".product-mgt-container");
+    const btns = document.querySelectorAll(".tab-btn");
+    const tables = document.querySelectorAll(".content");
+    about.addEventListener("click", function (e) {
+        const id = e.target.dataset.id;
+        if (id) {
+            // remove selected from other buttons
+            btns.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+            e.target.classList.add("active");
+            // hide other tables
+            tables.forEach(function (table) {
+                table.classList.remove("active");
+            });
+            const element = document.getElementById(id);
+            element.classList.add("active");
+        }
+    });
+
+    $(document).ready(function () {
+        $('#seedProducers').DataTable({
+        });
+        $('#seedProducers-active').DataTable({
+        });
+        $('#seedProducers-inactive').DataTable({
+        });
+    })
+</script>
