@@ -631,7 +631,8 @@ module.exports = {
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
-        unit: data.unit
+        unit: data.unit,
+        year_produced: data.year_produced
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {

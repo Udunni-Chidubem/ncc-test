@@ -470,7 +470,8 @@ companyRouter.post(
         name_of_seed:req.body.seed,
         variety_of_seed:req.body.variety,
         volume_of_seed:req.body.volumn,
-        unit:req.body.unit
+        unit:req.body.unit,
+        year_produced:req.body.yearProduced
       }
         
     let r = await companyController.createSeedProducerSeed(seeds);
