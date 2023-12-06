@@ -115,6 +115,7 @@
                     <th scope="col">Seed Produced</th>
                     <th scope="col">Variety</th>
                     <th scope="col">Volume</th>
+                    <th scope="col">Year Produced</th>
                     <th scope="col">Date Created</th>
                 </tr>
             </thead>
@@ -127,6 +128,7 @@
                     <td>{{name_of_seed}}</td>
                     <td>{{variety_of_seed}}</td>
                     <td>{{volume_of_seed}} {{unit}}</td>
+                    <td>{{dateFormat year_produced "DD/MM/YYYY"}}</td>
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
                 </tr>
                 {{/each}}
@@ -173,6 +175,10 @@
                                             <option value="kg">Kg</option>
                                             <option value="Metric Ton">Metric Ton</option>
                                         </select>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
+                                        <input type="date" class="form-control year_produced" name="yearProduced" id="yearProduced" required>
                                     </div>
                                 </div>
                             </div>
@@ -274,11 +280,12 @@
             let volumn = document.querySelector('.volumn').value
             let unit = document.querySelector('.unit').value
             let prod_id = document.querySelector('.prod_id').value
+            let year_produced = document.querySelector('.year_produced').value
 
             let url = window.location.origin + '/seed-company/seed-producer-seed/create'
 
 
-            console.log("data  ", seed, variety, volumn, unit)
+            console.log("data  ", seed, variety, volumn, unit, year_produced)
             console.log("idd", prod_id)
 
             let form = new FormData()
@@ -287,6 +294,7 @@
             form.append('volumn', volumn)
             form.append('unit', unit)
             form.append('prod_id', prod_id)
+            form.append('yearProduced', year_produced)
 
             fetch(url, {
                 method: 'POST',

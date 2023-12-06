@@ -429,6 +429,7 @@ companyRouter.post(
             variety_of_seed:req.body.varietyOfSeed[index],
             volume_of_seed:req.body.volumeOfSeed[index],
             unit:req.body.unit[index],
+            year_produced:req.body.yearProduced[index]
           }
         )
       })
@@ -437,7 +438,8 @@ companyRouter.post(
         name_of_seed:req.body.nameOfSeed,
         variety_of_seed:req.body.varietyOfSeed,
         volume_of_seed:req.body.volumeOfSeed,
-        unit:req.body.unit
+        unit:req.body.unit,
+        year_produced:req.body.yearProduced
       })
     }
     req.body.seeds=seeds
@@ -520,6 +522,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let states = await siteController.getStates();
   let prod_id = await req.params.id ;
   console.log("Yello", seedProducer)
+  console.log("seeds ", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
