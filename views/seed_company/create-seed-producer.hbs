@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="lg_id" class="input_form">Seed Producer LGA <span
+                        <label for="lg_id" class="input_form" >Seed Producer LGA <span
                                 class="profile_sub">*</span></label>
                         <div class="input-group">
                             <select required class="form-select border-bottom" id="lg_id" name="lg_id">
@@ -161,6 +161,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="form-row seeds">
+                    <div class="form-group col-md-3">
+                        <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
+                        <input type="date" class="form-control" name="yearProduced" id="yearProduced" required>
+                    </div>       
                 </div>
 
         </div>
@@ -231,4 +237,5 @@
                 $(this).closest(".form-row").remove()
             })
         })
+
     </script>
