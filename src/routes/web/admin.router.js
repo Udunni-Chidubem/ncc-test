@@ -200,9 +200,6 @@ adminRouter.get("/getmessagescount", async (req, res) => {
 
 adminRouter.get("/users", async (req, res) => {
   let user = await req.user;
-  let farmers = await adminController.getFarmers(req, res);
-  let traders = await adminController.getTraders(req, res);
-  let companies = await adminController.getCompanies(req, res);
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
 
@@ -212,8 +209,59 @@ adminRouter.get("/users", async (req, res) => {
     sub_title: "All Users",
     username: user.username,
     isVerified,
+    user_role: user_role.Role.role_name,
+  });
+});
+
+adminRouter.get("/farmers", async (req, res) => {
+  let user = await req.user;
+  let farmers = await adminController.getFarmers(req, res);
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/farmers", {
+    layout: "admin-dashboard",
+    title: "User Management",
+    sub_title: "All Farmers",
+    prev_link: "/admin/users",
+    username: user.username,
+    isVerified,
     farmers,
+    user_role: user_role.Role.role_name,
+  });
+});
+
+adminRouter.get("/companies", async (req, res) => {
+  let user = await req.user;
+  let companies = await adminController.getCompanies(req, res);
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/companies", {
+    layout: "admin-dashboard",
+    title: "User Management",
+    sub_title: "All Companies",
+    prev_link: "/admin/users",
+    username: user.username,
+    isVerified,
     companies,
+    user_role: user_role.Role.role_name,
+  });
+});
+
+adminRouter.get("/traders", async (req, res) => {
+  let user = await req.user;
+  let traders = await adminController.getTraders(req, res);
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  res.render("admin/traders", {
+    layout: "admin-dashboard",
+    title: "User Management",
+    sub_title: "All Traders",
+    prev_link: "/admin/users",
+    username: user.username,
+    isVerified,
     traders,
     user_role: user_role.Role.role_name,
   });

@@ -1359,3 +1359,41 @@ color: #818E9B;
 .download a{
  color: #000 !important
 }
+
+.users-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  grid-gap: 1%;
+}
+
+.users-grid div{
+  border-radius: 7px;
+  padding: 40px;
+  font-weight: 900;
+  font-size: large;
+  background-color: #fff;
+  box-shadow: 5px 6px 4px #323C4722;
+  text-align: center;
+  border-left: 2px solid #007f00;
+}
+
+.users-grid div:hover{
+  box-shadow: none;
+}
+
+.users-grid a{
+  text-decoration: none;
+  color: #000;
+}
+
+.users-grid a:hover{
+  color: #007f00;
+}
+
+.user-dropdown a{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+}
