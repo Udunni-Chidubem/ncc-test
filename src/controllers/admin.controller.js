@@ -61,7 +61,7 @@ module.exports = {
           model: User,
         },
       ],
-      order: [["updated_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
     });
     farmers = JSON.stringify(farmers);
 
@@ -82,7 +82,7 @@ module.exports = {
           model: User,
         },
       ],
-      order: [["updated_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
     });
 
     companies = JSON.stringify(companies);
@@ -100,7 +100,7 @@ module.exports = {
           attributes: ["name"],
         },
       ],
-      order: [["updated_at", "DESC"]],
+      order: [["createdAt", "DESC"]],
     });
     traders = JSON.stringify(traders);
     return JSON.parse(traders);
@@ -1021,9 +1021,9 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    let response = null;
+    // let response = null;
 
-    const seedProducer = await SeedProducer.findAndCountAll({
+    const seedProducer = await SeedProducer.findAll({
       include: [
         {
           model: States,
@@ -1048,7 +1048,7 @@ module.exports = {
           raw: true
         },
       ],
-      order: [["id", "DESC"]],
+      order: [["created_at", "DESC"]],
     });
 
     response = JSON.parse(JSON.stringify(seedProducer));
@@ -1080,7 +1080,7 @@ module.exports = {
 
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
-      order: [["id", "DESC"]],
+      order: [["created_at", "DESC"]],
     });
 
     response = JSON.parse(JSON.stringify(seeds));
