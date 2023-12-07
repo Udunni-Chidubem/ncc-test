@@ -221,8 +221,9 @@ adminRouter.get("/farmers", async (req, res) => {
 
   res.render("admin/farmers", {
     layout: "admin-dashboard",
-    title: "Farmers",
+    title: "User Management",
     sub_title: "All Farmers",
+    prev_link: "/admin/users",
     username: user.username,
     isVerified,
     farmers,
@@ -238,8 +239,9 @@ adminRouter.get("/companies", async (req, res) => {
 
   res.render("admin/companies", {
     layout: "admin-dashboard",
-    title: "Companies",
+    title: "User Management",
     sub_title: "All Companies",
+    prev_link: "/admin/users",
     username: user.username,
     isVerified,
     companies,
@@ -255,8 +257,9 @@ adminRouter.get("/traders", async (req, res) => {
 
   res.render("admin/traders", {
     layout: "admin-dashboard",
-    title: "Traders",
+    title: "User Management",
     sub_title: "All Traders",
+    prev_link: "/admin/users",
     username: user.username,
     isVerified,
     traders,
