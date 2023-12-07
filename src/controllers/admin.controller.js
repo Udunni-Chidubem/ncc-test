@@ -1021,9 +1021,9 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    let response = null;
+    // let response = null;
 
-    const seedProducer = await SeedProducer.findAndCountAll({
+    const seedProducer = await SeedProducer.findAll({
       include: [
         {
           model: States,
