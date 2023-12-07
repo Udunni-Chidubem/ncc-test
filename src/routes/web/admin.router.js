@@ -570,14 +570,10 @@ adminRouter.get("/seed-producers", async (req, res) => {
   let user_role = await adminController.getUserRole(req, res);
 
   let seedProducer = await adminController.listSeedProducers(req, res);
-  let paginate;
-  if (seedProducer) {
-    paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
-  }
+
   res.render("admin/seed-producer-list", {
     layout: "admin-dashboard",
     seedProducer,
-    pagination: paginate,
     title: "Seed Producers",
     username: user.username,
     isVerified,
