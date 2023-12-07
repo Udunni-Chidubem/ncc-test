@@ -605,20 +605,11 @@ module.exports = {
     const user = await req.user;
     let response = null;
 
-    const { page, size } = req.query;
-    const { limit, offset } = getPagination(page, size);
-
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
       order: [["id", "DESC"]],
-      // raw: true,
-      limit,
-      offset,
     });
 
-    if (seeds) {
-      response = getPagingData(seeds, page, limit);
-    }
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
@@ -631,7 +622,8 @@ module.exports = {
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
-        unit: data.unit
+        unit: data.unit,
+        year_produced: data.year_produced
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
