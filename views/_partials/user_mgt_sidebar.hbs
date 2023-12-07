@@ -1,17 +1,30 @@
 <div id="wrapper">
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
-	
-   <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-      <li>
-         <a href="/admin/users/create"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>CREATE USER</a>
-      </li>
-      <li>
-         <a href="/admin/users"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-bars fa-stack-1x "></i></span>ALL USERS</a>
-      </li>
-      <li>
-         <a href="/admin/users/deactivated"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-bars fa-stack-1x "></i></span>DEACTIVATED USERS</a>
-      </li>
-   </ul>
-</div>
-<!-- /#sidebar-wrapper -->
+   <!-- Sidebar -->
+   <div id="sidebar-wrapper">
+
+      <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+         <li>
+            <a href="/admin/users/create"><span class="fa-stack fa-lg pull-left"><i
+                     class="fa fa-plus fa-stack-1x "></i></span>CREATE USER</a>
+         </li>
+         <li class="nav-item dropdown user-dropdown">
+            <a class="dropbtn" href="#"><i class='bx bx-group' style="margin-left: auto; padding:15px;"></i> USER LIST</a>
+            <ul class="dropdown-content arrow-top">
+               <li>
+                  <a class="nav-link" href="/admin/farmers">Farmers </a>
+               </li>
+               <li>
+                  <a class="nav-link" href="/admin/companies">Seed Companies</a>
+               </li>
+               <li>
+                  <a class="nav-link" href="/admin/traders">Seed Traders</a>
+               </li>
+            </ul>
+         </li>
+         <li>
+            <a href="/admin/users/deactivated"> <span class="fa-stack fa-lg pull-left"><i
+                     class="fa fa-bars fa-stack-1x "></i></span>DEACTIVATED USERS</a>
+         </li>
+      </ul>
+   </div>
+   <!-- /#sidebar-wrapper -->
