@@ -1,0 +1,45 @@
+{{#if (ne user_role "rra")}}
+{{>user_mgt_sidebar}}
+{{/if}}
+{{>breadcrumbs}}
+
+<div id="page-content-wrapper">
+	<div class="card users_card">
+		<div class="card-body">
+			<div >
+					<div class="card p-2">
+					<table class="table table-theme  table-responsive table-hover" id="seed-company-table">
+						<thead>
+							<tr>
+								<th>S/N</th>
+								<th>Reg. Date</th>
+								<th>Name</th>
+								<th>Location</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each companies}}
+								{{#if (ne this.User.status 2)}}
+								<tr class="table-theme-secondary">
+									<td>{{increment  @index}}</td>
+									<td colspan="" rowspan="" headers="">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}
+									</td>
+									<td colspan="" rowspan="" headers="">{{this.name_of_company}}</td>
+									<td colspan="" rowspan="" headers="" class="text-uppercase">{{this.LGA.name}} ,
+										{{this.State.name}}</td>
+									<td colspan="" rowspan="" headers="">
+										<a class="" href="/admin/users/{{this.user_id}}?type=company">
+											<i class="fa fa-eye"></i> View
+										</a>
+									</td>
+								</tr>
+								{{/if}}
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
