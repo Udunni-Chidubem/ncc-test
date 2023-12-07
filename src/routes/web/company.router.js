@@ -500,15 +500,10 @@ companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
   let seedProducer = await companyController.listSeedProducers(req, res);
-  // console.log("producerrr  ", seedProducer.rows);
-  let paginate;
-  if (seedProducer) {
-    paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
-  }
+  
   res.render("seed_company/seed-producer-list", {
     layout: "company-dashboard",
     seedProducer,
-    pagination: paginate,
     title: "Seed Producers",
     company: company,
   });

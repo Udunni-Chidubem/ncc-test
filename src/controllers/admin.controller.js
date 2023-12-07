@@ -1023,9 +1023,6 @@ module.exports = {
     const user = await req.user;
     let response = null;
 
-    const { page, size } = req.query;
-    const { limit, offset } = getPagination(page, size);
-
     const seedProducer = await SeedProducer.findAndCountAll({
       include: [
         {
@@ -1052,14 +1049,8 @@ module.exports = {
         },
       ],
       order: [["id", "DESC"]],
-      // raw: true,
-      limit,
-      offset,
     });
 
-    if (seedProducer) {
-      response = getPagingData(seedProducer, page, limit);
-    }
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
@@ -1090,14 +1081,8 @@ module.exports = {
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
       order: [["id", "DESC"]],
-      // raw: true,
-      limit,
-      offset,
     });
 
-    if (seeds) {
-      response = getPagingData(seeds, page, limit);
-    }
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
