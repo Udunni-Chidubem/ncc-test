@@ -15,6 +15,7 @@
                 <table class="table con t_info  table-borderless" id="seedProducers">
                     <thead class="t_info_head ">
                         <tr class="row-height">
+                            <th scope="col">S/N</th>
                             <th scope="col">Name</th>
                             <th scope="col">Number of seeds produced</th>
                             <th scope="col">Seed Company</th>
@@ -24,8 +25,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each seedProducer.rows}}
+                        {{#each seedProducer}}
                         <tr class="t_info_row1">
+                            <td>{{increment @index}}</td>
                             <td> {{this.full_name}}</td>
                             <td> {{this.SeedProducerSeeds.length}}</td>
                             <td>{{User.SeedCompany.name_of_company}}</td>
@@ -60,6 +62,7 @@
                 <table class="table con t_info  table-borderless " id="seedProducers-active">
                     <thead class="t_info_head ">
                         <tr class="row-height">
+                            <th scope="col">S/N</th>
                             <th scope="col">Name</th>
                             <th scope="col">Number of seeds produced</th>
                             <th scope="col">Seed Company</th>
@@ -69,9 +72,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each seedProducer.rows}}
+                        {{#each seedProducer}}
                         {{#if (ne status 0)}}
                         <tr class="t_info_row1">
+                            <td>{{increment @index}}</td>
                             <td> {{this.full_name}}</td>
                             <td> {{this.SeedProducerSeeds.length}}</td>
                             <td>{{User.SeedCompany.name_of_company}}</td>
@@ -108,6 +112,7 @@
             <table class="table con t_info  table-borderless" id="seedProducers-inactive">
                 <thead class="t_info_head ">
                     <tr class="row-height">
+                        <th scope="col">S/N</th>
                         <th scope="col">Name</th>
                         <th scope="col">Number of seeds produced</th>
                         <th scope="col">Seed Company</th>
@@ -117,9 +122,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each seedProducer.rows}}
+                    {{#each seedProducer}}
                     {{#if (ne status 1)}}
                     <tr class="t_info_row1">
+                        <td>{{increment @index}}</td>
                         <td> {{this.full_name}}</td>
                         <td> {{this.SeedProducerSeeds.length}}</td>
                         <td>{{User.SeedCompany.name_of_company}}</td>
