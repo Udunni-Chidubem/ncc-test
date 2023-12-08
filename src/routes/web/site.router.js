@@ -162,66 +162,6 @@ siteRouter.delete("/logout", (req, res) => {
 }),
   siteRouter.get("/services", siteController.services);
 
-
-
-siteRouter.get("/knowledge-base", async (req, res) => {
-  let knowledgeBases = await siteController.allKnowledgeBase(req, res);
-  res.render("knowledge_base/index-main", {
-    layout: "knowledge_dashboard",
-    title: "Knowledge Base - Index",
-    knowledgeBases: knowledgeBases,
-  });
-});
-
-siteRouter.get("/:name", async (req, res) => {
-  let knowledgeBase = await siteController.KnowledgeBase(req, res);
-
-  res.render("knowledge_base/knowledge", {
-    layout: "knowledge_dashboard",
-    title: "Know" ,
-    knowledgeBase: knowledgeBase,
-  });
-});
-
-siteRouter.get("/cowpie", (req, res) => {
-  res.render("knowledge_base/cowpie", {
-    layout: "knowledge_dashboard",
-    title: "Knowledge Base - Cowpie",
-    crop: "Cowpea",
-  });
-});
-
-siteRouter.get("/groundnut", (req, res) => {
-  res.render("knowledge_base/groundnut", {
-    layout: "knowledge_dashboard",
-    title: "Knowledge Base - GroundNut",
-    crop: "Groundnut",
-  });
-});
-
-siteRouter.get("/maize", (req, res) => {
-  res.render("knowledge_base/maize", {
-    layout: "knowledge_dashboard",
-    crop: "Maize",
-    title: "Knowledge Base - Maize",
-  });
-});
-
-siteRouter.get("/rice", (req, res) => {
-  res.render("knowledge_base/rice", {
-    layout: "knowledge_dashboard",
-    crop: "Rice",
-    title: "Knowledge Base - Rice",
-  });
-});
-
-siteRouter.get("/recommendation", (req, res) => {
-  res.render("knowledge_base/recommendation", {
-    layout: "",
-    title: "Knowledge Base - Recommendation",
-  });
-});
-
 siteRouter.get("/forgot_password", async (req, res) => {
   res.render("site/forgot_password", {
     form_banner: "Group.png",
@@ -298,6 +238,66 @@ siteRouter.post("/forgot_password", async (req, res) => {
     }
   }
 });
+
+siteRouter.get("/knowledge-base", async (req, res) => {
+  let knowledgeBases = await siteController.allKnowledgeBase(req, res);
+  res.render("knowledge_base/index-main", {
+    layout: "knowledge_dashboard",
+    title: "Knowledge Base - Index",
+    knowledgeBases: knowledgeBases,
+  });
+});
+
+siteRouter.get("/:name", async (req, res) => {
+  let knowledgeBase = await siteController.KnowledgeBase(req, res);
+
+  res.render("knowledge_base/knowledge", {
+    layout: "knowledge_dashboard",
+    title: "Know" ,
+    knowledgeBase: knowledgeBase,
+  });
+});
+
+siteRouter.get("/cowpie", (req, res) => {
+  res.render("knowledge_base/cowpie", {
+    layout: "knowledge_dashboard",
+    title: "Knowledge Base - Cowpie",
+    crop: "Cowpea",
+  });
+});
+
+siteRouter.get("/groundnut", (req, res) => {
+  res.render("knowledge_base/groundnut", {
+    layout: "knowledge_dashboard",
+    title: "Knowledge Base - GroundNut",
+    crop: "Groundnut",
+  });
+});
+
+siteRouter.get("/maize", (req, res) => {
+  res.render("knowledge_base/maize", {
+    layout: "knowledge_dashboard",
+    crop: "Maize",
+    title: "Knowledge Base - Maize",
+  });
+});
+
+siteRouter.get("/rice", (req, res) => {
+  res.render("knowledge_base/rice", {
+    layout: "knowledge_dashboard",
+    crop: "Rice",
+    title: "Knowledge Base - Rice",
+  });
+});
+
+siteRouter.get("/recommendation", (req, res) => {
+  res.render("knowledge_base/recommendation", {
+    layout: "",
+    title: "Knowledge Base - Recommendation",
+  });
+});
+
+
 
 siteRouter.get("/otp", async (req, res) => {
   res.render("site/otp", {
