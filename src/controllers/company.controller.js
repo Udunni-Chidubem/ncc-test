@@ -629,5 +629,16 @@ module.exports = {
     } catch (e) {
       console.log(e)
     }
-  }
+  },
+
+  findSeedProducer: async (phone) => {
+    // let response = null;
+
+    const seedProducer = await SeedProducer.findOne({
+      where: { phone_no: phone },
+      raw: true,
+    });
+
+    return seedProducer;
+  },
 };

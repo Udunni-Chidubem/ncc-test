@@ -419,7 +419,10 @@ companyRouter.post(
   "/seed-producers/create",
   async (req, res) => {
     console.log("bosdy", req.body)
-
+          let phone = req.body.phone;
+    let check = await companyController.findSeedProducer(phone)
+    if(check == null){
+    
     let seeds=[];
     if(Array.isArray(req.body.nameOfSeed)){
       req.body.nameOfSeed.forEach((e, index)=>{
@@ -459,8 +462,18 @@ companyRouter.post(
         .status(500)
         .send();
     }
+  } else{
+    res
+        .json({
+          statusCode: 400,
+          message: "phone number already in use",
+          error: true,
+        })
+        .status(400)
+        .send();
   }
-);
+
+});
 
 companyRouter.post(
   "/seed-producer-seed/create",
