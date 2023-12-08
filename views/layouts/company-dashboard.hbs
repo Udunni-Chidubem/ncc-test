@@ -473,7 +473,7 @@
             })
             error_toastr(msg)
           } else if (r.statusCode == 500 || r.statusCode == 400) {
-            error_toastr(r.data)
+            error_toastr(r.message)
           } else {
             success_toastr(r.message)
 

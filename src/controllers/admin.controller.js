@@ -82,7 +82,7 @@ module.exports = {
           model: User,
         },
       ],
-      order: [["createdAt", "DESC"]],
+      order: [["created_at", "DESC"]],
     });
 
     companies = JSON.stringify(companies);
