@@ -421,10 +421,32 @@ module.exports = {
         { transaction: transaction }
       );
 
-      let r = await axios.get(
-        `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=Your OTP is ${otp_code}&type=0&routing=3`
-      );
-      console.log(r);
+      // let r = await axios.get(
+      //   `${process.env.sms_api}?token=${process.env.token_number}&sender=NIGSIMS&to=${phone}&message=Your OTP is ${otp_code}&type=0&routing=3`
+      // );
+      // console.log("oneee... ", r);
+
+        
+      payload = {
+        message: `Your OTP is ${otp_code}`,
+        sender_id: "Keep-Safe",
+        // type: "Transactional",
+        recipients: phone
+      }
+
+      var config = {
+        method: "post",
+        url: process.env.vasLink+"/sshort/Transactional",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: payload,
+      };
+
+      let resp = await axios(config)
+      console.log("testtt... ", resp)
+
+      // return resp.data
 
       // let p = {
       //     method: 'post',
