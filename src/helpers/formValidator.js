@@ -73,14 +73,14 @@ const companyValidation = () => {
       .withMessage("Phone Number field is required"),
     body("tin").not().isEmpty().withMessage("TIN field is required"),
     body("address").not().isEmpty().withMessage("Address field is required"),
-    body("licensed_no")
-      .not()
-      .isEmpty()
-      .withMessage("Licensed Number field required"),
-    body("certification_number")
-      .not()
-      .isEmpty()
-      .withMessage("Certification Number field is required"),
+    // body("licensed_no")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Licensed Number field required"),
+    // body("certification_number")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Certification Number field is required"),
     body("email").not().isEmpty().withMessage("Email field is required"),
     body("state_id").not().isEmpty().withMessage("State field is required"),
     body("lg_id").not().isEmpty().withMessage("LGA field is required"),
