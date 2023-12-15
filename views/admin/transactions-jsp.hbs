@@ -87,15 +87,19 @@
         event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
         // Your redirect code here
-         const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-         const url = `http://131.226.242:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const product = urlParams.get('Product');
+        const status = urlParams.get('Status');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-         window.open(url, '_blank')
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
 
     });
 
@@ -103,31 +107,39 @@
         event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
         // Your redirect code here
-         const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-         const url = `http://131.226.242:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const product = urlParams.get('Product');
+        const status = urlParams.get('Status');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-         window.open(url, '_blank')
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
 
     });
-    
+
     document.getElementById("csvbtn").addEventListener("click", function (event) {
         event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
-        // Your redirect code here
-         const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-         const url = `http://131.226.242:8081/jasperserver/rest_v2/reports/reports/Online_transaction.csv?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const product = urlParams.get('Product');
+        const status = urlParams.get('Status');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-         window.open(url, '_blank')
+
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.csv?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
 
     });
 
@@ -142,11 +154,11 @@
         const toDate = document.getElementById('to').value;
         // Update the PDF link with the selected values
         const pdfLink = document.getElementById('pdf-link');
-        pdfLink.href = `http://131.226.242:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        pdfLink.href = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         // Update the EXCEL link with the selected values
         const excelLink = document.getElementById('excel-link');
-        excelLink.href = `http://131.226.242:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        excelLink.href = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         // Trigger the download button
         document.getElementById('downnload-btn').disabled = false;

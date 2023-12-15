@@ -32,6 +32,7 @@ reportRouter.get("/transactions-jsp", async (req, res) => {
     result
   });
 });
+
 reportRouter.post("/transactions-jsp", async (req, res) => {
   let result = null;
   let Location = req.query.Location ?? "ALL";

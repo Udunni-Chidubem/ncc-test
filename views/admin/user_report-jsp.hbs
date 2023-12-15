@@ -54,66 +54,41 @@
 </div>
 
 <script>
-     document.getElementById("pdfbtn").addEventListener("click", function (event) {
+  
+
+     document.getElementById("pdf-link").addEventListener("click", function (event) {
         event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
         // Your redirect code here
-         const Location = document.getElementById('Location').value;
-        const from = document.getElementById('from').value;
-        const to = document.getElementById('to').value;
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.pdf?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-         window.open(url, '_blank')
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/User_Report.pdf?Location=${location}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
-    });
-
-    document.getElementById("xlsxbtn").addEventListener("click", function (event) {
-        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
-
-        // Your redirect code here
-        const Location = document.getElementById('Location').value;
-        const from = document.getElementById('from').value;
-        const to = document.getElementById('to').value;
-
-         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.xlsx?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
-
-         window.open(url, '_blank')
+        window.open(url, '_blank')
 
     });
     
-    document.getElementById("csvbtn").addEventListener("click", function (event) {
+     document.getElementById("excel-link").addEventListener("click", function (event) {
         event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
         // Your redirect code here
-         const location = document.getElementById('Location').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-         const url = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/User_Report.csv?Location=${Location}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-         window.open(url, '_blank')
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/User_Report.xlsx?Location=${location}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
-    });
+        window.open(url, '_blank')
 
-    document.querySelector('form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
-
-        // Get the selected values
-        const location = document.getElementById('Location').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
-
-        // Update the PDF link with the selected values
-        const pdfLink = document.getElementById('pdf-link');
-        pdfLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
-
-        // Update the EXCEL link with the selected values
-        const excelLink = document.getElementById('excel-link');
-        excelLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
-
-        // Trigger the download button
-        document.getElementById('downnload-btn').disabled = false;
-        document.getElementById('downnload-btn').click();
     });
 </script>
