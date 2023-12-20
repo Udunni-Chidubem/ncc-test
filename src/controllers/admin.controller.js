@@ -1086,7 +1086,6 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
-
   getSeedProducerCount: async (req, res) => {
     let seedProducerCount = await SeedProducer.count({
     });

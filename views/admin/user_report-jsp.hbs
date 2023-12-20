@@ -54,26 +54,41 @@
 </div>
 
 <script>
-    document.querySelector('form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
+  
 
-        // Get the selected values
-        const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
+     document.getElementById("pdf-link").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
 
-        // Update the PDF link with the selected values
-        const pdfLink = document.getElementById('pdf-link');
-        pdfLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Your redirect code here
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
 
-        // Update the EXCEL link with the selected values
-        const excelLink = document.getElementById('excel-link');
-        excelLink.href = `http://nigsims.com:8080/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
 
-        // Trigger the download button
-        document.getElementById('downnload-btn').disabled = false;
-        document.getElementById('downnload-btn').click();
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/User_Report.pdf?Location=${location}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
+
+    });
+    
+     document.getElementById("excel-link").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const fromDate = urlParams.get('from');
+        const toDate = urlParams.get('to');
+
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/User_Report.xlsx?Location=${location}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
+
     });
 </script>

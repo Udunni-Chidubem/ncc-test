@@ -579,9 +579,7 @@ module.exports = {
       offset,
     });
 
-    if (seedProducer) {
-      response = getPagingData(seedProducer, page, limit);
-    }
+    
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
