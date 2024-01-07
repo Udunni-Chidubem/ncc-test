@@ -1397,3 +1397,12 @@ color: #818E9B;
     line-height: 16px;
     letter-spacing: 0.01em;
 }
+
+.upload-btn {
+  height: 50px;
+  color: #fff !important;
+  background-color: #008346 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
+  margin-right: 20px; 
+}
