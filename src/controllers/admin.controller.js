@@ -80,6 +80,7 @@ module.exports = {
         },
         {
           model: User,
+          where: {status: 1}
         },
       ],
       order: [["created_at", "DESC"]],
@@ -88,6 +89,30 @@ module.exports = {
     companies = JSON.stringify(companies);
     return JSON.parse(companies);
   },
+
+  getDeactivatedCompanies: async (req, res) => {
+    let companies = await SeedCompany.findAll({
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          where: {status: 2}
+        },
+      ],
+      order: [["created_at", "DESC"]],
+    });
+
+    companies = JSON.stringify(companies);
+    return JSON.parse(companies);
+  },
+
   getTraders: async (req, res) => {
     let traders = await SeedTrader.findAll({
       include: [

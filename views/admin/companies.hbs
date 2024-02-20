@@ -20,7 +20,7 @@
 						</thead>
 						<tbody>
 							{{#each companies}}
-							{{#if (ne this.User.status 2)}}
+							{{!-- {{#if (ne this.User.status 2)}} --}}
 							<tr class="table-theme-secondary">
 								<td>{{increment @index}}</td>
 								<td>{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
@@ -32,7 +32,7 @@
 									</a>
 								</td>
 							</tr>
-							{{/if}}
+							{{!-- {{/if}} --}}
 							{{/each}}
 						</tbody>
 					</table>
