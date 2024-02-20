@@ -49,11 +49,11 @@ module.exports = (sequelize, DataTypes) => {
     living_status: DataTypes.STRING,
     created_at: {
       type: DataTypes.DATE,
-      defaultValue: new Date()
+      defaultValue: new Date(new Date().getTime() + (1 * 60 * 60 * 1000))
     },
     updated_at: {
       type: DataTypes.DATE,
-      defaultValue: new Date()
+      defaultValue: new Date(new Date().getTime() + (1 * 60 * 60 * 1000))
     }
   }, {
     underscored : true,
