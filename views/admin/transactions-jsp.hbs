@@ -60,6 +60,21 @@
             <a href="#" id="pdf-link" class="dropdown-item">PDF</a>
             <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
         </div>
+        <div class="d-flex flex-row justify-content-end">
+            <div class="dropdown show ">
+                <a class="btn btn-primary btnsearch dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Download Report
+                </a>
+
+                <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
+                    <button href="#" id="pdfbtn" class="dropdown-item btn">PDF</button>
+                    <button href="#" id="xlsxbtn" class="dropdown-item btn">EXCEL</button>
+                    <button href="#" id="csvbtn" class="dropdown-item btn">CSV</button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btnsearch">Generate</button>
+        </div>
 </div>
 </form>
 </div>
@@ -68,26 +83,5 @@
 </div>
 
 <script>
-
-    document.querySelector('form').addEventListener('submit', function () {
-        event.preventDefault(); // Prevent form submission
-
-        // Get the selected values
-        const location = document.getElementById('Location').value;
-        const product = document.getElementById('Product').value;
-        const status = document.getElementById('Status').value;
-        const fromDate = document.getElementById('from').value;
-        const toDate = document.getElementById('to').value;
-        // Update the PDF link with the selected values
-        const pdfLink = document.getElementById('pdf-link');
-        pdfLink.href = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
-
-        // Update the EXCEL link with the selected values
-        const excelLink = document.getElementById('excel-link');
-        excelLink.href = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
-
-        // Trigger the download button
-        document.getElementById('downnload-btn').disabled = false;
-        document.getElementById('downnload-btn').click();
-    });
+ 
 </script>

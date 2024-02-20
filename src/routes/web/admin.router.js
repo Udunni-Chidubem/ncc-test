@@ -271,7 +271,7 @@ adminRouter.get("/users/deactivated", async (req, res) => {
   let user = await req.user;
   let farmers = await adminController.getFarmers(req, res);
   let traders = await adminController.getTraders(req, res);
-  let companies = await adminController.getCompanies(req, res);
+  let companies = await adminController.getDeactivatedCompanies(req, res);
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
 
