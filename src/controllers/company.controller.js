@@ -321,6 +321,7 @@ module.exports = {
     chartamount = JSON.parse(JSON.stringify(chartamount));
     return chartamount;
   },
+  
   getOrder: async (transaction_id, user_id, company_id) => {
     // const user = await req.user
     let farmer = null,
@@ -383,6 +384,7 @@ module.exports = {
     orderStatus = JSON.parse(JSON.stringify(orderStatus));
     return { order, farmer, orderStatus };
   },
+
   getOrderCount: async (company_id) => {
     let orderCount = await Orders.count(
       {
@@ -584,6 +586,7 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
+
   viewSeedProducer: async (req, res) => {
     const user = await req.user;
     let response = null;
