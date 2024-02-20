@@ -77,7 +77,6 @@
 						</thead>
 						<tbody>
 							{{#each companies}}
-								{{#if (eq this.User.status 2)}}
 								<tr class="table-theme-secondary">
 									<td>{{this.id}}</td>
 									<td colspan="" rowspan="" headers="">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}
@@ -91,7 +90,6 @@
 										</a>
 									</td>
 								</tr>
-								{{/if}}
 							{{/each}}
 						</tbody>
 					</table>
