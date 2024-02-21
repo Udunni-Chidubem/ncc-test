@@ -249,9 +249,9 @@ module.exports = {
 
     let response, product;
 
-    const { page, size, Search, sorting } = req.query;
+    let { page, size, Search, sorting } = req.query;
     const { limit, offset } = getPagination(page, size);
-
+	size=100;
     if ((Search != null) & (sorting == null)) {
       //fetch data based on Search ONLY
 

@@ -97,7 +97,7 @@
         const fromDate = urlParams.get('from');
         const toDate = urlParams.get('to');
 
-        const url = `http://reports.pres.inecnigeria.org:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        const url = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         window.open(url, '_blank')
 
@@ -117,7 +117,7 @@
         const fromDate = urlParams.get('from');
         const toDate = urlParams.get('to');
 
-        const url = `http://reports.pres.inecnigeria.org:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        const url = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         window.open(url, '_blank')
 
@@ -137,7 +137,7 @@
         const toDate = urlParams.get('to');
 
 
-        const url = `http://reports.pres.inecnigeria.org:8081/jasperserver/rest_v2/reports/reports/Online_transaction.csv?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        const url = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.csv?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         window.open(url, '_blank')
 
@@ -154,11 +154,11 @@
         const toDate = document.getElementById('to').value;
         // Update the PDF link with the selected values
         const pdfLink = document.getElementById('pdf-link');
-        pdfLink.href = `http://reports.pres.inecnigeria.org:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        pdfLink.href = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.pdf?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         // Update the EXCEL link with the selected values
         const excelLink = document.getElementById('excel-link');
-        excelLink.href = `http://reports.pres.inecnigeria.org:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
+        excelLink.href = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Online_transaction.xlsx?Location=${location}&Product=${product}&Status=${status}&from=${fromDate}&to=${toDate}&j_username=jasperadmin&j_password=jasperadmin`;
 
         // Trigger the download button
         document.getElementById('downnload-btn').disabled = false;
