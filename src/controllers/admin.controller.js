@@ -103,7 +103,7 @@ module.exports = {
         },
         {
           model: User,
-          where: {status: 2}
+          where: {status: 0}
         },
       ],
       order: [["created_at", "DESC"]],
