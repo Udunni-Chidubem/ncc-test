@@ -25,6 +25,26 @@
     {
       "id": "G",
       "name": "Groundnut"
+    },
+    {
+      "id": "ML",
+      "name": "Millet"
+    },
+    {
+      "id": "S",
+      "name": "Sorgum"
+    },
+    {
+      "id": "SB",
+      "name": "Soyabean"
+    },
+    {
+      "id": "W",
+      "name": "Wheat"
+    },
+    {
+      "id": "SS",
+      "name": "Sesame"
     }
   ],
   "levelEducation": [
