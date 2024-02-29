@@ -122,13 +122,13 @@
                     <div class="form-group col-md-4">
                         <label for="nameOfSeed">Name of Seed Produced <span class="required-feilds">*</span></label>
                         <input type="text" class="form-control" name="nameOfSeed" id="nameOfSeed"
-                            placeholder="Enter name of Seed">
+                            placeholder="Enter name of Seed" required aria-required="true">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                 class="profile_sub">*</span></label>
                         <input type="text" class="form-control" name="varietyOfSeed" id="varietyOfSeed"
-                            placeholder="Enter Variety of Seed">
+                            placeholder="Enter Variety of Seed" required aria-required="true">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="volumeOfSeed" class="input_form">Volume of seed produced (KG)<span
@@ -137,9 +137,10 @@
                             placeholder="e.g: 100" required aria-required="true">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="unit" class="input_form">unit of measure<span class="profile_sub">*</span></label>
+                        <label for="unit" class="input_form">Unit of measure<span class="profile_sub">*</span></label>
                         <div class="input-group">
                             <select class="form-select border-bottom" id="unit" name="unit" required aria-required="true">
+                                <option value="">Select Unit of measure</option>
                                 <option value="kg">Kg</option>
                                 <option value="Metric Ton">Metric Ton</option>
                             </select>
@@ -148,7 +149,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
-                        <input type="date" class="form-control" name="yearProduced" id="yearProduced" required>
+                        <input type="date" class="form-control" name="yearProduced" id="yearProduced" required aria-required="true">
                     </div>
                     <div class="form-group col-md-1 flex-end">
                         <div class="col col_sma add_class" style="width: 30px; margin-top:17px">
