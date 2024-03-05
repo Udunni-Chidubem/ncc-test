@@ -2540,7 +2540,7 @@ input[type="number"] {
   .sidebar_arrow {
     order: -1;
   }
-}
+
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
   .s_chart{
@@ -2981,7 +2981,7 @@ input[type="number"] {
   .sidebar_arrow {
     order: -1;
   }
-}
+
 
 .v_bt {
   width: 21px !important;
@@ -3247,4 +3247,29 @@ background: #ccc;
 border: 1px solid black;
 text-align: center;
 padding: 2px;
+}
+
+.add-btn-theme {
+  width: max-content !important;
+  height: 50px;
+  color: #fff !important;
+  background-color:  #008346 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
+}
+.add-btn-theme:hover {
+  color: #fff;
+  background: #008341;
+  border-color: #008346;
+}
+.add-btn-theme.focus,
+.add-btn-theme:focus {
+  box-shadow: 0 0 0 0.2rem rgb(0, 159.38, 38.848, 0.5
+  );
+}
+
+.add-seed-div{
+  display: flow;
+  text-align: end;
+  margin-top: 21px;
 }

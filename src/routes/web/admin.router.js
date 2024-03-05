@@ -36,9 +36,6 @@ adminRouter.get("/dashboard", async (req, res) => {
   let offlineCount = await adminController.getOfflineTransactionCount(req, res);
   let onlineCount = await adminController.getOnlineTransactionCount(req, res);
 
-  console.log(user_role.Role.role_name);
-  console.log(onlineCount[0].count);
-
   res.render("admin/dashboard", {
     layout: "admin-dashboard",
     title: "Dashboard",
@@ -82,6 +79,7 @@ adminRouter.get("/users/create", async (req, res) => {
     user_role: user_role.Role.role_name,
   });
 });
+
 adminRouter.post("/users/create", async (req, res) => {
   let resp = await adminController.createUser(req, res);
   if (!resp.error) {
@@ -90,6 +88,7 @@ adminRouter.post("/users/create", async (req, res) => {
     res.redirect("/admin/users/create");
   }
 });
+
 adminRouter.get("/messages", async (req, res) => {
   let user = JSON.parse(JSON.stringify(await req.user));
   let roles = await adminController.getNascAdminRoles(req, res);
@@ -145,7 +144,6 @@ adminRouter.get("/view_message/:user_id", async (req, res) => {
   let getuserrole = await adminController.getuserrole(req, to_userid);
   let role_id = getuserrole.messages.UserRole.Role.role_name;
   let getuserdata = await adminController.getuserdata(role_id, to_userid);
-  console.log(getuserdata);
 
   let user_id = user.id;
 
@@ -161,6 +159,7 @@ adminRouter.get("/view_message/:user_id", async (req, res) => {
     role_id,
   });
 });
+
 adminRouter.get("/view_messages/:user_id", async (req, res) => {
   let user = await req.user;
   let roles = await adminController.getNascAdminRoles(req, res);
@@ -182,18 +181,21 @@ adminRouter.get("/view_messages/:user_id", async (req, res) => {
     })
     .status(200);
 });
+
 adminRouter.post("/message", async (req, res) => {
   let user = await req.user;
   let user_id = user.id;
   let response = await adminController.message(req, user_id);
   res.json({ message: response }).status(200);
 });
+
 adminRouter.get("/getmessagescount", async (req, res) => {
   let user = await req.user;
   let getmessagescount = await adminController.getmessagescount(req, res);
   getmessagescount = getmessagescount.length;
   res.json({ message: getmessagescount }).status(200);
 });
+
 adminRouter.get("/users", async (req, res) => {
   let user = await req.user;
   let farmers = await adminController.getFarmers(req, res);
@@ -241,7 +243,6 @@ adminRouter.get("/products/:id", async (req, res) => {
   let isVerified = await utils.isVerified(user);
   let product = await adminController.viewProduct(req, res);
   let user_role = await adminController.getUserRole(req, res);
-  console.log(product);
 
   res.render("admin/view-product", {
     layout: "admin-dashboard",
@@ -323,6 +324,7 @@ adminRouter.get("/users/:id", async (req, res) => {
     user_role: user_role.Role.role_name,
   });
 });
+
 adminRouter.get("/products/approval/:id/:status", async (req, res) => {
   let data = { status: req.params.status, updated_at: now() };
   let id = req.params.id;
@@ -331,7 +333,6 @@ adminRouter.get("/products/approval/:id/:status", async (req, res) => {
 });
 
 adminRouter.post("/products/approval", async (req, res) => {
-  console.log(req.body);
   let data = {
     status: req.body.status,
     reason: req.body.rejectionReason,
@@ -561,6 +562,49 @@ adminRouter.get("/transaction-resolution", async (req, res) => {
 adminRouter.post("/knowledge-base", async (req, res) => {
   adminController.createKnowledgeBase(req, res);
   res.redirect("back");
+});
+
+adminRouter.get("/seed-producers", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+
+  let seedProducer = await adminController.listSeedProducers(req, res);
+  let paginate;
+  if (seedProducer) {
+    paginate = { page: req.query.page || 1, pageCount: seedProducer.totalPages };
+  }
+  res.render("admin/seed-producer-list", {
+    layout: "admin-dashboard",
+    seedProducer,
+    pagination: paginate,
+    title: "Seed Producers",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name
+  });
+});
+
+adminRouter.get("/seed-producer/:id", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+  let seedProducer = await adminController.viewSeedProducer(req, res);
+  let seedsProduced = await adminController.getSeedProduced(req, res)
+  let states = await siteController.getStates();
+
+  res.render("admin/view-seed-producer", {
+    layout: "admin-dashboard",
+    title: "Seed Producers",
+    sub_title: "Seed Producer",
+    prev_link: "/admin/seed-producer-list",
+    seedProducer,
+    states: states,
+    seedsProduced,
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name
+  });
 });
 
 module.exports = adminRouter;

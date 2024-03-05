@@ -14,8 +14,9 @@ const {
   TransactionCarts,
   Cart,
   Farmer,
-  Banks,
+  SeedProducerSeed,
   Salesheets,
+  SeedProducer
 } = db;
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
@@ -295,10 +296,6 @@ module.exports = {
       " and status is not null GROUP BY status";
 
     let totalsales = await db.rest.query(sql, { type: QueryTypes.SELECT });
-    // console.log(totalsales)
-    // console.log(sql)
-    // console.log(company_id)
-    // console.log('company_id')
     return totalsales;
   },
   getProductOrders: async (req, product) => {
@@ -515,4 +512,130 @@ module.exports = {
     });
     return JSON.parse(JSON.stringify(printSheet));
   },
+
+  createSeedProducer: async (req, res) => {
+    const transaction = await db.rest.transaction();
+    const user = await req.user;
+    try {
+      let seedProducer = await SeedProducer.create(
+        {
+          full_name: req.body.fullName,
+          phone_no: req.body.phone,
+          certified: req.body.certified,
+          // name_of_seed: req.body.nameOfSeed,
+          // variety_of_seed: req.body.varietyOfSeed,
+          // volume_of_seed: req.body.volumeOfSeed,
+          gender: req.body.gender,
+          age_range: req.body.age_range,
+          living_status: req.body.living_status,
+          user_id: user.id,
+          state_id: req.body.state_id,
+          lg_id: req.body.lg_id,
+          status: 1,
+        },
+        { transaction: transaction }
+      );
+
+      await Promise.all(req.body.seeds.map(e=>{
+        return SeedProducerSeed.create(
+          {...e, producer_id:seedProducer.id},   
+          { transaction: transaction }
+        )}))
+      // await SeedProducerSeed.bulkCreate(req.body.seeds);
+      transaction.commit();
+      return seedProducer;
+    } catch (e) {
+      transaction.rollback();
+      console.log(e);
+      return e;
+    }
+  },
+
+  listSeedProducers: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seedProducer = await SeedProducer.findAndCountAll({
+      where: { user_id: user.id },
+      order: [["id", "DESC"]],
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: SeedProducerSeed,
+        }
+      ],
+      // raw: true,
+      limit,
+      offset,
+    });
+
+    if (seedProducer) {
+      response = getPagingData(seedProducer, page, limit);
+    }
+    response = JSON.parse(JSON.stringify(seedProducer));
+    return response;
+  },
+  viewSeedProducer: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const seedProducer = await SeedProducer.findOne({
+      where: { user_id: user.id, id: req.params.id },
+      raw: true,
+    });
+
+    if (seedProducer) {
+      response = seedProducer;
+    }
+
+    return response;
+  },
+
+  getSeedProduced: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seeds = await SeedProducerSeed.findAndCountAll({
+      where: { producer_id: req.params.id },
+      order: [["id", "DESC"]],
+      // raw: true,
+      limit,
+      offset,
+    });
+
+    if (seeds) {
+      response = getPagingData(seeds, page, limit);
+    }
+    response = JSON.parse(JSON.stringify(seeds));
+    return response;
+  },
+
+  createSeedProducerSeed: async(data) => {
+    try {
+      console.log("seeds", data)
+      let seed = await SeedProducerSeed.create({
+        producer_id: data.producer_id,
+        name_of_seed: data.name_of_seed,
+        variety_of_seed: data.variety_of_seed,
+        volume_of_seed: data.volume_of_seed,
+        unit: data.unit
+      });
+      return JSON.parse(JSON.stringify(seed));
+    } catch (e) {
+      console.log(e)
+    }
+  }
 };

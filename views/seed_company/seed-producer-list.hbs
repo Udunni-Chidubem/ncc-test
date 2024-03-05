@@ -1,0 +1,66 @@
+<!-- Content Wrapper START -->
+<div class="main-content">
+    <div class="container">
+        <div class="row  ">
+            <div class="col-12   ">
+                <a href="seed-producers/create" class="btn create_p mb-2  float_end ">
+                    <span><i class=" fa fa-solid fa-plus"></i></span> Create Seed Producer
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card table-responsives table_t_info p-3">
+        <table class="table con t_info  table-borderless" id="seedProducers">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Seed Produced</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+
+
+            <tbody class="t_info_body products-list-table">
+                {{#each seedProducer.rows}}
+                <tr class="t_info_row1">
+                    <th scope="row">{{increment @index}}</th>
+                    <td> {{full_name}}</td>
+                    <td>{{SeedProducerSeeds.[0].name_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
+                    <td>{{SeedProducerSeeds.[0].volume_of_seed}} {{SeedProducerSeeds.[0].unit}}</td>
+                    <td>{{LGA.name}}, {{State.name}}</td>
+                    <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                    <td><a href="#">
+                            <div class="dropdown d_t">
+                                <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Actions
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item border-0 border-bottom"
+                                            href="/seed-company/seed-producer/{{id}}">View</a></li>
+                                    <li><a class="dropdown-item border-0 border-bottom"
+                                            href="/seed-company/deactivate-seed-producer">Deactivate</a></li>
+                                </ul>
+                            </div>
+                        </a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#seedProducers').DataTable({
+        });
+    })
+</script>

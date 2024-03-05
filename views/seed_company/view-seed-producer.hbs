@@ -1,0 +1,333 @@
+<div class="container py-5">
+    {{#if seedProducer }}
+    <div class="card card_prod card_home">
+        <div class="card-body">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control" name="fullName" id="fullName"
+                            value="{{seedProducer.full_name}}" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" class="form-control" name="phone" id="phone" value="{{seedProducer.phone_no}}"
+                            disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="gender">Gender</label>
+                        <select name="gender" required class="form-select border-0 border-bottom gender" id="gender"
+                            data-gender="{{ seedProducer.gender }}" disabled>
+                            <option value="">Select Option</option>
+                            {{seedProducer.gender}}
+                        </select>
+                    </div>
+                     <div class="form-group col-md-4">
+                        <label for="age_range" class="input_form">Age Range </label>
+                        <div class="input-group input-group-sm mb-3">
+                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom" data-val="{{ seedProducer.age_range }}" disabled>
+                                <option value="">Select Age Range</option>
+                                <option value="15-19">15-19</option>
+                                <option value="20-30">20-30</option>
+                                <option value="31-40">31-40</option>
+                                <option value="41-50">41-50</option>
+                                <option value="51 and above">51 and above</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="living_status" class="input_form">Current Living Status</label>
+                        <div class="input-group input-group-sm mb-3">
+
+                            <select class="form-select border-0 border-bottom"
+                                id="living_status" name="living_status" data-val="{{ seedProducer.living_status }}" disabled>
+                                <option value="">Select One</option>
+                                <option value="IDP">Internally Displaced Person </option>
+                                <option value="Host">Indigene of the State</option>
+                                <option value="Returnee">Returnee</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="certified">Certified Seed Producer</label>
+                        <select name="certified" id="certified" class="form-select border-bottom "
+                            data-certified="{{seedProducer.certified}}" disabled>
+                            <option value="">Select an Option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="state" class="input_form">Seed Producer State <span
+                                class="profile_sub">*</span></label>
+                        <div class="input-group">
+                            <select name="state_id" class="form-select  border-bottom states " required id="state"
+                                data-state="{{seedProducer.state_id}}" disabled>
+                                <option value="">Select State </option>
+                                {{#each states}}
+                                <option value="{{this.id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="lga" class="input_form">Seed Producer LGA <span class="profile_sub">*</span></label>
+                        <div class="input-group">
+                            <select disabled class="form-select border-bottom" id="lgas" name="lg_id"
+                                data-lga="{{seedProducer.lg_id}}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <hr>
+
+        <div class="float-end">
+            <div class="float-end m-2 mb-3">
+                <button type="button" class="btn btn-theme float-right submitBtn" id="edit"><i class="fa fa-pencil"></i>
+                    Edit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    {{/if}}
+
+
+    <div class="add-seed-div">
+        <button type="button" class="btn add-btn-theme submitBtn" data-bs-toggle="modal" data-bs-target="#newSeed"
+            data-backdrop="false">
+            <i class="fa fa-plus"></i>
+            Add New Seed
+        </button>
+    </div>
+
+
+    <div class="card table-responsives table_t_info mt-2 p-3">
+        <table class="table con t_info  table-borderless" id="seedProduced">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Seed Produced</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Date Created</th>
+                </tr>
+            </thead>
+
+
+            <tbody class="t_info_body products-list-table">
+                {{#each seedsProduced.rows}}
+                <tr class="t_info_row1">
+                    <th scope="row">{{increment @index}}</th>
+                    <td>{{name_of_seed}}</td>
+                    <td>{{variety_of_seed}}</td>
+                    <td>{{volume_of_seed}} {{unit}}</td>
+                    <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="newSeed" tabindex="-1" role="dialog" aria-labelledby="newSeedTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Add New Seed</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        <div class="form seeds">
+                            <div class="form-group">
+                                <label for="nameOfSeed">Name of Seed Produced <span
+                                        class="required-feilds">*</span></label>
+                                <input type="text" class="form-control seed_name" name="nameOfSeed" id="nameOfSeed"
+                                    placeholder="Enter name of Seed">
+                            </div>
+                            <div class="form-group">
+                                <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
+                                        class="profile_sub">*</span></label>
+                                <input type="text" class="form-control variety" name="varietyOfSeed" id="varietyOfSeed"
+                                    placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
+                                    id="varietyOfSeed" placeholder="Enter Variety of Seed">
+                            </div>
+                            <div class="form-group">
+                                <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
+                                        class="profile_sub">*</span></label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="text" required id="volumeOfSeed" name="volumeOfSeed"
+                                            class="form-control volumn" aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-sm" />
+                                    </div>
+                                    <div class="input-group-append">
+                                        <select class="form-select unit" id="unit" name="unit" required>
+                                            <option selected>Choose...</option>
+                                            <option value="kg">Kg</option>
+                                            <option value="Metric Ton">Metric Ton</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-theme float-end submitBtn" onclick="saveSeed()">
+                            Submit</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let certified = $('#certified').data('certified')
+            let state = $('#state').data('state')
+            let age = $('#age_range').data('val')
+            let livingStatus = $('#living_status').data('val')
+
+
+            if (certified != null) {
+                $('#certified').val(certified)
+            }
+            
+            if (age != null) {
+                $('#age_range').val(age)
+            }
+            if (livingStatus != null) {
+                $('#living_status').val(livingStatus)
+            }
+
+            const getDefaultLgas = (state_id) => {
+                let url = window.location.origin + '/api/base/lgas/' + state_id
+                fetch(url).then(r => r.json())
+                    .then(r => {
+                        let selected, Options
+                        r.forEach(e => {
+                            Options += '<option value="' + e.id + '">' + e.name + '</option>'
+                        })
+                        document.querySelector('#lgas').innerHTML = Options
+
+                        $('#lgas').val(lga)
+                    }
+                    ).catch(e => {
+                        console.log(e)
+                    })
+            }
+
+
+
+            if (state != null) {
+                $('#state').val(state)
+
+                getDefaultLgas(state)
+            }
+
+            let gender = $('#gender').data('gender')
+            $('.gender').val(gender)
+
+            if (gender != null) {
+                $('.gender').val(gender)
+            }
+
+            document.querySelector('#state').addEventListener('change', function () {
+                let url = window.location.origin + '/api/base/lgas/' + this.value
+                fetch(url).then(r => r.json())
+                    .then(r => {
+                        let Options = '<option value="">Select LGA</option>'
+                        r.forEach(e => {
+                            Options += '<option value="' + e.id + '">' + e.name + '</option>'
+                        })
+                        document.querySelector('#lgas').innerHTML = Options
+                    }
+                    ).catch(e => {
+                        //console.log(e)
+                    })
+            })
+
+            $("#edit").click(function () {
+                var inputs = document.querySelectorAll("input");
+                inputs.forEach(function (input) {
+                    input.removeAttribute("disabled");
+                });
+            })
+        })
+
+        $(document).ready(function () {
+            $('#newSeed').appendTo('body');
+
+            $('#seedProduced').DataTable({
+            });
+        })
+
+        function saveSeed() {
+            let seed = document.querySelector('.seed_name').value
+            let variety = document.querySelector('.variety').value
+            let volumn = document.querySelector('.volumn').value
+            let unit = document.querySelector('.unit').value
+            let prod_id = document.querySelector('.prod_id').value
+
+            let url = window.location.origin + '/seed-company/seed-producer-seed/create'
+
+
+            console.log("data  ", seed, variety, volumn, unit)
+            console.log("idd", prod_id)
+
+            let form = new FormData()
+            form.append('seed', seed)
+            form.append('variety', variety)
+            form.append('volumn', volumn)
+            form.append('unit', unit)
+            form.append('prod_id', prod_id)
+
+            fetch(url, {
+                method: 'POST',
+                body: form
+            }).then(r => r.json())
+                .then(r => {
+                    console.log("response", r)
+                    alert(r.message)
+                    window.location.reload()
+                })
+        }
+
+        let url =  window.location.origin+'/api/base/get-droplist'
+
+        fetch(url,{})
+          .then(response => response.json())
+          .then(response => {
+            if(response.statusCode === 200){
+              
+                let gender, len, i, farm_produce, level
+                gender = response.data.gender
+
+                len = gender.length
+                var ele = document.getElementById('gender');
+
+                
+                for(i=0; i < len; i++){
+                    ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
+                }
+
+                setTimeout(function(){
+
+                  let gender = $('#gender').data('gender')
+                    if(gender != null){
+                        $('#gender').val(gender)
+                    }
+                }, 1000)
+
+            }
+        }).catch(e => {
+          console.log(e)
+        })
+        
+    </script>

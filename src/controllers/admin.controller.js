@@ -22,6 +22,8 @@ const {
   Message,
   Salesheets,
   KnowledgeBase,
+  SeedProducer,
+  SeedProducerSeed
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -876,6 +878,7 @@ module.exports = {
       farmerFemalelist,
     };
   },
+  
   getMaleSeedTraderCount: async (req, res) => {
     let maleSeedtraderCount = await SeedTrader.count({
       where: { gender: "Male" },
@@ -906,6 +909,7 @@ module.exports = {
     ledger_info = JSON.parse(JSON.stringify(ledger_info));
     return ledger_info;
   },
+
   getAllSaleSheets: async (res, req) => {
     let salesSheet = await Salesheets.findAll({
       include: [
@@ -1013,5 +1017,88 @@ module.exports = {
       raw: true,
     });
     return states;
-  }
+  },
+
+  listSeedProducers: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seedProducer = await SeedProducer.findAndCountAll({
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          include:[
+            {
+              model: SeedCompany,
+              attributes: ["name_of_company"],
+            }
+          ],
+          raw: true,
+        },
+        {
+          model: SeedProducerSeed,
+          raw: true
+        },
+      ],
+      order: [["id", "DESC"]],
+      // raw: true,
+      limit,
+      offset,
+    });
+
+    if (seedProducer) {
+      response = getPagingData(seedProducer, page, limit);
+    }
+    response = JSON.parse(JSON.stringify(seedProducer));
+    return response;
+  },
+
+  viewSeedProducer: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const seedProducer = await SeedProducer.findOne({
+      where: { id: req.params.id },
+      raw: true,
+    });
+
+    if (seedProducer) {
+      response = seedProducer;
+    }
+
+    return response;
+  },
+
+  getSeedProduced: async (req, res) => {
+    const user = await req.user;
+    let response = null;
+
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
+    const seeds = await SeedProducerSeed.findAndCountAll({
+      where: { producer_id: req.params.id },
+      order: [["id", "DESC"]],
+      // raw: true,
+      limit,
+      offset,
+    });
+
+    if (seeds) {
+      response = getPagingData(seeds, page, limit);
+    }
+    response = JSON.parse(JSON.stringify(seeds));
+    return response;
+  },
 };
