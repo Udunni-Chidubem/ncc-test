@@ -29,6 +29,7 @@ const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
 const { now } = require("moment");
 const { query } = require("express");
+const { isValidPhoneNumber } = require("../helpers/form.helper");
 
 module.exports = {
   getNascAdminRoles: async (req, res) => {
@@ -206,7 +207,7 @@ module.exports = {
 
     if (singleCompany) {
       company = JSON.parse(JSON.stringify(singleCompany));
-      console.log(singleCompany.toJSON());
+      // console.log(singleCompany.toJSON());
     }
     /* Find Seed Company - Ends */
     return company;
@@ -250,7 +251,7 @@ module.exports = {
 
     if (singleTrader) {
       trader = JSON.parse(JSON.stringify(singleTrader));
-      console.log(singleTrader.toJSON());
+      // console.log(singleTrader.toJSON());
     }
     /*Find Seed Trader - Ends */
 
@@ -310,7 +311,7 @@ module.exports = {
     });
 
     balance = balance;
-    console.log(balance);
+    // console.log(balance);
     return balance;
   },
   viewProduct: async (req, res) => {
@@ -437,7 +438,7 @@ module.exports = {
 
     farmer = JSON.parse(JSON.stringify(farmer));
     orderStatus = JSON.parse(JSON.stringify(orderStatus));
-    console.log(order);
+    // console.log(order);
     return { order, farmer, orderStatus };
   },
   updadeOrders: async (order_id, data) => {
@@ -511,7 +512,7 @@ module.exports = {
         ],
       });
       admin_messages = JSON.parse(JSON.stringify(admin_messages));
-      console.log(admin_messages);
+      // console.log(admin_messages);
       return admin_messages;
     } catch (e) {
       console.log(e);
@@ -553,7 +554,7 @@ module.exports = {
         ],
       });
       admin_messages = JSON.parse(JSON.stringify(admin_messages));
-      console.log(admin_messages);
+      // console.log(admin_messages);
       return admin_messages;
     } catch (e) {
       console.log(e);
@@ -561,7 +562,7 @@ module.exports = {
     }
   },
   updateMessagestatus: async (req, to_userid) => {
-    console.log(to_userid);
+    // console.log(to_userid);
     try {
       let status = Message.update(
         { status: "0" },
@@ -792,7 +793,7 @@ module.exports = {
         req.query.ageselect +
         "')";
     }
-    console.log("the sql is", sql);
+    // console.log("the sql is", sql);
 
     let users = await db.rest.query(sql, {
       nest: true,
@@ -802,7 +803,7 @@ module.exports = {
     states = JSON.parse(JSON.stringify(states));
     //ageRange = Json.parse(JSON.stringify(ageRange))
     // console.log(states)
-    console.log(users);
+    // console.log(users);
     return { users, states };
   },
 
@@ -842,7 +843,7 @@ module.exports = {
 
     transaction = JSON.parse(JSON.stringify(transaction));
 
-    console.log(transaction);
+    // console.log(transaction);
     return transaction;
   },
 
@@ -850,14 +851,14 @@ module.exports = {
     let sql = "SELECT count(id) as count from salesheets";
     let offlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
 
-    console.log(offlineCount);
+    // console.log(offlineCount);
     return offlineCount;
   },
 
   getOnlineTransactionCount: async (req, res) => {
     let sql = "SELECT count(id) as count from transaction_log";
     let onlineCount = await db.rest.query(sql, { type: QueryTypes.SELECT });
-    console.log(onlineCount);
+    // console.log(onlineCount);
     return onlineCount;
   },
 
@@ -935,7 +936,7 @@ module.exports = {
       ],
     });
     sales = JSON.parse(JSON.stringify(salesSheet));
-    console.log(sales);
+    // console.log(sales);
     return sales;
   },
 
@@ -978,14 +979,14 @@ module.exports = {
 
   createKnowledgeBase: async (req, res) => {
     try {
-      console.log(req.body);
+      // console.log(req.body);
       let knowledgeBase = await KnowledgeBase.create({
         name: req.body.fileName,
         description: req.body.description,
       });
       let displayImage = req.files.displayImage;
       let displayImageName = displayImage.name.split(".");
-      console.log(displayImageName);
+      // console.log(displayImageName);
       let displayImageFileName =
         req.body.fileName +
         knowledgeBase.id +
@@ -994,7 +995,7 @@ module.exports = {
       displayImage.mv("./public/knowledge_base/images/" + displayImageFileName);
       let pdfFile = req.files.pdfFile;
       pdfFileName = pdfFile.name.split(".");
-      console.log(pdfFileName);
+      // console.log(pdfFileName);
       let pdfFileFileName =
         req.body.fileName +
         knowledgeBase.id +
@@ -1101,4 +1102,49 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
+
+  updateSeedProducer: async (req, res) => {
+    const data = req.body;
+    try{
+      const isValid = isValidPhoneNumber(data.phone_no);
+      if(!isValid){
+        return res.status(200).json({ success: false, msg: `Invalid phone number`, status: 200 });
+      }
+      const response = await SeedProducer.update(
+        {
+          full_name: data.full_name, 
+            phone_no: data.phone_no, 
+            certified: data.certified, 
+            state_id: data.sate_id, 
+            lg_id: data.lg_id, 
+            gender: data.gender, 
+            age_range: data.age_range, 
+            living_status: data.living_status
+        },
+        {
+          where: {id: data.id},
+          fields: [
+            "full_name", 
+            "phone_no", 
+            "certified", 
+            "state_id", 
+            "lg_id", 
+            "gender", 
+            "age_range", 
+            "living_status"
+          ]
+        }
+      );
+      if(response[0] < 1 ){
+        return res.status(200).json({ success: false, msg: `No changes was made to ${data.full_name}'s data`, status: 200 })
+      }
+      return res.status(200).json({ success: true, msg: `${data.full_name}'s data was updated successfully`, status: 200 });
+      
+    }catch(err){
+      console.error(err.message);
+    }
+
+  }
+
+
 };

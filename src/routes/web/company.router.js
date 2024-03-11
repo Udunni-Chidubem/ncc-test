@@ -533,4 +533,10 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
 });
 
 
+companyRouter.patch("/seed-producer/update", async(req, res) => {
+  let response = await companyController.updateSeedProducer(req, res);
+  return response;
+});
+
+
 module.exports = companyRouter;

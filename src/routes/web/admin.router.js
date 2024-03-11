@@ -607,4 +607,12 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
   });
 });
 
+
+adminRouter.patch("/seed-producer/update", async (req, res) => {
+  const response = await adminController.updateSeedProducer(req, res);
+  res.render("admin/view-seed-producer", {
+    message: response
+  })
+})
+
 module.exports = adminRouter;

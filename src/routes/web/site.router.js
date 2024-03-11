@@ -63,7 +63,7 @@ siteRouter.post(
   signupValidation(),
   signUpvalidate,
   (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     let y = siteController.savefarmer(req, res);
     y.then(
       (r) => {
@@ -94,7 +94,7 @@ siteRouter.post(
     failureFlash: true,
   }),
   (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     helpers.redirect(req, res, req.user.UserRole.Role.role_name);
   }
 );
@@ -322,7 +322,7 @@ siteRouter.post("/otp", async (req, res) => {
 
 siteRouter.get("/otp-resend/:phone", async (req, res) => {
   let phone = req.params.phone;
-  console.log(phone);
+  // console.log(phone);
   let otp_instance = siteController.otp(phone);
   res.render("site/otp", {
     form_banner: "Group.png",

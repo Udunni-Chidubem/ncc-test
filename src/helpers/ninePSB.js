@@ -26,6 +26,7 @@ module.exports = {
     return resp;
   },
   validateCustomer: async (data, token) => {
+    console.log(data);
     let resp = await axios.post(
       `${process.env.psb_base_url}account/enquiry`,
       data,

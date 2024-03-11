@@ -11,23 +11,38 @@ module.exports = {
         return token
     },
     psbCustomerValidate: async (req, res) => {
-        let r = req.body 
-        let customerData = {
-            publickey: process.env.psb_publicKey,
-            source: {
-            operation: "account_enquiry",
-            recipient: {
-            accountnumber: r.account_number,
-            bankcode: r.bank_code
+        let r = req.body;
+
+        // console.log(req.body);
+
+        // let customerData = {
+        //     publickey: process.env.psb_publicKey,
+        //     source: {
+        //     operation: "account_enquiry",
+        //     recipient: {
+        //     accountnumber: r.account_number,
+        //     bankcode: r.bank_code
             
-            }
-            },
-            order: {    
-            country: "NG"
+        //     }
+        //     },
+        //     order: {    
+        //     country: "NG"
+        //     }
+        //    }
+
+
+        let customerData = {
+            // publickey: process.env.psb_publicKey,
+            customer: {
+                account: {
+                    number: r.account_number,
+                    bank: r.bank_code
+                }
             }
            }
-        //    console.log(process.env.psb_publicKey);
-        //    return res.send(customerData);
+
+
+
            
         try {
         let token = await psb.generateToken()
