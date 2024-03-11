@@ -1,0 +1,8 @@
+ACCESS_PORT= 5200
+#Database Configuration
+DB_USER=root
+DB_PASSWORD=
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=db_nigsims
+DB_DIALECT=mysql

@@ -7,28 +7,46 @@ require('dotenv').config()
 
 module.exports = {
     generateToken: async () => {
-        let token = await psb.generateToken()
-        // console.log(token.data)
+        let token = await psb.generateToken();
         return token
     },
     psbCustomerValidate: async (req, res) => {
-        let r = req.body
-        let customerData = {
-            publickey: process.env.psb_public_key,
-            source: {
-            operation: "account_enquiry",
-            recipient: {
-            accountnumber: r.account_number,
-            bankcode: r.bank_code
+        let r = req.body;
+
+        // console.log(req.body);
+
+        // let customerData = {
+        //     publickey: process.env.psb_publicKey,
+        //     source: {
+        //     operation: "account_enquiry",
+        //     recipient: {
+        //     accountnumber: r.account_number,
+        //     bankcode: r.bank_code
             
-            }
-            },
-            order: {    
-            country: "NG"
+        //     }
+        //     },
+        //     order: {    
+        //     country: "NG"
+        //     }
+        //    }
+
+
+        let customerData = {
+            // publickey: process.env.psb_publicKey,
+            customer: {
+                account: {
+                    number: r.account_number,
+                    bank: r.bank_code
+                }
             }
            }
+
+
+
+           
         try {
         let token = await psb.generateToken()
+        console.log(token.access_token);
         if(token.code="00"){
             // console.log('customer data', customerData)
             let validation = await psb.validateCustomer(customerData, token.access_token)
@@ -45,7 +63,7 @@ module.exports = {
     otherCustomerValidate: async (req, res) => {
         let r = req.body
         let customerData = {
-            publickey: process.env.psb_public_key,
+            publickey: process.env.psb_publicKey,
             source: {
             operation: "account_enquiry",
             recipient: {
@@ -93,7 +111,7 @@ module.exports = {
         let r = req.body
         let data = {
             
-                publickey: process.env.psb_public_key,
+                publickey: process.env.psb_publicKey,
                  transaction: {
                  reference: uniqid()
                  },
@@ -154,7 +172,7 @@ module.exports = {
         let r = req.body
         let data = {
             
-                publickey: process.env.psb_public_key,
+                publickey: process.env.psb_publicKey,
                  transaction: {
                  reference: uniqid()
                  },

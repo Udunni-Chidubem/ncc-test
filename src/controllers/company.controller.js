@@ -603,6 +603,16 @@ module.exports = {
     return response;
   },
 
+
+  updateSeedProducer: async (req, res) => {
+    const user = await req.user;
+    const payload = req.body;
+    let response = null;
+
+      return req;
+
+  },
+
   getSeedProduced: async (req, res) => {
     const user = await req.user;
     let response = null;
