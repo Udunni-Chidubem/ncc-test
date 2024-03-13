@@ -554,12 +554,12 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    let response = null;
+    // let response = null;
 
-    const { page, size } = req.query;
-    const { limit, offset } = getPagination(page, size);
+    // const { page, size } = req.query;
+    // const { limit, offset } = getPagination(page, size);
 
-    const seedProducer = await SeedProducer.findAndCountAll({
+    const seedProducer = await SeedProducer.findAll({
       where: { user_id: user.id },
       order: [["id", "DESC"]],
       include: [
