@@ -322,7 +322,6 @@ module.exports = {
     chartamount = JSON.parse(JSON.stringify(chartamount));
     return chartamount;
   },
-  
   getOrder: async (transaction_id, user_id, company_id) => {
     // const user = await req.user
     let farmer = null,
@@ -385,7 +384,6 @@ module.exports = {
     orderStatus = JSON.parse(JSON.stringify(orderStatus));
     return { order, farmer, orderStatus };
   },
-
   getOrderCount: async (company_id) => {
     let orderCount = await Orders.count(
       {
@@ -556,14 +554,14 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    // let response = null;
+    let response = null;
 
-    // const { page, size } = req.query;
-    // const { limit, offset } = getPagination(page, size);
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
 
-    const seedProducer = await SeedProducer.findAll({
+    const seedProducer = await SeedProducer.findAndCountAll({
       where: { user_id: user.id },
-      // order: [["id", "DESC"]],
+      order: [["id", "DESC"]],
       include: [
         {
           model: States,
@@ -578,16 +576,16 @@ module.exports = {
         }
       ],
       // raw: true,
-      // limit,
-      // offset,
-      order: [["created_at", "DESC"]],
+      limit,
+      offset,
     });
 
-    
+    if (seedProducer) {
+      response = getPagingData(seedProducer, page, limit);
+    }
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
-
   viewSeedProducer: async (req, res) => {
     const user = await req.user;
     let response = null;
@@ -608,11 +606,20 @@ module.exports = {
     const user = await req.user;
     let response = null;
 
+    const { page, size } = req.query;
+    const { limit, offset } = getPagination(page, size);
+
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
       order: [["id", "DESC"]],
+      // raw: true,
+      limit,
+      offset,
     });
 
+    if (seeds) {
+      response = getPagingData(seeds, page, limit);
+    }
     response = JSON.parse(JSON.stringify(seeds));
     return response;
   },
@@ -625,8 +632,7 @@ module.exports = {
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
-        unit: data.unit,
-        year_produced: data.year_produced
+        unit: data.unit
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
@@ -634,14 +640,51 @@ module.exports = {
     }
   },
 
-  findSeedProducer: async (phone) => {
-    // let response = null;
 
-    const seedProducer = await SeedProducer.findOne({
-      where: { phone_no: phone },
-      raw: true,
-    });
+  /* BINARY SOL */ 
 
-    return seedProducer;
-  },
+  updateSeedProducer: async (req, res) => {
+    const data = req.body;
+    try{
+      const isValid = isValidPhoneNumber(data.phone_no);
+      if(!isValid){
+        return res.status(200).json({ success: false, msg: `Invalid phone number`, status: 200 });
+      }
+      const response = await SeedProducer.update(
+        {
+          full_name: data.full_name, 
+            phone_no: data.phone_no, 
+            certified: data.certified, 
+            state_id: data.sate_id, 
+            lg_id: data.lg_id, 
+            gender: data.gender, 
+            age_range: data.age_range, 
+            living_status: data.living_status
+        },
+        {
+          where: {id: data.id},
+          fields: [
+            "full_name", 
+            "phone_no", 
+            "certified", 
+            "state_id", 
+            "lg_id", 
+            "gender", 
+            "age_range", 
+            "living_status"
+          ]
+        }
+      );
+      if(response[0] < 1 ){
+        return res.status(200).json({ success: false, msg: `No changes was made to ${data.full_name}'s data`, status: 200 })
+      }
+      return res.status(200).json({ success: true, msg: `${data.full_name}'s data was updated successfully`, status: 200 });
+      
+    }catch(err){
+      console.error(err.message);
+    }
+
+  }
+
+  /* BINARY EOL */ 
 };
