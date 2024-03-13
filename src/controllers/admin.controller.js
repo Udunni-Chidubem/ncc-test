@@ -1022,12 +1022,9 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    let response = null;
+    // let response = null;
 
-    const { page, size } = req.query;
-    const { limit, offset } = getPagination(page, size);
-
-    const seedProducer = await SeedProducer.findAndCountAll({
+    const seedProducer = await SeedProducer.findAll({
       include: [
         {
           model: States,
@@ -1052,15 +1049,8 @@ module.exports = {
           raw: true
         },
       ],
-      order: [["id", "DESC"]],
-      // raw: true,
-      limit,
-      offset,
+      order: [["created_at", "DESC"]],
     });
-
-    if (seedProducer) {
-      response = getPagingData(seedProducer, page, limit);
-    }
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
