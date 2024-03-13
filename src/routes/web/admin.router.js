@@ -18,8 +18,7 @@ adminRouter.get("/dashboard", async (req, res) => {
   let isVerified = await utils.isVerified(user);
   let farmerCount = await adminController.getFarmerCount(req, res);
   let companyCount = await adminController.getCompanyCount(req, res);
-  let { activeProduct, inactiveProduct } =
-    await adminController.getProductStatus(req, res);
+  let { activeProduct, inactiveProduct } = await adminController.getProductStatus(req, res);
   let {
     farmerinactivelist,
     farmeractivelist,
