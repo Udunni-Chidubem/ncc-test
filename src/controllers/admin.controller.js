@@ -1099,6 +1099,8 @@ module.exports = {
     // seedProducerCount = seedProducerCount;
     return seedProducerCount;
   },
+  /* BINARY SOL */ 
+
   updateSeedProducer: async (req, res) => {
     const data = req.body;
     try{
@@ -1142,5 +1144,6 @@ module.exports = {
 
   }
 
+  /* BINARY EOL */ 
 
 };

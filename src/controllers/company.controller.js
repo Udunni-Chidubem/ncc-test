@@ -21,6 +21,7 @@ const {
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const bcrypt = require("bcrypt");
+const { isValidPhoneNumber } = require("../helpers/form.helper");
 
 module.exports = {
   updateProfile: async (req, res) => {
@@ -601,16 +602,6 @@ module.exports = {
     }
 
     return response;
-  },
-
-
-  updateSeedProducer: async (req, res) => {
-    const user = await req.user;
-    const payload = req.body;
-    let response = null;
-
-      return req;
-
   },
 
   getSeedProduced: async (req, res) => {

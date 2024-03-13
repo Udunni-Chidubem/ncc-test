@@ -337,13 +337,16 @@ siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
 // siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
 
 siteRouter.post("/payment/9psbAuth", psbRouter.generateToken);
-siteRouter.post("/payment/9psbValidate", psbRouter.psbCustomerValidate);
-siteRouter.post("/payment/otherValidate", psbRouter.otherCustomerValidate);
-siteRouter.get("/payment/getBanks", psbRouter.getBanks);
-siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout);
-siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout);
-siteRouter.get("/payment/payoutStatus/:ref", psbRouter.payoutStatus);
-siteRouter.get("/payment/gatewayAuth", psbRouter.authentication);
+siteRouter.post("/payment/9psb/customer/account-detail", psbRouter.psbGetCustomerAccountDetails);
+siteRouter.post("/payment/9psb/customer/account-balance", psbRouter.psbCustomerAccountBalance);
+
+
+// siteRouter.post("/payment/otherValidate", psbRouter.otherCustomerValidate);
+// siteRouter.get("/payment/getBanks", psbRouter.getBanks);
+// siteRouter.post("/payment/9psbPayout", psbRouter.psbAccountPayout);
+// siteRouter.post("/payment/otherPayout", psbRouter.otherBankPayout);
+// siteRouter.get("/payment/payoutStatus/:ref", psbRouter.payoutStatus);
+// siteRouter.get("/payment/gatewayAuth", psbRouter.authentication);
 
 siteRouter.post("/payment/checkout", async (req, res) => {
   let user = await req.user;

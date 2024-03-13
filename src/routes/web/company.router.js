@@ -529,8 +529,6 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedsProduced = await companyController.getSeedProduced(req, res)
   let states = await siteController.getStates();
   let prod_id = await req.params.id ;
-  console.log("Yello", seedProducer)
-  console.log("seeds ", seedsProduced)
 
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
@@ -545,9 +543,13 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
 });
 
 
-companyRouter.patch("/seed-producer/update", async(req, res) => {
+companyRouter.patch("/seed-producer/:id", async(req, res) => {
+  const id = req.params.id;
   let response = await companyController.updateSeedProducer(req, res);
-  return response;
+  return res.render(`seed-company/seed-producer/${id}`, {
+    message: response
+  });
+
 });
 
 
