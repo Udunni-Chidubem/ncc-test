@@ -21,6 +21,7 @@ const {
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const bcrypt = require("bcrypt");
+const { isValidPhoneNumber } = require("../helpers/form.helper");
 
 module.exports = {
   updateProfile: async (req, res) => {
@@ -601,16 +602,6 @@ module.exports = {
     return response;
   },
 
-
-  updateSeedProducer: async (req, res) => {
-    const user = await req.user;
-    const payload = req.body;
-    let response = null;
-
-      return req;
-
-  },
-
   getSeedProduced: async (req, res) => {
     const user = await req.user;
     let response = null;
@@ -647,5 +638,53 @@ module.exports = {
     } catch (e) {
       console.log(e)
     }
+  },
+
+
+  /* BINARY SOL */ 
+
+  updateSeedProducer: async (req, res) => {
+    const data = req.body;
+    try{
+      const isValid = isValidPhoneNumber(data.phone_no);
+      if(!isValid){
+        return res.status(200).json({ success: false, msg: `Invalid phone number`, status: 200 });
+      }
+      const response = await SeedProducer.update(
+        {
+          full_name: data.full_name, 
+            phone_no: data.phone_no, 
+            certified: data.certified, 
+            state_id: data.sate_id, 
+            lg_id: data.lg_id, 
+            gender: data.gender, 
+            age_range: data.age_range, 
+            living_status: data.living_status
+        },
+        {
+          where: {id: data.id},
+          fields: [
+            "full_name", 
+            "phone_no", 
+            "certified", 
+            "state_id", 
+            "lg_id", 
+            "gender", 
+            "age_range", 
+            "living_status"
+          ]
+        }
+      );
+      if(response[0] < 1 ){
+        return res.status(200).json({ success: false, msg: `No changes was made to ${data.full_name}'s data`, status: 200 })
+      }
+      return res.status(200).json({ success: true, msg: `${data.full_name}'s data was updated successfully`, status: 200 });
+      
+    }catch(err){
+      console.error(err.message);
+    }
+
   }
+
+  /* BINARY EOL */ 
 };

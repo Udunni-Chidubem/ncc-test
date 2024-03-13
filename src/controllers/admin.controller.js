@@ -1103,6 +1103,8 @@ module.exports = {
     return response;
   },
 
+  /* BINARY SOL */ 
+
   updateSeedProducer: async (req, res) => {
     const data = req.body;
     try{
@@ -1146,5 +1148,6 @@ module.exports = {
 
   }
 
+  /* BINARY EOL */ 
 
 };

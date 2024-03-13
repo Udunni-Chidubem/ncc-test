@@ -256,7 +256,9 @@
                     ).catch(e => {
                         //console.log(e)
                     })
-            })
+            });
+
+            /* BINARY SOL */
 
             $("#edit").click(function () {
 
@@ -264,23 +266,121 @@
 
                 var inputs = document.querySelectorAll("input");
                 inputs.forEach(function (input) {
-                    input.removeAttribute("disabled");
-                    inputState = 'enabled';
+                    input.disabled = false;
+                    inputState = false;
                 });
 
                 var selectInputs = document.querySelectorAll('select');
                 selectInputs.forEach(function (select) {
-                    select.removeAttribute('disabled');
-                    inputState = 'enabled';
+                    select.disabled = false;
+                    inputState=false;
                 });
                 
-                if(inputState == 'enabled'){
+                if(!inputState){
                     this.style.display = 'none';
                     const saveBTN = document.getElementById('save');
                     saveBTN.style.display = "block";
                 }
 
-            })
+            });
+
+
+            $('#save').click(() => {
+            
+                let url = window.location.origin + '/admin/seed-producer/update';
+
+                const editBTN = document.getElementById('edit');
+                const saveBTN = document.getElementById('save');
+                var inputs = document.querySelectorAll("input");
+                var selectInputs = document.querySelectorAll('select');
+
+                let fullName = document.getElementById("fullName").value;
+                let phoneNumber = document.getElementById("phone").value;
+                let gender = document.getElementById("gender").value;
+                let age_range = document.getElementById("age_range").value;
+                let living_status = document.getElementById("living_status").value;
+                let certified = document.getElementById("certified").value;
+                let state = document.getElementById("state").value;
+                let lgas = document.getElementById("lgas").value;
+                
+
+
+                let baseURL = window.location.pathname;
+                const parts = baseURL.split('/');
+                const seedCompanyId = parts[parts.length - 1];
+
+
+                let form = new FormData();
+                form.append("full_name", fullName)
+                form.append("phone_no", phoneNumber)
+                form.append("gender", gender)
+                form.append("age_range", age_range)
+                form.append("living_status", living_status)
+                form.append("certified", certified)
+                form.append("state_id", state)
+                form.append("lg_id", lgas)
+                form.append("id", seedCompanyId);
+                
+                fetch(url, {
+                    method: 'PATCH',
+                    body: form,
+                })
+                .then((res) => {
+                    
+                    if (!res.ok) {
+                        throw new Error(`Request failed with status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    //console.log(data.success);
+                    if(data.success == false){
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        
+                        /* reset inputs and select element states */
+                        inputs.forEach((input) => {
+                            input.disabled = true;
+                        });
+                        
+                        selectInputs.forEach((select) => {
+                            select.disabled = true;
+                        });
+                        
+                        editBTN.style.display = "block";
+                        saveBTN.style.display = "none";
+                        return;
+                    }
+                    if(data.success == true){
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        
+                        /* reset inputs and select element states */
+                        inputs.forEach((input) => {
+                            input.disabled = true;
+                        });
+                        
+                        selectInputs.forEach((select) => {
+                            select.disabled = true;
+                        });
+                        
+                        editBTN.style.display = "block";
+                        saveBTN.style.display = "none";
+                        return;
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+            });
+            /* BINARY EOL */
+
         })
 
         $(document).ready(function () {
@@ -347,82 +447,5 @@
         }).catch(e => {
           console.log(e)
         });
-
-
-        $('#save').click(() => {
-            
-            let url = window.location.origin + '/admin/seed-producer/update';
-
-            const editBTN = document.getElementById('edit');
-            const saveBTN = document.getElementById('save');
-
-            let fullName = document.getElementById("fullName").value;
-            let phoneNumber = document.getElementById("phone").value;
-            let gender = document.getElementById("gender").value;
-            let age_range = document.getElementById("age_range").value;
-            let living_status = document.getElementById("living_status").value;
-            let certified = document.getElementById("certified").value;
-            let state = document.getElementById("state").value;
-            let lgas = document.getElementById("lgas").value;
-            
-
-
-            let baseURL = window.location.pathname;
-            const parts = baseURL.split('/');
-            const seedCompanyId = parts[parts.length - 1];
-
-
-            let form = new FormData();
-            form.append("full_name", fullName)
-            form.append("phone_no", phoneNumber)
-            form.append("gender", gender)
-            form.append("age_range", age_range)
-            form.append("living_status", living_status)
-            form.append("certified", certified)
-            form.append("state_id", state)
-            form.append("lg_id", lgas)
-            form.append("id", seedCompanyId);
-            
-            fetch(url, {
-                method: 'PATCH',
-                body: form,
-            })
-            .then((res) => {
-                
-                if (!res.ok) {
-                    throw new Error(`Request failed with status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((data) => {
-                console.log(data.success);
-                if(data.success == false){
-                    document.getElementById('msg').innerHTML = `
-                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        ${data.msg}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`;
-                    return;
-                }
-                if(data.success == true){
-                    document.getElementById('msg').innerHTML = `
-                    <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                        ${data.msg}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`;
-                    
-                    editBTN.style.display = "block";
-                    saveBTN.style.display = "none";
-                    return;
-                }
-            })
-            .catch((err) => {
-                console.error('Error:', err);
-            });
-
-
-
-        })
-
         
     </script>
