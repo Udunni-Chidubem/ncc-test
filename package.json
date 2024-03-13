@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "lite-server",
     "start": "env NODE_ENV=development nodemon app",
-    "migrate": "npx sequelize-cli db:migrate --url mysql://root:Interra123@127.0.0.1:3306/db_nigsims",
+    "migrate": "npx sequelize-cli db:migrate --url mysql://root:@127.0.0.1:3306/db_nigsims",
     "migration": "npx sequelize-cli migration:create --name add_column_to_sales_sheet_table",
     "model_generate": "npx sequelize-cli model:generate --name ModelName --attributes userid:integer,field2:string,field3:date",
     "seeder": "npx sequelize-cli seed:create --name my-seed-file",
