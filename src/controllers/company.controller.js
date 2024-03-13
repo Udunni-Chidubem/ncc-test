@@ -576,13 +576,9 @@ module.exports = {
         }
       ],
       // raw: true,
-      limit,
-      offset,
+      order: [["created_at", "DESC"]]
     });
 
-    if (seedProducer) {
-      response = getPagingData(seedProducer, page, limit);
-    }
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
