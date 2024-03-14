@@ -31,7 +31,7 @@ const uid = () => {
 
 // Usage. Example, id = khhry2hb7uip12rj2iu
 
-const { seedAdminData } = require("./src/helpers/bootstrapUser");
+// const { seedAdminData } = require("./src/helpers/bootstrapUser");
 
 app.set("view engine", "hbs");
 app.engine(

@@ -3,6 +3,7 @@
     <div class="card card_prod card_home">
         <div class="card-body">
             <form method="POST" action="" enctype="multipart/form-data">
+            <div id="msg"></div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fullName">Full Name</label>
@@ -89,8 +90,12 @@
 
         <div class="float-end">
             <div class="float-end m-2 mb-3">
-                <button type="button" class="btn btn-theme float-right submitBtn" id="edit"><i class="fa fa-pencil"></i>
-                    Edit</button>
+                <button type="button" class="btn btn-theme float-right submitBtn" id="edit">
+                    <i class="fa fa-pencil"></i>Edit
+                </button>
+                <button type="button" class="btn btn-theme float-right submitBtn" id="save" style="display: none;">
+                    <i class="fa fa-save"></i>Save
+                </button>
             </div>
             </form>
         </div>
@@ -259,12 +264,128 @@
                     })
             })
 
+            
+            /* BINARY SOL */
+
             $("#edit").click(function () {
+
+                let inputState;
+
                 var inputs = document.querySelectorAll("input");
                 inputs.forEach(function (input) {
-                    input.removeAttribute("disabled");
+                    input.disabled = false;
+                    inputState = true;
                 });
-            })
+
+                var selectInputs = document.querySelectorAll('select');
+                selectInputs.forEach(function (select) {
+                    select.disabled = false;
+                    inputState = true;
+                });
+                
+                if(inputState){
+                    this.style.display = 'none';
+                    const saveBTN = document.getElementById('save');
+                    saveBTN.style.display = "block";
+                }
+
+            });
+
+            $('#save').click(() => {
+            
+                let baseURL = window.location.pathname;
+                console.log(baseURL);
+
+                const parts = baseURL.split('/');
+                const seedCompanyId = parts[parts.length - 1];
+
+                let url = window.location.origin + baseURL;
+
+                const editBTN = document.getElementById('edit');
+                const saveBTN = document.getElementById('save');
+                var inputs = document.querySelectorAll("input");
+                var selectInputs = document.querySelectorAll('select');
+
+                let fullName = document.getElementById("fullName").value;
+                let phoneNumber = document.getElementById("phone").value;
+                let gender = document.getElementById("gender").value;
+                let age_range = document.getElementById("age_range").value;
+                let living_status = document.getElementById("living_status").value;
+                let certified = document.getElementById("certified").value;
+                let state = document.getElementById("state").value;
+                let lgas = document.getElementById("lgas").value;
+
+                let form = new FormData();
+                form.append("full_name", fullName)
+                form.append("phone_no", phoneNumber)
+                form.append("gender", gender)
+                form.append("age_range", age_range)
+                form.append("living_status", living_status)
+                form.append("certified", certified)
+                form.append("state_id", state)
+                form.append("lg_id", lgas)
+                form.append("id", seedCompanyId);
+                
+                fetch(url, {
+                    method: 'PATCH',
+                    body: form,
+                })
+                .then((res) => {
+                    console.log("Resp: ", res);
+                    if (!res.ok) {
+                        throw new Error(`Request failed with status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log(data.success);
+                    if(data.success == false){
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+
+                        /* reset inputs and select element states */
+                        inputs.forEach((input) => {
+                            input.disabled = true;
+                        });
+                        
+                        selectInputs.forEach((select) => {
+                            select.disabled = true;
+                        });
+                        
+                        editBTN.style.display = "block";
+                        saveBTN.style.display = "none";
+                        return;
+                    }
+                    if(data.success == true){
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        
+                        /* reset inputs and select element states */
+                        inputs.forEach((input) => {
+                            input.disabled = true;
+                        });
+                        
+                        selectInputs.forEach((select) => {
+                            select.disabled = true;
+                        });
+                        
+                        editBTN.style.display = "block";
+                        saveBTN.style.display = "none";
+                        return;
+                    }
+                })
+                .catch((err) => {
+                    console.error('Error:', err);
+                });
+            });
+
+            /* BINARY EOL */
         })
 
         $(document).ready(function () {

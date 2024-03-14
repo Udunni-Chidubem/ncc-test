@@ -9,9 +9,9 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.removeColumn('seedProducer', 'name_of_seed')
-    await queryInterface.removeColumn('seedProducer', 'variety_of_seed')
-    await queryInterface.removeColumn('seedProducer', 'volume_of_seed')
+    // await queryInterface.removeColumn('seedProducer', 'name_of_seed')
+    // await queryInterface.removeColumn('seedProducer', 'variety_of_seed')
+    // await queryInterface.removeColumn('seedProducer', 'volume_of_seed')
     await queryInterface.createTable('seedProducerSeeds', {
       id: {
         allowNull: false,

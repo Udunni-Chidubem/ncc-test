@@ -7,14 +7,11 @@ require("dotenv").config();
 module.exports = {
   generateToken: async () => {
     let tokenData = {
-      publickey: "pubkey2",
-      userinfo: {
-        username: "admin@mail.com",
-        password: "password",
-      },
+      publickey: process.env.psb_publicKey,
+      privatekey: process.env.psb_privateKey
     };
     let resp = await axios.post(
-      `${process.env.psb_base_url}disbursement-api/api/portal/merchant/account/authenticate`,
+      `${process.env.psb_base_url}authenticate`,
       tokenData,
       {
         headers: {
@@ -24,12 +21,12 @@ module.exports = {
         },
       }
     );
-    console.log(resp);
     return resp;
   },
-  validateCustomer: async (data, token) => {
+  getCustomerAccount: async (data, token) => {
+    // This service run-through the customer’s account details.
     let resp = await axios.post(
-      `${process.env.psb_base_url}disbursement-api/api/v1/customer/validate`,
+      `${process.env.psb_base_url}account/enquiry`,
       data,
       {
         headers: {
@@ -41,6 +38,23 @@ module.exports = {
     );
     return resp;
   },
+
+  psbCustomerAccountBalance: async (data, token) => {
+    //console.log(token.code);
+    let resp = await axios.post(
+      `${process.env.psb_base_url}account/balanceenquiry`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return resp;
+},
+
   validateOtherBank: async (data, token) => {
     let resp = await axios.post(
       `${process.env.psb_base_url}disbursement-api/api/v1/customer/validate`,
@@ -56,8 +70,9 @@ module.exports = {
     return resp;
   },
   getAllBanks: async (token) => {
+    // Fetch all available banks for fund transfer
     let resp = await axios.get(
-      `${process.env.psb_base_url}disbursement-api/api/v1/payout/banks`,
+      `${process.env.psb_base_url}transfer/getbanks`,
       {
         headers: {
           "Content-Type": "application/json",

@@ -7,45 +7,71 @@ require('dotenv').config()
 
 module.exports = {
     generateToken: async () => {
-        let token = await psb.generateToken()
-        // console.log(token.data)
+        let token = await psb.generateToken();
         return token
     },
-    psbCustomerValidate: async (req, res) => {
-        let r = req.body
+
+    psbGetCustomerAccountDetails: async (req, res) => {
+        // This service run-through the customer’s account details.
+        let r = req.body;
         let customerData = {
-            publickey: process.env.psb_public_key,
-            source: {
-            operation: "account_enquiry",
-            recipient: {
-            accountnumber: r.account_number,
-            bankcode: r.bank_code
-            
+            customer: {
+                account: {
+                    number: r.account_number,
+                    bank: r.bank_code
+                }
             }
-            },
-            order: {    
-            country: "NG"
-            }
-           }
+        }
         try {
         let token = await psb.generateToken()
         if(token.code="00"){
-            // console.log('customer data', customerData)
-            let validation = await psb.validateCustomer(customerData, token.access_token)
-            console.log(validation)
-                res.send(validation);
+            let detail = await psb.getCustomerAccount(customerData, token.access_token);
+            return res.send(detail);
         }else{
-            res.send(token)
+            return res.send(token);
         }
         } catch (e) {
             console.log(e)
         }
 
     },
+
+    psbCustomerAccountBalance: async (req, res) => {
+        // This service is used to get customer’s account and ledger balance
+        // only work on debit accounts profiled for client
+        
+        const accountNumber = req.body.accountnumber;
+        const customerData = {
+            account: {
+                accountnumber: accountNumber
+            }
+        }
+        try{
+            const token = await psb.generateToken();
+            if(token.code = "00"){
+                const balanceInfo = await psb.psbCustomerAccountBalance(customerData, token.access_token);
+                return res.send(balanceInfo);
+            }else{
+                return res.send(token);
+            }
+        }catch(e){
+            console.error(e.message);
+        }
+        
+    },
+
+
+
+
+
+
+
+
+
     otherCustomerValidate: async (req, res) => {
         let r = req.body
         let customerData = {
-            publickey: process.env.psb_public_key,
+            publickey: process.env.psb_publicKey,
             source: {
             operation: "account_enquiry",
             recipient: {
@@ -61,10 +87,8 @@ module.exports = {
         try {
         let token = await psb.generateToken()
         if(token.code="00"){
-            console.log(customerData)
             let validation = await psb.validateOtherBank(customerData, token.access_token)
-            console.log(validation)
-                res.send(validation);
+            res.send(validation);
         }else{
             res.send(token)
         }
@@ -93,7 +117,7 @@ module.exports = {
         let r = req.body
         let data = {
             
-                publickey: process.env.psb_public_key,
+                publickey: process.env.psb_publicKey,
                  transaction: {
                  reference: uniqid()
                  },
@@ -154,7 +178,7 @@ module.exports = {
         let r = req.body
         let data = {
             
-                publickey: process.env.psb_public_key,
+                publickey: process.env.psb_publicKey,
                  transaction: {
                  reference: uniqid()
                  },
