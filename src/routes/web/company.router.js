@@ -415,12 +415,10 @@ companyRouter.get("/seed-producers/create", async (req, res) => {
   });
 });
 
-companyRouter.post(
-  "/seed-producers/create",
-  async (req, res) => {
-    console.log("bosdy", req.body)
-          let phone = req.body.phone;
+companyRouter.post("/seed-producers/create", async (req, res) => {
+    let phone = req.body.phone;
     let check = await companyController.findSeedProducer(phone)
+    // console.log(check);
     if(check == null){
     
     let seeds=[];

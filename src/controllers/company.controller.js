@@ -639,6 +639,17 @@ module.exports = {
 
   /* BINARY SOL */ 
 
+  findSeedProducer: async (phone) => {
+    const seedProducer = await SeedProducer.findOne({
+      where: { phone_no: phone }
+    });
+    const res = JSON.parse(JSON.stringify(seedProducer));
+    if(res == null){
+      return null;
+    }
+    return false;
+  },
+
   updateSeedProducer: async (req, res) => {
     const data = req.body;
     try{
