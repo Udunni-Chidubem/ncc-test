@@ -11,6 +11,12 @@ module.exports = {
     let response = await axios.get(url);
     return response;
   },
+  
+  SeedProducer: async (Location, Company,from, to) => {
+    let url = `http://192.168.200.203:8081/jasperserver/rest_v2/reports/reports/Seed_Producer.html?Location=${Location}&Company=${Company}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+    let response = await axios.get(url);
+    return response;
+  },
  
   download: async (url) => {
     let respnse = await axios.get(url, {

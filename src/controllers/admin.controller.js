@@ -1142,8 +1142,17 @@ module.exports = {
       console.error(err.message);
     }
 
-  }
-
+  },
+  
   /* BINARY EOL */ 
 
+  getSeedCompanyNames: async (req, res) => {
+    const user = await req.user;
+    const seedCompany = await SeedCompany.findAll({
+      attributes: ["name_of_company"],
+      order: [["name_of_company", "DESC"]],
+    });
+    response = JSON.parse(JSON.stringify(seedCompany));
+    return response;
+  }
 };

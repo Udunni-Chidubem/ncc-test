@@ -1,0 +1,128 @@
+<div class="bg-primary">
+    {{>breadcrumbs}}
+</div>
+
+<br>
+<br>
+
+<div class="card m-3 mt-0 p-2">
+    <form action="" method="get">
+
+        <div class="row">
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Location </label>
+                <select class="form-control" aria-labelledby="" id="Location" name="Location">
+                    <option value="" disabled selected>Select Location</option>
+                    <option value="ALL">ALL</option>
+                    {{#each states}}
+                    <option id=" {{this.id}} " class="dropdown-item">{{this.name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+            
+            <div class="col form-group ">
+                <label for="selectico" class="labelos">Company </label>
+                <select class="form-control" aria-labelledby="" id="company" name="company">
+                    <option value="" disabled selected>Select Company</option>
+                    <option value="ALL">ALL</option>
+                    {{#each companies}}
+                    <option id=" {{this.name_of_company}} " class="dropdown-item">{{this.name_of_company}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">Start Date</label>
+                <input class="form-control" type="date" id="from" name="from">
+            </div>
+
+            <div class="col form-group">
+                <label for="datepic" class="labelos">End Date</label>
+                <input class="form-control" type="date" id="to" name="to">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-end">
+            <div class="dropdown show ">
+                <a class="btn btn-primary btnsearch dropdown-toggle mr-2" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Download Report
+                </a>
+
+                <div class="dropdown-menu download" aria-labelledby="dropdownMenuLink">
+                    <a href="#" id="pdf-link" class="dropdown-item" target="_blank">PDF</a>
+                    <a href="#" id="csv-link" class="dropdown-item" target="_blank">CSV</a>
+                    <a href="#" id="excel-link" class="dropdown-item" target="_blank">EXCEL</a>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btnsearch" style="margin-left: 4px;">Generate</button>
+        </div>
+</div>
+</form>
+</div>
+<div class="card mt-3 m-3">
+    {{{result.body}}}
+</div>
+
+<script>
+  
+
+     document.getElementById("pdf-link").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const company = urlParams.get('Company');
+        const from = urlParams.get('from');
+        const to = urlParams.get('to');
+
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Seed_Producer.pdf?Location=${location}&Company=${company}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
+
+    });
+    
+     document.getElementById("excel-link").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const company = urlParams.get('Company');
+        const from = urlParams.get('from');
+        const to = urlParams.get('to');
+
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Seed_Producer.xlsx?Location=${location}&Company=${company}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
+
+    });
+    
+    document.getElementById("csv-link").addEventListener("click", function (event) {
+        event.preventDefault(); // This will prevent the default behavior (e.g., form submission)
+
+        // Your redirect code here
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Get individual parameter values
+        const location = urlParams.get('Location');
+        const company = urlParams.get('Company');
+        const from = urlParams.get('from');
+        const to = urlParams.get('to');
+
+        const url = `http://131.226.242.203:8081/jasperserver/rest_v2/reports/reports/Seed_Producer.csv?Location=${location}&Company=${company}&from=${from}&to=${to}&j_username=jasperadmin&j_password=jasperadmin`;
+
+        window.open(url, '_blank')
+
+    });
+</script>
