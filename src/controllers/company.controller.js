@@ -598,18 +598,6 @@ module.exports = {
     return response;
   },
 
-  getSeedProducerSeedById: async (seedId, seedCompanyId) => {
-    try{
-      const response = await SeedProducerSeed.findOne({
-        where: { id: seedId, producer_id: seedCompanyId }
-      })
-      return response;
-
-    }catch(e){
-      console.error(e.message);
-    }
-  },
-
   getSeedProduced: async (req, res) => {
     const user = await req.user;
     let response = null;
@@ -650,6 +638,18 @@ module.exports = {
 
 
   /* BINARY SOL */ 
+
+  getSeedProducerSeedById: async (seedId, seedCompanyId) => {
+    try{
+      const response = await SeedProducerSeed.findOne({
+        where: { id: seedId, producer_id: seedCompanyId }
+      })
+      return response;
+
+    }catch(e){
+      console.error(e.message);
+    }
+  },
 
   findSeedProducer: async (phone) => {
     const seedProducer = await SeedProducer.findOne({

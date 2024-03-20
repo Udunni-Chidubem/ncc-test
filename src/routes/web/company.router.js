@@ -569,13 +569,8 @@ companyRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
 });
 
 companyRouter.patch("/seed-update", async(req, res) => {
-  // const id = req.body.producer_id;
   let response = await companyController.updateSeedProducerSeed(req, res);
   return response;
-  // return res.render(`seed-company/seed-producer/${id}`, {
-  //   message: response
-  // });
-
 });
 
 /*

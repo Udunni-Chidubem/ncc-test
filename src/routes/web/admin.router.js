@@ -653,12 +653,31 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
   });
 });
 
+/**
+ * Binary SOL
+ */
 
 adminRouter.patch("/seed-producer/update", async (req, res) => {
   const response = await adminController.updateSeedProducer(req, res);
   res.render("admin/view-seed-producer", {
     message: response
   })
-})
+});
+
+adminRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
+  const seedId = req.params.seedId;
+  const seedCompanyId = req.params.companyId;
+  let seedsProduced = await adminController.getSeedProducerSeedById(seedId, seedCompanyId)
+  return res.status(200).json({data: seedsProduced});
+});
+
+adminRouter.patch("/seed-update", async(req, res) => {
+  let response = await adminController.updateSeedProducerSeed(req, res);
+  return response;
+});
+
+/**
+ * Binary EOL
+ */
 
 module.exports = adminRouter;
