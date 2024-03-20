@@ -3268,6 +3268,24 @@ padding: 2px;
   );
 }
 
+.edit-btn-theme {
+  width: max-content !important;
+  height: 30px;
+  color: #fff !important;
+  background-color:  #008346 !important;
+  border-radius: 8px !important;
+  box-shadow: 3px 3px 5px #1213128c !important;
+}
+.edit-btn-theme:hover {
+  color: #fff;
+  background: #008341;
+  border-color: #008346;
+}
+.edit-btn-theme.focus,
+.edit-btn-theme:focus {
+  box-shadow: 0 0 0 0.2rem rgb(0, 159.38, 38.848, 0.5
+  );
+}
 .add-seed-div{
   display: flow;
   text-align: end;

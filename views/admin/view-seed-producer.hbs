@@ -121,6 +121,7 @@
                     <th scope="col">Variety</th>
                     <th scope="col">Volume</th>
                     <th scope="col">Date Created</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
 
@@ -133,6 +134,13 @@
                     <td>{{variety_of_seed}}</td>
                     <td>{{volume_of_seed}} {{unit}}</td>
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                     <td>
+                        <button type="button" class="btn edit-btn-theme submitBtn" data-bs-toggle="modal" data-bs-target="#editSeed"
+                            data-backdrop="false">
+                            <i class="fa fa-pencil"></i>
+                            Edit Seed
+                        </button>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -141,7 +149,6 @@
 
     <div class="modal fade" id="newSeed" tabindex="-1" role="dialog" aria-labelledby="newSeedTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-
             <div class="modal-content">
                 <div class="modal-header">
                     <h5>Add New Seed</h5>
@@ -191,6 +198,62 @@
         </div>
     </div>
 
+{{!-- Edit Seed --}}
+<div class="modal fade" id="editSeed" tabindex="-1" role="dialog" aria-labelledby="editSeedTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Edit Seed</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        <div class="form seeds">
+                            <div class="form-group">
+                                <label for="nameOfSeed">Name of Seed Produced <span
+                                        class="required-feilds">*</span></label>
+                                <input type="text" class="form-control seed_name" name="nameOfSeed" id="nameOfSeed"
+                                    placeholder="Enter name of Seed">
+                            </div>
+                            <div class="form-group">
+                                <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
+                                        class="profile_sub">*</span></label>
+                                <input type="text" class="form-control variety" name="varietyOfSeed" id="varietyOfSeed"
+                                    placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
+                                    id="varietyOfSeed" placeholder="Enter Variety of Seed">
+                            </div>
+                            <div class="form-group">
+                                <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
+                                        class="profile_sub">*</span></label>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="text" required id="volumeOfSeed" name="volumeOfSeed"
+                                            class="form-control volumn" aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-sm" />
+                                    </div>
+                                    <div class="input-group-append">
+                                        <select class="form-select unit" id="unit" name="unit" required>
+                                            <option selected>Choose...</option>
+                                            <option value="kg">Kg</option>
+                                            <option value="Metric Ton">Metric Ton</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
+                                        <input type="date" class="form-control year_produced" name="yearProduced" id="yearProduced" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-theme float-end submitBtn" onclick="">
+                            Save</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -385,6 +448,7 @@
 
         $(document).ready(function () {
             $('#newSeed').appendTo('body');
+            $('#editSeed').appendTo('body');
 
             $('#seedProduced').DataTable({
             });
