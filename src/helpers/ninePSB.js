@@ -98,8 +98,9 @@ module.exports = {
     return resp;
   },
   otherPayout: async (data, token) => {
+    //  https://baastest.9psb.com.ng/ipaymw-api/v1/merchant/account/transferwithfee
     let resp = await axios.post(
-      `${process.env.psb_base_url}disbursement-api/api/v1/account/payout`,
+      `${process.env.psb_base_url}account/transferwithfee`,
       data,
       {
         headers: {

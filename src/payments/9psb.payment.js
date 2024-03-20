@@ -60,14 +60,6 @@ module.exports = {
         
     },
 
-
-
-
-
-
-
-
-
     otherCustomerValidate: async (req, res) => {
         let r = req.body
         let customerData = {
@@ -175,39 +167,41 @@ module.exports = {
 
     },
     otherBankPayout: async (req, res) => {
-        let r = req.body
+        let r = req.body;
+        const user_id = req.user;
+        console.log(user_id)
+        return;
         let data = {
             
                 publickey: process.env.psb_publicKey,
                  transaction: {
-                 reference: uniqid()
+                    reference: uniqid()
                  },
                  order: {
-                 amount: r.amount,
-                 description: r.description,
-                 reason: r.reason,
-                 currency: "NGN",
-                 country: "NG"
+                    amount: r.amount,
+                    description: r.description,
+                    reason: r.reason,
+                    currency: "NGN",
+                    country: "NG"
                  },
                  source: {
-                 operation:"acct_payout",
+                    operation:"acct_payout",
                  sender: {
-                 name: r.sender_name,
-                 address: r.address,
-                 mobile: r.phone_number,
-                 country: "NG",
-                 idtype: "PASSPORT",
-                 idnumber: "P567839222",
-                 idexpiry: "05-2019"
+                    name: r.sender_name,
+                    address: r.address,
+                    mobile: r.phone_number,
+                    country: "NG",
+                    idtype: "PASSPORT",
+                    idnumber: "P567839222",
+                    idexpiry: "05-2019"
                  },
                  recipient: {
-                 name: r.recipient_name,
-                 address: r.recipient_address,
-                 accountnumber: r.recipient_account,
-                 bankcode: r.bank_code
+                    name: r.recipient_name,
+                    address: r.recipient_address,
+                    accountnumber: r.recipient_account,
+                    bankcode: r.bank_code
                  }
-                 }
-                
+                } 
         }    
         try {
             console.log("payload", data)
