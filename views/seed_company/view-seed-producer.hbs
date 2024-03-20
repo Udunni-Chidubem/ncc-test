@@ -138,7 +138,7 @@
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
                     <td>
                         <button type="button" class="btn edit-btn-theme submitBtn" data-bs-toggle="modal" data-bs-target="#editSeed"
-                            data-backdrop="false">
+                            data-backdrop="false" id="edit-seed" id-data="{{id}}">
                             <i class="fa fa-pencil"></i>
                             Edit Seed
                         </button>
@@ -214,33 +214,36 @@
                     <h5>Edit Seed</h5>
                 </div>
                 <div class="modal-body">
+                    <div id="msg-seed-edit"></div>
                     <form action="" method="POST">
                         <div class="form seeds">
                             <div class="form-group">
                                 <label for="nameOfSeed">Name of Seed Produced <span
                                         class="required-feilds">*</span></label>
-                                <input type="text" class="form-control seed_name" name="nameOfSeed" id="nameOfSeed"
+                                <input type="text" class="form-control seed_name" name="nameOfSeedInput" id="nameOfSeedInput"
                                     placeholder="Enter name of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                         class="profile_sub">*</span></label>
-                                <input type="text" class="form-control variety" name="varietyOfSeed" id="varietyOfSeed"
+                                <input type="text" class="form-control variety" name="varietyOfSeedInput" id="varietyOfSeedInput"
                                     placeholder="Enter Variety of Seed">
                                 <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
-                                    id="varietyOfSeed" placeholder="Enter Variety of Seed">
+                                    id="numberOfSeedInput" placeholder="Enter Variety of Seed">
+                                    <input type="number" class="form-control prod_id hidden" id="seedId"
+                                    id="seedId" placeholder="Enter Variety of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
                                         class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <input type="text" required id="volumeOfSeed" name="volumeOfSeed"
+                                        <input type="text" required id="volumeOfSeedInput" name="volumeOfSeedInput"
                                             class="form-control volumn" aria-label="Sizing example input"
                                             aria-describedby="inputGroup-sizing-sm" />
                                     </div>
                                     <div class="input-group-append">
-                                        <select class="form-select unit" id="unit" name="unit" required>
+                                        <select class="form-select unit" id="unitInput" name="unitInput" required>
                                             <option selected>Choose...</option>
                                             <option value="kg">Kg</option>
                                             <option value="Metric Ton">Metric Ton</option>
@@ -248,13 +251,14 @@
                                     </div>
                                     <div class="input-group-append">
                                         <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
-                                        <input type="date" class="form-control year_produced" name="yearProduced" id="yearProduced" required>
+                                        <input type="date" class="form-control year_produced" name="yearProducedInput" id="yearProducedInput" required>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-theme float-end submitBtn" onclick="">
-                            Save</button>
+                        <button type="button" class="btn btn-theme float-end submitBtn" id="save-updated-seed-data">
+                            Save
+                        </button>
                     </form>
                 </div>
 
@@ -332,6 +336,16 @@
             
             /* BINARY SOL */
 
+
+            function getIdFromCurrentLocationUrlPath(path) {
+                /* trim the current page url and extract the identifier */
+                const parts = path.split('/');
+                const Id = parts[parts.length - 1];
+                return Id
+            }
+
+
+
             $("#edit").click(function () {
 
                 let inputState;
@@ -358,13 +372,14 @@
 
             $('#save').click(() => {
             
-                let baseURL = window.location.pathname;
-                console.log(baseURL);
+                let urlPath = window.location.pathname;
 
-                const parts = baseURL.split('/');
-                const seedCompanyId = parts[parts.length - 1];
+                const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
 
-                let url = window.location.origin + baseURL;
+                /*const parts = baseURL.split('/');
+                const seedCompanyId = parts[parts.length - 1];*/
+
+                let url = window.location.origin + urlPath;
 
                 const editBTN = document.getElementById('edit');
                 const saveBTN = document.getElementById('save');
@@ -450,6 +465,103 @@
                 });
             });
 
+
+            $("#edit-seed").click(() => {
+
+            const urlPath = window.location.pathname;
+            const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
+            const seedId = document.getElementById("edit-seed").getAttribute("id-data");
+
+            //const seedCompanyId = seedId;
+            const url = window.location.origin + `/seed-company/fetch-single-seed/${seedId}/${seedCompanyId}`;
+
+            fetch(url, {
+                method: 'GET'
+            })
+            .then((res) => res.json())
+            .then((res) => {
+
+                const data = res.data;
+
+                const nameOfSeed = document.getElementById('nameOfSeedInput');
+                const varietyOfSeed = document.getElementById('varietyOfSeedInput');
+                const volumeOfSeed = document.getElementById('volumeOfSeedInput');
+                const yearProduced = document.getElementById('yearProducedInput');
+                const unit = document.getElementById('unitInput');
+                const seedId = document.getElementById('seedId');
+
+                if (data) {
+                    
+                    seedId.value = data.id || '';
+                    nameOfSeed.value = data.name_of_seed || '';
+                    varietyOfSeed.value = data.variety_of_seed || '';
+                    volumeOfSeed.value = data.volume_of_seed || '';
+                    yearProduced.value = data.year_produced || '';
+                    unit.value = data.unit || '';
+
+                } else {
+                    console.error('Data is null or undefined');
+                }
+            })
+            .catch((e) => console.log(e));
+        });
+
+
+            $("#save-updated-seed-data").click(() => {
+
+                const form = new FormData();
+
+                const urlPath = window.location.pathname;
+                const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath);
+
+                const url = window.location.origin + `/seed-company/seed-update`;
+
+                const seedId = document.getElementById('seedId').value;
+                const nameOfSeed = document.getElementById('nameOfSeedInput').value;
+                const varietyOfseed = document.getElementById('varietyOfSeedInput').value;
+                const volumeOfseed = document.getElementById('volumeOfSeedInput').value;
+                const yearProduced = document.getElementById('yearProducedInput').value;
+                const unit = document.getElementById('unitInput').value;
+                const producerId = document.getElementById('numberOfSeedInput').value;
+
+                form.append("id", seedId)
+                form.append("name_of_seed", nameOfSeed)
+                form.append("variety_of_seed", varietyOfseed)
+                form.append("volume_of_seed", volumeOfseed)
+                form.append("year_produced", yearProduced)
+                form.append("unit", unit)
+                form.append("producer_id", producerId)
+
+                fetch(url, {
+                    method: "PATCH",
+                    body: form
+                }).then((res) => res.json())
+                .then((res) => {
+                    //console.log("Response: ", res.msg);
+                    const data = res;
+                    if(data.success == true){
+                        
+                        document.getElementById('msg-seed-edit').innerHTML = `
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000)
+                    }else{
+                       document.getElementById('msg-seed-edit').innerHTML = `
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`; 
+                    }
+                })
+                .catch((e) => console.log(e));
+
+            });
+
+
             /* BINARY EOL */
         })
 
@@ -488,8 +600,6 @@
                 body: form
             }).then(r => r.json())
                 .then(r => {
-                    console.log("response", r)
-                    alert(r.message)
                     window.location.reload()
                 })
         }

@@ -530,17 +530,20 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let prod_id = await req.params.id ;
 
   res.render("seed_company/view-seed-producer", {
-    layout: "company-dashboard",
-    title: "Seed Producers",
-    sub_title: "Seed Producer",
-    prev_link: "/seed-company/seed-producers",
-    seedProducer,
-    states: states,
-    seedsProduced,
-    prod_id
+      layout: "company-dashboard",
+      title: "Seed Producers",
+      sub_title: "Seed Producer",
+      prev_link: "/seed-company/seed-producers",
+      seedProducer,
+      states: states,
+      seedsProduced,
+      prod_id
   });
 });
 
+/*
+  Binary SOL
+*/
 
 companyRouter.patch("/seed-producer/:id", async(req, res) => {
   const id = req.params.id;
@@ -553,11 +556,30 @@ companyRouter.patch("/seed-producer/:id", async(req, res) => {
 
 companyRouter.post("/found-withdraw", async (req, res) => {
   let response = await escrowController.getSeedCompanyPayoutDetail(req, res);
-  return;
-  return res.render(``, {
-    message: response
-  })
+  console.log(response);
+  return res.status(200).json(response);
 });
 
+companyRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
+  const seedId = req.params.seedId;
+  const seedCompanyId = req.params.companyId;
+  
+  let seedsProduced = await companyController.getSeedProducerSeedById(seedId, seedCompanyId)
+  return res.status(200).json({data: seedsProduced});
+});
+
+companyRouter.patch("/seed-update", async(req, res) => {
+  // const id = req.body.producer_id;
+  let response = await companyController.updateSeedProducerSeed(req, res);
+  return response;
+  // return res.render(`seed-company/seed-producer/${id}`, {
+  //   message: response
+  // });
+
+});
+
+/*
+  Binary EOL
+*/
 
 module.exports = companyRouter;
