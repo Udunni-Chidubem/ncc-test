@@ -78,6 +78,11 @@
                    <a href="/admin/seed-producers">Seed Producer</a>
                 </li>
                 {{/if}}
+                {{#if (or (eq user_role "admin") (eq user_role "rra") (eq user_role "nigsims") )}}
+                <li>
+                   <a href="/admin/report/seed-producer-report">Seed Producer Report</a>
+                </li>
+                {{/if}}
 
               </ul>
             </li>

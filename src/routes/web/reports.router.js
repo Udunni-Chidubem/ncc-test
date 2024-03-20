@@ -101,4 +101,53 @@ reportRouter.post("/user-report-jsp", async (req, res) => {
   });
 });
 
+reportRouter.get("/seed-producer-report", async (req, res) => {
+  let user = await req.user;
+  let isVerified = await utils.isVerified(user);
+  let user_role = await adminController.getUserRole(req, res);
+  let states  = await adminController.getStates(req, res);
+  let companies  = await adminController.getSeedCompanyNames(req, res);
+  let result = null;
+  let Location = req.query.Location ?? "ALL";
+  let Company = req.query.Company ?? "ALL";
+  let from = req.query.from ?? new Date().toISOString().split('T')[0];
+  let to = req.query.to ?? new Date().toISOString().split('T')[0];
+  let resp = await jasper.SeedProducer(Location, Company, from, to);
+  result = responses.success(resp);
+  console.log(result)
+
+  // res.status(result.code).send(result);
+
+  res.render("admin/seed-producer-jsp", {
+    layout: "admin-dashboard",
+    title: "Seed Producer Jasper",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+    states,
+    companies,
+    result
+  });
+});
+
+reportRouter.post("/seed-producer-report", async (req, res) => {
+  let result = null;
+  let Location = req.query.Location ?? "ALL";
+  let Company = req.query.Company ?? "ALL";
+  let from = req.query.from;
+  let to = req.query.to;
+  let resp = await jasper.SeedProducer(Location, Company, from, to);
+  result = responses.success(resp);
+  res.status(result.code).send(result);
+  console.log(result)
+  res.render("admin/seed-producer-jsp", {
+    layout: "admin-dashboard",
+    title: "Seed Producer Jasper",
+    username: user.username,
+    isVerified,
+    user_role: user_role.Role.role_name,
+    result
+  });
+});
+
 module.exports = reportRouter;
