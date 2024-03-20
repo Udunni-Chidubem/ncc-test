@@ -6,6 +6,12 @@ require('dotenv').config()
 
 module.exports = {
 
+    getSeedCompanyPayoutDetail: async (req, res) => {
+        const user = req.user;
+        console.log(user)
+        
+    },
+
     // generateToken: async(req, res) => {
     //     let tokenData = {
     //         "userIdentifyer": "INTERRANET",

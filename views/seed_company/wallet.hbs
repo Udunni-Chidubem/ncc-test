@@ -103,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success" href="#!">Withdraw</button>
+                    <button type="submit" class="btn btn-success" href="#!" onclick="withdraw()">Withdraw</button>
                 </div>
             	</form>
             </div>
@@ -127,8 +127,11 @@ $(document).ready(function(){
     }).change();
 
     $('#withdrawalModal').on('shown.bs.modal', function () {
-  $('#withdrawalModal').trigger('focus')
-})
+		$('#withdrawalModal').trigger('focus')
+	});
+
+	
+
 });
 
 

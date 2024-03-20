@@ -10,6 +10,7 @@ const {
 const companyController = require("../../controllers/company.controller");
 const { now } = require("moment");
 const db = require("../../models");
+const escrowController = require("../../controllers/escrow.controller");
 const { States } = db;
 
 companyRouter.get("/dashboard", async (req, res) => {
@@ -548,6 +549,14 @@ companyRouter.patch("/seed-producer/:id", async(req, res) => {
     message: response
   });
 
+});
+
+companyRouter.post("/found-withdraw", async (req, res) => {
+  let response = await escrowController.getSeedCompanyPayoutDetail(req, res);
+  return;
+  return res.render(``, {
+    message: response
+  })
 });
 
 

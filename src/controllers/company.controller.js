@@ -691,7 +691,7 @@ module.exports = {
       console.error(err.message);
     }
 
-  }
+  },
 
   /* BINARY EOL */ 
 };
