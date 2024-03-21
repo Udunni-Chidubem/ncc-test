@@ -573,6 +573,11 @@ companyRouter.patch("/seed-update", async(req, res) => {
   return response;
 });
 
+companyRouter.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) => {
+  let response = await companyController.updateSeedProducerStatus(req, res);
+  return response;
+})
+
 /*
   Binary EOL
 */

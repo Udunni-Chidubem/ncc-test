@@ -735,7 +735,37 @@ module.exports = {
           console.error(e);
           return res.status(500).json({ success: false, msg: `An error occurred while updating seed data`, status: 500 });
       }
-  }
+  },
+
+  updateSeedProducerStatus: async (req, res) => {
+    const producerId = req.params.id;
+    const user_id = req.params.user_id;
+    try {
+        let current = await SeedProducer.findOne({
+            where: {  id: producerId, user_id: user_id },
+            attributes: ["status", "full_name"]
+        });
+        const status = current.status == 1 ? 2 : 1; // Toggle status
+        const humanize = status === 1 ? "Activated" : "Deactivated"; // Corrected assignment
+
+        const response = await SeedProducer.update(
+            { status: status },
+            {
+                where: {  id: producerId, user_id: user_id },
+                fields: ["status"]
+            }
+        );
+
+        if (response[0] < 1) {
+            return res.status(200).json({ success: false, msg: `There was an error changing ${current.full_name} status`, status: 200, state: status });
+        }
+        return res.status(200).json({ success: true, msg: `You have successfully ${humanize} ${current.full_name}`, status: 200, state: status });
+
+    } catch (e) {
+        console.error(e);
+        return res.status(500).json({ success: false, msg: "An error occurred", status: 500 }); // Error response
+    }
+  },
 
 
   /* BINARY EOL */ 

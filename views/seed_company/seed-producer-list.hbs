@@ -1,6 +1,7 @@
 <!-- Content Wrapper START -->
 <div class="main-content">
     <div class="container">
+        <div id="msg"></div>
         <div class="row  ">
             <div class="col-12   ">
                 <a href="seed-producers/create" class="btn create_p mb-2  float_end ">
@@ -45,8 +46,16 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item border-0 border-bottom"
                                             href="/seed-company/seed-producer/{{id}}">View</a></li>
-                                    <li><a class="dropdown-item border-0 border-bottom"
-                                            href="/seed-company/deactivate-seed-producer">Deactivate</a></li>
+                                    <li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
+                                            href="#" 
+                                            id-data="{{user_id}}" 
+                                            seed-producer-data="{{id}}" 
+                                            id="update-seed-producer-status-btn"
+                                            current-status-data="{{status}}"
+                                            >
+                                            Deactivate
+                                            </a>
+                                        </li>
                                 </ul>
                             </div>
                         </a></td>
@@ -60,7 +69,75 @@
 <script>
 
     $(document).ready(function () {
-        $('#seedProducers').DataTable({
-        });
-    })
+        $('#seedProducers').DataTable({});
+
+
+        /*
+            Binary SOL
+        */
+
+            function getCurrentStatus() {
+                const statusElements = document.querySelectorAll('.update-seed-producer-status-btn');
+                statusElements.forEach((status) => {
+                    const currentStatus = parseInt(status.getAttribute('current-status-data'));
+                    if (currentStatus === 2) {
+                        status.textContent = "Activate";
+                    } else {
+                        status.textContent = "Deactivate";
+                    }
+                });
+            }
+
+            getCurrentStatus();
+
+
+            
+
+            $(".update-seed-producer-status-btn").click((event) => {
+                const seedCompany = event.target;
+                const userId = seedCompany.getAttribute("id-data");
+                const seedProducerId = seedCompany.getAttribute("seed-producer-data");
+                const currentStatus = seedCompany.getAttribute("current-status-data");
+                
+                var url = window.location.origin + `/seed-company/update-seed-producer-staus/${userId}/${seedProducerId}`;
+
+                fetch(url, {
+                    method: "PATCH"
+                })
+                .then((res) => res.json())
+                .then((res) => {
+                    const data = res;
+                    
+                    if(data.success == true){
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        if(data.state === 2){
+                            seedCompany.textContent = 'Activate';
+                        }
+                        else{
+                            seedCompany.textContent = 'Deactivate';
+                        }
+                        return;
+                    }else{
+                        document.getElementById('msg').innerHTML = `
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                    }
+                    
+                })
+                .catch((e) => console.log(e));
+
+            });
+
+
+        /*
+            Binary EOL
+        */
+
+    });
 </script>
