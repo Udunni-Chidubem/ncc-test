@@ -332,8 +332,8 @@ siteRouter.get("/otp-resend/:phone", async (req, res) => {
   });
 });
 
-siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
-siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
+// siteRouter.post("/escrow/zenithTransfer", escrowRouter.transferToZenith);
+// siteRouter.post("/escrow/otherBank", escrowRouter.transferToOtherBank);
 // siteRouter.post("/escrow/generateToken", escrowRouter.generateToken);
 
 siteRouter.post("/payment/9psbAuth", psbRouter.generateToken);
