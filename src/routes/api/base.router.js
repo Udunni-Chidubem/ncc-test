@@ -18,6 +18,54 @@ baseRouter.get("/knowledge-base", async (req, res) => {
     res.send(knowledge_base);
 });
 
+baseRouter.get("/:id", async (req, res) => {
+  let knowledgeBase = await siteController.KnowledgeBase(req, res);
+  res.render("knowledge_base/knowledge", {
+    layout: "knowledge_dashboard",
+    title: "Know" ,
+    knowledgeBase: knowledgeBase,
+  });
+});
+
+baseRouter.get("/cowpie", (req, res) => {
+  res.render("knowledge_base/cowpie", {
+    layout: "knowledge_dashboard",
+    title: "Knowledge Base - Cowpie",
+    crop: "Cowpea",
+  });
+});
+
+baseRouter.get("/groundnut", (req, res) => {
+  res.render("knowledge_base/groundnut", {
+    layout: "knowledge_dashboard",
+    title: "Knowledge Base - GroundNut",
+    crop: "Groundnut",
+  });
+});
+
+baseRouter.get("/maize", (req, res) => {
+  res.render("knowledge_base/maize", {
+    layout: "knowledge_dashboard",
+    crop: "Maize",
+    title: "Knowledge Base - Maize",
+  });
+});
+
+baseRouter.get("/rice", (req, res) => {
+  res.render("knowledge_base/rice", {
+    layout: "knowledge_dashboard",
+    crop: "Rice",
+    title: "Knowledge Base - Rice",
+  });
+});
+
+baseRouter.get("/recommendation", (req, res) => {
+  res.render("knowledge_base/recommendation", {
+    layout: "",
+    title: "Knowledge Base - Recommendation",
+  });
+});
+
 
 /*
   The below code handles payout endpoints
