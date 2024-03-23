@@ -248,7 +248,7 @@ siteRouter.get("/knowledge-base", async (req, res) => {
   });
 });
 
-siteRouter.get("/knowledge-base/:id", async (req, res) => {
+siteRouter.get("/:id", async (req, res) => {
   let knowledgeBase = await siteController.KnowledgeBase(req, res);
   res.render("knowledge_base/knowledge", {
     layout: "knowledge_dashboard",

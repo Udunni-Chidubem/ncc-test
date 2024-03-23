@@ -18,7 +18,7 @@ baseRouter.get("/knowledge-base", async (req, res) => {
     res.send(knowledge_base);
 });
 
-baseRouter.get("/:id", async (req, res) => {
+baseRouter.get("/knowledge-base/:id", async (req, res) => {
   let knowledgeBase = await siteController.KnowledgeBase(req, res);
   res.render("knowledge_base/knowledge", {
     layout: "knowledge_dashboard",
