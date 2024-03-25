@@ -566,7 +566,7 @@ module.exports = {
 
   KnowledgeBase: async (req, res) => {
     let knowledgeBase = await KnowledgeBase.findOne({
-      where: { name: req.params.name },
+      where: { id: req.params.id },
     });
     return JSON.parse(JSON.stringify(knowledgeBase));
   },
