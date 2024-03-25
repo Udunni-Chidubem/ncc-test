@@ -218,6 +218,7 @@ module.exports = {
         }
 
     },
+    
     payoutStatus: async (req, res) => {
         let ref = req.params.ref
         try {

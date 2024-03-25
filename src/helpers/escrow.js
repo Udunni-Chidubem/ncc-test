@@ -30,8 +30,7 @@ module.exports = {
     let token = await psb.generateToken()
     if(token.code="00"){
         let payout = await psb.otherPayout(payload, token.access_token)
-        console.log(payout)
-            res.send(payout);
+        res.send(payout);
     }else{
         res.send(token)
     }

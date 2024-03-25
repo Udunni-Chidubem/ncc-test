@@ -19,9 +19,9 @@ module.exports = {
                 attributes: ["name_of_company", "bank_account_name", "bank_account_no", "bank_code"]
             });
         
-            console.log("account No.: ", company.bank_account_no)
-            console.log("account Name: ", company.bank_account_name)
-            console.log("Bank Name: ", company.bank_code)
+            // console.log("account No.: ", company.bank_account_no)
+            // console.log("account Name: ", company.bank_account_name)
+            // console.log("Bank Name: ", company.bank_code)
 
             if(company.bank_account_no == null || company.bank_account_name == null || company.bank_code == null){
                 return { success: false, message: "Oop! You're yet to update your account information", status: 400 }
@@ -34,16 +34,6 @@ module.exports = {
             if(wallet.amount < data.amount){
                 return { success: false, message: "Insufient balance", status: 400 }
             }
-
-            // let transferData = {
-            //     amount: data.amount,
-            //     bankCode: company.bank_code, 
-            //     bankName: company.bank_account_name,
-            //     crAccount: company.bank_account_no,
-            //     description: "Seed company withdrawer", 
-            //     drAccount: process.env.escrow_acct,
-            //     transactionReference: uniqid()
-            // }
 
             const date = new Date();
             const formattedDate = date.toISOString();
@@ -69,8 +59,8 @@ module.exports = {
                         bank: company.bank_code,
                         name: company.name_of_company,
                         bvn: "22222222222",
-                        senderaccountnumber: "1100015371",
-                        sendername: "9PSB Agent/Oyenike Adeola",
+                        senderaccountnumber: process.env.escrow_acct,
+                        sendername: process.env.escrow_acct_name,
                         kyc: null
                     }
                     },
