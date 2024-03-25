@@ -13,18 +13,14 @@ baseRouter.get("/state", async (req, res) => {
 
 /* Binary SOL */
 
-baseRouter.get("/knowledge-base", async (req, res) => {
+baseRouter.get("/knowledge-base/all", async (req, res) => {
     let knowledge_base = await siteController.allKnowledgeBase(req, res);
-    res.send(knowledge_base);
+    return res.status(200).json(knowledge_base);
 });
 
 baseRouter.get("/knowledge-base/:id", async (req, res) => {
   let knowledgeBase = await siteController.KnowledgeBase(req, res);
-  res.render("knowledge_base/knowledge", {
-    layout: "knowledge_dashboard",
-    title: "Know" ,
-    knowledgeBase: knowledgeBase,
-  });
+  return res.status(200).json(knowledgeBase);
 });
 
 baseRouter.get("/cowpie", (req, res) => {
