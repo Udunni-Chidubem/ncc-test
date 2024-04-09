@@ -87,7 +87,7 @@
                     </thead>
                     <tbody>
                         {{#each seedProducer}}
-                        {{#if (ne status 0)}}
+                        {{#if (eq status 1)}}
                         <tr class="t_info_row1">
                             <td>{{increment @index}}</td>
                             <td> {{this.full_name}}</td>

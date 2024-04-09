@@ -8,7 +8,7 @@ accountRouter.post("/login", async (req, res) => {
 
 accountRouter.post("/farmer-signup", async (req, res) => {
   let y = await siteController.savefarmer(req, res);
-  console.log(req.body);
+  // console.log(req.body);
   if (y.user) {
     res
       .status(200)

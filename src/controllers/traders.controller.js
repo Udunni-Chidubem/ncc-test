@@ -1054,7 +1054,7 @@ module.exports = {
         ],
       });
       farmer_info = JSON.parse(JSON.stringify(farmer_info));
-      console.log(farmer_info);
+      // console.log(farmer_info);
       return farmer_info;
     } catch (e) {
       console.log(e);

@@ -12,8 +12,10 @@ const authGuard = require("../../helpers/auth.guard");
 const fileRoute = require("./file.routes");
 require("../../helpers/passport-jwt");
 passportjwt(passport);
+
 //all router on api will be use here for prefixing
 apiRouter.use("/account", accountRouter);
+
 apiRouter.use(
   "/farmer",
   verityToken,

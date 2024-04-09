@@ -104,6 +104,7 @@ farmersRouter.post(
 );
 
 farmersRouter.get("/market_place", async (req, res) => {
+  
   let resp = await farmerController.marketPlace(req, res);
   let message = null;
   const products = resp.response;

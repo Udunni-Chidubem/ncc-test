@@ -2,13 +2,13 @@
 <div class="main-content">
     <div class="container">
         <div id="msg"></div>
-        <div class="row  ">
+        {{!-- <div class="row  ">
             <div class="col-12   ">
                 <a href="seed-producers/create" class="btn create_p mb-2  float_end ">
                     <span><i class=" fa fa-solid fa-plus"></i></span> Create Seed Producer
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="card table-responsives table_t_info p-3">
         <table class="table con t_info  table-borderless" id="seedProducers">
@@ -28,7 +28,7 @@
 
             <tbody class="t_info_body products-list-table">
                 {{#each seedProducer}}
-                    {{#if (eq status 1)}}
+                    {{#if (eq status 2)}}
                         <tr class="t_info_row1">
                             <th scope="row">{{increment @index}}</th>
                             <td> {{full_name}}</td>
@@ -92,9 +92,6 @@
 
             getCurrentStatus();
 
-
-            
-
             $(".update-seed-producer-status-btn").click((event) => {
                 const seedCompany = event.target;
                 const userId = seedCompany.getAttribute("id-data");
@@ -126,7 +123,7 @@
                             seedCompany.textContent = 'Deactivate';
                             setTimeout(() => {
                                 location.reload();
-                            }, 500);
+                            }, 500)
                         }
                         return;
                     }else{

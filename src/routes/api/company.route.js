@@ -172,7 +172,7 @@ companyRoute.post("/offline", async (req, res) => {
 
   for (let i = 0; i < sheets.length; i++) {
     const temp = reader.utils.sheet_to_json(file.Sheets[file.SheetNames[i]]);
-    console.log(temp);
+    // console.log(temp);
     j = 10000;
     for (let k = 0; k < temp.length; k = k + 200) {
       run(temp, k, j);
