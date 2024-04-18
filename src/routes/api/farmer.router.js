@@ -108,7 +108,6 @@ farmerRouter.get("/product/:id", async (req, res) => {
 });
 farmerRouter.delete("/cart/:id", async (req, res) => {
   let count = await farmersController.deleteCart(req, res);
-  console.log(count);
   if (count > 0) {
     res.status(200).json({
       data: "product deleted from cart successfully",

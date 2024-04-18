@@ -283,7 +283,7 @@ companyRouter.get("/view-sheet", async (req, res) => {
   let company = await utils.getCompanyProfile(user);
   let isVerified = await utils.isVerified(user);
   let saleSheets = await companyController.saleSheets(user.id);
-  console.log(saleSheets);
+  console.log("Salesheets: ", saleSheets);
   // let states = await States.findAll({
   //     attributes : ['id', 'name'],
   //     raw: true
@@ -512,7 +512,7 @@ companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
   let seedProducer = await companyController.listSeedProducers(req, res);
-  
+
   res.render("seed_company/seed-producer-list", {
     layout: "company-dashboard",
     seedProducer,
@@ -545,6 +545,19 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   Binary SOL
 */
 
+companyRouter.get("/seed-producer/deactivated-seed-producer", async (req, res) => {
+  let user = await req.user;
+  let company = await utils.getCompanyProfile(user);
+  let seedProducer = await companyController.listSeedProducers(req, res);
+  
+  res.render("seed_company/deactivated-seed-producer", {
+    layout: "company-dashboard",
+    seedProducer,
+    title: "Seed Producers",
+    company: company,
+  });
+})
+
 companyRouter.patch("/seed-producer/:id", async(req, res) => {
   const id = req.params.id;
   let response = await companyController.updateSeedProducer(req, res);
@@ -555,8 +568,8 @@ companyRouter.patch("/seed-producer/:id", async(req, res) => {
 });
 
 companyRouter.post("/found-withdraw", async (req, res) => {
-  let response = await escrowController.getSeedCompanyPayoutDetail(req, res);
-  console.log(response);
+  let response = await escrowController.processFoundWithdrawer(req, res);
+  console.log("Response: ", response);
   return res.status(200).json(response);
 });
 
@@ -576,7 +589,20 @@ companyRouter.patch("/seed-update", async(req, res) => {
 companyRouter.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) => {
   let response = await companyController.updateSeedProducerStatus(req, res);
   return response;
-})
+});
+
+companyRouter.get("/deactivated-seed-producers", async (req, res) => {
+  let user = await req.user;
+  let company = await utils.getCompanyProfile(user);
+  let seedProducer = await companyController.listSeedProducers(req, res);
+
+  res.render("seed_company/deactivated-seed-producers", {
+    layout: "company-dashboard",
+    seedProducer,
+    title: "Deactivated Seed Producer",
+    company: company
+  });
+});
 
 /*
   Binary EOL

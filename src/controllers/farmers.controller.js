@@ -243,6 +243,7 @@ module.exports = {
     }
   },
   marketPlace: async (req, res) => {
+    // console.log('Here: ', farmer)
     const user = await req.user;
     const farmer = await utils.getFarmerProfile(user);
     const isVerified = await utils.isVerified(user);

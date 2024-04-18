@@ -3,13 +3,14 @@ const db = require("../models");
 const uniqid=require('uniqid');
 const escrow = require("../helpers/escrow");
 const axios = require("axios").default;
-require('dotenv').config()
+require('dotenv').config();
+const hashHelper = require('../helpers/helper.hash');
 
 const { SeedCompany, Wallet } = db;
 
 module.exports = {
 
-    getSeedCompanyPayoutDetail: async (req, res) => {
+    processFoundWithdrawer: async (req, res) => {
         const user = await req.user;
         const data = req.body; // request body: { amount: amount, password: password }
 
@@ -36,62 +37,50 @@ module.exports = {
             }
 
             const date = new Date();
-            const formattedDate = date.toISOString();
+            // const formattedDate = date.toISOString();
+
+            // const transferFee = 0.75;
+            const transferRef = uniqid('VT')
+
+            // Raw Data: privateKey + request.Customer.Account.SenderAccountNumber +
+            // request.Customer.Account.Number + request.Customer.Account.Bank + request.order.Amount +
+            // request.Transaction.Reference
+
+            let toHash = process.env.psb_publicKey+process.env.escrow_acct_number+company.bank_account_no+company.bank_code+data.amount+'.00'+transferRef;
+            console.log('Before hashed: ', toHash)
+            // let toHash = process.env.psb_publicKey+process.env.escrow_acct_number+'1100000103'+'120001'+company.amount+transferRef;
+            const hashToken = await hashHelper.generateSHA512Hash(toHash);
 
             let transferData = {
         
                 publickey: process.env.psb_publicKey,
                     transaction: {
-                        reference: uniqid('VT'),
-                        linkingreference: null,
-                        externalreference: null,
-                        date: formattedDate
+                        reference: transferRef,
+                        // date: formattedDate
                     },
                     order: {
-                        amount: company.amount,
+                        amount: data.amount+'.00',
                         description: "Virtual Settlement",
                         currency: "NGN",
                         country: "NGA"
                     },
                     customer: {
-                    account: {
-                        number: company.bank_account_no,
-                        bank: company.bank_code,
-                        name: company.name_of_company,
-                        bvn: "22222222222",
-                        senderaccountnumber: process.env.escrow_acct,
-                        sendername: process.env.escrow_acct_name,
-                        kyc: null
-                    }
+                        account: {
+                            number: company.bank_account_no,
+                            bank: company.bank_code,
+                            name: company.name_of_company,
+                            senderaccountnumber: process.env.escrow_acct_number,
+                            sendername: process.env.escrow_acct_name,
+                        }
                     },
-                    transferfee: {
-                    fee: 0.75,
-                    feedetail: [
-                        {
-                            AccountName: null,
-                            AccountNumber: "00960011010001178",
-                            Amount: 0.49
-                        },
-                    ]
-                },
-                "hash":"C53B53F7A8024E7283B14006E24F9E14927FCC7DA6E66491A447FE6224ECF6F49DB79BD6746AB7898E31105AAA20C36E2B4241083874786C4078B02F73FCDFDC"
-                 
+                "hash": hashToken
             }
 
-            let token=await escrow.generateToken();
-            if(token.responseCode=='00'){
-                let transfer= await escrow.transferOther(transferData, token.tokenDetail.token)
-                console.log(transfer)
-                return { transferRes: transfer };
-            }else{
-                return {tokenRes: token }
-            }
-
+            const response = await escrow.processTransferToOtherBank(transferData);
+            return response;
 
         } catch (error) {
             console.error("Error fetching account detail:", error);
         }
-        
-        
     },
 }
