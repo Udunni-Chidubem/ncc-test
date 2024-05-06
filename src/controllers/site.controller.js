@@ -426,25 +426,24 @@ module.exports = {
       // );
       // console.log("oneee... ", r);
 
-        
       payload = {
         message: `Your OTP is ${otp_code}`,
         sender_id: "Keep-Safe",
         // type: "Transactional",
-        recipients: phone
-      }
+        recipients: phone,
+      };
 
       var config = {
         method: "post",
-        url: process.env.vasLink+"/sshort/Transactional",
+        url: process.env.vasLink + "/sshort/Transactional",
         headers: {
           "Content-Type": "application/json",
         },
         data: payload,
       };
 
-      let resp = await axios(config)
-      console.log("testtt... ", resp)
+      let resp = await axios(config);
+      console.log("testtt... ", resp);
 
       // return resp.data
 
