@@ -417,34 +417,31 @@ companyRouter.get("/seed-producers/create", async (req, res) => {
 });
 
 companyRouter.post("/seed-producers/create", async (req, res) => {
-    let phone = req.body.phone;
-    let check = await companyController.findSeedProducer(phone)
-    // console.log(check);
-    if(check == null){
-    
-    let seeds=[];
-    if(Array.isArray(req.body.nameOfSeed)){
-      req.body.nameOfSeed.forEach((e, index)=>{
-        seeds.push(
-          {
-            name_of_seed:e,
-            variety_of_seed:req.body.varietyOfSeed[index],
-            volume_of_seed:req.body.volumeOfSeed[index],
-            unit:req.body.unit[index],
-            year_produced:req.body.yearProduced[index]
-          }
-        )
-      })
-    }else{
+  let phone = req.body.phone;
+  let check = await companyController.findSeedProducer(phone);
+  // console.log(check);
+  if (check == null) {
+    let seeds = [];
+    if (Array.isArray(req.body.nameOfSeed)) {
+      req.body.nameOfSeed.forEach((e, index) => {
+        seeds.push({
+          name_of_seed: e,
+          variety_of_seed: req.body.varietyOfSeed[index],
+          volume_of_seed: req.body.volumeOfSeed[index],
+          unit: req.body.unit[index],
+          year_produced: req.body.yearProduced[index],
+        });
+      });
+    } else {
       seeds.push({
-        name_of_seed:req.body.nameOfSeed,
-        variety_of_seed:req.body.varietyOfSeed,
-        volume_of_seed:req.body.volumeOfSeed,
-        unit:req.body.unit,
-        year_produced:req.body.yearProduced
-      })
+        name_of_seed: req.body.nameOfSeed,
+        variety_of_seed: req.body.varietyOfSeed,
+        volume_of_seed: req.body.volumeOfSeed,
+        unit: req.body.unit,
+        year_produced: req.body.yearProduced,
+      });
     }
-    req.body.seeds=seeds
+    req.body.seeds = seeds;
     let r = await companyController.createSeedProducer(req, res);
     if (r.id) {
       res
@@ -461,52 +458,48 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
         .status(500)
         .send();
     }
-  } else{
+  } else {
     res
-        .json({
-          statusCode: 400,
-          message: "phone number already in use",
-          error: true,
-        })
-        .status(400)
-        .send();
+      .json({
+        statusCode: 400,
+        message: "phone number already in use",
+        error: true,
+      })
+      .status(400)
+      .send();
   }
-
 });
 
-companyRouter.post(
-  "/seed-producer-seed/create",
-  async (req, res) => {
-    console.log("entryy", req.body)
-    
-    let seeds= {
-        producer_id:  req.body.prod_id,
-        name_of_seed:req.body.seed,
-        variety_of_seed:req.body.variety,
-        volume_of_seed:req.body.volumn,
-        unit:req.body.unit,
-        year_produced:req.body.yearProduced
-      }
-        
-    let r = await companyController.createSeedProducerSeed(seeds);
-    console.log("seedeeed",  r)
-    if (r.id) {
-      res
-        .json({
-          statusCode: 200,
-          message: "Seed has been created successfully",
-          body: "Seed has been created successfully",
-        })
-        .status(200)
-        .send();
-    } else {
-      res
-        .json({ statusCode: 500, error: r, message: "something went wrong" })
-        .status(500)
-        .send();
-    }
+companyRouter.post("/seed-producer-seed/create", async (req, res) => {
+  console.log("entryy", req.body);
+
+  let seeds = {
+    producer_id: req.body.prod_id,
+    name_of_seed: req.body.seed,
+    variety_of_seed: req.body.variety,
+    volume_of_seed: req.body.volumn,
+    unit: req.body.unit,
+    year_produced: req.body.yearProduced,
+  };
+
+  let r = await companyController.createSeedProducerSeed(seeds);
+  console.log("seedeeed", r);
+  if (r.id) {
+    res
+      .json({
+        statusCode: 200,
+        message: "Seed has been created successfully",
+        body: "Seed has been created successfully",
+      })
+      .status(200)
+      .send();
+  } else {
+    res
+      .json({ statusCode: 500, error: r, message: "something went wrong" })
+      .status(500)
+      .send();
   }
-);
+});
 
 companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
@@ -521,23 +514,21 @@ companyRouter.get("/seed-producers", async (req, res) => {
   });
 });
 
-
-
 companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
-  let seedsProduced = await companyController.getSeedProduced(req, res)
+  let seedsProduced = await companyController.getSeedProduced(req, res);
   let states = await siteController.getStates();
-  let prod_id = await req.params.id ;
+  let prod_id = await req.params.id;
 
   res.render("seed_company/view-seed-producer", {
-      layout: "company-dashboard",
-      title: "Seed Producers",
-      sub_title: "Seed Producer",
-      prev_link: "/seed-company/seed-producers",
-      seedProducer,
-      states: states,
-      seedsProduced,
-      prod_id
+    layout: "company-dashboard",
+    title: "Seed Producers",
+    sub_title: "Seed Producer",
+    prev_link: "/seed-company/seed-producers",
+    seedProducer,
+    states: states,
+    seedsProduced,
+    prod_id,
   });
 });
 
@@ -545,51 +536,59 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   Binary SOL
 */
 
-companyRouter.get("/seed-producer/deactivated-seed-producer", async (req, res) => {
-  let user = await req.user;
-  let company = await utils.getCompanyProfile(user);
-  let seedProducer = await companyController.listSeedProducers(req, res);
-  
-  res.render("seed_company/deactivated-seed-producer", {
-    layout: "company-dashboard",
-    seedProducer,
-    title: "Seed Producers",
-    company: company,
-  });
-})
+companyRouter.get(
+  "/seed-producer/deactivated-seed-producer",
+  async (req, res) => {
+    let user = await req.user;
+    let company = await utils.getCompanyProfile(user);
+    let seedProducer = await companyController.listSeedProducers(req, res);
 
-companyRouter.patch("/seed-producer/:id", async(req, res) => {
+    res.render("seed_company/deactivated-seed-producer", {
+      layout: "company-dashboard",
+      seedProducer,
+      title: "Seed Producers",
+      company: company,
+    });
+  }
+);
+
+companyRouter.patch("/seed-producer/:id", async (req, res) => {
   const id = req.params.id;
   let response = await companyController.updateSeedProducer(req, res);
   return res.render(`seed-company/seed-producer/${id}`, {
-    message: response
+    message: response,
   });
-
 });
 
 companyRouter.post("/found-withdraw", async (req, res) => {
   let response = await escrowController.processFoundWithdrawer(req, res);
-  console.log("Response: ", response);
+  // console.log("Response: ", response);
   return res.status(200).json(response);
 });
 
 companyRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
   const seedId = req.params.seedId;
   const seedCompanyId = req.params.companyId;
-  
-  let seedsProduced = await companyController.getSeedProducerSeedById(seedId, seedCompanyId)
-  return res.status(200).json({data: seedsProduced});
+
+  let seedsProduced = await companyController.getSeedProducerSeedById(
+    seedId,
+    seedCompanyId
+  );
+  return res.status(200).json({ data: seedsProduced });
 });
 
-companyRouter.patch("/seed-update", async(req, res) => {
+companyRouter.patch("/seed-update", async (req, res) => {
   let response = await companyController.updateSeedProducerSeed(req, res);
   return response;
 });
 
-companyRouter.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) => {
-  let response = await companyController.updateSeedProducerStatus(req, res);
-  return response;
-});
+companyRouter.patch(
+  "/update-seed-producer-staus/:user_id/:id",
+  async (req, res) => {
+    let response = await companyController.updateSeedProducerStatus(req, res);
+    return response;
+  }
+);
 
 companyRouter.get("/deactivated-seed-producers", async (req, res) => {
   let user = await req.user;
@@ -600,7 +599,7 @@ companyRouter.get("/deactivated-seed-producers", async (req, res) => {
     layout: "company-dashboard",
     seedProducer,
     title: "Deactivated Seed Producer",
-    company: company
+    company: company,
   });
 });
 
