@@ -16,7 +16,7 @@ const {
   Farmer,
   SeedProducerSeed,
   Salesheets,
-  SeedProducer
+  SeedProducer,
 } = db;
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
@@ -529,6 +529,10 @@ module.exports = {
           gender: req.body.gender,
           age_range: req.body.age_range,
           living_status: req.body.living_status,
+          amount_of_seed: req.body.amount_of_seed,
+          amount_of_seed_remmitted: req.body.amount_of_seed_remitted,
+          amount_of_seed_to_be_remmitted:
+            req.body.amount_of_seed_to_be_remitted,
           user_id: user.id,
           state_id: req.body.state_id,
           lg_id: req.body.lg_id,
@@ -537,11 +541,14 @@ module.exports = {
         { transaction: transaction }
       );
 
-      await Promise.all(req.body.seeds.map(e=>{
-        return SeedProducerSeed.create(
-          {...e, producer_id:seedProducer.id},   
-          { transaction: transaction }
-        )}))
+      await Promise.all(
+        req.body.seeds.map((e) => {
+          return SeedProducerSeed.create(
+            { ...e, producer_id: seedProducer.id },
+            { transaction: transaction }
+          );
+        })
+      );
       // await SeedProducerSeed.bulkCreate(req.body.seeds);
       transaction.commit();
       return seedProducer;
@@ -573,10 +580,10 @@ module.exports = {
         },
         {
           model: SeedProducerSeed,
-        }
+        },
       ],
       // raw: true,
-      order: [["created_at", "DESC"]]
+      order: [["created_at", "DESC"]],
     });
 
     response = JSON.parse(JSON.stringify(seedProducer));
@@ -620,43 +627,41 @@ module.exports = {
     return response;
   },
 
-  createSeedProducerSeed: async(data) => {
+  createSeedProducerSeed: async (data) => {
     try {
-      console.log("seeds", data)
+      console.log("seeds", data);
       let seed = await SeedProducerSeed.create({
         producer_id: data.producer_id,
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
-        unit: data.unit
+        unit: data.unit,
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   },
 
-
-  /* BINARY SOL */ 
+  /* BINARY SOL */
 
   getSeedProducerSeedById: async (seedId, seedCompanyId) => {
-    try{
+    try {
       const response = await SeedProducerSeed.findOne({
-        where: { id: seedId, producer_id: seedCompanyId }
-      })
+        where: { id: seedId, producer_id: seedCompanyId },
+      });
       return response;
-
-    }catch(e){
+    } catch (e) {
       console.error(e.message);
     }
   },
 
   findSeedProducer: async (phone) => {
     const seedProducer = await SeedProducer.findOne({
-      where: { phone_no: phone }
+      where: { phone_no: phone },
     });
     const res = JSON.parse(JSON.stringify(seedProducer));
-    if(res == null){
+    if (res == null) {
       return null;
     }
     return false;
@@ -664,109 +669,146 @@ module.exports = {
 
   updateSeedProducer: async (req, res) => {
     const data = req.body;
-    try{
+    try {
       const isValid = isValidPhoneNumber(data.phone_no);
-      if(!isValid){
-        return res.status(200).json({ success: false, msg: `Invalid phone number`, status: 200 });
+      if (!isValid) {
+        return res
+          .status(200)
+          .json({ success: false, msg: `Invalid phone number`, status: 200 });
       }
       const response = await SeedProducer.update(
         {
-          full_name: data.full_name, 
-            phone_no: data.phone_no, 
-            certified: data.certified, 
-            state_id: data.sate_id, 
-            lg_id: data.lg_id, 
-            gender: data.gender, 
-            age_range: data.age_range, 
-            living_status: data.living_status
+          full_name: data.full_name,
+          phone_no: data.phone_no,
+          certified: data.certified,
+          state_id: data.sate_id,
+          lg_id: data.lg_id,
+          gender: data.gender,
+          age_range: data.age_range,
+          living_status: data.living_status,
         },
         {
-          where: {id: data.id},
+          where: { id: data.id },
           fields: [
-            "full_name", 
-            "phone_no", 
-            "certified", 
-            "state_id", 
-            "lg_id", 
-            "gender", 
-            "age_range", 
-            "living_status"
-          ]
+            "full_name",
+            "phone_no",
+            "certified",
+            "state_id",
+            "lg_id",
+            "gender",
+            "age_range",
+            "living_status",
+          ],
         }
       );
-      if(response[0] < 1 ){
-        return res.status(200).json({ success: false, msg: `No changes was made to ${data.full_name}'s data`, status: 200 })
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `No changes was made to ${data.full_name}'s data`,
+          status: 200,
+        });
       }
-      return res.status(200).json({ success: true, msg: `${data.full_name}'s data was updated successfully`, status: 200 });
-      
-    }catch(err){
+      return res.status(200).json({
+        success: true,
+        msg: `${data.full_name}'s data was updated successfully`,
+        status: 200,
+      });
+    } catch (err) {
       console.error(err.message);
     }
-
   },
 
   updateSeedProducerSeed: async (req, res) => {
-      try {
-          const data = req.body;
-          const response = await SeedProducerSeed.update(
-              {
-                  name_of_seed: data.name_of_seed,
-                  variety_of_seed: data.variety_of_seed,
-                  volume_of_seed: data.volume_of_seed,
-                  year_produced: data.year_produced,
-                  unit: data.unit
-              },
-              {
-                  where: { id: data.id, producer_id: data.producer_id },
-                  fields: [
-                      "name_of_seed",
-                      "variety_of_seed",
-                      "volume_of_seed",
-                      "year_produced",
-                      "unit"
-                  ]
-              });
-          console.log(response[0]);
-          if (response[0] < 1) {
-              return res.status(200).json({ success: false, msg: `No changes were made to the seed data`, status: 200 });
-          }
-          return res.status(200).json({ success: true, msg: `Seed data was updated successfully`, status: 200 });
-      } catch (e) {
-          console.error(e);
-          return res.status(500).json({ success: false, msg: `An error occurred while updating seed data`, status: 500 });
+    try {
+      const data = req.body;
+      const response = await SeedProducerSeed.update(
+        {
+          name_of_seed: data.name_of_seed,
+          variety_of_seed: data.variety_of_seed,
+          volume_of_seed: data.volume_of_seed,
+          year_produced: data.year_produced,
+          unit: data.unit,
+          amount_of_seed: data.amount_of_seed,
+          amount_of_seed_remitted: data.amount_of_seed_remitted,
+          amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
+        },
+        {
+          where: { id: data.id, producer_id: data.producer_id },
+          fields: [
+            "name_of_seed",
+            "variety_of_seed",
+            "volume_of_seed",
+            "year_produced",
+            "unit",
+            "amount_of_seed",
+            "amount_of_seed_remitted",
+            "amount_of_seed_to_be_remitted",
+          ],
+        }
+      );
+      // console.log(response[0]);
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `No changes were made to the seed data`,
+          status: 200,
+        });
       }
+      return res.status(200).json({
+        success: true,
+        msg: `Seed data was updated successfully`,
+        status: 200,
+      });
+    } catch (e) {
+      console.error(e);
+      return res.status(500).json({
+        success: false,
+        msg: `An error occurred while updating seed data`,
+        status: 500,
+      });
+    }
   },
 
   updateSeedProducerStatus: async (req, res) => {
     const producerId = req.params.id;
     const user_id = req.params.user_id;
     try {
-        let current = await SeedProducer.findOne({
-            where: {  id: producerId, user_id: user_id },
-            attributes: ["status", "full_name"]
-        });
-        const status = current.status == 1 ? 2 : 1; // Toggle status
-        const humanize = status === 1 ? "Activated" : "Deactivated"; // Corrected assignment
+      let current = await SeedProducer.findOne({
+        where: { id: producerId, user_id: user_id },
+        attributes: ["status", "full_name"],
+      });
+      const status = current.status == 1 ? 2 : 1; // Toggle status
+      const humanize = status === 1 ? "Activated" : "Deactivated"; // Corrected assignment
 
-        const response = await SeedProducer.update(
-            { status: status },
-            {
-                where: {  id: producerId, user_id: user_id },
-                fields: ["status"]
-            }
-        );
-
-        if (response[0] < 1) {
-            return res.status(200).json({ success: false, msg: `There was an error changing ${current.full_name} status`, status: 200, state: status });
+      const response = await SeedProducer.update(
+        { status: status },
+        {
+          where: { id: producerId, user_id: user_id },
+          fields: ["status"],
         }
-        return res.status(200).json({ success: true, msg: `You have successfully ${humanize} ${current.full_name}`, status: 200, state: status });
+      );
 
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `There was an error changing ${current.full_name} status`,
+          status: 200,
+          state: status,
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        msg: `You have successfully ${humanize} ${current.full_name}`,
+        status: 200,
+        state: status,
+      });
     } catch (e) {
-        console.error(e);
-        return res.status(500).json({ success: false, msg: "An error occurred", status: 500 }); // Error response
+      console.error(e);
+      return res
+        .status(500)
+        .json({ success: false, msg: "An error occurred", status: 500 }); // Error response
     }
   },
 
-
-  /* BINARY EOL */ 
+  /* BINARY EOL */
 };

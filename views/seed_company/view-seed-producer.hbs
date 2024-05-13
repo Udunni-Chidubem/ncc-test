@@ -233,6 +233,35 @@
                                     <input type="number" class="form-control prod_id hidden"
                                     id="seedId" placeholder="Enter Variety of Seed">
                             </div>
+
+                            <div class="form-group">
+                                <label for="volumeOfSeed" class="input_form">Amount of seed<span
+                                        class="profile_sub">*</span></label>
+                                    <div class="custom-file">
+                                        <input type="text" required id="amountOfSeedInput" 
+                                            name="amountOfSeedInput"
+                                            class="form-control amount_of_seed" 
+                                            aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-sm" 
+                                            value="{{amount_of_seed}}" />
+                                    </div>
+                                    <div class="input-group-append">
+                                        <label for="amount_of_seed" class="input_form">Amount of seed remitted<span
+                                        class="profile_sub">*</span></label>
+                                        <input type="number" class="form-control amount_of_seed_remitted" 
+                                        name="amountOfSeedRemittedInput" 
+                                        id="amountOfSeedRemittedInput" required>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <label for="amountOfSeedToBeRemitted">Amount of seed to be remitted <span class="required-feilds">*</span></label>
+                                        <input type="number" 
+                                        class="form-control amount_of_seed_to_be_remitted" 
+                                        name="amountOfSeedToBeRemittedInput" 
+                                        id="amountOfSeedToBeRemittedInput" required>
+                                    </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
                                         class="profile_sub">*</span></label>
@@ -487,10 +516,15 @@
                 const varietyOfSeed = document.getElementById('varietyOfSeedInput');
                 const volumeOfSeed = document.getElementById('volumeOfSeedInput');
                 const yearProduced = document.getElementById('yearProducedInput');
+                const amountOfSeed = document.getElementById('amountOfSeedInput');
+                const amountOfSeedRemitted = document.getElementById('amountOfSeedRemittedInput');
+                const amountOfSeedToBeRemitted = document.getElementById('amountOfSeedToBeRemittedInput');
                 const unit = document.getElementById('unitInput');
                 const seedId = document.getElementById('seedId');
 
                 if (data) {
+
+                    console.log(data)
                     
                     seedId.value = data.id || '';
                     nameOfSeed.value = data.name_of_seed || '';
@@ -498,6 +532,9 @@
                     volumeOfSeed.value = data.volume_of_seed || '';
                     yearProduced.value = data.year_produced || '';
                     unit.value = data.unit || '';
+                    amountOfSeed.value = data.amount_of_seed || '';
+                    amountOfSeedRemitted.value = data.amount_of_seed_remitted || '';
+                    amountOfSeedToBeRemitted.value = data.amount_of_seed_to_be_remitted || '';
 
                 } else {
                     console.error('Data is null or undefined');
@@ -523,6 +560,10 @@
                 const yearProduced = document.getElementById('yearProducedInput').value;
                 const unit = document.getElementById('unitInput').value;
                 const producerId = document.getElementById('numberOfSeedInput').value;
+                const amountOfSeed = document.getElementById('amountOfSeedInput').value;
+                const amountOfSeedRemitted = document.getElementById('amountOfSeedRemittedInput').value;
+                const amountOfSeedToBeRemitted = document.getElementById('amountOfSeedToBeRemittedInput').value;
+
 
                 form.append("id", seedId)
                 form.append("name_of_seed", nameOfSeed)
@@ -531,6 +572,9 @@
                 form.append("year_produced", yearProduced)
                 form.append("unit", unit)
                 form.append("producer_id", producerId)
+                form.append("amount_of_seed", amountOfSeed)
+                form.append("amount_of_seed_remitted", amountOfSeedRemitted)
+                form.append("amount_of_seed_to_be_remitted", amountOfSeedToBeRemitted)
 
                 fetch(url, {
                     method: "PATCH",
