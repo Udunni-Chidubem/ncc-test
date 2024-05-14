@@ -471,7 +471,7 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
 });
 
 companyRouter.post("/seed-producer-seed/create", async (req, res) => {
-  console.log("entryy", req.body);
+  // console.log("entry:", req.body);
 
   let seeds = {
     producer_id: req.body.prod_id,
@@ -480,10 +480,12 @@ companyRouter.post("/seed-producer-seed/create", async (req, res) => {
     volume_of_seed: req.body.volumn,
     unit: req.body.unit,
     year_produced: req.body.yearProduced,
+    amount_of_seed: req.body.amount_of_seed,
+    amount_of_seed_remitted: req.body.amount_of_seed_remitted,
+    amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
   };
 
   let r = await companyController.createSeedProducerSeed(seeds);
-  console.log("seedeeed", r);
   if (r.id) {
     res
       .json({

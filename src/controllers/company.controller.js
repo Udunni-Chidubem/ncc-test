@@ -523,16 +523,9 @@ module.exports = {
           full_name: req.body.fullName,
           phone_no: req.body.phone,
           certified: req.body.certified,
-          // name_of_seed: req.body.nameOfSeed,
-          // variety_of_seed: req.body.varietyOfSeed,
-          // volume_of_seed: req.body.volumeOfSeed,
           gender: req.body.gender,
           age_range: req.body.age_range,
           living_status: req.body.living_status,
-          amount_of_seed: req.body.amount_of_seed,
-          amount_of_seed_remmitted: req.body.amount_of_seed_remitted,
-          amount_of_seed_to_be_remmitted:
-            req.body.amount_of_seed_to_be_remitted,
           user_id: user.id,
           state_id: req.body.state_id,
           lg_id: req.body.lg_id,
@@ -540,6 +533,8 @@ module.exports = {
         },
         { transaction: transaction }
       );
+
+      // cosole.log(req.body.seeds);
 
       await Promise.all(
         req.body.seeds.map((e) => {
@@ -629,13 +624,17 @@ module.exports = {
 
   createSeedProducerSeed: async (data) => {
     try {
-      console.log("seeds", data);
+      // console.log("seeds", data);
+
       let seed = await SeedProducerSeed.create({
         producer_id: data.producer_id,
         name_of_seed: data.name_of_seed,
         variety_of_seed: data.variety_of_seed,
         volume_of_seed: data.volume_of_seed,
         unit: data.unit,
+        amount_of_seed: data.amount_of_seed,
+        amount_of_seed_remitted: data.amount_of_seed_remitted,
+        amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
@@ -649,6 +648,17 @@ module.exports = {
     try {
       const response = await SeedProducerSeed.findOne({
         where: { id: seedId, producer_id: seedCompanyId },
+        attributes: [
+          "id",
+          "producer_id",
+          "name_of_seed",
+          "variety_of_seed",
+          "volume_of_seed",
+          "unit",
+          "amount_of_seed",
+          "amount_of_seed_remitted",
+          "amount_of_seed_to_be_remitted",
+        ],
       });
       return response;
     } catch (e) {

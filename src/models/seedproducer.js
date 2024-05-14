@@ -46,9 +46,6 @@ module.exports = (sequelize, DataTypes) => {
       gender: DataTypes.STRING,
       age_range: DataTypes.STRING,
       living_status: DataTypes.STRING,
-      amount_of_seed: DataTypes.INTEGER,
-      amount_of_seed_remitted: DataTypes.INTEGER,
-      amount_of_seed_to_be_remitted: DataTypes.INTEGER,
       created_at: {
         type: DataTypes.DATE,
         defaultValue: new Date(new Date().getTime() + 1 * 60 * 60 * 1000),

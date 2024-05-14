@@ -9,18 +9,22 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
 
-    await queryInterface.addColumn("seedProducer", "amount_of_seed", {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    });
-
-    await queryInterface.addColumn("seedProducer", "amount_of_seed_remitted", {
+    await queryInterface.addColumn("seedProducerSeeds", "amount_of_seed", {
       type: Sequelize.INTEGER,
       allowNull: false,
     });
 
     await queryInterface.addColumn(
-      "seedProducer",
+      "seedProducerSeeds",
+      "amount_of_seed_remitted",
+      {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
+    );
+
+    await queryInterface.addColumn(
+      "seedProducerSeeds",
       "amount_of_seed_to_be_remitted",
       {
         type: Sequelize.INTEGER,
@@ -37,13 +41,13 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
 
-    await queryInterface.removeColumn("seedProducer", "amount_of_seed");
+    await queryInterface.removeColumn("seedProducerSeeds", "amount_of_seed");
     await queryInterface.removeColumn(
-      "seedProducer",
+      "seedProducerSeeds",
       "amount_of_seed_remitted"
     );
     await queryInterface.removeColumn(
-      "seedProducer",
+      "seedProducerSeeds",
       "amount_of_seed_to_be_remitted"
     );
   },
