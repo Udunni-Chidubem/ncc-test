@@ -113,7 +113,6 @@ module.exports = {
       };
       // console.log(transferData);
       const response = await escrow.processTransferToOtherBank(transferData);
-      console.log(response);
       if (response.code !== "00") {
         return { success: false, message: response.message, status: 400 };
       }
