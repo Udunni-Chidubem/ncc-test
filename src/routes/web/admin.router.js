@@ -627,7 +627,7 @@ adminRouter.get("/seed-producers", async (req, res) => {
     title: "Seed Producers",
     username: user.username,
     isVerified,
-    user_role: user_role.Role.role_name
+    user_role: user_role.Role.role_name,
   });
 });
 
@@ -636,7 +636,7 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
   let seedProducer = await adminController.viewSeedProducer(req, res);
-  let seedsProduced = await adminController.getSeedProduced(req, res)
+  let seedsProduced = await adminController.getSeedProduced(req, res);
   let states = await siteController.getStates();
 
   res.render("admin/view-seed-producer", {
@@ -649,7 +649,7 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
     seedsProduced,
     username: user.username,
     isVerified,
-    user_role: user_role.Role.role_name
+    user_role: user_role.Role.role_name,
   });
 });
 
@@ -660,27 +660,32 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
 adminRouter.patch("/seed-producer/update", async (req, res) => {
   const response = await adminController.updateSeedProducer(req, res);
   res.render("admin/view-seed-producer", {
-    message: response
-  })
+    message: response,
+  });
 });
 
 adminRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
   const seedId = req.params.seedId;
   const seedCompanyId = req.params.companyId;
-  let seedsProduced = await adminController.getSeedProducerSeedById(seedId, seedCompanyId)
-  return res.status(200).json({data: seedsProduced});
+  let seedsProduced = await adminController.getSeedProducerSeedById(
+    seedId,
+    seedCompanyId
+  );
+  return res.status(200).json({ data: seedsProduced });
 });
 
-adminRouter.patch("/seed-update", async(req, res) => {
+adminRouter.patch("/seed-update", async (req, res) => {
   let response = await adminController.updateSeedProducerSeed(req, res);
   return response;
 });
 
-
-adminRouter.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) => {
-  let response = await companyController.updateSeedProducerStatus(req, res);
-  return response;
-})
+adminRouter.patch(
+  "/update-seed-producer-staus/:user_id/:id",
+  async (req, res) => {
+    let response = await companyController.updateSeedProducerStatus(req, res);
+    return response;
+  }
+);
 
 /**
  * Binary EOL
