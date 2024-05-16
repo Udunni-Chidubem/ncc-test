@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       })
       SeedCompany.hasMany(models.Orders, {
         foreignKey : 'company_id'
+      });
+
+      SeedCompany.hasMany(models.WalletLog, {
+        foreignKey : 'company_id'
       })
     }
   }

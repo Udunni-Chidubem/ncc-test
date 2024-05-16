@@ -54,7 +54,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="gender">Gender <span class="required-feilds">*</span></label>
-                        <select name="gender" id="gender" class="form-select border-bottom " required aria-required="true">
+                        <select name="gender" id="gender" class="form-select border-bottom " required
+                            aria-required="true">
                             <option value="">Select an Option</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -63,7 +64,8 @@
                     <div class="form-group col-md-4">
                         <label for="age_range" class="input_form">Age Range </label>
                         <div class="input-group input-group-sm mb-3">
-                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom" required aria-required="true">
+                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom" required
+                                aria-required="true">
                                 <option value="">Select Age Range</option>
                                 <option value="15-19">15-19</option>
                                 <option value="20-30">20-30</option>
@@ -117,18 +119,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="amount_of_seed">Amount of seed <span class="required-feilds">*</span></label>
-                        <input type="number" class="form-control" name="amount_of_seed" id="amount_of_seed" placeholder="Amount of seed" required aria-required="true">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="amount_of_seed_remitted">Amount of seed remitted<span class="required-feilds">*</span></label>
-                        <input type="number" class="form-control" name="amount_of_seed_remitted" id="amount_of_seed_remitted" placeholder="Amount of seed remitted" required aria-required="true">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="amount_of_seed_to_be_remitted">Amount of Seeds to be Remitted<span class="required-feilds">*</span></label>
-                        <input type="number" class="form-control" name="amount_of_seed_to_be_remitted" id="amount_of_seed_to_be_remitted" placeholder="Amount of Seeds to be Remitted" required aria-required="true">
-                    </div>
                 </div>
                 <div class="form-row seeds">
                     <div class="form-group col-md-4">
@@ -148,10 +138,38 @@
                         <input type="number" class="form-control" name="volumeOfSeed" id="volumeOfSeed"
                             placeholder="e.g: 100" required aria-required="true">
                     </div>
+
+
+                    <hr />
+
+                    <div class="form-group col-md-4">
+                        <label for="amount_of_seed">Total amount of seeds given
+                            {{!-- <span class="required-feilds">*</span></label> --}}
+                        <input type="number" class="form-control" name="amount_of_seed" id="amount_of_seed"
+                            placeholder="Amount of seed" required aria-required="true">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="amount_of_seed_remitted">Total amount of seeds remitted
+                            {{!-- <span class="required-feilds">*</span></label> --}}
+                        <input type="number" class="form-control" name="amount_of_seed_remitted"
+                            id="amount_of_seed_remitted" placeholder="Amount of seed remitted" aria-required="true">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="amount_of_seed_to_be_remitted">Total amount of seeds to be remitted
+                            {{!-- <span class="required-feilds">*</span></label> --}}
+                        <input type="number" class="form-control" name="amount_of_seed_to_be_remitted"
+                            id="amount_of_seed_to_be_remitted" placeholder="Amount of Seeds to be Remitted" required
+                            aria-required="true">
+                    </div>
+
+                    <hr />
+
+
                     <div class="form-group col-md-4">
                         <label for="unit" class="input_form">Unit of measure<span class="profile_sub">*</span></label>
                         <div class="input-group">
-                            <select class="form-select border-bottom" id="unit" name="unit" required aria-required="true">
+                            <select class="form-select border-bottom" id="unit" name="unit" required
+                                aria-required="true">
                                 <option value="">Select Unit of measure</option>
                                 <option value="kg">Kg</option>
                                 <option value="Metric Ton">Metric Ton</option>
@@ -161,7 +179,8 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
-                        <input type="date" class="form-control" name="yearProduced" id="yearProduced" required aria-required="true">
+                        <input type="date" class="form-control" name="yearProduced" id="yearProduced" required
+                            aria-required="true">
                     </div>
                     <div class="form-group col-md-1 flex-end">
                         <div class="col col_sma add_class" style="width: 30px; margin-top:17px">
@@ -197,7 +216,7 @@
         $(document).ready(function () {
 
             /* Cal amount of seed to be remitted */
-             $("#amount_of_seed_remitted").on("input", function () {
+            $("#amount_of_seed_remitted").on("input", function () {
                 var amount_of_seed = $("#amount_of_seed").val();
                 var amount_of_seed_remitted = $("#amount_of_seed_remitted").val();
 
@@ -260,11 +279,11 @@
             })
         })
 
-    /*    function disable() {
-            console.log("disable")
-            let submit_btn = document.querySelector('.submitBtn')
-            submit_btn.setAttribute("disabled", "");
-            submit_btn.removeAttribute("enabled", "");
-        }   */
+        /*    function disable() {
+                console.log("disable")
+                let submit_btn = document.querySelector('.submitBtn')
+                submit_btn.setAttribute("disabled", "");
+                submit_btn.removeAttribute("enabled", "");
+            }   */
 
     </script>
