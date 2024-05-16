@@ -3,7 +3,7 @@
     <div class="card card_prod card_home">
         <div class="card-body">
             <form method="POST" action="" enctype="multipart/form-data">
-            <div id="msg"></div>
+                <div id="msg"></div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fullName">Full Name</label>
@@ -25,10 +25,11 @@
                             {{seedProducer.gender}}
                         </select>
                     </div>
-                     <div class="form-group col-md-4">
+                    <div class="form-group col-md-4">
                         <label for="age_range" class="input_form">Age Range </label>
                         <div class="input-group input-group-sm mb-3">
-                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom" data-val="{{ seedProducer.age_range }}" disabled>
+                            <select name="age_range" id="age_range" class="form-select border-0 border-bottom"
+                                data-val="{{ seedProducer.age_range }}" disabled>
                                 <option value="">Select Age Range</option>
                                 <option value="15-19">15-19</option>
                                 <option value="20-30">20-30</option>
@@ -42,8 +43,8 @@
                         <label for="living_status" class="input_form">Current Living Status</label>
                         <div class="input-group input-group-sm mb-3">
 
-                            <select class="form-select border-0 border-bottom"
-                                id="living_status" name="living_status" data-val="{{ seedProducer.living_status }}" disabled>
+                            <select class="form-select border-0 border-bottom" id="living_status" name="living_status"
+                                data-val="{{ seedProducer.living_status }}" disabled>
                                 <option value="">Select One</option>
                                 <option value="IDP">Internally Displaced Person </option>
                                 <option value="Host">Indigene of the State</option>
@@ -137,8 +138,8 @@
                     <td>{{dateFormat year_produced "DD/MM/YYYY"}}</td>
                     <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
                     <td>
-                        <button type="button" class="btn edit-btn-theme submitBtn" data-bs-toggle="modal" data-bs-target="#editSeed"
-                            data-backdrop="false" id="edit-seed" id-data="{{id}}">
+                        <button type="button" class="btn edit-btn-theme submitBtn" data-bs-toggle="modal"
+                            data-bs-target="#editSeed" data-backdrop="false" id="edit-seed" id-data="{{id}}">
                             <i class="fa fa-pencil"></i>
                             Edit Seed
                         </button>
@@ -166,30 +167,26 @@
                                     placeholder="Enter name of Seed">
                             </div>
                             <div class="form-group">
-                                <label for="volumeOfSeed" class="input_form">Amount of seed<span
+                                <label for="volumeOfSeed" class="input_form">Total amount of seeds given<span
                                         class="profile_sub">*</span></label>
-                                    <div class="custom-file">
-                                        <input type="text" required id="amountOfSeedInput" 
-                                            name="amountOfSeedInput"
-                                            class="form-control amount_of_seed" 
-                                            aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-sm" 
-                                            value="{{amount_of_seed}}" />
-                                    </div>
-                                    <div class="input-group-append">
-                                        <label for="amount_of_seed" class="input_form">Amount of seed remitted<span
-                                        class="profile_sub">*</span></label>
-                                        <input type="number" class="form-control amount_of_seed_remitted" 
-                                        name="amountOfSeedRemittedInput" 
-                                        id="amountOfSeedRemittedInput" required>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <label for="amountOfSeedToBeRemitted">Amount of seed to be remitted <span class="required-feilds">*</span></label>
-                                        <input type="number" 
-                                        class="form-control amount_of_seed_to_be_remitted" 
-                                        name="amountOfSeedToBeRemittedInput" 
-                                        id="amountOfSeedToBeRemittedInput" required disabled>
-                                    </div>
+                                <div class="custom-file">
+                                    <input type="text" required id="amountOfSeedInput" name="amountOfSeedInput"
+                                        class="form-control amount_of_seed" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" />
+                                </div>
+                                <div class="input-group-append">
+                                    <label for="amount_of_seed" class="input_form">Total amount of seeds remitted<span
+                                            class="profile_sub">*</span></label>
+                                    <input type="number" class="form-control amount_of_seed_remitted"
+                                        name="amountOfSeedRemittedInput" id="amountOfSeedRemittedInput" required>
+                                </div>
+                                <div class="input-group-append">
+                                    <label for="amountOfSeedToBeRemitted">Total amount of seeds to be remitted <span
+                                            class="required-feilds">*</span></label>
+                                    <input type="number" class="form-control amount_of_seed_to_be_remitted"
+                                        name="amountOfSeedToBeRemittedInput" id="amountOfSeedToBeRemittedInput" required
+                                        disabled>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
@@ -216,8 +213,10 @@
                                         </select>
                                     </div>
                                     <div class="input-group-append">
-                                        <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
-                                        <input type="date" class="form-control year_produced" name="yearProduced" id="yearProduced" required>
+                                        <label for="yearProduced">Year produced <span
+                                                class="required-feilds">*</span></label>
+                                        <input type="date" class="form-control year_produced" name="yearProduced"
+                                            id="yearProduced" required>
                                     </div>
                                 </div>
                             </div>
@@ -231,8 +230,9 @@
         </div>
     </div>
 
-{{!-- Edit Seed --}}
- <div class="modal fade" id="editSeed" tabindex="-1" role="dialog" aria-labelledby="editSeedTitle" aria-hidden="true">
+    {{!-- Edit Seed --}}
+    <div class="modal fade" id="editSeed" tabindex="-1" role="dialog" aria-labelledby="editSeedTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
 
             <div class="modal-content">
@@ -246,44 +246,41 @@
                             <div class="form-group">
                                 <label for="nameOfSeed">Name of Seed Produced <span
                                         class="required-feilds">*</span></label>
-                                <input type="text" class="form-control seed_name" name="nameOfSeedInput" id="nameOfSeedInput"
-                                    placeholder="Enter name of Seed">
+                                <input type="text" class="form-control seed_name" name="nameOfSeedInput"
+                                    id="nameOfSeedInput" placeholder="Enter name of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                         class="profile_sub">*</span></label>
-                                <input type="text" class="form-control variety" name="varietyOfSeedInput" id="varietyOfSeedInput"
-                                    placeholder="Enter Variety of Seed">
+                                <input type="text" class="form-control variety" name="varietyOfSeedInput"
+                                    id="varietyOfSeedInput" placeholder="Enter Variety of Seed">
                                 <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
                                     id="numberOfSeedInput" placeholder="Enter Variety of Seed">
-                                    <input type="number" class="form-control prod_id hidden"
-                                    id="seedId" placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" id="seedId"
+                                    placeholder="Enter Variety of Seed">
                             </div>
 
                             <div class="form-group">
-                                <label for="volumeOfSeed" class="input_form">Amount of seed<span
+                                <label for="volumeOfSeed" class="input_form">Total amount of seed given<span
                                         class="profile_sub">*</span></label>
-                                    <div class="custom-file">
-                                        <input type="text" required id="amountOfSeedInput" 
-                                            name="amountOfSeedInput"
-                                            class="form-control amount_of_seed" 
-                                            aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-sm" />
-                                    </div>
-                                    <div class="input-group-append">
-                                        <label for="amount_of_seed" class="input_form">Amount of seed remitted<span
-                                        class="profile_sub">*</span></label>
-                                        <input type="number" class="form-control amount_of_seed_remitted" 
-                                        name="amountOfSeedRemittedInput" 
-                                        id="amountOfSeedRemittedInput" required>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <label for="amountOfSeedToBeRemitted">Amount of seed to be remitted <span class="required-feilds">*</span></label>
-                                        <input type="number" 
-                                        class="form-control amount_of_seed_to_be_remitted" 
-                                        name="amountOfSeedToBeRemittedInput" 
-                                        id="amountOfSeedToBeRemittedInput" required disabled>
-                                    </div>
+                                <div class="custom-file">
+                                    <input type="number" required id="amountOfSeed" name="amountOfSeedInput"
+                                        class="form-control amount_of_seed" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-sm" />
+                                </div>
+                                <div class="input-group-append">
+                                    <label for="amount_of_seed" class="input_form">Total amount of seeds remitted<span
+                                            class="profile_sub">*</span></label>
+                                    <input type="number" class="form-control amount_of_seed_remitted"
+                                        name="amountOfSeedRemittedInput" id="amountOfSeedRemitted" required>
+                                </div>
+                                <div class="input-group-append">
+                                    <label for="amountOfSeedToBeRemitted">Total amount of seeds to be remitted <span
+                                            class="required-feilds">*</span></label>
+                                    <input type="number" class="form-control amount_of_seed_to_be_remitted"
+                                        name="amountOfSeedToBeRemittedInput" id="amountOfSeedToBeRemitted" required
+                                        disabled>
+                                </div>
                             </div>
 
 
@@ -304,8 +301,10 @@
                                         </select>
                                     </div>
                                     <div class="input-group-append">
-                                        <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
-                                        <input type="date" class="form-control year_produced" name="yearProducedInput" id="yearProducedInput" required>
+                                        <label for="yearProduced">Year produced <span
+                                                class="required-feilds">*</span></label>
+                                        <input type="date" class="form-control year_produced" name="yearProducedInput"
+                                            id="yearProducedInput" required>
                                     </div>
                                 </div>
                             </div>
@@ -332,7 +331,7 @@
             if (certified != null) {
                 $('#certified').val(certified)
             }
-            
+
             if (age != null) {
                 $('#age_range').val(age)
             }
@@ -387,18 +386,62 @@
                     })
             })
 
-            
+
             /* BINARY SOL */
 
+            $("body").on("click", "#edit-seed", function (event) {
 
-            /* Cal amount of seed to be remitted */
-             $("#amountOfSeedRemittedInput").on("input", function () {
-                var amount_of_seed = $("#amountOfSeedInput").val();
-                var amount_of_seed_remitted = $("#amountOfSeedRemittedInput").val();
 
-                var amount_of_seed_to_be_remitted = amount_of_seed - amount_of_seed_remitted;
-                $("#amountOfSeedToBeRemittedInput").val(amount_of_seed_to_be_remitted);
+                /* Cal amount of seed to be remitted */
+                $("body").on("input", "#amountOfSeedRemitted", function () {
+                    var amount_of_seed = $("#amountOfSeed").val();
+                    var amount_of_seed_remitted = $("#amountOfSeedRemitted").val();
+
+                    var amount_of_seed_to_be_remitted = amount_of_seed - amount_of_seed_remitted;
+                    $("#amountOfSeedToBeRemitted").val(amount_of_seed_to_be_remitted);
+                });
+
+                const urlPath = window.location.pathname;
+                const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
+                const seedId = this.getAttribute("id-data");
+
+                const url = window.location.origin + `/seed-company/fetch-single-seed/${seedId}/${seedCompanyId}`;
+
+                fetch(url, {
+                    method: 'GET'
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        const data = res.data;
+                        if (data !== null && data !== undefined) {
+
+                            const nameOfSeed = $('#nameOfSeedInput');
+                            const varietyOfSeed = $('#varietyOfSeedInput');
+                            const volumeOfSeed = $('#volumeOfSeedInput');
+                            const yearProduced = $('#yearProducedInput');
+                            const unit = $('#unitInput');
+                            const seedIdInput = $('#seedId');
+                            const amountOfSeed = $('#amountOfSeed');
+                            const amountOfSeedRemitted = $('#amountOfSeedRemitted');
+                            const amountOfSeedToBeRemitted = $('#amountOfSeedToBeRemitted');
+
+                            seedIdInput.val(data.id);
+                            nameOfSeed.val(data.name_of_seed);
+                            varietyOfSeed.val(data.variety_of_seed);
+                            volumeOfSeed.val(data.volume_of_seed);
+                            yearProduced.val(data.year_produced);
+                            unit.val(data.unit);
+                            amountOfSeed.val(data.amount_of_seed);
+                            amountOfSeedRemitted.val(data.amount_of_seed_remitted);
+                            amountOfSeedToBeRemitted.val(data.amount_of_seed_to_be_remitted);
+
+                        } else {
+                            console.error('Data is null or undefined');
+                        }
+                    })
+                    .catch((e) => console.log(e));
             });
+
 
 
             function getIdFromCurrentLocationUrlPath(path) {
@@ -425,8 +468,8 @@
                     select.disabled = false;
                     inputState = true;
                 });
-                
-                if(inputState){
+
+                if (inputState) {
                     this.style.display = 'none';
                     const saveBTN = document.getElementById('save');
                     saveBTN.style.display = "block";
@@ -435,7 +478,7 @@
             });
 
             $('#save').click(() => {
-            
+
                 let urlPath = window.location.pathname;
 
                 const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
@@ -469,116 +512,65 @@
                 form.append("state_id", state)
                 form.append("lg_id", lgas)
                 form.append("id", seedCompanyId);
-                
+
                 fetch(url, {
                     method: 'PATCH',
                     body: form,
                 })
-                .then((res) => {
-                    //console.log("Resp: ", res);
-                    if (!res.ok) {
-                        throw new Error(`Request failed with status: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    console.log(data.success);
-                    if(data.success == false){
-                        document.getElementById('msg').innerHTML = `
+                    .then((res) => {
+                        //console.log("Resp: ", res);
+                        if (!res.ok) {
+                            throw new Error(`Request failed with status: ${res.status}`);
+                        }
+                        return res.json();
+                    })
+                    .then((data) => {
+                        console.log(data.success);
+                        if (data.success == false) {
+                            document.getElementById('msg').innerHTML = `
                         <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
 
-                        /* reset inputs and select element states */
-                        inputs.forEach((input) => {
-                            input.disabled = true;
-                        });
-                        
-                        selectInputs.forEach((select) => {
-                            select.disabled = true;
-                        });
-                        
-                        editBTN.style.display = "block";
-                        saveBTN.style.display = "none";
-                        return;
-                    }
-                    if(data.success == true){
-                        document.getElementById('msg').innerHTML = `
+                            /* reset inputs and select element states */
+                            inputs.forEach((input) => {
+                                input.disabled = true;
+                            });
+
+                            selectInputs.forEach((select) => {
+                                select.disabled = true;
+                            });
+
+                            editBTN.style.display = "block";
+                            saveBTN.style.display = "none";
+                            return;
+                        }
+                        if (data.success == true) {
+                            document.getElementById('msg').innerHTML = `
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                        
-                        /* reset inputs and select element states */
-                        inputs.forEach((input) => {
-                            input.disabled = true;
-                        });
-                        
-                        selectInputs.forEach((select) => {
-                            select.disabled = true;
-                        });
-                        
-                        editBTN.style.display = "block";
-                        saveBTN.style.display = "none";
-                        return;
-                    }
-                })
-                .catch((err) => {
-                    console.error('Error:', err);
-                });
+
+                            /* reset inputs and select element states */
+                            inputs.forEach((input) => {
+                                input.disabled = true;
+                            });
+
+                            selectInputs.forEach((select) => {
+                                select.disabled = true;
+                            });
+
+                            editBTN.style.display = "block";
+                            saveBTN.style.display = "none";
+                            return;
+                        }
+                    })
+                    .catch((err) => {
+                        console.error('Error:', err);
+                    });
             });
-
-
-            $("#edit-seed").click((event) => {
-
-            const urlPath = window.location.pathname;
-            const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
-            const seedId = event.target.getAttribute("id-data");
-
-            alert(seedId);
-
-            //const seedCompanyId = seedId;
-            const url = window.location.origin + `/seed-company/fetch-single-seed/${seedId}/${seedCompanyId}`;
-
-            fetch(url, {
-                method: 'GET'
-            })
-            .then((res) => res.json())
-            .then((res) => {
-
-                const data = res.data;
-                if (data !== null && data !== undefined) {
-
-                    console.log(data);
-
-                    const nameOfSeed = document.getElementById('nameOfSeedInput');
-                    const varietyOfSeed = document.getElementById('varietyOfSeedInput');
-                    const volumeOfSeed = document.getElementById('volumeOfSeedInput');
-                    const yearProduced = document.getElementById('yearProducedInput');
-                    const unit = document.getElementById('unitInput');
-                    const seedId = document.getElementById('seedId');
-                    const amountOfSeed = document.getElementById('amountOfSeedInput');
-                    const amountOfSeedRemitted = document.getElementById('amountOfSeedRemittedInput');
-                    const amountOfSeedToBeRemitted = document.getElementById('amountOfSeedToBeRemittedInput');
-
-                    seedId.value = data.id;
-                    nameOfSeed.value = data.name_of_seed;
-                    varietyOfSeed.value = data.variety_of_seed;
-                    volumeOfSeed.value = data.volume_of_seed;
-                    yearProduced.value = data.year_produced;
-                    unit.value = data.unit;
-                    amountOfSeed.value = data.amount_of_seed;
-                    amountOfSeedRemitted.value = data.amount_of_seed_remitted;
-                    amountOfSeedToBeRemitted.value = data.amount_of_seed_to_be_remitted;
-
-                } else {
-                    console.error('Data is null or undefined');
-                }
-            })
-            .catch((e) => console.log(e));
-        });
-
 
             $("#save-updated-seed-data").click(() => {
 
@@ -616,28 +608,28 @@
                     method: "PATCH",
                     body: form
                 }).then((res) => res.json())
-                .then((res) => {
-                    //console.log("Response: ", res.msg);
-                    const data = res;
-                    if(data.success == true){
-                        
-                        document.getElementById('msg-seed-edit').innerHTML = `
+                    .then((res) => {
+                        //console.log("Response: ", res.msg);
+                        const data = res;
+                        if (data.success == true) {
+
+                            document.getElementById('msg-seed-edit').innerHTML = `
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 3000)
-                    }else{
-                       document.getElementById('msg-seed-edit').innerHTML = `
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 3000)
+                        } else {
+                            document.getElementById('msg-seed-edit').innerHTML = `
                         <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>`; 
-                    }
-                })
-                .catch((e) => console.log(e));
+                        </div>`;
+                        }
+                    })
+                    .catch((e) => console.log(e));
 
             });
 
@@ -654,6 +646,9 @@
         })
 
         function saveSeed() {
+
+            /* controlls seed producer creation and update */
+
             let seed = document.querySelector('.seed_name').value
             let variety = document.querySelector('.variety').value
             let volumn = document.querySelector('.volumn').value
@@ -689,35 +684,35 @@
                 })
         }
 
-        let url =  window.location.origin+'/api/base/get-droplist'
+        let url = window.location.origin + '/api/base/get-droplist'
 
-        fetch(url,{})
-          .then(response => response.json())
-          .then(response => {
-            if(response.statusCode === 200){
-              
-                let gender, len, i, farm_produce, level
-                gender = response.data.gender
+        fetch(url, {})
+            .then(response => response.json())
+            .then(response => {
+                if (response.statusCode === 200) {
 
-                len = gender.length
-                var ele = document.getElementById('gender');
+                    let gender, len, i, farm_produce, level
+                    gender = response.data.gender
 
-                
-                for(i=0; i < len; i++){
-                    ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
-                }
+                    len = gender.length
+                    var ele = document.getElementById('gender');
 
-                setTimeout(function(){
 
-                  let gender = $('#gender').data('gender')
-                    if(gender != null){
-                        $('#gender').val(gender)
+                    for (i = 0; i < len; i++) {
+                        ele.innerHTML = ele.innerHTML + '<option value="' + gender[i].name + '">' + gender[i].name + '</option>';
                     }
-                }, 1000)
 
-            }
-        }).catch(e => {
-          console.log(e)
-        })
-        
+                    setTimeout(function () {
+
+                        let gender = $('#gender').data('gender')
+                        if (gender != null) {
+                            $('#gender').val(gender)
+                        }
+                    }, 1000)
+
+                }
+            }).catch(e => {
+                console.log(e)
+            })
+
     </script>

@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
         Wallet.belongsTo(models.User, {
             foreignKey : 'user_id'
+        });
+
+        Wallet.hasMany(models.WalletLog, {
+            foreignKey : 'wallet_id'
         })
     }
   }

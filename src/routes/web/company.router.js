@@ -430,6 +430,9 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
           volume_of_seed: req.body.volumeOfSeed[index],
           unit: req.body.unit[index],
           year_produced: req.body.yearProduced[index],
+          amount_of_seed: req.body.amount_of_seed[index],
+          amount_of_seed_remitted: req.body.amount_of_seed_remitted[index],
+          amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted[index],
         });
       });
     } else {
@@ -439,6 +442,9 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
         volume_of_seed: req.body.volumeOfSeed,
         unit: req.body.unit,
         year_produced: req.body.yearProduced,
+        amount_of_seed: req.body.amount_of_seed,
+        amount_of_seed_remitted: req.body.amount_of_seed_remitted,
+        amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
       });
     }
     req.body.seeds = seeds;
@@ -566,6 +572,17 @@ companyRouter.post("/found-withdraw", async (req, res) => {
   let response = await escrowController.processFoundWithdrawer(req, res);
   // console.log("Response: ", response);
   return res.status(200).json(response);
+});
+
+companyRouter.get("/withdraw-log", async (req, res) => {
+  let response = await escrowController.getWithdrawLog(req, res);
+  // console.log("Response: ", response);
+  return res.status(200).json(response);
+  // res.render("seed_company/wallet", {
+  //   layout: "company-dashboard",
+  //   title: "Wallet",
+  //   walletLog,
+  // });
 });
 
 companyRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {

@@ -6,8 +6,9 @@ const axios = require("axios").default;
 require("dotenv").config();
 const hashHelper = require("../helpers/helper.hash");
 const bcrypt = require("bcrypt");
+const utils = require("../helpers/utils");
 
-const { SeedCompany, Wallet, User } = db;
+const { SeedCompany, Wallet, User, WalletLog } = db;
 
 module.exports = {
   processFoundWithdrawer: async (req, res) => {
@@ -41,6 +42,7 @@ module.exports = {
       const company = await SeedCompany.findOne({
         where: { user_id: user.id },
         attributes: [
+          "id",
           "name_of_company",
           "bank_account_name",
           "bank_account_no",
@@ -114,6 +116,7 @@ module.exports = {
       // console.log(transferData);
       const response = await escrow.processTransferToOtherBank(transferData);
       if (response.code !== "00") {
+        await utils.walletTransactionLog(user, response, company); // record wallet log
         return { success: false, message: response.message, status: 400 };
       }
 
@@ -124,6 +127,7 @@ module.exports = {
       );
 
       if (updateWalletBalance.length === 1) {
+        await utils.walletTransactionLog(user, response, company); // record wallet log
         return { success: true, message: "Withdrawal successful", status: 200 };
       }
       throw new Error("Failed to update wallet balance");
@@ -131,4 +135,19 @@ module.exports = {
       console.error("Error fetching account detail:", error);
     }
   },
+
+  getWithdrawLog: async (req, res) => {
+    const user = await req.user;
+    try{
+      const res = await WalletLog.findAll({
+        where: { user_id: user.id },
+        attributes: ["transaction_ref", "amount", "status", "created_at"],
+        order: [["created_at", "DESC"]],
+      });
+      return res;
+    }catch(e){
+      console.error(e);
+    }
+  }
+
 };

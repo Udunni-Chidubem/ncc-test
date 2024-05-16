@@ -534,7 +534,7 @@ module.exports = {
         { transaction: transaction }
       );
 
-      // cosole.log(req.body.seeds);
+      // console.log("Seed", req.body.seeds);
 
       await Promise.all(
         req.body.seeds.map((e) => {

@@ -11,7 +11,7 @@ module.exports = {
 
     await queryInterface.addColumn("seedProducerSeeds", "amount_of_seed", {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
     });
 
     await queryInterface.addColumn(
@@ -19,7 +19,7 @@ module.exports = {
       "amount_of_seed_remitted",
       {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       }
     );
 
@@ -28,7 +28,7 @@ module.exports = {
       "amount_of_seed_to_be_remitted",
       {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       }
     );
   },
