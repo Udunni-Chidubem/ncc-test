@@ -624,7 +624,7 @@ module.exports = {
 
   createSeedProducerSeed: async (data) => {
     try {
-      // console.log("seeds", data);
+      console.log("seeds", data);
 
       let seed = await SeedProducerSeed.create({
         producer_id: data.producer_id,
@@ -635,6 +635,9 @@ module.exports = {
         amount_of_seed: data.amount_of_seed,
         amount_of_seed_remitted: data.amount_of_seed_remitted,
         amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
+        unit_for_total_amount_of_seed_given: data.unit_for_total_amount_of_seed_given,
+        unit_for_total_amount_of_seed_remitted: data.unit_for_total_amount_of_seed_remitted,
+        unit_for_total_amount_of_seed_to_be_remitted: data.unit_for_total_amount_of_seed_to_be_remitted,
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
@@ -658,6 +661,9 @@ module.exports = {
           "amount_of_seed",
           "amount_of_seed_remitted",
           "amount_of_seed_to_be_remitted",
+          "unit_for_total_amount_of_seed_given",
+          "unit_for_total_amount_of_seed_remitted",
+          "unit_for_total_amount_of_seed_to_be_remitted",
         ],
       });
       return response;
@@ -741,6 +747,9 @@ module.exports = {
           amount_of_seed: data.amount_of_seed,
           amount_of_seed_remitted: data.amount_of_seed_remitted,
           amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
+          unit_for_total_amount_of_seed_given: data.unit_for_total_amount_of_seed_given,
+          unit_for_total_amount_of_seed_remitted: data.unit_for_total_amount_of_seed_remitted,
+          unit_for_total_amount_of_seed_to_be_remitted: data.unit_for_total_amount_of_seed_to_be_remitted,
         },
         {
           where: { id: data.id, producer_id: data.producer_id },
@@ -753,6 +762,9 @@ module.exports = {
             "amount_of_seed",
             "amount_of_seed_remitted",
             "amount_of_seed_to_be_remitted",
+            "unit_for_total_amount_of_seed_given",
+            "unit_for_total_amount_of_seed_remitted",
+            "unit_for_total_amount_of_seed_to_be_remitted",
           ],
         }
       );

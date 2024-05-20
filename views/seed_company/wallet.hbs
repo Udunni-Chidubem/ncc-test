@@ -71,12 +71,18 @@
 						</tr>
 					</thead>
 					<tbody class="t_info_body" id="tableBody">
-						{{!-- <tr class="t_info_row1">
+						{{#if walletLog}}
+						{{this.amount}}
+						{{/if}}
+						{{#walletLog}}
+						{{this.amount}}
+						<tr class="t_info_row1">
 							<th scope="row"><a href="#">12345678</a></th>
 							<td>&#8358; 2000</td>
 							<td>12/12/3032</td>
-						</tr> --}}
-
+						</tr>
+						{{/walletLog}}
+						{{!-- {{/each}} --}}
 					</tbody>
 				</table>
 			</div>
@@ -136,9 +142,9 @@
 				if (optionValue) {
 					$(".walletTable").not("." + optionValue).hide();
 					$("." + optionValue).show();
-					if (optionValue == "withdrawal") {
-						return await fetchWidthdrawalHistory();
-					}
+					//if (optionValue == "withdrawal") {
+					//	return await fetchWidthdrawalHistory();
+					//}
 				} else {
 					$(".walletTable").hide();
 				}

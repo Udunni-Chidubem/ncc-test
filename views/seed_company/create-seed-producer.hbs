@@ -147,35 +147,65 @@
                             {{!-- <span class="required-feilds">*</span></label> --}}
                         <input type="number" class="form-control" name="amount_of_seed" id="amount_of_seed"
                             placeholder="Amount of seed" required aria-required="true">
+                        <br />
+                        {{!-- <label for="unit_for_total_amount_of_seed_given">Unit of measure<span
+                                class="profile_sub">*</span></label> --}}
+                        <select class="form-select border-bottom" id="unit_for_total_amount_of_seed_given"
+                            style="font-size: 12px;" name="unit_for_total_amount_of_seed_given" required
+                            aria-required="true">
+                            <option value="">Select Unit of measurement</option>
+                            <option value="kg">Kg</option>
+                            <option value="Metric Ton">Metric Ton</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="amount_of_seed_remitted">Total amount of seeds remitted
                             {{!-- <span class="required-feilds">*</span></label> --}}
                         <input type="number" class="form-control" name="amount_of_seed_remitted"
                             id="amount_of_seed_remitted" placeholder="Amount of seed remitted" aria-required="true">
+                        <br />
+                        {{!-- <label for="unit_for_total_amount_of_seed_given">Unit of measure<span
+                                class="profile_sub">*</span></label> --}}
+                        <select class="form-select border-bottom" id="unit_for_total_amount_of_seed_remitted"
+                            style="font-size: 12px;" name="unit_for_total_amount_of_seed_remitted" required
+                            aria-required="true">
+                            <option value="">Select Unit of measurement</option>
+                            <option value="kg">Kg</option>
+                            <option value="Metric Ton">Metric Ton</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="amount_of_seed_to_be_remitted">Total amount of seeds to be remitted
+                        <label for="amount_of_seed_to_be_remitted">Total amount of seeds to be remitted
                             {{!-- <span class="required-feilds">*</span></label> --}}
                         <input type="number" class="form-control" name="amount_of_seed_to_be_remitted"
-                            id="amount_of_seed_to_be_remitted" placeholder="Amount of Seeds to be Remitted" required
+                            id="amount_of_seed_to_be_remitted" placeholder="Amount of Seeds to be Remitted" required
                             aria-required="true">
+                        <br />
+                        {{!-- <label for="unit_for_total_amount_of_seed_to_be_remitted">Unit of measure<span
+                                class="profile_sub">*</span></label> --}}
+                        <select class="form-select border-bottom" id="unit_for_total_amount_of_seed_to_be_remitted"
+                            style="font-size: 12px;" name="unit_for_total_amount_of_seed_to_be_remitted" required
+                            aria-required="true">
+                            <option value="">Select Unit of measurement</option>
+                            <option value="kg">Kg</option>
+                            <option value="Metric Ton">Metric Ton</option>
+                        </select>
                     </div>
 
                     <hr />
 
 
                     <div class="form-group col-md-4">
-                        <label for="unit" class="input_form">Unit of measure<span class="profile_sub">*</span></label>
+                        <label for="unit" class="input_form">Unit of measurement<span
+                                class="profile_sub">*</span></label>
                         <div class="input-group">
                             <select class="form-select border-bottom" id="unit" name="unit" required
-                                aria-required="true">
+                                style="font-size: 12px;" aria-required="true">
                                 <option value="">Select Unit of measure</option>
                                 <option value="kg">Kg</option>
                                 <option value="Metric Ton">Metric Ton</option>
                             </select>
                         </div>
-
                     </div>
                     <div class="form-group col-md-4">
                         <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>

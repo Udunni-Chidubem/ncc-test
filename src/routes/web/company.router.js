@@ -133,7 +133,6 @@ companyRouter.get("/settings", async (req, res) => {
 companyRouter.get("/settings/deactivate/:id/:status", async (req, res) => {
   let data = { status: req.params.status, updated_at: now() };
   let id = req.params.id;
-  console.log(id);
   companyController.userUpdate(data, id);
   req.logOut();
   res.redirect("/login");
@@ -283,11 +282,6 @@ companyRouter.get("/view-sheet", async (req, res) => {
   let company = await utils.getCompanyProfile(user);
   let isVerified = await utils.isVerified(user);
   let saleSheets = await companyController.saleSheets(user.id);
-  console.log("Salesheets: ", saleSheets);
-  // let states = await States.findAll({
-  //     attributes : ['id', 'name'],
-  //     raw: true
-  // });
 
   res.render("seed_company/view-sheet", {
     layout: "company-dashboard",
@@ -433,6 +427,9 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
           amount_of_seed: req.body.amount_of_seed[index],
           amount_of_seed_remitted: req.body.amount_of_seed_remitted[index],
           amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted[index],
+          unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given[index],
+          unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted[index],
+          unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted[index],
         });
       });
     } else {
@@ -445,6 +442,9 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
         amount_of_seed: req.body.amount_of_seed,
         amount_of_seed_remitted: req.body.amount_of_seed_remitted,
         amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
+        unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given,
+        unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted,
+        unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted,
       });
     }
     req.body.seeds = seeds;
@@ -489,6 +489,9 @@ companyRouter.post("/seed-producer-seed/create", async (req, res) => {
     amount_of_seed: req.body.amount_of_seed,
     amount_of_seed_remitted: req.body.amount_of_seed_remitted,
     amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
+    unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given,
+    unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted,
+    unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted,
   };
 
   let r = await companyController.createSeedProducerSeed(seeds);
@@ -575,14 +578,14 @@ companyRouter.post("/found-withdraw", async (req, res) => {
 });
 
 companyRouter.get("/withdraw-log", async (req, res) => {
-  let response = await escrowController.getWithdrawLog(req, res);
+  let walletLog = await escrowController.getWithdrawLog(req, res);
   // console.log("Response: ", response);
-  return res.status(200).json(response);
-  // res.render("seed_company/wallet", {
-  //   layout: "company-dashboard",
-  //   title: "Wallet",
-  //   walletLog,
-  // });
+  // return res.status(200).json(response);
+  res.render("seed_company/wallet", {
+    layout: "company-dashboard",
+    title: "Wallet",
+    walletLog,
+  });
 });
 
 companyRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
