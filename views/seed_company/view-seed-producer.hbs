@@ -166,7 +166,10 @@
                                 <input type="text" class="form-control seed_name" name="nameOfSeed" id="nameOfSeed"
                                     placeholder="Enter name of Seed">
                             </div>
-                            <div class="form-group">
+
+
+
+                            {{!-- <div class="form-group">
                                 <label for="volumeOfSeed" class="input_form">Total amount of seeds given<span
                                         class="profile_sub">*</span></label>
                                 <div class="custom-file">
@@ -187,7 +190,80 @@
                                         name="amountOfSeedToBeRemittedInput" id="amountOfSeedToBeRemittedInput" required
                                         disabled>
                                 </div>
+                            </div> --}}
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="volumeOfSeed" class="input_form">Total amount of seed given<span
+                                                class="profile_sub">*</span></label>
+                                        <div class="custom-file">
+                                            <input type="number" required id="amountOfSeed" name="amountOfSeed"
+                                                class="form-control amount_of_seed" aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="unit_for_total_amount_of_seed_given" class="input_form">Unit</label>
+                                        <select class="form-select form-control"
+                                            id="unit_for_total_amount_of_seed_given"
+                                            name="unit_for_total_amount_of_seed_given" required>
+                                            <option selected>Select unit..</option>
+                                            <option value="kg">Kg</option>
+                                            <option value="Metric Ton">Metric Ton</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input-group-append">
+                                    <div class="row">
+
+                                        <div class="col-md-8">
+                                            <label for="amount_of_seed" class="input_form">Total amount of seeds
+                                                remitted<span class="profile_sub">*</span></label>
+                                            <input type="number" class="form-control amount_of_seed_remitted"
+                                                name="amountOfSeedRemitted" id="amountOfSeedRemitted" required>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <label for="unit_for_total_amount_of_seed_remitted" class="input_form">Unit
+                                                <select class="form-select form-control amount_of_seed_to_be_remitted"
+                                                    id="unit_for_total_amount_of_seed_remitted"
+                                                    name="unit_for_total_amount_of_seed_remitted" required>
+                                                    <option selected>Select unit..</option>
+                                                    <option value="kg">Kg</option>
+                                                    <option value="Metric Ton">Metric Ton</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="input-group-append">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="amountOfSeedToBeRemitted" class="input_form">Total amount of
+                                                seeds to be remitted
+                                                <span class="required-feilds">*</span></label>
+                                            <input type="number" class="form-control" name="amountOfSeedToBeRemitted"
+                                                id="amountOfSeedToBeRemitted" required disabled>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <label for="unit_for_total_amount_of_seed_to_be_remitted"
+                                                class="input_form">Unit</label>
+                                            <select class="form-select form-control"
+                                                id="unit_for_total_amount_of_seed_to_be_remitted"
+                                                name="unit_for_total_amount_of_seed_to_be_remitted" required>
+                                                <option selected>Select unit..</option>
+                                                <option value="kg">Kg</option>
+                                                <option value="Metric Ton">Metric Ton</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+
+
+
+
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                         class="profile_sub">*</span></label>
@@ -254,6 +330,7 @@
                                         class="profile_sub">*</span></label>
                                 <input type="text" class="form-control variety" name="varietyOfSeedInput"
                                     id="varietyOfSeedInput" placeholder="Enter Variety of Seed">
+
                                 <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
                                     id="numberOfSeedInput" placeholder="Enter Variety of Seed">
                                 <input type="number" class="form-control prod_id hidden" id="seedId"
@@ -261,45 +338,104 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="volumeOfSeed" class="input_form">Total amount of seed given<span
-                                        class="profile_sub">*</span></label>
-                                <div class="custom-file">
-                                    <input type="number" required id="amountOfSeed" name="amountOfSeedInput"
-                                        class="form-control amount_of_seed" aria-label="Sizing example input"
-                                        aria-describedby="inputGroup-sizing-sm" />
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="volumeOfSeed" class="input_form">Total amount of seed given<span
+                                                class="profile_sub">*</span></label>
+                                        <div class="custom-file">
+                                            <input type="number" required id="amountOfSeed" name="amountOfSeed"
+                                                class="form-control amount_of_seed" aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mt-2">
+                                        <label for="unit_for_total_amount_of_seed_given" class="input_form">Unit</label>
+                                        <select
+                                            class="form-select form-control unit_for_total_amount_of_seed_given_input"
+                                            id="unit_for_total_amount_of_seed_given"
+                                            name="unit_for_total_amount_of_seed_given" required>
+                                            <option selected>Select unit..</option>
+                                            <option value="kg">Kg</option>
+                                            <option value="Metric Ton">Metric Ton</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="input-group-append">
-                                    <label for="amount_of_seed" class="input_form">Total amount of seeds remitted<span
-                                            class="profile_sub">*</span></label>
-                                    <input type="number" class="form-control amount_of_seed_remitted"
-                                        name="amountOfSeedRemittedInput" id="amountOfSeedRemitted" required>
+                                    <div class="row">
+
+                                        <div class="col-md-8">
+                                            <label for="amount_of_seed" class="input_form">Total amount of seeds
+                                                remitted<span class="profile_sub">*</span></label>
+                                            <input type="number" class="form-control amount_of_seed_remitted"
+                                                name="amountOfSeedRemitted" id="amountOfSeedRemitted" required>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <label for="unit_for_total_amount_of_seed_remitted" class="input_form">Unit
+                                                <select
+                                                    class="form-select form-control unit_for_total_amount_of_seed_remitted_input"
+                                                    id="unit_for_total_amount_of_seed_remitted"
+                                                    name="unit_for_total_amount_of_seed_remitted" required>
+                                                    <option selected>Select unit..</option>
+                                                    <option value="kg">Kg</option>
+                                                    <option value="Metric Ton">Metric Ton</option>
+                                                </select>
+                                        </div>
+                                    </div>
                                 </div>
+                                <br />
                                 <div class="input-group-append">
-                                    <label for="amountOfSeedToBeRemitted">Total amount of seeds to be remitted <span
-                                            class="required-feilds">*</span></label>
-                                    <input type="number" class="form-control amount_of_seed_to_be_remitted"
-                                        name="amountOfSeedToBeRemittedInput" id="amountOfSeedToBeRemitted" required
-                                        disabled>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="amountOfSeedToBeRemitted" class="input_form">Total amount of
+                                                seeds to be remitted
+                                                <span class="required-feilds">*</span></label>
+                                            <input type="number"
+                                                class="form-control amount_of_seed_to_be_remitted_input"
+                                                name="amountOfSeedToBeRemitted" id="amountOfSeedToBeRemitted" required
+                                                disabled>
+                                        </div>
+                                        <div class="col-md-4 mt-2">
+                                            <label for="unit_for_total_amount_of_seed_to_be_remitted"
+                                                class="input_form">Unit</label>
+                                            <select
+                                                class="form-select form-control unit_for_total_amount_of_seed_to_be_remitted_input"
+                                                id="unit_for_total_amount_of_seed_to_be_remitted"
+                                                name="unit_for_total_amount_of_seed_to_be_remitted" required>
+                                                <option selected>Select unit..</option>
+                                                <option value="kg">Kg</option>
+                                                <option value="Metric Ton">Metric Ton</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
-                                        class="profile_sub">*</span></label>
                                 <div class="input-group mb-3">
-                                    <div class="custom-file">
-                                        <input type="text" required id="volumeOfSeedInput" name="volumeOfSeedInput"
-                                            class="form-control volumn" aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-sm" />
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
+                                                    class="profile_sub">*</span></label>
+                                            <input type="text" required id="volumeOfSeedInput" name="volumeOfSeedInput"
+                                                class="form-control volumn" aria-label="Sizing example input"
+                                                aria-describedby="inputGroup-sizing-sm" />
+                                        </div>
+                                        <div class="col-md-4 mt-3">
+                                            <div class="input-group-append">
+                                                <label for="unitInput" class="input_form">Unit</label>
+                                                <select class="form-select unit" id="unitInput" name="unitInput"
+                                                    required>
+                                                    <option selected>Select unit..</option>
+                                                    <option value="kg">Kg</option>
+                                                    <option value="Metric Ton">Metric Ton</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="input-group-append">
-                                        <select class="form-select unit" id="unitInput" name="unitInput" required>
-                                            <option selected>Choose...</option>
-                                            <option value="kg">Kg</option>
-                                            <option value="Metric Ton">Metric Ton</option>
-                                        </select>
-                                    </div>
+                                    {{!-- <div class="custom-file"> --}}
+                                        {{!-- </div> --}}
+
                                     <div class="input-group-append">
                                         <label for="yearProduced">Year produced <span
                                                 class="required-feilds">*</span></label>
@@ -322,6 +458,18 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+
+            /* Cal amount of seed to be remitted */
+            $("body").on("input", "#amountOfSeedRemitted", function () {
+                var amount_of_seed = $("#amountOfSeed").val();
+                var amount_of_seed_remitted = $("#amountOfSeedRemitted").val();
+
+                var amount_of_seed_to_be_remitted = amount_of_seed - amount_of_seed_remitted;
+                $("#amountOfSeedToBeRemitted").val(amount_of_seed_to_be_remitted);
+            });
+
+
             let certified = $('#certified').data('certified')
             let state = $('#state').data('state')
             let age = $('#age_range').data('val')
@@ -424,6 +572,11 @@
                             const amountOfSeed = $('#amountOfSeed');
                             const amountOfSeedRemitted = $('#amountOfSeedRemitted');
                             const amountOfSeedToBeRemitted = $('#amountOfSeedToBeRemitted');
+                            const unitOfAmountOfSeed = $('.unit_for_total_amount_of_seed_given_input');
+                            const unitOfAmountOfSeedRemitted = $('.unit_for_total_amount_of_seed_remitted_input');
+                            const unitOfAmountOfSeedToBeRemitted = $('.unit_for_total_amount_of_seed_to_be_remitted_input');
+
+                            //console.log(data);
 
                             seedIdInput.val(data.id);
                             nameOfSeed.val(data.name_of_seed);
@@ -434,6 +587,9 @@
                             amountOfSeed.val(data.amount_of_seed);
                             amountOfSeedRemitted.val(data.amount_of_seed_remitted);
                             amountOfSeedToBeRemitted.val(data.amount_of_seed_to_be_remitted);
+                            unitOfAmountOfSeed.val(data.unit_for_total_amount_of_seed_given);
+                            unitOfAmountOfSeedRemitted.val(data.unit_for_total_amount_of_seed_remitted);
+                            unitOfAmountOfSeedToBeRemitted.val(data.unit_for_total_amount_of_seed_to_be_remitted);
 
                         } else {
                             console.error('Data is null or undefined');
@@ -581,16 +737,19 @@
 
                 const url = window.location.origin + `/seed-company/seed-update`;
 
-                const seedId = document.getElementById('seedId').value;
-                const nameOfSeed = document.getElementById('nameOfSeedInput').value;
-                const varietyOfseed = document.getElementById('varietyOfSeedInput').value;
-                const volumeOfseed = document.getElementById('volumeOfSeedInput').value;
-                const yearProduced = document.getElementById('yearProducedInput').value;
-                const unit = document.getElementById('unitInput').value;
-                const producerId = document.getElementById('numberOfSeedInput').value;
-                const amountOfSeed = document.getElementById('amountOfSeedInput').value;
-                const amountOfSeedRemitted = document.getElementById('amountOfSeedRemittedInput').value;
-                const amountOfSeedToBeRemitted = document.getElementById('amountOfSeedToBeRemittedInput').value;
+                const seedId = document.querySelector('#seedId').value;
+                const nameOfSeed = document.querySelector('#nameOfSeedInput').value;
+                const varietyOfseed = document.querySelector('#varietyOfSeedInput').value;
+                const volumeOfseed = document.querySelector('#volumeOfSeedInput').value;
+                const yearProduced = document.querySelector('#yearProducedInput').value;
+                const unit = document.querySelector('#unitInput').value;
+                const producerId = document.querySelector('#numberOfSeedInput').value;
+                const amountOfSeed = document.querySelector('#amountOfSeed').value;
+                const amountOfSeedRemitted = document.querySelector('#amountOfSeedRemitted').value;
+                const amountOfSeedToBeRemitted = document.querySelector('#amountOfSeedToBeRemitted').value;
+                const unitOfAmountOfSeed = document.querySelector('#unit_for_total_amount_of_seed_given').value;
+                const unitOfAmountOfSeedRemitted = document.querySelector('#unit_for_total_amount_of_seed_remitted').value;
+                const unitOfAmountOfSeedToBeRemitted = document.querySelector('#unit_for_total_amount_of_seed_to_be_remitted').value;
 
 
                 form.append("id", seedId)
@@ -603,6 +762,9 @@
                 form.append("amount_of_seed", amountOfSeed)
                 form.append("amount_of_seed_remitted", amountOfSeedRemitted)
                 form.append("amount_of_seed_to_be_remitted", amountOfSeedToBeRemitted)
+                form.append("unit_for_total_amount_of_seed_given", unitOfAmountOfSeed)
+                form.append("unit_for_total_amount_of_seed_remitted", unitOfAmountOfSeedRemitted)
+                form.append("unit_for_total_amount_of_seed_to_be_remitted", unitOfAmountOfSeedToBeRemitted)
 
                 fetch(url, {
                     method: "PATCH",
@@ -646,8 +808,9 @@
         })
 
         function saveSeed() {
-
             /* controlls seed producer creation and update */
+
+            //alert("saveSeed")
 
             let seed = document.querySelector('.seed_name').value
             let variety = document.querySelector('.variety').value
@@ -658,6 +821,9 @@
             let amount_of_seed = document.querySelector('.amount_of_seed').value
             let amount_of_seed_remitted = document.querySelector('.amount_of_seed_remitted').value
             let amount_of_seed_to_be_remitted = document.querySelector('.amount_of_seed_to_be_remitted').value
+            let unit_for_total_amount_of_seed_given = document.querySelector('#unit_for_total_amount_of_seed_given').value
+            let unit_for_total_amount_of_seed_remitted = document.querySelector('#unit_for_total_amount_of_seed_remitted').value
+            let unit_for_total_amount_of_seed_to_be_remitted = document.querySelector('#unit_for_total_amount_of_seed_to_be_remitted').value
 
             let url = window.location.origin + '/seed-company/seed-producer-seed/create'
 
@@ -674,6 +840,11 @@
             form.append('amount_of_seed', amount_of_seed)
             form.append('amount_of_seed_remitted', amount_of_seed_remitted)
             form.append('amount_of_seed_to_be_remitted', amount_of_seed_to_be_remitted)
+            form.append('unit_for_total_amount_of_seed_given', unit_for_total_amount_of_seed_given)
+            form.append('unit_for_total_amount_of_seed_remitted', unit_for_total_amount_of_seed_remitted)
+            form.append('unit_for_total_amount_of_seed_to_be_remitted', unit_for_total_amount_of_seed_to_be_remitted)
+
+            console.log(form);
 
             fetch(url, {
                 method: 'POST',

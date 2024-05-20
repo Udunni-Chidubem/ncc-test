@@ -21,20 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       name_of_seed: DataTypes.STRING,
       variety_of_seed: DataTypes.STRING,
       volume_of_seed: DataTypes.INTEGER,
-      // state_id: DataTypes.INTEGER,
-      // lg_id: DataTypes.INTEGER,
-      // status: {
-      //   type: DataTypes.INTEGER,
-      //   defaultValue: 1
-      // },
-      // gender: DataTypes.STRING,
-      // age_range: DataTypes.STRING,
-      // living_status: DataTypes.STRING,
       unit: DataTypes.STRING,
       year_produced: DataTypes.STRING,
       amount_of_seed: DataTypes.INTEGER,
       amount_of_seed_remitted: DataTypes.INTEGER,
       amount_of_seed_to_be_remitted: DataTypes.INTEGER,
+      unit_for_total_amount_of_seed_given: DataTypes.STRING,
+      unit_for_total_amount_of_seed_remitted: DataTypes.STRING,
+      unit_for_total_amount_of_seed_to_be_remitted: DataTypes.STRING,
       created_at: {
         type: DataTypes.DATE,
         defaultValue: new Date(),

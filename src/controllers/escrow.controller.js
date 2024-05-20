@@ -138,16 +138,18 @@ module.exports = {
 
   getWithdrawLog: async (req, res) => {
     const user = await req.user;
-    try{
-      const res = await WalletLog.findAll({
+    // try{
+      const WalletLog = await WalletLog.findAll({
         where: { user_id: user.id },
         attributes: ["transaction_ref", "amount", "status", "created_at"],
         order: [["created_at", "DESC"]],
       });
+      res = JSON.parse(JSON.stringify(WalletLog));
+      console.log(res);
       return res;
-    }catch(e){
-      console.error(e);
-    }
+    // }catch(e){
+    //   console.error(e);
+    // }
   }
 
 };
