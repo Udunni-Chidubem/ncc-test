@@ -153,8 +153,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group col-md-6 row">
+
+                        <div class="form-group col-md-4">
+                            <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
+                            <input type="date" class="form-control" name="yearProduced" id="yearProduced" required
+                                aria-required="true">
+                        </div>
+
+                        <div class="form-group col-md-1 flex-end">
+                            <div class="col col_sma add_class" style="width: 30px; margin-top:17px">
+                                <div class="p-3  " style="width: inherit;">
+                                    <span class="add "
+                                        style="cursor: pointer;display: inline-block;width: inherit;text-align: center;font-size: larger;"
+                                        id="_add"><i class=" fa fa-solid fa-plus"></i></span>
+                                </div>
+                            </div>
+                            <div class="col trash_class" style="display: none; width: 30px; margin-top:17px">
+                                <div class="p-3 " style="width: inherit;">
+                                    <span id="_trash"
+                                        style="cursor: pointer;display: inline-block;width: inherit;text-align: center;font-size: larger;"
+                                        class="_trash"><i class="fa fa-solid fa-trash-can _trash p_red"></i></span>
+                                </div>
+                            </div>
+                        </div>
 
 
+                    </div>
                     <hr />
 
                     <div class="form-group col-md-4">
@@ -207,7 +232,8 @@
                         </select>
                     </div>
 
-                    <hr />
+                    {{!--
+                    <hr /> --}}
 
 
                     {{!-- <div class="form-group col-md-4">
@@ -222,12 +248,12 @@
                             </select>
                         </div>
                     </div> --}}
-                    <div class="form-group col-md-4">
+                    {{!-- <div class="form-group col-md-4">
                         <label for="yearProduced">Year produced <span class="required-feilds">*</span></label>
                         <input type="date" class="form-control" name="yearProduced" id="yearProduced" required
                             aria-required="true">
-                    </div>
-                    <div class="form-group col-md-1 flex-end">
+                    </div> --}}
+                    {{!-- <div class="form-group col-md-1 flex-end">
                         <div class="col col_sma add_class" style="width: 30px; margin-top:17px">
                             <div class="p-3  " style="width: inherit;">
                                 <span class="add "
@@ -242,7 +268,7 @@
                                     class="_trash"><i class="fa fa-solid fa-trash-can _trash p_red"></i></span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
 
