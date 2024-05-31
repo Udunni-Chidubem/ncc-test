@@ -137,19 +137,38 @@ module.exports = {
   },
 
   getWithdrawLog: async (req, res) => {
-    const user = await req.user;
-    // try{
-      const WalletLog = await WalletLog.findAll({
+    try {
+      const user = await req.user;
+
+      // Retrieve page and pageSize from query parameters, default to page 1 and pageSize 10
+      const page = parseInt(req.query.page) || 1;
+      const pageSize = parseInt(req.query.pageSize) || 10;
+
+      // Calculate offset
+      const offset = (page - 1) * pageSize;
+
+      // Fetch records with limit and offset for pagination
+      const response = await WalletLog.findAndCountAll({
         where: { user_id: user.id },
         attributes: ["transaction_ref", "amount", "status", "created_at"],
         order: [["created_at", "DESC"]],
+        limit: pageSize,
+        offset: offset,
       });
-      res = JSON.parse(JSON.stringify(WalletLog));
-      console.log(res);
-      return res;
-    // }catch(e){
-    //   console.error(e);
-    // }
-  }
 
+      // Prepare paginated response
+      const paginatedResponse = {
+        totalItems: response.count,
+        totalPages: Math.ceil(response.count / pageSize),
+        currentPage: page,
+        pageSize: pageSize,
+        data: response.rows,
+      };
+
+      return res.json(paginatedResponse);
+    } catch (error) {
+      console.error("Error fetching withdraw log:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  },
 };
