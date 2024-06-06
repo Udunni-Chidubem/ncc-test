@@ -71,7 +71,7 @@
 						</tr>
 					</thead>
 					<tbody class="t_info_body" id="tableBody">
-						{{#if walletLog}}
+						{{!-- {{#if walletLog}}
 						{{this.amount}}
 						{{/if}}
 						{{#walletLog}}
@@ -81,10 +81,17 @@
 							<td>&#8358; 2000</td>
 							<td>12/12/3032</td>
 						</tr>
-						{{/walletLog}}
+						{{/walletLog}} --}}
 						{{!-- {{/each}} --}}
 					</tbody>
 				</table>
+				<div class="col-md-12 p-4"
+					style="width: 100%; display: flex; align-items: center; justify-content: space-between">
+					<div>
+						Showing <span id="start"></span> to <span id="end"></span> of <span id="total"></span>
+					</div>
+					<div id="paginationControls"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -142,9 +149,9 @@
 				if (optionValue) {
 					$(".walletTable").not("." + optionValue).hide();
 					$("." + optionValue).show();
-					//if (optionValue == "withdrawal") {
-					//	return await fetchWidthdrawalHistory();
-					//}
+					if (optionValue == "withdrawal") {
+						return await fetchWidthdrawalHistory(currentPage, pageSize);;
+					}
 				} else {
 					$(".walletTable").hide();
 				}
@@ -225,24 +232,67 @@
 
 
 
-		async function fetchWidthdrawalHistory() {
-			const url = window.location.origin + '/seed-company/withdraw-log';
-			fetch(url, { method: "GET" }).then((res) => res.json()).then((res) => {
-				let sn = 1;
-				for (const element of res) {
-					document.getElementById('tableBody').innerHTML += `
-					<tr class="t_info_row1">
+		let currentPage = 1;
+		const pageSize = 10;
+
+		async function fetchWidthdrawalHistory(page = 1, pageSize = 10) {
+			const url = `${window.location.origin}/seed-company/withdraw-log?page=${page}&pageSize=${pageSize}`;
+
+			fetch(url, { method: "GET" })
+				.then((res) => res.json())
+				.then((res) => {
+					$('.pagination').remove();
+					$('#transactionTable_info').remove();
+					const tableBody = document.getElementById('tableBody');
+					tableBody.innerHTML = '';
+
+					var sn = (page - 1) * pageSize + 1;
+
+					res.data.forEach(element => {
+						const newRow = document.createElement('tr');
+						newRow.className = 't_info_row1';
+						newRow.innerHTML = `
 						<td>${sn++}</td>
 						<th scope="row"><a href="#">${element.transaction_ref}</a></th>
 						<td>&#8358; ${element.amount}</td>
 						<td>${element.created_at}</td>
-					</tr>`;
-				}
+						`;
 
+						tableBody.appendChild(newRow);
+					});
 
-			}).catch((e) => {
-				console.log(e)
-			});
+					console.log(res.totalPages);
+					console.log(res.currentPage);
+					updatePaginationControls(res.totalPages, res.currentPage);
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		}
+
+		function updatePaginationControls(totalPages, currentPage) {
+			const paginationControls = document.getElementById('paginationControls');
+			paginationControls.innerHTML = ''; // Clear existing controls
+
+			if (currentPage > 1) {
+				const prevButton = document.createElement('button');
+				prevButton.className = 'btn btn-light btn-sm shadow w-100';
+				prevButton.innerText = 'Previous';
+				prevButton.addEventListener('click', () => {
+					fetchWidthdrawalHistory(currentPage - 1, pageSize);
+				});
+				paginationControls.appendChild(prevButton);
+			}
+
+			if (currentPage < totalPages) {
+				const nextButton = document.createElement('button');
+				nextButton.className = 'btn btn-light btn-sm shadow w-100 bordered';
+				nextButton.innerText = 'Next';
+				nextButton.addEventListener('click', () => {
+					fetchWidthdrawalHistory(currentPage + 1, pageSize);
+				});
+				paginationControls.appendChild(nextButton);
+			}
 		}
 
 
