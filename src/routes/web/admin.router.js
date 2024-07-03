@@ -336,6 +336,7 @@ adminRouter.get("/products", async (req, res) => {
 
 adminRouter.get("/users/:id", async (req, res) => {
   let type = req.query.type;
+  // console.log("Account Type:", type);
   const user = await req.user;
   let isVerified = await utils.isVerified(user);
   let farmer = null,
@@ -343,7 +344,9 @@ adminRouter.get("/users/:id", async (req, res) => {
     trader = null,
     products = null,
     balance = null,
-    ledger_info = null;
+    ledger_info = null,
+    product = null,
+    company_id = null;
   if (type == "farmer") farmer = await adminController.getOneFarmer(req, res);
   if (type == "company") {
     company = await adminController.getOneCompany(req, res);
@@ -503,7 +506,7 @@ adminRouter.post(
     let user = await req.user;
     let data = {};
     data.status = req.body.status;
-    adminController.updadeOrders(req.body.order, data);
+    adminController.updadeOrders(req, data);
     let { order, farmer, orderStatus } = await adminController.getOrder(
       req.params.transaction_id,
       req.params.id,

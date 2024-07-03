@@ -23,7 +23,7 @@ const {
   Salesheets,
   KnowledgeBase,
   SeedProducer,
-  SeedProducerSeed
+  SeedProducerSeed,
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -144,6 +144,8 @@ module.exports = {
         "user_id",
         "created_at",
         "profile_pic",
+        "farm_size",
+        "farm_size_measurement",
       ],
       include: [
         {
@@ -376,6 +378,14 @@ module.exports = {
     return JSON.parse(orders);
   },
 
+  /**
+   * Retrieves the order details, farmer information, and order status based on the transaction ID, user ID, and company ID.
+   *
+   * @param {type} transaction_id - Description of the transaction ID parameter
+   * @param {type} user_id - Description of the user ID parameter
+   * @param {type} company_id - Description of the company ID parameter
+   * @return {type} An object containing the order details, farmer information, and order status
+   */
   getOrder: async (transaction_id, user_id, company_id) => {
     // const user = await req.user
     let farmer = null,
@@ -402,6 +412,7 @@ module.exports = {
     });
 
     order = JSON.parse(JSON.stringify(order));
+
     if (order.length) {
       farmer = await Farmer.findOne({
         where: { id: order[0].TransactionLog.farmer_id },
@@ -441,55 +452,133 @@ module.exports = {
     // console.log(order);
     return { order, farmer, orderStatus };
   },
-  updadeOrders: async (order_id, data) => {
-    Orders.update(data, { where: { id: order_id } });
+
+  /**
+   * Updates an order in the database based on the provided request and data.
+   *
+   * @param {Object} req - The request object containing the order ID.
+   * @param {Object} data - The data object containing the updated order information.
+   * @return {Promise<void>} - A promise that resolves when the order is successfully updated.
+   */
+  async updadeOrders(req, data) {
+    try {
+      const order_id = req.body.order;
+      const order = await Orders.update(data, { where: { id: order_id } });
+      if (order[0] > 0 && data.status === "4") {
+        // data == 4 means order is cleared (4 = Fulfilled)
+        const _order = await Orders.findOne({ where: { id: order_id } });
+        const transactionCart = await TransactionCarts.findAll({
+          include: [
+            {
+              model: TransactionLog,
+              where: { id: _order.transaction_log_id },
+            },
+            {
+              model: Cart,
+              // include: [
+              //   {
+              //     model: Product,
+              //   },
+              // ],
+            },
+          ],
+        });
+        const response = JSON.parse(JSON.stringify(transactionCart));
+        await this.updateClearedBalance(response, _order);
+      }
+    } catch (error) {
+      console.error("Error updating order:", error);
+    }
+  },
+
+  /**
+   * Updates the cleared balance and uncleared balance for multiple items in a transaction.
+   *
+   * @param {Array} trans_log - An array of transaction logs.
+   * @param {Object} order - The order object.
+   * @return {Promise<void>} A promise that resolves when the update is complete.
+   */
+  async updateClearedBalance(trans_log, order) {
+    let transaction = await db.rest.transaction();
+
+    try {
+      for (const item of trans_log) {
+        const final_cleared_amount = item.Cart.total_amount * 0.89;
+
+        const company = await SeedCompany.findOne({
+          where: { id: order.company_id },
+          attributes: ["user_id"],
+        });
+
+        await Wallet.increment(
+          {
+            uncleared_amount: -final_cleared_amount,
+            amount: final_cleared_amount,
+          },
+          {
+            where: { user_id: company.user_id },
+            transaction: transaction,
+          }
+        );
+        console.log("Updated cleared balance & uncleared balance");
+      }
+      await transaction.commit();
+    } catch (e) {
+      await transaction.rollback();
+      console.log("Error updating cleared balance", e);
+    }
   },
 
   getUserslist: async (req, res) => {
-    let sql =
-      "SELECT count(u.id) as count from user u join farmer f on u.id = f.user_id where u.status = '1' ";
-    let farmeractivelist = await db.rest.query(sql, {
-      type: QueryTypes.SELECT,
-    });
+    try {
+      let sql1 =
+        "SELECT count(u.id) as count FROM user u JOIN farmer f ON u.id = f.user_id WHERE u.status = '1'";
+      let farmeractivelist = await db.rest.query(sql1, {
+        type: QueryTypes.SELECT,
+      });
 
-    let sql2 =
-      "SELECT count(u.id) as count from user u join farmer f on u.id = f.user_id where u.status = '0' ";
-    let farmerinactivelist = await db.rest.query(sql2, {
-      type: QueryTypes.SELECT,
-    });
+      let sql2 =
+        "SELECT count(u.id) as count FROM user u JOIN farmer f ON u.id = f.user_id JOIN user_role ur ON u.id = ur.user_id WHERE u.status = '0' AND ur.role_id = '1'";
+      let farmerinactivelist = await db.rest.query(sql2, {
+        type: QueryTypes.SELECT,
+      });
 
-    let sql3 =
-      "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status = '1' ";
-    let seedcompanyactivelist = await db.rest.query(sql3, {
-      type: QueryTypes.SELECT,
-    });
+      let sql3 =
+        "SELECT count(u.id) as count FROM user u JOIN seedcompany sc ON u.id = sc.user_id WHERE u.status = '1'";
+      let seedcompanyactivelist = await db.rest.query(sql3, {
+        type: QueryTypes.SELECT,
+      });
 
-    let sql4 =
-      "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status = '0' ";
-    let seedcompanyinactivelist = await db.rest.query(sql4, {
-      type: QueryTypes.SELECT,
-    });
+      let sql4 =
+        "SELECT count(u.id) as count FROM user u JOIN seedcompany sc ON u.id = sc.user_id WHERE u.status = '0'";
+      let seedcompanyinactivelist = await db.rest.query(sql4, {
+        type: QueryTypes.SELECT,
+      });
 
-    let SQL5 =
-      "SELECT count(u.id) as count from user u join seedtrader st on u.id = st.user_id where u.status = '1' ";
-    let seedtraderactivelist = await db.rest.query(SQL5, {
-      type: QueryTypes.SELECT,
-    });
+      let sql5 =
+        "SELECT count(u.id) as count FROM user u JOIN seedtrader st ON u.id = st.user_id WHERE u.status = '1'";
+      let seedtraderactivelist = await db.rest.query(sql5, {
+        type: QueryTypes.SELECT,
+      });
 
-    let sql6 =
-      "SELECT count(u.id) as count from user u join seedtrader st on u.id = st.user_id where u.status = '0' ";
-    let seedtraderinactivelist = await db.rest.query(sql6, {
-      type: QueryTypes.SELECT,
-    });
+      let sql6 =
+        "SELECT count(u.id) as count FROM user u JOIN seedtrader st ON u.id = st.user_id WHERE u.status = '0'";
+      let seedtraderinactivelist = await db.rest.query(sql6, {
+        type: QueryTypes.SELECT,
+      });
 
-    return {
-      farmerinactivelist,
-      farmeractivelist,
-      seedcompanyactivelist,
-      seedcompanyinactivelist,
-      seedtraderactivelist,
-      seedtraderinactivelist,
-    };
+      return {
+        farmeractivelist,
+        farmerinactivelist,
+        seedcompanyactivelist,
+        seedcompanyinactivelist,
+        seedtraderactivelist,
+        seedtraderinactivelist,
+      };
+    } catch (error) {
+      console.error("Error querying user lists:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   },
 
   getMessages: async (req, res) => {
@@ -879,7 +968,7 @@ module.exports = {
       farmerFemalelist,
     };
   },
-  
+
   getMaleSeedTraderCount: async (req, res) => {
     let maleSeedtraderCount = await SeedTrader.count({
       where: { gender: "Male" },
@@ -1036,17 +1125,17 @@ module.exports = {
         },
         {
           model: User,
-          include:[
+          include: [
             {
               model: SeedCompany,
               attributes: ["name_of_company"],
-            }
+            },
           ],
           raw: true,
         },
         {
           model: SeedProducerSeed,
-          raw: true
+          raw: true,
         },
       ],
       order: [["created_at", "DESC"]],
@@ -1093,131 +1182,160 @@ module.exports = {
     return response;
   },
   getSeedProducerCount: async (req, res) => {
-    let seedProducerCount = await SeedProducer.count({
-    });
+    let seedProducerCount = await SeedProducer.count({});
 
     // seedProducerCount = seedProducerCount;
     return seedProducerCount;
   },
-  /* BINARY SOL */ 
+  /* BINARY SOL */
 
   getSeedProducerSeedById: async (seedId, seedCompanyId) => {
-    try{
+    try {
       const response = await SeedProducerSeed.findOne({
-        where: { id: seedId, producer_id: seedCompanyId }
-      })
+        where: { id: seedId, producer_id: seedCompanyId },
+      });
       return response;
-
-    }catch(e){
+    } catch (e) {
       console.error(e.message);
     }
   },
 
   updateSeedProducer: async (req, res) => {
     const data = req.body;
-    try{
+    try {
       const isValid = isValidPhoneNumber(data.phone_no);
-      if(!isValid){
-        return res.status(200).json({ success: false, msg: `Invalid phone number`, status: 200 });
+      if (!isValid) {
+        return res
+          .status(200)
+          .json({ success: false, msg: `Invalid phone number`, status: 200 });
       }
       const response = await SeedProducer.update(
         {
-          full_name: data.full_name, 
-            phone_no: data.phone_no, 
-            certified: data.certified, 
-            state_id: data.sate_id, 
-            lg_id: data.lg_id, 
-            gender: data.gender, 
-            age_range: data.age_range, 
-            living_status: data.living_status
+          full_name: data.full_name,
+          phone_no: data.phone_no,
+          certified: data.certified,
+          state_id: data.sate_id,
+          lg_id: data.lg_id,
+          gender: data.gender,
+          age_range: data.age_range,
+          living_status: data.living_status,
         },
         {
-          where: {id: data.id},
+          where: { id: data.id },
           fields: [
-            "full_name", 
-            "phone_no", 
-            "certified", 
-            "state_id", 
-            "lg_id", 
-            "gender", 
-            "age_range", 
-            "living_status"
-          ]
+            "full_name",
+            "phone_no",
+            "certified",
+            "state_id",
+            "lg_id",
+            "gender",
+            "age_range",
+            "living_status",
+          ],
         }
       );
-      if(response[0] < 1 ){
-        return res.status(200).json({ success: false, msg: `No changes was made to ${data.full_name}'s data`, status: 200 })
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `No changes was made to ${data.full_name}'s data`,
+          status: 200,
+        });
       }
-      return res.status(200).json({ success: true, msg: `${data.full_name}'s data was updated successfully`, status: 200 });
-      
-    }catch(err){
+      return res.status(200).json({
+        success: true,
+        msg: `${data.full_name}'s data was updated successfully`,
+        status: 200,
+      });
+    } catch (err) {
       console.error(err.message);
     }
-
   },
 
   updateSeedProducerSeed: async (req, res) => {
     try {
-        const data = req.body;
-        const response = await SeedProducerSeed.update(
-            {
-                name_of_seed: data.name_of_seed,
-                variety_of_seed: data.variety_of_seed,
-                volume_of_seed: data.volume_of_seed,
-                year_produced: data.year_produced,
-                unit: data.unit
-            },
-            {
-                where: { id: data.id, producer_id: data.producer_id },
-                fields: [
-                    "name_of_seed",
-                    "variety_of_seed",
-                    "volume_of_seed",
-                    "year_produced",
-                    "unit"
-                ]
-            });
-        console.log(response[0]);
-        if (response[0] < 1) {
-            return res.status(200).json({ success: false, msg: `No changes were made to the seed data`, status: 200 });
+      const data = req.body;
+      const response = await SeedProducerSeed.update(
+        {
+          name_of_seed: data.name_of_seed,
+          variety_of_seed: data.variety_of_seed,
+          volume_of_seed: data.volume_of_seed,
+          year_produced: data.year_produced,
+          unit: data.unit,
+        },
+        {
+          where: { id: data.id, producer_id: data.producer_id },
+          fields: [
+            "name_of_seed",
+            "variety_of_seed",
+            "volume_of_seed",
+            "year_produced",
+            "unit",
+          ],
         }
-        return res.status(200).json({ success: true, msg: `Seed data was updated successfully`, status: 200 });
+      );
+      console.log(response[0]);
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `No changes were made to the seed data`,
+          status: 200,
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        msg: `Seed data was updated successfully`,
+        status: 200,
+      });
     } catch (e) {
-        console.error(e);
-        return res.status(500).json({ success: false, msg: `An error occurred while updating seed data`, status: 500 });
+      console.error(e);
+      return res.status(500).json({
+        success: false,
+        msg: `An error occurred while updating seed data`,
+        status: 500,
+      });
     }
-},
+  },
 
-updateSeedProducerStatus: async (req, res) => {
-  const producerId = req.params.id;
-  const user_id = req.params.user_id;
-  try {
+  updateSeedProducerStatus: async (req, res) => {
+    const producerId = req.params.id;
+    const user_id = req.params.user_id;
+    try {
       let current = await SeedProducer.findOne({
-          where: {  id: producerId, user_id: user_id },
-          attributes: ["status", "full_name"]
+        where: { id: producerId, user_id: user_id },
+        attributes: ["status", "full_name"],
       });
       const status = current.status == 1 ? 2 : 1; // Toggle status
       const humanize = status === 1 ? "Activated" : "Deactivated"; // Corrected assignment
 
       const response = await SeedProducer.update(
-          { status: status },
-          {
-              where: {  id: producerId, user_id: user_id },
-              fields: ["status"]
-          }
+        { status: status },
+        {
+          where: { id: producerId, user_id: user_id },
+          fields: ["status"],
+        }
       );
 
       if (response[0] < 1) {
-          return res.status(200).json({ success: false, msg: `There was an error changing ${current.full_name} status`, status: 200, state: status });
+        return res.status(200).json({
+          success: false,
+          msg: `There was an error changing ${current.full_name} status`,
+          status: 200,
+          state: status,
+        });
       }
-      return res.status(200).json({ success: true, msg: `You have successfully ${humanize} ${current.full_name}`, status: 200, state: status });
-
-  } catch (e) {
+      return res.status(200).json({
+        success: true,
+        msg: `You have successfully ${humanize} ${current.full_name}`,
+        status: 200,
+        state: status,
+      });
+    } catch (e) {
       console.error(e);
-      return res.status(500).json({ success: false, msg: "An error occurred", status: 500 }); // Error response
-  }
-},
+      return res
+        .status(500)
+        .json({ success: false, msg: "An error occurred", status: 500 }); // Error response
+    }
+  },
 
-  /* BINARY EOL */ 
-
+  /* BINARY EOL */
 };

@@ -231,34 +231,41 @@ module.exports = {
 
     return response;
   },
+  /**
+   * Credits the wallet with the uncleared balance of the given carts.
+   *
+   * @param {Array} carts - An array of cart objects containing total_amount and Product.user_id.
+   * @return {Promise<void>} - A promise that resolves when the wallet is successfully credited.
+   */
   creditWallet: async (carts) => {
     let transaction = await db.rest.transaction();
     try {
-      // let transaction = db.rest.transaction()
-      carts.forEach(async (cart) => {
+      // update wallet uncleared amount prior to admin approval.
+      for (const cart of carts) {
         let final_cost = cart.total_amount * 0.89;
         await Wallet.increment(
           {
-            amount: final_cost,
+            uncleared_amount: final_cost,
           },
           {
             where: { user_id: cart.Product.user_id },
-          },
-          { transaction: transaction }
+            transaction: transaction,
+          }
         );
-      });
-      transaction.commit();
+      }
+      await transaction.commit();
     } catch (e) {
-      transaction.rollback();
+      await transaction.rollback();
       console.log(e);
     }
   },
+
   getWallet: async (req, res) => {
     const user = await req.user;
     let balance;
     const singleBalance = await Wallet.findOne({
       where: { user_id: user.id },
-      attributes: ["amount"],
+      attributes: ["amount", "uncleared_amount"],
       raw: true,
     });
 
@@ -297,6 +304,7 @@ module.exports = {
       " and status is not null GROUP BY status";
 
     let totalsales = await db.rest.query(sql, { type: QueryTypes.SELECT });
+    console.log("totalsales:", totalsales);
     return totalsales;
   },
   getProductOrders: async (req, product) => {
@@ -635,9 +643,12 @@ module.exports = {
         amount_of_seed: data.amount_of_seed,
         amount_of_seed_remitted: data.amount_of_seed_remitted,
         amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
-        unit_for_total_amount_of_seed_given: data.unit_for_total_amount_of_seed_given,
-        unit_for_total_amount_of_seed_remitted: data.unit_for_total_amount_of_seed_remitted,
-        unit_for_total_amount_of_seed_to_be_remitted: data.unit_for_total_amount_of_seed_to_be_remitted,
+        unit_for_total_amount_of_seed_given:
+          data.unit_for_total_amount_of_seed_given,
+        unit_for_total_amount_of_seed_remitted:
+          data.unit_for_total_amount_of_seed_remitted,
+        unit_for_total_amount_of_seed_to_be_remitted:
+          data.unit_for_total_amount_of_seed_to_be_remitted,
       });
       return JSON.parse(JSON.stringify(seed));
     } catch (e) {
@@ -747,9 +758,12 @@ module.exports = {
           amount_of_seed: data.amount_of_seed,
           amount_of_seed_remitted: data.amount_of_seed_remitted,
           amount_of_seed_to_be_remitted: data.amount_of_seed_to_be_remitted,
-          unit_for_total_amount_of_seed_given: data.unit_for_total_amount_of_seed_given,
-          unit_for_total_amount_of_seed_remitted: data.unit_for_total_amount_of_seed_remitted,
-          unit_for_total_amount_of_seed_to_be_remitted: data.unit_for_total_amount_of_seed_to_be_remitted,
+          unit_for_total_amount_of_seed_given:
+            data.unit_for_total_amount_of_seed_given,
+          unit_for_total_amount_of_seed_remitted:
+            data.unit_for_total_amount_of_seed_remitted,
+          unit_for_total_amount_of_seed_to_be_remitted:
+            data.unit_for_total_amount_of_seed_to_be_remitted,
         },
         {
           where: { id: data.id, producer_id: data.producer_id },

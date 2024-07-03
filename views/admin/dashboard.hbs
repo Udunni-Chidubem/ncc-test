@@ -12,12 +12,12 @@
 {{!-- Transaction List --}}
 
 {{#offlineCount}}
-<p id="offline-transaction" offlineCount="{{count}}" ></p>
+<p id="offline-transaction" offlineCount="{{count}}"></p>
 {{/offlineCount}}
 
 
 {{#onlineCount}}
-<p id="online-transaction" onlineCount="{{count}}" ></p>
+<p id="online-transaction" onlineCount="{{count}}"></p>
 {{/onlineCount}}
 
 
@@ -64,7 +64,7 @@
 <div class="admin_container mb-3">
   <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 ">
 
-     <div class="col co_12 ">
+    <div class="col co_12 ">
       <div class="">
         <div class="card card_admin_home">
           <div class="card-body">
@@ -84,7 +84,7 @@
           <div class="card-body">
             <h5 class="card-title text-center">Registered Seed Companies</h5>
             {{#companyCount}}
-                <p class="card-text text-center c_d_s2_sales s_1 ">{{count}}</p>
+            <p class="card-text text-center c_d_s2_sales s_1 ">{{count}}</p>
             {{/companyCount}}
             <a href="/admin/companies" class="card-link float-end">View details</a>
           </div>
@@ -119,11 +119,11 @@
         </div>
       </div>
     </div>
-    
-    
-    </div> 
+
 
   </div>
+
+</div>
 </div>
 
 <div class="row chart_">
@@ -131,7 +131,7 @@
     <div class="card shadow card_home c_h pl-0 mb-2 ">
       <div class="card-body">
         <div class="row">
-          <div class="col-12"> 
+          <div class="col-12">
             <canvas id="myChart" width="100%" height="30" style="background:#fff;"></canvas>
           </div>
         </div>
@@ -142,7 +142,7 @@
 
   <div class="col-6">
     <div class="card shadow card_home c_h pl-0 mb-2 " style="
-    height: 230px;" >
+    height: 230px;">
       <div class="card-body">
         <div class="row ">
           <div class="col-12 ">
@@ -178,8 +178,8 @@
       </div>
     </div>
   </div>
-<div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
+  <div class="col-4">
+    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
       <div class="card-body">
         <div class="row">
           <div class="col-3">
@@ -200,68 +200,68 @@
   </div>
 </div>
 <div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-3">
-            <div class=" ">
-              <span class="sp_p_accout "></span>
-              <p class="p_accout pl-3"> Online</p>
-              <span class="sp_un_account"></span>
-              <p class="un_account  pl-3"> Offline</p>
-            </div>
+  <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3">
+          <div class=" ">
+            <span class="sp_p_accout "></span>
+            <p class="p_accout pl-3"> Online</p>
+            <span class="sp_un_account"></span>
+            <p class="un_account  pl-3"> Offline</p>
           </div>
-          <div class="col-9">
-            <canvas id="totaltransactions" style="width:100%;max-width:600px"></canvas>
-          </div>
-
         </div>
+        <div class="col-9">
+          <canvas id="totaltransactions" style="width:100%;max-width:600px"></canvas>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+</div>
 
- 
 
-{{!-- 
-<div class=" row chart_ mb-2" >
+
+{{!--
+<div class=" row chart_ mb-2">
   <div class="col-12">
     <div class="card" style="height: 300px;">
       <div class="card-header">
         <h5>Farmer</h5>
       </div>
 
-      <div class="card-body row chart_" >
-          <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
-      <div class="card-body">
-          <div >
-            <canvas id="genderC" style="width:100%;max-width:600px height: 100;"></canvas>
-          </div>
+      <div class="card-body row chart_">
+        <div class="col-3">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="genderC" style="width:100%;max-width:600px height: 100;"></canvas>
+              </div>
 
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
-      <div class="card-body">
-          <div>
-            <canvas id="locationL" style="width:100%; height: 100;"></canvas>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
-      <div class="card-body">
+        </div>
 
-          <div>
-            <canvas id="ageRange" style="width:100%; height: 120%;"></canvas>
+        <div class="col-3">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="locationL" style="width:100%; height: 100;"></canvas>
+              </div>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
+        </div>
+        <div class="col-6">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+
+              <div>
+                <canvas id="ageRange" style="width:100%; height: 120%;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -269,94 +269,94 @@
 
 <div class="row chart_ mb-2">
   <div class="col-12">
-      <div class="card" style="height: 300px;">
-          <div class="card-header">
+    <div class="card" style="height: 300px;">
+      <div class="card-header">
         <h5>Seed Company</h5>
-  </div>
-  <div class="row chart_">
-    <div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-3">
-            <div class=" ">
-              <span class="sp_p_accout "></span>
-              <p class="p_accout pl-3"> Published </p>
-              <span class="sp_un_account"></span>
-              <p class="un_account  pl-3"> Unpublished</p>
+      </div>
+      <div class="row chart_">
+        <div class="col-4">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-3">
+                  <div class=" ">
+                    <span class="sp_p_accout "></span>
+                    <p class="p_accout pl-3"> Published </p>
+                    <span class="sp_un_account"></span>
+                    <p class="un_account  pl-3"> Unpublished</p>
+                  </div>
+                </div>
+                <div class="col-9">
+                  <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
+                </div>
+
+              </div>
             </div>
           </div>
-          <div class="col-9">
-            <canvas id="totalproduct" style="width:100%;max-width:600px"></canvas>
-          </div>
-
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;" >
-      <div class="card-body">
-          <div>
-            <canvas id="locationSC" style="width:100%; height: 100%"></canvas>
+        <div class="col-4">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="locationSC" style="width:100%; height: 100%"></canvas>
+              </div>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-4">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;" >
-      <div class="card-body">
-          <div>
-            <canvas id="salesG" style="width:100%; height: 120%;"></canvas>
+        </div>
+
+        <div class="col-4">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="salesG" style="width:100%; height: 120%;"></canvas>
+              </div>
+            </div>
           </div>
+        </div>
+
       </div>
     </div>
-  </div>
-  
-  </div>
-      </div>
   </div>
 </div>
 
-<div class=" row chart_ mb-2" >
+<div class=" row chart_ mb-2">
   <div class="col-12">
     <div class="card" style="height: 300px;">
       <div class="card-header">
         <h5>Seed Trader</h5>
       </div>
 
-      <div class="card-body row chart_" >
-          <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 "  style="height: 200px;">
-      <div class="card-body">
-          <div >
-            <canvas id="genderST" style="width:100%;max-width:600px height: 100;"></canvas>
-          </div>
+      <div class="card-body row chart_">
+        <div class="col-3">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="genderST" style="width:100%;max-width:600px height: 100;"></canvas>
+              </div>
 
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-3">
-    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
-      <div class="card-body">
-          <div>
-            <canvas id="locationST" style="width:100%; height: 100;"></canvas>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
-      <div class="card-body">
+        </div>
 
-          <div>
-            <canvas id="ageRangeST" style="width:100%; height: 120%;"></canvas>
+        <div class="col-3">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+              <div>
+                <canvas id="locationST" style="width:100%; height: 100;"></canvas>
+              </div>
+            </div>
           </div>
-      </div>
-    </div>
-  </div>
+        </div>
+        <div class="col-6">
+          <div class="card shadow card_home c_h pl-0 mb-2 " style="height: 200px;">
+            <div class="card-body">
+
+              <div>
+                <canvas id="ageRangeST" style="width:100%; height: 120%;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -400,7 +400,7 @@
 
   const seedtrader_2 = document.getElementById('seedtrader_2');
   seedtraderactivelist = seedtrader_2.getAttribute("seedtraderactivelist")
-  
+
   /* Farmer gender count*/
   const male_farmers = document.getElementById('male_farmers');
   farmerMalelist = male_farmers.getAttribute("farmerMalelist")
@@ -408,7 +408,7 @@
   const female_farmers = document.getElementById('female_farmers');
   farmerFemalelist = female_farmers.getAttribute("farmerFemalelist")
 
-/*  Transaction count*/
+  /*  Transaction count*/
 
   const offlineTransaction = document.getElementById('offline-transaction');
   offlineCount = offlineTransaction.getAttribute("offlineCount")
@@ -421,7 +421,7 @@
   // let x = $('.stat').data('user')
   // console.log(x)
 
-   var xactorValues = ["Active Account", "Inactive Account"];
+  var xactorValues = ["Active Account", "Inactive Account"];
   var yfarmerValues = [farmeractivelist, farmerinactivelist];
   // var yfarmerValues = [x.f_count[0].f_count, x.f_count[1].f_count];
   //var yfarmerValues = [33,99];
@@ -504,7 +504,7 @@
 
   var xproductValues = ["published", "unpublished"];
   var yproductValues = [activeProduct, inactiveProduct];
-  
+
   var productbarColors = [
     "#FB8200",
     "#7B61FF",
@@ -537,7 +537,7 @@
   var xtransactionValues = ["online transactions", "offline transactions"];
   var ytransactionValues = [onlineCount, offlineCount];
 
-    var transactionBarColors = [
+  var transactionBarColors = [
     "#FB8200",
     "#7B61FF",
 
@@ -568,10 +568,11 @@
     type: 'bar',
     data: {
       labels: ["Call", "SMS", "SM", "Others"],
-      datasets: [  { type: 'bar',
-            label: 'Bar Dataset',
-            data: [1302, 1500,3200,213],
-             backgroundColor: [
+      datasets: [{
+        type: 'bar',
+        label: 'Bar Dataset',
+        data: [1302, 1500, 3200, 213],
+        backgroundColor: [
           "#5DCD6D",
           "#BC445A",
           "#0d6efd",
@@ -583,18 +584,18 @@
           'white',
           'white'
         ]
-        }, {
-            type: 'line',
-            label: 'Line Dataset',
-            data: [1302, 1500,3200,213],
-            borderColor: 'rgb(75, 192, 192)',
+      }, {
+        type: 'line',
+        label: 'Line Dataset',
+        data: [1302, 1500, 3200, 213],
+        borderColor: 'rgb(75, 192, 192)',
         order: 1
-        },{
-         barPercentage: 0.5,
+      }, {
+        barPercentage: 0.5,
         barThickness: 100,
         maxBarThickness: 200,
         minBarLength: 2,
-        
+
         backgroundColor: [
           "#5DCD6D",
           "#BC445A",
@@ -617,11 +618,11 @@
       },
       scales: {
         yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
+          ticks: {
+            beginAtZero: true
+          }
         }]
-    },
+      },
       legend: {
         display: false
       }
@@ -629,19 +630,19 @@
   });
 
 
- 
+
 
   let gData = [farmerMalelist, farmerFemalelist];
- const gdr = document.getElementById('genderC').getContext('2d');
+  const gdr = document.getElementById('genderC').getContext('2d');
   const genderC = new Chart(gdr, {
     type: 'pie',
     data: {
       labels: ['male', 'female'],
       datasets: [{
-        data: gData ,
+        data: gData,
         backgroundColor: [
           "#0d6efd",
-        "#da18cc",
+          "#da18cc",
 
         ],
         borderColor: [
@@ -658,7 +659,7 @@
       }
     }
   });
-  
+
   const lcn = document.getElementById('locationL').getContext('2d');
   const locationL = new Chart(lcn, {
     type: 'bar',
@@ -666,12 +667,12 @@
       labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
       datasets: [{
 
-        data: [1302, 2500,789,213],
+        data: [1302, 2500, 789, 213],
         backgroundColor: [
-           "#5DCD6D",
-    "#BC445A",
-    "#0d6efd",
-    "#da18cc",
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
         ],
         borderColor: [
           'white',
@@ -694,17 +695,17 @@
       },
     }
   });
-  
-  
+
+
   const arn = document.getElementById('ageRange').getContext('2d');
   const ageRange = new Chart(arn, {
     type: 'bar',
     data: {
       labels: [" 0-18", "19-25", "25-40", "41-50", "50-60", "60 and above"],
-      
+
       datasets: [{
         axis: 'y',
-        data: [600,500, 1302, 250,789, 353],
+        data: [600, 500, 1302, 250, 789, 353],
         backgroundColor: [
           "#5DCD6D",
           "#BC445A",
@@ -731,18 +732,18 @@
       },
       scales: {
         yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
+          ticks: {
+            beginAtZero: true
+          }
         }]
-    },
+      },
       title: {
         display: true,
         text: "Age Range"
       }
     }
   });
-  
+
   const gdrst = document.getElementById('genderST').getContext('2d');
   const genderST = new Chart(gdrst, {
     type: 'pie',
@@ -753,7 +754,7 @@
         data: [3000, 2500],
         backgroundColor: [
           "#0d6efd",
-    "#da18cc",
+          "#da18cc",
 
         ],
         borderColor: [
@@ -770,7 +771,7 @@
       }
     }
   });
-  
+
   const lcnst = document.getElementById('locationST').getContext('2d');
   const locationST = new Chart(lcnst, {
     type: 'bar',
@@ -778,12 +779,12 @@
       labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
       datasets: [{
 
-        data: [1302, 2500,789,213],
+        data: [1302, 2500, 789, 213],
         backgroundColor: [
-           "#5DCD6D",
-    "#BC445A",
-    "#0d6efd",
-    "#da18cc",
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
         ],
         borderColor: [
           'white',
@@ -806,17 +807,17 @@
       },
     }
   });
-  
-  
+
+
   const arnst = document.getElementById('ageRangeST').getContext('2d');
   const ageRangeST = new Chart(arnst, {
     type: 'bar',
     data: {
       labels: [" 0-18", "19-25", "25-40", "41-50", "50-60", "60 and above"],
-      
+
       datasets: [{
         axis: 'y',
-        data: [600,500, 1302, 250,789, 353],
+        data: [600, 500, 1302, 250, 789, 353],
         backgroundColor: [
           "#5DCD6D",
           "#BC445A",
@@ -843,33 +844,33 @@
       },
       scales: {
         yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
+          ticks: {
+            beginAtZero: true
+          }
         }]
-    },
+      },
       title: {
         display: true,
         text: "Age Range"
       }
     }
   });
-  
-  
 
-   const lcnsc = document.getElementById('locationSC').getContext('2d');
+
+
+  const lcnsc = document.getElementById('locationSC').getContext('2d');
   const locationSC = new Chart(lcnsc, {
     type: 'bar',
     data: {
       labels: ["Adamawa", "Yobe", "Borno", "Gombe"],
       datasets: [{
 
-        data: [31, 20,36,42],
+        data: [31, 20, 36, 42],
         backgroundColor: [
-           "#5DCD6D",
-    "#BC445A",
-    "#0d6efd",
-    "#da18cc",
+          "#5DCD6D",
+          "#BC445A",
+          "#0d6efd",
+          "#da18cc",
         ],
         borderColor: [
           'white',
@@ -887,19 +888,19 @@
       },
       scales: {
         yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
+          ticks: {
+            beginAtZero: true
+          }
         }]
-    },
+      },
       title: {
         display: true,
         text: "Location"
       }
     }
   });
-  
-  
+
+
   const sg = document.getElementById('salesG').getContext('2d');
   const salesG = new Chart(sg, {
     type: 'line',
@@ -922,5 +923,5 @@
       }
     }
   });
-  
+
 </script>
