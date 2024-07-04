@@ -364,8 +364,8 @@
 											data-item="{{this.id}}"><i class="fa fa-eye"></i></a>
 									</td>
 								</tr>
-								<div class="modal fade" id="sc_product_{{this.id}}" tabindex="-1" aria-labelledby="sc_productLabel"
-									aria-hidden="true">
+								<div class="modal fade" id="sc_product_{{this.id}}" tabindex="-1"
+									aria-labelledby="sc_productLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -466,12 +466,12 @@
 
 														</div>
 													</div>
-													</div>
+												</div>
 											</div>
 										</div>
 									</div>
-						</div>
-								
+								</div>
+
 								{{/each}}
 							</tbody>
 						</table>
@@ -538,8 +538,10 @@
 						<div class="account-details-grid">
 							<div>
 								<h6>Bank Name</h6>
-                                 <select name="bank_code" class="form-control border-0 p-0" style="background-color: transparent !important;" data-bank="{{company.bank_code}}" id="bank" disabled>
-                                 </select>
+								<select name="bank_code" class="form-control border-0 p-0"
+									style="background-color: transparent !important;" data-bank="{{company.bank_code}}"
+									id="bank" disabled>
+								</select>
 							</div>
 
 							<div>
@@ -695,36 +697,36 @@
 </div>
 
 <script>
-	    let url =  window.location.origin+'/api/base/get-droplist'
+	let url = window.location.origin + '/api/base/get-droplist'
 
-        fetch(url,{})
-          .then(response => response.json())
-          .then(response => {
-            if(response.statusCode === 200){
-              
-                let banks, len, i
+	fetch(url, {})
+		.then(response => response.json())
+		.then(response => {
+			if (response.statusCode === 200) {
 
-                banks = response.data.bank
+				let banks, len, i
 
-                len = banks.length
-                var ele = document.getElementById('bank');
+				banks = response.data.bank
 
-                
-                for(i=0; i < len; i++){
-                   selected = (banks[i].code == bank ? 'selected' : null)
-                    ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="'+selected+'">' + banks[i].name + '</option>';
-                }
+				len = banks.length
+				var ele = document.getElementById('bank');
 
-                setTimeout(function(){
 
-                  let bank = $('#bank').data('bank')
-                    if(bank != null){
-                        $('#bank').val(bank)
-                    }
-                }, 1000)
+				for (i = 0; i < len; i++) {
+					selected = (banks[i].code == bank ? 'selected' : null)
+					ele.innerHTML = ele.innerHTML + '<option value="' + banks[i].code + '" selected="' + selected + '">' + banks[i].name + '</option>';
+				}
 
-            }
-        }).catch(e => {
-          console.log(e)
-        })
+				setTimeout(function () {
+
+					let bank = $('#bank').data('bank')
+					if (bank != null) {
+						$('#bank').val(bank)
+					}
+				}, 1000)
+
+			}
+		}).catch(e => {
+			console.log(e)
+		})
 </script>

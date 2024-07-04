@@ -100,7 +100,8 @@
                         <p><i class="fa fa-circle" style="color: #47BA5D"> </i> &nbsp; Cleared Balance: &#8358;
                           {{number this.amount}}
                         </p>
-                        <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358; 0
+                        <p><i class="fa fa-circle" style="color: #FB8200"> </i> &nbsp; Uncleared Balance: &#8358;
+                          {{number this.uncleared_amount}}
                         </p>
                       </div>
                       {{/balance}}
@@ -232,8 +233,8 @@
                 options: {
                   scales: {
                     y: {
-                      ticks:{
-                        callback: (data, index) =>{
+                      ticks: {
+                        callback: (data, index) => {
                           return new Intl.NumberFormat('en-NG', {
                             style: 'currency',
                             currency: 'NGN',
@@ -282,7 +283,7 @@
                 month = month + 1
                 for (var i = 0; i < month; i++) {
                   new_val = i + 1
-                  months.push(month_name[new_val-1] + '-' + year )
+                  months.push(month_name[new_val - 1] + '-' + year)
                 }
                 console.log(months)
                 return months
@@ -318,7 +319,7 @@
                         })
                         amount.push(subamt)
                         console.log('av')
-        
+
 
                       })
                       console.log(amount)

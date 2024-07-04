@@ -5,7 +5,6 @@ const utils = require("../../helpers/utils");
 const seedcompanyService = require("../../services/seedcompany.service");
 const psbPayout = require("../../payments/9psb.payment");
 
-
 companyRoute.get("/profile", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
@@ -181,30 +180,13 @@ companyRoute.post("/offline", async (req, res) => {
   }
 });
 
-
-
 /*
   The below code handles payout endpoints
-*/ 
+*/
 
 companyRoute.post("/payment/otherPayout", async (req, res) => {
   const response = psbPayout.otherBankPayout(req, res);
   return res.status(200).json(response);
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 module.exports = companyRoute;

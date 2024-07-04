@@ -11,6 +11,13 @@ const utils = require("../helpers/utils");
 const { SeedCompany, Wallet, User, WalletLog } = db;
 
 module.exports = {
+  /**
+   * Process the withdrawal request from the user.
+   *
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   * @return {Promise<Object>} An object containing the success status, message, and status code.
+   */
   processFoundWithdrawer: async (req, res) => {
     const user = await req.user;
     const data = req.body; // request body: { amount: amount, password: password }
