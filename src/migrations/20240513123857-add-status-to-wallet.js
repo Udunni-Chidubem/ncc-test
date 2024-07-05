@@ -9,7 +9,7 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
 
-    await queryInterface.addColumn("Wallet", "uncleared_amount", {
+    await queryInterface.addColumn("wallet", "uncleared_amount", {
       type: Sequelize.DOUBLE,
       defaultValue: 0.0,
       allowNull: true,
@@ -24,6 +24,6 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
 
-    await queryInterface.removeColumn("Wallet", "uncleared_amount");
+    await queryInterface.removeColumn("wallet", "uncleared_amount");
   },
 };
