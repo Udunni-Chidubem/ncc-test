@@ -1405,7 +1405,7 @@ module.exports = {
             },
           });
 
-          console.log("Total duplicate:", sseedProducer);
+          // console.log("Total duplicate:", sseedProducer);
 
           if (sseedProducer.length > 0) {
             duplicateSeedProducer.push({
@@ -1433,7 +1433,7 @@ module.exports = {
         }
       }
 
-      console.log("Seed producer to intert:", seedProducersToInsert.length);
+      // console.log("Seed producer to intert:", seedProducersToInsert.length);
 
       if (duplicateSeedProducer.length > 0) {
         console.log(
@@ -1459,7 +1459,7 @@ module.exports = {
       }
     } catch (e) {
       console.error(e);
-      if (error instanceof UniqueConstraintError) {
+      if (e instanceof UniqueConstraintError) {
         return {
           success: false,
           msg: `Seed producers data uploaded successfully. \nTotal rejected data: ${duplicateSeedProducer.length} \n Inserted data ${seedProducersToInsert.length}`,

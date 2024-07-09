@@ -415,6 +415,7 @@
 
         $("#uploadSeedProducerListBtn").on("click", function (event) {
             //event.preventDefault();
+            $("#uploadSeedProducerListBtn").val("Uploading...")
             $('#uploadSeedProducerListForm').on("submit", async function (e) {
                 e.preventDefault();
                 let formData = new FormData();
@@ -449,8 +450,6 @@
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        $("#uploadSeedProducerListBtn").val("Uploading...")
-                        console.log(data);
                         if (data.success === true) {
                             $("#uploadSeedProducerListBtn").val("Upload")
                             document.getElementById('upload-msg').innerHTML = `<div class='alert alert-success alert-dismissible fade show' role='alert'>
