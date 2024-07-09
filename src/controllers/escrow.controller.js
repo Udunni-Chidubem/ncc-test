@@ -127,9 +127,8 @@ module.exports = {
         return { success: false, message: response.message, status: 400 };
       }
 
-      const newBalance = wallet.amount - data.amount;
-      const updateWalletBalance = await Wallet.update(
-        { amount: newBalance },
+      const updateWalletBalance = await Wallet.increment(
+        { amount: -data.amount },
         { where: { user_id: user.id } }
       );
 
