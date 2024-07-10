@@ -1357,38 +1357,33 @@ module.exports = {
   uploadSeedProducerList: async (file, company_data) => {
     let seedProducersToInsert = [];
     let duplicateSeedProducer = [];
+    let seedProducedToInsert = [];
+
     try {
       if (!file || !file.data) {
         throw new Error("File data is undefined");
       }
 
       const data = [];
-
-      // Convert buffer to stream
       const bufferStream = new Readable();
       bufferStream.push(file.data);
       bufferStream.push(null);
 
-      // Read the CSV file and parse it
       await new Promise((resolve, reject) => {
         bufferStream
           .pipe(csv())
-          .on("data", (row) => {
-            data.push(row);
-          })
+          .on("data", (row) => data.push(row))
           .on("end", resolve)
           .on("error", reject);
       });
 
       for (const item of data) {
-        // Check if the state exists
         const stateQuery = `SELECT id FROM states WHERE name = :state_name`;
         const [state] = await db.rest.query(stateQuery, {
           type: QueryTypes.SELECT,
           replacements: { state_name: item.state_name },
         });
 
-        // Check if the lga exists
         const lgaQuery = `SELECT id FROM lgas WHERE name = :lg_name AND state_id = :state_id`;
         const [lga] = await db.rest.query(lgaQuery, {
           type: QueryTypes.SELECT,
@@ -1396,7 +1391,7 @@ module.exports = {
         });
 
         if (state && lga) {
-          const seedproducerQuery = `SELECT phone_no FROM seedproducer WHERE phone_no = :phone_no AND user_id = :user_id`;
+          const seedproducerQuery = `SELECT phone_no FROM seedproducer WHERE phone_no = :phone_no AND user_id = :user_id LIMIT 1`;
           const sseedProducer = await db.rest.query(seedproducerQuery, {
             type: QueryTypes.SELECT,
             replacements: {
@@ -1405,14 +1400,10 @@ module.exports = {
             },
           });
 
-          // console.log("Total duplicate:", sseedProducer);
-
           if (sseedProducer.length > 0) {
-            duplicateSeedProducer.push({
-              phone_number: item.phone_no,
-            });
+            duplicateSeedProducer.push({ phone_number: item.phone_no });
           } else {
-            let seedProducer = {
+            seedProducersToInsert.push({
               user_id: company_data.seed_company_id,
               full_name: item.full_name,
               phone_no: item.phone_no,
@@ -1422,9 +1413,7 @@ module.exports = {
               living_status: item.living_status,
               state_id: state.id,
               lg_id: lga.id,
-            };
-
-            seedProducersToInsert.push(seedProducer);
+            });
           }
         } else {
           console.warn(
@@ -1433,28 +1422,36 @@ module.exports = {
         }
       }
 
-      // console.log("Seed producer to intert:", seedProducersToInsert.length);
-
       if (duplicateSeedProducer.length > 0) {
-        console.log(
-          `The following list of seed producers already exist: \n ${duplicateSeedProducer
-            .map((dp) => dp.phone_number)
-            .join(", ")}`
+        seedProducersToInsert = seedProducersToInsert.filter(
+          (sp) =>
+            !duplicateSeedProducer.some((dp) => dp.phone_number === sp.phone_no)
         );
       }
 
       if (seedProducersToInsert.length > 0) {
-        await db.SeedProducer.bulkCreate(seedProducersToInsert);
+        const seedP = await db.SeedProducer.bulkCreate(seedProducersToInsert);
+        seedP.forEach((seed, index) => {
+          const item = data[index];
+          seedProducedToInsert.push({
+            producer_id: seed.id,
+            name_of_seed: item.name_of_seed,
+            variety_of_seed: item.variety_of_seed,
+            volume_of_seed: item.volume_of_seed,
+            year_produced: item.year_produced,
+          });
+        });
+
+        await db.SeedProducerSeed.bulkCreate(seedProducedToInsert);
+
         return {
           success: true,
-          msg: `Seed producers uploaded successfully. uplaoded data: ${seedProducersToInsert.length}, rejected data: ${duplicateSeedProducer.length}`,
+          msg: `Seed producers uploaded successfully. Uploaded data: ${seedProducersToInsert.length} and rejected data: ${duplicateSeedProducer.length}`,
         };
       } else {
         return {
           success: false,
-          msg: `All provided seed producers already exist. \nDuplicate(s) rejected: ${duplicateSeedProducer
-            .map((producer) => producer.phone_number)
-            .join(", ")} `,
+          msg: `All provided seed producers already exist. Inserted data: ${seedProducersToInsert.length} and rejected: ${duplicateSeedProducer.length}`,
         };
       }
     } catch (e) {
@@ -1462,7 +1459,7 @@ module.exports = {
       if (e instanceof UniqueConstraintError) {
         return {
           success: false,
-          msg: `Seed producers data uploaded successfully. \nTotal rejected data: ${duplicateSeedProducer.length} \n Inserted data ${seedProducersToInsert.length}`,
+          msg: `Unique constraint error. Total rejected data: ${duplicateSeedProducer.length}. Inserted data: ${seedProducersToInsert.length}`,
         };
       } else {
         return { success: false, msg: `Error processing file` };
