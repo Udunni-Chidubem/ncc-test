@@ -12,6 +12,8 @@ const companyController = require("../../controllers/company.controller");
 const {
   UserConversationList,
 } = require("twilio/lib/rest/conversations/v1/user/userConversation");
+const multer = require("multer");
+const upload = multer({ dest: "files/" });
 
 adminRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -689,6 +691,40 @@ adminRouter.patch(
     return response;
   }
 );
+
+adminRouter.get(
+  "/get-seed-companies/seed-producer-upload/:keyword",
+  async (req, res) => {
+    let user = await req.user;
+    const keyword = req.params.keyword;
+    let isVerified = await utils.isVerified(user);
+    let seedCompanyList = await adminController.listSeedCompanies(keyword);
+    return res.status(200).json(seedCompanyList);
+  }
+);
+
+adminRouter.post("/upload-seed-producer-list", async (req, res) => {
+  try {
+    let user = req.user;
+    let file = req.files.file;
+    let seed_company_id = req.body;
+
+    if (!file || !seed_company_id) {
+      return res
+        .status(400)
+        .json({ success: false, msg: "File or Seed Company ID missing" });
+    }
+
+    // await utils.isVerified(user);
+    const resp = await adminController.uploadSeedProducerList(
+      file,
+      seed_company_id
+    );
+    return res.status(200).json(resp);
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 
 /**
  * Binary EOL
