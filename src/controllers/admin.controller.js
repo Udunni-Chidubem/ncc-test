@@ -26,10 +26,15 @@ const {
   SeedProducerSeed,
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
-const { Op } = require("sequelize");
+const { Op, UniqueConstraintError } = require("sequelize");
 const { now } = require("moment");
 const { query } = require("express");
 const { isValidPhoneNumber } = require("../helpers/form.helper");
+
+const path = require("path");
+const csv = require("csv-parser");
+const fs = require("fs");
+const { Readable } = require("stream");
 
 module.exports = {
   getNascAdminRoles: async (req, res) => {
@@ -1334,6 +1339,134 @@ module.exports = {
       return res
         .status(500)
         .json({ success: false, msg: "An error occurred", status: 500 }); // Error response
+    }
+  },
+
+  listSeedCompanies: async (keyword) => {
+    try {
+      let sql = `SELECT user_id, name_of_company FROM seedcompany sc JOIN user u ON sc.user_id = u.id WHERE (name_of_company LIKE '%${keyword}%' OR phone_no LIKE '%${keyword}%' OR email LIKE '%${keyword}%' OR licensed_no LIKE '%${keyword}%') AND u.status = 1;`;
+      let seedCompanyList = await db.rest.query(sql, {
+        type: QueryTypes.SELECT,
+      });
+      return seedCompanyList;
+    } catch (e) {
+      console.error(e);
+    }
+  },
+
+  uploadSeedProducerList: async (file, company_data) => {
+    let seedProducersToInsert = [];
+    let duplicateSeedProducer = [];
+    try {
+      if (!file || !file.data) {
+        throw new Error("File data is undefined");
+      }
+
+      const data = [];
+
+      // Convert buffer to stream
+      const bufferStream = new Readable();
+      bufferStream.push(file.data);
+      bufferStream.push(null);
+
+      // Read the CSV file and parse it
+      await new Promise((resolve, reject) => {
+        bufferStream
+          .pipe(csv())
+          .on("data", (row) => {
+            data.push(row);
+          })
+          .on("end", resolve)
+          .on("error", reject);
+      });
+
+      for (const item of data) {
+        // Check if the state exists
+        const stateQuery = `SELECT id FROM states WHERE name = :state_name`;
+        const [state] = await db.rest.query(stateQuery, {
+          type: QueryTypes.SELECT,
+          replacements: { state_name: item.state_name },
+        });
+
+        // Check if the lga exists
+        const lgaQuery = `SELECT id FROM lgas WHERE name = :lg_name AND state_id = :state_id`;
+        const [lga] = await db.rest.query(lgaQuery, {
+          type: QueryTypes.SELECT,
+          replacements: { lg_name: item.lg_name, state_id: state.id },
+        });
+
+        if (state && lga) {
+          const seedproducerQuery = `SELECT phone_no FROM seedproducer WHERE phone_no = :phone_no AND user_id = :user_id`;
+          const sseedProducer = await db.rest.query(seedproducerQuery, {
+            type: QueryTypes.SELECT,
+            replacements: {
+              phone_no: item.phone_no,
+              user_id: company_data.seed_company_id,
+            },
+          });
+
+          // console.log("Total duplicate:", sseedProducer);
+
+          if (sseedProducer.length > 0) {
+            duplicateSeedProducer.push({
+              phone_number: item.phone_no,
+            });
+          } else {
+            let seedProducer = {
+              user_id: company_data.seed_company_id,
+              full_name: item.full_name,
+              phone_no: item.phone_no,
+              certified: item.certified,
+              gender: item.gender,
+              age_range: item.age_range,
+              living_status: item.living_status,
+              state_id: state.id,
+              lg_id: lga.id,
+            };
+
+            seedProducersToInsert.push(seedProducer);
+          }
+        } else {
+          console.warn(
+            `Invalid state_id or lg_id for seed producer: ${item.full_name}`
+          );
+        }
+      }
+
+      // console.log("Seed producer to intert:", seedProducersToInsert.length);
+
+      if (duplicateSeedProducer.length > 0) {
+        console.log(
+          `The following list of seed producers already exist: \n ${duplicateSeedProducer
+            .map((dp) => dp.phone_number)
+            .join(", ")}`
+        );
+      }
+
+      if (seedProducersToInsert.length > 0) {
+        await db.SeedProducer.bulkCreate(seedProducersToInsert);
+        return {
+          success: true,
+          msg: `Seed producers uploaded successfully. uplaoded data: ${seedProducersToInsert.length}, rejected data: ${duplicateSeedProducer.length}`,
+        };
+      } else {
+        return {
+          success: false,
+          msg: `All provided seed producers already exist. \nDuplicate(s) rejected: ${duplicateSeedProducer
+            .map((producer) => producer.phone_number)
+            .join(", ")} `,
+        };
+      }
+    } catch (e) {
+      console.error(e);
+      if (e instanceof UniqueConstraintError) {
+        return {
+          success: false,
+          msg: `Seed producers data uploaded successfully. \nTotal rejected data: ${duplicateSeedProducer.length} \n Inserted data ${seedProducersToInsert.length}`,
+        };
+      } else {
+        return { success: false, msg: `Error processing file` };
+      }
     }
   },
 

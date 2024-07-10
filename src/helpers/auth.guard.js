@@ -97,12 +97,13 @@ module.exports = {
   hasRole: (role_name) => {
     return async function (req, res, next) {
       let user = await req.user;
+      console.log(user);
       if (user.UserRole.Role.role_name == role_name) {
         next();
       } else {
         res.status(403).json({
           data: "User is forbidden to access this route",
-          statusCode: 403
+          statusCode: 403,
         });
       }
     };

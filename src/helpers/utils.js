@@ -1,7 +1,16 @@
 require("dotenv").config();
 const db = require("../models");
-const { User, Farmer, UserRole, Role, SeedTrader, SeedCompany, LGAs, States, WalletLog } =
-  db;
+const {
+  User,
+  Farmer,
+  UserRole,
+  Role,
+  SeedTrader,
+  SeedCompany,
+  LGAs,
+  States,
+  WalletLog,
+} = db;
 
 module.exports = {
   getFarmerProfile: async (user) => {
@@ -94,16 +103,15 @@ module.exports = {
   },
 
   walletTransactionLog: async (user, responseData, company) => {
-
     /* save wallet transaction to wallet_logs table */
 
     let status;
     let state;
 
-    try{
-      if(responseData != null){
-        responseData.code === '00'?status = "success": status = "failed";
-        responseData.code === '00'?state = 1: state = 0;
+    try {
+      if (responseData != null) {
+        responseData.code === "00" ? (status = "success") : (status = "failed");
+        responseData.code === "00" ? (state = 1) : (state = 0);
 
         return await WalletLog.create({
           user_id: user.id,
@@ -118,12 +126,11 @@ module.exports = {
           currency: responseData.order.currency,
           company_id: company.id,
           external_date: responseData.transaction.date,
-          state: state
+          state: state,
         });
       }
-    }catch(e){
+    } catch (e) {
       console.error("Error saving wallet transaction record:", e);
     }
   },
-
 };
