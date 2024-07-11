@@ -1462,7 +1462,7 @@ module.exports = {
           msg: `Unique constraint error. Total rejected data: ${duplicateSeedProducer.length}. Inserted data: ${seedProducersToInsert.length}`,
         };
       } else {
-        return { success: false, msg: `Error processing file` };
+        return { success: false, msg: `Error processing file: ${e.message}` };
       }
     }
   },
