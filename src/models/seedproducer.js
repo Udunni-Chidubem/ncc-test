@@ -34,11 +34,6 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       certified: DataTypes.STRING,
-      // name_of_seed: DataTypes.STRING,
-      // variety_of_seed: DataTypes.STRING,
-      // volume_of_seed: DataTypes.INTEGER,
-      // state_id: DataTypes.INTEGER,
-      // lg_id: DataTypes.INTEGER,
       status: {
         type: DataTypes.INTEGER,
         defaultValue: 1,

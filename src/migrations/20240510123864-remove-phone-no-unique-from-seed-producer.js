@@ -2,6 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.removeConstraint("seedProducer", "phone_no", {});
     await queryInterface.changeColumn("seedProducer", "phone_no", {
       type: Sequelize.STRING,
       unique: false,
@@ -11,7 +12,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     await queryInterface.changeColumn("seedProducer", "phone_no", {
       type: Sequelize.STRING,
-      unique: false,
+      unique: true,
     });
   },
 };
