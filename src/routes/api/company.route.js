@@ -2,6 +2,7 @@ const companyRoute = require("express").Router();
 const reader = require("xlsx");
 const companyController = require("../../controllers/company.controller");
 const utils = require("../../helpers/utils");
+const response = require("../../helpers/responses");
 const seedcompanyService = require("../../services/seedcompany.service");
 const psbPayout = require("../../payments/9psb.payment");
 
@@ -189,4 +190,52 @@ companyRoute.post("/payment/otherPayout", async (req, res) => {
   return res.status(200).json(response);
 });
 
+companyRoute.get("/dashboard", async (req, res) => {
+  try {
+    let user = req.user;
+  let company = await utils.getCompanyProfile(user);
+  let balance = await companyController.getWallet(req, res);
+  let productCount = await companyController.getProductCount(req, res);
+  let totalsales = await companyController.getTotalSales(company.id);
+  let isVerified = await utils.isVerified(user);
+  let fulfilled = null;
+  let unfulfilled = null;
+  totalsales.forEach((totalSale) => {
+    if (totalSale.status <= 3) {
+      unfulfilled = totalSale.count;
+    } else if (totalSale.status == 4) {
+      fulfilled = totalSale.count;
+    }
+  });
+
+  let total = fulfilled + unfulfilled;
+
+  return res.status(200).json({
+    success: true,
+    data:{ 
+      isVerified,
+      totalsales,
+      fulfilled,
+      unfulfilled,
+      balance,
+      productCount,
+      totalOrders:total
+    }
+  });
+
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({
+      success: false,
+      msg: `Error something went wrong`,
+      status: 500,
+    });
+  }
+  
+});
+
+companyRoute.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) => {
+  let response = await companyController.updateSeedProducerStatus(req, res);
+  return response;
+});
 module.exports = companyRoute;
