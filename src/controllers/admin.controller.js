@@ -1391,7 +1391,7 @@ module.exports = {
         });
 
         if (state && lga) {
-          const seedproducerQuery = `SELECT phone_no FROM seedproducer WHERE phone_no = :phone_no AND user_id = :user_id LIMIT 1`;
+          const seedproducerQuery = `SELECT phone_no FROM seedProducer WHERE phone_no = :phone_no AND user_id = :user_id LIMIT 1`;
           const sseedProducer = await db.rest.query(seedproducerQuery, {
             type: QueryTypes.SELECT,
             replacements: {
