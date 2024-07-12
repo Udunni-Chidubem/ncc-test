@@ -4,6 +4,7 @@ const companyController = require("../../controllers/company.controller");
 const utils = require("../../helpers/utils");
 const seedcompanyService = require("../../services/seedcompany.service");
 const psbPayout = require("../../payments/9psb.payment");
+const options = require("../../helpers/utils.dropdowns");
 
 companyRoute.get("/profile", async (req, res) => {
   let user = await req.user;
@@ -188,5 +189,76 @@ companyRoute.post("/payment/otherPayout", async (req, res) => {
   const response = psbPayout.otherBankPayout(req, res);
   return res.status(200).json(response);
 });
+
+/**
+ *  Binary SOL
+ * **/
+
+companyRoute.get("/states", async (req, res) => {
+  try {
+    const states = await options.fetchStates();
+    return res.status(200).json(states);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.get("/lga/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    console.log("LGA ID:", id);
+    const lga = await options.getLgaById(id);
+    return res.status(200).json(lga);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.get("/all", async (req, res) => {
+  try {
+    const companies = await options.getAllCompany();
+    return res.status(200).json(companies);
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.post("/seed-producers/create", async (req, res) => {
+  try {
+    // let company = await utils.getCompanyProfile(user);
+    let seedProducer = await companyController.createSeedProducer(req, res);
+    return res.status(200).json({
+      statusCode: 200,
+      message: "Product created successfully",
+      body: seedProducer,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.get("/seed-producer/profile/:id", async (req, res) => {
+  try {
+    let profile = await companyController.viewSeedProducer(req, res);
+    return res.status(200).json({
+      statusCode: 200,
+      body: profile,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.post("/seed-producer-seed/create", async (req, res) => {
+  return res.status(200).json({
+    statusCode: 200,
+    message: "Product created successfully",
+    body: "Product created succeessfully",
+  });
+});
+
+/**
+ * Binary EOL
+ */
 
 module.exports = companyRoute;

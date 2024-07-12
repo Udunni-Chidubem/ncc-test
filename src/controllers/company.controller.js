@@ -544,14 +544,17 @@ module.exports = {
 
       // console.log("Seed", req.body.seeds);
 
-      await Promise.all(
-        req.body.seeds.map((e) => {
-          return SeedProducerSeed.create(
-            { ...e, producer_id: seedProducer.id },
-            { transaction: transaction }
-          );
-        })
-      );
+      if (req.body.seeds) {
+        await Promise.all(
+          req.body.seeds.map((e) => {
+            return SeedProducerSeed.create(
+              { ...e, producer_id: seedProducer.id },
+              { transaction: transaction }
+            );
+          })
+        );
+      }
+
       // await SeedProducerSeed.bulkCreate(req.body.seeds);
       transaction.commit();
       return seedProducer;
