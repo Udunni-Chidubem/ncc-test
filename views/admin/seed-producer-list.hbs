@@ -219,9 +219,16 @@
                         </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" id="cancelUpload">Cancel</button>
-                <button type="submit" class="btn btn-txn fund_btn" id="uploadSeedProducerListBtn">Upload</button>
+            <div class="modal-footer" style="display: flex; justify-content: space-between; ">
+                <div>
+                    <img src="../../images/spin-wheel.gif" alt="spin wheel"
+                        style="visibility: hidden; width: 30px; height: 30px;" id="loader">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                        id="cancelUpload">Cancel</button>
+                    <button type="submit" class="btn btn-txn fund_btn" id="uploadSeedProducerListBtn">Upload</button>
+                </div>
             </div>
             </form>
         </div>
@@ -416,29 +423,35 @@
             $("#producerList").val(null);
         })
 
-        $("#uploadSeedProducerListBtn").on("click", function (event) {
-            //event.preventDefault();
+        $(document).ready(function () {
+            // Event listener for form submission
             $('#uploadSeedProducerListForm').on("submit", async function (e) {
                 e.preventDefault();
-                $("#uploadSeedProducerListBtn").val("Uploading...")
+
+                // Show preloader
+                $('#loader').css('visibility', 'visible');
+                $("#uploadSeedProducerListBtn").val("Uploading...");
+
                 let formData = new FormData();
 
                 const files = $('#producerList')[0].files;
                 const seed_company_id = $('#seed_company_id').val();
 
                 if (!seed_company_id) {
-                    document.getElementById('upload-msg').innerHTML = `<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    $('#upload-msg').html(`<div class='alert alert-warning alert-dismissible fade show' role='alert'>
                 Please select a seed company
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>`;
+            </div>`);
+                    hidePreloader();
                     return;
                 }
 
-                if (files.length == 0) {
-                    document.getElementById('upload-msg').innerHTML = `<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                if (files.length === 0) {
+                    $('#upload-msg').html(`<div class='alert alert-warning alert-dismissible fade show' role='alert'>
                 Please select a file
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>`;
+            </div>`);
+                    hidePreloader();
                     return;
                 }
 
@@ -447,33 +460,48 @@
 
                 const url = window.location.origin + `/admin/upload-seed-producer-list`;
 
-                await fetch(url, {
-                    method: "POST",
-                    body: formData
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.success === true) {
-                            $("#uploadSeedProducerListBtn").val("Upload")
-                            document.getElementById('upload-msg').innerHTML = `<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                ${data.msg}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>`;
-                            $("#searchResult").empty();
-                            $("#selectedResult").empty();
-                            $("#upload-msg").empty();
-                            $("#producerList").val(null);
-                        } else {
-                            document.getElementById('upload-msg').innerHTML = `
-                    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                        ${data.msg}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>`;
-                        }
-                    })
-                    .catch((e) => console.log(e));
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+
+                    const data = await response.json();
+
+                    if (data.success === true) {
+                        $('#uploadSeedProducerListBtn').val("Upload");
+                        $('#upload-msg').html(`<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                    ${data.msg}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+                        $("#searchResult").empty();
+                        $("#selectedResult").empty();
+                        $("#producerList").val(null);
+                    } else {
+                        $('#upload-msg').html(`<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                    ${data.msg}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    $('#upload-msg').html(`<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                Error occurred while uploading.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`);
+                } finally {
+                    hidePreloader();
+                }
             });
 
+            function hidePreloader() {
+                // Hide preloader
+                $('#loader').css('visibility', 'hidden');
+            }
         });
 
 
