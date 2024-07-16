@@ -238,4 +238,11 @@ companyRoute.patch("/update-seed-producer-staus/:user_id/:id", async (req, res) 
   let response = await companyController.updateSeedProducerStatus(req, res);
   return response;
 });
+companyRoute.get("/getchartamount", async (req, res) => {
+  let user = req.user;
+  let isVerified = await utils.isVerified(user);
+  let company = await utils.getCompanyProfile(user);
+  let getchartamount = await companyController.getchartamount(req, company.id);
+  res.json({ message: getchartamount, statusCode: 200 }).status(200);  
+});
 module.exports = companyRoute;
