@@ -5,6 +5,10 @@ const utils = require("../../helpers/utils");
 const seedcompanyService = require("../../services/seedcompany.service");
 const psbPayout = require("../../payments/9psb.payment");
 const options = require("../../helpers/utils.dropdowns");
+const {
+  message,
+  getOneCompany,
+} = require("../../controllers/admin.controller");
 
 companyRoute.get("/profile", async (req, res) => {
   let user = await req.user;
@@ -255,6 +259,49 @@ companyRoute.post("/seed-producer-seed/create", async (req, res) => {
     message: "Product created successfully",
     body: "Product created succeessfully",
   });
+});
+
+companyRoute.get("/seed-producer/list", async (req, res) => {
+  try {
+    const producers = await companyController.listSeedProducers(req, res);
+    return res.status(200).json({
+      statusCode: 200,
+      body: producers,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+companyRoute.get("/order-list", async (req, res) => {
+  try {
+    const orders = await companyController.getOrders(req, res);
+    return res.status(200).json({
+      statusCode: 200,
+      body: orders,
+    });
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
+companyRoute.get("/view-order/:transaction_id", async (req, res) => {
+  const transaction_id = req.params.transaction_id;
+  const user = req.user;
+  try {
+    const company = await utils.getCompanyProfile(user);
+    const order = await companyController.getOrder(
+      transaction_id,
+      company.id,
+      user.id
+    );
+    return res.status(200).json({
+      statusCode: 200,
+      body: order,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 /**

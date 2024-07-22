@@ -1433,11 +1433,13 @@ module.exports = {
         const seedP = await db.SeedProducer.bulkCreate(seedProducersToInsert);
         seedP.forEach((seed, index) => {
           const item = data[index];
+          const unit = item?.unit?.toLowerCase();
           seedProducedToInsert.push({
             producer_id: seed.id,
             name_of_seed: item.name_of_seed,
             variety_of_seed: item.variety_of_seed,
             volume_of_seed: item.volume_of_seed,
+            unit: unit,
             year_produced: item.year_produced,
           });
         });
