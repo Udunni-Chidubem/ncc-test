@@ -331,7 +331,6 @@ module.exports = {
     return chartamount;
   },
   getOrder: async (transaction_id, user_id, company_id) => {
-    // const user = await req.user
     let farmer = null,
       orderStatus = null;
     let order = await TransactionCarts.findAll({
@@ -567,10 +566,6 @@ module.exports = {
 
   listSeedProducers: async (req, res) => {
     const user = await req.user;
-    // let response = null;
-
-    // const { page, size } = req.query;
-    // const { limit, offset } = getPagination(page, size);
 
     const seedProducer = await SeedProducer.findAll({
       where: { user_id: user.id },
