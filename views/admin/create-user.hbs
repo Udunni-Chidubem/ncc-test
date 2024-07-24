@@ -17,6 +17,11 @@
 
 <div id="page-content-wrapper">
    <div class="card create-user-card">
+	{{#if error_msg}}
+		<div class="alert-content-error">
+			{{error_msg}}
+		</div>				
+    {{/if}}
    	<div class="card-header">
    		Create User
    	</div>

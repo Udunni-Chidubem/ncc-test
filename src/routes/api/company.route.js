@@ -237,8 +237,7 @@ companyRoute.get("/dashboard", async (req, res) => {
   }
 });
 
-companyRoute.patch(
-  "/update-seed-producer-staus/:user_id/:id",
+companyRoute.patch("/update-seed-producer-status/:user_id/:id",
   async (req, res) => {
     let response = await companyController.updateSeedProducerStatus(req, res);
     return response;

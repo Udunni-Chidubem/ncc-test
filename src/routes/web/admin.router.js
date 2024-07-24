@@ -87,8 +87,10 @@ adminRouter.get("/users/create", async (req, res) => {
 adminRouter.post("/users/create", async (req, res) => {
   let resp = await adminController.createUser(req, res);
   if (!resp.error) {
+    req.flash('success_msg', 'User created successfully !!');
     res.redirect("/admin/users");
   } else {
+    req.flash('error_msg', 'Error creating a user. Try again !!');
     res.redirect("/admin/users/create");
   }
 });

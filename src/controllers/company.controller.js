@@ -127,7 +127,8 @@ module.exports = {
     let response = null;
 
     const { page, size } = req.query;
-    const { limit, offset } = getPagination(page, size);
+    console.log(req.query);
+    const { limit, offset} = getPagination(page, size);
 
     const product = await Product.findAndCountAll({
       where: { user_id: user.id },

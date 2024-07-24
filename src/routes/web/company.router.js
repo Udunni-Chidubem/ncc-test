@@ -189,7 +189,8 @@ companyRouter.get("/products", async (req, res) => {
   let product = await companyController.listProducts(req, res);
   let paginate;
   if (product) {
-    paginate = { page: req.query.page || 1, pageCount: product.totalPages };
+    paginate = { page: parseInt(req.query.page) || 0, pageCount: product.totalPages,next:product.nextPage, previous:product.previousPage};
+    console.log(paginate)
   }
   res.render("seed_company/product-list", {
     layout: "company-dashboard",

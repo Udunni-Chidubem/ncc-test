@@ -1060,7 +1060,12 @@ module.exports = {
           { transaction: transaction }
         );
         await transaction.commit();
-        return user;
+        let data={
+          id:user.id,
+          username:user.username,
+          status:user.status
+        }
+        return data;
       } else {
         return { error: true, message: "Account already exist" };
       }
