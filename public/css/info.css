@@ -476,4 +476,8 @@ input {
   align-items: center;
   margin-bottom: 20px;
  }
+ .active-page{
+  background-color: #509750 !important;
+  color: white !important;
+ }
 

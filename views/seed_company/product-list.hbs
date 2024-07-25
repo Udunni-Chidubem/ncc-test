@@ -79,7 +79,7 @@
             <a class="page-link" href="?page={{pagination.previous}}" tabindex="-1">Previous</a>
           </li>
           {{#for 1 pagination.pageCount 1}}
-          <li class="page-item"><a class="page-link" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a></li>
+          <li class="page-item "><a class="page-link page-count" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a></li>
           {{/for}}
           <li class="{{#if (eq pagination.page pagination.next)}} disabled {{/if}}page-item">
             <a class="page-link" href="?page={{pagination.next}}">Next</a>
@@ -93,3 +93,22 @@
 
   </div>
 </div>
+<script>
+  //highlighting active page links in pagination **START**
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentPage = parseInt(urlParams.get('page'));
+    currentPage = currentPage + 1;
+    $(".page-count").first().addClass("active-page");
+
+    $(".page-count").each(function(index,element){
+      let activePage = $(element).html();
+
+      if (currentPage == activePage){
+        $(".page-count").first().removeClass("active-page")
+        $(element).addClass("active-page")
+      } 
+
+    })
+ //highlighting active page links in pagination **END**
+
+</script>
