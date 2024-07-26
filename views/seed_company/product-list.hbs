@@ -81,7 +81,7 @@
           {{#for 1 pagination.pageCount 1}}
           <li class="page-item "><a class="page-link page-count" href="?page={{#sub this 1}}{{this}}{{/sub}}">{{this}}</a></li>
           {{/for}}
-          <li class="{{#if (eq pagination.page pagination.next)}} disabled {{/if}}page-item">
+          <li class="{{#if (or (eq pagination.page pagination.next) (eq pagination.pageCount 1))}} disabled {{/if}}page-item">
             <a class="page-link" href="?page={{pagination.next}}">Next</a>
           </li>
 

@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
     getPagingData: (data, page, limit) => {
         const { count: totalItems, rows: result } = data;
-        const currentPage = page ? +page : 1;
+        const currentPage = page ? +page : 0;
         const totalPages = Math.ceil(totalItems / limit);
         let previousPage = currentPage - 1;
         let nextPage = currentPage + 1;
@@ -17,7 +17,7 @@ module.exports = {
         return { totalItems, result, totalPages, currentPage, previousPage, nextPage };
     },
     getPagination: (page, size) => {
-        const limit = size ? +size : 1;
+        const limit = size ? +size : 10;
         const offset = page ? page * limit : 0;
 
         return { limit, offset };
