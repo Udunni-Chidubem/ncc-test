@@ -190,6 +190,16 @@
                 <div class="card txn-modal-content">
                     <div id="upload-msg"></div>
                     <div class="labels">
+                        <h5>Without seed company: <input type="checkbox" class="form-check-input" name="noSeedCompany"
+                                id="noSeedCompany" style="cursor: pointer;"></h5>
+                    </div>
+                    <hr />
+                    {{!-- <div class="col-sm-1 flex justify-items-center shadow bg-light border rounded">
+                        <input type="checkbox" class="form-check-input" name="noSeedCompany" id="noSeedCompany"
+                            style="cursor: pointer;">
+                    </div> --}}
+                    <p></p>
+                    <div class="labels" id="searchLabel">
                         <h5>Search for Seed Company</h5>
                     </div>
                     <div class="col form-group">
@@ -285,6 +295,29 @@
         }
 
         getCurrentStatus();
+
+
+        function hideSearchField() {
+            const searchLabel = document.getElementById('searchLabel');
+            const searchField = document.getElementById('keyword');
+            searchLabel.style.display = 'none';
+            searchField.style.display = 'none';
+        }
+
+        function showSearchField() {
+            const searchLabel = document.getElementById('searchLabel');
+            const searchField = document.getElementById('keyword');
+            searchLabel.style.display = 'block';
+            searchField.style.display = 'block';
+        }
+
+        $("#noSeedCompany").on("change", function () {
+            if (this.checked) {
+                hideSearchField();
+            } else {
+                showSearchField();
+            }
+        })
 
 
 
@@ -432,18 +465,25 @@
                 $('#loader').css('visibility', 'visible');
                 $("#uploadSeedProducerListBtn").val("Uploading...");
 
+
                 let formData = new FormData();
 
                 const files = $('#producerList')[0].files;
                 const seed_company_id = $('#seed_company_id').val();
+                const noSeedCompany = $('#noSeedCompany').is(':checked');
 
-                if (!seed_company_id) {
-                    $('#upload-msg').html(`<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                if (!noSeedCompany) {
+                    /* This will validate search field if no seed company is 
+                    selected and without seed company is not checked
+                    */
+                    if (!seed_company_id) {
+                        $('#upload-msg').html(`<div class='alert alert-warning alert-dismissible fade show' role='alert'>
                 Please select a seed company
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>`);
-                    hidePreloader();
-                    return;
+                        hidePreloader();
+                        return;
+                    }
                 }
 
                 if (files.length === 0) {
