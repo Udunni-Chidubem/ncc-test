@@ -30,7 +30,7 @@ module.exports = {
 
     const {
       name_of_company,
-      phone_no,
+      //phone_no,
       tin,
       address,
       licensed_no,
@@ -46,7 +46,7 @@ module.exports = {
     try {
       const data = {
         name_of_company,
-        phone_no,
+       // phone_no,
         tin,
         address,
         licensed_no,
@@ -60,6 +60,8 @@ module.exports = {
       };
       await User.update({ status: true }, { where: { id: user.id } });
 
+
+
       const company = await SeedCompany.update(
         data,
         {
@@ -68,6 +70,7 @@ module.exports = {
         { transaction: transaction }
       );
       transaction.commit();
+      console.log(company)
       return { company };
     } catch (e) {
       transaction.rollback();
@@ -565,11 +568,10 @@ module.exports = {
     }
   },
 
-  listSeedProducers: async (req, res) => {
-    const user = await req.user;
-
+  listSeedProducers: async (user_id, res) => {
+  console.log(user_id)
     const seedProducer = await SeedProducer.findAll({
-      where: { user_id: user.id },
+      where: { user_id:user_id},
       order: [["id", "DESC"]],
       include: [
         {

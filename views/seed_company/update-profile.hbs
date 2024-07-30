@@ -299,7 +299,14 @@
             })
             error_toastr(msg)
           } else if (response.statusCode == 500 || response.statusCode == 400) {
-            error_toastr(response.data)
+            let msg = response.message[0].message;          
+            if (msg.includes("licensed_no")){
+              msg = msg.replace("licensed_no","License number");
+            }
+            if (msg.includes("certification_number")){
+              msg = msg.replace("certification_number","Certification number");
+            }
+            error_toastr(msg);
           } else {
             let m = state != null ? 'Your profile has been updated successfully.' : response.message
             success_toastr(m)

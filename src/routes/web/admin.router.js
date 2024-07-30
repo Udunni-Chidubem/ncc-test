@@ -363,6 +363,11 @@ adminRouter.get("/users/:id", async (req, res) => {
 
   balance = await adminController.getWallet(req, res);
   let user_role = await adminController.getUserRole(req, res);
+  let seed_producers = null;
+  if (company_id){
+    let id = company_id.user_id
+    seed_producers = await companyController.listSeedProducers(id,res);
+  }
 
   res.render("admin/view-user", {
     layout: "admin-dashboard",
@@ -378,6 +383,7 @@ adminRouter.get("/users/:id", async (req, res) => {
     product,
     balance,
     ledger_info,
+    seed_producers,
     user_role: user_role.Role.role_name,
   });
 });
@@ -625,8 +631,11 @@ adminRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
-
   let seedProducer = await adminController.listSeedProducers(req, res);
+  /*
+  * weeggo
+  */
+  let independentSeedProducers = await adminController.listIndependentSeedProducers(req,res);
 
   res.render("admin/seed-producer-list", {
     layout: "admin-dashboard",
@@ -634,6 +643,7 @@ adminRouter.get("/seed-producers", async (req, res) => {
     title: "Seed Producers",
     username: user.username,
     isVerified,
+    independentSeedProducers,
     user_role: user_role.Role.role_name,
   });
 });

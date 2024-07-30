@@ -76,11 +76,11 @@ companyRouter.post(
   validate,
   async (req, res) => {
     let r = await companyController.updateProfile(req, res);
-
+console.log(r)
     if (r.company) {
       res
         .json({
-          message: "Your profile has been “updated” successfully.",
+          message: "Your profile has been “updated” successfully ccc.",
           statusCode: 200,
         })
         .status(200);
@@ -516,8 +516,10 @@ companyRouter.post("/seed-producer-seed/create", async (req, res) => {
 companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
-  let seedProducer = await companyController.listSeedProducers(req, res);
-
+  let user_id = user.id
+  console.log("sd ",user_id);
+  let seedProducer = await companyController.listSeedProducers(user_id, res);
+  
   res.render("seed_company/seed-producer-list", {
     layout: "company-dashboard",
     seedProducer,
@@ -531,7 +533,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedsProduced = await companyController.getSeedProduced(req, res);
   let states = await siteController.getStates();
   let prod_id = await req.params.id;
-
+  
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
     title: "Seed Producers",

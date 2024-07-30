@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       NoSeedCompanySeedProducer.belongsTo(models.LGAs, {
         foreignKey: "lg_id",
       });
-      NoSeedCompanySeedProducer.hasMany(models.SeedProducerSeed, {
+      NoSeedCompanySeedProducer.hasMany(models.NoSeedCompanyseedProducerSeeds, {
         foreignKey: "producer_id",
         sourceKey: "id",
       });

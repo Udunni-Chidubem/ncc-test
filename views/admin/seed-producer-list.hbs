@@ -12,6 +12,7 @@
         <div class="tab-btn active" data-id="all">ALL</div>
         <div class="tab-btn" data-id="active">ACTIVE</div>
         <div class="tab-btn" data-id="deactivated">DEACTIVATED</div>
+        <div class="tab-btn" data-id="independent-seed-producers">INDEPENDENT SEED PRODUCERS</div>
     </div>
     <div>
 
@@ -176,6 +177,58 @@
             </table>
         </div>
     </div>
+    <!--independent seed producers ** START ** -->
+    <div class="content" id="independent-seed-producers">
+        <div class=" container table-responsives table_t_info card p-3">
+            <table class="table con t_info  table-borderless" id="seedProducers-inactive">
+                <thead class="t_info_head ">
+                    <tr class="row-height">
+                        <th scope="col">S/N</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of seeds produced</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Date Created</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each independentSeedProducers}}
+                    {{#if (eq status 1)}}
+                    <tr class="t_info_row1">
+                        <td>{{increment @index}}</td>
+                        <td> {{this.full_name}}</td>
+                        <td> {{this.NoSeedCompanyseedProducerSeeds.length}}</td>
+                        <td>{{LGA.name}}, {{State.name}}</td>
+                        <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                        <td><a href="#">
+                                <div class="dropdown d_t">
+                                    <a class="btn   dropdown-toggle action_btn" href="#" role="button"
+                                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item border-0 border-bottom"
+                                                href="/admin/seed-producer/{{id}}?type=independent">View</a></li>
+
+                                        <li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
+                                                href="#" id-data="{{user_id}}" seed-producer-data="{{id}}"
+                                                id="update-seed-producer-status-btn" current-status-data="{{status}}">
+                                                Deactivate
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </a></td>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--independent seed producers ** END ** -->
+
 </div>
 <!-- end of single item -->
 </div>

@@ -563,148 +563,60 @@
 					{{!-- Seed producers **START** --}}
 					<div class="tab-pane account-details-section fade" id="seed-producers" role="tabpanel"
 						aria-labelledby="seed-producers-tab">
-					<table class="table table-responsive table-bordered table-theme table-striped"
-							id="activity-log-table">
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Product Name</th>
-									<th>Status</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								{{#each products}}
-								<tr class="row-one row-height">
-									<td scope="col">{{dateFormat this.created_at "dddd, MMMM Do YYYY"}}</td>
-									<td scope="col"><strong>{{this.product_name}}/{{this.variant}}</strong></td>
-									<td scope="col">
-										{{#if this.status}}
-										{{#equals this.status 1}}
-										<span class="published">Published</span>
-										{{/equals}}
-										{{else}}
-										{{#equals this.status 0}}
-										<span class="unpublished">Unpublished</span>
-										{{/equals}}
-										{{/if}}
-									</td>
-									<td>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#sc_product_{{this.id}}"
-											data-item="{{this.id}}"><i class="fa fa-eye"></i></a>
-									</td>
-								</tr>
-								<div class="modal fade" id="sc_product_{{this.id}}" tabindex="-1"
-									aria-labelledby="sc_productLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="btn-close" data-bs-dismiss="modal"
-													aria-label="Close"></button>
-											</div>
-											<div class="modal-body">
-												<div class=" pt-2">
-													<span
-														class="{{#if (eq this.status 1)}} published_product {{else if (eq this.status 2)}} revoked {{else}} pending_product {{/if}} px-1 text-small">
-														{{#if (eq this.status 1)}} Published {{else}} Pending {{/if}}
-													</span>
-												</div>
-												<div class="card-body m-0 admin-user-product">
-													<div class="">
-														<div class="admin-user-name_varaint">
-															<div>
-																<h4>Product Name</h4>
-																<h5>{{this.product_name}}</h5>
-															</div>
-															<div>
-																<h4>Variety</h4>
-																<h5>{{this.variant}}</h5>
-															</div>
-														</div>
-														<hr class="admin-product-line">
-														<div class="admin-view-prod-desc">
-															<h4>Product Description</h4>
-															<p>{{this.description}}</p>
-														</div>
-														<hr class="admin-product-line">
-
-														<hr class="admin-product-line">
-														<div>
-															<div class="inp_cont" id="inp_cont">
-																<div class="">
-																	<div class="row admin-product-row">
-																		<div class="col col_sma ">
-																			<div class="   ">
-																				<h4>Package Size <i>(kg)</i> </h4>
-																			</div>
-																		</div>
-																		<div class="col col_sma">
-																			<div class=" ">
-																				<h4>Quantity </h4>
-																			</div>
-																		</div>
-																		<div class="col col_sma">
-																			<div class=" ">
-																				<h4>Min Stock </h4>
-																			</div>
-																		</div>
-																		<div class="col col_sma">
-																			<div class=" ">
-																				<h4>Unit Price </h4>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="row  admin-product-row">
-																		{{#json this.item}}
-																		<div class="col col_sma">
-																			{{#each pkg}}
-																			<div class="py-1 ">
-																				<h5>{{this}} </h5>
-																			</div>
-																			{{/each}}
-																		</div>
-																		<div class="col col_sma">
-																			{{#each quantity}}
-																			<div class="py-1 ">
-																				<h5>{{this}} </h5>
-																			</div>
-																			{{/each}}
-																		</div>
-																		<div class="col col_sma">
-																			{{#each min}}
-																			<div class="py-1 ">
-																				<h5>{{this}} </h5>
-																			</div>
-																			{{/each}}
-																		</div>
-																		<div class="col col_sma">
-																			{{#each price}}
-																			<div class="py-1 ">
-																				<h5> &#8358; {{this}} </h5>
-																			</div>
-																			{{/each}}
-																		</div>
-																		{{/json}}
-																		<div class="col col_sma">
-
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<hr class="admin-product-line">
+					<table class="table con t_info  table-borderless" id="seedProducers">
+            <thead class="t_info_head ">
+                <tr class="">
+                    <th scope="col">S/N</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Seed Produced</th>
+                    <th scope="col">Variety</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
 
 
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+            <tbody class="t_info_body products-list-table">
+                {{#each seed_producers}}
+                    {{#if (eq status 1)}}
+                        <tr class="t_info_row1">
+                            <th scope="row">{{increment @index}}</th>
+                            <td> {{full_name}}</td>
+                            <td>{{SeedProducerSeeds.[0].name_of_seed}}</td>
+                            <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
+                            <td>{{SeedProducerSeeds.[0].volume_of_seed}} {{SeedProducerSeeds.[0].unit}}</td>
+                            <td>{{LGA.name}}, {{State.name}}</td>
+                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+                            <td><a href="#">
+                                    <div class="dropdown d_t">
+                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </a>
 
-								{{/each}}
-							</tbody>
-						</table>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item border-0 border-bottom"
+                                                    href="/admin/seed-producer/{{id}}">View</a></li>
+                                            <li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
+                                                    href="#" 
+                                                    id-data="{{user_id}}" 
+                                                    seed-producer-data="{{id}}" 
+                                                    id="update-seed-producer-status-btn"
+                                                    current-status-data="{{status}}"
+                                                    >
+                                                    Deactivate
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                </a></td>
+                        </tr>
+                    {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
 					</div>
 					{{!-- Seed producers **END** --}}
 				</div>
