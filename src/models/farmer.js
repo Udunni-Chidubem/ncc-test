@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       Farmer.belongsTo(models.SeedTrader, {
         foreignKey : 'referee',
         targetKey : 'id'
+      }),
+      Farmer.hasMany(models.TransactionLog, {
+        foreignKey : 'farmer_id',
+        sourceKey : 'id'
       })
     }
   }
