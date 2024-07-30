@@ -2,11 +2,6 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class NoSeedCompanySeedProducer extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       NoSeedCompanySeedProducer.belongsTo(models.States, {
         foreignKey: "state_id",
@@ -22,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   NoSeedCompanySeedProducer.init(
     {
-      // user_id: DataTypes.INTEGER,
       full_name: DataTypes.STRING,
       phone_no: {
         type: DataTypes.STRING,
@@ -50,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
       sequelize,
       timestamps: false,
-      tableName: "noSeedCompanySeedProducer",
+      tableName: "NoSeedCompanySeedProducer",
       modelName: "NoSeedCompanySeedProducer",
     }
   );

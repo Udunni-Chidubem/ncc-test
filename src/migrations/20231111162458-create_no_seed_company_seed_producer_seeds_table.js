@@ -3,16 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
-    // await queryInterface.removeColumn('seedProducer', 'name_of_seed')
-    // await queryInterface.removeColumn('seedProducer', 'variety_of_seed')
-    // await queryInterface.removeColumn('seedProducer', 'volume_of_seed')
-    await queryInterface.createTable("noSeedCompanyseedProducerSeeds", {
+    await queryInterface.createTable("NoSeedCompanyseedProducerSeeds", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -23,9 +14,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "noSeedCompanyseedProducer",
+          model: "NoSeedCompanySeedProducer", // Corrected table name
           key: "id",
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       name_of_seed: {
         type: Sequelize.STRING,
@@ -54,11 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable("NoSeedCompanyseedProducerSeeds");
   },
 };
