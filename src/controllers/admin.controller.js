@@ -24,6 +24,8 @@ const {
   KnowledgeBase,
   SeedProducer,
   SeedProducerSeed,
+  NoSeedCompanySeedProducer,
+  NoSeedCompanyseedProducerSeeds
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op, UniqueConstraintError } = require("sequelize");
@@ -1060,7 +1062,12 @@ module.exports = {
           { transaction: transaction }
         );
         await transaction.commit();
-        return user;
+        let data = {
+          id: user.id,
+          username: user.username,
+          status: user.status,
+        };
+        return data;
       } else {
         return { error: true, message: "Account already exist" };
       }
@@ -1113,7 +1120,30 @@ module.exports = {
     });
     return states;
   },
-
+  /*
+  * weeggo
+  */
+  listIndependentSeedProducers: async (req,res)=>{
+    const independentSeedProducers = await NoSeedCompanySeedProducer.findAll({
+      include: [
+        {
+          model: States,
+          attributes: ["name"],
+        },
+        {
+          model: LGAs,
+          attributes: ["name"],
+        },
+        {
+          model: NoSeedCompanyseedProducerSeeds,
+          raw: true,
+        },
+      ],
+      order: [["created_at", "DESC"]],
+    })
+    response = JSON.parse(JSON.stringify(independentSeedProducers));
+    return response;
+  },
   listSeedProducers: async (req, res) => {
     const user = await req.user;
     // let response = null;
@@ -1152,7 +1182,23 @@ module.exports = {
   viewSeedProducer: async (req, res) => {
     const user = await req.user;
     let response = null;
-
+    /*
+    * weeggo **I added a "type" to the query to distinguish independent seed producers**
+     (this technique will enable the reuse of this function)
+    */
+    let type = req.query.type;
+    if (type !== null && type == "independent"){
+      const seedProducer = await NoSeedCompanySeedProducer.findOne({
+        where: { id: req.params.id },
+        raw: true,
+      });
+  
+      if (seedProducer) {
+        response = seedProducer;
+      }
+  
+      return response;
+    }
     const seedProducer = await SeedProducer.findOne({
       where: { id: req.params.id },
       raw: true,
@@ -1171,7 +1217,27 @@ module.exports = {
 
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
-
+   /*
+    * weeggo **I added a "type" to the query to distinguish independent seed producers**
+     (this technique will enable the reuse of this function)
+    */
+    let type = req.query.type;
+    if (type !== null && type == "independent"){     
+      const seeds = await NoSeedCompanyseedProducerSeeds.findAndCountAll({
+        where: { producer_id: req.params.id },
+        order: [["id", "DESC"]],
+        // raw: true,
+        limit,
+        offset,
+      });
+  
+      if (seeds) {
+        response = getPagingData(seeds, page, limit);
+      }
+      response = JSON.parse(JSON.stringify(seeds));
+      return response;
+    }
+    
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
       order: [["id", "DESC"]],
@@ -1358,6 +1424,9 @@ module.exports = {
     let seedProducersToInsert = [];
     let duplicateSeedProducer = [];
     let seedProducedToInsert = [];
+    const NO_SEED_COMPANY_ID = undefined;
+
+    // console.log("COMPANY DATA", company_data);
 
     try {
       if (!file || !file.data) {
@@ -1391,29 +1460,59 @@ module.exports = {
         });
 
         if (state && lga) {
-          const seedproducerQuery = `SELECT phone_no FROM seedProducer WHERE phone_no = :phone_no AND user_id = :user_id LIMIT 1`;
-          const sseedProducer = await db.rest.query(seedproducerQuery, {
-            type: QueryTypes.SELECT,
-            replacements: {
-              phone_no: item.phone_no,
-              user_id: company_data.seed_company_id,
-            },
-          });
-
-          if (sseedProducer.length > 0) {
-            duplicateSeedProducer.push({ phone_number: item.phone_no });
-          } else {
-            seedProducersToInsert.push({
-              user_id: company_data.seed_company_id,
-              full_name: item.full_name,
-              phone_no: item.phone_no,
-              certified: item.certified,
-              gender: item.gender,
-              age_range: item.age_range,
-              living_status: item.living_status,
-              state_id: state.id,
-              lg_id: lga.id,
+          // console.log("Data Type", typeof company_data.company_id);
+          if (company_data.seed_company_id !== undefined) {
+            const seedproducerQuery = `SELECT phone_no FROM seedProducer WHERE phone_no = :phone_no AND user_id = :user_id LIMIT 1`;
+            const sseedProducer = await db.rest.query(seedproducerQuery, {
+              type: QueryTypes.SELECT,
+              replacements: {
+                phone_no: item.phone_no,
+                user_id: company_data.seed_company_id,
+              },
             });
+
+            if (sseedProducer.length > 0) {
+              duplicateSeedProducer.push({ phone_number: item.phone_no });
+            } else {
+              seedProducersToInsert.push({
+                user_id: company_data.seed_company_id,
+                full_name: item.full_name,
+                phone_no: item.phone_no,
+                certified: item.certified,
+                gender: item.gender,
+                age_range: item.age_range,
+                living_status: item.living_status,
+                state_id: state.id,
+                lg_id: lga.id,
+              });
+            }
+          } else {
+            const seedproducerQuery = `SELECT phone_no FROM noseedcompanyseedproducer WHERE phone_no = :phone_no LIMIT 1`;
+            const sseedProducer = await db.rest.query(seedproducerQuery, {
+              type: QueryTypes.SELECT,
+              replacements: {
+                phone_no: item.phone_no,
+              },
+            });
+
+            if (sseedProducer.length > 0) {
+              duplicateSeedProducer.push({ phone_number: item.phone_no });
+            } else {
+              seedProducersToInsert.push({
+                full_name: item.full_name,
+                phone_no: item.phone_no,
+                certified: item.certified,
+                gender: item.gender,
+                age_range: item.age_range,
+                living_status: item.living_status,
+                state_id: state.id,
+                lg_id: lga.id,
+              });
+              // console.log(
+              //   "seedProducerToInsert without company:",
+              //   seedProducersToInsert
+              // );
+            }
           }
         } else {
           console.warn(
@@ -1429,27 +1528,53 @@ module.exports = {
         );
       }
 
+      // return;
       if (seedProducersToInsert.length > 0) {
-        const seedP = await db.SeedProducer.bulkCreate(seedProducersToInsert);
-        seedP.forEach((seed, index) => {
-          const item = data[index];
-          const unit = item?.unit?.toLowerCase();
-          seedProducedToInsert.push({
-            producer_id: seed.id,
-            name_of_seed: item.name_of_seed,
-            variety_of_seed: item.variety_of_seed,
-            volume_of_seed: item.volume_of_seed,
-            unit: unit,
-            year_produced: item.year_produced,
+        // console.log("Seed Producers to upload ==> ", seedProducersToInsert[0]);
+        if (seedProducersToInsert[0].user_id !== "") {
+          const seedP = await db.SeedProducer.bulkCreate(seedProducersToInsert);
+          seedP.forEach((seed, index) => {
+            const item = data[index];
+            const unit = item?.unit?.toLowerCase();
+            seedProducedToInsert.push({
+              producer_id: seed.id,
+              name_of_seed: item.name_of_seed,
+              variety_of_seed: item.variety_of_seed,
+              volume_of_seed: item.volume_of_seed,
+              unit: unit,
+              year_produced: item.year_produced,
+            });
           });
-        });
+          await db.SeedProducerSeed.bulkCreate(seedProducedToInsert);
 
-        await db.SeedProducerSeed.bulkCreate(seedProducedToInsert);
-
-        return {
-          success: true,
-          msg: `Seed producers uploaded successfully. Uploaded data: ${seedProducersToInsert.length} and rejected data: ${duplicateSeedProducer.length}`,
-        };
+          return {
+            success: true,
+            msg: `Seed producers uploaded successfully. Uploaded data: ${seedProducersToInsert.length} and rejected data: ${duplicateSeedProducer.length}`,
+          };
+        } else {
+          const seedP = await db.NoSeedCompanySeedProducer.bulkCreate(
+            seedProducersToInsert
+          );
+          seedP.forEach((seed, index) => {
+            const item = data[index];
+            const unit = item?.unit?.toLowerCase();
+            seedProducedToInsert.push({
+              producer_id: seed.id,
+              name_of_seed: item.name_of_seed,
+              variety_of_seed: item.variety_of_seed,
+              volume_of_seed: item.volume_of_seed,
+              unit: unit,
+              year_produced: item.year_produced,
+            });
+          });
+          await db.NoSeedCompanyseedProducerSeeds.bulkCreate(
+            seedProducedToInsert
+          );
+          return {
+            success: true,
+            msg: `Seed producers uploaded successfully. Uploaded data: ${seedProducersToInsert.length} and rejected data: ${duplicateSeedProducer.length}`,
+          };
+        }
       } else {
         return {
           success: false,
@@ -1461,7 +1586,7 @@ module.exports = {
       if (e instanceof UniqueConstraintError) {
         return {
           success: false,
-          msg: `Unique constraint error. Total rejected data: ${duplicateSeedProducer.length}. Inserted data: ${seedProducersToInsert.length}`,
+          msg: `Unique constraint error. Total rejected data: ${seedProducersToInsert.length}. Inserted data: ${duplicateSeedProducer.length}`,
         };
       } else {
         return { success: false, msg: `Error processing file: ${e.message}` };

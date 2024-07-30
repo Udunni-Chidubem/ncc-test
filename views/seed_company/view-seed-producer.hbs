@@ -112,7 +112,6 @@
         </button>
     </div>
 
-
     <div class="card table-responsives table_t_info mt-2 p-3">
         <table class="table con t_info  table-borderless" id="seedProduced">
             <thead class="t_info_head ">
@@ -320,39 +319,39 @@
                     <form action="" method="POST">
                         <div class="form seeds">
                             <div class="form-group">
-                                <label for="nameOfSeed">Name of Seed Produced <span
+                                <label for="nameOfSeed">Name of Seed Produced bb<span
                                         class="required-feilds">*</span></label>
                                 <input type="text" class="form-control seed_name" name="nameOfSeedInput"
-                                    id="nameOfSeedInput" placeholder="Enter name of Seed">
+                                    id="editSeed_nameOfSeedInput" placeholder="Enter name of Seed">
                             </div>
                             <div class="form-group">
                                 <label for="varietyOfSeed" class="input_form">Variety of seed produced <span
                                         class="profile_sub">*</span></label>
                                 <input type="text" class="form-control variety" name="varietyOfSeedInput"
-                                    id="varietyOfSeedInput" placeholder="Enter Variety of Seed">
+                                    id="editSeed_varietyOfSeedInput" placeholder="Enter Variety of Seed">
 
                                 <input type="number" class="form-control prod_id hidden" value="{{prod_id}}"
-                                    id="numberOfSeedInput" placeholder="Enter Variety of Seed">
-                                <input type="number" class="form-control prod_id hidden" id="seedId"
+                                    id="editSeed_numberOfSeedInput" placeholder="Enter Variety of Seed">
+                                <input type="number" class="form-control prod_id hidden" id="editSeed_seedId"
                                     placeholder="Enter Variety of Seed">
                             </div>
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <label for="volumeOfSeed" class="input_form">Total amount of seed given<span
+                                        <label for="volumeOfSeed" class="input_form">Total amount of seed givend<span
                                                 class="profile_sub">*</span></label>
                                         <div class="custom-file">
-                                            <input type="number" required id="amountOfSeed" name="amountOfSeed"
+                                            <input type="number" required id="editSeed_amountOfSeed" name="amountOfSeed"
                                                 class="form-control amount_of_seed" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm" />
+                                                aria-describedby="inputGroup-sizing-sm"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mt-2">
                                         <label for="unit_for_total_amount_of_seed_given" class="input_form">Unit</label>
                                         <select
                                             class="form-select form-control unit_for_total_amount_of_seed_given_input"
-                                            id="unit_for_total_amount_of_seed_given"
+                                            id="editSeed_unit_for_total_amount_of_seed_given"
                                             name="unit_for_total_amount_of_seed_given" required>
                                             <option selected>Select unit..</option>
                                             <option value="kg">Kg</option>
@@ -367,13 +366,13 @@
                                             <label for="amount_of_seed" class="input_form">Total amount of seeds
                                                 remitted<span class="profile_sub">*</span></label>
                                             <input type="number" class="form-control amount_of_seed_remitted"
-                                                name="amountOfSeedRemitted" id="amountOfSeedRemitted" required>
+                                                name="amountOfSeedRemitted" id="editSeed_amountOfSeedRemitted" required>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label for="unit_for_total_amount_of_seed_remitted" class="input_form">Unit
                                                 <select
                                                     class="form-select form-control unit_for_total_amount_of_seed_remitted_input"
-                                                    id="unit_for_total_amount_of_seed_remitted"
+                                                    id="editSeed_unit_for_total_amount_of_seed_remitted"
                                                     name="unit_for_total_amount_of_seed_remitted" required>
                                                     <option selected>Select unit..</option>
                                                     <option value="kg">Kg</option>
@@ -391,7 +390,7 @@
                                                 <span class="required-feilds">*</span></label>
                                             <input type="number"
                                                 class="form-control amount_of_seed_to_be_remitted_input"
-                                                name="amountOfSeedToBeRemitted" id="amountOfSeedToBeRemitted" required
+                                                name="amountOfSeedToBeRemitted" id="editSeed_amountOfSeedToBeRemitted" required
                                                 disabled>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -399,7 +398,7 @@
                                                 class="input_form">Unit</label>
                                             <select
                                                 class="form-select form-control unit_for_total_amount_of_seed_to_be_remitted_input"
-                                                id="unit_for_total_amount_of_seed_to_be_remitted"
+                                                id="editSeed_unit_for_total_amount_of_seed_to_be_remitted"
                                                 name="unit_for_total_amount_of_seed_to_be_remitted" required>
                                                 <option selected>Select unit..</option>
                                                 <option value="kg">Kg</option>
@@ -417,14 +416,14 @@
                                         <div class="col-md-8">
                                             <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
                                                     class="profile_sub">*</span></label>
-                                            <input type="text" required id="volumeOfSeedInput" name="volumeOfSeedInput"
+                                            <input type="text" required id="editSeed_volumeOfSeedInput" name="volumeOfSeedInput"
                                                 class="form-control volumn" aria-label="Sizing example input"
                                                 aria-describedby="inputGroup-sizing-sm" />
                                         </div>
                                         <div class="col-md-4 mt-3">
                                             <div class="input-group-append">
                                                 <label for="unitInput" class="input_form">Unit</label>
-                                                <select class="form-select unit" id="unitInput" name="unitInput"
+                                                <select class="form-select unit" id="editSeed_unitInput" name="unitInput"
                                                     required>
                                                     <option selected>Select unit..</option>
                                                     <option value="kg">Kg</option>
@@ -440,7 +439,7 @@
                                         <label for="yearProduced">Year produced <span
                                                 class="required-feilds">*</span></label>
                                         <input type="date" class="form-control year_produced" name="yearProducedInput"
-                                            id="yearProducedInput" required>
+                                            id="editSeed_yearProducedInput" required>
                                     </div>
                                 </div>
                             </div>
@@ -563,20 +562,20 @@
                         const data = res.data;
                         if (data !== null && data !== undefined) {
 
-                            const nameOfSeed = $('#nameOfSeedInput');
-                            const varietyOfSeed = $('#varietyOfSeedInput');
-                            const volumeOfSeed = $('#volumeOfSeedInput');
-                            const yearProduced = $('#yearProducedInput');
-                            const unit = $('#unitInput');
-                            const seedIdInput = $('#seedId');
-                            const amountOfSeed = $('#amountOfSeed');
-                            const amountOfSeedRemitted = $('#amountOfSeedRemitted');
-                            const amountOfSeedToBeRemitted = $('#amountOfSeedToBeRemitted');
+                            const nameOfSeed = $('#editSeed_nameOfSeedInput');
+                            const varietyOfSeed = $('#editSeed_varietyOfSeedInput');
+                            const volumeOfSeed = $('#editSeed_volumeOfSeedInput');
+                            const yearProduced = $('#editSeed_yearProducedInput');
+                            const unit = $('#editSeed_unitInput');
+                            const seedIdInput = $('#editSeed_seedId');
+                            const amountOfSeed = $('#editSeed_amountOfSeed');
+                            const amountOfSeedRemitted = $('#editSeed_amountOfSeedRemitted');
+                            const amountOfSeedToBeRemitted = $('#editSeed_amountOfSeedToBeRemitted');
                             const unitOfAmountOfSeed = $('.unit_for_total_amount_of_seed_given_input');
                             const unitOfAmountOfSeedRemitted = $('.unit_for_total_amount_of_seed_remitted_input');
                             const unitOfAmountOfSeedToBeRemitted = $('.unit_for_total_amount_of_seed_to_be_remitted_input');
 
-                            //console.log(data);
+                            console.log(data);
 
                             seedIdInput.val(data.id);
                             nameOfSeed.val(data.name_of_seed);
@@ -737,19 +736,19 @@
 
                 const url = window.location.origin + `/seed-company/seed-update`;
 
-                const seedId = document.querySelector('#seedId').value;
-                const nameOfSeed = document.querySelector('#nameOfSeedInput').value;
-                const varietyOfseed = document.querySelector('#varietyOfSeedInput').value;
-                const volumeOfseed = document.querySelector('#volumeOfSeedInput').value;
-                const yearProduced = document.querySelector('#yearProducedInput').value;
-                const unit = document.querySelector('#unitInput').value;
-                const producerId = document.querySelector('#numberOfSeedInput').value;
-                const amountOfSeed = document.querySelector('#amountOfSeed').value;
-                const amountOfSeedRemitted = document.querySelector('#amountOfSeedRemitted').value;
-                const amountOfSeedToBeRemitted = document.querySelector('#amountOfSeedToBeRemitted').value;
-                const unitOfAmountOfSeed = document.querySelector('#unit_for_total_amount_of_seed_given').value;
-                const unitOfAmountOfSeedRemitted = document.querySelector('#unit_for_total_amount_of_seed_remitted').value;
-                const unitOfAmountOfSeedToBeRemitted = document.querySelector('#unit_for_total_amount_of_seed_to_be_remitted').value;
+                const seedId = document.querySelector('#editSeed_seedId').value;
+                const nameOfSeed = document.querySelector('#editSeed_nameOfSeedInput').value;
+                const varietyOfseed = document.querySelector('#editSeed_varietyOfSeedInput').value;
+                const volumeOfseed = document.querySelector('#editSeed_volumeOfSeedInput').value;
+                const yearProduced = document.querySelector('#editSeed_yearProducedInput').value;
+                const unit = document.querySelector('#editSeed_unitInput').value;
+                const producerId = document.querySelector('#editSeed_numberOfSeedInput').value;
+                const amountOfSeed = document.querySelector('#editSeed_amountOfSeed').value;
+                const amountOfSeedRemitted = document.querySelector('#editSeed_amountOfSeedRemitted').value;
+                const amountOfSeedToBeRemitted = document.querySelector('#editSeed_amountOfSeedToBeRemitted').value;
+                const unitOfAmountOfSeed = document.querySelector('#editSeed_unit_for_total_amount_of_seed_given').value;
+                const unitOfAmountOfSeedRemitted = document.querySelector('#editSeed_unit_for_total_amount_of_seed_remitted').value;
+                const unitOfAmountOfSeedToBeRemitted = document.querySelector('#editSeed_unit_for_total_amount_of_seed_to_be_remitted').value;
 
 
                 form.append("id", seedId)
@@ -851,7 +850,9 @@
                 body: form
             }).then(r => r.json())
                 .then(r => {
-                    window.location.reload()
+                    console.log(form);
+                    console.log(r);
+                    //window.location.reload()
                 })
         }
 

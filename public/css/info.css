@@ -458,4 +458,26 @@ input {
   height: 40px;
 
 }
+ .alert-content-success{
+  background-color: #509750 !important;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+ }
+ .alert-content-error{
+  background-color: #ff8282 !important;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+ }
+ .active-page{
+  background-color: #509750 !important;
+  color: white !important;
+ }
 

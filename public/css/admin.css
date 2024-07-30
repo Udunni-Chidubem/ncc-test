@@ -280,7 +280,7 @@ th td {
   background: #fff;
   padding: 4px 8px;
   cursor: pointer;
-  width: 120px;
+  /* width: 120px; */
   border-radius: 7px 7px 0px 0px;
 }
 
