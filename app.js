@@ -66,8 +66,10 @@ app.engine(
         return b;
       },
       sub(a, b, sub) {
-        b -= a;
-        return b;
+        if (a>b){
+          return a-b;
+        }
+        return b - a;
       },
       increment(inindex) {
         return inindex + 1;
@@ -143,6 +145,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 app.use(methodOveride("_method"));
 app.use(
   fileUpload({
