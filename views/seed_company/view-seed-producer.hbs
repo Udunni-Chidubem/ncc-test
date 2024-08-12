@@ -71,7 +71,11 @@
                                 data-state="{{seedProducer.state_id}}" disabled>
                                 <option value="">Select State </option>
                                 {{#each states}}
+                                {{#if (eq this.id seedProducer.state_id)}}
+                                <option value="{{this.id}}" selected>this.name</option>
+                                {{else}}
                                 <option value="{{this.id}}">{{this.name}}</option>
+                                {{/if}}
                                 {{/each}}
                             </select>
                         </div>
@@ -344,7 +348,7 @@
                                         <div class="custom-file">
                                             <input type="number" required id="editSeed_amountOfSeed" name="amountOfSeed"
                                                 class="form-control amount_of_seed" aria-label="Sizing example input"
-                                                aria-describedby="inputGroup-sizing-sm"/>
+                                                aria-describedby="inputGroup-sizing-sm" />
                                         </div>
                                     </div>
                                     <div class="col-md-4 mt-2">
@@ -390,8 +394,8 @@
                                                 <span class="required-feilds">*</span></label>
                                             <input type="number"
                                                 class="form-control amount_of_seed_to_be_remitted_input"
-                                                name="amountOfSeedToBeRemitted" id="editSeed_amountOfSeedToBeRemitted" required
-                                                disabled>
+                                                name="amountOfSeedToBeRemitted" id="editSeed_amountOfSeedToBeRemitted"
+                                                required disabled>
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             <label for="unit_for_total_amount_of_seed_to_be_remitted"
@@ -416,15 +420,16 @@
                                         <div class="col-md-8">
                                             <label for="volumeOfSeed" class="input_form">Volume of seed produced<span
                                                     class="profile_sub">*</span></label>
-                                            <input type="text" required id="editSeed_volumeOfSeedInput" name="volumeOfSeedInput"
-                                                class="form-control volumn" aria-label="Sizing example input"
+                                            <input type="text" required id="editSeed_volumeOfSeedInput"
+                                                name="volumeOfSeedInput" class="form-control volumn"
+                                                aria-label="Sizing example input"
                                                 aria-describedby="inputGroup-sizing-sm" />
                                         </div>
                                         <div class="col-md-4 mt-3">
                                             <div class="input-group-append">
                                                 <label for="unitInput" class="input_form">Unit</label>
-                                                <select class="form-select unit" id="editSeed_unitInput" name="unitInput"
-                                                    required>
+                                                <select class="form-select unit" id="editSeed_unitInput"
+                                                    name="unitInput" required>
                                                     <option selected>Select unit..</option>
                                                     <option value="kg">Kg</option>
                                                     <option value="Metric Ton">Metric Ton</option>
@@ -474,7 +479,6 @@
             let age = $('#age_range').data('val')
             let livingStatus = $('#living_status').data('val')
 
-
             if (certified != null) {
                 $('#certified').val(certified)
             }
@@ -487,18 +491,25 @@
             }
 
             const getDefaultLgas = (state_id) => {
-                let url = window.location.origin + '/api/base/lgas/' + state_id
+                let url = window.location.origin + '/api/base/lgas/' + state_id;
+                let lg_id = $('#lgas').attr('data-lga')
                 fetch(url).then(r => r.json())
                     .then(r => {
                         let selected, Options
                         r.forEach(e => {
-                            Options += '<option value="' + e.id + '">' + e.name + '</option>'
+                            if (e.id == lg_id) {
+                                Options += '<option value="' + e.id + '" selected>' + e.name + '</option>';
+                            }
+                            if (e.id != lg_id) {
+                                Options += '<option value="' + e.id + '">' + e.name + '</option>';
+                            }
+
                         })
                         document.querySelector('#lgas').innerHTML = Options
 
                         $('#lgas').val(lga)
-                    }
-                    ).catch(e => {
+
+                    }).catch(e => {
                         console.log(e)
                     })
             }
@@ -529,7 +540,7 @@
                         document.querySelector('#lgas').innerHTML = Options
                     }
                     ).catch(e => {
-                        //console.log(e)
+                        console.log(e)
                     })
             })
 

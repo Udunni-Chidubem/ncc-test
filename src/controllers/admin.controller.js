@@ -25,7 +25,7 @@ const {
   SeedProducer,
   SeedProducerSeed,
   NoSeedCompanySeedProducer,
-  NoSeedCompanyseedProducerSeeds
+  NoSeedCompanyseedProducerSeeds,
 } = db;
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const { Op, UniqueConstraintError } = require("sequelize");
@@ -1121,9 +1121,9 @@ module.exports = {
     return states;
   },
   /*
-  * weeggo
-  */
-  listIndependentSeedProducers: async (req,res)=>{
+   * weeggo
+   */
+  listIndependentSeedProducers: async (req, res) => {
     const independentSeedProducers = await NoSeedCompanySeedProducer.findAll({
       include: [
         {
@@ -1140,7 +1140,7 @@ module.exports = {
         },
       ],
       order: [["created_at", "DESC"]],
-    })
+    });
     response = JSON.parse(JSON.stringify(independentSeedProducers));
     return response;
   },
@@ -1187,16 +1187,16 @@ module.exports = {
      (this technique will enable the reuse of this function)
     */
     let type = req.query.type;
-    if (type !== null && type == "independent"){
+    if (type !== null && type == "independent") {
       const seedProducer = await NoSeedCompanySeedProducer.findOne({
         where: { id: req.params.id },
         raw: true,
       });
-  
+
       if (seedProducer) {
         response = seedProducer;
       }
-  
+
       return response;
     }
     const seedProducer = await SeedProducer.findOne({
@@ -1217,12 +1217,12 @@ module.exports = {
 
     const { page, size } = req.query;
     const { limit, offset } = getPagination(page, size);
-   /*
+    /*
     * weeggo **I added a "type" to the query to distinguish independent seed producers**
      (this technique will enable the reuse of this function)
     */
     let type = req.query.type;
-    if (type !== null && type == "independent"){     
+    if (type !== null && type == "independent") {
       const seeds = await NoSeedCompanyseedProducerSeeds.findAndCountAll({
         where: { producer_id: req.params.id },
         order: [["id", "DESC"]],
@@ -1230,14 +1230,14 @@ module.exports = {
         limit,
         offset,
       });
-  
+
       if (seeds) {
         response = getPagingData(seeds, page, limit);
       }
       response = JSON.parse(JSON.stringify(seeds));
       return response;
     }
-    
+
     const seeds = await SeedProducerSeed.findAndCountAll({
       where: { producer_id: req.params.id },
       order: [["id", "DESC"]],
@@ -1285,7 +1285,7 @@ module.exports = {
           full_name: data.full_name,
           phone_no: data.phone_no,
           certified: data.certified,
-          state_id: data.sate_id,
+          state_id: data.state_id,
           lg_id: data.lg_id,
           gender: data.gender,
           age_range: data.age_range,

@@ -11,7 +11,7 @@ const companyController = require("../../controllers/company.controller");
 const { now } = require("moment");
 const db = require("../../models");
 const escrowController = require("../../controllers/escrow.controller");
-const { States } = db;
+const { States, LGAs } = db;
 
 companyRouter.get("/dashboard", async (req, res) => {
   let user = await req.user;
@@ -76,7 +76,7 @@ companyRouter.post(
   validate,
   async (req, res) => {
     let r = await companyController.updateProfile(req, res);
-console.log(r)
+    console.log(r);
     if (r.company) {
       res
         .json({
@@ -189,8 +189,13 @@ companyRouter.get("/products", async (req, res) => {
   let product = await companyController.listProducts(req, res);
   let paginate;
   if (product) {
-    paginate = { page: parseInt(req.query.page) || 0, pageCount: product.totalPages,next:product.nextPage, previous:product.previousPage};
-    console.log(paginate)
+    paginate = {
+      page: parseInt(req.query.page) || 0,
+      pageCount: product.totalPages,
+      next: product.nextPage,
+      previous: product.previousPage,
+    };
+    console.log(paginate);
   }
   res.render("seed_company/product-list", {
     layout: "company-dashboard",
@@ -427,10 +432,14 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
           year_produced: req.body.yearProduced[index],
           amount_of_seed: req.body.amount_of_seed[index],
           amount_of_seed_remitted: req.body.amount_of_seed_remitted[index],
-          amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted[index],
-          unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given[index],
-          unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted[index],
-          unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted[index],
+          amount_of_seed_to_be_remitted:
+            req.body.amount_of_seed_to_be_remitted[index],
+          unit_for_total_amount_of_seed_given:
+            req.body.unit_for_total_amount_of_seed_given[index],
+          unit_for_total_amount_of_seed_remitted:
+            req.body.unit_for_total_amount_of_seed_remitted[index],
+          unit_for_total_amount_of_seed_to_be_remitted:
+            req.body.unit_for_total_amount_of_seed_to_be_remitted[index],
         });
       });
     } else {
@@ -443,9 +452,12 @@ companyRouter.post("/seed-producers/create", async (req, res) => {
         amount_of_seed: req.body.amount_of_seed,
         amount_of_seed_remitted: req.body.amount_of_seed_remitted,
         amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
-        unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given,
-        unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted,
-        unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted,
+        unit_for_total_amount_of_seed_given:
+          req.body.unit_for_total_amount_of_seed_given,
+        unit_for_total_amount_of_seed_remitted:
+          req.body.unit_for_total_amount_of_seed_remitted,
+        unit_for_total_amount_of_seed_to_be_remitted:
+          req.body.unit_for_total_amount_of_seed_to_be_remitted,
       });
     }
     req.body.seeds = seeds;
@@ -490,9 +502,12 @@ companyRouter.post("/seed-producer-seed/create", async (req, res) => {
     amount_of_seed: req.body.amount_of_seed,
     amount_of_seed_remitted: req.body.amount_of_seed_remitted,
     amount_of_seed_to_be_remitted: req.body.amount_of_seed_to_be_remitted,
-    unit_for_total_amount_of_seed_given: req.body.unit_for_total_amount_of_seed_given,
-    unit_for_total_amount_of_seed_remitted: req.body.unit_for_total_amount_of_seed_remitted,
-    unit_for_total_amount_of_seed_to_be_remitted: req.body.unit_for_total_amount_of_seed_to_be_remitted,
+    unit_for_total_amount_of_seed_given:
+      req.body.unit_for_total_amount_of_seed_given,
+    unit_for_total_amount_of_seed_remitted:
+      req.body.unit_for_total_amount_of_seed_remitted,
+    unit_for_total_amount_of_seed_to_be_remitted:
+      req.body.unit_for_total_amount_of_seed_to_be_remitted,
   };
 
   let r = await companyController.createSeedProducerSeed(seeds);
@@ -516,10 +531,10 @@ companyRouter.post("/seed-producer-seed/create", async (req, res) => {
 companyRouter.get("/seed-producers", async (req, res) => {
   let user = await req.user;
   let company = await utils.getCompanyProfile(user);
-  let user_id = user.id
-  console.log("sd ",user_id);
+  let user_id = user.id;
+  console.log("sd ", user_id);
   let seedProducer = await companyController.listSeedProducers(user_id, res);
-  
+
   res.render("seed_company/seed-producer-list", {
     layout: "company-dashboard",
     seedProducer,
@@ -530,10 +545,18 @@ companyRouter.get("/seed-producers", async (req, res) => {
 
 companyRouter.get("/seed-producer/:id", async (req, res) => {
   let seedProducer = await companyController.viewSeedProducer(req, res);
+  let lgas = await LGAs.findOne({
+    attributes: ["id", "name"],
+    where: { state_id: seedProducer.state_id, id: seedProducer.lg_id },
+    raw: true,
+  });
   let seedsProduced = await companyController.getSeedProduced(req, res);
   let states = await siteController.getStates();
-  let prod_id = await req.params.id;
-  
+  let prod_id = req.params.id;
+
+  console.log("Here I am...!", seedProducer);
+  console.log("Here I am...!", lgas);
+
   res.render("seed_company/view-seed-producer", {
     layout: "company-dashboard",
     title: "Seed Producers",
@@ -541,6 +564,7 @@ companyRouter.get("/seed-producer/:id", async (req, res) => {
     prev_link: "/seed-company/seed-producers",
     seedProducer,
     states: states,
+    lgas: lgas,
     seedsProduced,
     prod_id,
   });
@@ -569,6 +593,7 @@ companyRouter.get(
 companyRouter.patch("/seed-producer/:id", async (req, res) => {
   const id = req.params.id;
   let response = await companyController.updateSeedProducer(req, res);
+  // console.log("TESTING:", response.body);
   return res.render(`seed-company/seed-producer/${id}`, {
     message: response,
   });

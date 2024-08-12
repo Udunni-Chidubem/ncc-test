@@ -46,7 +46,7 @@ module.exports = {
     try {
       const data = {
         name_of_company,
-       // phone_no,
+        // phone_no,
         tin,
         address,
         licensed_no,
@@ -60,8 +60,6 @@ module.exports = {
       };
       await User.update({ status: true }, { where: { id: user.id } });
 
-
-
       const company = await SeedCompany.update(
         data,
         {
@@ -70,7 +68,7 @@ module.exports = {
         { transaction: transaction }
       );
       transaction.commit();
-      console.log(company)
+      console.log(company);
       return { company };
     } catch (e) {
       transaction.rollback();
@@ -131,7 +129,7 @@ module.exports = {
 
     const { page, size } = req.query;
     console.log(req.query);
-    const { limit, offset} = getPagination(page, size);
+    const { limit, offset } = getPagination(page, size);
 
     const product = await Product.findAndCountAll({
       where: { user_id: user.id },
@@ -569,9 +567,9 @@ module.exports = {
   },
 
   listSeedProducers: async (user_id, res) => {
-  console.log(user_id)
+    console.log(user_id);
     const seedProducer = await SeedProducer.findAll({
-      where: { user_id:user_id},
+      where: { user_id: user_id },
       order: [["id", "DESC"]],
       include: [
         {
@@ -704,12 +702,13 @@ module.exports = {
           .status(200)
           .json({ success: false, msg: `Invalid phone number`, status: 200 });
       }
+      // console.log("UPDATE SEED PRODUCER ==>", data);
       const response = await SeedProducer.update(
         {
           full_name: data.full_name,
           phone_no: data.phone_no,
           certified: data.certified,
-          state_id: data.sate_id,
+          state_id: data.state_id,
           lg_id: data.lg_id,
           gender: data.gender,
           age_range: data.age_range,
@@ -737,6 +736,7 @@ module.exports = {
         });
       }
       return res.status(200).json({
+        id: response.id,
         success: true,
         msg: `${data.full_name}'s data was updated successfully`,
         status: 200,
