@@ -12,7 +12,7 @@
         <div class="tab-btn active" data-id="all">ALL</div>
         <div class="tab-btn" data-id="active">ACTIVE</div>
         <div class="tab-btn" data-id="deactivated">DEACTIVATED</div>
-        <div class="tab-btn" data-id="independent-seed-producers">INDEPENDENT SEED PRODUCERS</div>
+        <div class="tab-btn" data-id="independent-seed-producers" id="independent">INDEPENDENT SEED PRODUCERS</div>
     </div>
     <div>
 
@@ -213,7 +213,8 @@
 
                                         <li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
                                                 href="#" id-data="{{user_id}}" seed-producer-data="{{id}}"
-                                                id="update-seed-producer-status-btn" current-status-data="{{status}}">
+                                                id="independent-seed-producer-status-btn"
+                                                current-status-data="{{status}}">
                                                 Deactivate
                                             </a>
                                         </li>
@@ -370,9 +371,16 @@
             } else {
                 showSearchField();
             }
+        });
+
+        $("#independent").on("click", function () {
+            hideDeactivationBtn()
         })
 
-
+        // Hide seed producer deactivation button
+        const hideDeactivationBtn = () => {
+            document.getElementById('independent-seed-producer-status-btn').style.display = 'none';
+        }
 
 
         $(".update-seed-producer-status-btn").click((event) => {
