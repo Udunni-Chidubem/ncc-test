@@ -37,6 +37,7 @@ const path = require("path");
 const csv = require("csv-parser");
 const fs = require("fs");
 const { Readable } = require("stream");
+const { model } = require("mongoose");
 
 module.exports = {
   getNascAdminRoles: async (req, res) => {
@@ -181,6 +182,9 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          model: TransactionLog,
         },
       ],
     });
@@ -379,6 +383,7 @@ module.exports = {
           ],
         },
       ],
+      order: [["id", "DESC"]],
     });
 
     orders = JSON.stringify(orders);
@@ -1271,6 +1276,17 @@ module.exports = {
     }
   },
 
+  getIndependentSeedProducerSeedById: async (seedId, seedProducerId) => {
+    try {
+      const response = await NoSeedCompanyseedProducerSeeds.findOne({
+        where: { id: seedId, producer_id: seedProducerId },
+      });
+      return response;
+    } catch (e) {
+      console.error(e.message);
+    }
+  },
+
   updateSeedProducer: async (req, res) => {
     const data = req.body;
     try {
@@ -1326,6 +1342,51 @@ module.exports = {
     try {
       const data = req.body;
       const response = await SeedProducerSeed.update(
+        {
+          name_of_seed: data.name_of_seed,
+          variety_of_seed: data.variety_of_seed,
+          volume_of_seed: data.volume_of_seed,
+          year_produced: data.year_produced,
+          unit: data.unit,
+        },
+        {
+          where: { id: data.id, producer_id: data.producer_id },
+          fields: [
+            "name_of_seed",
+            "variety_of_seed",
+            "volume_of_seed",
+            "year_produced",
+            "unit",
+          ],
+        }
+      );
+      console.log(response[0]);
+      if (response[0] < 1) {
+        return res.status(200).json({
+          success: false,
+          msg: `No changes were made to the seed data`,
+          status: 200,
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        msg: `Seed data was updated successfully`,
+        status: 200,
+      });
+    } catch (e) {
+      console.error(e);
+      return res.status(500).json({
+        success: false,
+        msg: `An error occurred while updating seed data`,
+        status: 500,
+      });
+    }
+  },
+
+  updateIndependentSeedProducerSeed: async (req, res) => {
+    try {
+      const data = req.body;
+      const response = await NoSeedCompanyseedProducerSeeds.update(
         {
           name_of_seed: data.name_of_seed,
           variety_of_seed: data.variety_of_seed,

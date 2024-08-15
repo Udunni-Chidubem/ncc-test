@@ -87,10 +87,10 @@ adminRouter.get("/users/create", async (req, res) => {
 adminRouter.post("/users/create", async (req, res) => {
   let resp = await adminController.createUser(req, res);
   if (!resp.error) {
-    req.flash('success_msg', 'User created successfully !!');
+    req.flash("success_msg", "User created successfully !!");
     res.redirect("/admin/users");
   } else {
-    req.flash('error_msg', 'Error creating a user. Try again !!');
+    req.flash("error_msg", "Error creating a user. Try again !!");
     res.redirect("/admin/users/create");
   }
 });
@@ -364,9 +364,9 @@ adminRouter.get("/users/:id", async (req, res) => {
   balance = await adminController.getWallet(req, res);
   let user_role = await adminController.getUserRole(req, res);
   let seed_producers = null;
-  if (company_id){
-    let id = company_id.user_id
-    seed_producers = await companyController.listSeedProducers(id,res);
+  if (company_id) {
+    let id = company_id.user_id;
+    seed_producers = await companyController.listSeedProducers(id, res);
   }
 
   res.render("admin/view-user", {
@@ -633,9 +633,10 @@ adminRouter.get("/seed-producers", async (req, res) => {
   let user_role = await adminController.getUserRole(req, res);
   let seedProducer = await adminController.listSeedProducers(req, res);
   /*
-  * weeggo
-  */
-  let independentSeedProducers = await adminController.listIndependentSeedProducers(req,res);
+   * weeggo
+   */
+  let independentSeedProducers =
+    await adminController.listIndependentSeedProducers(req, res);
 
   res.render("admin/seed-producer-list", {
     layout: "admin-dashboard",
@@ -681,7 +682,7 @@ adminRouter.patch("/seed-producer/update", async (req, res) => {
   });
 });
 
-adminRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
+adminRouter.get("/dependent/seed/:seedId/:companyId", async (req, res) => {
   const seedId = req.params.seedId;
   const seedCompanyId = req.params.companyId;
   let seedsProduced = await adminController.getSeedProducerSeedById(
@@ -691,8 +692,29 @@ adminRouter.get("/fetch-single-seed/:seedId/:companyId", async (req, res) => {
   return res.status(200).json({ data: seedsProduced });
 });
 
-adminRouter.patch("/seed-update", async (req, res) => {
+// fetch independent seed producer seed
+adminRouter.get("/independent/seed/:seedId/:producerId", async (req, res) => {
+  const seedId = req.params.seedId;
+  const seedProducerId = req.params.producerId;
+  let seedsProduced = await adminController.getIndependentSeedProducerSeedById(
+    seedId,
+    seedProducerId
+  );
+  console.log(seedsProduced);
+  return res.status(200).json({ data: seedsProduced });
+});
+
+adminRouter.patch("/update/dependent/seed/:producer_id", async (req, res) => {
   let response = await adminController.updateSeedProducerSeed(req, res);
+  return response;
+});
+
+adminRouter.patch("/update/independent/seed/:producer_id", async (req, res) => {
+  let response = await adminController.updateIndependentSeedProducerSeed(
+    req,
+    res
+  );
+  console.log("Me..!", response);
   return response;
 });
 
