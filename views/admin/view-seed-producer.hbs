@@ -255,6 +255,8 @@
                                                 class="required-feilds">*</span></label>
                                         <input type="date" class="form-control year_produced" name="yearProducedInput"
                                             id="yearProducedInput" required>
+                                        <span id="current_produced_date" style="font-size: x-small; color: #999;">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -476,45 +478,90 @@
                 //alert("Hello..!")
 
                 const urlPath = window.location.pathname;
-                const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
                 const seedId = document.getElementById("edit-seed").getAttribute("id-data");
+                if (window.location.href.includes('type=independent')) {
+                    const seedProducerId = getIdFromCurrentLocationUrlPath(urlPath)
+                    const url = window.location.origin + `/admin/independent/seed/${seedId}/${seedProducerId}`;
+
+                    fetch(url, {
+                        method: 'GET'
+                    })
+                        .then((res) => res.json())
+                        .then((res) => {
+                            //console.log(res);
+                            const data = res.data;
+
+                            const nameOfSeed = document.getElementById('nameOfSeedInput');
+                            const varietyOfSeed = document.getElementById('varietyOfSeedInput');
+                            const volumeOfSeed = document.getElementById('volumeOfSeedInput');
+                            const yearProduced = document.getElementById('yearProducedInput');
+                            const unit = document.getElementById('unitInput');
+                            const seedId = document.getElementById('seedId');
+                            const producerId = document.getElementById('numberOfSeedInput')
+
+
+                            if (data) {
+
+                                //console.log(data);
+
+                                seedId.value = data.id || '';
+                                producerId.value = data.producer_id || '';
+                                nameOfSeed.value = data.name_of_seed || '';
+                                varietyOfSeed.value = data.variety_of_seed || '';
+                                volumeOfSeed.value = data.volume_of_seed || '';
+                                yearProduced.value = data.year_produced || '';
+                                unit.value = data.unit || '';
+
+                                document.getElementById('current_produced_date').innerText = `current year produced: ${data.year_produced}` || '';
+
+                            } else {
+                                console.error('Data is null or undefined');
+                            }
+                        })
+                        .catch((e) => console.log(e));
+                } else {
+                    const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath)
+                    const url = window.location.origin + `/admin/dependent/seed/${seedId}/${seedCompanyId}`;
+
+                    fetch(url, {
+                        method: 'GET'
+                    })
+                        .then((res) => res.json())
+                        .then((res) => {
+                            //console.log(res);
+                            const data = res.data;
+
+                            const nameOfSeed = document.getElementById('nameOfSeedInput');
+                            const varietyOfSeed = document.getElementById('varietyOfSeedInput');
+                            const volumeOfSeed = document.getElementById('volumeOfSeedInput');
+                            const yearProduced = document.getElementById('yearProducedInput');
+                            const unit = document.getElementById('unitInput');
+                            const seedId = document.getElementById('seedId');
+                            const producerId = document.getElementById('numberOfSeedInput')
+
+                            if (data) {
+
+                                ///console.log(data);
+
+                                seedId.value = data.id || '';
+                                producerId.value = data.producer_id || '';
+                                nameOfSeed.value = data.name_of_seed || '';
+                                varietyOfSeed.value = data.variety_of_seed || '';
+                                volumeOfSeed.value = data.volume_of_seed || '';
+                                yearProduced.value = data.year_produced || '';
+                                unit.value = data.unit || '';
+
+                                document.getElementById('current_produced_date').innerText = `current year produced: ${data.year_produced}` || '';
+
+                            } else {
+                                console.error('Data is null or undefined');
+                            }
+                        })
+                        .catch((e) => console.log(e));
+                }
 
                 //const seedCompanyId = seedId;
-                const url = window.location.origin + `/admin/fetch-single-seed/${seedId}/${seedCompanyId}`;
 
-                fetch(url, {
-                    method: 'GET'
-                })
-                    .then((res) => res.json())
-                    .then((res) => {
-                        //console.log(res);
-                        const data = res.data;
-
-                        const nameOfSeed = document.getElementById('nameOfSeedInput');
-                        const varietyOfSeed = document.getElementById('varietyOfSeedInput');
-                        const volumeOfSeed = document.getElementById('volumeOfSeedInput');
-                        const yearProduced = document.getElementById('yearProducedInput');
-                        const unit = document.getElementById('unitInput');
-                        const seedId = document.getElementById('seedId');
-                        const producerId = document.getElementById('numberOfSeedInput')
-
-                        if (data) {
-
-                            ///console.log(data);
-
-                            seedId.value = data.id || '';
-                            producerId.value = data.producer_id || '';
-                            nameOfSeed.value = data.name_of_seed || '';
-                            varietyOfSeed.value = data.variety_of_seed || '';
-                            volumeOfSeed.value = data.volume_of_seed || '';
-                            yearProduced.value = data.year_produced || '';
-                            unit.value = data.unit || '';
-
-                        } else {
-                            console.error('Data is null or undefined');
-                        }
-                    })
-                    .catch((e) => console.log(e));
             });
 
 
@@ -523,52 +570,101 @@
                 const form = new FormData();
 
                 const urlPath = window.location.pathname;
-                const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath);
 
-                const url = window.location.origin + `/admin/seed-update`;
+                if (window.location.href.includes('type=independent')) {
+                    const seedProducerId = getIdFromCurrentLocationUrlPath(urlPath)
+                    const url = window.location.origin + `/admin/update/independent/seed/${seedProducerId}`;
 
-                const seedId = document.getElementById('seedId').value;
-                const nameOfSeed = document.getElementById('nameOfSeedInput').value;
-                const varietyOfseed = document.getElementById('varietyOfSeedInput').value;
-                const volumeOfseed = document.getElementById('volumeOfSeedInput').value;
-                const yearProduced = document.getElementById('yearProducedInput').value;
-                const unit = document.getElementById('unitInput').value;
-                const producerId = document.getElementById('numberOfSeedInput').value;
+                    const seedId = document.getElementById('seedId').value;
+                    const nameOfSeed = document.getElementById('nameOfSeedInput').value;
+                    const varietyOfseed = document.getElementById('varietyOfSeedInput').value;
+                    const volumeOfseed = document.getElementById('volumeOfSeedInput').value;
+                    const yearProduced = document.getElementById('yearProducedInput').value;
+                    const unit = document.getElementById('unitInput').value;
+                    const producerId = document.getElementById('numberOfSeedInput').value;
 
-                form.append("id", seedId)
-                form.append("name_of_seed", nameOfSeed)
-                form.append("variety_of_seed", varietyOfseed)
-                form.append("volume_of_seed", volumeOfseed)
-                form.append("year_produced", yearProduced)
-                form.append("unit", unit)
-                form.append("producer_id", producerId)
+                    form.append("id", seedId)
+                    form.append("name_of_seed", nameOfSeed)
+                    form.append("variety_of_seed", varietyOfseed)
+                    form.append("volume_of_seed", volumeOfseed)
+                    form.append("year_produced", yearProduced)
+                    form.append("unit", unit)
+                    form.append("producer_id", producerId)
 
-                fetch(url, {
-                    method: "PATCH",
-                    body: form
-                }).then((res) => res.json())
-                    .then((res) => {
-                        //console.log("Response: ", res.msg);
-                        const data = res;
-                        if (data.success == true) {
+                    fetch(url, {
+                        method: "PATCH",
+                        body: form
+                    }).then((res) => res.json())
+                        .then((res) => {
+                            //console.log("Response: ", res.msg);
+                            const data = res;
+                            if (data.success == true) {
 
-                            document.getElementById('msg-seed-edit').innerHTML = `
+                                document.getElementById('msg-seed-edit').innerHTML = `
                         <div class='alert alert-success alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 3000)
-                        } else {
-                            document.getElementById('msg-seed-edit').innerHTML = `
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 3000)
+                            } else {
+                                document.getElementById('msg-seed-edit').innerHTML = `
                         <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                             ${data.msg}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                        }
-                    })
-                    .catch((e) => console.log(e));
+                            }
+                        })
+                        .catch((e) => console.log(e));
+                } else {
+                    const seedCompanyId = getIdFromCurrentLocationUrlPath(urlPath);
+                    const url = window.location.origin + `/admin/update/dependent/seed/${seedCompanyId}`;
+
+                    const seedId = document.getElementById('seedId').value;
+                    const nameOfSeed = document.getElementById('nameOfSeedInput').value;
+                    const varietyOfseed = document.getElementById('varietyOfSeedInput').value;
+                    const volumeOfseed = document.getElementById('volumeOfSeedInput').value;
+                    const yearProduced = document.getElementById('yearProducedInput').value;
+                    const unit = document.getElementById('unitInput').value;
+                    const producerId = document.getElementById('numberOfSeedInput').value;
+
+                    form.append("id", seedId)
+                    form.append("name_of_seed", nameOfSeed)
+                    form.append("variety_of_seed", varietyOfseed)
+                    form.append("volume_of_seed", volumeOfseed)
+                    form.append("year_produced", yearProduced)
+                    form.append("unit", unit)
+                    form.append("producer_id", producerId)
+
+                    fetch(url, {
+                        method: "PATCH",
+                        body: form
+                    }).then((res) => res.json())
+                        .then((res) => {
+                            //console.log("Response: ", res.msg);
+                            const data = res;
+                            if (data.success == true) {
+
+                                document.getElementById('msg-seed-edit').innerHTML = `
+                        <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 3000)
+                            } else {
+                                document.getElementById('msg-seed-edit').innerHTML = `
+                        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+                            ${data.msg}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                            }
+                        })
+                        .catch((e) => console.log(e));
+                }
+
 
             });
 
