@@ -37,6 +37,7 @@ const path = require("path");
 const csv = require("csv-parser");
 const fs = require("fs");
 const { Readable } = require("stream");
+const { model } = require("mongoose");
 
 module.exports = {
   getNascAdminRoles: async (req, res) => {
@@ -182,6 +183,9 @@ module.exports = {
             },
           ],
         },
+        {
+          model:TransactionLog,
+        }
       ],
     });
 
@@ -379,6 +383,7 @@ module.exports = {
           ],
         },
       ],
+      order: [["id", "DESC"]],
     });
 
     orders = JSON.stringify(orders);
