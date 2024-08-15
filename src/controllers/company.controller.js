@@ -22,6 +22,7 @@ const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
 const bcrypt = require("bcrypt");
 const { isValidPhoneNumber } = require("../helpers/form.helper");
+const { raw } = require("body-parser");
 
 module.exports = {
   updateProfile: async (req, res) => {
@@ -591,6 +592,15 @@ module.exports = {
     response = JSON.parse(JSON.stringify(seedProducer));
     return response;
   },
+
+  getSeedProducerCount: async (user) => {
+    const seedProducer = await SeedProducer.count({
+      where: { user_id: user.id },
+      raw: true,
+    });
+    return seedProducer;
+  },
+
   viewSeedProducer: async (req, res) => {
     const user = await req.user;
     let response = null;

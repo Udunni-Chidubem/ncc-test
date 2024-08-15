@@ -383,7 +383,7 @@ module.exports = {
           ],
         },
       ],
-      order: [["id", "DESC"]],
+      order: [["created_at", "DESC"]],
     });
 
     orders = JSON.stringify(orders);
@@ -407,6 +407,7 @@ module.exports = {
         {
           model: TransactionLog,
           where: { transaction_id: transaction_id },
+          order: [["created_at", "DESC"]],
         },
         {
           model: Cart,
@@ -597,6 +598,7 @@ module.exports = {
     try {
       let admin_messages = await Message.findAll({
         where: { to_user: "Admin" },
+        order: [["createdAt", "DESC"]],
         group: "from_user",
         include: [
           {
@@ -630,6 +632,7 @@ module.exports = {
     try {
       let admin_messages = await Message.findAll({
         where: { to_user: "Admin", status: "new" },
+        order: [["createdAt", "DESC"]],
         group: "from_user",
         include: [
           {
