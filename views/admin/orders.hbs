@@ -49,8 +49,8 @@
 								<td colspan="" rowspan="" headers=""><a
 										href="/admin/orders/{{TransactionLog.Farmer.id}}/{{TransactionLog.transaction_id}}/{{SeedCompany.id}}">{{TransactionLog.transaction_id}}</a>
 								</td>
-								<td colspan="" rowspan="" headers="">{{dateFormat TransactionLog.created_at
-									'DD/MM/YYYY'}}</td>
+								<td colspan="" rowspan="" headers="">{{dateFormat this.created_at
+									'YYYY-MM-DD'}}</td>
 								<td colspan="" rowspan="" headers="">{{TransactionLog.Farmer.firstname}}
 									{{TransactionLog.Farmer.lastname}}</td>
 								<td colspan="" rowspan="" headers="">{{SeedCompany.name_of_company}}</td>

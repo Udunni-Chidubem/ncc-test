@@ -342,6 +342,8 @@ adminRouter.get("/users/:id", async (req, res) => {
   let type = req.query.type;
   // console.log("Account Type:", type);
   const user = await req.user;
+
+  console.log;
   let isVerified = await utils.isVerified(user);
   let farmer = null,
     company = null,
@@ -369,6 +371,12 @@ adminRouter.get("/users/:id", async (req, res) => {
     seed_producers = await companyController.listSeedProducers(id, res);
   }
 
+  const company_brief = { id: company_id.user_id };
+
+  let seedProducerCount = await adminController.getCompanySeedProducerCount(
+    company_brief
+  );
+
   res.render("admin/view-user", {
     layout: "admin-dashboard",
     title: "All Users",
@@ -384,6 +392,7 @@ adminRouter.get("/users/:id", async (req, res) => {
     balance,
     ledger_info,
     seed_producers,
+    seedProducerCount,
     user_role: user_role.Role.role_name,
   });
 });
@@ -439,6 +448,8 @@ adminRouter.get("/orders", async (req, res) => {
     return e.status == 4;
   });
   let user_role = await adminController.getUserRole(req, res);
+
+  console.log("My Orders:", orders);
 
   res.render("admin/orders", {
     layout: "admin-dashboard",

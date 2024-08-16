@@ -568,7 +568,7 @@ module.exports = {
   },
 
   listSeedProducers: async (user_id, res) => {
-    console.log(user_id);
+    // console.log(user_id);
     const seedProducer = await SeedProducer.findAll({
       where: { user_id: user_id },
       order: [["id", "DESC"]],

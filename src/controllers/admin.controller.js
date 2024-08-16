@@ -1268,6 +1268,15 @@ module.exports = {
   },
   /* BINARY SOL */
 
+  getCompanySeedProducerCount: async (user) => {
+    console.log("USER ID..!", user);
+    const seedProducer = await SeedProducer.count({
+      where: { user_id: user.id },
+      raw: true,
+    });
+    return seedProducer;
+  },
+
   getSeedProducerSeedById: async (seedId, seedCompanyId) => {
     try {
       const response = await SeedProducerSeed.findOne({

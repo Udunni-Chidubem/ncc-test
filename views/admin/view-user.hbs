@@ -1,6 +1,6 @@
 {{>breadcrumbs}}
 
-<div class="container pt-4">
+<div class="container pt-4 mb-5">
 	{{#if farmer}}
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item" role="presentation">
@@ -310,6 +310,17 @@
 										<h5>State</h5>
 										<p>{{company.State.name}}</p>
 									</div>
+
+								</div>
+								<div class="col-md-9 profile-info d-flex justify-content-center">
+									<div class="row">
+										<div class="col">
+											<h6>Total Seed Producers</h6>
+										</div>
+										<div class="col-md-9" style="display: flex; justify-content: center">
+											<h1 style="font-weight: bolder;">{{seedProducerCount}}</h1>
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -571,60 +582,58 @@
 					{{!-- Seed producers **START** --}}
 					<div class="tab-pane account-details-section fade" id="seed-producers" role="tabpanel"
 						aria-labelledby="seed-producers-tab">
-					<table class="table con t_info  table-borderless" id="seedProducers">
-            <thead class="t_info_head ">
-                <tr class="">
-                    <th scope="col">S/N</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Seed Produced</th>
-                    <th scope="col">Variety</th>
-                    <th scope="col">Volume</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Date Created</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
+						<table class="table con t_info  table-borderless" id="seedProducers">
+							<thead class="t_info_head ">
+								<tr class="">
+									<th scope="col">S/N</th>
+									<th scope="col">Name</th>
+									<th scope="col">Seed Produced</th>
+									<th scope="col">Variety</th>
+									<th scope="col">Volume</th>
+									<th scope="col">Location</th>
+									<th scope="col">Date Created</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
 
 
-            <tbody class="t_info_body products-list-table">
-                {{#each seed_producers}}
-                    {{#if (eq status 1)}}
-                        <tr class="t_info_row1">
-                            <th scope="row">{{increment @index}}</th>
-                            <td> {{full_name}}</td>
-                            <td>{{SeedProducerSeeds.[0].name_of_seed}}</td>
-                            <td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
-                            <td>{{SeedProducerSeeds.[0].volume_of_seed}} {{SeedProducerSeeds.[0].unit}}</td>
-                            <td>{{LGA.name}}, {{State.name}}</td>
-                            <td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
-                            <td><a href="#">
-                                    <div class="dropdown d_t">
-                                        <a class="btn   dropdown-toggle action_btn" href="#" role="button" id="dropdownMenuLink"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            Actions
-                                        </a>
+							<tbody class="t_info_body products-list-table">
+								{{#each seed_producers}}
+								{{#if (eq status 1)}}
+								<tr class="t_info_row1">
+									<th scope="row">{{increment @index}}</th>
+									<td> {{full_name}}</td>
+									<td>{{SeedProducerSeeds.[0].name_of_seed}}</td>
+									<td>{{SeedProducerSeeds.[0].variety_of_seed}}</td>
+									<td>{{SeedProducerSeeds.[0].volume_of_seed}} {{SeedProducerSeeds.[0].unit}}</td>
+									<td>{{LGA.name}}, {{State.name}}</td>
+									<td>{{dateFormat created_at "DD/MM/YYYY"}}</td>
+									<td><a href="#">
+											<div class="dropdown d_t">
+												<a class="btn   dropdown-toggle action_btn" href="#" role="button"
+													id="dropdownMenuLink" data-bs-toggle="dropdown"
+													aria-expanded="false">
+													Actions
+												</a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a class="dropdown-item border-0 border-bottom"
-                                                    href="/admin/seed-producer/{{id}}">View</a></li>
-                                            <li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
-                                                    href="#" 
-                                                    id-data="{{user_id}}" 
-                                                    seed-producer-data="{{id}}" 
-                                                    id="update-seed-producer-status-btn"
-                                                    current-status-data="{{status}}"
-                                                    >
-                                                    Deactivate
-                                                    </a>
-                                                </li>
-                                        </ul>
-                                    </div>
-                                </a></td>
-                        </tr>
-                    {{/if}}
-                {{/each}}
-            </tbody>
-        </table>
+												<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<li><a class="dropdown-item border-0 border-bottom"
+															href="/admin/seed-producer/{{id}}">View</a></li>
+													<li><a class="dropdown-item border-0 border-bottom update-seed-producer-status-btn"
+															href="#" id-data="{{user_id}}" seed-producer-data="{{id}}"
+															id="update-seed-producer-status-btn"
+															current-status-data="{{status}}">
+															Deactivate
+														</a>
+													</li>
+												</ul>
+											</div>
+										</a></td>
+								</tr>
+								{{/if}}
+								{{/each}}
+							</tbody>
+						</table>
 					</div>
 					{{!-- Seed producers **END** --}}
 				</div>
