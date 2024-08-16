@@ -10,7 +10,7 @@
             <thead class="t_info_head ">
                 <tr class="">
                     <th scope="col">S/N</th>
-                     <th scope="col">Seller Name</th>
+                    <th scope="col">Seller Name</th>
                     {{!-- <th scope="col">Phone No.</th> --}}
                     <th scope="col">Name</th>
                     <th scope="col">Phone No.</th>
@@ -23,14 +23,15 @@
                     <th scope="col">State</th>
                     <th scope="col">LGA</th>
                     <th scope="col">Community</th>
+                    {{!-- <th scope="col">Action</th> --}}
                 </tr>
             </thead>
             <tbody>
                 {{#salesSheet }}
                 <tr>
                     <td scope="row">{{increment @index}}</td>
-                    <td>{{User.SeedCompany.name_of_company}} {{User.SeedTrader.firstname}} {{User.SeedTrader.lastname}} 
-</td>
+                    <td>{{User.SeedCompany.name_of_company}} {{User.SeedTrader.firstname}} {{User.SeedTrader.lastname}}
+                    </td>
                     <td>{{customer_name}}</td>
                     <td>{{customer_number}}</td>
 
@@ -58,7 +59,7 @@
                     <td>{{State.name}}</td>
                     <td>{{LGA.name}}</td>
                     <td>{{community}}</td>
-
+                    {{!-- <td><button>View</button></td> --}}
                 </tr>
                 {{/salesSheet}}
             </tbody>
