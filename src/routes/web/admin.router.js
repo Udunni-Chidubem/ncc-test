@@ -342,6 +342,8 @@ adminRouter.get("/users/:id", async (req, res) => {
   let type = req.query.type;
   // console.log("Account Type:", type);
   const user = await req.user;
+
+  console.log;
   let isVerified = await utils.isVerified(user);
   let farmer = null,
     company = null,
@@ -350,7 +352,9 @@ adminRouter.get("/users/:id", async (req, res) => {
     balance = null,
     ledger_info = null,
     product = null,
-    company_id = null;
+    company_id = null,
+    seedProducerCount = null;
+
   if (type == "farmer") farmer = await adminController.getOneFarmer(req, res);
   if (type == "company") {
     company = await adminController.getOneCompany(req, res);
@@ -358,6 +362,10 @@ adminRouter.get("/users/:id", async (req, res) => {
     product = await adminController.viewProduct(req, res);
     company_id = await adminController.company_id(req, res);
     ledger_info = await adminController.ledger_info(req, res, company_id.id);
+    const company_brief = { id: company_id.user_id };
+    seedProducerCount = await adminController.getCompanySeedProducerCount(
+      company_brief
+    );
   }
   if (type == "trader") trader = await adminController.getOneTrader(req, res);
 
@@ -384,6 +392,7 @@ adminRouter.get("/users/:id", async (req, res) => {
     balance,
     ledger_info,
     seed_producers,
+    seedProducerCount,
     user_role: user_role.Role.role_name,
   });
 });
@@ -439,6 +448,8 @@ adminRouter.get("/orders", async (req, res) => {
     return e.status == 4;
   });
   let user_role = await adminController.getUserRole(req, res);
+
+  console.log("My Orders:", orders);
 
   res.render("admin/orders", {
     layout: "admin-dashboard",

@@ -112,6 +112,16 @@
                           style="align-content:left; overflow:auto" rows="5" required>{{ company.address }} </textarea>
                       </div>
                     </div>
+                    <div class="col-md-12">
+                      <div>
+                        <div class="row mt-5">
+                          <div>
+                            <h6 class="text-center">Total Seed Producers</h6>
+                            <h1 class="text-center" style="font-weight: 900;">{{totalSeedProducer}}</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <hr>
                   <div class="row">
@@ -299,12 +309,12 @@
             })
             error_toastr(msg)
           } else if (response.statusCode == 500 || response.statusCode == 400) {
-            let msg = response.message[0].message;          
-            if (msg.includes("licensed_no")){
-              msg = msg.replace("licensed_no","License number");
+            let msg = response.message[0].message;
+            if (msg.includes("licensed_no")) {
+              msg = msg.replace("licensed_no", "License number");
             }
-            if (msg.includes("certification_number")){
-              msg = msg.replace("certification_number","Certification number");
+            if (msg.includes("certification_number")) {
+              msg = msg.replace("certification_number", "Certification number");
             }
             error_toastr(msg);
           } else {

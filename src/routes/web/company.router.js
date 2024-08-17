@@ -52,11 +52,14 @@ companyRouter.get("/update-profile", async (req, res) => {
   let user = await req.user;
   let isVerified = await utils.isVerified(user, "company");
   let company = await utils.getCompanyProfile(user);
+  let totalSeedProducer = await companyController.getSeedProducerCount(user);
+  console.log("Total count..!", totalSeedProducer);
   res.render("seed_company/update-profile", {
     layout: "company-dashboard",
     title: "Profile Update",
     states: states,
     company: company,
+    totalSeedProducer: totalSeedProducer,
     isVerified,
   });
 });
