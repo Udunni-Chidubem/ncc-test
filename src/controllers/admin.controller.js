@@ -307,7 +307,7 @@ module.exports = {
     // });
 
     let sql =
-      "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status != '2' ";
+      "SELECT count(u.id) as count from user u join seedcompany sc on u.id = sc.user_id where u.status != '0' ";
 
     let companyCount = await db.rest.query(sql, {
       type: QueryTypes.SELECT,
