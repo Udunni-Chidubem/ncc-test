@@ -1077,12 +1077,13 @@ module.exports = {
         };
         return data;
       } else {
-        return { error: true, message: "Account already exist" };
+        return { error: true, message: "The provided email is associated with an existing account" };
       }
     } catch (e) {
       await transaction.rollback();
 
-      return { error: true, message: e.message };
+      // return { error: true, message: e.message };
+      consoel.log(e);
     }
   },
 
