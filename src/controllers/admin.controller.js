@@ -1300,6 +1300,31 @@ module.exports = {
     }
   },
 
+  getIndependentSeedProducerById: async (seedProducerId) => {
+    try {
+      const response = await NoSeedCompanySeedProducer.findOne({
+        where: {id: seedProducerId },
+        raw: true,
+      });
+      return response;
+    } catch (e) {
+      console.error(e.message);
+    }
+  },
+
+
+  getAllIndependentSeedProducerSeedById: async (seedProducerId) => {
+    try {
+      const response = await NoSeedCompanyseedProducerSeeds.findAll({
+        where: {producer_id: seedProducerId },
+        raw: true,
+      });
+      return response;
+    } catch (e) {
+      console.error(e.message);
+    }
+  },
+
   updateSeedProducer: async (req, res) => {
     const data = req.body;
     try {

@@ -669,9 +669,9 @@ adminRouter.get("/seed-producer/:id", async (req, res) => {
   let user = await req.user;
   let isVerified = await utils.isVerified(user);
   let user_role = await adminController.getUserRole(req, res);
+  let states = await siteController.getStates();
   let seedProducer = await adminController.viewSeedProducer(req, res);
   let seedsProduced = await adminController.getSeedProduced(req, res);
-  let states = await siteController.getStates();
 
   res.render("admin/view-seed-producer", {
     layout: "admin-dashboard",
