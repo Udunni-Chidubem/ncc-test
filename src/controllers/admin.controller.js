@@ -2,7 +2,7 @@ require("dotenv").config();
 const { QueryTypes } = require("sequelize");
 const db = require("../models");
 const utils = require("../helpers/utils");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const {
   User,
   UserRole,

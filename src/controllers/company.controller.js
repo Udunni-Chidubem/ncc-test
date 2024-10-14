@@ -20,7 +20,7 @@ const {
 } = db;
 const utils = require("../helpers/utils");
 const { getPagingData, getPagination } = require("../helpers/pagination");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { isValidPhoneNumber } = require("../helpers/form.helper");
 const { raw } = require("body-parser");
 

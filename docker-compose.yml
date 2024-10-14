@@ -1,0 +1,51 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+version: '3.8'
+
+services:
+  webapp:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    # image: dubem/nigsims:latest # Replace with the actual image name
+    ports:
+      - "${ACCESS_PORT:-5200}:5200"
+    environment:
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-}
+      - DB_HOST=${DB_HOST:-127.0.0.1}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_NAME=${DB_NAME:-db_nigsims}
+      - DB_DIALECT=${DB_DIALECT:-mysql}
+      - paystack_secret_key=${paystack_secret_key:-sk_test_32d03429f58815a9fd92a493729335ee5013dbe0}
+      - paystack_initialize=${paystack_initialize:-https://api.paystack.co/transaction/initialize}
+      - paystack_verify=${paystack_verify:-https://api.paystack.co/transaction/verify/}
+      - paystack_subaccount=${paystack_subaccount:-ACCT_rq9h6afvk23ifv0}
+      - sms_username=${sms_username:-www.daniko15@gmail.com}
+      - sms_password=${sms_password:-Dansongs@21}
+      - SECRET=${SECRET:-HTdhg1234}
+      - wheather_api_key=${wheather_api_key:-fUOrctlKrVMbAXGpdMCf7F7rt1A9JXW8}
+      - wheather_base_url=${wheather_base_url:-http://dataservice.accuweather.com}
+      - sms_api=${sms_api:-https://portal.nigeriabulksms.com/api/}
+      - psb_base_url=${psb_base_url:-https://baastest.9psb.com.ng/ipaymw-api/v1/merchant/}
+      - psb_publicKey=${psb_publicKey:-E72D678A81B04DA787F98F3ADF8FB155}
+      - psb_privateKey=${psb_privateKey:-svKerTEUP3BzXF40wIqHq8ok_fV-sJC65KzS6lZ9uMisYf7mq7hsM-6pRET3XQIA}
+      - escrow_acct_name=${escrow_acct_name:-Amaechi uy}
+      - escrow_acct_number=${escrow_acct_number:-1100000309}
+      - escrow_bank_name=${escrow_bank_name:-9PSB}
+      - test_acct_number=${test_acct_number:-5030670209}
+      - test_account_bank_code=${test_account_bank_code:-120001}
+      - psb_payment_gateway_base_url=${psb_payment_gateway_base_url:-https://seerbitapi.com/api/v2/}
+      - psb_merchant_privateKey=${psb_merchant_privateKey:-SBTESTSECK_Fj7xqHsWehMW3zoEgQ9uaHznEPlkXKAjQkEji2zA}
+      - psb_merchant_publicKey=${psb_merchant_publicKey:-SBTESTPUBK_hBw91MA6pXyHpvb6xkF27YkR81rTap2p}
+      - bootstrap_farmers=${bootstrap_farmers:-0}
+      - secretOrKey=${secretOrKey:-secret123}
+volumes:
+  logs:

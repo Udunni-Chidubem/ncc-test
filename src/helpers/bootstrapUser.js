@@ -1,7 +1,7 @@
 const db = require('../models');
 const { QueryTypes } = require("sequelize")
 const {User, UserRole, Role, SeedCompany, Wallet, Orders }  = db
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { raw } = require('body-parser');
 
 

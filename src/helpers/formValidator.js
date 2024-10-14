@@ -1,7 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const db = require("../models");
 const { SeedCompany, User, SeedTrader } = db;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const utils = require("../helpers/utils");
 
 const profileUpdateValidation = () => {

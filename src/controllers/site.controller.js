@@ -15,7 +15,7 @@ const {
   Otp,
   KnowledgeBase,
 } = db;
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const uniqid = require("uniqid");
 const directoryPath = "./src/data/";
 const path = require("path");

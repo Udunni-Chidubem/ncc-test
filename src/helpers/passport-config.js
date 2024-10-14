@@ -1,7 +1,7 @@
 localStrategy = require('passport-local').Strategy
 jwtStrategy=require('passport-jwt').Strategy
 const extractJwt = require('passport-jwt').ExtractJwt
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { User, Farmer, SeedTrader, UserRole, Role} = require('../models')
 const opts = {
     jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken("jwt"),

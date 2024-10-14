@@ -5,7 +5,7 @@ const escrow = require("../helpers/escrow");
 const axios = require("axios").default;
 require("dotenv").config();
 const hashHelper = require("../helpers/helper.hash");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const utils = require("../helpers/utils");
 
 const { SeedCompany, Wallet, User, WalletLog } = db;
