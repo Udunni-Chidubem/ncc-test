@@ -6,7 +6,7 @@ const { User } = db;
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var params = {
-  secretOrKey: process.env.secretOrKey,
+  secretOrKey: process.env.secretOrKey ?? 'secret123 ',
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken("jwt"),
 };
 

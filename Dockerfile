@@ -9,7 +9,7 @@ ARG NODE_VERSION=20
 FROM node:${NODE_VERSION}-alpine
 
 # Use production node environment by default.
-ENV NODE_ENV production
+ENV NODE_ENV=development
 
 
 WORKDIR /
@@ -34,7 +34,7 @@ RUN npm install helmet
 COPY . .
 RUN mkdir logs 
 
-ENV ACCESS_PORT 5200
+ENV ACCESS_PORT=5200
 
 # Expose the port that the application listens on.
 EXPOSE 5200

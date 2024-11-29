@@ -14,13 +14,13 @@ services:
     build:
         context: .
         dockerfile: Dockerfile
-    # image: dubem/nigsims:latest # Replace with the actual image name
+    image: eadinterra/nigsims:latest # Replace with the actual image name
     ports:
       - "${ACCESS_PORT:-5200}:5200"
     environment:
       - DB_USER=${DB_USER:-root}
       - DB_PASSWORD=${DB_PASSWORD:-}
-      - DB_HOST=${DB_HOST:-127.0.0.1}
+      - DB_HOST=${DB_HOST:-192.168.200.233}
       - DB_PORT=${DB_PORT:-3306}
       - DB_NAME=${DB_NAME:-db_nigsims}
       - DB_DIALECT=${DB_DIALECT:-mysql}
